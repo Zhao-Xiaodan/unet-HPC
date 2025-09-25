@@ -322,7 +322,7 @@ echo "Output directory: $OUTPUT_DIR"
 echo ""
 
 # Change to working directory
-cd /home/svu/phyzxi/scratch/densityCNN-HPC
+cd /home/svu/phyzxi/scratch/unet-HPC
 
 # Execute the training with enhanced error handling and logging
 singularity exec --nv "$image" python3 run_mitochondria_training.py 2>&1 | tee "${OUTPUT_DIR}/training_console_${TIMESTAMP}.log"
