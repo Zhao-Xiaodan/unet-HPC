@@ -14,6 +14,9 @@
 # Based on the provided Python scripts
 # =======================================================================
 
+# IMPORTANT: Change to working directory FIRST
+cd /home/svu/phyzxi/scratch/unet-HPC
+
 echo "======================================================================="
 echo "MITOCHONDRIA SEGMENTATION - UNET MODELS TRAINING"
 echo "======================================================================="
@@ -320,9 +323,6 @@ mkdir -p "$OUTPUT_DIR"
 
 echo "Output directory: $OUTPUT_DIR"
 echo ""
-
-# Change to working directory
-cd /home/svu/phyzxi/scratch/unet-HPC
 
 # Execute the training with enhanced error handling and logging
 singularity exec --nv "$image" python3 run_mitochondria_training.py 2>&1 | tee "${OUTPUT_DIR}/training_console_${TIMESTAMP}.log"
