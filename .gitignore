@@ -1,5 +1,10 @@
 \[99\]Archive/
+data/
+dataset/
 
 **/*.png
-**/*.hdf5
 **/*.log
+**/*.tif
+**/*.npy
+**/*.hdf5
+**/*.h5
