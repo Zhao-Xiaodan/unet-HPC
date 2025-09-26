@@ -1,0 +1,15 @@
+{
+  "architecture": "UNet",
+  "learning_rate": 0.001,
+  "batch_size": 16,
+  "epochs_requested": 30,
+  "epochs_completed": 17,
+  "training_time_seconds": 89.553995,
+  "training_successful": true,
+  "best_val_jaccard": 0.07349689304828644,
+  "best_epoch": 7,
+  "final_val_loss": 0.13598710298538208,
+  "final_train_loss": 0.15561173856258392,
+  "val_loss_stability": 0.04753094271066639,
+  "overfitting_gap": -0.019624635577201843
+}

@@ -1,0 +1,15 @@
+{
+  "architecture": "Attention_UNet",
+  "learning_rate": 0.001,
+  "batch_size": 8,
+  "epochs_requested": 30,
+  "epochs_completed": 15,
+  "training_time_seconds": 102.536695,
+  "training_successful": true,
+  "best_val_jaccard": 0.07305820286273956,
+  "best_epoch": 5,
+  "final_val_loss": 0.1814270317554474,
+  "final_train_loss": 0.1381462812423706,
+  "val_loss_stability": 0.02266090136008909,
+  "overfitting_gap": 0.04328075051307678
+}

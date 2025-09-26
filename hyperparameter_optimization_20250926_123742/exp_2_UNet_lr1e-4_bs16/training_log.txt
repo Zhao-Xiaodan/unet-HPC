@@ -1,0 +1,456 @@
+✓ GPU memory growth enabled for 1 GPUs
+Loading dataset...
+Loaded 144 images and 144 masks
+Training set: (129, 256, 256, 3), Validation set: (15, 256, 256, 3)
+
+============================================================
+TRAINING: UNet
+Learning Rate: 0.0001, Batch Size: 16, Epochs: 30
+============================================================
+Model: "UNet"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(None, 256, 256, 1)]        0         []                            
+                                                                                                  
+ conv2d (Conv2D)             (None, 256, 256, 64)         640       ['input_1[0][0]']             
+                                                                                                  
+ batch_normalization (Batch  (None, 256, 256, 64)         256       ['conv2d[0][0]']              
+ Normalization)                                                                                   
+                                                                                                  
+ activation (Activation)     (None, 256, 256, 64)         0         ['batch_normalization[0][0]'] 
+                                                                                                  
+ conv2d_1 (Conv2D)           (None, 256, 256, 64)         36928     ['activation[0][0]']          
+                                                                                                  
+ batch_normalization_1 (Bat  (None, 256, 256, 64)         256       ['conv2d_1[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_1 (Activation)   (None, 256, 256, 64)         0         ['batch_normalization_1[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d (MaxPooling2  (None, 128, 128, 64)         0         ['activation_1[0][0]']        
+ D)                                                                                               
+                                                                                                  
+ conv2d_2 (Conv2D)           (None, 128, 128, 128)        73856     ['max_pooling2d[0][0]']       
+                                                                                                  
+ batch_normalization_2 (Bat  (None, 128, 128, 128)        512       ['conv2d_2[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_2 (Activation)   (None, 128, 128, 128)        0         ['batch_normalization_2[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_3 (Conv2D)           (None, 128, 128, 128)        147584    ['activation_2[0][0]']        
+                                                                                                  
+ batch_normalization_3 (Bat  (None, 128, 128, 128)        512       ['conv2d_3[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_3 (Activation)   (None, 128, 128, 128)        0         ['batch_normalization_3[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d_1 (MaxPoolin  (None, 64, 64, 128)          0         ['activation_3[0][0]']        
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_4 (Conv2D)           (None, 64, 64, 256)          295168    ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ batch_normalization_4 (Bat  (None, 64, 64, 256)          1024      ['conv2d_4[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_4 (Activation)   (None, 64, 64, 256)          0         ['batch_normalization_4[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_5 (Conv2D)           (None, 64, 64, 256)          590080    ['activation_4[0][0]']        
+                                                                                                  
+ batch_normalization_5 (Bat  (None, 64, 64, 256)          1024      ['conv2d_5[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_5 (Activation)   (None, 64, 64, 256)          0         ['batch_normalization_5[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d_2 (MaxPoolin  (None, 32, 32, 256)          0         ['activation_5[0][0]']        
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_6 (Conv2D)           (None, 32, 32, 512)          1180160   ['max_pooling2d_2[0][0]']     
+                                                                                                  
+ batch_normalization_6 (Bat  (None, 32, 32, 512)          2048      ['conv2d_6[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_6 (Activation)   (None, 32, 32, 512)          0         ['batch_normalization_6[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_7 (Conv2D)           (None, 32, 32, 512)          2359808   ['activation_6[0][0]']        
+                                                                                                  
+ batch_normalization_7 (Bat  (None, 32, 32, 512)          2048      ['conv2d_7[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_7 (Activation)   (None, 32, 32, 512)          0         ['batch_normalization_7[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d_3 (MaxPoolin  (None, 16, 16, 512)          0         ['activation_7[0][0]']        
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_8 (Conv2D)           (None, 16, 16, 1024)         4719616   ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ batch_normalization_8 (Bat  (None, 16, 16, 1024)         4096      ['conv2d_8[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_8 (Activation)   (None, 16, 16, 1024)         0         ['batch_normalization_8[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_9 (Conv2D)           (None, 16, 16, 1024)         9438208   ['activation_8[0][0]']        
+                                                                                                  
+ batch_normalization_9 (Bat  (None, 16, 16, 1024)         4096      ['conv2d_9[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_9 (Activation)   (None, 16, 16, 1024)         0         ['batch_normalization_9[0][0]'
+                                                                    ]                             
+                                                                                                  
+ up_sampling2d (UpSampling2  (None, 32, 32, 1024)         0         ['activation_9[0][0]']        
+ D)                                                                                               
+                                                                                                  
+ concatenate (Concatenate)   (None, 32, 32, 1536)         0         ['up_sampling2d[0][0]',       
+                                                                     'activation_7[0][0]']        
+                                                                                                  
+ conv2d_10 (Conv2D)          (None, 32, 32, 512)          7078400   ['concatenate[0][0]']         
+                                                                                                  
+ batch_normalization_10 (Ba  (None, 32, 32, 512)          2048      ['conv2d_10[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_10 (Activation)  (None, 32, 32, 512)          0         ['batch_normalization_10[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_11 (Conv2D)          (None, 32, 32, 512)          2359808   ['activation_10[0][0]']       
+                                                                                                  
+ batch_normalization_11 (Ba  (None, 32, 32, 512)          2048      ['conv2d_11[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_11 (Activation)  (None, 32, 32, 512)          0         ['batch_normalization_11[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_1 (UpSamplin  (None, 64, 64, 512)          0         ['activation_11[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_1 (Concatenate  (None, 64, 64, 768)          0         ['up_sampling2d_1[0][0]',     
+ )                                                                   'activation_5[0][0]']        
+                                                                                                  
+ conv2d_12 (Conv2D)          (None, 64, 64, 256)          1769728   ['concatenate_1[0][0]']       
+                                                                                                  
+ batch_normalization_12 (Ba  (None, 64, 64, 256)          1024      ['conv2d_12[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_12 (Activation)  (None, 64, 64, 256)          0         ['batch_normalization_12[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_13 (Conv2D)          (None, 64, 64, 256)          590080    ['activation_12[0][0]']       
+                                                                                                  
+ batch_normalization_13 (Ba  (None, 64, 64, 256)          1024      ['conv2d_13[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_13 (Activation)  (None, 64, 64, 256)          0         ['batch_normalization_13[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_2 (UpSamplin  (None, 128, 128, 256)        0         ['activation_13[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_2 (Concatenate  (None, 128, 128, 384)        0         ['up_sampling2d_2[0][0]',     
+ )                                                                   'activation_3[0][0]']        
+                                                                                                  
+ conv2d_14 (Conv2D)          (None, 128, 128, 128)        442496    ['concatenate_2[0][0]']       
+                                                                                                  
+ batch_normalization_14 (Ba  (None, 128, 128, 128)        512       ['conv2d_14[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_14 (Activation)  (None, 128, 128, 128)        0         ['batch_normalization_14[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_15 (Conv2D)          (None, 128, 128, 128)        147584    ['activation_14[0][0]']       
+                                                                                                  
+ batch_normalization_15 (Ba  (None, 128, 128, 128)        512       ['conv2d_15[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_15 (Activation)  (None, 128, 128, 128)        0         ['batch_normalization_15[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_3 (UpSamplin  (None, 256, 256, 128)        0         ['activation_15[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_3 (Concatenate  (None, 256, 256, 192)        0         ['up_sampling2d_3[0][0]',     
+ )                                                                   'activation_1[0][0]']        
+                                                                                                  
+ conv2d_16 (Conv2D)          (None, 256, 256, 64)         110656    ['concatenate_3[0][0]']       
+                                                                                                  
+ batch_normalization_16 (Ba  (None, 256, 256, 64)         256       ['conv2d_16[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_16 (Activation)  (None, 256, 256, 64)         0         ['batch_normalization_16[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_17 (Conv2D)          (None, 256, 256, 64)         36928     ['activation_16[0][0]']       
+                                                                                                  
+ batch_normalization_17 (Ba  (None, 256, 256, 64)         256       ['conv2d_17[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_17 (Activation)  (None, 256, 256, 64)         0         ['batch_normalization_17[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_18 (Conv2D)          (None, 256, 256, 1)          65        ['activation_17[0][0]']       
+                                                                                                  
+ batch_normalization_18 (Ba  (None, 256, 256, 1)          4         ['conv2d_18[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_18 (Activation)  (None, 256, 256, 1)          0         ['batch_normalization_18[0][0]
+                                                                    ']                            
+                                                                                                  
+==================================================================================================
+Total params: 31401349 (119.79 MB)
+Trainable params: 31389571 (119.74 MB)
+Non-trainable params: 11778 (46.01 KB)
+__________________________________________________________________________________________________
+None
+✓ focal_loss imported successfully
+Model: "UNet"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_2 (InputLayer)        [(None, 256, 256, 3)]        0         []                            
+                                                                                                  
+ conv2d_19 (Conv2D)          (None, 256, 256, 64)         1792      ['input_2[0][0]']             
+                                                                                                  
+ batch_normalization_19 (Ba  (None, 256, 256, 64)         256       ['conv2d_19[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_19 (Activation)  (None, 256, 256, 64)         0         ['batch_normalization_19[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_20 (Conv2D)          (None, 256, 256, 64)         36928     ['activation_19[0][0]']       
+                                                                                                  
+ batch_normalization_20 (Ba  (None, 256, 256, 64)         256       ['conv2d_20[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_20 (Activation)  (None, 256, 256, 64)         0         ['batch_normalization_20[0][0]
+                                                                    ']                            
+                                                                                                  
+ max_pooling2d_4 (MaxPoolin  (None, 128, 128, 64)         0         ['activation_20[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_21 (Conv2D)          (None, 128, 128, 128)        73856     ['max_pooling2d_4[0][0]']     
+                                                                                                  
+ batch_normalization_21 (Ba  (None, 128, 128, 128)        512       ['conv2d_21[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_21 (Activation)  (None, 128, 128, 128)        0         ['batch_normalization_21[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_22 (Conv2D)          (None, 128, 128, 128)        147584    ['activation_21[0][0]']       
+                                                                                                  
+ batch_normalization_22 (Ba  (None, 128, 128, 128)        512       ['conv2d_22[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_22 (Activation)  (None, 128, 128, 128)        0         ['batch_normalization_22[0][0]
+                                                                    ']                            
+                                                                                                  
+ max_pooling2d_5 (MaxPoolin  (None, 64, 64, 128)          0         ['activation_22[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_23 (Conv2D)          (None, 64, 64, 256)          295168    ['max_pooling2d_5[0][0]']     
+                                                                                                  
+ batch_normalization_23 (Ba  (None, 64, 64, 256)          1024      ['conv2d_23[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_23 (Activation)  (None, 64, 64, 256)          0         ['batch_normalization_23[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_24 (Conv2D)          (None, 64, 64, 256)          590080    ['activation_23[0][0]']       
+                                                                                                  
+ batch_normalization_24 (Ba  (None, 64, 64, 256)          1024      ['conv2d_24[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_24 (Activation)  (None, 64, 64, 256)          0         ['batch_normalization_24[0][0]
+                                                                    ']                            
+                                                                                                  
+ max_pooling2d_6 (MaxPoolin  (None, 32, 32, 256)          0         ['activation_24[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_25 (Conv2D)          (None, 32, 32, 512)          1180160   ['max_pooling2d_6[0][0]']     
+                                                                                                  
+ batch_normalization_25 (Ba  (None, 32, 32, 512)          2048      ['conv2d_25[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_25 (Activation)  (None, 32, 32, 512)          0         ['batch_normalization_25[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_26 (Conv2D)          (None, 32, 32, 512)          2359808   ['activation_25[0][0]']       
+                                                                                                  
+ batch_normalization_26 (Ba  (None, 32, 32, 512)          2048      ['conv2d_26[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_26 (Activation)  (None, 32, 32, 512)          0         ['batch_normalization_26[0][0]
+                                                                    ']                            
+                                                                                                  
+ max_pooling2d_7 (MaxPoolin  (None, 16, 16, 512)          0         ['activation_26[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_27 (Conv2D)          (None, 16, 16, 1024)         4719616   ['max_pooling2d_7[0][0]']     
+                                                                                                  
+ batch_normalization_27 (Ba  (None, 16, 16, 1024)         4096      ['conv2d_27[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_27 (Activation)  (None, 16, 16, 1024)         0         ['batch_normalization_27[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_28 (Conv2D)          (None, 16, 16, 1024)         9438208   ['activation_27[0][0]']       
+                                                                                                  
+ batch_normalization_28 (Ba  (None, 16, 16, 1024)         4096      ['conv2d_28[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_28 (Activation)  (None, 16, 16, 1024)         0         ['batch_normalization_28[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_4 (UpSamplin  (None, 32, 32, 1024)         0         ['activation_28[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_4 (Concatenate  (None, 32, 32, 1536)         0         ['up_sampling2d_4[0][0]',     
+ )                                                                   'activation_26[0][0]']       
+                                                                                                  
+ conv2d_29 (Conv2D)          (None, 32, 32, 512)          7078400   ['concatenate_4[0][0]']       
+                                                                                                  
+ batch_normalization_29 (Ba  (None, 32, 32, 512)          2048      ['conv2d_29[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_29 (Activation)  (None, 32, 32, 512)          0         ['batch_normalization_29[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_30 (Conv2D)          (None, 32, 32, 512)          2359808   ['activation_29[0][0]']       
+                                                                                                  
+ batch_normalization_30 (Ba  (None, 32, 32, 512)          2048      ['conv2d_30[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_30 (Activation)  (None, 32, 32, 512)          0         ['batch_normalization_30[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_5 (UpSamplin  (None, 64, 64, 512)          0         ['activation_30[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_5 (Concatenate  (None, 64, 64, 768)          0         ['up_sampling2d_5[0][0]',     
+ )                                                                   'activation_24[0][0]']       
+                                                                                                  
+ conv2d_31 (Conv2D)          (None, 64, 64, 256)          1769728   ['concatenate_5[0][0]']       
+                                                                                                  
+ batch_normalization_31 (Ba  (None, 64, 64, 256)          1024      ['conv2d_31[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_31 (Activation)  (None, 64, 64, 256)          0         ['batch_normalization_31[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_32 (Conv2D)          (None, 64, 64, 256)          590080    ['activation_31[0][0]']       
+                                                                                                  
+ batch_normalization_32 (Ba  (None, 64, 64, 256)          1024      ['conv2d_32[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_32 (Activation)  (None, 64, 64, 256)          0         ['batch_normalization_32[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_6 (UpSamplin  (None, 128, 128, 256)        0         ['activation_32[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_6 (Concatenate  (None, 128, 128, 384)        0         ['up_sampling2d_6[0][0]',     
+ )                                                                   'activation_22[0][0]']       
+                                                                                                  
+ conv2d_33 (Conv2D)          (None, 128, 128, 128)        442496    ['concatenate_6[0][0]']       
+                                                                                                  
+ batch_normalization_33 (Ba  (None, 128, 128, 128)        512       ['conv2d_33[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_33 (Activation)  (None, 128, 128, 128)        0         ['batch_normalization_33[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_34 (Conv2D)          (None, 128, 128, 128)        147584    ['activation_33[0][0]']       
+                                                                                                  
+ batch_normalization_34 (Ba  (None, 128, 128, 128)        512       ['conv2d_34[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_34 (Activation)  (None, 128, 128, 128)        0         ['batch_normalization_34[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_7 (UpSamplin  (None, 256, 256, 128)        0         ['activation_34[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_7 (Concatenate  (None, 256, 256, 192)        0         ['up_sampling2d_7[0][0]',     
+ )                                                                   'activation_20[0][0]']       
+                                                                                                  
+ conv2d_35 (Conv2D)          (None, 256, 256, 64)         110656    ['concatenate_7[0][0]']       
+                                                                                                  
+ batch_normalization_35 (Ba  (None, 256, 256, 64)         256       ['conv2d_35[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_35 (Activation)  (None, 256, 256, 64)         0         ['batch_normalization_35[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_36 (Conv2D)          (None, 256, 256, 64)         36928     ['activation_35[0][0]']       
+                                                                                                  
+ batch_normalization_36 (Ba  (None, 256, 256, 64)         256       ['conv2d_36[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_36 (Activation)  (None, 256, 256, 64)         0         ['batch_normalization_36[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_37 (Conv2D)          (None, 256, 256, 1)          65        ['activation_36[0][0]']       
+                                                                                                  
+ batch_normalization_37 (Ba  (None, 256, 256, 1)          4         ['conv2d_37[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_37 (Activation)  (None, 256, 256, 1)          0         ['batch_normalization_37[0][0]
+                                                                    ']                            
+                                                                                                  
+==================================================================================================
+Total params: 31402501 (119.79 MB)
+Trainable params: 31390723 (119.75 MB)
+Non-trainable params: 11778 (46.01 KB)
+__________________________________________________________________________________________________
+WARNING:absl:`lr` is deprecated in TF-Keras optimizer, please use `learning_rate` or use the legacy optimizer, e.g.,tf.keras.optimizers.legacy.Adam.
+None
+Epoch 1/30
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1758861658.601494 3179911 service.cc:145] XLA service 0x1454f5ce7f70 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1758861658.601572 3179911 service.cc:153]   StreamExecutor device (0): NVIDIA A40, Compute Capability 8.6
+I0000 00:00:1758861659.062111 3179911 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+1/9 [==>...........................] - ETA: 5:59 - loss: 0.3351 - accuracy: 0.4928 - jacard_coef: 0.09712/9 [=====>........................] - ETA: 52s - loss: 0.3002 - accuracy: 0.4386 - jacard_coef: 0.0858 3/9 [=========>....................] - ETA: 33s - loss: 0.2785 - accuracy: 0.3951 - jacard_coef: 0.08604/9 [============>.................] - ETA: 23s - loss: 0.2609 - accuracy: 0.3518 - jacard_coef: 0.08475/9 [===============>..............] - ETA: 14s - loss: 0.2492 - accuracy: 0.3178 - jacard_coef: 0.08116/9 [===================>..........] - ETA: 8s - loss: 0.2403 - accuracy: 0.2955 - jacard_coef: 0.0805 7/9 [======================>.......] - ETA: 5s - loss: 0.2338 - accuracy: 0.2785 - jacard_coef: 0.08038/9 [=========================>....] - ETA: 2s - loss: 0.2288 - accuracy: 0.2610 - jacard_coef: 0.07609/9 [==============================] - ETA: 0s - loss: 0.2285 - accuracy: 0.2608 - jacard_coef: 0.08159/9 [==============================] - 67s 3s/step - loss: 0.2285 - accuracy: 0.2608 - jacard_coef: 0.0815 - val_loss: 0.1855 - val_accuracy: 0.9300 - val_jacard_coef: 0.0361 - lr: 0.0010
+Epoch 2/30
+1/9 [==>...........................] - ETA: 1s - loss: 0.1917 - accuracy: 0.1847 - jacard_coef: 0.08222/9 [=====>........................] - ETA: 1s - loss: 0.1907 - accuracy: 0.1812 - jacard_coef: 0.07333/9 [=========>....................] - ETA: 1s - loss: 0.1891 - accuracy: 0.1854 - jacard_coef: 0.07554/9 [============>.................] - ETA: 1s - loss: 0.1886 - accuracy: 0.1879 - jacard_coef: 0.07585/9 [===============>..............] - ETA: 0s - loss: 0.1879 - accuracy: 0.1912 - jacard_coef: 0.07716/9 [===================>..........] - ETA: 0s - loss: 0.1876 - accuracy: 0.1923 - jacard_coef: 0.07877/9 [======================>.......] - ETA: 0s - loss: 0.1874 - accuracy: 0.1897 - jacard_coef: 0.07798/9 [=========================>....] - ETA: 0s - loss: 0.1875 - accuracy: 0.1871 - jacard_coef: 0.07699/9 [==============================] - 2s 234ms/step - loss: 0.1874 - accuracy: 0.1870 - jacard_coef: 0.0757 - val_loss: 0.3439 - val_accuracy: 0.9301 - val_jacard_coef: 0.0150 - lr: 0.0010
+Epoch 3/30
+1/9 [==>...........................] - ETA: 1s - loss: 0.1849 - accuracy: 0.1856 - jacard_coef: 0.07532/9 [=====>........................] - ETA: 1s - loss: 0.1841 - accuracy: 0.1989 - jacard_coef: 0.08533/9 [=========>....................] - ETA: 1s - loss: 0.1842 - accuracy: 0.1989 - jacard_coef: 0.08024/9 [============>.................] - ETA: 1s - loss: 0.1844 - accuracy: 0.2049 - jacard_coef: 0.08295/9 [===============>..............] - ETA: 0s - loss: 0.1846 - accuracy: 0.2025 - jacard_coef: 0.07926/9 [===================>..........] - ETA: 0s - loss: 0.1844 - accuracy: 0.2021 - jacard_coef: 0.07667/9 [======================>.......] - ETA: 0s - loss: 0.1840 - accuracy: 0.2029 - jacard_coef: 0.07538/9 [=========================>....] - ETA: 0s - loss: 0.1840 - accuracy: 0.2047 - jacard_coef: 0.07639/9 [==============================] - 2s 241ms/step - loss: 0.1840 - accuracy: 0.2054 - jacard_coef: 0.0820 - val_loss: 0.1776 - val_accuracy: 0.9200 - val_jacard_coef: 0.0376 - lr: 0.0010
+Epoch 4/30
+1/9 [==>...........................] - ETA: 1s - loss: 0.1817 - accuracy: 0.1898 - jacard_coef: 0.05312/9 [=====>........................] - ETA: 1s - loss: 0.1815 - accuracy: 0.2140 - jacard_coef: 0.07423/9 [=========>....................] - ETA: 1s - loss: 0.1813 - accuracy: 0.2208 - jacard_coef: 0.07924/9 [============>.................] - ETA: 1s - loss: 0.1807 - accuracy: 0.2172 - jacard_coef: 0.07575/9 [===============>..............] - ETA: 0s - loss: 0.1804 - accuracy: 0.2213 - jacard_coef: 0.07626/9 [===================>..........] - ETA: 0s - loss: 0.1804 - accuracy: 0.2208 - jacard_coef: 0.07507/9 [======================>.......] - ETA: 0s - loss: 0.1803 - accuracy: 0.2266 - jacard_coef: 0.07758/9 [=========================>....] - ETA: 0s - loss: 0.1801 - accuracy: 0.2284 - jacard_coef: 0.07629/9 [==============================] - 2s 242ms/step - loss: 0.1800 - accuracy: 0.2294 - jacard_coef: 0.0813 - val_loss: 0.1167 - val_accuracy: 0.8948 - val_jacard_coef: 0.0502 - lr: 0.0010
+Epoch 5/30
+1/9 [==>...........................] - ETA: 1s - loss: 0.1758 - accuracy: 0.2866 - jacard_coef: 0.07512/9 [=====>........................] - ETA: 1s - loss: 0.1756 - accuracy: 0.2909 - jacard_coef: 0.06513/9 [=========>....................] - ETA: 1s - loss: 0.1754 - accuracy: 0.3035 - jacard_coef: 0.06064/9 [============>.................] - ETA: 1s - loss: 0.1752 - accuracy: 0.3240 - jacard_coef: 0.06665/9 [===============>..............] - ETA: 0s - loss: 0.1746 - accuracy: 0.3224 - jacard_coef: 0.06686/9 [===================>..........] - ETA: 0s - loss: 0.1740 - accuracy: 0.3578 - jacard_coef: 0.07277/9 [======================>.......] - ETA: 0s - loss: 0.1738 - accuracy: 0.3822 - jacard_coef: 0.07688/9 [=========================>....] - ETA: 0s - loss: 0.1737 - accuracy: 0.3990 - jacard_coef: 0.07649/9 [==============================] - 2s 240ms/step - loss: 0.1737 - accuracy: 0.4009 - jacard_coef: 0.0736 - val_loss: 0.1966 - val_accuracy: 0.9192 - val_jacard_coef: 0.0599 - lr: 0.0010
+Epoch 6/30
+1/9 [==>...........................] - ETA: 1s - loss: 0.1712 - accuracy: 0.6280 - jacard_coef: 0.06352/9 [=====>........................] - ETA: 1s - loss: 0.1689 - accuracy: 0.7021 - jacard_coef: 0.06703/9 [=========>....................] - ETA: 1s - loss: 0.1680 - accuracy: 0.7160 - jacard_coef: 0.06954/9 [============>.................] - ETA: 1s - loss: 0.1676 - accuracy: 0.6999 - jacard_coef: 0.07195/9 [===============>..............] - ETA: 0s - loss: 0.1694 - accuracy: 0.6350 - jacard_coef: 0.07506/9 [===================>..........] - ETA: 0s - loss: 0.1690 - accuracy: 0.6712 - jacard_coef: 0.07477/9 [======================>.......] - ETA: 0s - loss: 0.1691 - accuracy: 0.6929 - jacard_coef: 0.07508/9 [=========================>....] - ETA: 0s - loss: 0.1694 - accuracy: 0.7026 - jacard_coef: 0.07649/9 [==============================] - 2s 239ms/step - loss: 0.1694 - accuracy: 0.7018 - jacard_coef: 0.0711 - val_loss: 2.2134 - val_accuracy: 0.1285 - val_jacard_coef: 0.0697 - lr: 0.0010
+Epoch 7/30
+1/9 [==>...........................] - ETA: 1s - loss: 0.1693 - accuracy: 0.7258 - jacard_coef: 0.05792/9 [=====>........................] - ETA: 1s - loss: 0.1696 - accuracy: 0.6957 - jacard_coef: 0.07663/9 [=========>....................] - ETA: 1s - loss: 0.1693 - accuracy: 0.6792 - jacard_coef: 0.08214/9 [============>.................] - ETA: 1s - loss: 0.1691 - accuracy: 0.6712 - jacard_coef: 0.07715/9 [===============>..............] - ETA: 0s - loss: 0.1688 - accuracy: 0.6587 - jacard_coef: 0.07866/9 [===================>..........] - ETA: 0s - loss: 0.1686 - accuracy: 0.6435 - jacard_coef: 0.07807/9 [======================>.......] - ETA: 0s - loss: 0.1680 - accuracy: 0.6442 - jacard_coef: 0.07728/9 [=========================>....] - ETA: 0s - loss: 0.1677 - accuracy: 0.6550 - jacard_coef: 0.07579/9 [==============================] - 2s 235ms/step - loss: 0.1677 - accuracy: 0.6554 - jacard_coef: 0.0828 - val_loss: 1.0931 - val_accuracy: 0.9303 - val_jacard_coef: 8.6569e-04 - lr: 0.0010
+Epoch 8/30
+1/9 [==>...........................] - ETA: 1s - loss: 0.1637 - accuracy: 0.7007 - jacard_coef: 0.06932/9 [=====>........................] - ETA: 1s - loss: 0.1635 - accuracy: 0.7054 - jacard_coef: 0.07543/9 [=========>....................] - ETA: 1s - loss: 0.1630 - accuracy: 0.7103 - jacard_coef: 0.08084/9 [============>.................] - ETA: 1s - loss: 0.1626 - accuracy: 0.7258 - jacard_coef: 0.07795/9 [===============>..............] - ETA: 0s - loss: 0.1624 - accuracy: 0.7246 - jacard_coef: 0.07386/9 [===================>..........] - ETA: 0s - loss: 0.1626 - accuracy: 0.7442 - jacard_coef: 0.07327/9 [======================>.......] - ETA: 0s - loss: 0.1625 - accuracy: 0.7479 - jacard_coef: 0.07588/9 [=========================>....] - ETA: 0s - loss: 0.1623 - accuracy: 0.7627 - jacard_coef: 0.07569/9 [==============================] - 2s 236ms/step - loss: 0.1624 - accuracy: 0.7607 - jacard_coef: 0.0810 - val_loss: 0.2921 - val_accuracy: 0.9161 - val_jacard_coef: 0.0428 - lr: 0.0010
+Epoch 9/30
+1/9 [==>...........................] - ETA: 1s - loss: 0.1604 - accuracy: 0.9050 - jacard_coef: 0.07572/9 [=====>........................] - ETA: 1s - loss: 0.1618 - accuracy: 0.8819 - jacard_coef: 0.07483/9 [=========>....................] - ETA: 1s - loss: 0.1629 - accuracy: 0.8502 - jacard_coef: 0.08034/9 [============>.................] - ETA: 1s - loss: 0.1630 - accuracy: 0.8376 - jacard_coef: 0.07575/9 [===============>..............] - ETA: 0s - loss: 0.1635 - accuracy: 0.8228 - jacard_coef: 0.07626/9 [===================>..........] - ETA: 0s - loss: 0.1635 - accuracy: 0.8146 - jacard_coef: 0.07377/9 [======================>.......] - ETA: 0s - loss: 0.1635 - accuracy: 0.8116 - jacard_coef: 0.07558/9 [=========================>....] - ETA: 0s - loss: 0.1635 - accuracy: 0.8080 - jacard_coef: 0.07649/9 [==============================] - 2s 237ms/step - loss: 0.1635 - accuracy: 0.8083 - jacard_coef: 0.0684 - val_loss: 0.8143 - val_accuracy: 0.9208 - val_jacard_coef: 0.0214 - lr: 0.0010
+Epoch 10/30
+1/9 [==>...........................] - ETA: 1s - loss: 0.1639 - accuracy: 0.8471 - jacard_coef: 0.08132/9 [=====>........................] - ETA: 1s - loss: 0.1628 - accuracy: 0.8615 - jacard_coef: 0.07843/9 [=========>....................] - ETA: 1s - loss: 0.1619 - accuracy: 0.8676 - jacard_coef: 0.07414/9 [============>.................] - ETA: 1s - loss: 0.1621 - accuracy: 0.8329 - jacard_coef: 0.07875/9 [===============>..............] - ETA: 0s - loss: 0.1620 - accuracy: 0.8182 - jacard_coef: 0.08416/9 [===================>..........] - ETA: 0s - loss: 0.1616 - accuracy: 0.8274 - jacard_coef: 0.08237/9 [======================>.......] - ETA: 0s - loss: 0.1611 - accuracy: 0.8373 - jacard_coef: 0.07888/9 [=========================>....] - ETA: 0s - loss: 0.1606 - accuracy: 0.8491 - jacard_coef: 0.07529/9 [==============================] - 2s 236ms/step - loss: 0.1607 - accuracy: 0.8486 - jacard_coef: 0.0815 - val_loss: 0.6812 - val_accuracy: 0.9174 - val_jacard_coef: 0.0317 - lr: 0.0010
+Epoch 11/30
+1/9 [==>...........................] - ETA: 1s - loss: 0.1598 - accuracy: 0.8520 - jacard_coef: 0.11252/9 [=====>........................] - ETA: 1s - loss: 0.1578 - accuracy: 0.8988 - jacard_coef: 0.07933/9 [=========>....................] - ETA: 1s - loss: 0.1573 - accuracy: 0.9085 - jacard_coef: 0.07434/9 [============>.................] - ETA: 1s - loss: 0.1573 - accuracy: 0.9045 - jacard_coef: 0.07795/9 [===============>..............] - ETA: 0s - loss: 0.1575 - accuracy: 0.8991 - jacard_coef: 0.08196/9 [===================>..........] - ETA: 0s - loss: 0.1573 - accuracy: 0.8975 - jacard_coef: 0.08167/9 [======================>.......] - ETA: 0s - loss: 0.1570 - accuracy: 0.8987 - jacard_coef: 0.07858/9 [=========================>....] - ETA: 0s - loss: 0.1567 - accuracy: 0.9022 - jacard_coef: 0.07509/9 [==============================] - 2s 236ms/step - loss: 0.1567 - accuracy: 0.9013 - jacard_coef: 0.0795 - val_loss: 0.1255 - val_accuracy: 0.8908 - val_jacard_coef: 0.0634 - lr: 0.0010
+Epoch 12/30
+1/9 [==>...........................] - ETA: 2s - loss: 0.1556 - accuracy: 0.9052 - jacard_coef: 0.08372/9 [=====>........................] - ETA: 1s - loss: 0.1542 - accuracy: 0.9163 - jacard_coef: 0.07263/9 [=========>....................] - ETA: 1s - loss: 0.1538 - accuracy: 0.9189 - jacard_coef: 0.06944/9 [============>.................] - ETA: 1s - loss: 0.1541 - accuracy: 0.9170 - jacard_coef: 0.06935/9 [===============>..............] - ETA: 1s - loss: 0.1543 - accuracy: 0.9096 - jacard_coef: 0.07366/9 [===================>..........] - ETA: 0s - loss: 0.1543 - accuracy: 0.9077 - jacard_coef: 0.07407/9 [======================>.......] - ETA: 0s - loss: 0.1545 - accuracy: 0.9081 - jacard_coef: 0.07508/9 [=========================>....] - ETA: 0s - loss: 0.1546 - accuracy: 0.9079 - jacard_coef: 0.07619/9 [==============================] - 2s 242ms/step - loss: 0.1546 - accuracy: 0.9082 - jacard_coef: 0.0717 - val_loss: 0.1642 - val_accuracy: 0.7294 - val_jacard_coef: 0.0650 - lr: 5.0000e-04
+Epoch 13/30
+1/9 [==>...........................] - ETA: 2s - loss: 0.1544 - accuracy: 0.9071 - jacard_coef: 0.08282/9 [=====>........................] - ETA: 1s - loss: 0.1549 - accuracy: 0.8978 - jacard_coef: 0.08623/9 [=========>....................] - ETA: 1s - loss: 0.1548 - accuracy: 0.8954 - jacard_coef: 0.08534/9 [============>.................] - ETA: 1s - loss: 0.1546 - accuracy: 0.8945 - jacard_coef: 0.08525/9 [===============>..............] - ETA: 1s - loss: 0.1542 - accuracy: 0.8986 - jacard_coef: 0.08086/9 [===================>..........] - ETA: 0s - loss: 0.1538 - accuracy: 0.8967 - jacard_coef: 0.07647/9 [======================>.......] - ETA: 0s - loss: 0.1540 - accuracy: 0.8886 - jacard_coef: 0.07678/9 [=========================>....] - ETA: 0s - loss: 0.1536 - accuracy: 0.8884 - jacard_coef: 0.07589/9 [==============================] - 2s 242ms/step - loss: 0.1541 - accuracy: 0.8859 - jacard_coef: 0.0753 - val_loss: 0.1550 - val_accuracy: 0.8843 - val_jacard_coef: 0.0651 - lr: 5.0000e-04
+Epoch 14/30
+1/9 [==>...........................] - ETA: 2s - loss: 0.1531 - accuracy: 0.9228 - jacard_coef: 0.07092/9 [=====>........................] - ETA: 1s - loss: 0.1549 - accuracy: 0.8358 - jacard_coef: 0.07383/9 [=========>....................] - ETA: 1s - loss: 0.1553 - accuracy: 0.7995 - jacard_coef: 0.07184/9 [============>.................] - ETA: 1s - loss: 0.1554 - accuracy: 0.7831 - jacard_coef: 0.07245/9 [===============>..............] - ETA: 1s - loss: 0.1556 - accuracy: 0.7574 - jacard_coef: 0.07186/9 [===================>..........] - ETA: 0s - loss: 0.1574 - accuracy: 0.7250 - jacard_coef: 0.07237/9 [======================>.......] - ETA: 0s - loss: 0.1573 - accuracy: 0.7163 - jacard_coef: 0.07548/9 [=========================>....] - ETA: 0s - loss: 0.1575 - accuracy: 0.7036 - jacard_coef: 0.07619/9 [==============================] - 2s 242ms/step - loss: 0.1574 - accuracy: 0.7052 - jacard_coef: 0.0738 - val_loss: 0.1592 - val_accuracy: 0.9225 - val_jacard_coef: 0.0650 - lr: 5.0000e-04
+Epoch 15/30
+1/9 [==>...........................] - ETA: 2s - loss: 0.1550 - accuracy: 0.8844 - jacard_coef: 0.09922/9 [=====>........................] - ETA: 1s - loss: 0.1542 - accuracy: 0.9022 - jacard_coef: 0.08233/9 [=========>....................] - ETA: 1s - loss: 0.1528 - accuracy: 0.9150 - jacard_coef: 0.07284/9 [============>.................] - ETA: 1s - loss: 0.1528 - accuracy: 0.9135 - jacard_coef: 0.07385/9 [===============>..............] - ETA: 1s - loss: 0.1528 - accuracy: 0.9157 - jacard_coef: 0.07196/9 [===================>..........] - ETA: 0s - loss: 0.1531 - accuracy: 0.9119 - jacard_coef: 0.07507/9 [======================>.......] - ETA: 0s - loss: 0.1529 - accuracy: 0.9132 - jacard_coef: 0.07398/9 [=========================>....] - ETA: 0s - loss: 0.1529 - accuracy: 0.9112 - jacard_coef: 0.07599/9 [==============================] - 2s 242ms/step - loss: 0.1529 - accuracy: 0.9118 - jacard_coef: 0.0677 - val_loss: 0.1697 - val_accuracy: 0.8639 - val_jacard_coef: 0.0652 - lr: 5.0000e-04
+Epoch 16/30
+1/9 [==>...........................] - ETA: 2s - loss: 0.1510 - accuracy: 0.9372 - jacard_coef: 0.05472/9 [=====>........................] - ETA: 1s - loss: 0.1512 - accuracy: 0.9254 - jacard_coef: 0.06543/9 [=========>....................] - ETA: 1s - loss: 0.1508 - accuracy: 0.9268 - jacard_coef: 0.06534/9 [============>.................] - ETA: 1s - loss: 0.1513 - accuracy: 0.9219 - jacard_coef: 0.06995/9 [===============>..............] - ETA: 1s - loss: 0.1511 - accuracy: 0.9222 - jacard_coef: 0.07006/9 [===================>..........] - ETA: 0s - loss: 0.1512 - accuracy: 0.9206 - jacard_coef: 0.07147/9 [======================>.......] - ETA: 0s - loss: 0.1514 - accuracy: 0.9181 - jacard_coef: 0.07378/9 [=========================>....] - ETA: 0s - loss: 0.1514 - accuracy: 0.9157 - jacard_coef: 0.07579/9 [==============================] - 2s 242ms/step - loss: 0.1517 - accuracy: 0.9120 - jacard_coef: 0.0733 - val_loss: 0.1742 - val_accuracy: 0.8868 - val_jacard_coef: 0.0651 - lr: 5.0000e-04
+/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/training.py:3098: UserWarning: You are saving your model as an HDF5 file via `model.save()`. This file format is considered legacy. We recommend using instead the native TF-Keras format, e.g. `model.save('my_model.keras')`.
+  saving_api.save_model(
+
+✓ Training completed successfully!
+  Best Val Jaccard: 0.0697 (epoch 6)
+  Final Val Loss: 0.1742
+  Training Time: 0:01:40.567897
+  Stability (std): 0.3306
+
+Results saved to: hyperparameter_optimization_20250926_123742/exp_2_UNet_lr1e-4_bs16/UNet_lr0.0001_bs16_results.json
