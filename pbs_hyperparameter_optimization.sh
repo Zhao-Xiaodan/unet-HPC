@@ -24,7 +24,7 @@ echo "======================================================================="
 echo "Testing Learning Rates: [1e-4, 5e-4, 1e-3, 5e-3]"
 echo "Testing Batch Sizes: [8, 16, 32]"
 echo "Testing Architectures: [UNet, Attention_UNet, Attention_ResUNet]"
-echo "Epochs per experiment: 30 (reduced for grid search)"
+echo "Epochs per experiment: 75 (increased for proper convergence)"
 echo "Total experiments: 4 LR × 3 BS × 3 Arch = 36 experiments"
 echo "Estimated total time: 36-48 hours"
 echo ""
@@ -312,7 +312,7 @@ def main():
     parser.add_argument('--architecture', required=True, choices=['UNet', 'Attention_UNet', 'Attention_ResUNet'])
     parser.add_argument('--learning_rate', type=float, required=True)
     parser.add_argument('--batch_size', type=int, required=True)
-    parser.add_argument('--epochs', type=int, default=30)
+    parser.add_argument('--epochs', type=int, default=75)
     parser.add_argument('--output_dir', required=True)
 
     args = parser.parse_args()

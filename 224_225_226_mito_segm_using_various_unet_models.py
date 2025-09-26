@@ -12,6 +12,7 @@ import os
 import numpy as np
 from matplotlib import pyplot as plt
 from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
 import tensorflow as tf
 from datetime import datetime 
 import cv2
@@ -94,19 +95,27 @@ from models import Attention_ResUNet, UNet, Attention_UNet, dice_coef, dice_coef
 UNet
 '''
 unet_model = UNet(input_shape)
-unet_model.compile(optimizer=Adam(lr = 1e-2), loss=BinaryFocalLoss(gamma=2), 
+unet_model.compile(optimizer=Adam(lr = 1e-3), loss=BinaryFocalLoss(gamma=2),
               metrics=['accuracy', jacard_coef])
 
 
 print(unet_model.summary())
 
-start1 = datetime.now() 
-unet_history = unet_model.fit(X_train, y_train, 
+# Define improved training callbacks
+callbacks_unet = [
+    EarlyStopping(monitor='val_jacard_coef', mode='max', patience=15, verbose=1, restore_best_weights=True),
+    ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=8, min_lr=1e-6, verbose=1),
+    ModelCheckpoint('best_unet_model.h5', monitor='val_jacard_coef', mode='max', save_best_only=True, verbose=1)
+]
+
+start1 = datetime.now()
+unet_history = unet_model.fit(X_train, y_train,
                     verbose=1,
                     batch_size = batch_size,
-                    validation_data=(X_test, y_test ), 
+                    validation_data=(X_test, y_test ),
                     shuffle=False,
-                    epochs=50)
+                    epochs=100,
+                    callbacks=callbacks_unet)
 
 stop1 = datetime.now()
 #Execution time of the model 
@@ -120,18 +129,27 @@ Attention UNet
 '''
 att_unet_model = Attention_UNet(input_shape)
 
-att_unet_model.compile(optimizer=Adam(lr = 1e-2), loss=BinaryFocalLoss(gamma=2), 
+att_unet_model.compile(optimizer=Adam(lr = 1e-3), loss=BinaryFocalLoss(gamma=2),
               metrics=['accuracy', jacard_coef])
 
 
 print(att_unet_model.summary())
-start2 = datetime.now() 
-att_unet_history = att_unet_model.fit(X_train, y_train, 
+
+# Define improved training callbacks for Attention U-Net
+callbacks_att_unet = [
+    EarlyStopping(monitor='val_jacard_coef', mode='max', patience=15, verbose=1, restore_best_weights=True),
+    ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=8, min_lr=1e-6, verbose=1),
+    ModelCheckpoint('best_attention_unet_model.h5', monitor='val_jacard_coef', mode='max', save_best_only=True, verbose=1)
+]
+
+start2 = datetime.now()
+att_unet_history = att_unet_model.fit(X_train, y_train,
                     verbose=1,
                     batch_size = batch_size,
-                    validation_data=(X_test, y_test ), 
+                    validation_data=(X_test, y_test ),
                     shuffle=False,
-                    epochs=50)
+                    epochs=100,
+                    callbacks=callbacks_att_unet)
 stop2 = datetime.now()
 #Execution time of the model 
 execution_time_Att_Unet = stop2-start2
@@ -145,7 +163,7 @@ Attention Residual Unet
 '''
 att_res_unet_model = Attention_ResUNet(input_shape)
 
-att_res_unet_model.compile(optimizer=Adam(lr = 1e-2), loss=BinaryFocalLoss(gamma=2), 
+att_res_unet_model.compile(optimizer=Adam(lr = 1e-3), loss=BinaryFocalLoss(gamma=2),
               metrics=['accuracy', jacard_coef])
 
 
@@ -154,14 +172,21 @@ att_res_unet_model.compile(optimizer=Adam(lr = 1e-2), loss=BinaryFocalLoss(gamma
 
 print(att_res_unet_model.summary())
 
+# Define improved training callbacks for Attention ResU-Net
+callbacks_att_res_unet = [
+    EarlyStopping(monitor='val_jacard_coef', mode='max', patience=15, verbose=1, restore_best_weights=True),
+    ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=8, min_lr=1e-6, verbose=1),
+    ModelCheckpoint('best_attention_resunet_model.h5', monitor='val_jacard_coef', mode='max', save_best_only=True, verbose=1)
+]
 
-start3 = datetime.now() 
-att_res_unet_history = att_res_unet_model.fit(X_train, y_train, 
+start3 = datetime.now()
+att_res_unet_history = att_res_unet_model.fit(X_train, y_train,
                     verbose=1,
                     batch_size = batch_size,
-                    validation_data=(X_test, y_test ), 
+                    validation_data=(X_test, y_test ),
                     shuffle=False,
-                    epochs=50)
+                    epochs=100,
+                    callbacks=callbacks_att_res_unet)
 stop3 = datetime.now()
 
 #Execution time of the model 

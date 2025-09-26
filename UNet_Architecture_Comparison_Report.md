@@ -36,7 +36,7 @@ This study presents a comprehensive comparison of three U-Net architectures for 
 
 ### 2.1 Comprehensive Training Metrics Comparison
 
-![Figure 1: U-Net Architecture Comparison](unet_architecture_comparison.png)
+![Figure 1: U-Net Architecture Comparison](./mitochondria_segmentation_20250925_133928/unet_architecture_comparison.png)
 
 **Figure 1. Comprehensive training metrics comparison across three U-Net architectures for mitochondria segmentation.** Six panels show the evolution of key performance metrics over 50 training epochs. Standard U-Net (blue), Attention U-Net (orange), and Attention Residual U-Net (green) demonstrate distinct training behaviors and convergence patterns.
 
@@ -68,7 +68,7 @@ This study presents a comprehensive comparison of three U-Net architectures for 
 
 ### 2.2 Performance Summary Analysis
 
-![Figure 2: Model Performance Summary](unet_performance_summary.png)
+![Figure 2: Model Performance Summary](./mitochondria_segmentation_20250925_133928/unet_performance_summary.png)
 
 **Figure 2. Quantitative performance comparison across three key metrics.** Bar charts compare (A) best validation Jaccard coefficient achieved during training, (B) final validation loss after 50 epochs, and (C) convergence stability measured as standard deviation of validation loss over the final 10 epochs.
 
@@ -84,7 +84,7 @@ This study presents a comprehensive comparison of three U-Net architectures for 
 
 ### 2.3 Training Dynamics and Convergence Analysis
 
-![Figure 3: Training Dynamics Analysis](unet_training_dynamics.png)
+![Figure 3: Training Dynamics Analysis](./mitochondria_segmentation_20250925_133928/unet_training_dynamics.png)
 
 **Figure 3. Advanced analysis of training dynamics, overfitting patterns, learning progress, and convergence behavior.** Four specialized panels reveal deeper insights into model behavior throughout the training process, highlighting distinct convergence patterns and stability characteristics.
 
