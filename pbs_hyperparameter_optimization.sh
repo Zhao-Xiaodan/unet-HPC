@@ -24,6 +24,7 @@ echo "======================================================================="
 echo "Testing Learning Rates: [1e-4, 5e-4, 1e-3, 5e-3]"
 echo "Testing Batch Sizes: [8, 16, 32]"
 echo "Testing Architectures: [UNet, Attention_UNet, Attention_ResUNet]"
+echo "Dataset: dataset_full_stack/ (1,980 patches - REQUIRED)"
 echo "Epochs per experiment: 75 (increased for proper convergence)"
 echo "Total experiments: 4 LR × 3 BS × 3 Arch = 36 experiments"
 echo "Estimated total time: 36-48 hours"
@@ -121,14 +122,19 @@ def load_dataset():
     """Load and preprocess the mitochondria segmentation dataset."""
     print("Loading dataset...")
 
-    # Dataset paths
-    image_directory = 'dataset/images/'  # Updated path structure
-    mask_directory = 'dataset/masks/'
+    # Dataset paths - Use full stack dataset (1,980 patches)
+    image_directory = 'dataset_full_stack/images/'
+    mask_directory = 'dataset_full_stack/masks/'
 
     if not os.path.exists(image_directory) or not os.path.exists(mask_directory):
-        # Fallback to data directory
-        image_directory = 'data/images/'
-        mask_directory = 'data/masks/'
+        print(f"ERROR: Full stack dataset not found!")
+        print(f"Required directories:")
+        print(f"  {image_directory}")
+        print(f"  {mask_directory}")
+        print(f"")
+        print(f"Please run: python3 create_full_dataset.py")
+        print(f"Or copy dataset_full_stack/ from local machine")
+        raise FileNotFoundError("Full stack dataset required for meaningful hyperparameter optimization")
 
     SIZE = 256
     image_dataset = []
