@@ -38,8 +38,8 @@ echo ""
 # =======================================================================
 
 echo "=== TRAINING CONFIGURATION ==="
-echo "Dataset Images: ./dataset/images/"
-echo "Dataset Masks: ./dataset/masks/"
+echo "Dataset Images: ./dataset_full_stack/images/ (1980 patches)"
+echo "Dataset Masks: ./dataset_full_stack/masks/ (1980 patches)"
 echo "Image Size: 256x256"
 echo "Batch Size: 8"
 echo "Epochs per Model: 100 (with early stopping)"

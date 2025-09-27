@@ -20,8 +20,8 @@ from PIL import Image
 from keras import backend, optimizers
 
 
-image_directory = 'data/images/'
-mask_directory = 'data/masks/'
+image_directory = 'dataset_full_stack/images/'
+mask_directory = 'dataset_full_stack/masks/'
 
 
 SIZE = 256
