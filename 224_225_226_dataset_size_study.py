@@ -16,7 +16,7 @@ import tensorflow as tf
 from datetime import datetime
 import cv2
 from PIL import Image
-from keras import backend, optimizers
+# Note: backend and optimizers available via tensorflow.keras if needed
 import json
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -104,8 +104,19 @@ num_labels = 1  # Binary
 input_shape = (IMG_HEIGHT,IMG_WIDTH,IMG_CHANNELS)
 batch_size = 8
 
-# Import fixed models
-from 224_225_226_models import Attention_ResUNet, UNet, Attention_UNet, dice_coef, dice_coef_loss, jacard_coef
+# Import fixed models using importlib to handle numeric module name
+import sys
+import importlib.util
+spec = importlib.util.spec_from_file_location("models", "224_225_226_models.py")
+models = importlib.util.module_from_spec(spec)
+sys.modules["models"] = models
+spec.loader.exec_module(models)
+
+# Import model classes and functions
+Attention_ResUNet = models.Attention_ResUNet
+UNet = models.UNet
+Attention_UNet = models.Attention_UNet
+jacard_coef = models.jacard_coef
 
 # FOCAL LOSS
 from focal_loss import BinaryFocalLoss
