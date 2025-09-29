@@ -1,0 +1,688 @@
+=======================================================================
+MODERN U-NET ARCHITECTURES - MITOCHONDRIA SEGMENTATION TRAINING
+=======================================================================
+Models: ConvNeXt-UNet, Swin-UNet, CoAtNet-UNet
+Task: Mitochondria semantic segmentation with state-of-the-art architectures
+Framework: TensorFlow/Keras
+Expected Training Time: 24-48 hours (due to model complexity)
+
+Job started on Mon Sep 29 03:41:23 PM +08 2025
+Running on node: GN-A40-021
+Job ID: 237008.stdct-mgmt-02
+Available GPUs: GPU-07686ccb-c55e-5991-f53d-134d1cd8e134
+Memory: 503Gi, CPUs: 36
+
+=== TRAINING CONFIGURATION ===
+Dataset Images: ./dataset_full_stack/images/ (1980 patches - REQUIRED)
+Dataset Masks: ./dataset_full_stack/masks/ (1980 patches - REQUIRED)
+Alternative: ./dataset/images/ and ./dataset/masks/
+Image Size: 256x256x3
+Batch Size: 4 (smaller due to model complexity)
+Learning Rate: 1e-4 (conservative for modern architectures)
+Epochs per Model: 100 (with early stopping)
+Models: 3 (ConvNeXt-UNet, Swin-UNet, CoAtNet-UNet)
+Loss Function: Binary Focal Loss
+Optimizers: AdamW for transformers, Adam for ConvNeXt
+==============================
+
+TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+
+=== PRE-EXECUTION CHECKS ===
+1. Checking dataset structure...
+   ✓ Full stack dataset directories found (PREFERRED)
+   ✓ Images found: 1980 files
+   ✓ Masks found: 1980 files
+
+2. Checking Python files...
+   ✓ modern_unet_models.py found
+   ✓ modern_unet_training.py found
+==========================
+
+=== TENSORFLOW & GPU STATUS ===
+Python version: 3.10.12
+TensorFlow version: 2.16.1
+CUDA built support: True
+Physical GPUs found: 1
+  GPU 0: PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')
+✓ GPU memory growth enabled (CRITICAL for modern U-Nets)
+✓ GPU operation test successful
+✓ GPU Details: NVIDIA A40
+
+Checking dependencies:
+  ✓ cv2
+  ✓ PIL
+  ✓ matplotlib
+  ✓ numpy
+  ✓ sklearn
+  ✓ pandas
+  ✓ focal_loss
+
+Memory recommendations for modern U-Nets:
+- ConvNeXt-UNet: ~8-12 GB GPU memory
+- Swin-UNet: ~10-16 GB GPU memory
+- CoAtNet-UNet: ~6-10 GB GPU memory
+- Batch size will be automatically adjusted if needed
+===============================
+
+=== MODEL VALIDATION TEST ===
+Testing model creation to validate implementation...
+2025-09-29 07:41:44.867372: W tensorflow/core/common_runtime/gpu/gpu_bfc_allocator.cc:47] Overriding orig_value setting because the TF_FORCE_GPU_ALLOW_GROWTH environment variable is set. Original config value was 0.
+Testing modern U-Net model creation...
+Model: "UNet"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(None, 256, 256, 1)]        0         []                            
+                                                                                                  
+ conv2d (Conv2D)             (None, 256, 256, 64)         640       ['input_1[0][0]']             
+                                                                                                  
+ batch_normalization (Batch  (None, 256, 256, 64)         256       ['conv2d[0][0]']              
+ Normalization)                                                                                   
+                                                                                                  
+ activation (Activation)     (None, 256, 256, 64)         0         ['batch_normalization[0][0]'] 
+                                                                                                  
+ conv2d_1 (Conv2D)           (None, 256, 256, 64)         36928     ['activation[0][0]']          
+                                                                                                  
+ batch_normalization_1 (Bat  (None, 256, 256, 64)         256       ['conv2d_1[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_1 (Activation)   (None, 256, 256, 64)         0         ['batch_normalization_1[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d (MaxPooling2  (None, 128, 128, 64)         0         ['activation_1[0][0]']        
+ D)                                                                                               
+                                                                                                  
+ conv2d_2 (Conv2D)           (None, 128, 128, 128)        73856     ['max_pooling2d[0][0]']       
+                                                                                                  
+ batch_normalization_2 (Bat  (None, 128, 128, 128)        512       ['conv2d_2[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_2 (Activation)   (None, 128, 128, 128)        0         ['batch_normalization_2[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_3 (Conv2D)           (None, 128, 128, 128)        147584    ['activation_2[0][0]']        
+                                                                                                  
+ batch_normalization_3 (Bat  (None, 128, 128, 128)        512       ['conv2d_3[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_3 (Activation)   (None, 128, 128, 128)        0         ['batch_normalization_3[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d_1 (MaxPoolin  (None, 64, 64, 128)          0         ['activation_3[0][0]']        
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_4 (Conv2D)           (None, 64, 64, 256)          295168    ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ batch_normalization_4 (Bat  (None, 64, 64, 256)          1024      ['conv2d_4[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_4 (Activation)   (None, 64, 64, 256)          0         ['batch_normalization_4[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_5 (Conv2D)           (None, 64, 64, 256)          590080    ['activation_4[0][0]']        
+                                                                                                  
+ batch_normalization_5 (Bat  (None, 64, 64, 256)          1024      ['conv2d_5[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_5 (Activation)   (None, 64, 64, 256)          0         ['batch_normalization_5[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d_2 (MaxPoolin  (None, 32, 32, 256)          0         ['activation_5[0][0]']        
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_6 (Conv2D)           (None, 32, 32, 512)          1180160   ['max_pooling2d_2[0][0]']     
+                                                                                                  
+ batch_normalization_6 (Bat  (None, 32, 32, 512)          2048      ['conv2d_6[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_6 (Activation)   (None, 32, 32, 512)          0         ['batch_normalization_6[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_7 (Conv2D)           (None, 32, 32, 512)          2359808   ['activation_6[0][0]']        
+                                                                                                  
+ batch_normalization_7 (Bat  (None, 32, 32, 512)          2048      ['conv2d_7[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_7 (Activation)   (None, 32, 32, 512)          0         ['batch_normalization_7[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d_3 (MaxPoolin  (None, 16, 16, 512)          0         ['activation_7[0][0]']        
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_8 (Conv2D)           (None, 16, 16, 1024)         4719616   ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ batch_normalization_8 (Bat  (None, 16, 16, 1024)         4096      ['conv2d_8[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_8 (Activation)   (None, 16, 16, 1024)         0         ['batch_normalization_8[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_9 (Conv2D)           (None, 16, 16, 1024)         9438208   ['activation_8[0][0]']        
+                                                                                                  
+ batch_normalization_9 (Bat  (None, 16, 16, 1024)         4096      ['conv2d_9[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_9 (Activation)   (None, 16, 16, 1024)         0         ['batch_normalization_9[0][0]'
+                                                                    ]                             
+                                                                                                  
+ up_sampling2d (UpSampling2  (None, 32, 32, 1024)         0         ['activation_9[0][0]']        
+ D)                                                                                               
+                                                                                                  
+ concatenate (Concatenate)   (None, 32, 32, 1536)         0         ['up_sampling2d[0][0]',       
+                                                                     'activation_7[0][0]']        
+                                                                                                  
+ conv2d_10 (Conv2D)          (None, 32, 32, 512)          7078400   ['concatenate[0][0]']         
+                                                                                                  
+ batch_normalization_10 (Ba  (None, 32, 32, 512)          2048      ['conv2d_10[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_10 (Activation)  (None, 32, 32, 512)          0         ['batch_normalization_10[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_11 (Conv2D)          (None, 32, 32, 512)          2359808   ['activation_10[0][0]']       
+                                                                                                  
+ batch_normalization_11 (Ba  (None, 32, 32, 512)          2048      ['conv2d_11[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_11 (Activation)  (None, 32, 32, 512)          0         ['batch_normalization_11[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_1 (UpSamplin  (None, 64, 64, 512)          0         ['activation_11[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_1 (Concatenate  (None, 64, 64, 768)          0         ['up_sampling2d_1[0][0]',     
+ )                                                                   'activation_5[0][0]']        
+                                                                                                  
+ conv2d_12 (Conv2D)          (None, 64, 64, 256)          1769728   ['concatenate_1[0][0]']       
+                                                                                                  
+ batch_normalization_12 (Ba  (None, 64, 64, 256)          1024      ['conv2d_12[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_12 (Activation)  (None, 64, 64, 256)          0         ['batch_normalization_12[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_13 (Conv2D)          (None, 64, 64, 256)          590080    ['activation_12[0][0]']       
+                                                                                                  
+ batch_normalization_13 (Ba  (None, 64, 64, 256)          1024      ['conv2d_13[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_13 (Activation)  (None, 64, 64, 256)          0         ['batch_normalization_13[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_2 (UpSamplin  (None, 128, 128, 256)        0         ['activation_13[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_2 (Concatenate  (None, 128, 128, 384)        0         ['up_sampling2d_2[0][0]',     
+ )                                                                   'activation_3[0][0]']        
+                                                                                                  
+ conv2d_14 (Conv2D)          (None, 128, 128, 128)        442496    ['concatenate_2[0][0]']       
+                                                                                                  
+ batch_normalization_14 (Ba  (None, 128, 128, 128)        512       ['conv2d_14[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_14 (Activation)  (None, 128, 128, 128)        0         ['batch_normalization_14[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_15 (Conv2D)          (None, 128, 128, 128)        147584    ['activation_14[0][0]']       
+                                                                                                  
+ batch_normalization_15 (Ba  (None, 128, 128, 128)        512       ['conv2d_15[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_15 (Activation)  (None, 128, 128, 128)        0         ['batch_normalization_15[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_3 (UpSamplin  (None, 256, 256, 128)        0         ['activation_15[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_3 (Concatenate  (None, 256, 256, 192)        0         ['up_sampling2d_3[0][0]',     
+ )                                                                   'activation_1[0][0]']        
+                                                                                                  
+ conv2d_16 (Conv2D)          (None, 256, 256, 64)         110656    ['concatenate_3[0][0]']       
+                                                                                                  
+ batch_normalization_16 (Ba  (None, 256, 256, 64)         256       ['conv2d_16[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_16 (Activation)  (None, 256, 256, 64)         0         ['batch_normalization_16[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_17 (Conv2D)          (None, 256, 256, 64)         36928     ['activation_16[0][0]']       
+                                                                                                  
+ batch_normalization_17 (Ba  (None, 256, 256, 64)         256       ['conv2d_17[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_17 (Activation)  (None, 256, 256, 64)         0         ['batch_normalization_17[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_18 (Conv2D)          (None, 256, 256, 1)          65        ['activation_17[0][0]']       
+                                                                                                  
+ batch_normalization_18 (Ba  (None, 256, 256, 1)          4         ['conv2d_18[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_18 (Activation)  (None, 256, 256, 1)          0         ['batch_normalization_18[0][0]
+                                                                    ']                            
+                                                                                                  
+==================================================================================================
+Total params: 31401349 (119.79 MB)
+Trainable params: 31389571 (119.74 MB)
+Non-trainable params: 11778 (46.01 KB)
+__________________________________________________________________________________________________
+None
+  ✗ ConvNeXt_UNet: Failed - Exception encountered when calling layer "conv_ne_xt_block_18" (type ConvNeXtBlock).
+
+in user code:
+
+    File "/scratch/phyzxi/unet-HPC/modern_unet_models.py", line 78, in call  *
+        x = input_x + x
+
+    ValueError: Dimensions must be equal, but are 768 and 384 for '{{node conv_ne_xt_block_18/add}} = AddV2[T=DT_FLOAT](Placeholder, conv_ne_xt_block_18/mul)' with input shapes: [?,4,4,768], [?,4,4,384].
+
+
+Call arguments received by layer "conv_ne_xt_block_18" (type ConvNeXtBlock):
+  • x=tf.Tensor(shape=(None, 4, 4, 768), dtype=float32)
+  • training=None
+  ✗ Swin_UNet: Failed - Exception encountered when calling layer "swin_transformer_block_12" (type SwinTransformerBlock).
+
+in user code:
+
+    File "/scratch/phyzxi/unet-HPC/modern_unet_models.py", line 199, in call  *
+        x = shortcut + self.drop_path(x, training=training)
+
+    ValueError: Dimensions must be equal, but are 768 and 384 for '{{node swin_transformer_block_12/add_1}} = AddV2[T=DT_FLOAT](swin_transformer_block_12/add, swin_transformer_block_12/identity_12/Identity_1)' with input shapes: [?,4,4,768], [?,4,4,384].
+
+
+Call arguments received by layer "swin_transformer_block_12" (type SwinTransformerBlock):
+  • x=tf.Tensor(shape=(None, 4, 4, 768), dtype=float32)
+  • training=None
+  ✗ CoAtNet_UNet: Failed - Exception encountered when calling layer "co_at_net_block_11" (type CoAtNetBlock).
+
+in user code:
+
+    File "/scratch/phyzxi/unet-HPC/modern_unet_models.py", line 274, in call  *
+        x = shortcut + x
+
+    ValueError: Dimensions must be equal, but are 512 and 256 for '{{node co_at_net_block_11/add_1}} = AddV2[T=DT_FLOAT](co_at_net_block_11/add, co_at_net_block_11/sequential_24/dropout_86/Identity)' with input shapes: [?,8,8,512], [?,8,8,256].
+
+
+Call arguments received by layer "co_at_net_block_11" (type CoAtNetBlock):
+  • x=tf.Tensor(shape=(None, 8, 8, 512), dtype=float32)
+  • training=None
+✓ Model validation completed
+✓ Model validation test passed
+=========================
+
+🚀 STARTING MODERN U-NET TRAINING
+==============================================
+Training 3 state-of-the-art models sequentially:
+1. ConvNeXt-UNet (ConvNeXt blocks)
+2. Swin-UNet (Swin Transformer blocks)
+3. CoAtNet-UNet (Convolution + Attention)
+
+Training Configuration:
+- Learning Rate: 1e-4 (conservative for stability)
+- Batch Size: 4 (adjusted for model complexity)
+- Max Epochs: 100 per model (with early stopping)
+- Optimizers: AdamW for transformers, Adam for ConvNeXt
+- Loss: Binary Focal Loss (gamma=2)
+
+Expected total time: 24-48 hours
+Results will be saved as .hdf5 model files and training logs
+==============================================
+Output directory: modern_unet_training_20250929_154214
+
+Starting training execution...
+======================================================================
+MODERN U-NET ARCHITECTURES TRAINING FOR MITOCHONDRIA SEGMENTATION
+======================================================================
+Models: ConvNeXt-UNet, Swin-UNet, CoAtNet-UNet
+Task: Mitochondria semantic segmentation
+Framework: TensorFlow/Keras
+
+✓ GPU memory growth enabled for 1 GPUs
+✓ focal_loss already available
+Output directory: modern_unet_training_20250929_074222
+=== LOADING DATASET ===
+Using dataset: dataset_full_stack/images/ and dataset_full_stack/masks/
+✓ Loaded 1980 images and 1980 masks
+Image shape: (256, 256, 3)
+Mask shape: (256, 256, 1)
+Training set: 1782 samples
+Validation set: 198 samples
+
+Training Configuration:
+  Learning Rate: 0.0001
+  Batch Size: 4
+  Max Epochs: 100
+  Input Shape: (256, 256, 3)
+
+
+======================================================================
+TRAINING MODEL 1/3: ConvNeXt_UNet
+======================================================================
+
+============================================================
+TRAINING: ConvNeXt_UNet
+Learning Rate: 0.0001, Batch Size: 4, Max Epochs: 100
+============================================================
+Model: "UNet"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(None, 256, 256, 1)]        0         []                            
+                                                                                                  
+ conv2d (Conv2D)             (None, 256, 256, 64)         640       ['input_1[0][0]']             
+                                                                                                  
+ batch_normalization (Batch  (None, 256, 256, 64)         256       ['conv2d[0][0]']              
+ Normalization)                                                                                   
+                                                                                                  
+ activation (Activation)     (None, 256, 256, 64)         0         ['batch_normalization[0][0]'] 
+                                                                                                  
+ conv2d_1 (Conv2D)           (None, 256, 256, 64)         36928     ['activation[0][0]']          
+                                                                                                  
+ batch_normalization_1 (Bat  (None, 256, 256, 64)         256       ['conv2d_1[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_1 (Activation)   (None, 256, 256, 64)         0         ['batch_normalization_1[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d (MaxPooling2  (None, 128, 128, 64)         0         ['activation_1[0][0]']        
+ D)                                                                                               
+                                                                                                  
+ conv2d_2 (Conv2D)           (None, 128, 128, 128)        73856     ['max_pooling2d[0][0]']       
+                                                                                                  
+ batch_normalization_2 (Bat  (None, 128, 128, 128)        512       ['conv2d_2[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_2 (Activation)   (None, 128, 128, 128)        0         ['batch_normalization_2[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_3 (Conv2D)           (None, 128, 128, 128)        147584    ['activation_2[0][0]']        
+                                                                                                  
+ batch_normalization_3 (Bat  (None, 128, 128, 128)        512       ['conv2d_3[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_3 (Activation)   (None, 128, 128, 128)        0         ['batch_normalization_3[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d_1 (MaxPoolin  (None, 64, 64, 128)          0         ['activation_3[0][0]']        
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_4 (Conv2D)           (None, 64, 64, 256)          295168    ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ batch_normalization_4 (Bat  (None, 64, 64, 256)          1024      ['conv2d_4[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_4 (Activation)   (None, 64, 64, 256)          0         ['batch_normalization_4[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_5 (Conv2D)           (None, 64, 64, 256)          590080    ['activation_4[0][0]']        
+                                                                                                  
+ batch_normalization_5 (Bat  (None, 64, 64, 256)          1024      ['conv2d_5[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_5 (Activation)   (None, 64, 64, 256)          0         ['batch_normalization_5[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d_2 (MaxPoolin  (None, 32, 32, 256)          0         ['activation_5[0][0]']        
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_6 (Conv2D)           (None, 32, 32, 512)          1180160   ['max_pooling2d_2[0][0]']     
+                                                                                                  
+ batch_normalization_6 (Bat  (None, 32, 32, 512)          2048      ['conv2d_6[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_6 (Activation)   (None, 32, 32, 512)          0         ['batch_normalization_6[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_7 (Conv2D)           (None, 32, 32, 512)          2359808   ['activation_6[0][0]']        
+                                                                                                  
+ batch_normalization_7 (Bat  (None, 32, 32, 512)          2048      ['conv2d_7[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_7 (Activation)   (None, 32, 32, 512)          0         ['batch_normalization_7[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d_3 (MaxPoolin  (None, 16, 16, 512)          0         ['activation_7[0][0]']        
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_8 (Conv2D)           (None, 16, 16, 1024)         4719616   ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ batch_normalization_8 (Bat  (None, 16, 16, 1024)         4096      ['conv2d_8[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_8 (Activation)   (None, 16, 16, 1024)         0         ['batch_normalization_8[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_9 (Conv2D)           (None, 16, 16, 1024)         9438208   ['activation_8[0][0]']        
+                                                                                                  
+ batch_normalization_9 (Bat  (None, 16, 16, 1024)         4096      ['conv2d_9[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_9 (Activation)   (None, 16, 16, 1024)         0         ['batch_normalization_9[0][0]'
+                                                                    ]                             
+                                                                                                  
+ up_sampling2d (UpSampling2  (None, 32, 32, 1024)         0         ['activation_9[0][0]']        
+ D)                                                                                               
+                                                                                                  
+ concatenate (Concatenate)   (None, 32, 32, 1536)         0         ['up_sampling2d[0][0]',       
+                                                                     'activation_7[0][0]']        
+                                                                                                  
+ conv2d_10 (Conv2D)          (None, 32, 32, 512)          7078400   ['concatenate[0][0]']         
+                                                                                                  
+ batch_normalization_10 (Ba  (None, 32, 32, 512)          2048      ['conv2d_10[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_10 (Activation)  (None, 32, 32, 512)          0         ['batch_normalization_10[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_11 (Conv2D)          (None, 32, 32, 512)          2359808   ['activation_10[0][0]']       
+                                                                                                  
+ batch_normalization_11 (Ba  (None, 32, 32, 512)          2048      ['conv2d_11[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_11 (Activation)  (None, 32, 32, 512)          0         ['batch_normalization_11[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_1 (UpSamplin  (None, 64, 64, 512)          0         ['activation_11[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_1 (Concatenate  (None, 64, 64, 768)          0         ['up_sampling2d_1[0][0]',     
+ )                                                                   'activation_5[0][0]']        
+                                                                                                  
+ conv2d_12 (Conv2D)          (None, 64, 64, 256)          1769728   ['concatenate_1[0][0]']       
+                                                                                                  
+ batch_normalization_12 (Ba  (None, 64, 64, 256)          1024      ['conv2d_12[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_12 (Activation)  (None, 64, 64, 256)          0         ['batch_normalization_12[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_13 (Conv2D)          (None, 64, 64, 256)          590080    ['activation_12[0][0]']       
+                                                                                                  
+ batch_normalization_13 (Ba  (None, 64, 64, 256)          1024      ['conv2d_13[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_13 (Activation)  (None, 64, 64, 256)          0         ['batch_normalization_13[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_2 (UpSamplin  (None, 128, 128, 256)        0         ['activation_13[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_2 (Concatenate  (None, 128, 128, 384)        0         ['up_sampling2d_2[0][0]',     
+ )                                                                   'activation_3[0][0]']        
+                                                                                                  
+ conv2d_14 (Conv2D)          (None, 128, 128, 128)        442496    ['concatenate_2[0][0]']       
+                                                                                                  
+ batch_normalization_14 (Ba  (None, 128, 128, 128)        512       ['conv2d_14[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_14 (Activation)  (None, 128, 128, 128)        0         ['batch_normalization_14[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_15 (Conv2D)          (None, 128, 128, 128)        147584    ['activation_14[0][0]']       
+                                                                                                  
+ batch_normalization_15 (Ba  (None, 128, 128, 128)        512       ['conv2d_15[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_15 (Activation)  (None, 128, 128, 128)        0         ['batch_normalization_15[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_3 (UpSamplin  (None, 256, 256, 128)        0         ['activation_15[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_3 (Concatenate  (None, 256, 256, 192)        0         ['up_sampling2d_3[0][0]',     
+ )                                                                   'activation_1[0][0]']        
+                                                                                                  
+ conv2d_16 (Conv2D)          (None, 256, 256, 64)         110656    ['concatenate_3[0][0]']       
+                                                                                                  
+ batch_normalization_16 (Ba  (None, 256, 256, 64)         256       ['conv2d_16[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_16 (Activation)  (None, 256, 256, 64)         0         ['batch_normalization_16[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_17 (Conv2D)          (None, 256, 256, 64)         36928     ['activation_16[0][0]']       
+                                                                                                  
+ batch_normalization_17 (Ba  (None, 256, 256, 64)         256       ['conv2d_17[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_17 (Activation)  (None, 256, 256, 64)         0         ['batch_normalization_17[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_18 (Conv2D)          (None, 256, 256, 1)          65        ['activation_17[0][0]']       
+                                                                                                  
+ batch_normalization_18 (Ba  (None, 256, 256, 1)          4         ['conv2d_18[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_18 (Activation)  (None, 256, 256, 1)          0         ['batch_normalization_18[0][0]
+                                                                    ']                            
+                                                                                                  
+==================================================================================================
+Total params: 31401349 (119.79 MB)
+Trainable params: 31389571 (119.74 MB)
+Non-trainable params: 11778 (46.01 KB)
+__________________________________________________________________________________________________
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/modern_unet_training.py", line 517, in main
+    model, history, results = train_modern_unet(
+  File "/scratch/phyzxi/unet-HPC/modern_unet_training.py", line 222, in train_modern_unet
+    model = create_modern_unet(model_name, input_shape, num_classes=1)
+  File "/scratch/phyzxi/unet-HPC/modern_unet_models.py", line 552, in create_modern_unet
+    return model_dict[model_name](input_shape, num_classes)
+  File "/scratch/phyzxi/unet-HPC/modern_unet_models.py", line 353, in ConvNeXt_UNet
+    x = ConvNeXtBlock(384)(x)
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/utils/traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/var/tmp/pbs.237008.stdct-mgmt-02/__autograph_generated_filew2274vni.py", line 32, in tf__call
+    x = ag__.ld(input_x) + ag__.ld(x)
+ValueError: Exception encountered when calling layer "conv_ne_xt_block_18" (type ConvNeXtBlock).
+
+in user code:
+
+    File "/scratch/phyzxi/unet-HPC/modern_unet_models.py", line 78, in call  *
+        x = input_x + x
+
+    ValueError: Dimensions must be equal, but are 768 and 384 for '{{node conv_ne_xt_block_18/add}} = AddV2[T=DT_FLOAT](Placeholder, conv_ne_xt_block_18/mul)' with input shapes: [?,16,16,768], [?,16,16,384].
+
+
+Call arguments received by layer "conv_ne_xt_block_18" (type ConvNeXtBlock):
+  • x=tf.Tensor(shape=(None, 16, 16, 768), dtype=float32)
+  • training=None
+None
+Creating ConvNeXt_UNet model...
+
+✗ Training script failed: Exception encountered when calling layer "conv_ne_xt_block_18" (type ConvNeXtBlock).
+
+in user code:
+
+    File "/scratch/phyzxi/unet-HPC/modern_unet_models.py", line 78, in call  *
+        x = input_x + x
+
+    ValueError: Dimensions must be equal, but are 768 and 384 for '{{node conv_ne_xt_block_18/add}} = AddV2[T=DT_FLOAT](Placeholder, conv_ne_xt_block_18/mul)' with input shapes: [?,16,16,768], [?,16,16,384].
+
+
+Call arguments received by layer "conv_ne_xt_block_18" (type ConvNeXtBlock):
+  • x=tf.Tensor(shape=(None, 16, 16, 768), dtype=float32)
+  • training=None
+
+======================================================================
+MODERN U-NET TRAINING COMPLETED
+======================================================================
+
+Moving generated files to output directory...
+No training output directories to move
+No .hdf5 files to move
+No .csv files to move
+No .json files to move
+No custom focal loss file to move
+
+=======================================================================
+MODERN U-NET TRAINING COMPLETED
+=======================================================================
+Job finished on Mon Sep 29 03:42:49 PM +08 2025
+Exit code: 0 ✓ SUCCESS
+
+✓ Modern U-Net training completed successfully!
+
+Generated files in modern_unet_training_20250929_154214:
+📁 Model files (.hdf5):
+   No model files found
+
+📊 Training histories (.csv):
+   No history files found
+
+📈 Training results (.json):
+   No result files found
+
+🖼️ Visualization files (.png):
+-rw------- 1 phyzxi svuusers 358713 Sep 29 14:22 modern_unet_training_20250929_154214/dataset_sample_100.0pct.png
+-rw------- 1 phyzxi svuusers 370804 Sep 29 11:06 modern_unet_training_20250929_154214/dataset_sample_10.0pct.png
+-rw------- 1 phyzxi svuusers 378273 Sep 29 11:27 modern_unet_training_20250929_154214/dataset_sample_20.0pct.png
+-rw------- 1 phyzxi svuusers 369311 Sep 29 12:00 modern_unet_training_20250929_154214/dataset_sample_50.0pct.png
+-rw------- 1 phyzxi svuusers 366961 Sep 29 13:19 modern_unet_training_20250929_154214/dataset_sample_75.0pct.png
+
+🎯 MODERN U-NET PERFORMANCE SUMMARY:
+======================================
+No training results JSON files found.
+
+🔬 ARCHITECTURE INSIGHTS:
+=========================
+ConvNeXt-UNet: Modern CNN with improved efficiency
+Swin-UNet: Hierarchical Vision Transformer with shifted windows
+CoAtNet-UNet: Hybrid convolution + attention mechanism
+
+For detailed analysis, check:
+- Training curves: modern_unet_training_comparison.png
+- Performance summary: modern_unet_performance_summary.png
+- Individual model results: *_results.json files
+
+📁 ALL OUTPUT FILES SAVED IN: modern_unet_training_20250929_154214
+📝 CONSOLE LOG: modern_unet_training_20250929_154214/training_console_20250929_154214.log
+
+🔗 NEXT STEPS:
+=============
+1. Analyze training results and model performance
+2. Compare with traditional U-Net architectures
+3. Consider ensemble methods for improved performance
+4. Optimize best-performing architecture for deployment
+
+=========================================
+MODERN U-NET TRAINING JOB COMPLETE
+Models: ConvNeXt-UNet, Swin-UNet, CoAtNet-UNet
+Framework: TensorFlow/Keras + Modern Architectures
+=========================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-09-29 15:42:51.136758:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 237008.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:01:39
+	Memory: Requested(240gb), Used(9985108kb)
+	Vmem Used: 26315292kb
+	Walltime: Requested(48:00:00), Used(00:01:29)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-021[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
