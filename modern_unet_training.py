@@ -204,7 +204,29 @@ def train_modern_unet(model_name, X_train, X_test, y_train, y_test,
 
     # Import models and metrics
     from modern_unet_models import create_modern_unet
-    from models import jacard_coef
+
+    # Import existing metrics (ensure models.py exists)
+    try:
+        from models import jacard_coef
+    except ImportError:
+        # Fallback to creating custom metric
+        print("⚠ models.py not found, using custom jacard_coef implementation")
+        def jacard_coef(y_true, y_pred):
+            import tensorflow as tf
+            from tensorflow.keras import backend as K
+
+            y_true_f = K.flatten(y_true)
+            y_pred_f = K.flatten(y_pred)
+
+            # Convert probabilities to binary predictions at 0.5 threshold
+            y_pred_binary = K.cast(K.greater(y_pred_f, 0.5), K.floatx())
+
+            # Calculate intersection with binary masks
+            intersection = K.sum(y_true_f * y_pred_binary)
+            union = K.sum(y_true_f) + K.sum(y_pred_binary) - intersection
+
+            # Add small epsilon to prevent division by zero
+            return (intersection + 1e-7) / (union + 1e-7)
 
     # Handle focal loss import
     try:

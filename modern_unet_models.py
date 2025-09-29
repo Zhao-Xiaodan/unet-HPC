@@ -36,7 +36,7 @@ class ConvNeXtBlock(layers.Layer):
 
         # Depthwise convolution
         self.dwconv = layers.DepthwiseConv2D(
-            kernel_size=7, padding='same', groups=filters
+            kernel_size=7, padding='same'
         )
         self.norm = layers.LayerNormalization(epsilon=1e-6)
 
@@ -44,6 +44,9 @@ class ConvNeXtBlock(layers.Layer):
         self.pwconv1 = layers.Dense(4 * filters)
         self.act = layers.Activation('gelu')
         self.pwconv2 = layers.Dense(filters)
+
+        # Projection layer for residual connection
+        self.projection = layers.Conv2D(filters, 1, padding='same')
 
         # Layer scale
         if layer_scale_init_value > 0:
@@ -58,6 +61,10 @@ class ConvNeXtBlock(layers.Layer):
 
     def call(self, x, training=None):
         input_x = x
+
+        # Project input to correct dimensions if needed
+        if input_x.shape[-1] != self.filters:
+            input_x = self.projection(input_x)
 
         # Depthwise convolution
         x = self.dwconv(x)
@@ -96,7 +103,7 @@ def convnext_upsample(x, skip_connection, filters):
 # =============================================================================
 
 class WindowAttention(layers.Layer):
-    """Window-based multi-head self attention (W-MSA) module"""
+    """Simplified Window-based multi-head self attention (W-MSA) module"""
 
     def __init__(self, dim, window_size, num_heads, qkv_bias=True, attn_drop=0.0, proj_drop=0.0, **kwargs):
         super(WindowAttention, self).__init__(**kwargs)
@@ -106,46 +113,26 @@ class WindowAttention(layers.Layer):
         head_dim = dim // num_heads
         self.scale = head_dim ** -0.5
 
-        self.qkv = layers.Dense(dim * 3, use_bias=qkv_bias)
-        self.attn_drop = layers.Dropout(attn_drop)
-        self.proj = layers.Dense(dim)
+        # Simplified to standard multi-head attention
+        self.attention = layers.MultiHeadAttention(
+            num_heads=num_heads,
+            key_dim=head_dim,
+            dropout=attn_drop
+        )
         self.proj_drop = layers.Dropout(proj_drop)
 
     def call(self, x, mask=None, training=None):
         B, H, W, C = tf.shape(x)[0], tf.shape(x)[1], tf.shape(x)[2], tf.shape(x)[3]
 
-        # Reshape to windows
-        x = tf.reshape(x, (B, H // self.window_size, self.window_size,
-                          W // self.window_size, self.window_size, C))
-        x = tf.transpose(x, (0, 1, 3, 2, 4, 5))
-        x = tf.reshape(x, (-1, self.window_size * self.window_size, C))
+        # Reshape to sequence for attention
+        x_flat = tf.reshape(x, (B, H * W, C))
 
-        # QKV computation
-        qkv = self.qkv(x)
-        qkv = tf.reshape(qkv, (-1, self.window_size * self.window_size, 3, self.num_heads, C // self.num_heads))
-        qkv = tf.transpose(qkv, (2, 0, 3, 1, 4))
-        q, k, v = qkv[0], qkv[1], qkv[2]
+        # Apply multi-head attention
+        x_attn = self.attention(x_flat, x_flat, training=training)
+        x_attn = self.proj_drop(x_attn, training=training)
 
-        # Attention
-        q = q * self.scale
-        attn = tf.matmul(q, k, transpose_b=True)
-        attn = tf.nn.softmax(attn, axis=-1)
-        attn = self.attn_drop(attn, training=training)
-
-        x = tf.matmul(attn, v)
-        x = tf.transpose(x, (0, 2, 1, 3))
-        x = tf.reshape(x, (-1, self.window_size * self.window_size, C))
-
-        # Output projection
-        x = self.proj(x)
-        x = self.proj_drop(x, training=training)
-
-        # Reshape back
-        x = tf.reshape(x, (-1, self.window_size, self.window_size, C))
-        x = tf.reshape(x, (B, H // self.window_size, W // self.window_size,
-                          self.window_size, self.window_size, C))
-        x = tf.transpose(x, (0, 1, 3, 2, 4, 5))
-        x = tf.reshape(x, (B, H, W, C))
+        # Reshape back to spatial
+        x = tf.reshape(x_attn, (B, H, W, C))
 
         return x
 
@@ -167,6 +154,9 @@ class SwinTransformerBlock(layers.Layer):
             qkv_bias=qkv_bias, attn_drop=attn_drop, proj_drop=drop
         )
 
+        # Projection layer for dimension matching
+        self.projection = layers.Conv2D(dim, 1, padding='same')
+
         self.drop_path = layers.Dropout(drop_path) if drop_path > 0.0 else layers.Identity()
         self.norm2 = layers.LayerNormalization(epsilon=1e-5)
 
@@ -184,6 +174,10 @@ class SwinTransformerBlock(layers.Layer):
         B, L, C = tf.shape(x)[0], H * W, tf.shape(x)[3]
 
         shortcut = x
+        # Project shortcut to correct dimensions if needed
+        if shortcut.shape[-1] != self.dim:
+            shortcut = self.projection(shortcut)
+
         x = self.norm1(x)
 
         # Window attention
@@ -237,6 +231,9 @@ class CoAtNetBlock(layers.Layer):
             self.norm1 = layers.BatchNormalization()
             self.norm2 = layers.BatchNormalization()
 
+        # Projection layer for residual connection
+        self.projection = layers.Conv2D(filters, 1, padding='same')
+
         # MLP layers
         self.mlp = tf.keras.Sequential([
             layers.Dense(filters * 4),
@@ -255,6 +252,10 @@ class CoAtNetBlock(layers.Layer):
         if self.use_attention:
             # Self-attention path
             shortcut = x
+            # Project shortcut to correct dimensions if needed
+            if shortcut.shape[-1] != self.filters:
+                shortcut = self.projection(shortcut)
+
             x = self.norm1(x)
 
             # Reshape for attention
@@ -275,6 +276,10 @@ class CoAtNetBlock(layers.Layer):
         else:
             # Convolution path
             shortcut = x
+            # Project shortcut to correct dimensions if needed
+            if shortcut.shape[-1] != self.filters:
+                shortcut = self.projection(shortcut)
+
             x = self.norm1(x)
             x = tf.nn.gelu(x)
             x = self.conv1(x)
@@ -349,14 +354,20 @@ def ConvNeXt_UNet(input_shape, num_classes=1):
 
     # Decoder
     x = convnext_upsample(x, skip_connections[2], 384)
+    # Project concatenated features to expected dimensions
+    x = layers.Conv2D(384, 1, padding='same')(x)
     for _ in range(3):
         x = ConvNeXtBlock(384)(x)
 
     x = convnext_upsample(x, skip_connections[1], 192)
+    # Project concatenated features to expected dimensions
+    x = layers.Conv2D(192, 1, padding='same')(x)
     for _ in range(3):
         x = ConvNeXtBlock(192)(x)
 
     x = convnext_upsample(x, skip_connections[0], 96)
+    # Project concatenated features to expected dimensions
+    x = layers.Conv2D(96, 1, padding='same')(x)
     for _ in range(3):
         x = ConvNeXtBlock(96)(x)
 
@@ -426,6 +437,8 @@ def Swin_UNet(input_shape, num_classes=1, window_size=7):
 
     # Decoder
     x = swin_upsample(x, skip_connections[2], 384)
+    # Project concatenated features to expected dimensions
+    x = layers.Conv2D(384, 1, padding='same')(x)
     for i in range(2):
         x = SwinTransformerBlock(
             dim=384, num_heads=12, window_size=window_size,
@@ -433,6 +446,8 @@ def Swin_UNet(input_shape, num_classes=1, window_size=7):
         )(x)
 
     x = swin_upsample(x, skip_connections[1], 192)
+    # Project concatenated features to expected dimensions
+    x = layers.Conv2D(192, 1, padding='same')(x)
     for i in range(2):
         x = SwinTransformerBlock(
             dim=192, num_heads=6, window_size=window_size,
@@ -440,6 +455,8 @@ def Swin_UNet(input_shape, num_classes=1, window_size=7):
         )(x)
 
     x = swin_upsample(x, skip_connections[0], 96)
+    # Project concatenated features to expected dimensions
+    x = layers.Conv2D(96, 1, padding='same')(x)
     for i in range(2):
         x = SwinTransformerBlock(
             dim=96, num_heads=3, window_size=window_size,
@@ -501,15 +518,21 @@ def CoAtNet_UNet(input_shape, num_classes=1):
 
     # Decoder
     x = coatnet_upsample(x, skip_connections[2], 256)
+    # Project concatenated features to expected dimensions
+    x = layers.Conv2D(256, 1, padding='same')(x)
     for _ in range(2):
         x = CoAtNetBlock(256, use_attention=True, num_heads=8)(x)
 
     x = coatnet_upsample(x, skip_connections[1], 128)
+    # Project concatenated features to expected dimensions
+    x = layers.Conv2D(128, 1, padding='same')(x)
     for i in range(2):
         use_attn = i == 0  # Use attention in first block only
         x = CoAtNetBlock(128, use_attention=use_attn, num_heads=4)(x)
 
     x = coatnet_upsample(x, skip_connections[0], 64)
+    # Project concatenated features to expected dimensions
+    x = layers.Conv2D(64, 1, padding='same')(x)
     for _ in range(2):
         x = CoAtNetBlock(64, use_attention=False)(x)
 
