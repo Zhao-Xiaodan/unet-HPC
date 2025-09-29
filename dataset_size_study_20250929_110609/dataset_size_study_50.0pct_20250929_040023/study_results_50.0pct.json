@@ -1,0 +1,27 @@
+{
+  "dataset_percentage": 50.0,
+  "total_available_samples": 1980,
+  "used_samples": 990,
+  "training_samples": 891,
+  "validation_samples": 99,
+  "models": {
+    "UNet": {
+      "best_val_jaccard": 0.9171417951583862,
+      "training_time": "0:22:57.619192",
+      "epochs_trained": 90,
+      "final_val_jaccard": 0.9112852811813354
+    },
+    "Attention_UNet": {
+      "best_val_jaccard": 0.9198335409164429,
+      "training_time": "0:32:03.043167",
+      "epochs_trained": 89,
+      "final_val_jaccard": 0.9198243618011475
+    },
+    "Attention_ResUNet": {
+      "best_val_jaccard": 0.9136998057365417,
+      "training_time": "0:23:57.398051",
+      "epochs_trained": 58,
+      "final_val_jaccard": 0.8853504657745361
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "model_name": "Swin_UNet",
+  "learning_rate": 0.0001,
+  "batch_size": 4,
+  "epochs_completed": 66,
+  "training_time_seconds": 8251.834649324417,
+  "best_val_jaccard": 0.9272616505622864,
+  "best_epoch": 
