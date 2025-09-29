@@ -116,10 +116,22 @@ spec.loader.exec_module(models)
 Attention_ResUNet = models.Attention_ResUNet
 UNet = models.UNet
 Attention_UNet = models.Attention_UNet
-jacard_coef = models.jacard_coef
+dice_coef = models.dice_coef           # Dice metric for monitoring
+dice_coef_loss = models.dice_coef_loss # Dice loss function (alternative to focal loss)
+jacard_coef = models.jacard_coef       # IoU/Jaccard metric for monitoring (FIXED implementation)
 
-# FOCAL LOSS
+# FOCAL LOSS (primary loss function for optimization)
 from focal_loss import BinaryFocalLoss
+
+# Loss function options available:
+# 1. BinaryFocalLoss(gamma=2) - Primary choice (handles class imbalance)
+# 2. dice_coef_loss - Alternative (directly optimizes Dice coefficient)
+# 3. 'binary_crossentropy' - Standard binary classification loss
+#
+# Metrics for monitoring (not used for backpropagation):
+# - jacard_coef (IoU) - Primary evaluation metric (FIXED implementation)
+# - dice_coef - Secondary evaluation metric
+# - 'accuracy' - Pixel-wise accuracy
 
 # Create output directory with timestamp and percentage
 output_dir = f'dataset_size_study_{DATASET_PERCENTAGE}pct_{datetime.now().strftime("%Y%m%d_%H%M%S")}'
@@ -153,7 +165,7 @@ print("-" * 40)
 
 unet_model = UNet(input_shape)
 unet_model.compile(optimizer=Adam(lr = 1e-3), loss=BinaryFocalLoss(gamma=2),
-              metrics=['accuracy', jacard_coef])
+              metrics=['accuracy', jacard_coef, dice_coef])
 
 start1 = datetime.now()
 unet_history = unet_model.fit(X_train, y_train,
@@ -202,7 +214,7 @@ print("-" * 40)
 
 att_unet_model = Attention_UNet(input_shape)
 att_unet_model.compile(optimizer=Adam(lr = 1e-3), loss=BinaryFocalLoss(gamma=2),
-              metrics=['accuracy', jacard_coef])
+              metrics=['accuracy', jacard_coef, dice_coef])
 
 start2 = datetime.now()
 att_unet_history = att_unet_model.fit(X_train, y_train,
@@ -250,7 +262,7 @@ print("-" * 40)
 
 att_res_unet_model = Attention_ResUNet(input_shape)
 att_res_unet_model.compile(optimizer=Adam(lr = 1e-3), loss=BinaryFocalLoss(gamma=2),
-              metrics=['accuracy', jacard_coef])
+              metrics=['accuracy', jacard_coef, dice_coef])
 
 start3 = datetime.now()
 att_res_unet_history = att_res_unet_model.fit(X_train, y_train,
