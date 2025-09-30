@@ -243,7 +243,13 @@ def train_modern_unet(model_name, X_train, X_test, y_train, y_test,
     print(f"Creating {model_name} model...")
     model = create_modern_unet(model_name, input_shape, num_classes=1)
 
-    print(f"Model parameters: {model.count_params():,}")
+    # Build model to ensure weights are created
+    try:
+        model.build(input_shape=(None,) + input_shape)
+        print(f"Model parameters: {model.count_params():,}")
+    except Exception as e:
+        print(f"Warning: Could not build model explicitly: {e}")
+        print(f"Model will be built on first forward pass")
 
     # Choose optimizer based on model type
     if 'Swin' in model_name or 'CoAtNet' in model_name:
@@ -321,20 +327,20 @@ def train_modern_unet(model_name, X_train, X_test, y_train, y_test,
         last_10_epochs = min(10, len(history.history['val_loss']))
         val_loss_stability = np.std(history.history['val_loss'][-last_10_epochs:])
 
-        # Training results
+        # Training results (convert numpy types to native Python types for JSON serialization)
         results = {
             'model_name': model_name,
-            'learning_rate': learning_rate,
-            'batch_size': batch_size,
-            'epochs_completed': len(history.history['loss']),
-            'training_time_seconds': training_time,
-            'best_val_jaccard': best_val_jaccard,
-            'best_epoch': best_epoch,
-            'final_val_loss': final_val_loss,
-            'final_train_loss': final_train_loss,
-            'val_loss_stability': val_loss_stability,
-            'overfitting_gap': final_val_loss - final_train_loss,
-            'model_parameters': model.count_params()
+            'learning_rate': float(learning_rate),
+            'batch_size': int(batch_size),
+            'epochs_completed': int(len(history.history['loss'])),
+            'training_time_seconds': float(training_time),
+            'best_val_jaccard': float(best_val_jaccard),
+            'best_epoch': int(best_epoch),
+            'final_val_loss': float(final_val_loss),
+            'final_train_loss': float(final_train_loss),
+            'val_loss_stability': float(val_loss_stability),
+            'overfitting_gap': float(final_val_loss - final_train_loss),
+            'model_parameters': int(model.count_params())
         }
 
         # Save results
@@ -357,6 +363,15 @@ def train_modern_unet(model_name, X_train, X_test, y_train, y_test,
     except Exception as e:
         print(f"\n✗ Training failed: {e}")
         return None, None, None
+
+    finally:
+        # Clean up memory and clear any cached datasets
+        try:
+            import gc
+            tf.keras.backend.clear_session()
+            gc.collect()
+        except:
+            pass
 
 # =============================================================================
 # Visualization Functions
