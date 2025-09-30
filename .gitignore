@@ -3,7 +3,6 @@ data/
 dataset/
 
 **/*.png
-**/*.log
 **/*.tif
 **/*.npy
 **/*.hdf5

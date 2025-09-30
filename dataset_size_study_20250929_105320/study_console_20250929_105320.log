@@ -1,0 +1,53 @@
+=== MITOCHONDRIA DATASET SIZE SUFFICIENCY STUDY ===
+🔬 Testing multiple dataset sizes for acceptable performance
+
+✓ focal_loss already available
+
+🎯 DATASET SIZE STUDY PLAN:
+------------------------------
+   10%: ~ 198 samples
+   20%: ~ 396 samples
+   50%: ~ 990 samples
+   75%: ~1485 samples
+  100%: ~1980 samples
+
+
+============================================================
+🔬 RUNNING DATASET SIZE STUDY: 10% OF FULL DATASET
+============================================================
+❌ Failed study for 10% dataset: invalid decimal literal (<string>, line 108)
+
+============================================================
+🔬 RUNNING DATASET SIZE STUDY: 20% OF FULL DATASET
+============================================================
+❌ Failed study for 20% dataset: invalid decimal literal (<string>, line 108)
+
+============================================================
+🔬 RUNNING DATASET SIZE STUDY: 50% OF FULL DATASET
+============================================================
+❌ Failed study for 50% dataset: invalid decimal literal (<string>, line 108)
+
+============================================================
+🔬 RUNNING DATASET SIZE STUDY: 75% OF FULL DATASET
+============================================================
+❌ Failed study for 75% dataset: invalid decimal literal (<string>, line 108)
+
+============================================================
+🔬 RUNNING DATASET SIZE STUDY: 100% OF FULL DATASET
+============================================================
+❌ Failed study for 100% dataset: invalid decimal literal (<string>, line 108)
+
+============================================================
+🏁 DATASET SIZE STUDY COMPLETED
+============================================================
+✅ Successful runs: 0/5
+
+📋 RESULTS SUMMARY:
+  10% : Failed
+  20% : Failed
+  50% : Failed
+  75% : Failed
+  100%: Failed
+
+📁 Individual results saved in respective output directories
+🔍 Check each directory for detailed analysis and visualizations
