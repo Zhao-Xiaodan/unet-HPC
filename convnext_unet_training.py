@@ -278,8 +278,9 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
             metrics=['accuracy', jacard_coef]
         )
 
-        # Callbacks
-        model_filename = f"ConvNeXt_UNet_lr{learning_rate}_bs{batch_size}_model.hdf5"
+        # Callbacks with unique model filename to prevent name conflicts
+        session_id = os.environ.get('TF_SESSION_ID', 'unknown')
+        model_filename = f"ConvNeXt_UNet_lr{learning_rate}_bs{batch_size}_{session_id}_model.hdf5"
         model_path = os.path.join(output_dir, model_filename)
 
         callbacks = [

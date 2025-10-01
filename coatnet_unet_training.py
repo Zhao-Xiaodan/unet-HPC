@@ -93,9 +93,14 @@ def enhanced_model_initialization(model, input_shape, model_name="CoAtNet_UNet")
         model.build(input_shape=(None,) + input_shape)
         print(f"✓ Model built with input shape: {input_shape}")
 
-        # Step 2: Initialize all sublayers explicitly for complex hybrid architecture
+        # Step 2: Deep layer initialization for CoAtNet Sequential models
         layer_count = 0
-        for layer in model.layers:
+        sequential_count = 0
+
+        def initialize_layer_recursive(layer, dummy_shape):
+            nonlocal layer_count, sequential_count
+
+            # Build the layer if not built
             if hasattr(layer, 'build') and not getattr(layer, 'built', False):
                 try:
                     if hasattr(layer, 'input_spec') and layer.input_spec is not None:
@@ -107,23 +112,73 @@ def enhanced_model_initialization(model, input_shape, model_name="CoAtNet_UNet")
                 except Exception as e:
                     print(f"Warning: Could not build layer {layer.name}: {e}")
 
-        print(f"✓ Built {layer_count} additional sublayers")
+            # Handle Sequential models specifically (this is where CoAtNet fails)
+            if isinstance(layer, tf.keras.Sequential):
+                sequential_count += 1
+                print(f"  🔧 Initializing Sequential model #{sequential_count} with {len(layer.layers)} layers")
 
-        # Step 3: Force forward pass to initialize all weights
+                # Build the Sequential model explicitly
+                try:
+                    layer.build(dummy_shape)
+                    print(f"    ✓ Sequential model built with shape {dummy_shape}")
+                except Exception as e:
+                    print(f"    Warning: Sequential build failed: {e}")
+
+                # Initialize each sublayer in the Sequential model
+                for sublayer in layer.layers:
+                    initialize_layer_recursive(sublayer, dummy_shape)
+
+            # Handle layers with sublayers (like custom CoAtNet blocks)
+            if hasattr(layer, 'layers'):
+                for sublayer in layer.layers:
+                    initialize_layer_recursive(sublayer, dummy_shape)
+
+            # Handle layers with specific attributes that contain other layers
+            for attr_name in ['mlp', 'conv1', 'conv2', 'attn', 'norm1', 'norm2', 'projection']:
+                if hasattr(layer, attr_name):
+                    attr_layer = getattr(layer, attr_name)
+                    if hasattr(attr_layer, 'build') or isinstance(attr_layer, tf.keras.Sequential):
+                        initialize_layer_recursive(attr_layer, dummy_shape)
+
+        # Apply recursive initialization to all model layers
+        dummy_shape = (None,) + input_shape
+        for layer in model.layers:
+            initialize_layer_recursive(layer, dummy_shape)
+
+        print(f"✓ Built {layer_count} additional sublayers and {sequential_count} Sequential models")
+
+        # Step 3: Multiple forward passes to ensure all weights are created
         dummy_input = tf.zeros((1,) + input_shape, dtype=tf.float32)
+
+        # First pass - inference mode
         try:
             _ = model(dummy_input, training=False)
-            print("✓ Initial forward pass successful")
+            print("✓ First forward pass (inference) successful")
         except Exception as e:
-            print(f"Warning: Initial forward pass failed: {e}")
-            # Try with training=True if training=False fails
-            try:
-                _ = model(dummy_input, training=True)
-                print("✓ Training forward pass successful")
-            except Exception as e2:
-                print(f"Warning: Training forward pass also failed: {e2}")
+            print(f"Warning: First forward pass failed: {e}")
 
-        # Step 4: Verify gradient computation
+        # Second pass - training mode to activate all paths
+        try:
+            _ = model(dummy_input, training=True)
+            print("✓ Second forward pass (training) successful")
+        except Exception as e:
+            print(f"Warning: Second forward pass failed: {e}")
+
+        # Step 4: Force weight creation by accessing model parameters safely
+        try:
+            # Try to count parameters to ensure weights are created
+            param_count = 0
+            for layer in model.layers:
+                try:
+                    if hasattr(layer, 'count_params'):
+                        param_count += layer.count_params()
+                except:
+                    pass
+            print(f"✓ Partial parameter count: {param_count:,}")
+        except Exception as e:
+            print(f"Warning: Parameter counting failed: {e}")
+
+        # Step 5: Verify gradient computation
         try:
             with tf.GradientTape() as tape:
                 predictions = model(dummy_input, training=True)
@@ -299,7 +354,13 @@ def train_coatnet_unet(X_train, X_test, y_train, y_test,
         if not initialization_success:
             print("⚠ Warning: Enhanced initialization had issues, but proceeding with training...")
 
-        print(f"Model parameters: {model.count_params():,}")
+        # Safe parameter counting
+        try:
+            param_count = model.count_params()
+            print(f"Model parameters: {param_count:,}")
+        except Exception as e:
+            print(f"Warning: Could not count parameters: {e}")
+            print("Model created successfully, continuing without parameter count...")
 
         # Use AdamW optimizer for CoAtNet (better for hybrid architectures)
         optimizer = AdamW(learning_rate=learning_rate, weight_decay=1e-4, clipnorm=1.0)
@@ -330,8 +391,9 @@ def train_coatnet_unet(X_train, X_test, y_train, y_test,
                 run_eagerly=True
             )
 
-        # Callbacks
-        model_filename = f"CoAtNet_UNet_lr{learning_rate}_bs{batch_size}_model.hdf5"
+        # Callbacks with unique model filename to prevent name conflicts
+        session_id = os.environ.get('TF_COATNET_SESSION_ID', 'unknown')
+        model_filename = f"CoAtNet_UNet_lr{learning_rate}_bs{batch_size}_{session_id}_model.hdf5"
         model_path = os.path.join(output_dir, model_filename)
 
         callbacks = [
