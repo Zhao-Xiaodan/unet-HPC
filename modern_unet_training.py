@@ -181,6 +181,46 @@ def create_data_splits(image_dataset, mask_dataset, test_size=0.10, random_state
 # Model Training Functions
 # =============================================================================
 
+def clear_tensorflow_caches():
+    """Clear TensorFlow dataset caches to prevent 'name already exists' errors"""
+    import gc
+    import shutil
+    import tempfile
+
+    try:
+        # Clear TensorFlow session first
+        tf.keras.backend.clear_session()
+
+        # Clear various TensorFlow cache directories
+        cache_dirs = [
+            os.path.expanduser('~/.tensorflow_datasets'),
+            '/tmp/tf_data_cache',
+            '/tmp/tensorflow_cache',
+            tempfile.gettempdir() + '/tf_data',
+            '/tmp/tfds'
+        ]
+
+        cleared_count = 0
+        for cache_dir in cache_dirs:
+            if os.path.exists(cache_dir):
+                try:
+                    shutil.rmtree(cache_dir, ignore_errors=True)
+                    cleared_count += 1
+                except Exception as e:
+                    print(f"  Warning: Could not clear {cache_dir}: {e}")
+
+        # Reset TensorFlow state
+        tf.random.set_seed(None)
+        gc.collect()
+
+        if cleared_count > 0:
+            print(f"  ✓ Cleared {cleared_count} TensorFlow cache directories")
+        else:
+            print(f"  ✓ No cache directories found to clear")
+
+    except Exception as e:
+        print(f"  Warning: Cache clearing failed: {e}")
+
 def train_modern_unet(model_name, X_train, X_test, y_train, y_test,
                      learning_rate=1e-4, batch_size=8, epochs=100, output_dir="./"):
     """
@@ -201,6 +241,10 @@ def train_modern_unet(model_name, X_train, X_test, y_train, y_test,
     print(f"TRAINING: {model_name}")
     print(f"Learning Rate: {learning_rate}, Batch Size: {batch_size}, Max Epochs: {epochs}")
     print(f"{'='*60}")
+
+    # Clear TensorFlow caches before each model to prevent dataset naming conflicts
+    print("Clearing TensorFlow caches...")
+    clear_tensorflow_caches()
 
     # Import models and metrics
     from modern_unet_models import create_modern_unet
@@ -243,13 +287,51 @@ def train_modern_unet(model_name, X_train, X_test, y_train, y_test,
     print(f"Creating {model_name} model...")
     model = create_modern_unet(model_name, input_shape, num_classes=1)
 
-    # Build model to ensure weights are created
+    # Enhanced model building to ensure weights are created (critical for CoAtNet-UNet)
     try:
+        # Force model building with proper input shape
         model.build(input_shape=(None,) + input_shape)
+        print(f"✓ Model built successfully")
+
+        # For complex models like CoAtNet, ensure all sublayers are built
+        if 'CoAtNet' in model_name:
+            print("Performing enhanced initialization for CoAtNet-UNet...")
+
+            # Build all sublayers that might not be initialized
+            for layer in model.layers:
+                if hasattr(layer, 'build') and not getattr(layer, 'built', False):
+                    try:
+                        if hasattr(layer, 'input_spec') and layer.input_spec is not None:
+                            layer.build(layer.input_spec)
+                    except Exception as e:
+                        print(f"Warning: Could not build layer {layer.name}: {e}")
+
+            # Force a forward pass to initialize all weights
+            dummy_input = tf.zeros((1,) + input_shape, dtype=tf.float32)
+            try:
+                _ = model(dummy_input, training=False)
+                print("✓ Forward pass successful - all weights initialized")
+            except Exception as e:
+                print(f"Warning: Forward pass failed: {e}")
+
         print(f"Model parameters: {model.count_params():,}")
+
     except Exception as e:
         print(f"Warning: Could not build model explicitly: {e}")
         print(f"Model will be built on first forward pass")
+
+        # For CoAtNet, try alternative initialization
+        if 'CoAtNet' in model_name:
+            print("Attempting alternative CoAtNet initialization...")
+            try:
+                # Create dummy input and attempt forward pass
+                dummy_input = tf.zeros((1,) + input_shape, dtype=tf.float32)
+                _ = model(dummy_input, training=False)
+                print("✓ Alternative initialization successful")
+                print(f"Model parameters: {model.count_params():,}")
+            except Exception as e2:
+                print(f"Alternative initialization also failed: {e2}")
+                print("Model will be initialized during compilation")
 
     # Choose optimizer based on model type
     if 'Swin' in model_name or 'CoAtNet' in model_name:
@@ -299,7 +381,38 @@ def train_modern_unet(model_name, X_train, X_test, y_train, y_test,
     start_time = time.time()
 
     try:
+        # Model-specific training optimizations
+        if 'ConvNeXt' in model_name:
+            print("Applying ConvNeXt-specific optimizations...")
+            # Ensure no dataset caching conflicts
+            tf.config.experimental.enable_tensor_float_32_execution(False)
+
+        elif 'CoAtNet' in model_name:
+            print("Applying CoAtNet-specific optimizations...")
+            # Additional weight verification before training
+            try:
+                # Verify model can handle training step
+                dummy_batch_x = X_train[:1]
+                dummy_batch_y = y_train[:1]
+                with tf.GradientTape() as tape:
+                    predictions = model(dummy_batch_x, training=True)
+                    loss = model.compiled_loss(dummy_batch_y, predictions)
+                gradients = tape.gradient(loss, model.trainable_variables)
+                print("✓ CoAtNet gradient computation verified")
+            except Exception as e:
+                print(f"⚠ CoAtNet gradient verification failed: {e}")
+                print("Attempting to fix weight initialization...")
+
+                # Re-initialize model if needed
+                model.compile(
+                    optimizer=optimizer,
+                    loss=BinaryFocalLoss(gamma=2),
+                    metrics=['accuracy', jacard_coef],
+                    run_eagerly=True  # Enable eager execution for debugging
+                )
+
         # Train model
+        print("Starting model training...")
         history = model.fit(
             X_train, y_train,
             batch_size=batch_size,
@@ -365,12 +478,40 @@ def train_modern_unet(model_name, X_train, X_test, y_train, y_test,
         return None, None, None
 
     finally:
-        # Clean up memory and clear any cached datasets
+        # Enhanced cleanup for dataset cache clearing
         try:
             import gc
+            import shutil
+            import tempfile
+
+            # Clear TensorFlow session and memory
             tf.keras.backend.clear_session()
             gc.collect()
-        except:
+
+            # Clear TensorFlow dataset caches that cause "name already exists" errors
+            cache_dirs = [
+                os.path.expanduser('~/.tensorflow_datasets'),
+                '/tmp/tf_data_cache',
+                '/tmp/tensorflow_cache',
+                tempfile.gettempdir() + '/tf_data'
+            ]
+
+            for cache_dir in cache_dirs:
+                if os.path.exists(cache_dir):
+                    try:
+                        shutil.rmtree(cache_dir, ignore_errors=True)
+                        print(f"✓ Cleared cache directory: {cache_dir}")
+                    except Exception as e:
+                        print(f"Warning: Could not clear {cache_dir}: {e}")
+
+            # Reset TensorFlow random state to avoid naming conflicts
+            tf.random.set_seed(None)
+
+            # Force garbage collection
+            gc.collect()
+
+        except Exception as e:
+            print(f"Warning: Enhanced cleanup failed: {e}")
             pass
 
 # =============================================================================

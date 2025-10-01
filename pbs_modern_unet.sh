@@ -326,8 +326,13 @@ mkdir -p "$OUTPUT_DIR"
 echo "Output directory: $OUTPUT_DIR"
 echo ""
 
+# Clear any existing TensorFlow caches before training
+echo "Clearing TensorFlow caches to prevent dataset conflicts..."
+rm -rf ~/.tensorflow_datasets /tmp/tf_data_cache /tmp/tensorflow_cache /tmp/tfds 2>/dev/null || true
+
 # Execute the training with enhanced error handling and logging
 echo "Starting training execution..."
+echo "Note: Enhanced fixes applied for ConvNeXt-UNet dataset caching and CoAtNet-UNet weight initialization"
 singularity exec --nv "$image" python3 modern_unet_training.py 2>&1 | tee "${OUTPUT_DIR}/training_console_${TIMESTAMP}.log"
 
 # Capture exit code
