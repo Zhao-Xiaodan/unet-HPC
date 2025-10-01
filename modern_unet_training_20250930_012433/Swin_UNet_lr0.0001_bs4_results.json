@@ -1,0 +1,14 @@
+{
+  "model_name": "Swin_UNet",
+  "learning_rate": 0.0001,
+  "batch_size": 4,
+  "epochs_completed": 71,
+  "training_time_seconds": 9385.200280427933,
+  "best_val_jaccard": 0.9356643557548523,
+  "best_epoch": 56,
+  "final_val_loss": 0.009910361841320992,
+  "final_train_loss": 0.00029851682484149933,
+  "val_loss_stability": 0.0014542768628824077,
+  "overfitting_gap": 0.009611845016479492,
+  "model_parameters": 34164673
+}
