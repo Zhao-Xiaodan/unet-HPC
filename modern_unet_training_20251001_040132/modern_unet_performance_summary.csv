@@ -1,0 +1,2 @@
+model_name,learning_rate,batch_size,epochs_completed,training_time_seconds,best_val_jaccard,best_epoch,final_val_loss,final_train_loss,val_loss_stability,overfitting_gap,model_parameters
+Swin_UNet,0.0001,4,75,10705.292803287506,0.9345822334289551,60,0.008596951141953468,0.00032426361576654017,0.0015135032407653725,0.008272687526186928,34164673
