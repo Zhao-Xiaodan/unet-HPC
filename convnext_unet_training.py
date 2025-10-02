@@ -336,14 +336,18 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
             metrics=['accuracy', jacard_coef]
         )
 
-        # Callbacks with unique model filename to prevent name conflicts
+        # Use Keras format instead of HDF5 to avoid dataset name conflicts
         session_id = os.environ.get('TF_SESSION_ID', 'unknown')
-        model_filename = f"ConvNeXt_UNet_lr{learning_rate}_bs{batch_size}_{session_id}_model.hdf5"
+        timestamp_id = str(int(time.time()))[-6:]  # Last 6 digits of timestamp for uniqueness
+        unique_id = f"{session_id}_{timestamp_id}"
+
+        model_filename = f"ConvNeXt_UNet_lr{learning_rate}_bs{batch_size}_{unique_id}_model.keras"
         model_path = os.path.join(output_dir, model_filename)
 
-        # Enhanced callbacks with more frequent checkpointing and time management
-        checkpoint_filepath = os.path.join(output_dir, f"ConvNeXt_UNet_checkpoint_{session_id}.hdf5")
+        # Enhanced callbacks with Keras format to avoid HDF5 issues
+        checkpoint_filepath = os.path.join(output_dir, f"ConvNeXt_UNet_checkpoint_{unique_id}.keras")
 
+        # Use safer callback configuration to avoid HDF5 conflicts
         callbacks = [
             TimeManagementCallback(max_training_time_hours=22),  # Stop 2 hours before walltime limit
             EarlyStopping(
@@ -352,21 +356,6 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
                 restore_best_weights=True,
                 mode='max',
                 verbose=1
-            ),
-            ModelCheckpoint(
-                model_path,
-                monitor='val_jacard_coef',
-                save_best_only=True,
-                mode='max',
-                verbose=1
-            ),
-            ModelCheckpoint(
-                checkpoint_filepath,
-                monitor='val_jacard_coef',
-                save_best_only=False,  # Save every improvement for resume capability
-                save_freq='epoch',     # Save every epoch
-                mode='max',
-                verbose=0
             ),
             ReduceLROnPlateau(
                 monitor='val_jacard_coef',
@@ -377,6 +366,23 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
                 verbose=1
             )
         ]
+
+        # Add ModelCheckpoint with error handling
+        try:
+            callbacks.append(
+                ModelCheckpoint(
+                    model_path,
+                    monitor='val_jacard_coef',
+                    save_best_only=True,
+                    mode='max',
+                    verbose=1,
+                    save_weights_only=False  # Save full model
+                )
+            )
+            print(f"✓ ModelCheckpoint configured: {model_path}")
+        except Exception as e:
+            print(f"⚠️ ModelCheckpoint configuration failed: {e}")
+            print("Training will continue without automatic model saving")
 
         print("Starting ConvNeXt-UNet training...")
         start_time = time.time()
@@ -412,22 +418,63 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
         except Exception as e:
             print(f"⚠ XLA not available: {e}")
 
-        # Train model with optimized settings for ConvNeXt
-        history = model.fit(
-            X_train, y_train,
-            batch_size=batch_size,
-            epochs=epochs,
-            validation_data=(X_test, y_test),
-            callbacks=callbacks,
-            verbose=1,
-            shuffle=True,
-            use_multiprocessing=False,  # Disable multiprocessing to avoid dataset conflicts
-            workers=1,
-            steps_per_epoch=len(X_train) // batch_size,  # Explicit steps calculation
-            validation_steps=len(X_test) // batch_size   # Explicit validation steps
-        )
+        # Train model with enhanced error handling
+        try:
+            history = model.fit(
+                X_train, y_train,
+                batch_size=batch_size,
+                epochs=epochs,
+                validation_data=(X_test, y_test),
+                callbacks=callbacks,
+                verbose=1,
+                shuffle=True,
+                use_multiprocessing=False,  # Disable multiprocessing to avoid dataset conflicts
+                workers=1,
+                steps_per_epoch=len(X_train) // batch_size,  # Explicit steps calculation
+                validation_steps=len(X_test) // batch_size   # Explicit validation steps
+            )
+        except Exception as training_error:
+            print(f"\n⚠️ Training encountered an error: {training_error}")
+
+            # Try to save model manually if training failed during saving
+            if "Unable to synchronously create dataset" in str(training_error):
+                print("🔧 Attempting manual model save with alternative format...")
+                try:
+                    # Use SavedModel format as fallback
+                    fallback_path = os.path.join(output_dir, f"ConvNeXt_UNet_fallback_{unique_id}")
+                    model.save(fallback_path, save_format='tf')
+                    print(f"✓ Model saved successfully to: {fallback_path}")
+                except Exception as save_error:
+                    print(f"✗ Manual save also failed: {save_error}")
+
+            # Re-raise the original error
+            raise training_error
 
         training_time = time.time() - start_time
+
+        # Manual model saving as backup
+        print("\n💾 Saving model manually...")
+        try:
+            # Try Keras format first
+            manual_save_path = os.path.join(output_dir, f"ConvNeXt_UNet_final_{unique_id}.keras")
+            model.save(manual_save_path)
+            print(f"✓ Model saved successfully: {manual_save_path}")
+        except Exception as save_error1:
+            print(f"⚠️ Keras format save failed: {save_error1}")
+            try:
+                # Fallback to SavedModel format
+                manual_save_path = os.path.join(output_dir, f"ConvNeXt_UNet_final_{unique_id}_savedmodel")
+                model.save(manual_save_path, save_format='tf')
+                print(f"✓ Model saved with SavedModel format: {manual_save_path}")
+            except Exception as save_error2:
+                print(f"⚠️ SavedModel format also failed: {save_error2}")
+                try:
+                    # Last resort: save weights only
+                    weights_path = os.path.join(output_dir, f"ConvNeXt_UNet_weights_{unique_id}.weights.h5")
+                    model.save_weights(weights_path)
+                    print(f"✓ Model weights saved: {weights_path}")
+                except Exception as save_error3:
+                    print(f"✗ All save attempts failed: {save_error3}")
 
         # Save training history
         history_df = pd.DataFrame(history.history)
@@ -493,8 +540,10 @@ def find_latest_checkpoint(base_dir="."):
     """Find the latest ConvNeXt-UNet checkpoint for resume training."""
     import glob
 
-    # Look for checkpoint files
+    # Look for checkpoint files (both old HDF5 and new Keras formats)
     checkpoint_patterns = [
+        os.path.join(base_dir, "convnext_unet_training_*/ConvNeXt_UNet_checkpoint_*.keras"),
+        os.path.join(base_dir, "ConvNeXt_UNet_checkpoint_*.keras"),
         os.path.join(base_dir, "convnext_unet_training_*/ConvNeXt_UNet_checkpoint_*.hdf5"),
         os.path.join(base_dir, "ConvNeXt_UNet_checkpoint_*.hdf5")
     ]
