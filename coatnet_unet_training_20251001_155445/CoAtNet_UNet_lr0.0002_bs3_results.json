@@ -1,0 +1,15 @@
+{
+  "model_name": "CoAtNet_UNet",
+  "learning_rate": 0.0002,
+  "batch_size": 3,
+  "epochs_completed": 94,
+  "training_time_seconds": 14964.243102788925,
+  "best_val_jaccard": 0.9392510652542114,
+  "best_epoch": 79,
+  "final_val_loss": 0.005227257963269949,
+  "final_train_loss": 0.00048092924407683313,
+  "val_loss_stability": 0.00024069886063651512,
+  "overfitting_gap": 0.004746328719193116,
+  "model_parameters": 15165249,
+  "initialization_success": false
+}
