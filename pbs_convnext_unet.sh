@@ -47,7 +47,7 @@ echo "Batch Size: 6 (optimized for faster training)"
 echo "Learning Rate: 2e-4 (Adam optimizer, optimized)"
 echo "Epochs: 80 (with early stopping, optimized)"
 echo "Loss Function: Binary Focal Loss"
-echo "Special Features: Enhanced dataset cache management"
+echo "Special Features: Enhanced dataset cache management + TF compatibility fixes"
 echo "=============================================="
 echo ""
 
@@ -61,7 +61,7 @@ export CUDA_VISIBLE_DEVICES=0
 # ConvNeXt-specific optimizations for speed
 export TF_ENABLE_TENSOR_FLOAT_32_EXECUTION=1
 export TF_DISABLE_DATASET_CACHING=1
-export TF_ENABLE_AUTO_MIXED_PRECISION=1
+export XLA_FLAGS="--xla_gpu_cuda_data_dir=/usr/local/cuda"
 
 # Load required modules
 module load singularity
@@ -278,8 +278,9 @@ echo "- Max Epochs: 100 (with early stopping)"
 echo "- Loss: Binary Focal Loss (gamma=2)"
 echo "- Special: No tf.data.Dataset caching"
 echo ""
-echo "Expected timeline: 6-8 hours"
+echo "Expected timeline: 8-12 hours (optimized + compatibility fixes)"
 echo "Expected performance: 93-95% Jaccard"
+echo "Recent fixes: TensorFlow compatibility issues resolved"
 echo "============================================="
 
 # Create timestamped output directory

@@ -208,13 +208,14 @@ def create_data_splits(image_dataset, mask_dataset, test_size=0.10, random_state
 # =============================================================================
 
 def train_convnext_unet(X_train, X_test, y_train, y_test,
-                       learning_rate=1e-4, batch_size=4, epochs=100, output_dir="./"):
+                       learning_rate=2e-4, batch_size=6, epochs=80, output_dir="./"):
     """
     Train ConvNeXt-UNet with enhanced dataset management.
     """
     print(f"\n{'='*60}")
     print(f"TRAINING: ConvNeXt-UNet (Dedicated)")
     print(f"Learning Rate: {learning_rate}, Batch Size: {batch_size}, Max Epochs: {epochs}")
+    print(f"TensorFlow Version: {tf.__version__}")
     print(f"{'='*60}")
 
     # Aggressive cache clearing before starting
@@ -268,8 +269,18 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
         model.build(input_shape=(None,) + input_shape)
         print(f"Model parameters: {model.count_params():,}")
 
-        # Use Adam optimizer for ConvNeXt
-        optimizer = Adam(learning_rate=learning_rate, clipnorm=1.0)
+        # Use Adam optimizer for ConvNeXt with mixed precision compatibility
+        if hasattr(tf.keras.mixed_precision, 'LossScaleOptimizer'):
+            try:
+                base_optimizer = Adam(learning_rate=learning_rate, clipnorm=1.0)
+                optimizer = tf.keras.mixed_precision.LossScaleOptimizer(base_optimizer)
+                print("✓ Loss scaling optimizer enabled for mixed precision")
+            except Exception as e:
+                optimizer = Adam(learning_rate=learning_rate, clipnorm=1.0)
+                print(f"⚠ Using standard Adam optimizer: {e}")
+        else:
+            optimizer = Adam(learning_rate=learning_rate, clipnorm=1.0)
+            print("✓ Standard Adam optimizer")
 
         # Compile model
         model.compile(
@@ -313,9 +324,34 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
 
         # ConvNeXt-specific optimizations for speed
         print("Applying ConvNeXt-specific optimizations...")
-        tf.config.experimental.enable_tensor_float_32_execution(True)  # Enable TF32 for speed
-        tf.config.experimental.enable_mlir_graph_optimization()       # Enable MLIR optimization
-        tf.config.optimizer.set_experimental_options({'auto_mixed_precision': True})  # Mixed precision
+        try:
+            tf.config.experimental.enable_tensor_float_32_execution(True)  # Enable TF32 for speed
+            print("✓ TF32 enabled")
+        except Exception as e:
+            print(f"⚠ TF32 not available: {e}")
+
+        try:
+            # Use compatible mixed precision policy
+            from tensorflow.keras import mixed_precision
+            policy = mixed_precision.Policy('mixed_float16')
+            mixed_precision.set_global_policy(policy)
+            print("✓ Mixed precision (float16) enabled")
+        except Exception as e:
+            try:
+                # Fallback to older mixed precision API
+                from tensorflow.keras.mixed_precision import experimental as mixed_precision_exp
+                policy = mixed_precision_exp.Policy('mixed_float16')
+                mixed_precision_exp.set_policy(policy)
+                print("✓ Mixed precision (experimental) enabled")
+            except Exception as e2:
+                print(f"⚠ Mixed precision not available: {e}, fallback failed: {e2}")
+
+        # Enable XLA optimization if available
+        try:
+            tf.config.optimizer.set_jit(True)
+            print("✓ XLA JIT compilation enabled")
+        except Exception as e:
+            print(f"⚠ XLA not available: {e}")
 
         # Train model with optimized settings for ConvNeXt
         history = model.fit(
