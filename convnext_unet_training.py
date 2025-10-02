@@ -27,6 +27,53 @@ import shutil
 import tempfile
 import uuid
 
+# Custom callback for time management and progress reporting
+class TimeManagementCallback(tf.keras.callbacks.Callback):
+    def __init__(self, max_training_time_hours=22):
+        super().__init__()
+        self.max_training_time = max_training_time_hours * 3600  # Convert to seconds
+        self.training_start_time = None
+        self.epoch_times = []
+
+    def on_train_begin(self, logs=None):
+        self.training_start_time = time.time()
+        print(f"🕐 Training started at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+
+    def on_epoch_begin(self, epoch, logs=None):
+        self.epoch_start_time = time.time()
+
+    def on_epoch_end(self, epoch, logs=None):
+        epoch_time = time.time() - self.epoch_start_time
+        self.epoch_times.append(epoch_time)
+
+        # Calculate statistics
+        elapsed_time = time.time() - self.training_start_time
+        remaining_time = self.max_training_time - elapsed_time
+        avg_epoch_time = sum(self.epoch_times) / len(self.epoch_times)
+
+        # Progress reporting
+        if epoch % 5 == 0 or epoch < 5:  # Report every 5 epochs, or first 5 epochs
+            print(f"\n📊 Progress Report (Epoch {epoch + 1}):")
+            print(f"  ⏱️ Epoch time: {epoch_time:.1f}s (avg: {avg_epoch_time:.1f}s)")
+            print(f"  🕐 Elapsed: {elapsed_time/3600:.1f}h, Remaining: {remaining_time/3600:.1f}h")
+
+            if logs:
+                val_jaccard = logs.get('val_jacard_coef', 0)
+                val_loss = logs.get('val_loss', 0)
+                print(f"  🎯 Val Jaccard: {val_jaccard:.4f}, Val Loss: {val_loss:.4f}")
+
+        # Time management
+        if remaining_time < avg_epoch_time * 2:  # Less than 2 epochs remaining
+            print(f"\n⚠️ TIME WARNING: Less than 2 epochs time remaining!")
+            print(f"   Stopping training to allow for cleanup and saving")
+            self.model.stop_training = True
+
+        # Emergency stop if very close to limit
+        if remaining_time < 1800:  # Less than 30 minutes
+            print(f"\n🚨 EMERGENCY STOP: Less than 30 minutes remaining!")
+            print(f"   Forcing training stop for safe shutdown")
+            self.model.stop_training = True
+
 # =============================================================================
 # Environment Setup with Enhanced Dataset Management
 # =============================================================================
@@ -208,7 +255,7 @@ def create_data_splits(image_dataset, mask_dataset, test_size=0.10, random_state
 # =============================================================================
 
 def train_convnext_unet(X_train, X_test, y_train, y_test,
-                       learning_rate=2e-4, batch_size=6, epochs=80, output_dir="./"):
+                       learning_rate=2e-4, batch_size=6, epochs=60, output_dir="./"):
     """
     Train ConvNeXt-UNet with enhanced dataset management.
     """
@@ -294,10 +341,14 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
         model_filename = f"ConvNeXt_UNet_lr{learning_rate}_bs{batch_size}_{session_id}_model.hdf5"
         model_path = os.path.join(output_dir, model_filename)
 
+        # Enhanced callbacks with more frequent checkpointing and time management
+        checkpoint_filepath = os.path.join(output_dir, f"ConvNeXt_UNet_checkpoint_{session_id}.hdf5")
+
         callbacks = [
+            TimeManagementCallback(max_training_time_hours=22),  # Stop 2 hours before walltime limit
             EarlyStopping(
                 monitor='val_jacard_coef',
-                patience=10,  # Reduced patience for faster training
+                patience=8,   # Slightly reduced patience for time efficiency
                 restore_best_weights=True,
                 mode='max',
                 verbose=1
@@ -309,10 +360,18 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
                 mode='max',
                 verbose=1
             ),
+            ModelCheckpoint(
+                checkpoint_filepath,
+                monitor='val_jacard_coef',
+                save_best_only=False,  # Save every improvement for resume capability
+                save_freq='epoch',     # Save every epoch
+                mode='max',
+                verbose=0
+            ),
             ReduceLROnPlateau(
                 monitor='val_jacard_coef',
                 factor=0.5,
-                patience=5,   # Reduced patience for faster convergence
+                patience=4,   # Further reduced for faster adaptation
                 min_lr=1e-6,
                 mode='max',
                 verbose=1
@@ -427,6 +486,58 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
         aggressive_cache_clearing()
 
 # =============================================================================
+# Resume Training Function
+# =============================================================================
+
+def find_latest_checkpoint(base_dir="."):
+    """Find the latest ConvNeXt-UNet checkpoint for resume training."""
+    import glob
+
+    # Look for checkpoint files
+    checkpoint_patterns = [
+        os.path.join(base_dir, "convnext_unet_training_*/ConvNeXt_UNet_checkpoint_*.hdf5"),
+        os.path.join(base_dir, "ConvNeXt_UNet_checkpoint_*.hdf5")
+    ]
+
+    all_checkpoints = []
+    for pattern in checkpoint_patterns:
+        all_checkpoints.extend(glob.glob(pattern))
+
+    if not all_checkpoints:
+        return None
+
+    # Get the most recent checkpoint
+    latest_checkpoint = max(all_checkpoints, key=os.path.getmtime)
+    print(f"Found latest checkpoint: {latest_checkpoint}")
+    return latest_checkpoint
+
+def check_training_completion():
+    """Check if training was already completed successfully."""
+    import glob
+
+    # Look for completed training results
+    result_files = glob.glob("convnext_unet_training_*/ConvNeXt_UNet_*_results.json")
+
+    for result_file in result_files:
+        try:
+            with open(result_file, 'r') as f:
+                results = json.load(f)
+
+            # Check if training completed with good performance
+            best_jaccard = results.get('best_val_jaccard', 0)
+            epochs_completed = results.get('epochs_completed', 0)
+
+            if best_jaccard > 0.90 and epochs_completed >= 30:  # Reasonable completion criteria
+                print(f"✓ Found completed training with {best_jaccard:.4f} Jaccard in {epochs_completed} epochs")
+                print(f"  Result file: {result_file}")
+                return True, results
+
+        except Exception as e:
+            continue
+
+    return False, None
+
+# =============================================================================
 # Main Training Script
 # =============================================================================
 
@@ -443,27 +554,64 @@ def main():
     # Setup
     setup_gpu()
 
+    # Check if training was already completed successfully
+    print("\n🔍 Checking for previous completed training...")
+    is_completed, previous_results = check_training_completion()
+
+    if is_completed:
+        print("✅ ConvNeXt-UNet training was already completed successfully!")
+        print("No need to retrain. Exiting.")
+        return
+
+    # Check for checkpoints to resume from
+    print("\n🔍 Checking for previous checkpoints to resume from...")
+    latest_checkpoint = find_latest_checkpoint()
+
+    if latest_checkpoint:
+        print(f"✅ Found checkpoint: {latest_checkpoint}")
+        print("⚠️ Resume training not implemented yet - starting fresh training")
+        print("  (Future enhancement: implement resume from checkpoint)")
+
     # Create output directory
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     output_dir = f"convnext_unet_training_{timestamp}"
     os.makedirs(output_dir, exist_ok=True)
-    print(f"Output directory: {output_dir}")
+    print(f"\n📁 Output directory: {output_dir}")
 
     try:
         # Load dataset
         image_dataset, mask_dataset = load_dataset()
         X_train, X_test, y_train, y_test = create_data_splits(image_dataset, mask_dataset)
 
-        # Training configuration - optimized for faster training
+        # Training configuration - optimized for completion within time limit
         learning_rate = 2e-4  # Higher learning rate for faster convergence
         batch_size = 6        # Increased batch size for better GPU utilization
-        epochs = 80           # Reduced epochs with higher learning rate
+        epochs = 60           # Further reduced epochs for time limit compliance
 
-        print(f"\nTraining Configuration:")
+        print(f"\n⚙️ Training Configuration:")
         print(f"  Learning Rate: {learning_rate}")
         print(f"  Batch Size: {batch_size}")
         print(f"  Max Epochs: {epochs}")
         print(f"  Input Shape: {X_train.shape[1:]}")
+        print(f"  Training Samples: {len(X_train)}")
+        print(f"  Validation Samples: {len(X_test)}")
+        print(f"  Steps per Epoch: {len(X_train) // batch_size}")
+
+        # Estimate training time
+        steps_per_epoch = len(X_train) // batch_size
+        estimated_time_per_epoch = 20  # seconds, based on recent observation
+        estimated_total_time = (steps_per_epoch * estimated_time_per_epoch * epochs) / 3600  # hours
+
+        print(f"\n⏱️ Time Estimates:")
+        print(f"  Estimated time per epoch: ~{estimated_time_per_epoch}s")
+        print(f"  Estimated total training time: ~{estimated_total_time:.1f} hours")
+        print(f"  Walltime limit: 24 hours")
+
+        if estimated_total_time > 20:
+            print(f"  ⚠️ Warning: Estimated time exceeds safe limit!")
+            print(f"  Consider reducing epochs if training is slow")
+
+        print(f"\n🚀 Starting training at: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 
         # Train ConvNeXt-UNet
         model, history, results = train_convnext_unet(

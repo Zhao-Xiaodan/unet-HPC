@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l walltime=18:00:00
+#PBS -l walltime=24:00:00
 #PBS -j oe
 #PBS -k oed
 #PBS -N ConvNeXt_UNet_Mitochondria_Segmentation
@@ -23,7 +23,7 @@ echo "======================================================================="
 echo "Model: ConvNeXt-UNet (Modern CNN with improved efficiency)"
 echo "Task: Mitochondria semantic segmentation"
 echo "Framework: TensorFlow/Keras with enhanced dataset management"
-echo "Expected Training Time: 8-12 hours (optimized)"
+echo "Expected Training Time: 12-18 hours (with optimizations and checkpointing)"
 echo ""
 
 # Job information
@@ -45,7 +45,7 @@ echo "Alternative: ./dataset/images/ and ./dataset/masks/"
 echo "Image Size: 256x256x3"
 echo "Batch Size: 6 (optimized for faster training)"
 echo "Learning Rate: 2e-4 (Adam optimizer, optimized)"
-echo "Epochs: 80 (with early stopping, optimized)"
+echo "Epochs: 60 (reduced for completion within time limit)"
 echo "Loss Function: Binary Focal Loss"
 echo "Special Features: Enhanced dataset cache management + TF compatibility fixes"
 echo "=============================================="
@@ -278,9 +278,9 @@ echo "- Max Epochs: 100 (with early stopping)"
 echo "- Loss: Binary Focal Loss (gamma=2)"
 echo "- Special: No tf.data.Dataset caching"
 echo ""
-echo "Expected timeline: 8-12 hours (optimized + compatibility fixes)"
+echo "Expected timeline: 12-18 hours (complete training with checkpointing)"
 echo "Expected performance: 93-95% Jaccard"
-echo "Recent fixes: TensorFlow compatibility issues resolved"
+echo "Recent fixes: TensorFlow compatibility + time management optimizations"
 echo "============================================="
 
 # Create timestamped output directory
