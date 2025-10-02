@@ -286,7 +286,7 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
         callbacks = [
             EarlyStopping(
                 monitor='val_jacard_coef',
-                patience=15,
+                patience=10,  # Reduced patience for faster training
                 restore_best_weights=True,
                 mode='max',
                 verbose=1
@@ -301,8 +301,8 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
             ReduceLROnPlateau(
                 monitor='val_jacard_coef',
                 factor=0.5,
-                patience=8,
-                min_lr=1e-7,
+                patience=5,   # Reduced patience for faster convergence
+                min_lr=1e-6,
                 mode='max',
                 verbose=1
             )
@@ -311,11 +311,13 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
         print("Starting ConvNeXt-UNet training...")
         start_time = time.time()
 
-        # ConvNeXt-specific optimizations
+        # ConvNeXt-specific optimizations for speed
         print("Applying ConvNeXt-specific optimizations...")
-        tf.config.experimental.enable_tensor_float_32_execution(False)
+        tf.config.experimental.enable_tensor_float_32_execution(True)  # Enable TF32 for speed
+        tf.config.experimental.enable_mlir_graph_optimization()       # Enable MLIR optimization
+        tf.config.optimizer.set_experimental_options({'auto_mixed_precision': True})  # Mixed precision
 
-        # Train model with standard numpy arrays (avoid tf.data.Dataset for ConvNeXt)
+        # Train model with optimized settings for ConvNeXt
         history = model.fit(
             X_train, y_train,
             batch_size=batch_size,
@@ -325,7 +327,9 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
             verbose=1,
             shuffle=True,
             use_multiprocessing=False,  # Disable multiprocessing to avoid dataset conflicts
-            workers=1
+            workers=1,
+            steps_per_epoch=len(X_train) // batch_size,  # Explicit steps calculation
+            validation_steps=len(X_test) // batch_size   # Explicit validation steps
         )
 
         training_time = time.time() - start_time
@@ -414,10 +418,10 @@ def main():
         image_dataset, mask_dataset = load_dataset()
         X_train, X_test, y_train, y_test = create_data_splits(image_dataset, mask_dataset)
 
-        # Training configuration
-        learning_rate = 1e-4
-        batch_size = 4
-        epochs = 100
+        # Training configuration - optimized for faster training
+        learning_rate = 2e-4  # Higher learning rate for faster convergence
+        batch_size = 6        # Increased batch size for better GPU utilization
+        epochs = 80           # Reduced epochs with higher learning rate
 
         print(f"\nTraining Configuration:")
         print(f"  Learning Rate: {learning_rate}")

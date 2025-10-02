@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l walltime=12:00:00
+#PBS -l walltime=18:00:00
 #PBS -j oe
 #PBS -k oed
 #PBS -N ConvNeXt_UNet_Mitochondria_Segmentation
@@ -23,7 +23,7 @@ echo "======================================================================="
 echo "Model: ConvNeXt-UNet (Modern CNN with improved efficiency)"
 echo "Task: Mitochondria semantic segmentation"
 echo "Framework: TensorFlow/Keras with enhanced dataset management"
-echo "Expected Training Time: 6-8 hours"
+echo "Expected Training Time: 8-12 hours (optimized)"
 echo ""
 
 # Job information
@@ -43,9 +43,9 @@ echo "Dataset Images: ./dataset_full_stack/images/ (1980 patches - REQUIRED)"
 echo "Dataset Masks: ./dataset_full_stack/masks/ (1980 patches - REQUIRED)"
 echo "Alternative: ./dataset/images/ and ./dataset/masks/"
 echo "Image Size: 256x256x3"
-echo "Batch Size: 4 (optimized for ConvNeXt)"
-echo "Learning Rate: 1e-4 (Adam optimizer)"
-echo "Epochs: 100 (with early stopping)"
+echo "Batch Size: 6 (optimized for faster training)"
+echo "Learning Rate: 2e-4 (Adam optimizer, optimized)"
+echo "Epochs: 80 (with early stopping, optimized)"
 echo "Loss Function: Binary Focal Loss"
 echo "Special Features: Enhanced dataset cache management"
 echo "=============================================="
@@ -58,9 +58,10 @@ export TF_FORCE_GPU_ALLOW_GROWTH=true
 export TF_GPU_MEMORY_ALLOW_GROWTH=true
 export CUDA_VISIBLE_DEVICES=0
 
-# ConvNeXt-specific optimizations
-export TF_ENABLE_TENSOR_FLOAT_32_EXECUTION=0
+# ConvNeXt-specific optimizations for speed
+export TF_ENABLE_TENSOR_FLOAT_32_EXECUTION=1
 export TF_DISABLE_DATASET_CACHING=1
+export TF_ENABLE_AUTO_MIXED_PRECISION=1
 
 # Load required modules
 module load singularity
