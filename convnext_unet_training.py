@@ -255,7 +255,7 @@ def create_data_splits(image_dataset, mask_dataset, test_size=0.10, random_state
 # =============================================================================
 
 def train_convnext_unet(X_train, X_test, y_train, y_test,
-                       learning_rate=2e-4, batch_size=6, epochs=60, output_dir="./"):
+                       learning_rate=1e-4, batch_size=6, epochs=80, output_dir="./"):
     """
     Train ConvNeXt-UNet with enhanced dataset management.
     """
@@ -316,18 +316,32 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
         model.build(input_shape=(None,) + input_shape)
         print(f"Model parameters: {model.count_params():,}")
 
-        # Use Adam optimizer for ConvNeXt with mixed precision compatibility
+        # Use AdamW optimizer for ConvNeXt with better weight decay
+        try:
+            from tensorflow.keras.optimizers import AdamW
+            base_optimizer = AdamW(
+                learning_rate=learning_rate,
+                weight_decay=1e-4,  # Add weight decay for better regularization
+                clipnorm=1.0
+            )
+            print("✓ AdamW optimizer with weight decay")
+        except ImportError:
+            base_optimizer = Adam(
+                learning_rate=learning_rate,
+                clipnorm=1.0
+            )
+            print("✓ Standard Adam optimizer (AdamW not available)")
+
+        # Apply mixed precision if available
         if hasattr(tf.keras.mixed_precision, 'LossScaleOptimizer'):
             try:
-                base_optimizer = Adam(learning_rate=learning_rate, clipnorm=1.0)
                 optimizer = tf.keras.mixed_precision.LossScaleOptimizer(base_optimizer)
-                print("✓ Loss scaling optimizer enabled for mixed precision")
+                print("✓ Loss scaling enabled for mixed precision")
             except Exception as e:
-                optimizer = Adam(learning_rate=learning_rate, clipnorm=1.0)
-                print(f"⚠ Using standard Adam optimizer: {e}")
+                optimizer = base_optimizer
+                print(f"⚠ Using base optimizer: {e}")
         else:
-            optimizer = Adam(learning_rate=learning_rate, clipnorm=1.0)
-            print("✓ Standard Adam optimizer")
+            optimizer = base_optimizer
 
         # Compile model
         model.compile(
@@ -352,7 +366,7 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
             TimeManagementCallback(max_training_time_hours=22),  # Stop 2 hours before walltime limit
             EarlyStopping(
                 monitor='val_jacard_coef',
-                patience=8,   # Slightly reduced patience for time efficiency
+                patience=15,  # Increased patience for better convergence
                 restore_best_weights=True,
                 mode='max',
                 verbose=1
@@ -360,8 +374,8 @@ def train_convnext_unet(X_train, X_test, y_train, y_test,
             ReduceLROnPlateau(
                 monitor='val_jacard_coef',
                 factor=0.5,
-                patience=4,   # Further reduced for faster adaptation
-                min_lr=1e-6,
+                patience=8,   # Increased patience for stable learning
+                min_lr=1e-7,  # Lower minimum learning rate
                 mode='max',
                 verbose=1
             )
@@ -576,7 +590,7 @@ def check_training_completion():
             best_jaccard = results.get('best_val_jaccard', 0)
             epochs_completed = results.get('epochs_completed', 0)
 
-            if best_jaccard > 0.90 and epochs_completed >= 30:  # Reasonable completion criteria
+            if best_jaccard > 0.92 and epochs_completed >= 30:  # Stricter completion criteria for better performance
                 print(f"✓ Found completed training with {best_jaccard:.4f} Jaccard in {epochs_completed} epochs")
                 print(f"  Result file: {result_file}")
                 return True, results
@@ -632,10 +646,10 @@ def main():
         image_dataset, mask_dataset = load_dataset()
         X_train, X_test, y_train, y_test = create_data_splits(image_dataset, mask_dataset)
 
-        # Training configuration - optimized for completion within time limit
-        learning_rate = 2e-4  # Higher learning rate for faster convergence
+        # Training configuration - optimized for ConvNeXt performance
+        learning_rate = 1e-4  # Reduced learning rate for better ConvNeXt convergence
         batch_size = 6        # Increased batch size for better GPU utilization
-        epochs = 60           # Further reduced epochs for time limit compliance
+        epochs = 80           # Increased epochs for proper convergence
 
         print(f"\n⚙️ Training Configuration:")
         print(f"  Learning Rate: {learning_rate}")
