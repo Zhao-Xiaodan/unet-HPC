@@ -1,0 +1,14 @@
+{
+  "model_name": "ConvNeXt_UNet",
+  "learning_rate": 0.0002,
+  "batch_size": 6,
+  "epochs_completed": 12,
+  "training_time_seconds": 404.29218220710754,
+  "best_val_jaccard": 0.4713365435600281,
+  "best_epoch": 4,
+  "final_val_loss": 1.5067784786224365,
+  "final_train_loss": 1.586043119430542,
+  "val_loss_stability": 0.5934589076518271,
+  "overfitting_gap": -0.07926464080810547,
+  "model_parameters": 34590913
+}
