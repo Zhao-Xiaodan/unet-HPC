@@ -1,0 +1,19 @@
+{
+  "model_name": "ConvNeXt_UNet_Optimized",
+  "learning_rate": 8e-05,
+  "batch_size": 4,
+  "epochs_completed": 112,
+  "training_time_seconds": 3195.4134199619293,
+  "best_val_jaccard": 0.9340582489967346,
+  "final_val_jaccard": 0.9331559538841248,
+  "best_epoch": 87,
+  "final_val_loss": 0.03496019169688225,
+  "model_parameters": 34590913,
+  "optimization_techniques": [
+    "warmup_cosine_decay",
+    "adamw_optimizer",
+    "combined_focal_dice_loss",
+    "enhanced_regularization",
+    "advanced_preprocessing"
+  ]
+}

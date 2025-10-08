@@ -1,0 +1,205 @@
+=======================================================================
+OPTIMIZED MITOCHONDRIA SEGMENTATION - MICROSCOPE DATASET
+=======================================================================
+Dataset: dataset_microscope/
+Models: UNet, Attention UNet, Attention ResUNet
+Using optimized hyperparameters from optimization study
+
+Job started on Wed Oct  8 03:37:56 PM +08 2025
+Running on node: GN-A40-071
+Job ID: 278614.stdct-mgmt-02
+Available GPUs: GPU-44c8ed4b-b494-5885-85df-dcff9e7291f8
+Memory: 503Gi, CPUs: 36
+
+=== TRAINING CONFIGURATION ===
+Dataset: ./dataset_microscope/
+  Images: ./dataset_microscope/images/
+  Masks: ./dataset_microscope/masks/
+Image Size: 256x256
+
+Model Configurations (Optimized):
+  1. UNet:
+     - Learning Rate: 1e-3
+     - Batch Size: 8
+     - Expected Val Jaccard: ~0.0670
+
+  2. Attention UNet (Best Performer):
+     - Learning Rate: 1e-4
+     - Batch Size: 16
+     - Expected Val Jaccard: ~0.0699
+
+  3. Attention ResUNet:
+     - Learning Rate: 5e-4
+     - Batch Size: 16
+     - Expected Val Jaccard: ~0.0695
+
+All models use:
+  - Binary Focal Loss (gamma=2)
+  - Gradient Clipping (clipnorm=1.0)
+  - Early Stopping (patience=15)
+  - Adaptive LR Reduction
+  - Maximum 100 epochs per model
+==============================
+
+TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+
+=== PRE-EXECUTION CHECKS ===
+1. Checking dataset structure...
+   ERROR: Dataset directories not found!
+   Expected: ./dataset_microscope/images/ and ./dataset_microscope/masks/
+   Current directory contents:
+total 1437256
+drwxr-xr-x 35 phyzxi svuusers      7115 Oct  8 15:37 .
+drwx------  5 phyzxi svuusers        84 Sep 25 10:08 ..
+-rw-r--r--  1 phyzxi svuusers     16698 Sep 29 15:40 224_225_226_dataset_size_study.py
+-rw-r--r--  1 phyzxi svuusers     11160 Sep 28 11:34 224_225_226_mito_segm_using_various_unet_models_original.py
+-rw-r--r--  1 phyzxi svuusers     10752 Sep 27 10:02 224_225_226_mito_segm_using_various_unet_models.py
+-rw-r--r--  1 phyzxi svuusers     15602 Sep 28 11:34 224_225_226_models_original.py
+-rw-r--r--  1 phyzxi svuusers     15888 Sep 26 16:50 224_225_226_models.py
+-rw-r--r--  1 phyzxi svuusers     22107 Sep 29 10:52 analyze_broken_vs_fixed_validation.py
+-rw-r--r--  1 phyzxi svuusers     31773 Sep 28 11:34 analyze_fixed_results_comparison.py
+-rw-r--r--  1 phyzxi svuusers     23281 Sep 27 10:02 analyze_fixed_training_comparison.py
+-rw-r--r--  1 phyzxi svuusers     25590 Sep 26 12:36 analyze_hyperparameter_results.py
+-rw-r-----  1 phyzxi svuusers      9420 Sep 27 22:58 analyze_hyperparameters.py
+-rw-r--r--  1 phyzxi svuusers     23692 Sep 26 16:50 analyze_hyperparameter_study.py
+-rw-r--r--  1 phyzxi svuusers     14780 Sep 26 12:36 analyze_unet_comparison.py
+-rw-r-----  1 phyzxi svuusers 469688040 Sep 28 03:41 best_attention_resunet_model.h5
+-rw-r-----  1 phyzxi svuusers 448514008 Sep 27 21:47 best_attention_unet_model.h5
+-rw-r-----  1 phyzxi svuusers 377079976 Sep 27 15:18 best_unet_model.h5
+drwxr-xr-x  2 phyzxi svuusers        64 Sep 28 11:34 breakthrough_analysis_20250928
+-rw-r--r--  1 phyzxi svuusers      5603 Sep 29 15:51 BUGFIX_SUMMARY.md
+-rw-r--r--  1 phyzxi svuusers      1781 Sep 29 15:40 CLAUDE.md
+-rw-------  1 phyzxi svuusers     50895 Oct  1 23:33 CoAtNet_UNet_Mitochondria_Segmentation.o239493
+-rw-------  1 phyzxi svuusers  12277946 Oct  2 04:05 CoAtNet_UNet_Mitochondria_Segmentation.o239496
+drwxr-x---  2 phyzxi svuusers         0 Oct  1 23:32 coatnet_unet_training_20251001_153225
+drwxr-x---  2 phyzxi svuusers       174 Oct  2 04:05 coatnet_unet_training_20251001_155445
+-rw-r-----  1 phyzxi svuusers     23772 Oct  1 23:33 coatnet_unet_training_20251001_233201_console.log
+-rw-r-----  1 phyzxi svuusers  12249967 Oct  2 04:05 coatnet_unet_training_20251001_235424_console.log
+-rw-r--r--  1 phyzxi svuusers     22107 Oct  1 23:52 coatnet_unet_training.py
+-rw-r--r--  1 phyzxi svuusers      2765 Sep 26 16:50 collect_hyperparameter_results.py
+-rw-r--r--  1 phyzxi svuusers     11821 Oct  1 11:59 COMPREHENSIVE_DEBUG_ANALYSIS_20250930.md
+-rw-r--r--  1 phyzxi svuusers     11534 Sep 26 16:50 Convergence_Stability_Analysis.md
+-rw-r--r--  1 phyzxi svuusers      9061 Oct  8 15:37 ConvNeXt_CoAtNet_Optimization_Summary.md
+-rw-------  1 phyzxi svuusers    145166 Oct  1 23:35 ConvNeXt_UNet_Mitochondria_Segmentation.o239494
+-rw-------  1 phyzxi svuusers    145598 Oct  1 23:57 ConvNeXt_UNet_Mitochondria_Segmentation.o239495
+-rw-------  1 phyzxi svuusers     46658 Oct  2 11:35 ConvNeXt_UNet_Mitochondria_Segmentation.o239625
+-rw-------  1 phyzxi svuusers     83618 Oct  2 13:29 ConvNeXt_UNet_Mitochondria_Segmentation.o239689
+-rw-------  1 phyzxi svuusers     85793 Oct  2 15:08 ConvNeXt_UNet_Mitochondria_Segmentation.o246020
+-rw-------  1 phyzxi svuusers    822152 Oct  2 17:08 ConvNeXt_UNet_Mitochondria_Segmentation.o246108
+-rw-------  1 phyzxi svuusers   1492675 Oct  2 17:50 ConvNeXt_UNet_Mitochondria_Segmentation.o250130
+drwxr-x---  2 phyzxi svuusers       181 Oct  2 21:17 convnext_unet_optimized_20251002_122342
+-rw-r-----  1 phyzxi svuusers  12408892 Oct  2 21:17 convnext_unet_optimized_20251002_202235_console.log
+-rw-------  1 phyzxi svuusers  12435998 Oct  2 21:17 ConvNeXt_UNet_Optimized_Mitochondria.o250172
+-rw-r--r--  1 phyzxi svuusers     19029 Oct  2 20:21 convnext_unet_optimized_training.py
+-rw-r--r--  1 phyzxi svuusers      1600 Sep 29 15:40 ConvNeXt-UNet, Swin-UNet, CoAtNet-UNet.md
+drwxr-x---  2 phyzxi svuusers         0 Oct  1 23:53 convnext_unet_training_20251001_153225
+drwxr-x---  2 phyzxi svuusers         0 Oct  2 11:33 convnext_unet_training_20251001_155440
+-rw-r-----  1 phyzxi svuusers    120154 Oct  1 23:35 convnext_unet_training_20251001_233200_console.log
+-rw-r-----  1 phyzxi svuusers    120375 Oct  1 23:57 convnext_unet_training_20251001_235416_console.log
+drwxr-x---  2 phyzxi svuusers         0 Oct  2 11:34 convnext_unet_training_20251002_033437
+drwxr-x---  2 phyzxi svuusers         0 Oct  2 15:05 convnext_unet_training_20251002_052719
+drwxr-x---  2 phyzxi svuusers         0 Oct  2 15:21 convnext_unet_training_20251002_070601
+drwxr-x---  2 phyzxi svuusers         0 Oct  2 17:36 convnext_unet_training_20251002_090036
+drwxr-x---  2 phyzxi svuusers       244 Oct  2 17:50 convnext_unet_training_20251002_093834
+-rw-r-----  1 phyzxi svuusers     21469 Oct  2 11:35 convnext_unet_training_20251002_113428_console.log
+-rw-r-----  1 phyzxi svuusers     57934 Oct  2 13:29 convnext_unet_training_20251002_132711_console.log
+-rw-r-----  1 phyzxi svuusers     59897 Oct  2 15:08 convnext_unet_training_20251002_150553_console.log
+-rw-r-----  1 phyzxi svuusers    795220 Oct  2 17:08 convnext_unet_training_20251002_170009_console.log
+-rw-r-----  1 phyzxi svuusers   1465582 Oct  2 17:50 convnext_unet_training_20251002_173807_console.log
+-rw-r--r--  1 phyzxi svuusers     28503 Oct  2 17:36 convnext_unet_training.py
+-rw-r--r--  1 phyzxi svuusers      4816 Sep 28 11:34 create_corrected_heatmap_analysis.py
+-rw-r--r--  1 phyzxi svuusers      8700 Sep 27 10:02 create_full_dataset.py
+lrwxrwxrwx  1 phyzxi svuusers        18 Sep 27 10:02 data -> dataset_full_stack
+drwxr-xr-x  4 phyzxi svuusers        47 Sep 25 12:31 dataset_190
+drwxr-xr-x  4 phyzxi svuusers       111 Oct  8 15:37 dataset_full_stack
+-rw-r--r--  1 phyzxi svuusers      5454 Sep 27 10:02 DATASET_IMPROVEMENTS_SUMMARY.md
+drwxr-xr-x  4 phyzxi svuusers        83 Oct  8 15:18 dataset_microscope
+drwx------  7 phyzxi svuusers       379 Oct  8 15:37 dataset_size_study_20250929_110609
+-rw-r--r--  1 phyzxi svuusers      4787 Oct  1 11:40 dino3_unet_denoise.md
+-rw-r--r--  1 phyzxi svuusers     14340 Oct  8 15:37 .DS_Store
+-rw-r--r--  1 phyzxi svuusers      8143 Sep 30 09:22 FINAL_DEBUG_REPORT.md
+-rw-r--r--  1 phyzxi svuusers      8476 Oct  1 11:59 FIXES_SUMMARY.md
+drwxr-xr-x  8 phyzxi svuusers       354 Oct  8 15:37 .git
+-rw-r--r--  1 phyzxi svuusers        87 Oct  2 16:55 .gitignore
+drwxr-x--- 38 phyzxi svuusers      1910 Sep 27 10:02 hyperparameter_optimization_20250926_123742
+drwxr-x--- 38 phyzxi svuusers      1802 Sep 27 10:02 hyperparameter_optimization_20250926_165036
+drwxr-x--- 38 phyzxi svuusers      1802 Oct  8 15:37 hyperparameter_optimization_20250927_101211
+-rw-r--r--  1 phyzxi svuusers     15587 Sep 26 16:50 Hyperparameter_Optimization_Report.md
+-rw-r--r--  1 phyzxi svuusers      7244 Sep 26 12:36 Hyperparameter_Optimization_Strategy.md
+-rw-r-----  1 phyzxi svuusers      8984 Sep 27 10:12 hyperparameter_training.py
+-rw-r--r--  1 phyzxi svuusers     18736 Sep 29 15:40 Loss_Functions_vs_Metrics_Deep_Learning_Analysis.md
+-rw-r--r--  1 phyzxi svuusers      9790 Sep 26 16:50 Mathematical_Metrics_Analysis.md
+-rw-r--r--  1 phyzxi svuusers     10297 Sep 26 12:36 Metrics_Analysis_and_Spikes_Explanation.md
+-rw-r--r--  1 phyzxi svuusers     15502 Oct  8 15:37 microscope_optimized_training.py
+-rw-------  1 phyzxi svuusers      1574 Oct  8 15:37 Microscope_Optimized_UNet.o278614
+-rw-r--r--  1 phyzxi svuusers     10753 Oct  8 15:37 MICROSCOPE_TRAINING_README.md
+-rw-------  1 phyzxi svuusers      6909 Sep 29 10:53 Mitochondria_Dataset_Size_Study.o236816
+-rw-------  1 phyzxi svuusers  22601518 Sep 29 16:08 Mitochondria_Dataset_Size_Study.o236819
+-rw-------  1 phyzxi svuusers   7346798 Sep 28 22:46 Mitochondria_Original_Broken.o234506
+drwxr-x---  2 phyzxi svuusers       459 Sep 27 10:02 mitochondria_segmentation_20250925_133928
+drwxr-x---  2 phyzxi svuusers       403 Sep 27 10:02 mitochondria_segmentation_20250926_165043
+drwx------  2 phyzxi svuusers       376 Sep 28 04:45 mitochondria_segmentation_20250927_100511
+drwxr-x---  2 phyzxi svuusers         0 Sep 28 22:46 mitochondria_segmentation_original_20250928_130508
+drwxr-x---  2 phyzxi svuusers       430 Sep 28 22:46 mitochondria_segmentation_original_20250928_210433
+-rw-------  1 phyzxi svuusers    680153 Sep 25 13:48 Mitochondria_UNet_Segmentation.o228485
+-rw-------  1 phyzxi svuusers    366929 Sep 26 16:56 Mitochondria_UNet_Segmentation.o229353
+-rw-------  1 phyzxi svuusers  14744133 Sep 28 04:45 Mitochondria_UNet_Segmentation.o229690
+-rw-r--r--  1 phyzxi svuusers     15602 Sep 28 11:34 models_original.py
+-rw-r--r--  1 phyzxi svuusers     15888 Sep 26 16:50 models.py
+-rw-------  1 phyzxi svuusers     50870 Sep 29 15:42 Modern_UNet_Mitochondria_Segmentation.o237008
+-rw-------  1 phyzxi svuusers   6605593 Sep 29 18:14 Modern_UNet_Mitochondria_Segmentation.o237045
+-rw-r--r--  1 phyzxi svuusers   7100368 Oct  1 11:40 Modern_UNet_Mitochondria_Segmentation.o238119
+-rw-------  1 phyzxi svuusers   7505417 Oct  1 15:03 Modern_UNet_Mitochondria_Segmentation.o239045
+-rw-r--r--  1 phyzxi svuusers     19761 Sep 29 15:51 modern_unet_models.py
+drwxr-x---  2 phyzxi svuusers         0 Sep 29 15:42 modern_unet_training_20250929_074222
+drwxr-x---  2 phyzxi svuusers         0 Sep 29 18:14 modern_unet_training_20250929_075410
+drwxr-x---  2 phyzxi svuusers         0 Sep 29 18:14 modern_unet_training_20250929_154214
+drwxr-x---  2 phyzxi svuusers         0 Oct  1 15:03 modern_unet_training_20250930_012433
+drwxr-x---  2 phyzxi svuusers       211 Oct  1 15:03 modern_unet_training_20250930_092411
+drwxr-x---  2 phyzxi svuusers       370 Oct  1 15:03 modern_unet_training_20251001_040132
+drwxr-x---  2 phyzxi svuusers       807 Oct  1 15:03 modern_unet_training_20251001_120110
+-rw-r--r--  1 phyzxi svuusers     28619 Oct  1 11:59 modern_unet_training.py
+-rw-r--r--  1 phyzxi svuusers     15870 Oct  1 23:30 pbs_coatnet_unet.sh
+-rw-r--r--  1 phyzxi svuusers     18418 Oct  2 20:21 pbs_convnext_unet_optimized.sh
+-rw-r--r--  1 phyzxi svuusers     15194 Oct  2 17:36 pbs_convnext_unet.sh
+-rwxr-xr-x  1 phyzxi svuusers     16453 Sep 29 10:52 pbs_dataset_size_study.sh
+-rw-r--r--  1 phyzxi svuusers     28350 Sep 27 10:11 pbs_hyperparameter_optimization.sh
+-rw-r--r--  1 phyzxi svuusers     14856 Oct  8 15:37 pbs_microscope_optimized.sh
+-rw-r--r--  1 phyzxi svuusers     20019 Oct  1 11:59 pbs_modern_unet.sh
+-rwxr-xr-x  1 phyzxi svuusers     14342 Sep 28 21:03 pbs_original_broken_implementation.sh
+-rw-r--r--  1 phyzxi svuusers      5849 Sep 25 12:43 pbs_setup_verification.sh
+-rw-r--r--  1 phyzxi svuusers     14564 Sep 27 10:02 pbs_unet.sh
+-rw-r--r--  1 phyzxi svuusers      7260 Sep 26 12:36 README_Hyperparameter_Optimization.md
+-rw-r--r--  1 phyzxi svuusers      9688 Sep 29 15:40 README_Modern_UNet.md
+-rw-------  1 phyzxi svuusers      3912 Sep 29 11:06 run_dataset_size_study.py
+-rw-r-----  1 phyzxi svuusers      3022 Sep 27 10:05 run_mitochondria_training.py
+-rw-r-----  1 phyzxi svuusers      2210 Sep 28 21:04 run_original_broken_training.py
+-rw-r--r--  1 phyzxi svuusers      4236 Sep 27 10:02 setup_full_dataset.py
+-rw-r--r--  1 phyzxi svuusers      8809 Sep 29 15:40 test_modern_unet.py
+drwxr-xr-x  2 phyzxi svuusers       110 Sep 27 10:02 training_analysis_20250927
+-rw-r--r--  1 phyzxi svuusers     16980 Sep 29 15:40 Training_Dynamics_Convergence_Mathematical_Analysis.md
+-rw-r--r--  1 phyzxi svuusers     20810 Sep 29 15:40 Training_Dynamics_Mathematical_Analysis.md
+-rw-r--r--  1 phyzxi svuusers      8985 Sep 28 11:34 Training_Stability_Mathematical_Analysis.md
+-rw-r--r--  1 phyzxi svuusers     27932 Sep 26 16:50 UNet_Architecture_Comparison_Report.md
+-rw-------  1 phyzxi svuusers   2290647 Sep 26 14:14 UNet_Hyperparameter_Optimization.o229134
+-rw-------  1 phyzxi svuusers   2368625 Sep 26 18:11 UNet_Hyperparameter_Optimization.o229354
+-rw-------  1 phyzxi svuusers  30535934 Sep 27 22:58 UNet_Hyperparameter_Optimization.o229693
+-rw-r--r--  1 phyzxi svuusers     11736 Sep 26 16:50 update_report_with_figures.py
+-rw-r--r--  1 phyzxi svuusers     10441 Oct  1 11:59 validate_modern_unet_fixes.py
+drwxr-xr-x  2 phyzxi svuusers       120 Sep 29 10:52 validation_analysis_20250929_100953
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-08 15:37:57.682755:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 278614.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:00
+	Memory: Requested(240gb), Used(16892kb)
+	Vmem Used: 0kb
+	Walltime: Requested(24:00:00), Used(00:00:02)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-071[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
