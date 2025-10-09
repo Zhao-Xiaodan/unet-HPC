@@ -25,7 +25,7 @@ import cv2
 from PIL import Image
 from keras import backend
 
-# Dataset paths - UPDATE TO MICROSCOPE DATASET
+# Dataset paths - MICROSCOPE DATASET
 image_directory = 'dataset_microscope/images/'
 mask_directory = 'dataset_microscope/masks/'
 

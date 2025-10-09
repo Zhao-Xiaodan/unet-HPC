@@ -126,7 +126,7 @@ else
     echo "   ERROR: Dataset directories not found!"
     echo "   Expected: ./dataset_microscope/images/ and ./dataset_microscope/masks/"
     echo "   Current directory contents:"
-    ls -la ./
+    ls -la ./dataset_microscope/
     exit 1
 fi
 
