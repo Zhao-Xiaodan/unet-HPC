@@ -1,0 +1,4 @@
+model,lr,batch_size,dropout,loss_type,best_val_jacard,training_time
+UNet,0.0001,32,0.3,dice,0.2455657422542572,0:03:35.913371
+Attention_UNet,0.0001,32,0.3,dice,0.1441425234079361,0:04:40.594105
+Attention_ResUNet,0.0001,32,0.3,dice,0.11649186909198761,0:02:39.409344

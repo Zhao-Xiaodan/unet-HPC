@@ -1,0 +1,715 @@
+=======================================================================
+MICROSCOPE IMAGE SEGMENTATION - PREDICTION
+=======================================================================
+Job started on Thu Oct  9 02:06:45 PM +08 2025
+Running on node: GN-A40-075
+Job ID: 279192.stdct-mgmt-02
+Available GPUs: GPU-9fb8ae2e-270e-e2c9-31f8-cda2f0cfb402
+
+=== CONFIGURATION ===
+Input directory: ./test_images
+Output directory: ./predictions_20251009_140645
+Model directory: ./microscope_training_20251008_074915
+Tile size: 256x256
+Tile overlap: 32px
+Binary threshold: 0.5
+=====================
+
+TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+
+=== PRE-EXECUTION CHECKS ===
+1. Checking input directory...
+   ✓ Input directory found: ./test_images
+   ✓ Images found: 11 files
+   Sample files:
+     ./test_images/160x_2025-05-15_02-05-00.tif
+     ./test_images/10x_2025-05-15_02-05-00.tif
+     ./test_images/5120x_2025-05-16_00-59-00_002.tif
+     ./test_images/1280x_2025-05-16_00-59-00_002.tif
+     ./test_images/10240x_2560x_2025-05-16_00-59-00_002.tif
+
+2. Checking model directory...
+   ✓ Model directory found: ./microscope_training_20251008_074915
+   ✓ Model files found: 6
+   Available models:
+     ./microscope_training_20251008_074915/best_attention_unet_model.hdf5
+     ./microscope_training_20251008_074915/best_unet_model.hdf5
+     ./microscope_training_20251008_074915/best_attention_resunet_model.hdf5
+     ./microscope_training_20251008_074915/final_attention_unet_model.hdf5
+     ./microscope_training_20251008_074915/final_attention_resunet_model.hdf5
+     ./microscope_training_20251008_074915/final_unet_model.hdf5
+
+3. Checking prediction script...
+   ✓ Prediction script found
+
+4. Checking required files...
+   ✓ models.py
+   ✗ focal_loss.py (may be created automatically)
+============================
+
+=== TENSORFLOW & GPU STATUS ===
+Python version: 3.10.12
+TensorFlow version: 2.16.1
+CUDA built support: True
+Physical GPUs found: 1
+  GPU 0: PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')
+✓ GPU memory growth enabled
+✓ Basic GPU operation successful
+
+Checking dependencies:
+  ✓ cv2
+  ✓ PIL
+  ✓ matplotlib
+  ✓ numpy
+  ✓ argparse
+  ✓ pathlib
+  ✓ focal_loss
+
+✓ All critical dependencies available
+===============================
+
+=== CHECKING FOCAL LOSS ===
+Attempting to create focal_loss.py...
+✓ focal_loss package already available
+===========================
+
+Created output directory: ./predictions_20251009_140645
+
+🚀 STARTING PREDICTION
+==============================================
+Processing images from: ./test_images
+Saving results to: ./predictions_20251009_140645
+Using model from: ./microscope_training_20251008_074915
+
+Tile configuration:
+  - Size: 256x256
+  - Overlap: 32px
+  - Threshold: 0.5
+
+This may take several minutes for large images...
+==============================================
+
+================================================================================
+MICROSCOPE IMAGE SEGMENTATION - PREDICTION TOOL
+================================================================================
+
+Searching for best model...
+  Found: Attention ResUNet at ./microscope_training_20251008_074915/best_attention_resunet_model.hdf5
+  Loading model...
+Model: "UNet"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ input_1 (InputLayer)        [(None, 256, 256, 1)]        0         []                            
+                                                                                                  
+ conv2d (Conv2D)             (None, 256, 256, 64)         640       ['input_1[0][0]']             
+                                                                                                  
+ batch_normalization (Batch  (None, 256, 256, 64)         256       ['conv2d[0][0]']              
+ Normalization)                                                                                   
+                                                                                                  
+ activation (Activation)     (None, 256, 256, 64)         0         ['batch_normalization[0][0]'] 
+                                                                                                  
+ conv2d_1 (Conv2D)           (None, 256, 256, 64)         36928     ['activation[0][0]']          
+                                                                                                  
+ batch_normalization_1 (Bat  (None, 256, 256, 64)         256       ['conv2d_1[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_1 (Activation)   (None, 256, 256, 64)         0         ['batch_normalization_1[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d (MaxPooling2  (None, 128, 128, 64)         0         ['activation_1[0][0]']        
+ D)                                                                                               
+                                                                                                  
+ conv2d_2 (Conv2D)           (None, 128, 128, 128)        73856     ['max_pooling2d[0][0]']       
+                                                                                                  
+ batch_normalization_2 (Bat  (None, 128, 128, 128)        512       ['conv2d_2[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_2 (Activation)   (None, 128, 128, 128)        0         ['batch_normalization_2[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_3 (Conv2D)           (None, 128, 128, 128)        147584    ['activation_2[0][0]']        
+                                                                                                  
+ batch_normalization_3 (Bat  (None, 128, 128, 128)        512       ['conv2d_3[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_3 (Activation)   (None, 128, 128, 128)        0         ['batch_normalization_3[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d_1 (MaxPoolin  (None, 64, 64, 128)          0         ['activation_3[0][0]']        
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_4 (Conv2D)           (None, 64, 64, 256)          295168    ['max_pooling2d_1[0][0]']     
+                                                                                                  
+ batch_normalization_4 (Bat  (None, 64, 64, 256)          1024      ['conv2d_4[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_4 (Activation)   (None, 64, 64, 256)          0         ['batch_normalization_4[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_5 (Conv2D)           (None, 64, 64, 256)          590080    ['activation_4[0][0]']        
+                                                                                                  
+ batch_normalization_5 (Bat  (None, 64, 64, 256)          1024      ['conv2d_5[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_5 (Activation)   (None, 64, 64, 256)          0         ['batch_normalization_5[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d_2 (MaxPoolin  (None, 32, 32, 256)          0         ['activation_5[0][0]']        
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_6 (Conv2D)           (None, 32, 32, 512)          1180160   ['max_pooling2d_2[0][0]']     
+                                                                                                  
+ batch_normalization_6 (Bat  (None, 32, 32, 512)          2048      ['conv2d_6[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_6 (Activation)   (None, 32, 32, 512)          0         ['batch_normalization_6[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_7 (Conv2D)           (None, 32, 32, 512)          2359808   ['activation_6[0][0]']        
+                                                                                                  
+ batch_normalization_7 (Bat  (None, 32, 32, 512)          2048      ['conv2d_7[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_7 (Activation)   (None, 32, 32, 512)          0         ['batch_normalization_7[0][0]'
+                                                                    ]                             
+                                                                                                  
+ max_pooling2d_3 (MaxPoolin  (None, 16, 16, 512)          0         ['activation_7[0][0]']        
+ g2D)                                                                                             
+                                                                                                  
+ conv2d_8 (Conv2D)           (None, 16, 16, 1024)         4719616   ['max_pooling2d_3[0][0]']     
+                                                                                                  
+ batch_normalization_8 (Bat  (None, 16, 16, 1024)         4096      ['conv2d_8[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_8 (Activation)   (None, 16, 16, 1024)         0         ['batch_normalization_8[0][0]'
+                                                                    ]                             
+                                                                                                  
+ conv2d_9 (Conv2D)           (None, 16, 16, 1024)         9438208   ['activation_8[0][0]']        
+                                                                                                  
+ batch_normalization_9 (Bat  (None, 16, 16, 1024)         4096      ['conv2d_9[0][0]']            
+ chNormalization)                                                                                 
+                                                                                                  
+ activation_9 (Activation)   (None, 16, 16, 1024)         0         ['batch_normalization_9[0][0]'
+                                                                    ]                             
+                                                                                                  
+ up_sampling2d (UpSampling2  (None, 32, 32, 1024)         0         ['activation_9[0][0]']        
+ D)                                                                                               
+                                                                                                  
+ concatenate (Concatenate)   (None, 32, 32, 1536)         0         ['up_sampling2d[0][0]',       
+                                                                     'activation_7[0][0]']        
+                                                                                                  
+ conv2d_10 (Conv2D)          (None, 32, 32, 512)          7078400   ['concatenate[0][0]']         
+                                                                                                  
+ batch_normalization_10 (Ba  (None, 32, 32, 512)          2048      ['conv2d_10[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_10 (Activation)  (None, 32, 32, 512)          0         ['batch_normalization_10[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_11 (Conv2D)          (None, 32, 32, 512)          2359808   ['activation_10[0][0]']       
+                                                                                                  
+ batch_normalization_11 (Ba  (None, 32, 32, 512)          2048      ['conv2d_11[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_11 (Activation)  (None, 32, 32, 512)          0         ['batch_normalization_11[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_1 (UpSamplin  (None, 64, 64, 512)          0         ['activation_11[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_1 (Concatenate  (None, 64, 64, 768)          0         ['up_sampling2d_1[0][0]',     
+ )                                                                   'activation_5[0][0]']        
+                                                                                                  
+ conv2d_12 (Conv2D)          (None, 64, 64, 256)          1769728   ['concatenate_1[0][0]']       
+                                                                                                  
+ batch_normalization_12 (Ba  (None, 64, 64, 256)          1024      ['conv2d_12[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_12 (Activation)  (None, 64, 64, 256)          0         ['batch_normalization_12[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_13 (Conv2D)          (None, 64, 64, 256)          590080    ['activation_12[0][0]']       
+                                                                                                  
+ batch_normalization_13 (Ba  (None, 64, 64, 256)          1024      ['conv2d_13[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_13 (Activation)  (None, 64, 64, 256)          0         ['batch_normalization_13[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_2 (UpSamplin  (None, 128, 128, 256)        0         ['activation_13[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_2 (Concatenate  (None, 128, 128, 384)        0         ['up_sampling2d_2[0][0]',     
+ )                                                                   'activation_3[0][0]']        
+                                                                                                  
+ conv2d_14 (Conv2D)          (None, 128, 128, 128)        442496    ['concatenate_2[0][0]']       
+                                                                                                  
+ batch_normalization_14 (Ba  (None, 128, 128, 128)        512       ['conv2d_14[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_14 (Activation)  (None, 128, 128, 128)        0         ['batch_normalization_14[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_15 (Conv2D)          (None, 128, 128, 128)        147584    ['activation_14[0][0]']       
+                                                                                                  
+ batch_normalization_15 (Ba  (None, 128, 128, 128)        512       ['conv2d_15[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_15 (Activation)  (None, 128, 128, 128)        0         ['batch_normalization_15[0][0]
+                                                                    ']                            
+                                                                                                  
+ up_sampling2d_3 (UpSamplin  (None, 256, 256, 128)        0         ['activation_15[0][0]']       
+ g2D)                                                                                             
+                                                                                                  
+ concatenate_3 (Concatenate  (None, 256, 256, 192)        0         ['up_sampling2d_3[0][0]',     
+ )                                                                   'activation_1[0][0]']        
+                                                                                                  
+ conv2d_16 (Conv2D)          (None, 256, 256, 64)         110656    ['concatenate_3[0][0]']       
+                                                                                                  
+ batch_normalization_16 (Ba  (None, 256, 256, 64)         256       ['conv2d_16[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_16 (Activation)  (None, 256, 256, 64)         0         ['batch_normalization_16[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_17 (Conv2D)          (None, 256, 256, 64)         36928     ['activation_16[0][0]']       
+                                                                                                  
+ batch_normalization_17 (Ba  (None, 256, 256, 64)         256       ['conv2d_17[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_17 (Activation)  (None, 256, 256, 64)         0         ['batch_normalization_17[0][0]
+                                                                    ']                            
+                                                                                                  
+ conv2d_18 (Conv2D)          (None, 256, 256, 1)          65        ['activation_17[0][0]']       
+                                                                                                  
+ batch_normalization_18 (Ba  (None, 256, 256, 1)          4         ['conv2d_18[0][0]']           
+ tchNormalization)                                                                                
+                                                                                                  
+ activation_18 (Activation)  (None, 256, 256, 1)          0         ['batch_normalization_18[0][0]
+                                                                    ']                            
+                                                                                                  
+==================================================================================================
+Total params: 31401349 (119.79 MB)
+Trainable params: 31389571 (119.74 MB)
+Non-trainable params: 11778 (46.01 KB)
+__________________________________________________________________________________________________
+None
+  ✓ Model loaded successfully!
+  Model: Attention ResUNet
+  Input shape: (None, 256, 256, 3)
+  Output shape: (None, 256, 256, 1)
+
+Found 11 images to process
+Using model: Attention ResUNet
+Tile size: 256x256, Overlap: 32px
+
+[1/11] Processing: 160x_2025-05-15_02-05-00.tif
+  Image size: 2160x3840
+  Processing 10 x 17 = 170 tiles...
+    Progress: 10/170 tiles (5.9%)
+    Progress: 20/170 tiles (11.8%)
+    Progress: 30/170 tiles (17.6%)
+    Progress: 40/170 tiles (23.5%)
+    Progress: 50/170 tiles (29.4%)
+    Progress: 60/170 tiles (35.3%)
+    Progress: 70/170 tiles (41.2%)
+    Progress: 80/170 tiles (47.1%)
+    Progress: 90/170 tiles (52.9%)
+    Progress: 100/170 tiles (58.8%)
+    Progress: 110/170 tiles (64.7%)
+    Progress: 120/170 tiles (70.6%)
+    Progress: 130/170 tiles (76.5%)
+    Progress: 140/170 tiles (82.4%)
+    Progress: 150/170 tiles (88.2%)
+    Progress: 160/170 tiles (94.1%)
+    Progress: 170/170 tiles (100.0%)
+  Prediction time: 23.51s
+  Saved binary mask: ./predictions_20251009_140645/masks/160x_2025-05-15_02-05-00_mask.png
+  Saved overlay: ./predictions_20251009_140645/overlays/160x_2025-05-15_02-05-00_overlay.png
+  Saved comparison: ./predictions_20251009_140645/comparisons/160x_2025-05-15_02-05-00_comparison.png
+  Statistics:
+    Image size: 3840x2160
+    Predicted mitochondria coverage: 57.44%
+    Positive pixels: 4,763,987 / 8,294,400
+
+[2/11] Processing: 10x_2025-05-15_02-05-00.tif
+  Image size: 2160x3840
+  Processing 10 x 17 = 170 tiles...
+    Progress: 10/170 tiles (5.9%)
+    Progress: 20/170 tiles (11.8%)
+    Progress: 30/170 tiles (17.6%)
+    Progress: 40/170 tiles (23.5%)
+    Progress: 50/170 tiles (29.4%)
+    Progress: 60/170 tiles (35.3%)
+    Progress: 70/170 tiles (41.2%)
+    Progress: 80/170 tiles (47.1%)
+    Progress: 90/170 tiles (52.9%)
+    Progress: 100/170 tiles (58.8%)
+    Progress: 110/170 tiles (64.7%)
+    Progress: 120/170 tiles (70.6%)
+    Progress: 130/170 tiles (76.5%)
+    Progress: 140/170 tiles (82.4%)
+    Progress: 150/170 tiles (88.2%)
+    Progress: 160/170 tiles (94.1%)
+    Progress: 170/170 tiles (100.0%)
+  Prediction time: 10.91s
+  Saved binary mask: ./predictions_20251009_140645/masks/10x_2025-05-15_02-05-00_mask.png
+  Saved overlay: ./predictions_20251009_140645/overlays/10x_2025-05-15_02-05-00_overlay.png
+  Saved comparison: ./predictions_20251009_140645/comparisons/10x_2025-05-15_02-05-00_comparison.png
+  Statistics:
+    Image size: 3840x2160
+    Predicted mitochondria coverage: 21.56%
+    Positive pixels: 1,788,158 / 8,294,400
+
+[3/11] Processing: 5120x_2025-05-16_00-59-00_002.tif
+  Image size: 2160x3840
+  Processing 10 x 17 = 170 tiles...
+    Progress: 10/170 tiles (5.9%)
+    Progress: 20/170 tiles (11.8%)
+    Progress: 30/170 tiles (17.6%)
+    Progress: 40/170 tiles (23.5%)
+    Progress: 50/170 tiles (29.4%)
+    Progress: 60/170 tiles (35.3%)
+    Progress: 70/170 tiles (41.2%)
+    Progress: 80/170 tiles (47.1%)
+    Progress: 90/170 tiles (52.9%)
+    Progress: 100/170 tiles (58.8%)
+    Progress: 110/170 tiles (64.7%)
+    Progress: 120/170 tiles (70.6%)
+    Progress: 130/170 tiles (76.5%)
+    Progress: 140/170 tiles (82.4%)
+    Progress: 150/170 tiles (88.2%)
+    Progress: 160/170 tiles (94.1%)
+    Progress: 170/170 tiles (100.0%)
+  Prediction time: 11.11s
+  Saved binary mask: ./predictions_20251009_140645/masks/5120x_2025-05-16_00-59-00_002_mask.png
+  Saved overlay: ./predictions_20251009_140645/overlays/5120x_2025-05-16_00-59-00_002_overlay.png
+  Saved comparison: ./predictions_20251009_140645/comparisons/5120x_2025-05-16_00-59-00_002_comparison.png
+  Statistics:
+    Image size: 3840x2160
+    Predicted mitochondria coverage: 47.24%
+    Positive pixels: 3,918,309 / 8,294,400
+
+[4/11] Processing: 1280x_2025-05-16_00-59-00_002.tif
+  Image size: 2160x3840
+  Processing 10 x 17 = 170 tiles...
+    Progress: 10/170 tiles (5.9%)
+    Progress: 20/170 tiles (11.8%)
+    Progress: 30/170 tiles (17.6%)
+    Progress: 40/170 tiles (23.5%)
+    Progress: 50/170 tiles (29.4%)
+    Progress: 60/170 tiles (35.3%)
+    Progress: 70/170 tiles (41.2%)
+    Progress: 80/170 tiles (47.1%)
+    Progress: 90/170 tiles (52.9%)
+    Progress: 100/170 tiles (58.8%)
+    Progress: 110/170 tiles (64.7%)
+    Progress: 120/170 tiles (70.6%)
+    Progress: 130/170 tiles (76.5%)
+    Progress: 140/170 tiles (82.4%)
+    Progress: 150/170 tiles (88.2%)
+    Progress: 160/170 tiles (94.1%)
+    Progress: 170/170 tiles (100.0%)
+  Prediction time: 10.97s
+  Saved binary mask: ./predictions_20251009_140645/masks/1280x_2025-05-16_00-59-00_002_mask.png
+  Saved overlay: ./predictions_20251009_140645/overlays/1280x_2025-05-16_00-59-00_002_overlay.png
+  Saved comparison: ./predictions_20251009_140645/comparisons/1280x_2025-05-16_00-59-00_002_comparison.png
+  Statistics:
+    Image size: 3840x2160
+    Predicted mitochondria coverage: 46.41%
+    Positive pixels: 3,849,650 / 8,294,400
+
+[5/11] Processing: 10240x_2560x_2025-05-16_00-59-00_002.tif
+  Image size: 2160x3840
+  Processing 10 x 17 = 170 tiles...
+    Progress: 10/170 tiles (5.9%)
+    Progress: 20/170 tiles (11.8%)
+    Progress: 30/170 tiles (17.6%)
+    Progress: 40/170 tiles (23.5%)
+    Progress: 50/170 tiles (29.4%)
+    Progress: 60/170 tiles (35.3%)
+    Progress: 70/170 tiles (41.2%)
+    Progress: 80/170 tiles (47.1%)
+    Progress: 90/170 tiles (52.9%)
+    Progress: 100/170 tiles (58.8%)
+    Progress: 110/170 tiles (64.7%)
+    Progress: 120/170 tiles (70.6%)
+    Progress: 130/170 tiles (76.5%)
+    Progress: 140/170 tiles (82.4%)
+    Progress: 150/170 tiles (88.2%)
+    Progress: 160/170 tiles (94.1%)
+    Progress: 170/170 tiles (100.0%)
+  Prediction time: 11.17s
+  Saved binary mask: ./predictions_20251009_140645/masks/10240x_2560x_2025-05-16_00-59-00_002_mask.png
+  Saved overlay: ./predictions_20251009_140645/overlays/10240x_2560x_2025-05-16_00-59-00_002_overlay.png
+  Saved comparison: ./predictions_20251009_140645/comparisons/10240x_2560x_2025-05-16_00-59-00_002_comparison.png
+  Statistics:
+    Image size: 3840x2160
+    Predicted mitochondria coverage: 44.57%
+    Positive pixels: 3,697,171 / 8,294,400
+
+[6/11] Processing: 2025-05-16_00-59-00_002.tif
+  Image size: 2160x3840
+  Processing 10 x 17 = 170 tiles...
+    Progress: 10/170 tiles (5.9%)
+    Progress: 20/170 tiles (11.8%)
+    Progress: 30/170 tiles (17.6%)
+    Progress: 40/170 tiles (23.5%)
+    Progress: 50/170 tiles (29.4%)
+    Progress: 60/170 tiles (35.3%)
+    Progress: 70/170 tiles (41.2%)
+    Progress: 80/170 tiles (47.1%)
+    Progress: 90/170 tiles (52.9%)
+    Progress: 100/170 tiles (58.8%)
+    Progress: 110/170 tiles (64.7%)
+    Progress: 120/170 tiles (70.6%)
+    Progress: 130/170 tiles (76.5%)
+    Progress: 140/170 tiles (82.4%)
+    Progress: 150/170 tiles (88.2%)
+    Progress: 160/170 tiles (94.1%)
+    Progress: 170/170 tiles (100.0%)
+  Prediction time: 10.94s
+  Saved binary mask: ./predictions_20251009_140645/masks/2025-05-16_00-59-00_002_mask.png
+  Saved overlay: ./predictions_20251009_140645/overlays/2025-05-16_00-59-00_002_overlay.png
+  Saved comparison: ./predictions_20251009_140645/comparisons/2025-05-16_00-59-00_002_comparison.png
+  Statistics:
+    Image size: 3840x2160
+    Predicted mitochondria coverage: 41.07%
+    Positive pixels: 3,406,209 / 8,294,400
+
+[7/11] Processing: 20x_2025-05-15_02-05-00.tif
+  Image size: 2160x3840
+  Processing 10 x 17 = 170 tiles...
+    Progress: 10/170 tiles (5.9%)
+    Progress: 20/170 tiles (11.8%)
+    Progress: 30/170 tiles (17.6%)
+    Progress: 40/170 tiles (23.5%)
+    Progress: 50/170 tiles (29.4%)
+    Progress: 60/170 tiles (35.3%)
+    Progress: 70/170 tiles (41.2%)
+    Progress: 80/170 tiles (47.1%)
+    Progress: 90/170 tiles (52.9%)
+    Progress: 100/170 tiles (58.8%)
+    Progress: 110/170 tiles (64.7%)
+    Progress: 120/170 tiles (70.6%)
+    Progress: 130/170 tiles (76.5%)
+    Progress: 140/170 tiles (82.4%)
+    Progress: 150/170 tiles (88.2%)
+    Progress: 160/170 tiles (94.1%)
+    Progress: 170/170 tiles (100.0%)
+  Prediction time: 10.98s
+  Saved binary mask: ./predictions_20251009_140645/masks/20x_2025-05-15_02-05-00_mask.png
+  Saved overlay: ./predictions_20251009_140645/overlays/20x_2025-05-15_02-05-00_overlay.png
+  Saved comparison: ./predictions_20251009_140645/comparisons/20x_2025-05-15_02-05-00_comparison.png
+  Statistics:
+    Image size: 3840x2160
+    Predicted mitochondria coverage: 58.52%
+    Positive pixels: 4,854,117 / 8,294,400
+
+[8/11] Processing: 320x_2025-05-15_02-05-00.tif
+  Image size: 2160x3840
+  Processing 10 x 17 = 170 tiles...
+    Progress: 10/170 tiles (5.9%)
+    Progress: 20/170 tiles (11.8%)
+    Progress: 30/170 tiles (17.6%)
+    Progress: 40/170 tiles (23.5%)
+    Progress: 50/170 tiles (29.4%)
+    Progress: 60/170 tiles (35.3%)
+    Progress: 70/170 tiles (41.2%)
+    Progress: 80/170 tiles (47.1%)
+    Progress: 90/170 tiles (52.9%)
+    Progress: 100/170 tiles (58.8%)
+    Progress: 110/170 tiles (64.7%)
+    Progress: 120/170 tiles (70.6%)
+    Progress: 130/170 tiles (76.5%)
+    Progress: 140/170 tiles (82.4%)
+    Progress: 150/170 tiles (88.2%)
+    Progress: 160/170 tiles (94.1%)
+    Progress: 170/170 tiles (100.0%)
+  Prediction time: 11.16s
+  Saved binary mask: ./predictions_20251009_140645/masks/320x_2025-05-15_02-05-00_mask.png
+  Saved overlay: ./predictions_20251009_140645/overlays/320x_2025-05-15_02-05-00_overlay.png
+  Saved comparison: ./predictions_20251009_140645/comparisons/320x_2025-05-15_02-05-00_comparison.png
+  Statistics:
+    Image size: 3840x2160
+    Predicted mitochondria coverage: 58.18%
+    Positive pixels: 4,825,269 / 8,294,400
+
+[9/11] Processing: 640x_2025-05-16_00-59-00_002.tif
+  Image size: 2160x3840
+  Processing 10 x 17 = 170 tiles...
+    Progress: 10/170 tiles (5.9%)
+    Progress: 20/170 tiles (11.8%)
+    Progress: 30/170 tiles (17.6%)
+    Progress: 40/170 tiles (23.5%)
+    Progress: 50/170 tiles (29.4%)
+    Progress: 60/170 tiles (35.3%)
+    Progress: 70/170 tiles (41.2%)
+    Progress: 80/170 tiles (47.1%)
+    Progress: 90/170 tiles (52.9%)
+    Progress: 100/170 tiles (58.8%)
+    Progress: 110/170 tiles (64.7%)
+    Progress: 120/170 tiles (70.6%)
+    Progress: 130/170 tiles (76.5%)
+    Progress: 140/170 tiles (82.4%)
+    Progress: 150/170 tiles (88.2%)
+    Progress: 160/170 tiles (94.1%)
+    Progress: 170/170 tiles (100.0%)
+  Prediction time: 10.84s
+  Saved binary mask: ./predictions_20251009_140645/masks/640x_2025-05-16_00-59-00_002_mask.png
+  Saved overlay: ./predictions_20251009_140645/overlays/640x_2025-05-16_00-59-00_002_overlay.png
+  Saved comparison: ./predictions_20251009_140645/comparisons/640x_2025-05-16_00-59-00_002_comparison.png
+  Statistics:
+    Image size: 3840x2160
+    Predicted mitochondria coverage: 44.08%
+    Positive pixels: 3,656,497 / 8,294,400
+
+[10/11] Processing: 80x_1_2025-05-22_14-48-00_003.tif
+  Image size: 2160x3840
+  Processing 10 x 17 = 170 tiles...
+    Progress: 10/170 tiles (5.9%)
+    Progress: 20/170 tiles (11.8%)
+    Progress: 30/170 tiles (17.6%)
+    Progress: 40/170 tiles (23.5%)
+    Progress: 50/170 tiles (29.4%)
+    Progress: 60/170 tiles (35.3%)
+    Progress: 70/170 tiles (41.2%)
+    Progress: 80/170 tiles (47.1%)
+    Progress: 90/170 tiles (52.9%)
+    Progress: 100/170 tiles (58.8%)
+    Progress: 110/170 tiles (64.7%)
+    Progress: 120/170 tiles (70.6%)
+    Progress: 130/170 tiles (76.5%)
+    Progress: 140/170 tiles (82.4%)
+    Progress: 150/170 tiles (88.2%)
+    Progress: 160/170 tiles (94.1%)
+    Progress: 170/170 tiles (100.0%)
+  Prediction time: 11.19s
+  Saved binary mask: ./predictions_20251009_140645/masks/80x_1_2025-05-22_14-48-00_003_mask.png
+  Saved overlay: ./predictions_20251009_140645/overlays/80x_1_2025-05-22_14-48-00_003_overlay.png
+  Saved comparison: ./predictions_20251009_140645/comparisons/80x_1_2025-05-22_14-48-00_003_comparison.png
+  Statistics:
+    Image size: 3840x2160
+    Predicted mitochondria coverage: 49.88%
+    Positive pixels: 4,137,143 / 8,294,400
+
+[11/11] Processing: 80x_2_2025-05-22_14-48-00.tif
+  Image size: 2160x3840
+  Processing 10 x 17 = 170 tiles...
+    Progress: 10/170 tiles (5.9%)
+    Progress: 20/170 tiles (11.8%)
+    Progress: 30/170 tiles (17.6%)
+    Progress: 40/170 tiles (23.5%)
+    Progress: 50/170 tiles (29.4%)
+    Progress: 60/170 tiles (35.3%)
+    Progress: 70/170 tiles (41.2%)
+    Progress: 80/170 tiles (47.1%)
+    Progress: 90/170 tiles (52.9%)
+    Progress: 100/170 tiles (58.8%)
+    Progress: 110/170 tiles (64.7%)
+    Progress: 120/170 tiles (70.6%)
+    Progress: 130/170 tiles (76.5%)
+    Progress: 140/170 tiles (82.4%)
+    Progress: 150/170 tiles (88.2%)
+    Progress: 160/170 tiles (94.1%)
+    Progress: 170/170 tiles (100.0%)
+  Prediction time: 10.97s
+  Saved binary mask: ./predictions_20251009_140645/masks/80x_2_2025-05-22_14-48-00_mask.png
+  Saved overlay: ./predictions_20251009_140645/overlays/80x_2_2025-05-22_14-48-00_overlay.png
+  Saved comparison: ./predictions_20251009_140645/comparisons/80x_2_2025-05-22_14-48-00_comparison.png
+  Statistics:
+    Image size: 3840x2160
+    Predicted mitochondria coverage: 62.21%
+    Positive pixels: 5,159,582 / 8,294,400
+
+Saved summary: ./predictions_20251009_140645/prediction_summary.txt
+================================================================================
+PROCESSING COMPLETE
+================================================================================
+Processed: 11 images
+Output directory: ./predictions_20251009_140645
+  - Binary masks: ./predictions_20251009_140645/masks/
+  - Overlays: ./predictions_20251009_140645/overlays/
+  - Comparisons: ./predictions_20251009_140645/comparisons/
+  - Summary: ./predictions_20251009_140645/prediction_summary.txt
+
+=======================================================================
+PREDICTION COMPLETED
+=======================================================================
+Job finished on Thu Oct  9 02:10:05 PM +08 2025
+Exit code: 0 ✓ SUCCESS
+
+✓ Prediction completed successfully!
+
+📊 OUTPUT SUMMARY:
+==================
+Output directory: ./predictions_20251009_140645
+
+Generated files:
+  - Binary masks: 11 files (in ./predictions_20251009_140645/masks/)
+  - Overlays: 11 files (in ./predictions_20251009_140645/overlays/)
+  - Comparisons: 11 files (in ./predictions_20251009_140645/comparisons/)
+
+📝 PREDICTION SUMMARY:
+=====================
+================================================================================
+MICROSCOPE IMAGE SEGMENTATION - PREDICTION SUMMARY
+================================================================================
+
+Model: Attention ResUNet
+Processing date: 2025-10-09 06:10:03
+Total images: 11
+
+Results:
+--------------------------------------------------------------------------------
+Filename                                 Size         Coverage     Time       Status              
+--------------------------------------------------------------------------------
+160x_2025-05-15_02-05-00.tif             3840x2160    57.44%       23.51s     Success             
+10x_2025-05-15_02-05-00.tif              3840x2160    21.56%       10.91s     Success             
+5120x_2025-05-16_00-59-00_002.tif        3840x2160    47.24%       11.11s     Success             
+1280x_2025-05-16_00-59-00_002.tif        3840x2160    46.41%       10.97s     Success             
+10240x_2560x_2025-05-16_00-59-00_002.tif 3840x2160    44.57%       11.17s     Success             
+2025-05-16_00-59-00_002.tif              3840x2160    41.07%       10.94s     Success             
+20x_2025-05-15_02-05-00.tif              3840x2160    58.52%       10.98s     Success             
+320x_2025-05-15_02-05-00.tif             3840x2160    58.18%       11.16s     Success             
+640x_2025-05-16_00-59-00_002.tif         3840x2160    44.08%       10.84s     Success             
+80x_1_2025-05-22_14-48-00_003.tif        3840x2160    49.88%       11.19s     Success             
+80x_2_2025-05-22_14-48-00.tif            3840x2160    62.21%       10.97s     Success             
+--------------------------------------------------------------------------------
+
+Successful: 11/11
+
+📁 RESULT LOCATIONS:
+====================
+  Binary masks:   ./predictions_20251009_140645/masks/
+  Overlays:       ./predictions_20251009_140645/overlays/
+  Comparisons:    ./predictions_20251009_140645/comparisons/
+  Summary:        ./predictions_20251009_140645/prediction_summary.txt
+  Full log:       ./predictions_20251009_140645/prediction_log.txt
+
+🔍 TO DOWNLOAD RESULTS:
+=======================
+From your local machine, run:
+  scp -r phyzxi@hpc:~/scratch/unet-HPC/./predictions_20251009_140645 ./local_predictions/
+
+
+=======================================================================
+JOB COMPLETE - MICROSCOPE PREDICTION
+=======================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-09 14:10:05.730744:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 279192.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:04:01
+	Memory: Requested(240gb), Used(5233764kb)
+	Vmem Used: 72036460kb
+	Walltime: Requested(02:00:00), Used(00:03:21)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-075[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
