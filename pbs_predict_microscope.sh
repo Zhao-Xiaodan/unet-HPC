@@ -31,7 +31,7 @@ echo ""
 # =======================================================================
 
 # INPUT/OUTPUT DIRECTORIES
-INPUT_DIR="./test_image"                              # Directory with images to predict
+INPUT_DIR="./test_images"                              # Directory with images to predict
 OUTPUT_DIR="./predictions_$(date +%Y%m%d_%H%M%S)"    # Timestamped output directory
 MODEL_DIR="./microscope_training_20251008_074915"    # Training directory with models
 
