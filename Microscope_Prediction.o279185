@@ -1,0 +1,42 @@
+=======================================================================
+MICROSCOPE IMAGE SEGMENTATION - PREDICTION
+=======================================================================
+Job started on Thu Oct  9 02:03:09 PM +08 2025
+Running on node: GN-A40-075
+Job ID: 279185.stdct-mgmt-02
+Available GPUs: GPU-9fb8ae2e-270e-e2c9-31f8-cda2f0cfb402
+
+=== CONFIGURATION ===
+Input directory: ./test_image
+Output directory: ./predictions_20251009_140309
+Model directory: ./microscope_training_20251008_074915
+Tile size: 256x256
+Tile overlap: 32px
+Binary threshold: 0.5
+=====================
+
+TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+
+=== PRE-EXECUTION CHECKS ===
+1. Checking input directory...
+   ERROR: Input directory not found: ./test_image
+
+   Please create the directory and add images:
+     mkdir -p ./test_image
+     # Copy your test images to ./test_image/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-09 14:03:10.158217:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 279185.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:00
+	Memory: Requested(240gb), Used(29788kb)
+	Vmem Used: 0kb
+	Walltime: Requested(02:00:00), Used(00:00:02)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-075[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
