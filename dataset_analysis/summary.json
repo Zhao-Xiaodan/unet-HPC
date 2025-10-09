@@ -1,0 +1,12 @@
+{
+  "dataset_size": 73,
+  "mean_positive_ratio": 0.11539009825824058,
+  "std_positive_ratio": 0.10380992706533096,
+  "mean_objects_per_image": 109.36986301369863,
+  "std_objects_per_image": 80.74541538354167,
+  "mean_object_size": 69.1434118236473,
+  "partial_mask_suspects": 0,
+  "partial_mask_ratio": 0.0,
+  "mean_brightness": 106.92049731946972,
+  "std_brightness": 19.288538745260386
+}
