@@ -33,7 +33,7 @@ echo ""
 # INPUT/OUTPUT DIRECTORIES
 INPUT_DIR="./test_images"                              # Directory with images to predict
 OUTPUT_DIR="./predictions_$(date +%Y%m%d_%H%M%S)"    # Timestamped output directory
-MODEL_DIR="./microscope_training_20251008_074915"    # Training directory with models
+MODEL_DIR="./microbead_training_20251009_073134"    # Training directory with models
 
 # PREDICTION PARAMETERS
 TILE_SIZE=256        # Must match training (default: 256)
