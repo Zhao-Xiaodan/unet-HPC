@@ -1,0 +1,11 @@
+{
+  "learning_rate": 0.0002,
+  "batch_size": 4,
+  "dropout": 0.3,
+  "loss_type": "combined",
+  "best_val_jacard": 0.16403828561306,
+  "best_epoch": 52,
+  "total_epochs": 72,
+  "final_val_jacard": 0.14031872153282166,
+  "checkpoint_path": "hyperparam_search_20251010_043123/model_lr0.0002_bs4_dr0.3_combined.hdf5"
+}
