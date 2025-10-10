@@ -32,10 +32,10 @@ import pandas as pd
 # Import model definitions
 import sys
 if Path('models.py').exists():
-    from models import simple_unet_model
+    from models import UNet
 elif Path('224_225_226_models.py').exists():
     sys.path.insert(0, '.')
-    from models import simple_unet_model
+    from models import UNet
 else:
     raise FileNotFoundError("Model definition file not found!")
 
@@ -173,7 +173,7 @@ def train_with_hyperparameters(X_train, X_val, y_train, y_val, hyperparams, outp
 
     # Build model
     input_shape = (SIZE, SIZE, IMG_CHANNELS)
-    model = simple_unet_model(input_shape, dropout_rate=dropout)
+    model = UNet(input_shape, NUM_CLASSES=1, dropout_rate=dropout, batch_norm=True)
 
     # Compile model
     loss_fn = get_loss_function(loss_type)
