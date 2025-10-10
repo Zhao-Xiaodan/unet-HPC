@@ -1,0 +1,169 @@
+=======================================================================
+FIXED MICROBEAD PREDICTION
+=======================================================================
+Job started on Fri Oct 10 05:20:07 PM +08 2025
+Running on node: GN-A40-070
+Job ID: 281775.stdct-mgmt-02
+
+=== CONFIGURATION ===
+Model: ./microbead_training_20251009_073134/best_unet_model.hdf5
+Input directory: ./test_images
+Output directory: predictions_fixed_20251010_172007
+Tile size: 512×512 (original 512×512 resolution ✓)
+Overlap: 64 pixels (smooth blending ✓)
+Threshold: 0.5
+=====================
+
+TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+
+=== PRE-EXECUTION CHECKS ===
+1. Checking model...
+   ✓ Model found: ./microbead_training_20251009_073134/best_unet_model.hdf5
+   Size: 121M
+
+2. Checking input directory...
+   ✓ Input directory found: ./test_images
+   ✓ Images found: 11
+
+3. Checking prediction script...
+   ✓ Fixed prediction script found
+=============================
+
+=== GPU STATUS ===
+GPUs available: 1
+  GPU 0: /physical_device:GPU:0
+✓ GPU memory growth enabled
+==================
+
+🔮 STARTING PREDICTION
+==============================================
+
+================================================================================
+FIXED MICROBEAD PREDICTION
+================================================================================
+
+Configuration:
+  Model: ./microbead_training_20251009_073134/best_unet_model.hdf5
+  Input directory: ./test_images
+  Tile size: 512×512 (original 512×512 resolution ✓)
+  Overlap: 64 pixels (smooth blending ✓)
+  Threshold: 0.5
+
+Loading model from: ./microbead_training_20251009_073134/best_unet_model.hdf5
+✓ Model loaded successfully
+Output directory: predictions_fixed_20251010_172007
+
+Found 11 images to process
+================================================================================
+
+[1/11]
+
+Processing: 10240x_2560x_2025-05-16_00-59-00_002.tif
+  Image size: 2160×3840
+  Tile size: 512×512
+  Overlap: 64 pixels
+  Number of tiles: 5×9 = 45 tiles
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/predict_microscope_fixed.py", line 351, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/predict_microscope_fixed.py", line 327, in main
+    predict_on_image(
+  File "/scratch/phyzxi/unet-HPC/predict_microscope_fixed.py", line 224, in predict_on_image
+    mask = predictor.predict_large_image(image, threshold=threshold)
+  File "/scratch/phyzxi/unet-HPC/predict_microscope_fixed.py", line 161, in predict_large_image
+    tile_pred = self._predict_single_tile(tile, threshold=None)  # Get probabilities
+  File "/scratch/phyzxi/unet-HPC/predict_microscope_fixed.py", line 202, in _predict_single_tile
+    pred = self.model.predict(tile_input, verbose=0)[0, :, :, 0]
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/utils/traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_fileobs4_cjc.py", line 15, in tf__predict_function
+    retval_ = ag__.converted_call(ag__.ld(step_function), (ag__.ld(self), ag__.ld(iterator)), None, fscope)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_file1kyroe2n.py", line 45, in tf__step_function
+    outputs = ag__.converted_call(ag__.ld(model).distribute_strategy.run, (ag__.ld(run_step),), dict(args=(ag__.ld(data),)), fscope)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_file1kyroe2n.py", line 18, in run_step
+    outputs = ag__.converted_call(ag__.ld(model).predict_step, (ag__.ld(data),), None, fscope_1)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_filed7yyc98h.py", line 32, in tf__predict_step
+    retval_ = ag__.converted_call(ag__.ld(self), (ag__.ld(x),), dict(training=False), fscope)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_fileccchn1ph.py", line 44, in tf__error_handler
+    ag__.if_stmt(ag__.not_(ag__.converted_call(ag__.ld(tf).debugging.is_traceback_filtering_enabled, (), None, fscope)), if_body, else_body, get_state, set_state, ('do_return', 'retval_'), 2)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_fileccchn1ph.py", line 40, in else_body
+    raise ag__.converted_call(ag__.ld(e).with_traceback, (ag__.ld(filtered_tb),), None, fscope) from None
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_fileccchn1ph.py", line 34, in else_body
+    retval_ = ag__.converted_call(ag__.ld(fn), tuple(ag__.ld(args)), dict(**ag__.ld(kwargs)), fscope)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_filesm_lmkti.py", line 67, in tf____call__
+    retval_ = ag__.converted_call(ag__.converted_call(ag__.ld(super), (), None, fscope).__call__, tuple(ag__.ld(args)), dict(**ag__.ld(kwargs)), fscope)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_fileccchn1ph.py", line 44, in tf__error_handler
+    ag__.if_stmt(ag__.not_(ag__.converted_call(ag__.ld(tf).debugging.is_traceback_filtering_enabled, (), None, fscope)), if_body, else_body, get_state, set_state, ('do_return', 'retval_'), 2)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_fileccchn1ph.py", line 40, in else_body
+    raise ag__.converted_call(ag__.ld(e).with_traceback, (ag__.ld(filtered_tb),), None, fscope) from None
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_fileccchn1ph.py", line 34, in else_body
+    retval_ = ag__.converted_call(ag__.ld(fn), tuple(ag__.ld(args)), dict(**ag__.ld(kwargs)), fscope)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_fileynjfnpn9.py", line 242, in tf____call__
+    ag__.if_stmt(ag__.converted_call(ag__.ld(_in_functional_construction_mode), (ag__.ld(self), ag__.ld(inputs), ag__.ld(args), ag__.ld(kwargs), ag__.ld(input_list)), None, fscope), if_body_11, else_body_11, get_state_11, set_state_11, ('do_return', "kwargs['mask']", 'retval_', 'args', 'input_list', 'inputs', 'kwargs'), 3)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_fileynjfnpn9.py", line 120, in else_body_11
+    ag__.converted_call(ag__.ld(input_spec).assert_input_compatibility, (ag__.ld(self).input_spec, ag__.ld(inputs), ag__.ld(self).name), None, fscope)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_files8y1x2js.py", line 495, in tf__assert_input_compatibility
+    ag__.if_stmt(ag__.not_(ag__.ld(input_spec)), if_body_25, else_body_25, get_state_30, set_state_30, ('do_return', 'retval_', 'input_spec', 'inputs'), 2)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_files8y1x2js.py", line 479, in else_body_25
+    ag__.for_stmt(ag__.converted_call(ag__.ld(enumerate), (ag__.converted_call(ag__.ld(zip), (ag__.ld(inputs), ag__.ld(input_spec)), None, fscope),), None, fscope), extra_test, loop_body_4, get_state_29, set_state_29, ('do_return', 'retval_'), {'iterate_names': '(input_index, (x, spec))'})
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_files8y1x2js.py", line 463, in loop_body_4
+    ag__.if_stmt(ag__.not_(continue__2), if_body_24, else_body_24, get_state_28, set_state_28, ('do_return', 'retval_'), 2)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_files8y1x2js.py", line 458, in if_body_24
+    ag__.if_stmt(ag__.ld(shape).rank is None, if_body_23, else_body_23, get_state_27, set_state_27, ('do_return', 'retval_'), 2)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_files8y1x2js.py", line 457, in else_body_23
+    ag__.if_stmt(ag__.and_(lambda : ag__.ld(spec).shape is not None, lambda : ag__.ld(shape).rank is not None), if_body_22, else_body_22, get_state_26, set_state_26, ('shape_as_list',), 0)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_files8y1x2js.py", line 452, in if_body_22
+    ag__.for_stmt(ag__.converted_call(ag__.ld(zip), (ag__.ld(spec_shape), ag__.ld(shape_as_list)), None, fscope), None, loop_body_3, get_state_25, set_state_25, (), {'iterate_names': '(spec_dim, dim)'})
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_files8y1x2js.py", line 451, in loop_body_3
+    ag__.if_stmt(ag__.and_(lambda : ag__.ld(spec_dim) is not None, lambda : ag__.ld(dim) is not None), if_body_21, else_body_21, get_state_24, set_state_24, (), 0)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_files8y1x2js.py", line 447, in if_body_21
+    ag__.if_stmt(ag__.ld(spec_dim) != ag__.ld(dim), if_body_20, else_body_20, get_state_23, set_state_23, (), 0)
+  File "/var/tmp/pbs.281775.stdct-mgmt-02/__autograph_generated_files8y1x2js.py", line 443, in if_body_20
+    raise ag__.converted_call(ag__.ld(ValueError), (f'Input {ag__.ld(input_index)} of layer "{ag__.ld(layer_name)}" is incompatible with the layer: expected shape={ag__.ld(spec).shape}, found shape={ag__.converted_call(ag__.ld(display_shape), (ag__.ld(x).shape,), None, fscope)}',), None, fscope)
+ValueError: in user code:
+
+    File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/training.py", line 2436, in predict_function  *
+        return step_function(self, iterator)
+    File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/training.py", line 2409, in run_step  *
+        outputs = model.predict_step(data)
+    File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/training.py", line 2377, in predict_step  *
+        return self(x, training=False)
+    File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/training.py", line 558, in error_handler  *
+        return fn(*args, **kwargs)
+    File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/training.py", line 588, in __call__  *
+        return super().__call__(*args, **kwargs)
+    File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/training.py", line 558, in error_handler  *
+        return fn(*args, **kwargs)
+    File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/base_layer.py", line 1103, in __call__  *
+        input_spec.assert_input_compatibility(
+    File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/input_spec.py", line 298, in assert_input_compatibility  *
+        raise ValueError(
+
+    ValueError: Input 0 of layer "UNet" is incompatible with the layer: expected shape=(None, 256, 256, 3), found shape=(None, 512, 512, 1)
+
+
+=======================================================================
+PREDICTION COMPLETED
+=======================================================================
+Job finished on Fri Oct 10 05:20:27 PM +08 2025
+Exit code: 1 ✗ ERROR
+
+Check the output above for error messages
+
+=======================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-10 17:20:27.740006:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 281775.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:36
+	Memory: Requested(240gb), Used(3031656kb)
+	Vmem Used: 64008768kb
+	Walltime: Requested(02:00:00), Used(00:00:21)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-070[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
