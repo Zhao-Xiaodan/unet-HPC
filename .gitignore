@@ -1,8 +1,9 @@
-\[99\]Archive/
 data/
 dataset/
+dataset_full_stack/
+dataset_microscope/
+test_images/
 
-**/*.png
 **/*.tif
 **/*.npy
 **/*.hdf5
