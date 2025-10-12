@@ -1,0 +1,12 @@
+{
+  "architecture": "attention_resunet",
+  "batch_size": 8,
+  "dropout": 0.3,
+  "loss_function": "focal",
+  "learning_rate": 5e-05,
+  "best_val_jacard": 0.1677212119102478,
+  "best_epoch": 4,
+  "total_epochs": 34,
+  "final_val_jacard": 0.057369641959667206,
+  "checkpoint_path": "hyperparam_comprehensive_20251011_031111/model_attention_resunet_bs8_dr0.3_focal.hdf5"
+}

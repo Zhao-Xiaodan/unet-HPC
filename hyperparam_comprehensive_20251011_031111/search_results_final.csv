@@ -1,0 +1,10 @@
+architecture,batch_size,dropout,loss_function,learning_rate,best_val_jacard,best_epoch,total_epochs,final_val_jacard,checkpoint_path
+attention_resunet,8,0.3,focal,5e-05,0.1677212119102478,4,34,0.057369641959667206,hyperparam_comprehensive_20251011_031111/model_attention_resunet_bs8_dr0.3_focal.hdf5
+unet,8,0.3,focal_tversky,5e-05,0.1522311270236969,2,32,0.028445150703191757,hyperparam_comprehensive_20251011_031111/model_unet_bs8_dr0.3_focal_tversky.hdf5
+unet,8,0.3,combined_tversky,5e-05,0.1499732881784439,1,31,0.0223239678889513,hyperparam_comprehensive_20251011_031111/model_unet_bs8_dr0.3_combined_tversky.hdf5
+unet,8,0.3,focal_tversky,5e-05,0.149908646941185,1,31,0.013788551092147827,hyperparam_comprehensive_20251011_031111/model_unet_bs8_dr0.3_focal_tversky.hdf5
+attention_resunet,8,0.3,combined_tversky,5e-05,0.14273235201835632,1,31,0.0015259068459272385,hyperparam_comprehensive_20251011_031111/model_attention_resunet_bs8_dr0.3_combined_tversky.hdf5
+attention_resunet,8,0.3,focal_tversky,5e-05,0.13676375150680542,1,31,0.001792999217286706,hyperparam_comprehensive_20251011_031111/model_attention_resunet_bs8_dr0.3_focal_tversky.hdf5
+attention_resunet,8,0.3,focal_tversky,5e-05,0.1348726898431778,1,31,0.0027223415672779083,hyperparam_comprehensive_20251011_031111/model_attention_resunet_bs8_dr0.3_focal_tversky.hdf5
+resunet,8,0.3,combined_tversky,5e-05,0.13286469876766205,1,31,0.0029537619557231665,hyperparam_comprehensive_20251011_031111/model_resunet_bs8_dr0.3_combined_tversky.hdf5
+resunet,8,0.3,focal_tversky,5e-05,0.1294965296983719,1,31,0.0021202145144343376,hyperparam_comprehensive_20251011_031111/model_resunet_bs8_dr0.3_focal_tversky.hdf5
