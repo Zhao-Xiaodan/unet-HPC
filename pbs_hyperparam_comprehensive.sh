@@ -12,9 +12,14 @@
 #
 # Tests combinations of:
 # - Architectures: U-Net, ResU-Net, Attention ResU-Net
-# - Batch Sizes: 8, 16, 32 (memory-optimized for 512×512)
+# - Batch Sizes: 4, 6, 8 (reduced due to OOM at 512×512)
 # - Loss Functions: Focal, Combined, Focal Tversky, Combined Tversky
 # - Dataset: dataset_shrunk_masks (512×512)
+#
+# Memory optimizations:
+# - Mixed precision training (FP16) reduces memory by ~40%
+# - Smaller batch sizes (4-8 instead of 8-32)
+# - Aggressive memory cleanup between experiments
 #
 # Fixed parameters (based on previous analysis):
 # - Learning Rate: 5e-5 (lower for stability with variable batch sizes)
@@ -34,9 +39,15 @@ export TF_CPP_MIN_LOG_LEVEL=1
 export TF_ENABLE_ONEDNN_OPTS=1
 export CUDA_VISIBLE_DEVICES=0
 
-# Memory optimization for large batch sizes
+# Memory optimization settings (CRITICAL for preventing OOM)
 export TF_GPU_ALLOCATOR=cuda_malloc_async
 export TF_FORCE_GPU_ALLOW_GROWTH=true
+export TF_GPU_THREAD_MODE=gpu_private
+export TF_GPU_THREAD_COUNT=2
+
+# Enable memory pooling and fragmentation reduction
+export TF_CUDA_MALLOC_ASYNC_SUPPORTED_PREALLOC_SIZE_BYTES=536870912  # 512MB preallocate
+export TF_CUDA_MALLOC_ASYNC_SUPPORTED_MAX_ALLOCATION_SIZE_BYTES=6442450944  # 6GB max per allocation
 
 # Load required modules
 module load singularity
@@ -85,7 +96,7 @@ echo "Search Type: Random (30 combinations)"
 echo ""
 echo "Search Space:"
 echo "  Architectures: U-Net, ResU-Net, Attention ResU-Net"
-echo "  Batch Sizes: 8, 16, 32"
+echo "  Batch Sizes: 4, 6, 8 (reduced due to OOM)"
 echo "  Loss Functions: focal, combined, focal_tversky, combined_tversky"
 echo "  Dropout: 0.3 (fixed)"
 echo ""
@@ -94,6 +105,11 @@ echo "  Learning Rate: 5e-5"
 echo "  Early Stopping Patience: 30 epochs"
 echo "  Image Size: 512×512"
 echo "  Validation Split: 15%"
+echo ""
+echo "Memory Optimizations:"
+echo "  Mixed Precision: FP16 (saves ~40% memory)"
+echo "  Aggressive cleanup between experiments"
+echo "  GPU memory growth enabled"
 echo "=============================================================================="
 echo ""
 

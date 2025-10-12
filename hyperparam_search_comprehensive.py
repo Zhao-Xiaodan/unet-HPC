@@ -41,9 +41,12 @@ VALIDATION_SPLIT = 0.15
 LEARNING_RATE = 5e-5  # Lower LR for stability with small batches (from analysis)
 
 # Hyperparameter search space
+# NOTE: Reduced batch sizes due to OOM at 512×512 with large models (34M params)
+# AttentionResUNet with BS=16+ causes OOM (requires ~5-6GB VRAM per batch)
+# Solution: Use BS=4-8 with mixed precision training (FP16) to reduce memory by ~40%
 SEARCH_SPACE = {
     'architecture': ['unet', 'resunet', 'attention_resunet'],
-    'batch_size': [8, 16, 32],  # Larger batch sizes for gradient stability
+    'batch_size': [4, 6, 8],  # Conservative sizes to prevent OOM
     'loss_function': ['focal', 'combined', 'focal_tversky', 'combined_tversky'],
     'dropout': [0.3],  # Fixed at 0.3 (worked well in previous search)
 }
@@ -164,6 +167,17 @@ def train_with_hyperparameters(X_train, X_val, y_train, y_val, hyperparams, outp
     print(f"Training: Arch={arch}, BS={bs}, Dropout={dropout}, Loss={loss_name}")
     print(f"{'='*80}\n")
 
+    # Enable mixed precision for memory efficiency (reduces memory by ~40%)
+    try:
+        from tensorflow.keras import mixed_precision
+        policy = mixed_precision.Policy('mixed_float16')
+        mixed_precision.set_global_policy(policy)
+        print("✓ Mixed precision training enabled (FP16)")
+        print("  Expected memory savings: ~40%")
+    except Exception as e:
+        print(f"⚠ Mixed precision not available: {e}")
+        print("  Continuing with FP32")
+
     # Build model
     input_shape = (SIZE, SIZE, IMG_CHANNELS)
     model = get_model(arch, input_shape, NUM_CLASSES=1, dropout_rate=dropout, batch_norm=True)
@@ -243,9 +257,18 @@ def train_with_hyperparameters(X_train, X_val, y_train, y_val, hyperparams, outp
 
     print(f"\nBest Val Jaccard: {best_val_jacard:.4f} at epoch {best_epoch}")
 
-    # Clear session to free memory
+    # Clear session and force garbage collection to free memory
     keras.backend.clear_session()
     del model
+    import gc
+    gc.collect()
+
+    # Reset mixed precision policy to default to avoid affecting next model
+    try:
+        from tensorflow.keras import mixed_precision
+        mixed_precision.set_global_policy('float32')
+    except:
+        pass
 
     return {
         'architecture': arch,
