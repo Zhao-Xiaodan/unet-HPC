@@ -1,0 +1,12 @@
+{
+  "architecture": "resunet",
+  "batch_size": 8,
+  "dropout": 0.3,
+  "loss_function": "combined_tversky",
+  "learning_rate": 5e-05,
+  "best_val_jacard": 0.30652913451194763,
+  "best_epoch": 28,
+  "total_epochs": 58,
+  "final_val_jacard": 0.16371871531009674,
+  "checkpoint_path": "hyperparam_comprehensive_20251012_005054/model_resunet_bs8_dr0.3_combined_tversky.hdf5"
+}
