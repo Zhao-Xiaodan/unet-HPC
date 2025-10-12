@@ -1,0 +1,64 @@
+========================================================================
+PREDICTION AND DENSITY ANALYSIS
+========================================================================
+Start time: Sun Oct 12 03:37:23 PM +08 2025
+Job ID: 285422.stdct-mgmt-02
+Node: GN-A40-075
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================================================
+
+Environment Configuration:
+  CUDA_VISIBLE_DEVICES: 0
+  TF_GPU_ALLOCATOR: cuda_malloc_async
+  TF_FORCE_GPU_ALLOW_GROWTH: true
+========================================================================
+
+Loading modules...
+✓ Singularity loaded: apptainer version 1.3.1-1.el9
+✓ TensorFlow container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+========================================================================
+
+Verifying input files...
+✓ Test images directory: ./test_images
+  Found 11 test images
+✓ Found: predict_with_density_analysis.py
+✓ Found: model_architectures.py
+✓ Found: loss_functions.py
+========================================================================
+
+Starting prediction and density analysis...
+Time: Sun Oct 12 03:37:23 PM +08 2025
+
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/predict_with_density_analysis.py", line 36, in <module>
+    from model_architectures import build_unet, build_resunet, build_attention_resunet
+ImportError: cannot import name 'build_unet' from 'model_architectures' (/scratch/phyzxi/unet-HPC/model_architectures.py)
+
+========================================================================
+✗ PREDICTION AND ANALYSIS FAILED (exit code: 1)
+End time: Sun Oct 12 03:37:32 PM +08 2025
+========================================================================
+
+Output Summary:
+----------------
+⚠ No output directory found
+
+========================================================================
+Job completed: Sun Oct 12 03:37:32 PM +08 2025
+========================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-12 15:37:32.888521:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 285422.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:16
+	Memory: Requested(240gb), Used(887264kb)
+	Vmem Used: 6130424kb
+	Walltime: Requested(04:00:00), Used(00:00:10)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-075[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
