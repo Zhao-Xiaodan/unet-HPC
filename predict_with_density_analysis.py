@@ -33,8 +33,8 @@ from tensorflow import keras
 import tensorflow.keras.backend as K
 
 # Import model architectures and loss functions
-from model_architectures import build_unet, build_resunet, build_attention_resunet
-from loss_functions import get_loss_function, jacard_coef
+from model_architectures import get_model, UNet, ResUNet, AttentionResUNet
+from loss_functions import get_loss_function, jacard_coef, dice_coef
 
 # Configuration
 CONFIG = {
@@ -168,9 +168,10 @@ def load_model_with_custom_objects(model_path, architecture):
     """Load model with custom loss functions"""
     print(f"Loading {architecture} model from: {model_path}")
 
-    # Custom objects for loading (support all loss functions)
+    # Custom objects for loading (support all loss functions and metrics)
     custom_objects = {
         'jacard_coef': jacard_coef,
+        'dice_coef': dice_coef,
         'combined_tversky_focal_loss': get_loss_function('combined_tversky'),
         'combined_dice_focal_loss': get_loss_function('combined'),
         'focal_loss': get_loss_function('focal'),
@@ -186,19 +187,19 @@ def load_model_with_custom_objects(model_path, architecture):
         print(f"✗ Failed to load {architecture} model: {e}")
         print(f"  Rebuilding model architecture and loading weights...")
 
-        # Rebuild architecture
+        # Rebuild architecture using get_model()
         img_height = CONFIG['img_height']
         img_width = CONFIG['img_width']
         img_channels = CONFIG['img_channels']
+        input_shape = (img_height, img_width, img_channels)
 
-        if architecture == 'unet':
-            model = build_unet(img_height, img_width, img_channels)
-        elif architecture == 'resunet':
-            model = build_resunet(img_height, img_width, img_channels)
-        elif architecture == 'attention_resunet':
-            model = build_attention_resunet(img_height, img_width, img_channels)
-        else:
-            raise ValueError(f"Unknown architecture: {architecture}")
+        model = get_model(
+            model_name=architecture,
+            input_shape=input_shape,
+            NUM_CLASSES=1,
+            dropout_rate=0.3,
+            batch_norm=True
+        )
 
         # Load weights only
         model.load_weights(model_path)
