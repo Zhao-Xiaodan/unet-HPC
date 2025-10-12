@@ -1,0 +1,17 @@
+{
+  "config": {
+    "architecture": "unet",
+    "batch_size": 4,
+    "dropout": 0.3,
+    "loss_function": "combined"
+  },
+  "final_loss": 0.40974605083465576,
+  "final_val_loss": 0.7112798690795898,
+  "final_val_jacard": 0.029847299680113792,
+  "best_val_jacard": 0.13840393722057343,
+  "best_epoch": 0,
+  "nan_detected": false,
+  "criteria_met": 2,
+  "total_criteria": 4,
+  "validation_passed": false
+}
