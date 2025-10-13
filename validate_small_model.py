@@ -48,7 +48,7 @@ import sys
 sys.path.append('/Users/xiaodan/unetCNN/unet-HPC')
 from model_architectures import get_model
 from loss_functions_fixed import (
-    combined_bce_dice_loss,
+    combined_dice_focal_loss,
     jacard_coef,
     dice_coef
 )
@@ -244,8 +244,8 @@ def train_model(config, X_train, y_train, X_val, y_val, save_dir):
     print(f"   Parameters per training image: {total_params/len(X_train):,.0f}")
     print(f"   🎯 Expected: ~2M params (vs Phase 1's 31M params)")
 
-    # Select loss function
-    loss_fn = combined_bce_dice_loss
+    # Select loss function (same as Phase 1: Dice + Focal)
+    loss_fn = combined_dice_focal_loss
 
     # Compile with GRADIENT CLIPPING
     model.compile(
