@@ -108,11 +108,11 @@ fi
 echo "✓ validate_small_model.py"
 
 # Check model definitions
-if [ ! -f "models_224_225_226.py" ]; then
-    echo "❌ ERROR: models_224_225_226.py not found"
+if [ ! -f "model_architectures.py" ]; then
+    echo "❌ ERROR: model_architectures.py not found"
     exit 1
 fi
-echo "✓ models_224_225_226.py"
+echo "✓ model_architectures.py"
 
 # Check loss functions
 if [ ! -f "loss_functions_fixed.py" ]; then
