@@ -1,0 +1,15 @@
+{
+  "fold": 3,
+  "train_samples": 1584,
+  "val_samples": 396,
+  "train_density": 0.05616714805364609,
+  "val_density": 0.056849971413612366,
+  "best_val_jacard": 0.7517410516738892,
+  "best_epoch": 18,
+  "final_val_jacard": 0.4796503186225891,
+  "final_train_jacard": 0.9091933369636536,
+  "min_val_jacard": 0.0218065362423658,
+  "overfitting_gap": 1.8955336870714112,
+  "nan_detected": false,
+  "epochs_trained": 20
+}
