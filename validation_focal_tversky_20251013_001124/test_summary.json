@@ -1,0 +1,18 @@
+{
+  "config": {
+    "architecture": "unet",
+    "batch_size": 4,
+    "dropout": 0.3,
+    "loss_function": "focal_tversky"
+  },
+  "best_val_jacard": 0.1325957477092743,
+  "final_val_jacard": 0.020758135244250298,
+  "min_val_jacard": 0.006597388535737991,
+  "best_epoch": 0,
+  "degradation": 0.9502443430523636,
+  "overfitting_gap": 15.108984131009196,
+  "nan_detected": false,
+  "criteria_met": 1,
+  "total_criteria": 5,
+  "test_passed": false
+}
