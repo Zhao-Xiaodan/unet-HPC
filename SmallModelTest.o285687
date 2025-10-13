@@ -1,0 +1,45 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    SMALL MODEL VALIDATION - PRIORITY 1                     ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+Hypothesis: Reducing model complexity will improve validation performance
+Approach: filters=64→16 (31M→2M params), dropout=0.3→0.5
+
+Starting at: Mon Oct 13 08:40:06 AM +08 2025
+
+─────────────────────────────────────────────────────────────────────────────
+1. Environment Setup
+─────────────────────────────────────────────────────────────────────────────
+✓ Working directory: /home/svu/phyzxi/scratch/unet-HPC
+✓ GPU Configuration:
+  - Precision: FP32 (mixed precision disabled)
+  - GPU Memory: 4GB max (reduced for smaller model)
+  - CUDA device: 0
+
+─────────────────────────────────────────────────────────────────────────────
+2. Loading Modules
+─────────────────────────────────────────────────────────────────────────────
+✓ Singularity loaded
+✓ TensorFlow container: tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+
+─────────────────────────────────────────────────────────────────────────────
+3. Verifying Required Files
+─────────────────────────────────────────────────────────────────────────────
+✓ validate_small_model.py
+❌ ERROR: models_224_225_226.py not found
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-13 08:40:07.437169:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 285687.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:00
+	Memory: Requested(240gb), Used(20380kb)
+	Vmem Used: 0kb
+	Walltime: Requested(02:00:00), Used(00:00:02)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-071[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
