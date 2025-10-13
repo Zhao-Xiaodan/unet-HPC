@@ -136,7 +136,7 @@ def attention_gate(x, g, filters, name_prefix="attn"):
 # Model 1: Standard U-Net
 # ==============================================================================
 
-def UNet(input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=True):
+def UNet(input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=True, filters=64):
     """
     Standard U-Net architecture
 
@@ -145,6 +145,8 @@ def UNet(input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=True):
         NUM_CLASSES: Number of output classes (default: 1 for binary segmentation)
         dropout_rate: Dropout rate (default: 0.3)
         batch_norm: Use batch normalization (default: True)
+        filters: Base number of filters in first layer (default: 64)
+                 Each subsequent layer doubles: filters, 2*filters, 4*filters, etc.
 
     Returns:
         Keras model
@@ -158,37 +160,37 @@ def UNet(input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=True):
     inputs = layers.Input(input_shape, name="input")
 
     # Encoder
-    conv1 = conv_block(inputs, 64, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc1")
+    conv1 = conv_block(inputs, filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc1")
     pool1 = layers.MaxPooling2D((2, 2), name="pool1")(conv1)
 
-    conv2 = conv_block(pool1, 128, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc2")
+    conv2 = conv_block(pool1, 2*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc2")
     pool2 = layers.MaxPooling2D((2, 2), name="pool2")(conv2)
 
-    conv3 = conv_block(pool2, 256, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc3")
+    conv3 = conv_block(pool2, 4*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc3")
     pool3 = layers.MaxPooling2D((2, 2), name="pool3")(conv3)
 
-    conv4 = conv_block(pool3, 512, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc4")
+    conv4 = conv_block(pool3, 8*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc4")
     pool4 = layers.MaxPooling2D((2, 2), name="pool4")(conv4)
 
     # Bridge
-    bridge = conv_block(pool4, 1024, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="bridge")
+    bridge = conv_block(pool4, 16*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="bridge")
 
     # Decoder
     up1 = layers.UpSampling2D((2, 2), name="up1")(bridge)
     concat1 = layers.Concatenate(axis=3, name="concat1")([up1, conv4])
-    conv5 = conv_block(concat1, 512, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec1")
+    conv5 = conv_block(concat1, 8*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec1")
 
     up2 = layers.UpSampling2D((2, 2), name="up2")(conv5)
     concat2 = layers.Concatenate(axis=3, name="concat2")([up2, conv3])
-    conv6 = conv_block(concat2, 256, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec2")
+    conv6 = conv_block(concat2, 4*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec2")
 
     up3 = layers.UpSampling2D((2, 2), name="up3")(conv6)
     concat3 = layers.Concatenate(axis=3, name="concat3")([up3, conv2])
-    conv7 = conv_block(concat3, 128, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec3")
+    conv7 = conv_block(concat3, 2*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec3")
 
     up4 = layers.UpSampling2D((2, 2), name="up4")(conv7)
     concat4 = layers.Concatenate(axis=3, name="concat4")([up4, conv1])
-    conv8 = conv_block(concat4, 64, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec4")
+    conv8 = conv_block(concat4, filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec4")
 
     # Output
     outputs = layers.Conv2D(NUM_CLASSES, (1, 1), activation='sigmoid', name="output")(conv8)
@@ -202,7 +204,7 @@ def UNet(input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=True):
 # Model 2: Residual U-Net (ResU-Net)
 # ==============================================================================
 
-def ResUNet(input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=True):
+def ResUNet(input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=True, filters=64):
     """
     Residual U-Net with residual connections in encoder/decoder blocks
 
@@ -213,6 +215,7 @@ def ResUNet(input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=True):
         NUM_CLASSES: Number of output classes (default: 1)
         dropout_rate: Dropout rate (default: 0.3)
         batch_norm: Use batch normalization (default: True)
+        filters: Base number of filters in first layer (default: 64)
 
     Returns:
         Keras model
@@ -220,37 +223,37 @@ def ResUNet(input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=True):
     inputs = layers.Input(input_shape, name="input")
 
     # Encoder
-    conv1 = res_conv_block(inputs, 64, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc1")
+    conv1 = res_conv_block(inputs, filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc1")
     pool1 = layers.MaxPooling2D((2, 2), name="pool1")(conv1)
 
-    conv2 = res_conv_block(pool1, 128, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc2")
+    conv2 = res_conv_block(pool1, 2*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc2")
     pool2 = layers.MaxPooling2D((2, 2), name="pool2")(conv2)
 
-    conv3 = res_conv_block(pool2, 256, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc3")
+    conv3 = res_conv_block(pool2, 4*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc3")
     pool3 = layers.MaxPooling2D((2, 2), name="pool3")(conv3)
 
-    conv4 = res_conv_block(pool3, 512, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc4")
+    conv4 = res_conv_block(pool3, 8*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc4")
     pool4 = layers.MaxPooling2D((2, 2), name="pool4")(conv4)
 
     # Bridge
-    bridge = res_conv_block(pool4, 1024, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="bridge")
+    bridge = res_conv_block(pool4, 16*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="bridge")
 
     # Decoder
     up1 = layers.UpSampling2D((2, 2), name="up1")(bridge)
     concat1 = layers.Concatenate(axis=3, name="concat1")([up1, conv4])
-    conv5 = res_conv_block(concat1, 512, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec1")
+    conv5 = res_conv_block(concat1, 8*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec1")
 
     up2 = layers.UpSampling2D((2, 2), name="up2")(conv5)
     concat2 = layers.Concatenate(axis=3, name="concat2")([up2, conv3])
-    conv6 = res_conv_block(concat2, 256, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec2")
+    conv6 = res_conv_block(concat2, 4*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec2")
 
     up3 = layers.UpSampling2D((2, 2), name="up3")(conv6)
     concat3 = layers.Concatenate(axis=3, name="concat3")([up3, conv2])
-    conv7 = res_conv_block(concat3, 128, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec3")
+    conv7 = res_conv_block(concat3, 2*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec3")
 
     up4 = layers.UpSampling2D((2, 2), name="up4")(conv7)
     concat4 = layers.Concatenate(axis=3, name="concat4")([up4, conv1])
-    conv8 = res_conv_block(concat4, 64, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec4")
+    conv8 = res_conv_block(concat4, filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec4")
 
     # Output
     outputs = layers.Conv2D(NUM_CLASSES, (1, 1), activation='sigmoid', name="output")(conv8)
@@ -264,7 +267,7 @@ def ResUNet(input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=True):
 # Model 3: Attention Residual U-Net
 # ==============================================================================
 
-def AttentionResUNet(input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=True):
+def AttentionResUNet(input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=True, filters=64):
     """
     Attention Residual U-Net combining residual connections and attention gates
 
@@ -276,6 +279,7 @@ def AttentionResUNet(input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=Tr
         NUM_CLASSES: Number of output classes (default: 1)
         dropout_rate: Dropout rate (default: 0.3)
         batch_norm: Use batch normalization (default: True)
+        filters: Base number of filters in first layer (default: 64)
 
     Returns:
         Keras model
@@ -283,41 +287,41 @@ def AttentionResUNet(input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=Tr
     inputs = layers.Input(input_shape, name="input")
 
     # Encoder
-    conv1 = res_conv_block(inputs, 64, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc1")
+    conv1 = res_conv_block(inputs, filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc1")
     pool1 = layers.MaxPooling2D((2, 2), name="pool1")(conv1)
 
-    conv2 = res_conv_block(pool1, 128, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc2")
+    conv2 = res_conv_block(pool1, 2*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc2")
     pool2 = layers.MaxPooling2D((2, 2), name="pool2")(conv2)
 
-    conv3 = res_conv_block(pool2, 256, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc3")
+    conv3 = res_conv_block(pool2, 4*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc3")
     pool3 = layers.MaxPooling2D((2, 2), name="pool3")(conv3)
 
-    conv4 = res_conv_block(pool3, 512, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc4")
+    conv4 = res_conv_block(pool3, 8*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="enc4")
     pool4 = layers.MaxPooling2D((2, 2), name="pool4")(conv4)
 
     # Bridge
-    bridge = res_conv_block(pool4, 1024, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="bridge")
+    bridge = res_conv_block(pool4, 16*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="bridge")
 
     # Decoder with Attention Gates
     up1 = layers.UpSampling2D((2, 2), name="up1")(bridge)
-    attn1 = attention_gate(conv4, up1, 512, name_prefix="attn1")
+    attn1 = attention_gate(conv4, up1, 8*filters, name_prefix="attn1")
     concat1 = layers.Concatenate(axis=3, name="concat1")([up1, attn1])
-    conv5 = res_conv_block(concat1, 512, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec1")
+    conv5 = res_conv_block(concat1, 8*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec1")
 
     up2 = layers.UpSampling2D((2, 2), name="up2")(conv5)
-    attn2 = attention_gate(conv3, up2, 256, name_prefix="attn2")
+    attn2 = attention_gate(conv3, up2, 4*filters, name_prefix="attn2")
     concat2 = layers.Concatenate(axis=3, name="concat2")([up2, attn2])
-    conv6 = res_conv_block(concat2, 256, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec2")
+    conv6 = res_conv_block(concat2, 4*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec2")
 
     up3 = layers.UpSampling2D((2, 2), name="up3")(conv6)
-    attn3 = attention_gate(conv2, up3, 128, name_prefix="attn3")
+    attn3 = attention_gate(conv2, up3, 2*filters, name_prefix="attn3")
     concat3 = layers.Concatenate(axis=3, name="concat3")([up3, attn3])
-    conv7 = res_conv_block(concat3, 128, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec3")
+    conv7 = res_conv_block(concat3, 2*filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec3")
 
     up4 = layers.UpSampling2D((2, 2), name="up4")(conv7)
-    attn4 = attention_gate(conv1, up4, 64, name_prefix="attn4")
+    attn4 = attention_gate(conv1, up4, filters, name_prefix="attn4")
     concat4 = layers.Concatenate(axis=3, name="concat4")([up4, attn4])
-    conv8 = res_conv_block(concat4, 64, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec4")
+    conv8 = res_conv_block(concat4, filters, dropout=dropout_rate, batch_norm=batch_norm, name_prefix="dec4")
 
     # Output
     outputs = layers.Conv2D(NUM_CLASSES, (1, 1), activation='sigmoid', name="output")(conv8)
@@ -335,7 +339,7 @@ MODEL_ARCHITECTURES = {
 }
 
 
-def get_model(model_name, input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=True):
+def get_model(model_name, input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_norm=True, filters=64):
     """
     Get model by name
 
@@ -345,6 +349,8 @@ def get_model(model_name, input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_no
         NUM_CLASSES: Number of output classes
         dropout_rate: Dropout rate
         batch_norm: Use batch normalization
+        filters: Base number of filters in first layer (default: 64)
+                 Reduces model complexity when set lower (e.g., 16, 32)
 
     Returns:
         Keras model
@@ -357,7 +363,7 @@ def get_model(model_name, input_shape, NUM_CLASSES=1, dropout_rate=0.3, batch_no
                         f"Available: {list(MODEL_ARCHITECTURES.keys())}")
 
     model_fn = MODEL_ARCHITECTURES[model_name]
-    return model_fn(input_shape, NUM_CLASSES, dropout_rate, batch_norm)
+    return model_fn(input_shape, NUM_CLASSES, dropout_rate, batch_norm, filters)
 
 
 if __name__ == '__main__':
