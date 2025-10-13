@@ -1,0 +1,164 @@
+{
+  "config": {
+    "architecture": "unet",
+    "batch_size": 4,
+    "dropout": 0.3,
+    "loss_function": "combined",
+    "filters": 64,
+    "n_folds": 5
+  },
+  "n_folds": 5,
+  "statistics": {
+    "best_val_jacard": {
+      "mean": 0.6096954047679901,
+      "std": 0.11543559612451836,
+      "min": 0.4989798963069916,
+      "max": 0.7517410516738892,
+      "values": [
+        0.5383632183074951,
+        0.5431566834449768,
+        0.7517410516738892,
+        0.4989798963069916,
+        0.7162361741065979
+      ]
+    },
+    "final_val_jacard": {
+      "mean": 0.48084983229637146,
+      "std": 0.13088951795544299,
+      "min": 0.3494308888912201,
+      "max": 0.6989838480949402,
+      "values": [
+        0.4410059750080108,
+        0.3494308888912201,
+        0.4796503186225891,
+        0.435178130865097,
+        0.6989838480949402
+      ]
+    },
+    "overfitting_gap": {
+      "mean": 1.9326110290221934,
+      "std": 0.4262259119741178,
+      "min": 1.2877443623063796,
+      "max": 2.480326960743133,
+      "values": [
+        1.9848080496266147,
+        2.480326960743133,
+        1.8955336870714112,
+        2.0146420853634277,
+        1.2877443623063796
+      ]
+    },
+    "best_epoch": {
+      "mean": 9.6,
+      "std": 5.224940191045253,
+      "values": [
+        8,
+        5,
+        18,
+        6,
+        11
+      ]
+    },
+    "epochs_trained": {
+      "mean": 14.8,
+      "values": [
+        14,
+        11,
+        20,
+        12,
+        17
+      ]
+    }
+  },
+  "fold_results": [
+    {
+      "fold": 1,
+      "train_samples": 1584,
+      "val_samples": 396,
+      "train_density": 0.05629850551486015,
+      "val_density": 0.0563245452940464,
+      "best_val_jacard": 0.5383632183074951,
+      "best_epoch": 8,
+      "final_val_jacard": 0.4410059750080108,
+      "final_train_jacard": 0.8753122091293335,
+      "min_val_jacard": 0.0566397681832313,
+      "overfitting_gap": 1.9848080496266147,
+      "nan_detected": false,
+      "epochs_trained": 14
+    },
+    {
+      "fold": 2,
+      "train_samples": 1584,
+      "val_samples": 396,
+      "train_density": 0.05650586634874344,
+      "val_density": 0.05549509823322296,
+      "best_val_jacard": 0.5431566834449768,
+      "best_epoch": 5,
+      "final_val_jacard": 0.3494308888912201,
+      "final_train_jacard": 0.8667028546333313,
+      "min_val_jacard": 0.1143296957015991,
+      "overfitting_gap": 2.480326960743133,
+      "nan_detected": false,
+      "epochs_trained": 11
+    },
+    {
+      "fold": 3,
+      "train_samples": 1584,
+      "val_samples": 396,
+      "train_density": 0.05616714805364609,
+      "val_density": 0.056849971413612366,
+      "best_val_jacard": 0.7517410516738892,
+      "best_epoch": 18,
+      "final_val_jacard": 0.4796503186225891,
+      "final_train_jacard": 0.9091933369636536,
+      "min_val_jacard": 0.0218065362423658,
+      "overfitting_gap": 1.8955336870714112,
+      "nan_detected": false,
+      "epochs_trained": 20
+    },
+    {
+      "fold": 4,
+      "train_samples": 1584,
+      "val_samples": 396,
+      "train_density": 0.05611421540379524,
+      "val_density": 0.057061705738306046,
+      "best_val_jacard": 0.4989798963069916,
+      "best_epoch": 6,
+      "final_val_jacard": 0.435178130865097,
+      "final_train_jacard": 0.8767281770706177,
+      "min_val_jacard": 0.1296260207891464,
+      "overfitting_gap": 2.0146420853634277,
+      "nan_detected": false,
+      "epochs_trained": 12
+    },
+    {
+      "fold": 5,
+      "train_samples": 1584,
+      "val_samples": 396,
+      "train_density": 0.056432828307151794,
+      "val_density": 0.05578725039958954,
+      "best_val_jacard": 0.7162361741065979,
+      "best_epoch": 11,
+      "final_val_jacard": 0.6989838480949402,
+      "final_train_jacard": 0.900112509727478,
+      "min_val_jacard": 0.0350039638578891,
+      "overfitting_gap": 1.2877443623063796,
+      "nan_detected": false,
+      "epochs_trained": 17
+    }
+  ],
+  "comparison": {
+    "phase1_best_jacard": 0.138,
+    "cv_mean_best_jacard": 0.6096954047679901,
+    "improvement": 3.4180826432463047,
+    "phase1_gap": 10.5,
+    "cv_mean_gap": 1.9326110290221934,
+    "gap_change": -8.567388970977806
+  },
+  "diagnosis": {
+    "split_bias": true,
+    "epoch_1_problem_persists": false,
+    "high_variance": false,
+    "coefficient_of_variation": 0.189
+  }
+}
