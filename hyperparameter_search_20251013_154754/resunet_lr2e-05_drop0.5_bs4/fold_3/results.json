@@ -1,0 +1,20 @@
+{
+  "architecture": "resunet",
+  "config": {
+    "learning_rate": 2e-05,
+    "dropout": 0.5,
+    "batch_size": 4
+  },
+  "config_name": "resunet_lr2e-05_drop0.5_bs4",
+  "fold": 3,
+  "train_samples": 1320,
+  "val_samples": 660,
+  "best_val_jacard": 0.238572895526886,
+  "best_val_dice": 0.3804931938648224,
+  "best_epoch": 10,
+  "final_val_jacard": 0.1330127567052841,
+  "final_train_jacard": 0.8675270676612854,
+  "overfitting_gap": 6.522134336208535,
+  "nan_detected": false,
+  "epochs_trained": 19
+}
