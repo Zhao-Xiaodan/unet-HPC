@@ -29,6 +29,7 @@ from pathlib import Path
 from datetime import datetime
 import tensorflow as tf
 from tensorflow import keras
+from tqdm import tqdm
 
 # Dummy placeholders if model architecture files are not available.
 # Replace with your actual imports.
@@ -66,7 +67,8 @@ def create_output_dirs(base_dir):
         (subdirs['representative_masks'] / arch).mkdir(parents=True, exist_ok=True)
 
     for path in subdirs.values():
-        path.mkdir(parents=True, exist_ok=True)
+        if not path.exists():
+            path.mkdir(parents=True, exist_ok=True)
 
     print(f"✓ Created output directory: {base}")
     return subdirs
@@ -81,9 +83,10 @@ def rescale_image_full_range(img):
         img = 255.0 * (img - img_min) / (img_max - img_min)
     return img.astype(np.uint8)
 
-def apply_clahe_otsu(img_gray, clip=2.0, tile_size=(8, 8)):
+# FIXED: The function signature was updated to match the keys in CONFIG['clahe'].
+def apply_clahe_otsu(img_gray, clipLimit=2.0, tileGridSize=(8, 8)):
     """Apply CLAHE + OTSU thresholding to calculate particle density."""
-    clahe = cv2.createCLAHE(clipLimit=clip, tileGridSize=tile_size)
+    clahe = cv2.createCLAHE(clipLimit=clipLimit, tileGridSize=tileGridSize)
     clahe_img = clahe.apply(img_gray)
     _, binary_mask = cv2.threshold(clahe_img, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
     density = np.count_nonzero(binary_mask) / binary_mask.size
@@ -158,7 +161,7 @@ def load_model_with_custom_objects(model_path, architecture):
 def predict_on_tiles(model, tiles):
     """Run model prediction on a list of image tiles."""
     predictions = []
-    for tile in tqdm(tiles, desc="  Predicting tiles", leave=False):
+    for tile in tqdm(tiles, desc="  Predicting tiles", leave=False, ncols=80):
         tile_input = tile[np.newaxis, ..., np.newaxis]
         pred = model.predict(tile_input, verbose=0)
         pred_mask = (pred[0, ..., 0] > 0.5).astype(np.uint8) * 255
