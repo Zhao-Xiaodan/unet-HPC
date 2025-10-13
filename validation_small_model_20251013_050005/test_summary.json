@@ -1,0 +1,31 @@
+{
+  "config": {
+    "architecture": "unet",
+    "batch_size": 4,
+    "dropout": 0.5,
+    "loss_function": "combined",
+    "filters": 16
+  },
+  "final_loss": 0.4166134595870971,
+  "final_train_jacard": 0.2688586413860321,
+  "final_val_jacard": 0.0607877485454082,
+  "best_val_jacard": 0.0759824067354202,
+  "min_val_jacard": 0.0586466155946254,
+  "best_epoch": 0,
+  "overfitting_gap": 4.4229083626151375,
+  "degradation": 0.19997600553667128,
+  "nan_detected": false,
+  "criteria_met": 3,
+  "total_criteria": 5,
+  "test_passed": false,
+  "comparison": {
+    "phase1_best_jacard": 0.138,
+    "focal_tversky_best_jacard": 0.133,
+    "this_test_best_jacard": 0.0759824067354202,
+    "improvement_vs_phase1": -0.44940284974333194,
+    "phase1_gap": 10.5,
+    "focal_tversky_gap": 15.1,
+    "this_test_gap": 4.4229083626151375,
+    "gap_reduction": 6.0770916373848625
+  }
+}
