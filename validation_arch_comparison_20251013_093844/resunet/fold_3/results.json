@@ -1,0 +1,31 @@
+{
+  "architecture": "resunet",
+  "fold": 3,
+  "train_samples": 1584,
+  "val_samples": 396,
+  "train_density": 0.05616714805364609,
+  "val_density": 0.056849971413612366,
+  "total_parameters": 33156929,
+  "trainable_parameters": 33139265,
+  "best_val_jacard": 0.4089708030223846,
+  "best_val_dice": 0.5664089322090149,
+  "best_epoch": 2,
+  "final_val_jacard": 0.2540329694747925,
+  "final_train_jacard": 0.8941652774810791,
+  "min_val_jacard": 0.1942804455757141,
+  "overfitting_gap": 3.519878854031215,
+  "nan_detected": false,
+  "epochs_trained": 8,
+  "total_training_time_sec": 374.6355023384094,
+  "avg_epoch_time_sec": 44.97476968169212,
+  "epoch_times": [
+    63.272393226623535,
+    42.58689522743225,
+    42.322651386260986,
+    42.31613898277283,
+    42.32073521614075,
+    42.313908100128174,
+    42.338600635528564,
+    42.3268346786499
+  ]
+}
