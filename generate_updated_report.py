@@ -1,10 +1,33 @@
-# Hyperparameter Search Results - Complete Analysis
+#!/usr/bin/env python3
+"""
+Generate Updated Hyperparameter Search Report
+==============================================
+
+Creates comprehensive markdown report based on complete dataset
+(19 configurations instead of previous 12).
+
+Author: Claude Code
+Date: October 14, 2025
+"""
+
+import json
+from pathlib import Path
+from datetime import datetime
+
+# Load summary
+SUMMARY_PATH = Path('./hyperparameter_search_20251013_154754/hyperparameter_search_summary.json')
+OUTPUT_PATH = Path('./hyperparameter_search_20251013_154754/REPORT.md')
+
+with open(SUMMARY_PATH, 'r') as f:
+    summary = json.load(f)
+
+# Generate report
+report = f"""# Hyperparameter Search Results - Complete Analysis
 
 **Date:** October 14, 2025 (Updated with complete dataset)
 **Experiment:** `hyperparameter_search_20251013_154754`
-**Configurations Analyzed:** 19 (was 12 in initial analysis)
+**Configurations Analyzed:** {summary['n_configurations']} (was 12 in initial analysis)
 **Total Training Runs:** 57 (19 configs × 3 folds)
-**Input Image Size:** 256×256 pixels
 
 ---
 
@@ -12,34 +35,34 @@
 
 ### Best Configuration Found
 
-**Configuration:** `resunet_lr5e-05_drop0.3_bs8`
+**Configuration:** `{summary['best_config']['config_name']}`
 
 | Parameter | Value |
 |-----------|-------|
-| **Architecture** | RESUNET |
-| **Learning Rate** | 5e-05 |
-| **Dropout** | 0.3 |
-| **Batch Size** | 8 |
+| **Architecture** | {summary['best_config']['architecture'].upper()} |
+| **Learning Rate** | {summary['best_config']['learning_rate']:.0e} |
+| **Dropout** | {summary['best_config']['dropout']} |
+| **Batch Size** | {summary['best_config']['batch_size']} |
 
 ### Performance
 
 | Metric | Value |
 |--------|-------|
-| **Mean Jaccard** | **0.6005** ± 0.1129 |
-| **Min Jaccard** | 0.4421 |
-| **Max Jaccard** | 0.6971 |
-| **Mean Best Epoch** | 16.0 |
-| **Mean Overfitting Gap** | 2.67% |
+| **Mean Jaccard** | **{summary['best_config']['mean_best_jacard']:.4f}** ± {summary['best_config']['std_best_jacard']:.4f} |
+| **Min Jaccard** | {summary['best_config']['min_best_jacard']:.4f} |
+| **Max Jaccard** | {summary['best_config']['max_best_jacard']:.4f} |
+| **Mean Best Epoch** | {summary['best_config']['mean_best_epoch']:.1f} |
+| **Mean Overfitting Gap** | {summary['best_config']['mean_overfitting_gap']:.2f}% |
 
 ### Comparison to Baselines
 
 | Baseline | Jaccard | vs Best Config |
 |----------|---------|----------------|
-| **U-Net** | 0.6994 | -14.1% |
-| **ResUNet** | 0.3995 | +50.3% |
-| **Attention ResUNet** | 0.4176 | +43.8% |
+| **U-Net** | {summary['baselines']['unet']:.4f} | {((summary['best_config']['mean_best_jacard'] - summary['baselines']['unet']) / summary['baselines']['unet'] * 100):+.1f}% |
+| **ResUNet** | {summary['baselines']['resunet_baseline']:.4f} | {((summary['best_config']['mean_best_jacard'] - summary['baselines']['resunet_baseline']) / summary['baselines']['resunet_baseline'] * 100):+.1f}% |
+| **Attention ResUNet** | {summary['baselines']['attention_resunet_baseline']:.4f} | {((summary['best_config']['mean_best_jacard'] - summary['baselines']['attention_resunet_baseline']) / summary['baselines']['attention_resunet_baseline'] * 100):+.1f}% |
 
-**Key Finding:** The best hyperparameter configuration achieves **0.6005** mean Jaccard, which exceeds the baseline ResUNet performance of 0.3995.
+**Key Finding:** The best hyperparameter configuration achieves **{summary['best_config']['mean_best_jacard']:.4f}** mean Jaccard, which {'exceeds' if summary['best_config']['mean_best_jacard'] > summary['baselines']['resunet_baseline'] else 'falls short of'} the baseline ResUNet performance of {summary['baselines']['resunet_baseline']:.4f}.
 
 ---
 
@@ -48,7 +71,7 @@
 ### Figure 1: Baseline Comparison
 ![Baseline Comparison](baseline_comparison.png)
 
-**Figure 1 Caption:** Performance of all 19 hyperparameter configurations compared to baseline models. The best configuration (highlighted in green) is `resunet_lr5e-05_drop0.3_bs8` with mean Jaccard of 0.6005. Error bars show standard deviation across 3 cross-validation folds.
+**Figure 1 Caption:** Performance of all 19 hyperparameter configurations compared to baseline models. The best configuration (highlighted in green) is `{summary['best_config']['config_name']}` with mean Jaccard of {summary['best_config']['mean_best_jacard']:.4f}. Error bars show standard deviation across 3 cross-validation folds.
 
 ### Figure 2: Hyperparameter Effects Analysis
 ![Hyperparameter Effects](hyperparam_effects_analysis.png)
@@ -68,26 +91,26 @@
 
 | Learning Rate | Mean Jaccard | Std | Configurations |
 |---------------|--------------|-----|----------------|
-| **5e-05** | **0.3894** | 0.1380 | 6 |
-| **2e-05** | **0.3119** | 0.1072 | 6 |
-| **1e-05** | 0.1878 | 0.1013 | 7 |
+| **5e-05** | **{summary['hyperparameter_effects']['learning_rate']['mean']['5e-05']:.4f}** | {summary['hyperparameter_effects']['learning_rate']['std']['5e-05']:.4f} | {int(summary['hyperparameter_effects']['learning_rate']['count']['5e-05'])} |
+| **2e-05** | **{summary['hyperparameter_effects']['learning_rate']['mean']['2e-05']:.4f}** | {summary['hyperparameter_effects']['learning_rate']['std']['2e-05']:.4f} | {int(summary['hyperparameter_effects']['learning_rate']['count']['2e-05'])} |
+| **1e-05** | {summary['hyperparameter_effects']['learning_rate']['mean']['1e-05']:.4f} | {summary['hyperparameter_effects']['learning_rate']['std']['1e-05']:.4f} | {int(summary['hyperparameter_effects']['learning_rate']['count']['1e-05'])} |
 
 **Analysis:**
-- **5e-05** shows the best average performance (0.3894)
+- **5e-05** shows the best average performance ({summary['hyperparameter_effects']['learning_rate']['mean']['5e-05']:.4f})
 - Performance scales with learning rate: higher LR → better performance
-- However, 5e-05 also shows higher variance (0.1380), suggesting less stable training
+- However, 5e-05 also shows higher variance ({summary['hyperparameter_effects']['learning_rate']['std']['5e-05']:.4f}), suggesting less stable training
 - **Recommendation:** Use **5e-05** for best performance, but monitor training stability
 
 ### Dropout
 
 | Dropout Rate | Mean Jaccard | Std | Configurations |
 |--------------|--------------|-----|----------------|
-| **0.3** | **0.3890** | 0.1480 | 7 |
-| **0.4** | 0.2675 | 0.1115 | 6 |
-| **0.5** | 0.1990 | 0.0835 | 6 |
+| **0.3** | **{summary['hyperparameter_effects']['dropout']['mean']['0.3']:.4f}** | {summary['hyperparameter_effects']['dropout']['std']['0.3']:.4f} | {int(summary['hyperparameter_effects']['dropout']['count']['0.3'])} |
+| **0.4** | {summary['hyperparameter_effects']['dropout']['mean']['0.4']:.4f} | {summary['hyperparameter_effects']['dropout']['std']['0.4']:.4f} | {int(summary['hyperparameter_effects']['dropout']['count']['0.4'])} |
+| **0.5** | {summary['hyperparameter_effects']['dropout']['mean']['0.5']:.4f} | {summary['hyperparameter_effects']['dropout']['std']['0.5']:.4f} | {int(summary['hyperparameter_effects']['dropout']['count']['0.5'])} |
 
 **Analysis:**
-- **0.3** dropout is optimal (0.3890 mean Jaccard)
+- **0.3** dropout is optimal ({summary['hyperparameter_effects']['dropout']['mean']['0.3']:.4f} mean Jaccard)
 - Performance decreases monotonically with higher dropout
 - Higher dropout (0.5) shows lower variance but worse performance
 - **Recommendation:** Use **0.3** dropout for best performance
@@ -96,12 +119,12 @@
 
 | Batch Size | Mean Jaccard | Std | Configurations |
 |------------|--------------|-----|----------------|
-| **4** | **0.3001** | 0.1242 | 10 |
-| **8** | 0.2801 | 0.1616 | 9 |
+| **4** | **{summary['hyperparameter_effects']['batch_size']['mean']['4']:.4f}** | {summary['hyperparameter_effects']['batch_size']['std']['4']:.4f} | {int(summary['hyperparameter_effects']['batch_size']['count']['4'])} |
+| **8** | {summary['hyperparameter_effects']['batch_size']['mean']['8']:.4f} | {summary['hyperparameter_effects']['batch_size']['std']['8']:.4f} | {int(summary['hyperparameter_effects']['batch_size']['count']['8'])} |
 
 **Analysis:**
-- **4** shows marginally better average performance (0.3001 vs 0.2801)
-- However, **8** shows higher variance (0.1616), suggesting more variable results
+- **4** shows marginally better average performance ({summary['hyperparameter_effects']['batch_size']['mean']['4']:.4f} vs {summary['hyperparameter_effects']['batch_size']['mean']['8']:.4f})
+- However, **8** shows higher variance ({summary['hyperparameter_effects']['batch_size']['std']['8']:.4f}), suggesting more variable results
 - The best overall configuration uses batch size **8**
 - **Recommendation:** Use **batch size 8** (best overall configuration uses this)
 
@@ -109,72 +132,26 @@
 
 ## Top 5 Configurations
 
-### 1. resunet_lr5e-05_drop0.3_bs8
+"""
+
+# Add top 5 configurations
+for i, config in enumerate(summary['all_configs'][:5], 1):
+    report += f"""### {i}. {config['config_name']}
 
 | Parameter | Value |
 |-----------|-------|
-| Architecture | resunet |
-| Learning Rate | 5e-05 |
-| Dropout | 0.3 |
-| Batch Size | 8 |
-| **Mean Jaccard** | **0.6005** ± 0.1129 |
-| Range | [0.4421, 0.6971] |
-| Mean Best Epoch | 16.0 |
-| Overfitting Gap | 2.67% |
+| Architecture | {config['architecture']} |
+| Learning Rate | {config['learning_rate']:.0e} |
+| Dropout | {config['dropout']} |
+| Batch Size | {config['batch_size']} |
+| **Mean Jaccard** | **{config['mean_best_jacard']:.4f}** ± {config['std_best_jacard']:.4f} |
+| Range | [{config['min_best_jacard']:.4f}, {config['max_best_jacard']:.4f}] |
+| Mean Best Epoch | {config['mean_best_epoch']:.1f} |
+| Overfitting Gap | {config['mean_overfitting_gap']:.2f}% |
 
-### 2. resunet_lr5e-05_drop0.3_bs4
+"""
 
-| Parameter | Value |
-|-----------|-------|
-| Architecture | resunet |
-| Learning Rate | 5e-05 |
-| Dropout | 0.3 |
-| Batch Size | 4 |
-| **Mean Jaccard** | **0.5035** ± 0.1457 |
-| Range | [0.3410, 0.6945] |
-| Mean Best Epoch | 10.3 |
-| Overfitting Gap | 3.11% |
-
-### 3. resunet_lr2e-05_drop0.3_bs4
-
-| Parameter | Value |
-|-----------|-------|
-| Architecture | resunet |
-| Learning Rate | 2e-05 |
-| Dropout | 0.3 |
-| Batch Size | 4 |
-| **Mean Jaccard** | **0.4240** ± 0.0460 |
-| Range | [0.3658, 0.4783] |
-| Mean Best Epoch | 11.7 |
-| Overfitting Gap | 2.84% |
-
-### 4. resunet_lr2e-05_drop0.3_bs8
-
-| Parameter | Value |
-|-----------|-------|
-| Architecture | resunet |
-| Learning Rate | 2e-05 |
-| Dropout | 0.3 |
-| Batch Size | 8 |
-| **Mean Jaccard** | **0.4023** ± 0.1272 |
-| Range | [0.2237, 0.5102] |
-| Mean Best Epoch | 16.0 |
-| Overfitting Gap | 3.70% |
-
-### 5. resunet_lr2e-05_drop0.4_bs4
-
-| Parameter | Value |
-|-----------|-------|
-| Architecture | resunet |
-| Learning Rate | 2e-05 |
-| Dropout | 0.4 |
-| Batch Size | 4 |
-| **Mean Jaccard** | **0.4003** ± 0.0452 |
-| Range | [0.3629, 0.4638] |
-| Mean Best Epoch | 18.0 |
-| Overfitting Gap | 3.49% |
-
----
+report += """---
 
 ## Key Insights
 
@@ -322,8 +299,7 @@ CONFIG = {{
     'dropout': 0.3,
     'batch_size': 8,
     'filters': 64,
-    'img_size': 256,  # Input image size: 256×256 pixels
-    'img_channels': 1,
+    'img_size': 256,
 }}
 ```
 
@@ -387,8 +363,7 @@ CONFIG = {{
 | Train Samples per Fold | 1,320 |
 | Validation Samples per Fold | 660 |
 | Total Dataset Size | 1,980 images |
-| **Input Image Size** | **256×256 pixels** |
-| **Training Resolution** | **256×256 (native, no resizing during inference)** |
+| Input Size | 256×256 pixels |
 | Architectures Tested | ResUNet (18 configs), Attention ResUNet (1 config) |
 
 ---
@@ -419,3 +394,12 @@ The optimized ResUNet configuration significantly improves over the baseline, de
 
 **Report Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 **Analysis Complete:** ✓
+"""
+
+# Write report
+with open(OUTPUT_PATH, 'w') as f:
+    f.write(report)
+
+print(f"✓ Report generated: {OUTPUT_PATH}")
+print(f"  Total length: {len(report)} characters")
+print(f"  Sections: Executive Summary, Visualizations, Effects, Top 5, Insights, Interactions, Recommendations")
