@@ -234,7 +234,7 @@ def train_model(architecture, X_train, y_train, X_val, y_val, output_dir):
 
     callbacks = [
         keras.callbacks.ModelCheckpoint(
-            model_path,
+            str(model_path),  # Convert Path to string for Keras compatibility
             monitor='val_jacard_coef',
             save_best_only=True,
             mode='max',
@@ -470,7 +470,7 @@ def create_individual_plot(df, method, output_path):
     plt.tight_layout()
 
     # Save
-    plt.savefig(output_path, dpi=CONFIG['dpi'], bbox_inches='tight')
+    plt.savefig(str(output_path), dpi=CONFIG['dpi'], bbox_inches='tight')  # Convert Path to string
     plt.close()
 
     print(f"✓ Saved: {output_path.name}")
@@ -569,7 +569,7 @@ def main():
 
     # Save comprehensive CSV
     csv_path = subdirs['csv'] / 'density_analysis_comprehensive.csv'
-    df.to_csv(csv_path, index=False)
+    df.to_csv(str(csv_path), index=False)  # Convert Path to string
     print(f"\n✓ Saved comprehensive CSV: {csv_path}")
 
     # Create individual plots
