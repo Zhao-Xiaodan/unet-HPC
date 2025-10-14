@@ -1,0 +1,1024 @@
+{
+  "n_configurations": 12,
+  "best_config": {
+    "architecture": "resunet",
+    "config_name": "resunet_lr2e-05_drop0.3_bs4",
+    "learning_rate": 2e-05,
+    "dropout": 0.3,
+    "batch_size": 4,
+    "n_folds": 3,
+    "mean_best_jacard": 0.4239682654539744,
+    "std_best_jacard": 0.0460040997970049,
+    "min_best_jacard": 0.3657861948013305,
+    "max_best_jacard": 0.478272408246994,
+    "mean_best_epoch": 11.666666666666666,
+    "mean_overfitting_gap": 2.8404269485769116,
+    "fold_results": [
+      {
+        "architecture": "resunet",
+        "config": {
+          "learning_rate": 2e-05,
+          "dropout": 0.3,
+          "batch_size": 4
+        },
+        "config_name": "resunet_lr2e-05_drop0.3_bs4",
+        "fold": 1,
+        "train_samples": 1320,
+        "val_samples": 660,
+        "best_val_jacard": 0.478272408246994,
+        "best_val_dice": 0.6373224258422852,
+        "best_epoch": 13,
+        "final_val_jacard": 0.4238833785057068,
+        "final_train_jacard": 0.9021356105804444,
+        "overfitting_gap": 2.128263707250552,
+        "nan_detected": false,
+        "epochs_trained": 22
+      },
+      {
+        "architecture": "resunet",
+        "config": {
+          "learning_rate": 2e-05,
+          "dropout": 0.3,
+          "batch_size": 4
+        },
+        "config_name": "resunet_lr2e-05_drop0.3_bs4",
+        "fold": 2,
+        "train_samples": 1320,
+        "val_samples": 660,
+        "best_val_jacard": 0.3657861948013305,
+        "best_val_dice": 0.5202447772026062,
+        "best_epoch": 8,
+        "final_val_jacard": 0.3302588760852813,
+        "final_train_jacard": 0.870780885219574,
+        "overfitting_gap": 2.6366615654403063,
+        "nan_detected": false,
+        "epochs_trained": 17
+      },
+      {
+        "architecture": "resunet",
+        "config": {
+          "learning_rate": 2e-05,
+          "dropout": 0.3,
+          "batch_size": 4
+        },
+        "config_name": "resunet_lr2e-05_drop0.3_bs4",
+        "fold": 3,
+        "train_samples": 1320,
+        "val_samples": 660,
+        "best_val_jacard": 0.4278461933135986,
+        "best_val_dice": 0.5867067575454712,
+        "best_epoch": 14,
+        "final_val_jacard": 0.2412838488817215,
+        "final_train_jacard": 0.906347930431366,
+        "overfitting_gap": 3.7563555730398765,
+        "nan_detected": false,
+        "epochs_trained": 23
+      }
+    ]
+  },
+  "all_configs": [
+    {
+      "architecture": "resunet",
+      "config_name": "resunet_lr1e-05_drop0.3_bs4",
+      "learning_rate": 1e-05,
+      "dropout": 0.3,
+      "batch_size": 4,
+      "n_folds": 3,
+      "mean_best_jacard": 0.31719694534937537,
+      "std_best_jacard": 0.09473885321312343,
+      "min_best_jacard": 0.1902927458286285,
+      "max_best_jacard": 0.4178601801395416,
+      "mean_best_epoch": 20.666666666666668,
+      "mean_overfitting_gap": 3.5166731239596296,
+      "fold_results": [
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.3,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr1e-05_drop0.3_bs4",
+          "fold": 1,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.1902927458286285,
+          "best_val_dice": 0.3122279345989227,
+          "best_epoch": 24,
+          "final_val_jacard": 0.1902927458286285,
+          "final_train_jacard": 0.884438157081604,
+          "overfitting_gap": 4.647776525743658,
+          "nan_detected": false,
+          "epochs_trained": 25
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.3,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr1e-05_drop0.3_bs4",
+          "fold": 2,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.343437910079956,
+          "best_val_dice": 0.4977806806564331,
+          "best_epoch": 17,
+          "final_val_jacard": 0.2416393905878067,
+          "final_train_jacard": 0.8686813712120056,
+          "overfitting_gap": 3.594949354485915,
+          "nan_detected": false,
+          "epochs_trained": 25
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.3,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr1e-05_drop0.3_bs4",
+          "fold": 3,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.4178601801395416,
+          "best_val_dice": 0.5769935250282288,
+          "best_epoch": 21,
+          "final_val_jacard": 0.3872467577457428,
+          "final_train_jacard": 0.8934919238090515,
+          "overfitting_gap": 2.3072934916493155,
+          "nan_detected": false,
+          "epochs_trained": 25
+        }
+      ]
+    },
+    {
+      "architecture": "resunet",
+      "config_name": "resunet_lr1e-05_drop0.3_bs8",
+      "learning_rate": 1e-05,
+      "dropout": 0.3,
+      "batch_size": 8,
+      "n_folds": 3,
+      "mean_best_jacard": 0.1347270508607228,
+      "std_best_jacard": 0.04000035840587606,
+      "min_best_jacard": 0.0816475450992584,
+      "max_best_jacard": 0.1782069206237793,
+      "mean_best_epoch": 16.666666666666668,
+      "mean_overfitting_gap": 8.285426336044155,
+      "fold_results": [
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.3,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr1e-05_drop0.3_bs8",
+          "fold": 1,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.1782069206237793,
+          "best_val_dice": 0.2987321019172668,
+          "best_epoch": 21,
+          "final_val_jacard": 0.135734274983406,
+          "final_train_jacard": 0.8479807376861572,
+          "overfitting_gap": 6.247358950344899,
+          "nan_detected": false,
+          "epochs_trained": 25
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.3,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr1e-05_drop0.3_bs8",
+          "fold": 2,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.1443266868591308,
+          "best_val_dice": 0.2482620775699615,
+          "best_epoch": 24,
+          "final_val_jacard": 0.1443266868591308,
+          "final_train_jacard": 0.8720685839653015,
+          "overfitting_gap": 6.042323862228465,
+          "nan_detected": false,
+          "epochs_trained": 25
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.3,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr1e-05_drop0.3_bs8",
+          "fold": 3,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.0816475450992584,
+          "best_val_dice": 0.1492770761251449,
+          "best_epoch": 5,
+          "final_val_jacard": 0.0596696101129055,
+          "final_train_jacard": 0.7498438954353333,
+          "overfitting_gap": 12.566596195559104,
+          "nan_detected": false,
+          "epochs_trained": 14
+        }
+      ]
+    },
+    {
+      "architecture": "resunet",
+      "config_name": "resunet_lr1e-05_drop0.4_bs4",
+      "learning_rate": 1e-05,
+      "dropout": 0.4,
+      "batch_size": 4,
+      "n_folds": 3,
+      "mean_best_jacard": 0.1917954583962758,
+      "std_best_jacard": 0.10153850039280025,
+      "min_best_jacard": 0.0571532100439071,
+      "max_best_jacard": 0.3023450374603271,
+      "mean_best_epoch": 13.666666666666666,
+      "mean_overfitting_gap": 8.211310394268693,
+      "fold_results": [
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.4,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr1e-05_drop0.4_bs4",
+          "fold": 1,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.3023450374603271,
+          "best_val_dice": 0.4554170072078705,
+          "best_epoch": 17,
+          "final_val_jacard": 0.0963131040334701,
+          "final_train_jacard": 0.8182398676872253,
+          "overfitting_gap": 8.495623476145841,
+          "nan_detected": false,
+          "epochs_trained": 25
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.4,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr1e-05_drop0.4_bs4",
+          "fold": 2,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.0571532100439071,
+          "best_val_dice": 0.1062661707401275,
+          "best_epoch": 0,
+          "final_val_jacard": 0.0568983443081378,
+          "final_train_jacard": 0.6941652894020081,
+          "overfitting_gap": 12.200096467529832,
+          "nan_detected": false,
+          "epochs_trained": 9
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.4,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr1e-05_drop0.4_bs4",
+          "fold": 3,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.2158881276845932,
+          "best_val_dice": 0.3458926975727081,
+          "best_epoch": 24,
+          "final_val_jacard": 0.2158881276845932,
+          "final_train_jacard": 0.8502130508422852,
+          "overfitting_gap": 3.9382112391304065,
+          "nan_detected": false,
+          "epochs_trained": 25
+        }
+      ]
+    },
+    {
+      "architecture": "resunet",
+      "config_name": "resunet_lr1e-05_drop0.4_bs8",
+      "learning_rate": 1e-05,
+      "dropout": 0.4,
+      "batch_size": 8,
+      "n_folds": 3,
+      "mean_best_jacard": 0.12062271808584525,
+      "std_best_jacard": 0.04367796491509881,
+      "min_best_jacard": 0.0616713427007198,
+      "max_best_jacard": 0.1660733371973037,
+      "mean_best_epoch": 7.666666666666667,
+      "mean_overfitting_gap": 10.206131835212396,
+      "fold_results": [
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.4,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr1e-05_drop0.4_bs8",
+          "fold": 1,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.1341234743595123,
+          "best_val_dice": 0.2338101714849472,
+          "best_epoch": 15,
+          "final_val_jacard": 0.0628561973571777,
+          "final_train_jacard": 0.7391836643218994,
+          "overfitting_gap": 11.759917007411683,
+          "nan_detected": false,
+          "epochs_trained": 24
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.4,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr1e-05_drop0.4_bs8",
+          "fold": 2,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.1660733371973037,
+          "best_val_dice": 0.2802285552024841,
+          "best_epoch": 8,
+          "final_val_jacard": 0.0980950891971588,
+          "final_train_jacard": 0.6263677477836609,
+          "overfitting_gap": 6.385311975452109,
+          "nan_detected": false,
+          "epochs_trained": 17
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.4,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr1e-05_drop0.4_bs8",
+          "fold": 3,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.0616713427007198,
+          "best_val_dice": 0.1148250624537468,
+          "best_epoch": 0,
+          "final_val_jacard": 0.0564213246107101,
+          "final_train_jacard": 0.7037525773048401,
+          "overfitting_gap": 12.473166522773399,
+          "nan_detected": false,
+          "epochs_trained": 9
+        }
+      ]
+    },
+    {
+      "architecture": "resunet",
+      "config_name": "resunet_lr1e-05_drop0.5_bs4",
+      "learning_rate": 1e-05,
+      "dropout": 0.5,
+      "batch_size": 4,
+      "n_folds": 3,
+      "mean_best_jacard": 0.09117154031991953,
+      "std_best_jacard": 0.028207039842749033,
+      "min_best_jacard": 0.0567651987075805,
+      "max_best_jacard": 0.1258563697338104,
+      "mean_best_epoch": 13.333333333333334,
+      "mean_overfitting_gap": 10.858192933111658,
+      "fold_results": [
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.5,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr1e-05_drop0.5_bs4",
+          "fold": 1,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.0908930525183677,
+          "best_val_dice": 0.1638027131557464,
+          "best_epoch": 22,
+          "final_val_jacard": 0.0674454495310783,
+          "final_train_jacard": 0.8325169682502747,
+          "overfitting_gap": 12.343560225907574,
+          "nan_detected": false,
+          "epochs_trained": 25
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.5,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr1e-05_drop0.5_bs4",
+          "fold": 2,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.0567651987075805,
+          "best_val_dice": 0.1055998504161834,
+          "best_epoch": 1,
+          "final_val_jacard": 0.0567549504339695,
+          "final_train_jacard": 0.6607377529144287,
+          "overfitting_gap": 11.641940445056893,
+          "nan_detected": false,
+          "epochs_trained": 10
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.5,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr1e-05_drop0.5_bs4",
+          "fold": 3,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.1258563697338104,
+          "best_val_dice": 0.2186789959669113,
+          "best_epoch": 17,
+          "final_val_jacard": 0.0967450365424156,
+          "final_train_jacard": 0.8309506773948669,
+          "overfitting_gap": 8.589078128370502,
+          "nan_detected": false,
+          "epochs_trained": 25
+        }
+      ]
+    },
+    {
+      "architecture": "resunet",
+      "config_name": "resunet_lr1e-05_drop0.5_bs8",
+      "learning_rate": 1e-05,
+      "dropout": 0.5,
+      "batch_size": 8,
+      "n_folds": 3,
+      "mean_best_jacard": 0.1182300286988417,
+      "std_best_jacard": 0.08691961192072845,
+      "min_best_jacard": 0.0561478920280933,
+      "max_best_jacard": 0.241150826215744,
+      "mean_best_epoch": 1.6666666666666667,
+      "mean_overfitting_gap": 10.987806243746865,
+      "fold_results": [
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.5,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr1e-05_drop0.5_bs8",
+          "fold": 1,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.241150826215744,
+          "best_val_dice": 0.3807555437088012,
+          "best_epoch": 3,
+          "final_val_jacard": 0.0572392866015434,
+          "final_train_jacard": 0.6358501315116882,
+          "overfitting_gap": 11.10863131362897,
+          "nan_detected": false,
+          "epochs_trained": 12
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.5,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr1e-05_drop0.5_bs8",
+          "fold": 2,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.0573913678526878,
+          "best_val_dice": 0.1072489023208618,
+          "best_epoch": 1,
+          "final_val_jacard": 0.0566521435976028,
+          "final_train_jacard": 0.593262255191803,
+          "overfitting_gap": 10.472017782870028,
+          "nan_detected": false,
+          "epochs_trained": 10
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 1e-05,
+            "dropout": 0.5,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr1e-05_drop0.5_bs8",
+          "fold": 3,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.0561478920280933,
+          "best_val_dice": 0.1051397696137428,
+          "best_epoch": 1,
+          "final_val_jacard": 0.05609031021595,
+          "final_train_jacard": 0.6384630799293518,
+          "overfitting_gap": 11.382769634741592,
+          "nan_detected": false,
+          "epochs_trained": 10
+        }
+      ]
+    },
+    {
+      "architecture": "resunet",
+      "config_name": "resunet_lr2e-05_drop0.3_bs4",
+      "learning_rate": 2e-05,
+      "dropout": 0.3,
+      "batch_size": 4,
+      "n_folds": 3,
+      "mean_best_jacard": 0.4239682654539744,
+      "std_best_jacard": 0.0460040997970049,
+      "min_best_jacard": 0.3657861948013305,
+      "max_best_jacard": 0.478272408246994,
+      "mean_best_epoch": 11.666666666666666,
+      "mean_overfitting_gap": 2.8404269485769116,
+      "fold_results": [
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.3,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr2e-05_drop0.3_bs4",
+          "fold": 1,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.478272408246994,
+          "best_val_dice": 0.6373224258422852,
+          "best_epoch": 13,
+          "final_val_jacard": 0.4238833785057068,
+          "final_train_jacard": 0.9021356105804444,
+          "overfitting_gap": 2.128263707250552,
+          "nan_detected": false,
+          "epochs_trained": 22
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.3,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr2e-05_drop0.3_bs4",
+          "fold": 2,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.3657861948013305,
+          "best_val_dice": 0.5202447772026062,
+          "best_epoch": 8,
+          "final_val_jacard": 0.3302588760852813,
+          "final_train_jacard": 0.870780885219574,
+          "overfitting_gap": 2.6366615654403063,
+          "nan_detected": false,
+          "epochs_trained": 17
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.3,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr2e-05_drop0.3_bs4",
+          "fold": 3,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.4278461933135986,
+          "best_val_dice": 0.5867067575454712,
+          "best_epoch": 14,
+          "final_val_jacard": 0.2412838488817215,
+          "final_train_jacard": 0.906347930431366,
+          "overfitting_gap": 3.7563555730398765,
+          "nan_detected": false,
+          "epochs_trained": 23
+        }
+      ]
+    },
+    {
+      "architecture": "resunet",
+      "config_name": "resunet_lr2e-05_drop0.3_bs8",
+      "learning_rate": 2e-05,
+      "dropout": 0.3,
+      "batch_size": 8,
+      "n_folds": 3,
+      "mean_best_jacard": 0.4023450165987015,
+      "std_best_jacard": 0.1271929943080129,
+      "min_best_jacard": 0.223748579621315,
+      "max_best_jacard": 0.510205864906311,
+      "mean_best_epoch": 16.0,
+      "mean_overfitting_gap": 3.7047645555919684,
+      "fold_results": [
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.3,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr2e-05_drop0.3_bs8",
+          "fold": 1,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.223748579621315,
+          "best_val_dice": 0.3608574271202087,
+          "best_epoch": 7,
+          "final_val_jacard": 0.1601911038160324,
+          "final_train_jacard": 0.8583947420120239,
+          "overfitting_gap": 5.358566871465138,
+          "nan_detected": false,
+          "epochs_trained": 16
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.3,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr2e-05_drop0.3_bs8",
+          "fold": 2,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.510205864906311,
+          "best_val_dice": 0.670283854007721,
+          "best_epoch": 22,
+          "final_val_jacard": 0.410618245601654,
+          "final_train_jacard": 0.9018723964691162,
+          "overfitting_gap": 2.19637681990399,
+          "nan_detected": false,
+          "epochs_trained": 25
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.3,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr2e-05_drop0.3_bs8",
+          "fold": 3,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.4730806052684784,
+          "best_val_dice": 0.6366264820098877,
+          "best_epoch": 19,
+          "final_val_jacard": 0.2560555338859558,
+          "final_train_jacard": 0.911391258239746,
+          "overfitting_gap": 3.5593499754067772,
+          "nan_detected": false,
+          "epochs_trained": 25
+        }
+      ]
+    },
+    {
+      "architecture": "resunet",
+      "config_name": "resunet_lr2e-05_drop0.4_bs4",
+      "learning_rate": 2e-05,
+      "dropout": 0.4,
+      "batch_size": 4,
+      "n_folds": 3,
+      "mean_best_jacard": 0.4002528289953868,
+      "std_best_jacard": 0.045192785750080386,
+      "min_best_jacard": 0.362943023443222,
+      "max_best_jacard": 0.4638473093509674,
+      "mean_best_epoch": 18.0,
+      "mean_overfitting_gap": 3.494740532652115,
+      "fold_results": [
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.4,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr2e-05_drop0.4_bs4",
+          "fold": 1,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.3739681541919708,
+          "best_val_dice": 0.5325943231582642,
+          "best_epoch": 15,
+          "final_val_jacard": 0.2294336557388305,
+          "final_train_jacard": 0.8962990641593933,
+          "overfitting_gap": 3.90657186398002,
+          "nan_detected": false,
+          "epochs_trained": 24
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.4,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr2e-05_drop0.4_bs4",
+          "fold": 2,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.4638473093509674,
+          "best_val_dice": 0.6185957193374634,
+          "best_epoch": 23,
+          "final_val_jacard": 0.2540000677108764,
+          "final_train_jacard": 0.8885201215744019,
+          "overfitting_gap": 3.4981097823398533,
+          "nan_detected": false,
+          "epochs_trained": 25
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.4,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr2e-05_drop0.4_bs4",
+          "fold": 3,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.362943023443222,
+          "best_val_dice": 0.5216684341430664,
+          "best_epoch": 16,
+          "final_val_jacard": 0.2880804240703583,
+          "final_train_jacard": 0.8871551752090454,
+          "overfitting_gap": 3.079539951636472,
+          "nan_detected": false,
+          "epochs_trained": 25
+        }
+      ]
+    },
+    {
+      "architecture": "resunet",
+      "config_name": "resunet_lr2e-05_drop0.4_bs8",
+      "learning_rate": 2e-05,
+      "dropout": 0.4,
+      "batch_size": 8,
+      "n_folds": 3,
+      "mean_best_jacard": 0.21014250566562012,
+      "std_best_jacard": 0.09343399826073698,
+      "min_best_jacard": 0.0837788954377174,
+      "max_best_jacard": 0.3067764639854431,
+      "mean_best_epoch": 8.666666666666666,
+      "mean_overfitting_gap": 7.756040070405902,
+      "fold_results": [
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.4,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr2e-05_drop0.4_bs8",
+          "fold": 1,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.0837788954377174,
+          "best_val_dice": 0.1530081331729889,
+          "best_epoch": 8,
+          "final_val_jacard": 0.0576012916862964,
+          "final_train_jacard": 0.7905579805374146,
+          "overfitting_gap": 13.724657162948514,
+          "nan_detected": false,
+          "epochs_trained": 17
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.4,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr2e-05_drop0.4_bs8",
+          "fold": 2,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.3067764639854431,
+          "best_val_dice": 0.4622498154640198,
+          "best_epoch": 15,
+          "final_val_jacard": 0.1751345992088318,
+          "final_train_jacard": 0.8689085841178894,
+          "overfitting_gap": 4.961375924821094,
+          "nan_detected": false,
+          "epochs_trained": 24
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.4,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr2e-05_drop0.4_bs8",
+          "fold": 3,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.2398721575736999,
+          "best_val_dice": 0.3826369941234588,
+          "best_epoch": 3,
+          "final_val_jacard": 0.1792033165693283,
+          "final_train_jacard": 0.8211252093315125,
+          "overfitting_gap": 4.582087123448098,
+          "nan_detected": false,
+          "epochs_trained": 12
+        }
+      ]
+    },
+    {
+      "architecture": "resunet",
+      "config_name": "resunet_lr2e-05_drop0.5_bs4",
+      "learning_rate": 2e-05,
+      "dropout": 0.5,
+      "batch_size": 4,
+      "n_folds": 3,
+      "mean_best_jacard": 0.19932694733142853,
+      "std_best_jacard": 0.031805595896466504,
+      "min_best_jacard": 0.1606721431016922,
+      "max_best_jacard": 0.238572895526886,
+      "mean_best_epoch": 10.666666666666666,
+      "mean_overfitting_gap": 6.452865522498722,
+      "fold_results": [
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.5,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr2e-05_drop0.5_bs4",
+          "fold": 1,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.1606721431016922,
+          "best_val_dice": 0.2707582116127014,
+          "best_epoch": 16,
+          "final_val_jacard": 0.1167488768696785,
+          "final_train_jacard": 0.8883073329925537,
+          "overfitting_gap": 7.608701315252318,
+          "nan_detected": false,
+          "epochs_trained": 25
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.5,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr2e-05_drop0.5_bs4",
+          "fold": 2,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.1987358033657074,
+          "best_val_dice": 0.3224274814128876,
+          "best_epoch": 6,
+          "final_val_jacard": 0.1609510630369186,
+          "final_train_jacard": 0.841413676738739,
+          "overfitting_gap": 5.2277609160353125,
+          "nan_detected": false,
+          "epochs_trained": 15
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.5,
+            "batch_size": 4
+          },
+          "config_name": "resunet_lr2e-05_drop0.5_bs4",
+          "fold": 3,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.238572895526886,
+          "best_val_dice": 0.3804931938648224,
+          "best_epoch": 10,
+          "final_val_jacard": 0.1330127567052841,
+          "final_train_jacard": 0.8675270676612854,
+          "overfitting_gap": 6.522134336208535,
+          "nan_detected": false,
+          "epochs_trained": 19
+        }
+      ]
+    },
+    {
+      "architecture": "resunet",
+      "config_name": "resunet_lr2e-05_drop0.5_bs8",
+      "learning_rate": 2e-05,
+      "dropout": 0.5,
+      "batch_size": 8,
+      "n_folds": 2,
+      "mean_best_jacard": 0.2855232208967209,
+      "std_best_jacard": 0.031108483672142057,
+      "min_best_jacard": 0.2544147372245788,
+      "max_best_jacard": 0.3166317045688629,
+      "mean_best_epoch": 4.0,
+      "mean_overfitting_gap": 6.015530055755358,
+      "fold_results": [
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.5,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr2e-05_drop0.5_bs8",
+          "fold": 1,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.2544147372245788,
+          "best_val_dice": 0.4004033505916595,
+          "best_epoch": 5,
+          "final_val_jacard": 0.2370141446590423,
+          "final_train_jacard": 0.7961523532867432,
+          "overfitting_gap": 3.3590921522091075,
+          "nan_detected": false,
+          "epochs_trained": 14
+        },
+        {
+          "architecture": "resunet",
+          "config": {
+            "learning_rate": 2e-05,
+            "dropout": 0.5,
+            "batch_size": 8
+          },
+          "config_name": "resunet_lr2e-05_drop0.5_bs8",
+          "fold": 2,
+          "train_samples": 1320,
+          "val_samples": 660,
+          "best_val_jacard": 0.3166317045688629,
+          "best_val_dice": 0.4728265404701233,
+          "best_epoch": 3,
+          "final_val_jacard": 0.0859746634960174,
+          "final_train_jacard": 0.7455695271492004,
+          "overfitting_gap": 8.671967959301607,
+          "nan_detected": false,
+          "epochs_trained": 12
+        }
+      ]
+    }
+  ],
+  "hyperparameter_effects": {
+    "learning_rate": {
+      "mean": {
+        "1e-05": 0.16229062361849675,
+        "2e-05": 0.32025979749030536
+      },
+      "std": {
+        "1e-05": 0.08289961244301385,
+        "2e-05": 0.10183272221895273
+      },
+      "count": {
+        "1e-05": 6,
+        "2e-05": 6
+      }
+    },
+    "dropout": {
+      "mean": {
+        "0.3": 0.3195593195656935,
+        "0.4": 0.23070337778578198,
+        "0.5": 0.17356293431172765
+      },
+      "std": {
+        "0.3": 0.13155891960297658,
+        "0.4": 0.11944502738221376,
+        "0.5": 0.08765265233969637
+      },
+      "count": {
+        "0.3": 4,
+        "0.4": 4,
+        "0.5": 4
+      }
+    },
+    "batch_size": {
+      "mean": {
+        "4": 0.27061866430772674,
+        "8": 0.21193175680107537
+      },
+      "std": {
+        "4": 0.13113926193010123,
+        "8": 0.1138016129357623
+      },
+      "count": {
+        "4": 6,
+        "8": 6
+      }
+    }
+  },
+  "baselines": {
+    "unet": 0.6994,
+    "resunet_baseline": 0.3995
+  }
+}
