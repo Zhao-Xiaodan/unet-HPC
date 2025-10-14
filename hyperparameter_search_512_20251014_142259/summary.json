@@ -1,0 +1,7 @@
+{
+  "best_config": "attention_resunet_lr5e-05_drop0.2_bs4",
+  "best_jaccard": 0.1562,
+  "total_configs": 24,
+  "successful_configs": 24,
+  "config_summary": {
+    
