@@ -279,3 +279,126 @@ Fixed parameters:
 2025-10-14 00:06:21.058460: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
 2025-10-14 00:15:43.442699: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
 2025-10-14 00:31:18.909520: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 00:46:57.782579: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 00:58:55.583060: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 01:06:19.783369: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 01:17:51.992932: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 01:26:48.779491: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 01:35:04.567045: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 01:50:45.312491: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+  [resunet_lr2e-05_drop0.5_bs4] Fold 1 - Epoch 15: val_jacard=0.0975 (best=0.1556 @ epoch 13)
+  [resunet_lr2e-05_drop0.5_bs4] Fold 1 - Epoch 20: val_jacard=0.1308 (best=0.1607 @ epoch 17)
+  [resunet_lr2e-05_drop0.5_bs4] Fold 1 - Epoch 25: val_jacard=0.1167 (best=0.1607 @ epoch 17)
+  [resunet_lr2e-05_drop0.5_bs4] Fold 2 - Epoch 1: val_jacard=0.0605 (best=0.0605 @ epoch 1)
+  [resunet_lr2e-05_drop0.5_bs4] Fold 2 - Epoch 5: val_jacard=0.0696 (best=0.1242 @ epoch 3)
+  [resunet_lr2e-05_drop0.5_bs4] Fold 2 - Epoch 10: val_jacard=0.1135 (best=0.1987 @ epoch 7)
+  [resunet_lr2e-05_drop0.5_bs4] Fold 2 - Epoch 15: val_jacard=0.1610 (best=0.1987 @ epoch 7)
+  [resunet_lr2e-05_drop0.5_bs4] Fold 3 - Epoch 1: val_jacard=0.0562 (best=0.0562 @ epoch 1)
+  [resunet_lr2e-05_drop0.5_bs4] Fold 3 - Epoch 5: val_jacard=0.0607 (best=0.0607 @ epoch 5)
+  [resunet_lr2e-05_drop0.5_bs4] Fold 3 - Epoch 10: val_jacard=0.0883 (best=0.1520 @ epoch 8)
+  [resunet_lr2e-05_drop0.5_bs4] Fold 3 - Epoch 15: val_jacard=0.1131 (best=0.2386 @ epoch 11)
+  ✅ CV Results: 0.1993 ± 0.0318
+     Best epoch: 10.7, Overfitting gap: 6.45×
+
+[12/36] Testing: resunet_lr2e-05_drop0.5_bs8
+  LR=2e-05, Dropout=0.5, BatchSize=8
+  [resunet_lr2e-05_drop0.5_bs8] Fold 1 - Epoch 1: val_jacard=0.0408 (best=0.0408 @ epoch 1)
+  [resunet_lr2e-05_drop0.5_bs8] Fold 1 - Epoch 5: val_jacard=0.0991 (best=0.1377 @ epoch 4)
+  [resunet_lr2e-05_drop0.5_bs8] Fold 1 - Epoch 10: val_jacard=0.0804 (best=0.2544 @ epoch 6)
+  [resunet_lr2e-05_drop0.5_bs8] Fold 2 - Epoch 1: val_jacard=0.0614 (best=0.0614 @ epoch 1)
+  [resunet_lr2e-05_drop0.5_bs8] Fold 2 - Epoch 5: val_jacard=0.2576 (best=0.3166 @ epoch 4)
+  [resunet_lr2e-05_drop0.5_bs8] Fold 2 - Epoch 10: val_jacard=0.0713 (best=0.3166 @ epoch 4)
+  [resunet_lr2e-05_drop0.5_bs8] Fold 3 - Epoch 1: val_jacard=0.0561 (best=0.0561 @ epoch 1)
+  [resunet_lr2e-05_drop0.5_bs8] Fold 3 - Epoch 5: val_jacard=0.0561 (best=0.0561 @ epoch 5)
+  [resunet_lr2e-05_drop0.5_bs8] Fold 3 - Epoch 10: val_jacard=0.0571 (best=0.0571 @ epoch 10)
+  [resunet_lr2e-05_drop0.5_bs8] Fold 3 - Epoch 15: val_jacard=0.0567 (best=0.0739 @ epoch 13)
+  [resunet_lr2e-05_drop0.5_bs8] Fold 3 - Epoch 20: val_jacard=0.1097 (best=0.1343 @ epoch 19)
+  [resunet_lr2e-05_drop0.5_bs8] Fold 3 - Epoch 25: val_jacard=0.1046 (best=0.1343 @ epoch 19)
+  ✅ CV Results: 0.2351 ± 0.0757
+     Best epoch: 8.7, Overfitting gap: 6.66×
+
+[13/36] Testing: resunet_lr5e-05_drop0.3_bs4
+  LR=5e-05, Dropout=0.3, BatchSize=4
+  [resunet_lr5e-05_drop0.3_bs4] Fold 1 - Epoch 1: val_jacard=0.0760 (best=0.0760 @ epoch 1)
+  [resunet_lr5e-05_drop0.3_bs4] Fold 1 - Epoch 5: val_jacard=0.2310 (best=0.2310 @ epoch 5)
+  [resunet_lr5e-05_drop0.3_bs4] Fold 1 - Epoch 10: val_jacard=0.1529 (best=0.3410 @ epoch 6)
+  [resunet_lr5e-05_drop0.3_bs4] Fold 2 - Epoch 1: val_jacard=0.0476 (best=0.0476 @ epoch 1)
+  [resunet_lr5e-05_drop0.3_bs4] Fold 2 - Epoch 5: val_jacard=0.4663 (best=0.4663 @ epoch 5)
+  [resunet_lr5e-05_drop0.3_bs4] Fold 2 - Epoch 10: val_jacard=0.1286 (best=0.4749 @ epoch 7)
+  [resunet_lr5e-05_drop0.3_bs4] Fold 2 - Epoch 15: val_jacard=0.2505 (best=0.4749 @ epoch 7)
+  [resunet_lr5e-05_drop0.3_bs4] Fold 3 - Epoch 1: val_jacard=0.0865 (best=0.0865 @ epoch 1)
+  [resunet_lr5e-05_drop0.3_bs4] Fold 3 - Epoch 5: val_jacard=0.3995 (best=0.3995 @ epoch 5)
+  [resunet_lr5e-05_drop0.3_bs4] Fold 3 - Epoch 10: val_jacard=0.3318 (best=0.3995 @ epoch 5)
+  [resunet_lr5e-05_drop0.3_bs4] Fold 3 - Epoch 15: val_jacard=0.3600 (best=0.5735 @ epoch 13)
+  [resunet_lr5e-05_drop0.3_bs4] Fold 3 - Epoch 20: val_jacard=0.3440 (best=0.5735 @ epoch 13)
+  [resunet_lr5e-05_drop0.3_bs4] Fold 3 - Epoch 25: val_jacard=0.4442 (best=0.6945 @ epoch 21)
+  ✅ CV Results: 0.5035 ± 0.1457
+     Best epoch: 10.3, Overfitting gap: 3.11×
+
+[14/36] Testing: resunet_lr5e-05_drop0.3_bs8
+  LR=5e-05, Dropout=0.3, BatchSize=8
+  [resunet_lr5e-05_drop0.3_bs8] Fold 1 - Epoch 1: val_jacard=0.1437 (best=0.1437 @ epoch 1)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 1 - Epoch 5: val_jacard=0.1348 (best=0.1913 @ epoch 3)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 1 - Epoch 10: val_jacard=0.2779 (best=0.4421 @ epoch 7)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 1 - Epoch 15: val_jacard=0.2170 (best=0.4421 @ epoch 7)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 2 - Epoch 1: val_jacard=0.0415 (best=0.0415 @ epoch 1)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 2 - Epoch 5: val_jacard=0.2881 (best=0.2881 @ epoch 5)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 2 - Epoch 10: val_jacard=0.3462 (best=0.5452 @ epoch 7)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 2 - Epoch 15: val_jacard=0.4567 (best=0.5529 @ epoch 14)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 2 - Epoch 20: val_jacard=0.4593 (best=0.5848 @ epoch 19)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 2 - Epoch 25: val_jacard=0.4553 (best=0.6622 @ epoch 24)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 3 - Epoch 1: val_jacard=0.0847 (best=0.0847 @ epoch 1)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 3 - Epoch 5: val_jacard=0.4181 (best=0.4181 @ epoch 5)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 3 - Epoch 10: val_jacard=0.3094 (best=0.5400 @ epoch 9)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 3 - Epoch 15: val_jacard=0.6001 (best=0.6001 @ epoch 15)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 3 - Epoch 20: val_jacard=0.6971 (best=0.6971 @ epoch 20)
+  [resunet_lr5e-05_drop0.3_bs8] Fold 3 - Epoch 25: val_jacard=0.5060 (best=0.6971 @ epoch 20)
+  ✅ CV Results: 0.6005 ± 0.1129
+     Best epoch: 16.0, Overfitting gap: 2.67×
+
+[15/36] Testing: resunet_lr5e-05_drop0.4_bs4
+  LR=5e-05, Dropout=0.4, BatchSize=4
+  [resunet_lr5e-05_drop0.4_bs4] Fold 1 - Epoch 1: val_jacard=0.0110 (best=0.0110 @ epoch 1)
+  [resunet_lr5e-05_drop0.4_bs4] Fold 1 - Epoch 5: val_jacard=0.2833 (best=0.2833 @ epoch 5)
+  [resunet_lr5e-05_drop0.4_bs4] Fold 1 - Epoch 10: val_jacard=0.2943 (best=0.2943 @ epoch 10)
+  [resunet_lr5e-05_drop0.4_bs4] Fold 1 - Epoch 15: val_jacard=0.1916 (best=0.2943 @ epoch 10)
+  [resunet_lr5e-05_drop0.4_bs4] Fold 2 - Epoch 1: val_jacard=0.0628 (best=0.0628 @ epoch 1)
+  [resunet_lr5e-05_drop0.4_bs4] Fold 2 - Epoch 5: val_jacard=0.1385 (best=0.3056 @ epoch 3)
+  [resunet_lr5e-05_drop0.4_bs4] Fold 2 - Epoch 10: val_jacard=0.2414 (best=0.3056 @ epoch 3)
+  [resunet_lr5e-05_drop0.4_bs4] Fold 3 - Epoch 1: val_jacard=0.0563 (best=0.0563 @ epoch 1)
+  [resunet_lr5e-05_drop0.4_bs4] Fold 3 - Epoch 5: val_jacard=0.2331 (best=0.2331 @ epoch 5)
+  [resunet_lr5e-05_drop0.4_bs4] Fold 3 - Epoch 10: val_jacard=0.2001 (best=0.3048 @ epoch 9)
+  [resunet_lr5e-05_drop0.4_bs4] Fold 3 - Epoch 15: val_jacard=0.1883 (best=0.3048 @ epoch 9)
+  ✅ CV Results: 0.3016 ± 0.0051
+     Best epoch: 6.3, Overfitting gap: 9.36×
+
+[16/36] Testing: resunet_lr5e-05_drop0.4_bs8
+  LR=5e-05, Dropout=0.4, BatchSize=8
+  [resunet_lr5e-05_drop0.4_bs8] Fold 1 - Epoch 1: val_jacard=0.0338 (best=0.0338 @ epoch 1)
+  [resunet_lr5e-05_drop0.4_bs8] Fold 1 - Epoch 5: val_jacard=0.0518 (best=0.3316 @ epoch 4)
+  [resunet_lr5e-05_drop0.4_bs8] Fold 1 - Epoch 10: val_jacard=0.3483 (best=0.4513 @ epoch 6)
+  [resunet_lr5e-05_drop0.4_bs8] Fold 2 - Epoch 1: val_jacard=0.0568 (best=0.0568 @ epoch 1)
+  [resunet_lr5e-05_drop0.4_bs8] Fold 2 - Epoch 5: val_jacard=0.3489 (best=0.3489 @ epoch 5)
+  [resunet_lr5e-05_drop0.4_bs8] Fold 2 - Epoch 10: val_jacard=0.1011 (best=0.3489 @ epoch 5)
+  [resunet_lr5e-05_drop0.4_bs8] Fold 3 - Epoch 1: val_jacard=0.0561 (best=0.0561 @ epoch 1)
+  [resunet_lr5e-05_drop0.4_bs8] Fold 3 - Epoch 5: val_jacard=0.0992 (best=0.0992 @ epoch 5)
+  [resunet_lr5e-05_drop0.4_bs8] Fold 3 - Epoch 10: val_jacard=0.1285 (best=0.2069 @ epoch 8)
+  [resunet_lr5e-05_drop0.4_bs8] Fold 3 - Epoch 15: val_jacard=0.1716 (best=0.2341 @ epoch 14)
+  [resunet_lr5e-05_drop0.4_bs8] Fold 3 - Epoch 20: val_jacard=0.2059 (best=0.2341 @ epoch 14)
+  [resunet_lr5e-05_drop0.4_bs8] Fold 3 - Epoch 25: val_jacard=0.1439 (best=0.3411 @ epoch 21)
+  ✅ CV Results: 0.3805 ± 0.0502
+     Best epoch: 9.7, Overfitting gap: 5.01×
+
+[17/36] Testing: resunet_lr5e-05_drop0.5_bs4
+  LR=5e-05, Dropout=0.5, BatchSize=4
+  [resunet_lr5e-05_drop0.5_bs4] Fold 1 - Epoch 1: val_jacard=0.0560 (best=0.0560 @ epoch 1)
+  [resunet_lr5e-05_drop0.5_bs4] Fold 1 - Epoch 5: val_jacard=0.1290 (best=0.1495 @ epoch 3)
+2025-10-14 02:00:48.460110: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 02:10:33.132976: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 02:19:21.049298: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 02:28:23.472064: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 02:43:58.823628: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 02:57:33.435536: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inAttentionResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 03:16:28.853604: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inAttentionResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 03:24:06.049964: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inAttentionResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+2025-10-14 03:42:50.411469: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inAttentionResUNet/enc1_dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
