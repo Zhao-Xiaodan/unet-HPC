@@ -1,0 +1,1401 @@
+image,dilution_factor,tile_idx,model_name,model_label,architecture,foreground_pct
+10x_2025-05-15_02-05-00,10,0,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,0,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.3589630126953125
+10x_2025-05-15_02-05-00,10,0,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3997802734375
+10x_2025-05-15_02-05-00,10,0,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,0,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,1,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,1,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.412750244140625
+10x_2025-05-15_02-05-00,10,1,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3849029541015625
+10x_2025-05-15_02-05-00,10,1,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,1,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,2,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,2,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.429534912109375
+10x_2025-05-15_02-05-00,10,2,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3997802734375
+10x_2025-05-15_02-05-00,10,2,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,2,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,3,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,3,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.4306793212890625
+10x_2025-05-15_02-05-00,10,3,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3795623779296875
+10x_2025-05-15_02-05-00,10,3,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,3,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,4,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,4,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.4390716552734375
+10x_2025-05-15_02-05-00,10,4,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3726959228515625
+10x_2025-05-15_02-05-00,10,4,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,4,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,5,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,5,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.408935546875
+10x_2025-05-15_02-05-00,10,5,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3589630126953125
+10x_2025-05-15_02-05-00,10,5,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,5,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,6,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,6,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.4306793212890625
+10x_2025-05-15_02-05-00,10,6,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3753662109375
+10x_2025-05-15_02-05-00,10,6,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,6,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,7,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,7,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.33721923828125
+10x_2025-05-15_02-05-00,10,7,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4047393798828125
+10x_2025-05-15_02-05-00,10,7,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,7,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,8,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,8,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.4016876220703125
+10x_2025-05-15_02-05-00,10,8,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.397491455078125
+10x_2025-05-15_02-05-00,10,8,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,8,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,9,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,9,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.374603271484375
+10x_2025-05-15_02-05-00,10,9,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4024505615234375
+10x_2025-05-15_02-05-00,10,9,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,9,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,10,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,10,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.432586669921875
+10x_2025-05-15_02-05-00,10,10,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.379180908203125
+10x_2025-05-15_02-05-00,10,10,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,10,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,11,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,11,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.4428863525390625
+10x_2025-05-15_02-05-00,10,11,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3597259521484375
+10x_2025-05-15_02-05-00,10,11,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,11,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,12,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,12,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.4459381103515625
+10x_2025-05-15_02-05-00,10,12,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3688812255859375
+10x_2025-05-15_02-05-00,10,12,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,12,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,13,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,13,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.4894256591796875
+10x_2025-05-15_02-05-00,10,13,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.371551513671875
+10x_2025-05-15_02-05-00,10,13,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,13,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,14,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,14,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.390625
+10x_2025-05-15_02-05-00,10,14,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4047393798828125
+10x_2025-05-15_02-05-00,10,14,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,14,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,15,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,15,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.389862060546875
+10x_2025-05-15_02-05-00,10,15,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3932952880859375
+10x_2025-05-15_02-05-00,10,15,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,15,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,16,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,16,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.4207611083984375
+10x_2025-05-15_02-05-00,10,16,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.39215087890625
+10x_2025-05-15_02-05-00,10,16,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,16,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,17,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,17,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.443267822265625
+10x_2025-05-15_02-05-00,10,17,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3948211669921875
+10x_2025-05-15_02-05-00,10,17,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,17,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,18,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,18,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.4444122314453125
+10x_2025-05-15_02-05-00,10,18,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.36773681640625
+10x_2025-05-15_02-05-00,10,18,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,18,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,19,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,19,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.42572021484375
+10x_2025-05-15_02-05-00,10,19,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3833770751953125
+10x_2025-05-15_02-05-00,10,19,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,19,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,20,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,20,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.431060791015625
+10x_2025-05-15_02-05-00,10,20,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.373077392578125
+10x_2025-05-15_02-05-00,10,20,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,20,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,21,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,21,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.3353118896484375
+10x_2025-05-15_02-05-00,10,21,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4177093505859375
+10x_2025-05-15_02-05-00,10,21,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,21,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,22,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,22,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.3238677978515625
+10x_2025-05-15_02-05-00,10,22,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3948211669921875
+10x_2025-05-15_02-05-00,10,22,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,22,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,23,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,23,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.390625
+10x_2025-05-15_02-05-00,10,23,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.41351318359375
+10x_2025-05-15_02-05-00,10,23,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,23,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,24,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,24,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.4108428955078125
+10x_2025-05-15_02-05-00,10,24,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3879547119140625
+10x_2025-05-15_02-05-00,10,24,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,24,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,25,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,25,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.457763671875
+10x_2025-05-15_02-05-00,10,25,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3833770751953125
+10x_2025-05-15_02-05-00,10,25,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,25,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,26,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,26,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.4482269287109375
+10x_2025-05-15_02-05-00,10,26,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3673553466796875
+10x_2025-05-15_02-05-00,10,26,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,26,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10x_2025-05-15_02-05-00,10,27,unet_best,U-Net (best),unet,0.0
+10x_2025-05-15_02-05-00,10,27,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.4383087158203125
+10x_2025-05-15_02-05-00,10,27,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3734588623046875
+10x_2025-05-15_02-05-00,10,27,resunet,ResUNet,resunet,0.0
+10x_2025-05-15_02-05-00,10,27,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,0,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,0,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.299835205078125
+20x_2025-05-15_02-05-00,20,0,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.406646728515625
+20x_2025-05-15_02-05-00,20,0,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,0,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,1,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,1,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2964019775390625
+20x_2025-05-15_02-05-00,20,1,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.411224365234375
+20x_2025-05-15_02-05-00,20,1,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,1,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,2,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,2,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2994537353515625
+20x_2025-05-15_02-05-00,20,2,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.40740966796875
+20x_2025-05-15_02-05-00,20,2,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,2,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,3,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,3,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.3108978271484375
+20x_2025-05-15_02-05-00,20,3,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4116058349609375
+20x_2025-05-15_02-05-00,20,3,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,3,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,4,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,4,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.3173828125
+20x_2025-05-15_02-05-00,20,4,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.41961669921875
+20x_2025-05-15_02-05-00,20,4,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,4,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,5,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,5,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2838134765625
+20x_2025-05-15_02-05-00,20,5,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4032135009765625
+20x_2025-05-15_02-05-00,20,5,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,5,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,6,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,6,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.3337860107421875
+20x_2025-05-15_02-05-00,20,6,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.40740966796875
+20x_2025-05-15_02-05-00,20,6,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,6,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,7,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,7,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.27008056640625
+20x_2025-05-15_02-05-00,20,7,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4150390625
+20x_2025-05-15_02-05-00,20,7,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,7,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,8,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,8,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2593994140625
+20x_2025-05-15_02-05-00,20,8,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3871917724609375
+20x_2025-05-15_02-05-00,20,8,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,8,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,9,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,9,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2651214599609375
+20x_2025-05-15_02-05-00,20,9,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.408935546875
+20x_2025-05-15_02-05-00,20,9,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,9,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,10,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,10,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2979278564453125
+20x_2025-05-15_02-05-00,20,10,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.395965576171875
+20x_2025-05-15_02-05-00,20,10,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,10,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,11,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,11,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.304412841796875
+20x_2025-05-15_02-05-00,20,11,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4055023193359375
+20x_2025-05-15_02-05-00,20,11,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,11,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,12,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,12,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2948760986328125
+20x_2025-05-15_02-05-00,20,12,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3932952880859375
+20x_2025-05-15_02-05-00,20,12,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,12,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,13,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,13,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2483367919921875
+20x_2025-05-15_02-05-00,20,13,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4093170166015625
+20x_2025-05-15_02-05-00,20,13,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,13,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,14,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,14,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.255584716796875
+20x_2025-05-15_02-05-00,20,14,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3936767578125
+20x_2025-05-15_02-05-00,20,14,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,14,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,15,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,15,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2468109130859375
+20x_2025-05-15_02-05-00,20,15,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.39520263671875
+20x_2025-05-15_02-05-00,20,15,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,15,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,16,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,16,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.27618408203125
+20x_2025-05-15_02-05-00,20,16,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.389862060546875
+20x_2025-05-15_02-05-00,20,16,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,16,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,17,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,17,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2460479736328125
+20x_2025-05-15_02-05-00,20,17,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.408172607421875
+20x_2025-05-15_02-05-00,20,17,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,17,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,18,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,18,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2811431884765625
+20x_2025-05-15_02-05-00,20,18,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.415802001953125
+20x_2025-05-15_02-05-00,20,18,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,18,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,19,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,19,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2758026123046875
+20x_2025-05-15_02-05-00,20,19,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.412750244140625
+20x_2025-05-15_02-05-00,20,19,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,19,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,20,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,20,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2391815185546875
+20x_2025-05-15_02-05-00,20,20,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.417327880859375
+20x_2025-05-15_02-05-00,20,20,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,20,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,21,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,21,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2147674560546875
+20x_2025-05-15_02-05-00,20,21,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3971099853515625
+20x_2025-05-15_02-05-00,20,21,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,21,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,22,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,22,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.22735595703125
+20x_2025-05-15_02-05-00,20,22,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3498077392578125
+20x_2025-05-15_02-05-00,20,22,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,22,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,23,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,23,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.23651123046875
+20x_2025-05-15_02-05-00,20,23,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.389862060546875
+20x_2025-05-15_02-05-00,20,23,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,23,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,24,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,24,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2285003662109375
+20x_2025-05-15_02-05-00,20,24,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.37841796875
+20x_2025-05-15_02-05-00,20,24,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,24,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,25,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,25,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2346038818359375
+20x_2025-05-15_02-05-00,20,25,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.395965576171875
+20x_2025-05-15_02-05-00,20,25,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,25,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,26,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,26,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2269744873046875
+20x_2025-05-15_02-05-00,20,26,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.391387939453125
+20x_2025-05-15_02-05-00,20,26,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,26,attention_resunet,Attention ResUNet,attention_resunet,0.0
+20x_2025-05-15_02-05-00,20,27,unet_best,U-Net (best),unet,0.0
+20x_2025-05-15_02-05-00,20,27,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.229644775390625
+20x_2025-05-15_02-05-00,20,27,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.408935546875
+20x_2025-05-15_02-05-00,20,27,resunet,ResUNet,resunet,0.0
+20x_2025-05-15_02-05-00,20,27,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,0,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,0,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2002716064453125
+320x_2025-05-15_02-05-00,20,0,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3879547119140625
+320x_2025-05-15_02-05-00,20,0,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,0,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,1,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,1,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2010345458984375
+320x_2025-05-15_02-05-00,20,1,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.225830078125
+320x_2025-05-15_02-05-00,20,1,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,1,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,2,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,2,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2017974853515625
+320x_2025-05-15_02-05-00,20,2,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2376556396484375
+320x_2025-05-15_02-05-00,20,2,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,2,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,3,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,3,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.203704833984375
+320x_2025-05-15_02-05-00,20,3,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2552032470703125
+320x_2025-05-15_02-05-00,20,3,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,3,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,4,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,4,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.200653076171875
+320x_2025-05-15_02-05-00,20,4,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.23956298828125
+320x_2025-05-15_02-05-00,20,4,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,4,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,5,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,5,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.200653076171875
+320x_2025-05-15_02-05-00,20,5,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.270843505859375
+320x_2025-05-15_02-05-00,20,5,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,5,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,6,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,6,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.22125244140625
+320x_2025-05-15_02-05-00,20,6,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3787994384765625
+320x_2025-05-15_02-05-00,20,6,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,6,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,7,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,7,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1987457275390625
+320x_2025-05-15_02-05-00,20,7,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2552032470703125
+320x_2025-05-15_02-05-00,20,7,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,7,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,8,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,8,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.19989013671875
+320x_2025-05-15_02-05-00,20,8,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2033233642578125
+320x_2025-05-15_02-05-00,20,8,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,8,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,9,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,9,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2010345458984375
+320x_2025-05-15_02-05-00,20,9,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.212860107421875
+320x_2025-05-15_02-05-00,20,9,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,9,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,10,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,10,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2002716064453125
+320x_2025-05-15_02-05-00,20,10,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.214385986328125
+320x_2025-05-15_02-05-00,20,10,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,10,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,11,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,11,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.200653076171875
+320x_2025-05-15_02-05-00,20,11,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.234222412109375
+320x_2025-05-15_02-05-00,20,11,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,11,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,12,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,12,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+320x_2025-05-15_02-05-00,20,12,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2285003662109375
+320x_2025-05-15_02-05-00,20,12,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,12,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,13,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,13,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2010345458984375
+320x_2025-05-15_02-05-00,20,13,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2437591552734375
+320x_2025-05-15_02-05-00,20,13,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,13,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,14,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,14,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1979827880859375
+320x_2025-05-15_02-05-00,20,14,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2521514892578125
+320x_2025-05-15_02-05-00,20,14,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,14,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,15,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,15,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+320x_2025-05-15_02-05-00,20,15,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.196075439453125
+320x_2025-05-15_02-05-00,20,15,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,15,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,16,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,16,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+320x_2025-05-15_02-05-00,20,16,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2010345458984375
+320x_2025-05-15_02-05-00,20,16,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,16,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,17,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,17,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+320x_2025-05-15_02-05-00,20,17,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2124786376953125
+320x_2025-05-15_02-05-00,20,17,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,17,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,18,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,18,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.19989013671875
+320x_2025-05-15_02-05-00,20,18,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2017974853515625
+320x_2025-05-15_02-05-00,20,18,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,18,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,19,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,19,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+320x_2025-05-15_02-05-00,20,19,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2117156982421875
+320x_2025-05-15_02-05-00,20,19,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,19,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,20,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,20,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+320x_2025-05-15_02-05-00,20,20,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.232696533203125
+320x_2025-05-15_02-05-00,20,20,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,20,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,21,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,21,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1987457275390625
+320x_2025-05-15_02-05-00,20,21,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3566741943359375
+320x_2025-05-15_02-05-00,20,21,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,21,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,22,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,22,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+320x_2025-05-15_02-05-00,20,22,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1293182373046875
+320x_2025-05-15_02-05-00,20,22,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,22,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,23,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,23,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+320x_2025-05-15_02-05-00,20,23,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1895904541015625
+320x_2025-05-15_02-05-00,20,23,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,23,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,24,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,24,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+320x_2025-05-15_02-05-00,20,24,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2017974853515625
+320x_2025-05-15_02-05-00,20,24,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,24,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,25,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,25,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1979827880859375
+320x_2025-05-15_02-05-00,20,25,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.209808349609375
+320x_2025-05-15_02-05-00,20,25,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,25,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,26,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,26,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2002716064453125
+320x_2025-05-15_02-05-00,20,26,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.209808349609375
+320x_2025-05-15_02-05-00,20,26,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,26,attention_resunet,Attention ResUNet,attention_resunet,0.0
+320x_2025-05-15_02-05-00,20,27,unet_best,U-Net (best),unet,0.0
+320x_2025-05-15_02-05-00,20,27,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+320x_2025-05-15_02-05-00,20,27,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.21820068359375
+320x_2025-05-15_02-05-00,20,27,resunet,ResUNet,resunet,0.0
+320x_2025-05-15_02-05-00,20,27,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,0,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,0,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+5120x_2025-05-16_00-59-00_002,20,0,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.20751953125
+5120x_2025-05-16_00-59-00_002,20,0,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,0,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,1,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,1,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.19989013671875
+5120x_2025-05-16_00-59-00_002,20,1,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2017974853515625
+5120x_2025-05-16_00-59-00_002,20,1,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,1,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,2,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,2,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2002716064453125
+5120x_2025-05-16_00-59-00_002,20,2,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.23345947265625
+5120x_2025-05-16_00-59-00_002,20,2,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,2,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,3,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,3,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2033233642578125
+5120x_2025-05-16_00-59-00_002,20,3,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4268646240234375
+5120x_2025-05-16_00-59-00_002,20,3,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,3,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,4,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,4,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2040863037109375
+5120x_2025-05-16_00-59-00_002,20,4,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.45928955078125
+5120x_2025-05-16_00-59-00_002,20,4,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,4,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,5,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,5,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2040863037109375
+5120x_2025-05-16_00-59-00_002,20,5,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.42572021484375
+5120x_2025-05-16_00-59-00_002,20,5,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,5,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,6,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,6,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.21820068359375
+5120x_2025-05-16_00-59-00_002,20,6,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.39825439453125
+5120x_2025-05-16_00-59-00_002,20,6,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,6,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,7,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,7,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+5120x_2025-05-16_00-59-00_002,20,7,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1979827880859375
+5120x_2025-05-16_00-59-00_002,20,7,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,7,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,8,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,8,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+5120x_2025-05-16_00-59-00_002,20,8,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.200653076171875
+5120x_2025-05-16_00-59-00_002,20,8,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,8,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,9,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,9,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.201416015625
+5120x_2025-05-16_00-59-00_002,20,9,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2002716064453125
+5120x_2025-05-16_00-59-00_002,20,9,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,9,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,10,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,10,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2025604248046875
+5120x_2025-05-16_00-59-00_002,20,10,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.240325927734375
+5120x_2025-05-16_00-59-00_002,20,10,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,10,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,11,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,11,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2044677734375
+5120x_2025-05-16_00-59-00_002,20,11,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.440216064453125
+5120x_2025-05-16_00-59-00_002,20,11,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,11,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,12,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,12,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2056121826171875
+5120x_2025-05-16_00-59-00_002,20,12,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4772186279296875
+5120x_2025-05-16_00-59-00_002,20,12,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,12,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,13,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,13,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2044677734375
+5120x_2025-05-16_00-59-00_002,20,13,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4245758056640625
+5120x_2025-05-16_00-59-00_002,20,13,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,13,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,14,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,14,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+5120x_2025-05-16_00-59-00_002,20,14,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.19683837890625
+5120x_2025-05-16_00-59-00_002,20,14,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,14,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,15,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,15,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+5120x_2025-05-16_00-59-00_002,20,15,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1983642578125
+5120x_2025-05-16_00-59-00_002,20,15,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,15,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,16,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,16,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+5120x_2025-05-16_00-59-00_002,20,16,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1987457275390625
+5120x_2025-05-16_00-59-00_002,20,16,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,16,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,17,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,17,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+5120x_2025-05-16_00-59-00_002,20,17,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2079010009765625
+5120x_2025-05-16_00-59-00_002,20,17,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,17,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,18,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,18,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.200653076171875
+5120x_2025-05-16_00-59-00_002,20,18,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.26702880859375
+5120x_2025-05-16_00-59-00_002,20,18,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,18,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,19,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,19,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2010345458984375
+5120x_2025-05-16_00-59-00_002,20,19,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.405120849609375
+5120x_2025-05-16_00-59-00_002,20,19,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,19,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,20,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,20,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2040863037109375
+5120x_2025-05-16_00-59-00_002,20,20,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.464630126953125
+5120x_2025-05-16_00-59-00_002,20,20,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,20,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,21,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,21,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+5120x_2025-05-16_00-59-00_002,20,21,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1949310302734375
+5120x_2025-05-16_00-59-00_002,20,21,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,21,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,22,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,22,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+5120x_2025-05-16_00-59-00_002,20,22,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.19683837890625
+5120x_2025-05-16_00-59-00_002,20,22,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,22,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,23,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,23,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+5120x_2025-05-16_00-59-00_002,20,23,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1987457275390625
+5120x_2025-05-16_00-59-00_002,20,23,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,23,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,24,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,24,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+5120x_2025-05-16_00-59-00_002,20,24,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2002716064453125
+5120x_2025-05-16_00-59-00_002,20,24,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,24,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,25,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,25,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+5120x_2025-05-16_00-59-00_002,20,25,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2086639404296875
+5120x_2025-05-16_00-59-00_002,20,25,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,25,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,26,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,26,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2002716064453125
+5120x_2025-05-16_00-59-00_002,20,26,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.225830078125
+5120x_2025-05-16_00-59-00_002,20,26,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,26,attention_resunet,Attention ResUNet,attention_resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,27,unet_best,U-Net (best),unet,0.0
+5120x_2025-05-16_00-59-00_002,20,27,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.201416015625
+5120x_2025-05-16_00-59-00_002,20,27,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.32501220703125
+5120x_2025-05-16_00-59-00_002,20,27,resunet,ResUNet,resunet,0.0
+5120x_2025-05-16_00-59-00_002,20,27,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,0,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,0,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+10240x_2560x_2025-05-16_00-59-00_002,40,0,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2017974853515625
+10240x_2560x_2025-05-16_00-59-00_002,40,0,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,0,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,1,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,1,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+10240x_2560x_2025-05-16_00-59-00_002,40,1,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.19989013671875
+10240x_2560x_2025-05-16_00-59-00_002,40,1,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,1,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,2,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,2,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.203704833984375
+10240x_2560x_2025-05-16_00-59-00_002,40,2,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2223968505859375
+10240x_2560x_2025-05-16_00-59-00_002,40,2,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,2,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,3,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,3,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2048492431640625
+10240x_2560x_2025-05-16_00-59-00_002,40,3,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4009246826171875
+10240x_2560x_2025-05-16_00-59-00_002,40,3,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,3,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,4,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,4,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2044677734375
+10240x_2560x_2025-05-16_00-59-00_002,40,4,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4730224609375
+10240x_2560x_2025-05-16_00-59-00_002,40,4,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,4,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,5,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,5,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2025604248046875
+10240x_2560x_2025-05-16_00-59-00_002,40,5,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4520416259765625
+10240x_2560x_2025-05-16_00-59-00_002,40,5,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,5,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,6,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,6,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.21514892578125
+10240x_2560x_2025-05-16_00-59-00_002,40,6,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4001617431640625
+10240x_2560x_2025-05-16_00-59-00_002,40,6,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,6,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,7,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,7,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+10240x_2560x_2025-05-16_00-59-00_002,40,7,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.197601318359375
+10240x_2560x_2025-05-16_00-59-00_002,40,7,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,7,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,8,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,8,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+10240x_2560x_2025-05-16_00-59-00_002,40,8,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.205230712890625
+10240x_2560x_2025-05-16_00-59-00_002,40,8,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,8,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,9,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,9,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+10240x_2560x_2025-05-16_00-59-00_002,40,9,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.205230712890625
+10240x_2560x_2025-05-16_00-59-00_002,40,9,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,9,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,10,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,10,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2025604248046875
+10240x_2560x_2025-05-16_00-59-00_002,40,10,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2315521240234375
+10240x_2560x_2025-05-16_00-59-00_002,40,10,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,10,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,11,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,11,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.201416015625
+10240x_2560x_2025-05-16_00-59-00_002,40,11,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4261016845703125
+10240x_2560x_2025-05-16_00-59-00_002,40,11,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,11,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,12,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,12,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2025604248046875
+10240x_2560x_2025-05-16_00-59-00_002,40,12,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4604339599609375
+10240x_2560x_2025-05-16_00-59-00_002,40,12,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,12,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,13,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,13,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2025604248046875
+10240x_2560x_2025-05-16_00-59-00_002,40,13,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4505157470703125
+10240x_2560x_2025-05-16_00-59-00_002,40,13,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,13,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,14,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,14,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+10240x_2560x_2025-05-16_00-59-00_002,40,14,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.197601318359375
+10240x_2560x_2025-05-16_00-59-00_002,40,14,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,14,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,15,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,15,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+10240x_2560x_2025-05-16_00-59-00_002,40,15,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2002716064453125
+10240x_2560x_2025-05-16_00-59-00_002,40,15,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,15,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,16,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,16,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+10240x_2560x_2025-05-16_00-59-00_002,40,16,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.201416015625
+10240x_2560x_2025-05-16_00-59-00_002,40,16,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,16,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,17,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,17,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.200653076171875
+10240x_2560x_2025-05-16_00-59-00_002,40,17,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2033233642578125
+10240x_2560x_2025-05-16_00-59-00_002,40,17,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,17,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,18,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,18,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2002716064453125
+10240x_2560x_2025-05-16_00-59-00_002,40,18,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2685546875
+10240x_2560x_2025-05-16_00-59-00_002,40,18,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,18,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,19,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,19,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2017974853515625
+10240x_2560x_2025-05-16_00-59-00_002,40,19,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3688812255859375
+10240x_2560x_2025-05-16_00-59-00_002,40,19,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,19,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,20,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,20,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2017974853515625
+10240x_2560x_2025-05-16_00-59-00_002,40,20,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.45013427734375
+10240x_2560x_2025-05-16_00-59-00_002,40,20,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,20,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,21,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,21,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+10240x_2560x_2025-05-16_00-59-00_002,40,21,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1873016357421875
+10240x_2560x_2025-05-16_00-59-00_002,40,21,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,21,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,22,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,22,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+10240x_2560x_2025-05-16_00-59-00_002,40,22,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1979827880859375
+10240x_2560x_2025-05-16_00-59-00_002,40,22,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,22,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,23,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,23,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+10240x_2560x_2025-05-16_00-59-00_002,40,23,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1987457275390625
+10240x_2560x_2025-05-16_00-59-00_002,40,23,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,23,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,24,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,24,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+10240x_2560x_2025-05-16_00-59-00_002,40,24,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2025604248046875
+10240x_2560x_2025-05-16_00-59-00_002,40,24,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,24,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,25,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,25,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.19989013671875
+10240x_2560x_2025-05-16_00-59-00_002,40,25,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2086639404296875
+10240x_2560x_2025-05-16_00-59-00_002,40,25,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,25,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,26,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,26,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+10240x_2560x_2025-05-16_00-59-00_002,40,26,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2166748046875
+10240x_2560x_2025-05-16_00-59-00_002,40,26,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,26,attention_resunet,Attention ResUNet,attention_resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,27,unet_best,U-Net (best),unet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,27,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.205230712890625
+10240x_2560x_2025-05-16_00-59-00_002,40,27,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2841949462890625
+10240x_2560x_2025-05-16_00-59-00_002,40,27,resunet,ResUNet,resunet,0.0
+10240x_2560x_2025-05-16_00-59-00_002,40,27,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,0,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,0,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2002716064453125
+640x_2025-05-16_00-59-00_002,40,0,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.21514892578125
+640x_2025-05-16_00-59-00_002,40,0,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,0,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,1,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,1,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+640x_2025-05-16_00-59-00_002,40,1,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2197265625
+640x_2025-05-16_00-59-00_002,40,1,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,1,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,2,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,2,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2033233642578125
+640x_2025-05-16_00-59-00_002,40,2,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2368927001953125
+640x_2025-05-16_00-59-00_002,40,2,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,2,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,3,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,3,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2025604248046875
+640x_2025-05-16_00-59-00_002,40,3,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3688812255859375
+640x_2025-05-16_00-59-00_002,40,3,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,3,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,4,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,4,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2056121826171875
+640x_2025-05-16_00-59-00_002,40,4,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4589080810546875
+640x_2025-05-16_00-59-00_002,40,4,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,4,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,5,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,5,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.203704833984375
+640x_2025-05-16_00-59-00_002,40,5,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4505157470703125
+640x_2025-05-16_00-59-00_002,40,5,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,5,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,6,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,6,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.215911865234375
+640x_2025-05-16_00-59-00_002,40,6,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.405120849609375
+640x_2025-05-16_00-59-00_002,40,6,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,6,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,7,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,7,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2002716064453125
+640x_2025-05-16_00-59-00_002,40,7,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2105712890625
+640x_2025-05-16_00-59-00_002,40,7,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,7,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,8,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,8,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+640x_2025-05-16_00-59-00_002,40,8,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.20904541015625
+640x_2025-05-16_00-59-00_002,40,8,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,8,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,9,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,9,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.19989013671875
+640x_2025-05-16_00-59-00_002,40,9,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2155303955078125
+640x_2025-05-16_00-59-00_002,40,9,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,9,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,10,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,10,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.200653076171875
+640x_2025-05-16_00-59-00_002,40,10,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2475738525390625
+640x_2025-05-16_00-59-00_002,40,10,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,10,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,11,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,11,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.200653076171875
+640x_2025-05-16_00-59-00_002,40,11,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3795623779296875
+640x_2025-05-16_00-59-00_002,40,11,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,11,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,12,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,12,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.202178955078125
+640x_2025-05-16_00-59-00_002,40,12,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4425048828125
+640x_2025-05-16_00-59-00_002,40,12,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,12,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,13,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,13,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2063751220703125
+640x_2025-05-16_00-59-00_002,40,13,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4558563232421875
+640x_2025-05-16_00-59-00_002,40,13,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,13,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,14,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,14,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1979827880859375
+640x_2025-05-16_00-59-00_002,40,14,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1979827880859375
+640x_2025-05-16_00-59-00_002,40,14,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,14,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,15,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,15,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+640x_2025-05-16_00-59-00_002,40,15,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2033233642578125
+640x_2025-05-16_00-59-00_002,40,15,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,15,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,16,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,16,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1987457275390625
+640x_2025-05-16_00-59-00_002,40,16,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.206756591796875
+640x_2025-05-16_00-59-00_002,40,16,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,16,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,17,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,17,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+640x_2025-05-16_00-59-00_002,40,17,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2117156982421875
+640x_2025-05-16_00-59-00_002,40,17,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,17,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,18,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,18,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2002716064453125
+640x_2025-05-16_00-59-00_002,40,18,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.238037109375
+640x_2025-05-16_00-59-00_002,40,18,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,18,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,19,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,19,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2002716064453125
+640x_2025-05-16_00-59-00_002,40,19,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3467559814453125
+640x_2025-05-16_00-59-00_002,40,19,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,19,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,20,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,20,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2010345458984375
+640x_2025-05-16_00-59-00_002,40,20,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.443267822265625
+640x_2025-05-16_00-59-00_002,40,20,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,20,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,21,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,21,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+640x_2025-05-16_00-59-00_002,40,21,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1922607421875
+640x_2025-05-16_00-59-00_002,40,21,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,21,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,22,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,22,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+640x_2025-05-16_00-59-00_002,40,22,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1979827880859375
+640x_2025-05-16_00-59-00_002,40,22,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,22,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,23,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,23,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+640x_2025-05-16_00-59-00_002,40,23,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1979827880859375
+640x_2025-05-16_00-59-00_002,40,23,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,23,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,24,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,24,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+640x_2025-05-16_00-59-00_002,40,24,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.203704833984375
+640x_2025-05-16_00-59-00_002,40,24,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,24,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,25,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,25,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+640x_2025-05-16_00-59-00_002,40,25,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2002716064453125
+640x_2025-05-16_00-59-00_002,40,25,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,25,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,26,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,26,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+640x_2025-05-16_00-59-00_002,40,26,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2155303955078125
+640x_2025-05-16_00-59-00_002,40,26,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,26,attention_resunet,Attention ResUNet,attention_resunet,0.0
+640x_2025-05-16_00-59-00_002,40,27,unet_best,U-Net (best),unet,0.0
+640x_2025-05-16_00-59-00_002,40,27,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.19989013671875
+640x_2025-05-16_00-59-00_002,40,27,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2918243408203125
+640x_2025-05-16_00-59-00_002,40,27,resunet,ResUNet,resunet,0.0
+640x_2025-05-16_00-59-00_002,40,27,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,0,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,0,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.199127197265625
+1280x_2025-05-16_00-59-00_002,80,0,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.217437744140625
+1280x_2025-05-16_00-59-00_002,80,0,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,0,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,1,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,1,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.19989013671875
+1280x_2025-05-16_00-59-00_002,80,1,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.206756591796875
+1280x_2025-05-16_00-59-00_002,80,1,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,1,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,2,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,2,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.20294189453125
+1280x_2025-05-16_00-59-00_002,80,2,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.23040771484375
+1280x_2025-05-16_00-59-00_002,80,2,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,2,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,3,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,3,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2033233642578125
+1280x_2025-05-16_00-59-00_002,80,3,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4169464111328125
+1280x_2025-05-16_00-59-00_002,80,3,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,3,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,4,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,4,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.20599365234375
+1280x_2025-05-16_00-59-00_002,80,4,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4665374755859375
+1280x_2025-05-16_00-59-00_002,80,4,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,4,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,5,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,5,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2105712890625
+1280x_2025-05-16_00-59-00_002,80,5,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4261016845703125
+1280x_2025-05-16_00-59-00_002,80,5,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,5,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,6,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,6,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2254486083984375
+1280x_2025-05-16_00-59-00_002,80,6,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3997802734375
+1280x_2025-05-16_00-59-00_002,80,6,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,6,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,7,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,7,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1987457275390625
+1280x_2025-05-16_00-59-00_002,80,7,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.19989013671875
+1280x_2025-05-16_00-59-00_002,80,7,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,7,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,8,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,8,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.200653076171875
+1280x_2025-05-16_00-59-00_002,80,8,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2071380615234375
+1280x_2025-05-16_00-59-00_002,80,8,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,8,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,9,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,9,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.20294189453125
+1280x_2025-05-16_00-59-00_002,80,9,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2079010009765625
+1280x_2025-05-16_00-59-00_002,80,9,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,9,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,10,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,10,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.200653076171875
+1280x_2025-05-16_00-59-00_002,80,10,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.247955322265625
+1280x_2025-05-16_00-59-00_002,80,10,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,10,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,11,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,11,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2079010009765625
+1280x_2025-05-16_00-59-00_002,80,11,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.431060791015625
+1280x_2025-05-16_00-59-00_002,80,11,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,11,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,12,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,12,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.201416015625
+1280x_2025-05-16_00-59-00_002,80,12,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4711151123046875
+1280x_2025-05-16_00-59-00_002,80,12,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,12,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,13,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,13,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2048492431640625
+1280x_2025-05-16_00-59-00_002,80,13,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4238128662109375
+1280x_2025-05-16_00-59-00_002,80,13,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,13,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,14,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,14,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+1280x_2025-05-16_00-59-00_002,80,14,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.19683837890625
+1280x_2025-05-16_00-59-00_002,80,14,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,14,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,15,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,15,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+1280x_2025-05-16_00-59-00_002,80,15,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2002716064453125
+1280x_2025-05-16_00-59-00_002,80,15,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,15,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,16,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,16,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.19989013671875
+1280x_2025-05-16_00-59-00_002,80,16,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.203704833984375
+1280x_2025-05-16_00-59-00_002,80,16,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,16,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,17,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,17,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+1280x_2025-05-16_00-59-00_002,80,17,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.203704833984375
+1280x_2025-05-16_00-59-00_002,80,17,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,17,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,18,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,18,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.200653076171875
+1280x_2025-05-16_00-59-00_002,80,18,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2498626708984375
+1280x_2025-05-16_00-59-00_002,80,18,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,18,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,19,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,19,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2010345458984375
+1280x_2025-05-16_00-59-00_002,80,19,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4047393798828125
+1280x_2025-05-16_00-59-00_002,80,19,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,19,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,20,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,20,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.202178955078125
+1280x_2025-05-16_00-59-00_002,80,20,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.45013427734375
+1280x_2025-05-16_00-59-00_002,80,20,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,20,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,21,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,21,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+1280x_2025-05-16_00-59-00_002,80,21,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.19073486328125
+1280x_2025-05-16_00-59-00_002,80,21,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,21,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,22,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,22,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+1280x_2025-05-16_00-59-00_002,80,22,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.194549560546875
+1280x_2025-05-16_00-59-00_002,80,22,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,22,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,23,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,23,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+1280x_2025-05-16_00-59-00_002,80,23,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.199127197265625
+1280x_2025-05-16_00-59-00_002,80,23,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,23,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,24,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,24,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.19989013671875
+1280x_2025-05-16_00-59-00_002,80,24,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2105712890625
+1280x_2025-05-16_00-59-00_002,80,24,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,24,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,25,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,25,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+1280x_2025-05-16_00-59-00_002,80,25,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.20294189453125
+1280x_2025-05-16_00-59-00_002,80,25,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,25,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,26,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,26,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2002716064453125
+1280x_2025-05-16_00-59-00_002,80,26,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2197265625
+1280x_2025-05-16_00-59-00_002,80,26,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,26,attention_resunet,Attention ResUNet,attention_resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,27,unet_best,U-Net (best),unet,0.0
+1280x_2025-05-16_00-59-00_002,80,27,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.202178955078125
+1280x_2025-05-16_00-59-00_002,80,27,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.330352783203125
+1280x_2025-05-16_00-59-00_002,80,27,resunet,ResUNet,resunet,0.0
+1280x_2025-05-16_00-59-00_002,80,27,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,0,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,0,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.279998779296875
+80x_1_2025-05-22_14-48-00_003,80,0,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4245758056640625
+80x_1_2025-05-22_14-48-00_003,80,0,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,0,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,1,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,1,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.32806396484375
+80x_1_2025-05-22_14-48-00_003,80,1,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4161834716796875
+80x_1_2025-05-22_14-48-00_003,80,1,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,1,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,2,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,2,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.3223419189453125
+80x_1_2025-05-22_14-48-00_003,80,2,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.411224365234375
+80x_1_2025-05-22_14-48-00_003,80,2,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,2,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,3,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,3,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.307464599609375
+80x_1_2025-05-22_14-48-00_003,80,3,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4116058349609375
+80x_1_2025-05-22_14-48-00_003,80,3,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,3,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,4,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,4,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.276947021484375
+80x_1_2025-05-22_14-48-00_003,80,4,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3936767578125
+80x_1_2025-05-22_14-48-00_003,80,4,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,4,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,5,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,5,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2685546875
+80x_1_2025-05-22_14-48-00_003,80,5,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.408935546875
+80x_1_2025-05-22_14-48-00_003,80,5,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,5,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,6,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,6,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.292205810546875
+80x_1_2025-05-22_14-48-00_003,80,6,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.395965576171875
+80x_1_2025-05-22_14-48-00_003,80,6,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,6,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,7,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,7,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2773284912109375
+80x_1_2025-05-22_14-48-00_003,80,7,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4169464111328125
+80x_1_2025-05-22_14-48-00_003,80,7,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,7,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,8,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,8,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.27618408203125
+80x_1_2025-05-22_14-48-00_003,80,8,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.40740966796875
+80x_1_2025-05-22_14-48-00_003,80,8,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,8,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,9,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,9,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.30364990234375
+80x_1_2025-05-22_14-48-00_003,80,9,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.38604736328125
+80x_1_2025-05-22_14-48-00_003,80,9,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,9,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,10,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,10,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.29754638671875
+80x_1_2025-05-22_14-48-00_003,80,10,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.402069091796875
+80x_1_2025-05-22_14-48-00_003,80,10,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,10,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,11,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,11,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2712249755859375
+80x_1_2025-05-22_14-48-00_003,80,11,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.40740966796875
+80x_1_2025-05-22_14-48-00_003,80,11,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,11,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,12,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,12,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.249481201171875
+80x_1_2025-05-22_14-48-00_003,80,12,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3902435302734375
+80x_1_2025-05-22_14-48-00_003,80,12,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,12,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,13,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,13,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2475738525390625
+80x_1_2025-05-22_14-48-00_003,80,13,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3734588623046875
+80x_1_2025-05-22_14-48-00_003,80,13,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,13,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,14,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,14,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2216339111328125
+80x_1_2025-05-22_14-48-00_003,80,14,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3570556640625
+80x_1_2025-05-22_14-48-00_003,80,14,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,14,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,15,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,15,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2483367919921875
+80x_1_2025-05-22_14-48-00_003,80,15,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.365447998046875
+80x_1_2025-05-22_14-48-00_003,80,15,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,15,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,16,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,16,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2780914306640625
+80x_1_2025-05-22_14-48-00_003,80,16,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3627777099609375
+80x_1_2025-05-22_14-48-00_003,80,16,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,16,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,17,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,17,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2712249755859375
+80x_1_2025-05-22_14-48-00_003,80,17,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3627777099609375
+80x_1_2025-05-22_14-48-00_003,80,17,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,17,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,18,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,18,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2597808837890625
+80x_1_2025-05-22_14-48-00_003,80,18,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3795623779296875
+80x_1_2025-05-22_14-48-00_003,80,18,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,18,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,19,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,19,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.243377685546875
+80x_1_2025-05-22_14-48-00_003,80,19,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3856658935546875
+80x_1_2025-05-22_14-48-00_003,80,19,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,19,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,20,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,20,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.238037109375
+80x_1_2025-05-22_14-48-00_003,80,20,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.359344482421875
+80x_1_2025-05-22_14-48-00_003,80,20,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,20,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,21,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,21,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2178192138671875
+80x_1_2025-05-22_14-48-00_003,80,21,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3681182861328125
+80x_1_2025-05-22_14-48-00_003,80,21,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,21,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,22,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,22,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2323150634765625
+80x_1_2025-05-22_14-48-00_003,80,22,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3475189208984375
+80x_1_2025-05-22_14-48-00_003,80,22,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,22,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,23,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,23,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.238037109375
+80x_1_2025-05-22_14-48-00_003,80,23,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3582000732421875
+80x_1_2025-05-22_14-48-00_003,80,23,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,23,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,24,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,24,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.23040771484375
+80x_1_2025-05-22_14-48-00_003,80,24,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3452301025390625
+80x_1_2025-05-22_14-48-00_003,80,24,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,24,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,25,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,25,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.23040771484375
+80x_1_2025-05-22_14-48-00_003,80,25,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3482818603515625
+80x_1_2025-05-22_14-48-00_003,80,25,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,25,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,26,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,26,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2155303955078125
+80x_1_2025-05-22_14-48-00_003,80,26,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3444671630859375
+80x_1_2025-05-22_14-48-00_003,80,26,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,26,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,27,unet_best,U-Net (best),unet,0.0
+80x_1_2025-05-22_14-48-00_003,80,27,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2201080322265625
+80x_1_2025-05-22_14-48-00_003,80,27,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3246307373046875
+80x_1_2025-05-22_14-48-00_003,80,27,resunet,ResUNet,resunet,0.0
+80x_1_2025-05-22_14-48-00_003,80,27,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,0,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,0,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2384185791015625
+80x_2_2025-05-22_14-48-00,80,0,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3993988037109375
+80x_2_2025-05-22_14-48-00,80,0,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,0,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,1,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,1,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.246429443359375
+80x_2_2025-05-22_14-48-00,80,1,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.39215087890625
+80x_2_2025-05-22_14-48-00,80,1,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,1,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,2,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,2,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2716064453125
+80x_2_2025-05-22_14-48-00,80,2,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.38909912109375
+80x_2_2025-05-22_14-48-00,80,2,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,2,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,3,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,3,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.254058837890625
+80x_2_2025-05-22_14-48-00,80,3,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.382232666015625
+80x_2_2025-05-22_14-48-00,80,3,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,3,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,4,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,4,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2468109130859375
+80x_2_2025-05-22_14-48-00,80,4,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3795623779296875
+80x_2_2025-05-22_14-48-00,80,4,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,4,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,5,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,5,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.24566650390625
+80x_2_2025-05-22_14-48-00,80,5,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3955841064453125
+80x_2_2025-05-22_14-48-00,80,5,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,5,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,6,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,6,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2704620361328125
+80x_2_2025-05-22_14-48-00,80,6,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.384521484375
+80x_2_2025-05-22_14-48-00,80,6,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,6,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,7,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,7,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2399444580078125
+80x_2_2025-05-22_14-48-00,80,7,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.345611572265625
+80x_2_2025-05-22_14-48-00,80,7,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,7,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,8,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,8,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.226593017578125
+80x_2_2025-05-22_14-48-00,80,8,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3734588623046875
+80x_2_2025-05-22_14-48-00,80,8,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,8,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,9,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,9,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2620697021484375
+80x_2_2025-05-22_14-48-00,80,9,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.32958984375
+80x_2_2025-05-22_14-48-00,80,9,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,9,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,10,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,10,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.23040771484375
+80x_2_2025-05-22_14-48-00,80,10,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3772735595703125
+80x_2_2025-05-22_14-48-00,80,10,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,10,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,11,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,11,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.243377685546875
+80x_2_2025-05-22_14-48-00,80,11,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.368499755859375
+80x_2_2025-05-22_14-48-00,80,11,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,11,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,12,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,12,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2277374267578125
+80x_2_2025-05-22_14-48-00,80,12,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3498077392578125
+80x_2_2025-05-22_14-48-00,80,12,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,12,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,13,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,13,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2170562744140625
+80x_2_2025-05-22_14-48-00,80,13,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.305938720703125
+80x_2_2025-05-22_14-48-00,80,13,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,13,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,14,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,14,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2124786376953125
+80x_2_2025-05-22_14-48-00,80,14,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3093719482421875
+80x_2_2025-05-22_14-48-00,80,14,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,14,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,15,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,15,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2330780029296875
+80x_2_2025-05-22_14-48-00,80,15,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3143310546875
+80x_2_2025-05-22_14-48-00,80,15,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,15,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,16,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,16,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2346038818359375
+80x_2_2025-05-22_14-48-00,80,16,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.310516357421875
+80x_2_2025-05-22_14-48-00,80,16,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,16,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,17,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,17,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.23040771484375
+80x_2_2025-05-22_14-48-00,80,17,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3177642822265625
+80x_2_2025-05-22_14-48-00,80,17,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,17,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,18,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,18,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2201080322265625
+80x_2_2025-05-22_14-48-00,80,18,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.32958984375
+80x_2_2025-05-22_14-48-00,80,18,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,18,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,19,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,19,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2285003662109375
+80x_2_2025-05-22_14-48-00,80,19,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3173828125
+80x_2_2025-05-22_14-48-00,80,19,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,19,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,20,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,20,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2262115478515625
+80x_2_2025-05-22_14-48-00,80,20,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.29449462890625
+80x_2_2025-05-22_14-48-00,80,20,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,20,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,21,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,21,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.20904541015625
+80x_2_2025-05-22_14-48-00,80,21,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.28228759765625
+80x_2_2025-05-22_14-48-00,80,21,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,21,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,22,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,22,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2262115478515625
+80x_2_2025-05-22_14-48-00,80,22,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.299835205078125
+80x_2_2025-05-22_14-48-00,80,22,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,22,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,23,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,23,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.226593017578125
+80x_2_2025-05-22_14-48-00,80,23,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.262451171875
+80x_2_2025-05-22_14-48-00,80,23,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,23,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,24,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,24,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2140045166015625
+80x_2_2025-05-22_14-48-00,80,24,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3154754638671875
+80x_2_2025-05-22_14-48-00,80,24,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,24,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,25,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,25,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2105712890625
+80x_2_2025-05-22_14-48-00,80,25,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2834320068359375
+80x_2_2025-05-22_14-48-00,80,25,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,25,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,26,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,26,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2162933349609375
+80x_2_2025-05-22_14-48-00,80,26,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.260162353515625
+80x_2_2025-05-22_14-48-00,80,26,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,26,attention_resunet,Attention ResUNet,attention_resunet,0.0
+80x_2_2025-05-22_14-48-00,80,27,unet_best,U-Net (best),unet,0.0
+80x_2_2025-05-22_14-48-00,80,27,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2044677734375
+80x_2_2025-05-22_14-48-00,80,27,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.270843505859375
+80x_2_2025-05-22_14-48-00,80,27,resunet,ResUNet,resunet,0.0
+80x_2_2025-05-22_14-48-00,80,27,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,0,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,0,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2086639404296875
+160x_2025-05-15_02-05-00,160,0,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2719879150390625
+160x_2025-05-15_02-05-00,160,0,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,0,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,1,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,1,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2094268798828125
+160x_2025-05-15_02-05-00,160,1,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.289154052734375
+160x_2025-05-15_02-05-00,160,1,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,1,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,2,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,2,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.209808349609375
+160x_2025-05-15_02-05-00,160,2,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2788543701171875
+160x_2025-05-15_02-05-00,160,2,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,2,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,3,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,3,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2166748046875
+160x_2025-05-15_02-05-00,160,3,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3459930419921875
+160x_2025-05-15_02-05-00,160,3,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,3,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,4,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,4,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.218963623046875
+160x_2025-05-15_02-05-00,160,4,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.331878662109375
+160x_2025-05-15_02-05-00,160,4,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,4,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,5,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,5,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2368927001953125
+160x_2025-05-15_02-05-00,160,5,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.38604736328125
+160x_2025-05-15_02-05-00,160,5,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,5,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,6,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,6,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2895355224609375
+160x_2025-05-15_02-05-00,160,6,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.4207611083984375
+160x_2025-05-15_02-05-00,160,6,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,6,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,7,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,7,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+160x_2025-05-15_02-05-00,160,7,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2353668212890625
+160x_2025-05-15_02-05-00,160,7,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,7,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,8,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,8,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2017974853515625
+160x_2025-05-15_02-05-00,160,8,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2323150634765625
+160x_2025-05-15_02-05-00,160,8,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,8,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,9,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,9,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.203704833984375
+160x_2025-05-15_02-05-00,160,9,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2796173095703125
+160x_2025-05-15_02-05-00,160,9,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,9,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,10,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,10,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2048492431640625
+160x_2025-05-15_02-05-00,160,10,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2567291259765625
+160x_2025-05-15_02-05-00,160,10,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,10,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,11,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,11,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2002716064453125
+160x_2025-05-15_02-05-00,160,11,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.30517578125
+160x_2025-05-15_02-05-00,160,11,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,11,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,12,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,12,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2140045166015625
+160x_2025-05-15_02-05-00,160,12,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.3063201904296875
+160x_2025-05-15_02-05-00,160,12,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,12,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,13,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,13,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2307891845703125
+160x_2025-05-15_02-05-00,160,13,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.348663330078125
+160x_2025-05-15_02-05-00,160,13,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,13,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,14,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,14,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+160x_2025-05-15_02-05-00,160,14,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2101898193359375
+160x_2025-05-15_02-05-00,160,14,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,14,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,15,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,15,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1987457275390625
+160x_2025-05-15_02-05-00,160,15,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2201080322265625
+160x_2025-05-15_02-05-00,160,15,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,15,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,16,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,16,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.200653076171875
+160x_2025-05-15_02-05-00,160,16,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2262115478515625
+160x_2025-05-15_02-05-00,160,16,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,16,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,17,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,17,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2010345458984375
+160x_2025-05-15_02-05-00,160,17,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2353668212890625
+160x_2025-05-15_02-05-00,160,17,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,17,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,18,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,18,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.205230712890625
+160x_2025-05-15_02-05-00,160,18,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2643585205078125
+160x_2025-05-15_02-05-00,160,18,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,18,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,19,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,19,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2101898193359375
+160x_2025-05-15_02-05-00,160,19,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.25177001953125
+160x_2025-05-15_02-05-00,160,19,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,19,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,20,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,20,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.217437744140625
+160x_2025-05-15_02-05-00,160,20,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.319671630859375
+160x_2025-05-15_02-05-00,160,20,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,20,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,21,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,21,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+160x_2025-05-15_02-05-00,160,21,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.1888275146484375
+160x_2025-05-15_02-05-00,160,21,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,21,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,22,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,22,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2010345458984375
+160x_2025-05-15_02-05-00,160,22,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2063751220703125
+160x_2025-05-15_02-05-00,160,22,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,22,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,23,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,23,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2010345458984375
+160x_2025-05-15_02-05-00,160,23,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2307891845703125
+160x_2025-05-15_02-05-00,160,23,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,23,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,24,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,24,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1983642578125
+160x_2025-05-15_02-05-00,160,24,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.229644775390625
+160x_2025-05-15_02-05-00,160,24,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,24,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,25,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,25,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.1995086669921875
+160x_2025-05-15_02-05-00,160,25,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2361297607421875
+160x_2025-05-15_02-05-00,160,25,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,25,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,26,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,26,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.205230712890625
+160x_2025-05-15_02-05-00,160,26,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.235748291015625
+160x_2025-05-15_02-05-00,160,26,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,26,attention_resunet,Attention ResUNet,attention_resunet,0.0
+160x_2025-05-15_02-05-00,160,27,unet_best,U-Net (best),unet,0.0
+160x_2025-05-15_02-05-00,160,27,unet_lr5e-05_d0.2,"U-Net (lr5e-05, d0.2)",unet,0.2101898193359375
+160x_2025-05-15_02-05-00,160,27,unet_lr5e-05_d0.3,"U-Net (lr5e-05, d0.3)",unet,0.2811431884765625
+160x_2025-05-15_02-05-00,160,27,resunet,ResUNet,resunet,0.0
+160x_2025-05-15_02-05-00,160,27,attention_resunet,Attention ResUNet,attention_resunet,0.0

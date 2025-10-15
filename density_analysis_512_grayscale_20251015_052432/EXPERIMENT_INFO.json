@@ -1,0 +1,56 @@
+{
+  "experiment_name": "Density Analysis - 512\u00d7512 Grayscale Models",
+  "python_script": "density_analysis_512_grayscale.py",
+  "timestamp": "2025-10-15 05:31:14",
+  "model_source": "./hyperparameter_search_512_20251014_235755",
+  "test_images": "./test_images",
+  "output_directory": "density_analysis_512_grayscale_20251015_052432",
+  "tile_size": 512,
+  "models_used": [
+    {
+      "name": "unet_lr0.0001_drop0.3_bs4",
+      "short_name": "unet_best",
+      "label": "U-Net (best)",
+      "architecture": "unet",
+      "mean_jaccard": 0.1533
+    },
+    {
+      "name": "unet_lr5e-05_drop0.2_bs4",
+      "short_name": "unet_lr5e-05_d0.2",
+      "label": "U-Net (lr5e-05, d0.2)",
+      "architecture": "unet",
+      "mean_jaccard": 0.1327
+    },
+    {
+      "name": "unet_lr5e-05_drop0.3_bs4",
+      "short_name": "unet_lr5e-05_d0.3",
+      "label": "U-Net (lr5e-05, d0.3)",
+      "architecture": "unet",
+      "mean_jaccard": 0.1308
+    },
+    {
+      "name": "resunet_lr5e-05_drop0.3_bs4",
+      "short_name": "resunet",
+      "label": "ResUNet",
+      "architecture": "resunet",
+      "mean_jaccard": 0.1117
+    },
+    {
+      "name": "attention_resunet_lr5e-05_drop0.2_bs4",
+      "short_name": "attention_resunet",
+      "label": "Attention ResUNet",
+      "architecture": "attention_resunet",
+      "mean_jaccard": 0.1091
+    }
+  ],
+  "num_test_images": 11,
+  "dilution_factors": [
+    10,
+    20,
+    40,
+    80,
+    160
+  ],
+  "total_predictions": 1400,
+  "n_representative_tiles_per_image": 5
+}
