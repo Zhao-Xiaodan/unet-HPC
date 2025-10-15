@@ -1,0 +1,25 @@
+{
+    "execution_times": {
+        "unet": "0:20:04.554580",
+        "attention_unet": "0:27:01.363954",
+        "attention_resunet": "0:31:41.350584",
+        "total": "1:18:47.269118"
+    },
+    "final_validation_metrics": {
+        "unet": {
+            "loss": 0.008937869220972061,
+            "accuracy": 0.9314002990722656,
+            "jaccard": 0.6064779162406921
+        },
+        "attention_unet": {
+            "loss": 0.04633643850684166,
+            "accuracy": 0.8960357904434204,
+            "jaccard": 0.42526522278785706
+        },
+        "attention_resunet": {
+            "loss": 0.03329349309206009,
+            "accuracy": 0.8610639572143555,
+            "jaccard": 0.24646976590156555
+        }
+    }
+}

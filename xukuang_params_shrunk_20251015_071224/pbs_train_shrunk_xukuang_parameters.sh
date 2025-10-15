@@ -1,0 +1,1 @@
+/home/svu/phyzxi/scratch/unet-HPC/pbs_train_shrunk_xukuang_parameters.sh
