@@ -1,0 +1,23 @@
+{
+  "architecture": "attention_resunet",
+  "config": {
+    "learning_rate": 5e-05,
+    "dropout": 0.3,
+    "batch_size": 4
+  },
+  "config_name": "attention_resunet_lr5e-05_drop0.3_bs4",
+  "fold": 3,
+  "train_samples": 66,
+  "val_samples": 32,
+  "best_val_jaccard": 0.11642009764909744,
+  "best_val_dice": 0.19303908944129944,
+  "best_epoch": 0,
+  "final_val_jaccard": 0.01727469637989998,
+  "final_train_jaccard": 0.49978750944137573,
+  "overfitting_gap": 11.521916836500168,
+  "epochs_trained": 8,
+  "batch_size_used": 4,
+  "oom_retries": 0,
+  "success": true,
+  "filename_prefix": "attention_resunet_fold3_lr5e-05_drop0.3_bs4"
+}

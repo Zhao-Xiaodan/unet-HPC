@@ -1,0 +1,7 @@
+{
+  "best_config": "unet_lr0.0001_drop0.3_bs4",
+  "best_jaccard": 0.1533,
+  "total_configs": 12,
+  "successful_configs": 12,
+  "config_summary": {
+    

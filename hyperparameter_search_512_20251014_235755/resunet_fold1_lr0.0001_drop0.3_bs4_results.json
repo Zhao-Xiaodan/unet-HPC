@@ -1,0 +1,23 @@
+{
+  "architecture": "resunet",
+  "config": {
+    "learning_rate": 0.0001,
+    "dropout": 0.3,
+    "batch_size": 4
+  },
+  "config_name": "resunet_lr0.0001_drop0.3_bs4",
+  "fold": 1,
+  "train_samples": 65,
+  "val_samples": 33,
+  "best_val_jaccard": 0.09895175695419312,
+  "best_val_dice": 0.16832439601421356,
+  "best_epoch": 0,
+  "final_val_jaccard": 0.01141730323433876,
+  "final_train_jaccard": 0.5759406089782715,
+  "overfitting_gap": 14.96136337518692,
+  "epochs_trained": 8,
+  "batch_size_used": 4,
+  "oom_retries": 0,
+  "success": true,
+  "filename_prefix": "resunet_fold1_lr0.0001_drop0.3_bs4"
+}

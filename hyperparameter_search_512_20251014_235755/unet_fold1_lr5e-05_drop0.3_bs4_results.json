@@ -1,0 +1,23 @@
+{
+  "architecture": "unet",
+  "config": {
+    "learning_rate": 5e-05,
+    "dropout": 0.3,
+    "batch_size": 4
+  },
+  "config_name": "unet_lr5e-05_drop0.3_bs4",
+  "fold": 1,
+  "train_samples": 65,
+  "val_samples": 33,
+  "best_val_jaccard": 0.13761946558952332,
+  "best_val_dice": 0.21802197396755219,
+  "best_epoch": 0,
+  "final_val_jaccard": 0.0618770532310009,
+  "final_train_jaccard": 0.4279114007949829,
+  "overfitting_gap": 5.134952068328857,
+  "epochs_trained": 8,
+  "batch_size_used": 4,
+  "oom_retries": 0,
+  "success": true,
+  "filename_prefix": "unet_fold1_lr5e-05_drop0.3_bs4"
+}
