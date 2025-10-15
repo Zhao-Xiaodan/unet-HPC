@@ -456,7 +456,7 @@ def build_attention_resunet(input_shape=(512, 512, 3), n_filters=16, dropout=0.1
     u8 = layers.concatenate([gating, att2])
     c8 = res_conv_block(u8, 3, n_filters*2, dropout, batch_norm)
 
-    gating = layers.Conv2DTranspose(n_filters, (2, 2), strides=(2, 2), padding='same')(c7)
+    gating = layers.Conv2DTranspose(n_filters, (2, 2), strides=(2, 2), padding='same')(c8)
     att1 = attention_block(c1, gating, n_filters)
     u9 = layers.concatenate([gating, att1])
     c9 = res_conv_block(u9, 3, n_filters, dropout, batch_norm)
