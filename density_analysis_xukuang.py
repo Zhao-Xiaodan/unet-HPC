@@ -257,7 +257,13 @@ def load_model(model_dir, model_name):
         'focal_loss': focal_loss,
     }
 
-    model = keras.models.load_model(model_path, custom_objects=custom_objects)
+    # Load model with safe_mode=False to allow Lambda layers
+    # Note: Attention models use Lambda layers for attention mechanisms
+    model = keras.models.load_model(
+        model_path,
+        custom_objects=custom_objects,
+        safe_mode=False  # Required for Lambda layers in Attention models
+    )
     print(f"  ✓ Model loaded successfully")
     print(f"  Input shape: {model.input_shape}")
     print(f"  Output shape: {model.output_shape}")

@@ -451,6 +451,93 @@ class BinaryFocalLoss(keras.losses.Loss):
 
 ---
 
-**Date:** October 15, 2025
+## Fix #2: Lambda Layer Deserialization (Attention Models)
+
+**Date:** October 15, 2025 (Update)
+**Job:** `Density_MultiModel.o288541`
+
+### Issue
+
+After fixing BinaryFocalLoss, encountered new error when loading Attention UNet:
+
+```
+ValueError: Requested the deserialization of a Lambda layer with a Python `lambda`
+inside it. This carries a potential risk of arbitrary code execution and thus it is
+disallowed by default. If you trust the source of the saved model, you can pass
+`safe_mode=False` to the loading function in order to allow Lambda layer loading.
+```
+
+**Location:** Line 106 in `Density_MultiModel.o288541`
+
+### Root Cause
+
+**Attention mechanisms use Lambda layers:**
+- Attention UNet and Attention ResUNet architectures include Lambda layers for attention gates
+- Lambda layers are used for element-wise operations: `Lambda(lambda x: x[0] * x[1])`
+- Keras 2.x+ blocks Lambda layer loading by default (`safe_mode=True`) for security
+
+**Why UNet worked but Attention models failed:**
+- UNet: Only standard layers (Conv2D, MaxPooling, Concatenate) → No Lambda layers ✓
+- Attention UNet/ResUNet: Contains Lambda layers for attention → Blocked by safe mode ✗
+
+### Solution
+
+Added `safe_mode=False` parameter to model loading:
+
+**File:** `density_analysis_xukuang.py` (Line 260-266)
+
+```python
+# Load model with safe_mode=False to allow Lambda layers
+# Note: Attention models use Lambda layers for attention mechanisms
+model = keras.models.load_model(
+    model_path,
+    custom_objects=custom_objects,
+    safe_mode=False  # Required for Lambda layers in Attention models
+)
+```
+
+### Why This is Safe
+
+1. **Trusted Source:** Models trained by us on HPC, not from untrusted sources
+2. **Controlled Environment:** Models in our directory (`xukuang_params_shrunk_20251015_071224/`)
+3. **Known Architecture:** We designed these models with Lambda layers
+4. **No External Input:** Lambda functions from our training code
+
+⚠️ **Security Note:** Only use `safe_mode=False` with trusted models. Never with models from unknown sources.
+
+### Comparison: Two Serialization Issues
+
+| Issue | Component | Fix | Stage |
+|-------|-----------|-----|-------|
+| **BinaryFocalLoss** | Custom loss class | Add decorator | Compilation config deserialization |
+| **Lambda Layers** | Attention mechanism | Add `safe_mode=False` | Architecture deserialization |
+
+Both relate to Keras serialization, but at different stages:
+1. BinaryFocalLoss: Can't find loss class during config loading
+2. Lambda Layers: Can't load Lambda layers during architecture reconstruction
+
+### Verification
+
+After fix, all three models should load:
+
+```
+✓ UNet loaded successfully
+✓ Attention UNet loaded successfully  (requires safe_mode=False)
+✓ Attention ResUNet loaded successfully  (requires safe_mode=False)
+```
+
+**Status:** ✓ Fixed
+
+**See also:** `LAMBDA_LAYER_FIX.md` for detailed technical explanation
+
+---
+
+**Dates:**
+- October 15, 2025 (BinaryFocalLoss fix)
+- October 15, 2025 (Lambda layer fix - Update)
+
 **Debugged by:** Claude Code
-**Based on logs:** `Density_Xukuang.o288483`, `density_analysis_xukuang_console_20251015_213724.log`
+
+**Based on logs:**
+- `Density_Xukuang.o288483` (BinaryFocalLoss error)
+- `Density_MultiModel.o288541` (Lambda layer error)
