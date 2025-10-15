@@ -1,0 +1,38 @@
+{
+  "UNet": {
+    "best_epoch": 140,
+    "best_val_jaccard": 0.6788503527641296,
+    "best_val_accuracy": 0.9471138119697572,
+    "best_val_loss": 0.0066195130348205,
+    "final_val_jaccard": 0.6064779162406921,
+    "final_val_accuracy": 0.9314002990722656,
+    "final_val_loss": 0.008937869220972,
+    "max_train_jaccard": 0.8310639262199402,
+    "convergence_epoch": 140,
+    "training_stability": 0.17783776997809866
+  },
+  "Attention UNet": {
+    "best_epoch": 74,
+    "best_val_jaccard": 0.6628985404968262,
+    "best_val_accuracy": 0.9417808651924132,
+    "best_val_loss": 0.007135207299143,
+    "final_val_jaccard": 0.425265222787857,
+    "final_val_accuracy": 0.8960357904434204,
+    "final_val_loss": 0.0463364385068416,
+    "max_train_jaccard": 0.8247020840644836,
+    "convergence_epoch": 70,
+    "training_stability": 0.19281805102202515
+  },
+  "Attention ResUNet": {
+    "best_epoch": 44,
+    "best_val_jaccard": 0.6277332305908203,
+    "best_val_accuracy": 0.9333570599555968,
+    "best_val_loss": 0.0101399347186088,
+    "final_val_jaccard": 0.2464697659015655,
+    "final_val_accuracy": 0.8610639572143555,
+    "final_val_loss": 0.03329349309206,
+    "max_train_jaccard": 0.8324443697929382,
+    "convergence_epoch": 44,
+    "training_stability": 0.09720122352052174
+  }
+}
