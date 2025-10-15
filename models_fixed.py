@@ -114,13 +114,21 @@ def attention_block(x, gating, inter_shape):
 
     phi_g = layers.Conv2D(inter_shape, (1, 1), padding='same')(gating)
 
-    # Calculate strides safely (avoid zeros)
-    stride_h = max(1, shape_theta_x[1] // shape_g[1])
-    stride_w = max(1, shape_theta_x[2] // shape_g[2])
-
-    upsample_g = layers.Conv2DTranspose(inter_shape, (3, 3),
-                                       strides=(stride_h, stride_w),
-                                       padding='same')(phi_g)
+    # Resize phi_g to match theta_x dimensions
+    # If gating is smaller than theta_x, upsample
+    # If gating is same size or larger, pool down
+    if shape_g[1] < shape_theta_x[1]:
+        # Need to upsample
+        scale_h = shape_theta_x[1] // shape_g[1]
+        scale_w = shape_theta_x[2] // shape_g[2]
+        upsample_g = layers.UpSampling2D(size=(scale_h, scale_w))(phi_g)
+    elif shape_g[1] > shape_theta_x[1]:
+        # Need to downsample
+        pool_size = (shape_g[1] // shape_theta_x[1], shape_g[2] // shape_theta_x[2])
+        upsample_g = layers.MaxPooling2D(pool_size=pool_size)(phi_g)
+    else:
+        # Same size, no resizing needed
+        upsample_g = phi_g
 
     # Use Add layer instead of add function for better serialization
     concat_xg = layers.Add()([upsample_g, theta_x])
