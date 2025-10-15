@@ -271,8 +271,8 @@ if [ $EXIT_CODE -eq 0 ]; then
         echo "📁 RESULTS DIRECTORY: $OUTPUT_DIR"
         echo ""
 
-        # Copy logs and scripts to output directory
-        echo "📋 Archiving logs and scripts..."
+        # Archive logs (logs are copied since they contain job-specific output)
+        echo "📋 Archiving logs..."
         if [ -n "$PBS_JOBID" ]; then
             PBS_OUTPUT_FILE="${PBS_JOBNAME}.o${PBS_JOBID}"
             if [ -f "$PBS_OUTPUT_FILE" ]; then
@@ -286,9 +286,14 @@ if [ $EXIT_CODE -eq 0 ]; then
             echo "   ✓ Copied console log"
         fi
 
-        cp train_shrunk_xukuang_parameters.py "$OUTPUT_DIR/"
-        cp pbs_train_shrunk_xukuang_parameters.sh "$OUTPUT_DIR/"
-        echo "   ✓ Copied source scripts"
+        # Create symlinks to source scripts (instead of copying)
+        # This ensures the result directory always references the latest version
+        echo ""
+        echo "📂 Creating symlinks to source scripts..."
+        ln -sf "$(pwd)/train_shrunk_xukuang_parameters.py" "$OUTPUT_DIR/train_shrunk_xukuang_parameters.py"
+        ln -sf "$(pwd)/pbs_train_shrunk_xukuang_parameters.sh" "$OUTPUT_DIR/pbs_train_shrunk_xukuang_parameters.sh"
+        echo "   ✓ Created symlink: train_shrunk_xukuang_parameters.py -> $(pwd)/train_shrunk_xukuang_parameters.py"
+        echo "   ✓ Created symlink: pbs_train_shrunk_xukuang_parameters.sh -> $(pwd)/pbs_train_shrunk_xukuang_parameters.sh"
         echo ""
 
         # Check results

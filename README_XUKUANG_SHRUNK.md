@@ -119,11 +119,22 @@ xukuang_params_shrunk_YYYYMMDD_HHMMSS/
 ├── attention_resunet_xukuang_params_shrunk.keras # Attention ResUNet model
 ├── attention_resunet_history.csv                 # Attention ResUNet history
 │
-├── train_shrunk_xukuang_parameters.py            # Source script (archived)
-├── pbs_train_shrunk_xukuang_parameters.sh        # PBS script (archived)
-├── Xukuang_Shrunk.o######                        # PBS output log
-└── train_shrunk_console_*.log                    # Python console log
+├── train_shrunk_xukuang_parameters.py            # Symlink to source script
+├── pbs_train_shrunk_xukuang_parameters.sh        # Symlink to PBS script
+├── Xukuang_Shrunk.o######                        # PBS output log (copied)
+└── train_shrunk_console_*.log                    # Python console log (copied)
 ```
+
+**Note on File Archiving:**
+- **Logs** (PBS output, console log): **Copied** to results directory (job-specific, won't change)
+- **Scripts** (Python, PBS): **Symlinked** to main directory (always references latest version)
+- **Models/Data**: Created directly in results directory
+
+**Why symlinks?**
+- Avoids confusion about which script version was used
+- Results directory always points to the current version
+- Logs contain full script content anyway (via PBS output)
+- Easier to update scripts without updating archived copies
 
 ## Training Process
 
