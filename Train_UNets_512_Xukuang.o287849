@@ -1,0 +1,75 @@
+=======================================================================
+MODEL TRAINING - 512x512 IMAGES (Xukuang's Parameters)
+=======================================================================
+Architectures: U-Net, Attention U-Net, Attention Res-UNet
+Dataset: dataset_shrunk_masks
+Image Size: 512x512 GRAYSCALE
+Job started on Wed Oct 15 10:39:27 AM +08 2025
+Running on node: GN-A40-076
+Job ID: 287849.stdct-mgmt-02
+This output is being logged to: training_console_xukuang_20251015_103927.log
+
+=== FIXED HYPERPARAMETERS ===
+Source: bead_seg.ipynb
+  - Learning Rate: 5e-3
+  - Batch Size: 4
+  - Epochs: 200
+  - Optimizer: Adam
+  - Loss Function: BinaryFocalLoss(gamma=2)
+  - Base Filters: 64
+  - Dropout: 0.0
+=============================
+
+=== ENVIRONMENT SETUP ===
+✓ TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+✓ GPU memory growth: ENABLED
+===========================
+
+=== PRE-EXECUTION CHECKS ===
+   ✓ Found required script: train_models_512_xukuang_parameters.py
+   ✓ Found required script: models.py
+   ✓ Found required script: loss_functions_fixed.py
+
+2. Checking dataset...
+   ✓ Images: 98 .png files
+   ✓ Masks: 98 .png files
+=============================
+
+🚀 STARTING MODEL TRAINING (Xukuang's Parameters)
+=============================================
+Training 3 models: U-Net, Attention U-Net, Attention Res-UNet
+Progress will be logged to the console and saved to training_console_xukuang_20251015_103927.log
+=============================================
+
+  File "/scratch/phyzxi/unet-HPC/train_models_512_xukuang_parameters.py", line 3
+    (Xukuang's Parameters)
+            ^
+SyntaxError: unterminated string literal (detected at line 3)
+
+=======================================================================
+TRAINING JOB COMPLETED
+=======================================================================
+Job finished on Wed Oct 15 10:39:29 AM +08 2025
+Exit code: 0 ✓ SUCCESS
+
+✓ Training script completed successfully!
+
+⚠ WARNING: Could not find the output directory created by the training script.
+
+=======================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-15 10:39:30.195252:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 287849.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:02
+	Memory: Requested(240gb), Used(74984kb)
+	Vmem Used: 0kb
+	Walltime: Requested(24:00:00), Used(00:00:04)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-076[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
