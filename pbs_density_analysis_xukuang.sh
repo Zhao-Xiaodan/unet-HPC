@@ -1,33 +1,34 @@
 #!/bin/bash
-#PBS -l walltime=4:00:00
+#PBS -l walltime=8:00:00
 #PBS -j oe
 #PBS -k oed
-#PBS -N Density_Xukuang
+#PBS -N Density_MultiModel
 #PBS -l select=1:ncpus=36:mpiprocs=1:ompthreads=36:ngpus=1:mem=240gb
 #PBS -M phyzxi@nus.edu.sg
 #PBS -m abe
 
 ################################################################################
-# Density Analysis Using Xukuang UNet Model
+# Multi-Model Density Analysis Using Xukuang Models
 ################################################################################
 #
-# Purpose: Perform density analysis on test images using the best UNet model
+# Purpose: Perform density analysis on test images using ALL THREE models
 #          from xukuang_params_shrunk_20251015_071224
 #
-# Model: UNet (Val IoU: 0.6789 at epoch 140)
+# Models: UNet, Attention UNet, Attention ResUNet
 # Training: LR=0.005, 200 epochs, BinaryFocalLoss, 512×512 RGB
 #
-# Outputs:
-#   - Box plot with CORRECTED dilution ordering (10x - 10240x)
-#   - Representative tile visualizations
-#   - CSV with density results
-#   - EXPERIMENT_INFO.json
+# NEW FEATURES:
+#   - Tile-level density values (n=28 per image) for ALL models
+#   - Multi-model box plots (individual + comparison)
+#   - 4-panel tile comparisons (Original, UNet, Attn UNet, Attn ResUNet)
+#   - CORRECTED dilution ordering (10x - 10240x)
 #
 # Date: October 15, 2025
+# Updated: Multi-model comparison
 ################################################################################
 
 echo "========================================================================"
-echo "DENSITY ANALYSIS - XUKUANG UNET MODEL"
+echo "MULTI-MODEL DENSITY ANALYSIS - XUKUANG MODELS"
 echo "========================================================================"
 echo "Job ID: $PBS_JOBID"
 echo "Job Name: $PBS_JOBNAME"
@@ -130,7 +131,7 @@ echo "End time: $(date)"
 
 # Find and display output directory
 if [ $EXIT_CODE -eq 0 ]; then
-    OUTPUT_DIR=$(find . -maxdepth 1 -type d -name "density_analysis_xukuang_*" | sort | tail -1)
+    OUTPUT_DIR=$(find . -maxdepth 1 -type d -name "density_analysis_xukuang_multimodel_*" | sort | tail -1)
 
     if [ -n "$OUTPUT_DIR" ]; then
         echo ""
@@ -140,16 +141,22 @@ if [ $EXIT_CODE -eq 0 ]; then
         ls -lh "$OUTPUT_DIR"
         echo ""
 
-        if [ -d "$OUTPUT_DIR/representative_tiles" ]; then
-            echo "Representative tiles:"
-            ls -1 "$OUTPUT_DIR/representative_tiles"
+        if [ -d "$OUTPUT_DIR/representative_tiles_4panel" ]; then
+            echo "4-panel tile comparisons:"
+            ls -1 "$OUTPUT_DIR/representative_tiles_4panel"
         fi
 
         # Display summary if CSV exists
-        if [ -f "$OUTPUT_DIR/density_results.csv" ]; then
+        if [ -f "$OUTPUT_DIR/density_results_tile_level.csv" ]; then
             echo ""
-            echo "Density Results Summary:"
-            head -20 "$OUTPUT_DIR/density_results.csv"
+            echo "Tile-Level Density Results Summary (first 20 rows):"
+            head -20 "$OUTPUT_DIR/density_results_tile_level.csv"
+        fi
+
+        if [ -f "$OUTPUT_DIR/density_results_image_summary.csv" ]; then
+            echo ""
+            echo "Image-Level Density Summary:"
+            head -20 "$OUTPUT_DIR/density_results_image_summary.csv"
         fi
     fi
 
