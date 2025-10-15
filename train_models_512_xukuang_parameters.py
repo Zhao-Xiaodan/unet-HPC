@@ -1,6 +1,6 @@
 ================================================================================
 TRAINING SCRIPT FOR U-NET, ATTENTION U-NET, AND ATTENTION RES-UNET
-(Xukuang's Parameters)
+(Xukuang Parameters)
 ================================================================================
 Purpose:
 This script trains three U-Net-based architectures for semantic segmentation
