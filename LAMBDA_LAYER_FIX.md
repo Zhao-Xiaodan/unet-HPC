@@ -185,14 +185,16 @@ return layers.Lambda(lambda x, repnum: K.repeat_elements(x, repnum, axis=3),
 
 ### Solution
 
-**Two-part fix:**
+**Three-part fix:**
 
-**Part 1:** Import Keras backend in density_analysis script:
+**Part 1:** Import required modules in density_analysis script:
 ```python
 from tensorflow.keras import backend as K
+from tensorflow.keras import models as keras_models
+from tensorflow.keras import layers as keras_layers
 ```
 
-**Part 2:** Add `K` to `custom_objects`:
+**Part 2:** Add ALL required modules to `custom_objects`:
 ```python
 custom_objects = {
     'BinaryFocalLoss': BinaryFocalLoss,
@@ -202,10 +204,17 @@ custom_objects = {
     'dice_coef': dice_coef,
     'focal_loss': focal_loss,
     'K': K,  # Keras backend for Lambda layers
+    'models': keras_models,  # TensorFlow keras models module
+    'layers': keras_layers,  # TensorFlow keras layers module
 }
 ```
 
-This makes `K` available in the deserialization context.
+**Why all three modules?**
+- Warning in log: "`models` is not loaded, but a Lambda layer uses it"
+- The Lambda layer references modules from the training context
+- Must provide all modules that Lambda functions might reference
+
+This makes `K`, `models`, and `layers` available in the deserialization context.
 
 ### Why This Works
 
