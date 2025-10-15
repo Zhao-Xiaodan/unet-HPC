@@ -277,6 +277,54 @@ def jacard_coef(y_true, y_pred, smooth=1e-3):
     return (intersection + smooth) / (union + smooth)
 
 
+# ============================================================================
+# KERAS LOSS CLASSES (for model.compile())
+# ============================================================================
+
+@keras.saving.register_keras_serializable(package='Custom')
+class BinaryFocalLoss(keras.losses.Loss):
+    """
+    Binary Focal Loss as a Keras Loss class for proper serialization.
+
+    Wrapper around the focal_loss function that can be used with model.compile()
+    and properly serialized when saving models.
+
+    Usage:
+        model.compile(
+            optimizer='adam',
+            loss=BinaryFocalLoss(gamma=2, alpha=0.25),
+            metrics=['accuracy']
+        )
+
+    Args:
+        gamma: Focusing parameter (default: 2.0)
+        alpha: Balancing factor (default: 0.25)
+        name: Name of the loss (default: 'binary_focal_loss')
+    """
+    def __init__(self, gamma=2.0, alpha=0.25, name='binary_focal_loss', **kwargs):
+        super().__init__(name=name, **kwargs)
+        self.gamma = gamma
+        self.alpha = alpha
+
+    def call(self, y_true, y_pred):
+        """Compute focal loss."""
+        return focal_loss(y_true, y_pred, alpha=self.alpha, gamma=self.gamma)
+
+    def get_config(self):
+        """Return configuration for serialization."""
+        config = super().get_config()
+        config.update({
+            'gamma': self.gamma,
+            'alpha': self.alpha,
+        })
+        return config
+
+    @classmethod
+    def from_config(cls, config):
+        """Create instance from configuration."""
+        return cls(**config)
+
+
 # Dictionary of available loss functions
 LOSS_FUNCTIONS = {
     'focal': focal_loss,
