@@ -45,17 +45,36 @@ from models import Attention_ResUNet, UNet, Attention_UNet, dice_coef, dice_coef
 from loss_functions_fixed import focal_loss as focal_loss_function
 
 # Create a wrapper class to match the interface expected by Keras
-class BinaryFocalLoss:
+@tf.keras.utils.register_keras_serializable(package="Custom", name="BinaryFocalLoss")
+class BinaryFocalLoss(tf.keras.losses.Loss):
     """
     Wrapper for focal_loss function to match the interface of focal_loss.BinaryFocalLoss
     Used in bead_seg.ipynb: BinaryFocalLoss(gamma=2)
+
+    Inherits from tf.keras.losses.Loss for proper serialization support.
     """
-    def __init__(self, gamma=2.0, alpha=0.25):
+    def __init__(self, gamma=2.0, alpha=0.25, name='binary_focal_loss', **kwargs):
+        super().__init__(name=name, **kwargs)
         self.gamma = gamma
         self.alpha = alpha
 
-    def __call__(self, y_true, y_pred):
+    def call(self, y_true, y_pred):
+        """Compute focal loss"""
         return focal_loss_function(y_true, y_pred, alpha=self.alpha, gamma=self.gamma)
+
+    def get_config(self):
+        """Return configuration for serialization"""
+        config = super().get_config()
+        config.update({
+            'gamma': self.gamma,
+            'alpha': self.alpha,
+        })
+        return config
+
+    @classmethod
+    def from_config(cls, config):
+        """Create instance from configuration"""
+        return cls(**config)
 
 # ============================================================================
 # GPU CONFIGURATION

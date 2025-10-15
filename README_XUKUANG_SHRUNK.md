@@ -73,7 +73,7 @@ dataset_shrunk_masks/
    - loss_functions_fixed.py (focal_loss implementation)
    - Standard libs: numpy, pandas, matplotlib, opencv, PIL, sklearn
 
-   **Note:** The original `bead_seg.ipynb` uses `BinaryFocalLoss` from the `focal_loss` pip package. Our implementation uses the equivalent `focal_loss` function from `loss_functions_fixed.py` with a wrapper class for compatibility.
+   **Note:** The original `bead_seg.ipynb` uses `BinaryFocalLoss` from the `focal_loss` pip package. Our implementation uses the equivalent `focal_loss` function from `loss_functions_fixed.py` with a Keras-serializable wrapper class for compatibility. The wrapper inherits from `tf.keras.losses.Loss` and implements `get_config()` and `from_config()` methods for proper model saving/loading.
 
 ## Usage
 
@@ -298,6 +298,21 @@ In `train_shrunk_xukuang_parameters.py`, reduce batch size:
 ```python
 BATCH_SIZE = 2  # Reduce from 4
 ```
+
+### Model Serialization Error
+
+**Error:** `TypeError: Cannot serialize object <__main__.BinaryFocalLoss object> of type <class '__main__.BinaryFocalLoss'>. To be serializable, a class must implement the get_config() method.`
+
+**Cause:** The custom loss class needs to inherit from `tf.keras.losses.Loss` and implement serialization methods.
+
+**Solution:**
+This has been fixed in the current version. The `BinaryFocalLoss` class now:
+1. Inherits from `tf.keras.losses.Loss`
+2. Implements `get_config()` method
+3. Implements `from_config()` classmethod
+4. Uses `@tf.keras.utils.register_keras_serializable` decorator
+
+If you encounter this error with an older version, update to the latest `train_shrunk_xukuang_parameters.py`.
 
 ### Low Jaccard Scores
 
