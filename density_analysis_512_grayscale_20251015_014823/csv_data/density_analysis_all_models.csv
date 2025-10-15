@@ -1,0 +1,51 @@
+image,dilution_factor,inverse_dilution,model,model_name,architecture,foreground_percentage,mean_jaccard
+10x_2025-05-15_02-05-00.tif,10,0.1,U-Net (best),unet_lr0.0001_drop0.3_bs4,unet,0.0,0.1533
+10x_2025-05-15_02-05-00.tif,10,0.1,U-Net (lr5e-05),unet_lr5e-05_drop0.2_bs4,unet,0.4604339599609375,0.1327
+10x_2025-05-15_02-05-00.tif,10,0.1,U-Net (d0.3),unet_lr5e-05_drop0.3_bs4,unet,0.4047393798828125,0.1308
+10x_2025-05-15_02-05-00.tif,10,0.1,ResUNet,resunet_lr5e-05_drop0.3_bs4,resunet,0.0,0.1117
+10x_2025-05-15_02-05-00.tif,10,0.1,Att-ResUNet,attention_resunet_lr5e-05_drop0.2_bs4,attention_resunet,0.0,0.1091
+20x_2025-05-15_02-05-00.tif,20,0.05,U-Net (best),unet_lr0.0001_drop0.3_bs4,unet,0.0,0.1533
+20x_2025-05-15_02-05-00.tif,20,0.05,U-Net (lr5e-05),unet_lr5e-05_drop0.2_bs4,unet,0.3238677978515625,0.1327
+20x_2025-05-15_02-05-00.tif,20,0.05,U-Net (d0.3),unet_lr5e-05_drop0.3_bs4,unet,0.4390716552734375,0.1308
+20x_2025-05-15_02-05-00.tif,20,0.05,ResUNet,resunet_lr5e-05_drop0.3_bs4,resunet,0.0,0.1117
+20x_2025-05-15_02-05-00.tif,20,0.05,Att-ResUNet,attention_resunet_lr5e-05_drop0.2_bs4,attention_resunet,0.0,0.1091
+320x_2025-05-15_02-05-00.tif,20,0.05,U-Net (best),unet_lr0.0001_drop0.3_bs4,unet,0.0,0.1533
+320x_2025-05-15_02-05-00.tif,20,0.05,U-Net (lr5e-05),unet_lr5e-05_drop0.2_bs4,unet,0.2704620361328125,0.1327
+320x_2025-05-15_02-05-00.tif,20,0.05,U-Net (d0.3),unet_lr5e-05_drop0.3_bs4,unet,0.42572021484375,0.1308
+320x_2025-05-15_02-05-00.tif,20,0.05,ResUNet,resunet_lr5e-05_drop0.3_bs4,resunet,0.0,0.1117
+320x_2025-05-15_02-05-00.tif,20,0.05,Att-ResUNet,attention_resunet_lr5e-05_drop0.2_bs4,attention_resunet,0.0,0.1091
+5120x_2025-05-16_00-59-00_002.tif,20,0.05,U-Net (best),unet_lr0.0001_drop0.3_bs4,unet,0.0,0.1533
+5120x_2025-05-16_00-59-00_002.tif,20,0.05,U-Net (lr5e-05),unet_lr5e-05_drop0.2_bs4,unet,0.2605438232421875,0.1327
+5120x_2025-05-16_00-59-00_002.tif,20,0.05,U-Net (d0.3),unet_lr5e-05_drop0.3_bs4,unet,0.2948760986328125,0.1308
+5120x_2025-05-16_00-59-00_002.tif,20,0.05,ResUNet,resunet_lr5e-05_drop0.3_bs4,resunet,0.0,0.1117
+5120x_2025-05-16_00-59-00_002.tif,20,0.05,Att-ResUNet,attention_resunet_lr5e-05_drop0.2_bs4,attention_resunet,0.0,0.1091
+10240x_2560x_2025-05-16_00-59-00_002.tif,40,0.025,U-Net (best),unet_lr0.0001_drop0.3_bs4,unet,0.0,0.1533
+10240x_2560x_2025-05-16_00-59-00_002.tif,40,0.025,U-Net (lr5e-05),unet_lr5e-05_drop0.2_bs4,unet,0.2681732177734375,0.1327
+10240x_2560x_2025-05-16_00-59-00_002.tif,40,0.025,U-Net (d0.3),unet_lr5e-05_drop0.3_bs4,unet,0.31890869140625,0.1308
+10240x_2560x_2025-05-16_00-59-00_002.tif,40,0.025,ResUNet,resunet_lr5e-05_drop0.3_bs4,resunet,0.0,0.1117
+10240x_2560x_2025-05-16_00-59-00_002.tif,40,0.025,Att-ResUNet,attention_resunet_lr5e-05_drop0.2_bs4,attention_resunet,0.0,0.1091
+640x_2025-05-16_00-59-00_002.tif,40,0.025,U-Net (best),unet_lr0.0001_drop0.3_bs4,unet,0.0,0.1533
+640x_2025-05-16_00-59-00_002.tif,40,0.025,U-Net (lr5e-05),unet_lr5e-05_drop0.2_bs4,unet,0.2902984619140625,0.1327
+640x_2025-05-16_00-59-00_002.tif,40,0.025,U-Net (d0.3),unet_lr5e-05_drop0.3_bs4,unet,0.344085693359375,0.1308
+640x_2025-05-16_00-59-00_002.tif,40,0.025,ResUNet,resunet_lr5e-05_drop0.3_bs4,resunet,0.0,0.1117
+640x_2025-05-16_00-59-00_002.tif,40,0.025,Att-ResUNet,attention_resunet_lr5e-05_drop0.2_bs4,attention_resunet,0.0,0.1091
+1280x_2025-05-16_00-59-00_002.tif,80,0.0125,U-Net (best),unet_lr0.0001_drop0.3_bs4,unet,0.0,0.1533
+1280x_2025-05-16_00-59-00_002.tif,80,0.0125,U-Net (lr5e-05),unet_lr5e-05_drop0.2_bs4,unet,0.2689361572265625,0.1327
+1280x_2025-05-16_00-59-00_002.tif,80,0.0125,U-Net (d0.3),unet_lr5e-05_drop0.3_bs4,unet,0.3101348876953125,0.1308
+1280x_2025-05-16_00-59-00_002.tif,80,0.0125,ResUNet,resunet_lr5e-05_drop0.3_bs4,resunet,0.0,0.1117
+1280x_2025-05-16_00-59-00_002.tif,80,0.0125,Att-ResUNet,attention_resunet_lr5e-05_drop0.2_bs4,attention_resunet,0.0,0.1091
+80x_1_2025-05-22_14-48-00_003.tif,80,0.0125,U-Net (best),unet_lr0.0001_drop0.3_bs4,unet,0.0,0.1533
+80x_1_2025-05-22_14-48-00_003.tif,80,0.0125,U-Net (lr5e-05),unet_lr5e-05_drop0.2_bs4,unet,0.267791748046875,0.1327
+80x_1_2025-05-22_14-48-00_003.tif,80,0.0125,U-Net (d0.3),unet_lr5e-05_drop0.3_bs4,unet,0.437164306640625,0.1308
+80x_1_2025-05-22_14-48-00_003.tif,80,0.0125,ResUNet,resunet_lr5e-05_drop0.3_bs4,resunet,0.0,0.1117
+80x_1_2025-05-22_14-48-00_003.tif,80,0.0125,Att-ResUNet,attention_resunet_lr5e-05_drop0.2_bs4,attention_resunet,0.0,0.1091
+80x_2_2025-05-22_14-48-00.tif,80,0.0125,U-Net (best),unet_lr0.0001_drop0.3_bs4,unet,0.0,0.1533
+80x_2_2025-05-22_14-48-00.tif,80,0.0125,U-Net (lr5e-05),unet_lr5e-05_drop0.2_bs4,unet,0.289154052734375,0.1327
+80x_2_2025-05-22_14-48-00.tif,80,0.0125,U-Net (d0.3),unet_lr5e-05_drop0.3_bs4,unet,0.443267822265625,0.1308
+80x_2_2025-05-22_14-48-00.tif,80,0.0125,ResUNet,resunet_lr5e-05_drop0.3_bs4,resunet,0.0,0.1117
+80x_2_2025-05-22_14-48-00.tif,80,0.0125,Att-ResUNet,attention_resunet_lr5e-05_drop0.2_bs4,attention_resunet,0.0,0.1091
+160x_2025-05-15_02-05-00.tif,160,0.00625,U-Net (best),unet_lr0.0001_drop0.3_bs4,unet,0.0,0.1533
+160x_2025-05-15_02-05-00.tif,160,0.00625,U-Net (lr5e-05),unet_lr5e-05_drop0.2_bs4,unet,0.3231048583984375,0.1327
+160x_2025-05-15_02-05-00.tif,160,0.00625,U-Net (d0.3),unet_lr5e-05_drop0.3_bs4,unet,0.353240966796875,0.1308
+160x_2025-05-15_02-05-00.tif,160,0.00625,ResUNet,resunet_lr5e-05_drop0.3_bs4,resunet,0.0,0.1117
+160x_2025-05-15_02-05-00.tif,160,0.00625,Att-ResUNet,attention_resunet_lr5e-05_drop0.2_bs4,attention_resunet,0.0,0.1091
