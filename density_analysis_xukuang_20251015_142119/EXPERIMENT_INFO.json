@@ -1,0 +1,51 @@
+{
+  "timestamp": "2025-10-15 14:23:12",
+  "model_dir": "./xukuang_params_shrunk_20251015_071224",
+  "model_file": "xukuang_params_shrunk_20251015_071224/unet_xukuang_params_shrunk.keras",
+  "model_name": "UNet (Xukuang - FINAL epoch)",
+  "model_note": "Using FINAL model from epoch 200, NOT best checkpoint from epoch 140",
+  "model_performance": {
+    "final_val_iou_epoch_200": 0.6065,
+    "best_val_iou_epoch_140": 0.6789,
+    "model_used": "final_epoch_200"
+  },
+  "training_params": {
+    "learning_rate": 0.005,
+    "epochs": 200,
+    "batch_size": 4,
+    "loss_function": "BinaryFocalLoss(gamma=2)",
+    "image_size": 512,
+    "image_channels": 3,
+    "image_type": "RGB",
+    "optimizer": "Adam",
+    "test_split": 0.2,
+    "random_state": 0
+  },
+  "test_images_dir": "./test_images",
+  "prediction_threshold": 0.5,
+  "dilution_order": [
+    10,
+    20,
+    80,
+    160,
+    320,
+    640,
+    1280,
+    2560,
+    5120,
+    10240
+  ],
+  "dilution_labels": [
+    "10x",
+    "20x",
+    "80x",
+    "160x",
+    "320x",
+    "640x",
+    "1280x",
+    "2560x",
+    "5120x",
+    "10240x"
+  ],
+  "dilution_order_note": "CORRECTED ordering: 10x -> 10240x (not string sort)"
+}
