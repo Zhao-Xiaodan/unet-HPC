@@ -1,0 +1,448 @@
+================================================================================
+ATTENTION RESUNET HYPERPARAMETER SEARCH
+================================================================================
+Timestamp: 2025-10-15 23:01:57
+Output directory: ./attention_resunet_hyperparam_20251015_230157
+Model: Attention ResUNet
+Image size: 512×512×3
+Epochs: 100
+Batch size: 4
+
+Hyperparameter Grid:
+  n_filters: [16, 32, 64]
+  dropout: [0.1, 0.2, 0.3]
+  batch_norm: [True]
+  learning_rate: [0.001, 0.003, 0.005]
+================================================================================
+
+✓ Saved configuration: attention_resunet_hyperparam_20251015_230157/CONFIG.json
+
+Loading data...
+  Found 98 files in image directory
+  Loaded 98 image-mask pairs
+  Training samples: 78
+  Validation samples: 20
+  Image shape: (512, 512, 3)
+  Mask shape: (512, 512, 1)
+
+================================================================================
+HYPERPARAMETER SEARCH: ATTENTION RESUNET
+================================================================================
+
+Total combinations to try: 27
+
+
+================================================================================
+Combination 1/27
+================================================================================
+Hyperparameters:
+  n_filters: 16
+  dropout: 0.1
+  batch_norm: True
+  learning_rate: 0.001
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 16, 'dropout': 0.1, 'batch_norm': True, 'learning_rate': 0.001}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 16), (None, 512, 512, 16)]
+
+
+================================================================================
+Combination 2/27
+================================================================================
+Hyperparameters:
+  n_filters: 16
+  dropout: 0.1
+  batch_norm: True
+  learning_rate: 0.003
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 16, 'dropout': 0.1, 'batch_norm': True, 'learning_rate': 0.003}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 16), (None, 512, 512, 16)]
+
+
+================================================================================
+Combination 3/27
+================================================================================
+Hyperparameters:
+  n_filters: 16
+  dropout: 0.1
+  batch_norm: True
+  learning_rate: 0.005
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 16, 'dropout': 0.1, 'batch_norm': True, 'learning_rate': 0.005}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 16), (None, 512, 512, 16)]
+
+
+================================================================================
+Combination 4/27
+================================================================================
+Hyperparameters:
+  n_filters: 16
+  dropout: 0.2
+  batch_norm: True
+  learning_rate: 0.001
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 16, 'dropout': 0.2, 'batch_norm': True, 'learning_rate': 0.001}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 16), (None, 512, 512, 16)]
+
+
+================================================================================
+Combination 5/27
+================================================================================
+Hyperparameters:
+  n_filters: 16
+  dropout: 0.2
+  batch_norm: True
+  learning_rate: 0.003
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 16, 'dropout': 0.2, 'batch_norm': True, 'learning_rate': 0.003}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 16), (None, 512, 512, 16)]
+
+
+================================================================================
+Combination 6/27
+================================================================================
+Hyperparameters:
+  n_filters: 16
+  dropout: 0.2
+  batch_norm: True
+  learning_rate: 0.005
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 16, 'dropout': 0.2, 'batch_norm': True, 'learning_rate': 0.005}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 16), (None, 512, 512, 16)]
+
+
+================================================================================
+Combination 7/27
+================================================================================
+Hyperparameters:
+  n_filters: 16
+  dropout: 0.3
+  batch_norm: True
+  learning_rate: 0.001
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 16, 'dropout': 0.3, 'batch_norm': True, 'learning_rate': 0.001}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 16), (None, 512, 512, 16)]
+
+
+================================================================================
+Combination 8/27
+================================================================================
+Hyperparameters:
+  n_filters: 16
+  dropout: 0.3
+  batch_norm: True
+  learning_rate: 0.003
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 16, 'dropout': 0.3, 'batch_norm': True, 'learning_rate': 0.003}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 16), (None, 512, 512, 16)]
+
+
+================================================================================
+Combination 9/27
+================================================================================
+Hyperparameters:
+  n_filters: 16
+  dropout: 0.3
+  batch_norm: True
+  learning_rate: 0.005
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 16, 'dropout': 0.3, 'batch_norm': True, 'learning_rate': 0.005}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 16), (None, 512, 512, 16)]
+
+
+================================================================================
+Combination 10/27
+================================================================================
+Hyperparameters:
+  n_filters: 32
+  dropout: 0.1
+  batch_norm: True
+  learning_rate: 0.001
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 32, 'dropout': 0.1, 'batch_norm': True, 'learning_rate': 0.001}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 32), (None, 512, 512, 32)]
+
+
+================================================================================
+Combination 11/27
+================================================================================
+Hyperparameters:
+  n_filters: 32
+  dropout: 0.1
+  batch_norm: True
+  learning_rate: 0.003
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 32, 'dropout': 0.1, 'batch_norm': True, 'learning_rate': 0.003}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 32), (None, 512, 512, 32)]
+
+
+================================================================================
+Combination 12/27
+================================================================================
+Hyperparameters:
+  n_filters: 32
+  dropout: 0.1
+  batch_norm: True
+  learning_rate: 0.005
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 32, 'dropout': 0.1, 'batch_norm': True, 'learning_rate': 0.005}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 32), (None, 512, 512, 32)]
+
+
+================================================================================
+Combination 13/27
+================================================================================
+Hyperparameters:
+  n_filters: 32
+  dropout: 0.2
+  batch_norm: True
+  learning_rate: 0.001
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 32, 'dropout': 0.2, 'batch_norm': True, 'learning_rate': 0.001}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 32), (None, 512, 512, 32)]
+
+
+================================================================================
+Combination 14/27
+================================================================================
+Hyperparameters:
+  n_filters: 32
+  dropout: 0.2
+  batch_norm: True
+  learning_rate: 0.003
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 32, 'dropout': 0.2, 'batch_norm': True, 'learning_rate': 0.003}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 32), (None, 512, 512, 32)]
+
+
+================================================================================
+Combination 15/27
+================================================================================
+Hyperparameters:
+  n_filters: 32
+  dropout: 0.2
+  batch_norm: True
+  learning_rate: 0.005
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 32, 'dropout': 0.2, 'batch_norm': True, 'learning_rate': 0.005}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 32), (None, 512, 512, 32)]
+
+
+================================================================================
+Combination 16/27
+================================================================================
+Hyperparameters:
+  n_filters: 32
+  dropout: 0.3
+  batch_norm: True
+  learning_rate: 0.001
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 32, 'dropout': 0.3, 'batch_norm': True, 'learning_rate': 0.001}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 32), (None, 512, 512, 32)]
+
+
+================================================================================
+Combination 17/27
+================================================================================
+Hyperparameters:
+  n_filters: 32
+  dropout: 0.3
+  batch_norm: True
+  learning_rate: 0.003
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 32, 'dropout': 0.3, 'batch_norm': True, 'learning_rate': 0.003}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 32), (None, 512, 512, 32)]
+
+
+================================================================================
+Combination 18/27
+================================================================================
+Hyperparameters:
+  n_filters: 32
+  dropout: 0.3
+  batch_norm: True
+  learning_rate: 0.005
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 32, 'dropout': 0.3, 'batch_norm': True, 'learning_rate': 0.005}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 32), (None, 512, 512, 32)]
+
+
+================================================================================
+Combination 19/27
+================================================================================
+Hyperparameters:
+  n_filters: 64
+  dropout: 0.1
+  batch_norm: True
+  learning_rate: 0.001
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 64, 'dropout': 0.1, 'batch_norm': True, 'learning_rate': 0.001}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 64), (None, 512, 512, 64)]
+
+
+================================================================================
+Combination 20/27
+================================================================================
+Hyperparameters:
+  n_filters: 64
+  dropout: 0.1
+  batch_norm: True
+  learning_rate: 0.003
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 64, 'dropout': 0.1, 'batch_norm': True, 'learning_rate': 0.003}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 64), (None, 512, 512, 64)]
+
+
+================================================================================
+Combination 21/27
+================================================================================
+Hyperparameters:
+  n_filters: 64
+  dropout: 0.1
+  batch_norm: True
+  learning_rate: 0.005
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 64, 'dropout': 0.1, 'batch_norm': True, 'learning_rate': 0.005}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 64), (None, 512, 512, 64)]
+
+
+================================================================================
+Combination 22/27
+================================================================================
+Hyperparameters:
+  n_filters: 64
+  dropout: 0.2
+  batch_norm: True
+  learning_rate: 0.001
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 64, 'dropout': 0.2, 'batch_norm': True, 'learning_rate': 0.001}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 64), (None, 512, 512, 64)]
+
+
+================================================================================
+Combination 23/27
+================================================================================
+Hyperparameters:
+  n_filters: 64
+  dropout: 0.2
+  batch_norm: True
+  learning_rate: 0.003
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 64, 'dropout': 0.2, 'batch_norm': True, 'learning_rate': 0.003}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 64), (None, 512, 512, 64)]
+
+
+================================================================================
+Combination 24/27
+================================================================================
+Hyperparameters:
+  n_filters: 64
+  dropout: 0.2
+  batch_norm: True
+  learning_rate: 0.005
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 64, 'dropout': 0.2, 'batch_norm': True, 'learning_rate': 0.005}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 64), (None, 512, 512, 64)]
+
+
+================================================================================
+Combination 25/27
+================================================================================
+Hyperparameters:
+  n_filters: 64
+  dropout: 0.3
+  batch_norm: True
+  learning_rate: 0.001
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 64, 'dropout': 0.3, 'batch_norm': True, 'learning_rate': 0.001}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 64), (None, 512, 512, 64)]
+
+
+================================================================================
+Combination 26/27
+================================================================================
+Hyperparameters:
+  n_filters: 64
+  dropout: 0.3
+  batch_norm: True
+  learning_rate: 0.003
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 64, 'dropout': 0.3, 'batch_norm': True, 'learning_rate': 0.003}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 64), (None, 512, 512, 64)]
+
+
+================================================================================
+Combination 27/27
+================================================================================
+Hyperparameters:
+  n_filters: 64
+  dropout: 0.3
+  batch_norm: True
+  learning_rate: 0.005
+
+Building model...
+
+❌ Error training with hyperparameters {'n_filters': 64, 'dropout': 0.3, 'batch_norm': True, 'learning_rate': 0.005}:
+   A `Concatenate` layer requires inputs with matching shapes except for the concatenation axis. Received: input_shape=[(None, 256, 256, 64), (None, 512, 512, 64)]
+
+
+================================================================================
+HYPERPARAMETER SEARCH COMPLETE
+================================================================================
+
+Output directory: attention_resunet_hyperparam_20251015_230157
+Total experiments: 27
+
+✓ Results saved: attention_resunet_hyperparam_20251015_230157/attention_resunet_results.csv
+================================================================================
