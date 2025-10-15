@@ -2,16 +2,16 @@
 #PBS -l walltime=48:00:00
 #PBS -j oe
 #PBS -k oed
-#PBS -N Attention_Hyperparam
+#PBS -N AttentionResUNet_Hyperparam
 #PBS -l select=1:ncpus=36:mpiprocs=1:ompthreads=36:ngpus=1:mem=240gb
 #PBS -M phyzxi@nus.edu.sg
 #PBS -m abe
 
 ################################################################################
-# Attention Models Hyperparameter Search
+# Attention ResUNet Hyperparameter Search
 ################################################################################
 #
-# Purpose: Train Attention UNet and Attention ResUNet with hyperparameter tuning
+# Purpose: Train Attention ResUNet with hyperparameter tuning
 #
 # Features:
 #   - NO Lambda layers (uses RepeatElements custom layer)
@@ -19,16 +19,16 @@
 #   - Hyperparameter grid search
 #   - Proper BinaryFocalLoss serialization
 #
-# Models: Attention UNet, Attention ResUNet
+# Model: Attention ResUNet (with residual blocks + attention gates)
 # Training: Hyperparameter search (filters, dropout, learning rate)
 #
-# Expected Runtime: 24-48 hours (multiple hyperparameter combinations)
+# Expected Runtime: 24-48 hours
 #
 # Date: October 16, 2025
 ################################################################################
 
 echo "========================================================================"
-echo "ATTENTION MODELS HYPERPARAMETER SEARCH"
+echo "ATTENTION RESUNET HYPERPARAMETER SEARCH"
 echo "========================================================================"
 echo "Job ID: $PBS_JOBID"
 echo "Job Name: $PBS_JOBNAME"
@@ -61,7 +61,7 @@ if [ ! -f "$image" ]; then
 fi
 
 echo "✓ TensorFlow Container: $image"
-echo "==========================="
+echo "============================"
 echo ""
 
 # Verify required files exist
@@ -69,7 +69,7 @@ echo "Verifying required files..."
 
 IMAGES_DIR="./dataset_shrunk_masks/images"
 MASKS_DIR="./dataset_shrunk_masks/masks"
-SCRIPT="./train_attention_models_hyperparam.py"
+SCRIPT="./train_attention_resunet_hyperparam.py"
 
 if [ ! -d "$IMAGES_DIR" ]; then
     echo "ERROR: Images directory not found: $IMAGES_DIR"
@@ -121,7 +121,7 @@ echo "Command: singularity exec --nv \"$image\" python3 $SCRIPT"
 echo ""
 
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-singularity exec --nv "$image" python3 "$SCRIPT" 2>&1 | tee "train_attention_hyperparam_console_${TIMESTAMP}.log"
+singularity exec --nv "$image" python3 "$SCRIPT" 2>&1 | tee "train_attention_resunet_hyperparam_console_${TIMESTAMP}.log"
 
 EXIT_CODE=$?
 
@@ -134,7 +134,7 @@ echo "End time: $(date)"
 
 # Find and display output directory
 if [ $EXIT_CODE -eq 0 ]; then
-    OUTPUT_DIR=$(find . -maxdepth 1 -type d -name "attention_hyperparam_*" | sort | tail -1)
+    OUTPUT_DIR=$(find . -maxdepth 1 -type d -name "attention_resunet_hyperparam_*" | sort | tail -1)
 
     if [ -n "$OUTPUT_DIR" ]; then
         echo ""
@@ -142,9 +142,9 @@ if [ $EXIT_CODE -eq 0 ]; then
         echo ""
 
         # Display results summary
-        if [ -f "$OUTPUT_DIR/all_results.csv" ]; then
+        if [ -f "$OUTPUT_DIR/attention_resunet_results.csv" ]; then
             echo "Results Summary:"
-            head -20 "$OUTPUT_DIR/all_results.csv"
+            head -20 "$OUTPUT_DIR/attention_resunet_results.csv"
             echo ""
         fi
 

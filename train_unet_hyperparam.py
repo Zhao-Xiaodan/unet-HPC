@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """
-Attention Models Training with Hyperparameter Search
-====================================================
+Standard UNet Training with Hyperparameter Search
+==================================================
 
-Trains Attention UNet and Attention ResUNet with hyperparameter tuning.
-Saves BOTH best and final models with proper serialization (no Lambda layers).
+Trains standard UNet with hyperparameter tuning.
+Saves BOTH best and final models with proper serialization.
 
 Key Features:
 1. NO Lambda layers - uses RepeatElements custom layer
@@ -31,13 +31,13 @@ from tensorflow import keras
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau, CSVLogger
 
 # Import custom modules
-from models_fixed import build_attention_unet, build_attention_resunet, RepeatElements
+from models_fixed import build_unet, RepeatElements
 from loss_functions_fixed import (
     combined_dice_focal_loss,
     jacard_coef,
     dice_coef,
     focal_loss,
-    BinaryFocalLoss  # Make sure this exists in loss_functions_fixed.py
+    BinaryFocalLoss
 )
 
 # For data loading
@@ -56,10 +56,10 @@ CONFIG = {
     'train_val_split': 0.8,  # 80% train, 20% validation
 
     # Output
-    'output_dir': f'./attention_hyperparam_{datetime.now().strftime("%Y%m%d_%H%M%S")}',
+    'output_dir': f'./unet_hyperparam_{datetime.now().strftime("%Y%m%d_%H%M%S")}',
 
-    # Model selection
-    'architectures': ['attention_unet', 'attention_resunet'],
+    # Model
+    'model_name': 'unet',
 
     # Image settings
     'img_size': 512,
@@ -67,7 +67,7 @@ CONFIG = {
 
     # Training hyperparameters to search
     'hyperparam_grid': {
-        'n_filters': [16, 32],  # Base number of filters
+        'n_filters': [16, 32, 64],  # Base number of filters
         'dropout': [0.1, 0.2, 0.3],  # Dropout rate
         'batch_norm': [True],  # Always use batch norm
         'learning_rate': [0.001, 0.003, 0.005],
@@ -103,11 +103,11 @@ def create_output_dir(config):
 def print_header(config):
     """Print training header."""
     print("="*80)
-    print("ATTENTION MODELS HYPERPARAMETER SEARCH")
+    print("STANDARD UNET HYPERPARAMETER SEARCH")
     print("="*80)
     print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Output directory: {config['output_dir']}")
-    print(f"Architectures: {', '.join(config['architectures'])}")
+    print(f"Model: Standard UNet")
     print(f"Image size: {config['img_size']}×{config['img_size']}×{config['img_channels']}")
     print(f"Epochs: {config['epochs']}")
     print(f"Batch size: {config['batch_size']}")
@@ -200,12 +200,11 @@ def load_data(config):
 # MODEL BUILDING
 # ============================================================================
 
-def build_model(architecture, n_filters, dropout, batch_norm, config):
+def build_model(n_filters, dropout, batch_norm, config):
     """
-    Build model with specified architecture and hyperparameters.
+    Build standard UNet model.
 
     Args:
-        architecture: 'attention_unet' or 'attention_resunet'
         n_filters: Base number of filters
         dropout: Dropout rate
         batch_norm: Whether to use batch normalization
@@ -216,22 +215,12 @@ def build_model(architecture, n_filters, dropout, batch_norm, config):
     """
     input_shape = (config['img_size'], config['img_size'], config['img_channels'])
 
-    if architecture == 'attention_unet':
-        model = build_attention_unet(
-            input_shape=input_shape,
-            n_filters=n_filters,
-            dropout=dropout,
-            batch_norm=batch_norm
-        )
-    elif architecture == 'attention_resunet':
-        model = build_attention_resunet(
-            input_shape=input_shape,
-            n_filters=n_filters,
-            dropout=dropout,
-            batch_norm=batch_norm
-        )
-    else:
-        raise ValueError(f"Unknown architecture: {architecture}")
+    model = build_unet(
+        input_shape=input_shape,
+        n_filters=n_filters,
+        dropout=dropout,
+        batch_norm=batch_norm
+    )
 
     return model
 
@@ -336,15 +325,15 @@ def generate_hyperparameter_combinations(hyperparam_grid):
 
     return combinations
 
-def run_hyperparam_search(architecture, X_train, y_train, X_val, y_val, output_dir, config):
+def run_hyperparam_search(X_train, y_train, X_val, y_val, output_dir, config):
     """
-    Run hyperparameter search for given architecture.
+    Run hyperparameter search for standard UNet.
 
     Returns:
         DataFrame with results for all hyperparameter combinations
     """
     print("="*80)
-    print(f"HYPERPARAMETER SEARCH: {architecture.upper()}")
+    print(f"HYPERPARAMETER SEARCH: STANDARD UNET")
     print("="*80)
     print()
 
@@ -366,14 +355,13 @@ def run_hyperparam_search(architecture, X_train, y_train, X_val, y_val, output_d
         print()
 
         # Create experiment name
-        experiment_name = f"{architecture}_" + "_".join([f"{k}{v}" for k, v in hyperparams.items()])
+        experiment_name = f"unet_" + "_".join([f"{k}{v}" for k, v in hyperparams.items()])
         experiment_name = experiment_name.replace('.', 'p')  # Replace dots in filenames
 
         try:
             # Build model
             print("Building model...")
             model = build_model(
-                architecture,
                 hyperparams['n_filters'],
                 hyperparams['dropout'],
                 hyperparams['batch_norm'],
@@ -407,7 +395,7 @@ def run_hyperparam_search(architecture, X_train, y_train, X_val, y_val, output_d
 
             # Record results
             result = {
-                'architecture': architecture,
+                'model': 'unet',
                 'experiment_name': experiment_name,
                 'best_epoch': best_epoch + 1,
                 'best_val_iou': best_val_iou,
@@ -436,7 +424,7 @@ def run_hyperparam_search(architecture, X_train, y_train, X_val, y_val, output_d
             print()
 
             result = {
-                'architecture': architecture,
+                'model': 'unet',
                 'experiment_name': experiment_name,
                 'error': str(e),
                 **hyperparams
@@ -469,57 +457,37 @@ def main():
     # Load data
     X_train, X_val, y_train, y_val = load_data(CONFIG)
 
-    # Run hyperparameter search for each architecture
-    all_results = []
+    # Run hyperparameter search
+    results_df = run_hyperparam_search(X_train, y_train, X_val, y_val, output_dir, CONFIG)
 
-    for architecture in CONFIG['architectures']:
-        results_df = run_hyperparam_search(
-            architecture,
-            X_train,
-            y_train,
-            X_val,
-            y_val,
-            output_dir,
-            CONFIG
-        )
-        all_results.append(results_df)
-
-        # Save intermediate results
-        results_path = output_dir / f'{architecture}_results.csv'
-        results_df.to_csv(results_path, index=False)
-        print(f"\n✓ Saved {architecture} results: {results_path}\n")
-
-    # Combine all results
-    final_results = pd.concat(all_results, ignore_index=True)
-    final_results_path = output_dir / 'all_results.csv'
-    final_results.to_csv(final_results_path, index=False)
+    # Save results
+    results_path = output_dir / 'unet_results.csv'
+    results_df.to_csv(results_path, index=False)
 
     # Print summary
     print("\n" + "="*80)
     print("HYPERPARAMETER SEARCH COMPLETE")
     print("="*80)
     print(f"\nOutput directory: {output_dir}")
-    print(f"Total experiments: {len(final_results)}")
+    print(f"Total experiments: {len(results_df)}")
     print()
 
-    # Print best results for each architecture
-    for architecture in CONFIG['architectures']:
-        arch_results = final_results[final_results['architecture'] == architecture]
-        if 'best_val_iou' in arch_results.columns:
-            arch_results = arch_results.dropna(subset=['best_val_iou'])
-            if len(arch_results) > 0:
-                best_idx = arch_results['best_val_iou'].idxmax()
-                best_result = arch_results.loc[best_idx]
+    # Print best results
+    if 'best_val_iou' in results_df.columns:
+        results_clean = results_df.dropna(subset=['best_val_iou'])
+        if len(results_clean) > 0:
+            best_idx = results_clean['best_val_iou'].idxmax()
+            best_result = results_clean.loc[best_idx]
 
-                print(f"{architecture.upper()} - Best Configuration:")
-                print(f"  Experiment: {best_result['experiment_name']}")
-                print(f"  Best Val IoU: {best_result['best_val_iou']:.4f}")
-                print(f"  Hyperparameters:")
-                for param in CONFIG['hyperparam_grid'].keys():
-                    print(f"    {param}: {best_result[param]}")
-                print()
+            print(f"STANDARD UNET - Best Configuration:")
+            print(f"  Experiment: {best_result['experiment_name']}")
+            print(f"  Best Val IoU: {best_result['best_val_iou']:.4f}")
+            print(f"  Hyperparameters:")
+            for param in CONFIG['hyperparam_grid'].keys():
+                print(f"    {param}: {best_result[param]}")
+            print()
 
-    print(f"✓ All results saved: {final_results_path}")
+    print(f"✓ Results saved: {results_path}")
     print("="*80)
 
 if __name__ == '__main__':
