@@ -1,0 +1,47 @@
+================================================================================
+DENSITY ANALYSIS - XUKUANG UNET MODEL (RGB)
+================================================================================
+Script: density_analysis_xukuang.py
+Timestamp: 2025-10-15 13:37:34
+Model directory: ./xukuang_params_shrunk_20251015_071224
+Test images: ./test_images
+Output directory: ./density_analysis_xukuang_20251015_133734
+Image format: 512×512 RGB (3 channels)
+
+Model: UNet (FINAL model from Xukuang experiment)
+  - Final Val IoU (Epoch 200): 0.6065
+  - Best Val IoU (Epoch 140): 0.6789
+  - Training: LR=0.005, 200 epochs, BinaryFocalLoss
+  - NOTE: Using FINAL epoch model, not best checkpoint
+================================================================================
+
+Output directory: density_analysis_xukuang_20251015_133734
+
+Loading model: unet
+  Model file: xukuang_params_shrunk_20251015_071224/unet_xukuang_params_shrunk.keras
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_xukuang.py", line 565, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_xukuang.py", line 535, in main
+    model = load_model(CONFIG['model_dir'], CONFIG['model_name'])
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_xukuang.py", line 255, in load_model
+    model = keras.models.load_model(model_path, custom_objects=custom_objects)
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/saving_api.py", line 254, in load_model
+    return saving_lib.load_model(
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/saving_lib.py", line 271, in load_model
+    raise e
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/saving_lib.py", line 236, in load_model
+    model = deserialize_keras_object(
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/serialization_lib.py", line 733, in deserialize_keras_object
+    instance.compile_from_config(compile_config)
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/training.py", line 3676, in compile_from_config
+    config = saving_lib.deserialize_keras_object(config)
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/serialization_lib.py", line 621, in deserialize_keras_object
+    return {
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/serialization_lib.py", line 622, in <dictcomp>
+    key: deserialize_keras_object(
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/serialization_lib.py", line 704, in deserialize_keras_object
+    cls = _retrieve_class_or_fn(
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/serialization_lib.py", line 834, in _retrieve_class_or_fn
+    raise TypeError(
+TypeError: Could not locate class 'BinaryFocalLoss'. Make sure custom classes are decorated with `@keras.saving.register_keras_serializable()`. Full object config: {'module': None, 'class_name': 'BinaryFocalLoss', 'config': {'reduction': 'auto', 'name': 'binary_focal_loss', 'gamma': 2, 'alpha': 0.25}, 'registered_name': 'Custom>BinaryFocalLoss'}
