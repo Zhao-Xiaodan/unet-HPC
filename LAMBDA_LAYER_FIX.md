@@ -144,11 +144,91 @@ model.compile(...)  # Recompile
 3. **Quick Fix:** Single line change vs. architectural redesign + retraining
 4. **Functionally Identical:** Models work exactly as trained
 
+## Fix #2: Keras Backend Namespace Issue
+
+**Date:** October 15, 2025 (Additional fix)
+**Job:** `Density_MultiModel.o288545`
+
+### New Error After safe_mode=False
+
+After adding `safe_mode=False`, encountered:
+
+```
+NameError: Exception encountered when calling layer "lambda" (type Lambda).
+
+name 'K' is not defined
+
+File "/scratch/phyzxi/unet-HPC/models.py", line 92, in <lambda>
+    return layers.Lambda(lambda x, repnum: K.repeat_elements(x, repnum, axis=3),
+```
+
+**Location:** models.py line 92, in `repeat_elem()` function
+
+### Root Cause
+
+The Lambda layer in Attention models uses `K.repeat_elements()` where `K` is the Keras backend:
+
+```python
+# From models.py line 92
+return layers.Lambda(lambda x, repnum: K.repeat_elements(x, repnum, axis=3),
+                     arguments={'repnum': rep})(tensor)
+```
+
+**The Problem:**
+- When the model was **trained**, `K` was imported in `models.py`: `from tensorflow.keras import backend as K`
+- When the model is **loaded**, the Lambda function tries to execute but `K` is not in scope
+- The deserialization context doesn't have access to the `models` module's namespace
+
+**Why `safe_mode=False` alone wasn't enough:**
+- `safe_mode=False` allows Lambda layers to load
+- But the Lambda function still needs access to `K` in its execution context
+
+### Solution
+
+**Two-part fix:**
+
+**Part 1:** Import Keras backend in density_analysis script:
+```python
+from tensorflow.keras import backend as K
+```
+
+**Part 2:** Add `K` to `custom_objects`:
+```python
+custom_objects = {
+    'BinaryFocalLoss': BinaryFocalLoss,
+    'binary_focal_loss': BinaryFocalLoss,
+    'combined_dice_focal_loss': combined_dice_focal_loss,
+    'jacard_coef': jacard_coef,
+    'dice_coef': dice_coef,
+    'focal_loss': focal_loss,
+    'K': K,  # Keras backend for Lambda layers
+}
+```
+
+This makes `K` available in the deserialization context.
+
+### Why This Works
+
+When Keras deserializes Lambda layers:
+1. It reconstructs the lambda function from saved source code
+2. The function references `K.repeat_elements()`
+3. Keras looks for `K` in `custom_objects`
+4. ✓ Finds it and provides it to the Lambda's execution context
+
+**Analogy:** It's like providing a dictionary of variables to an `eval()` function:
+```python
+# Without K in scope
+eval("K.repeat_elements(x, 2, axis=3)")  # NameError: K not defined
+
+# With K in scope (via custom_objects)
+eval("K.repeat_elements(x, 2, axis=3)", {'K': K})  # ✓ Works!
+```
+
 ## Verification
 
 ### Successful Loading Indicators
 
-After fix, models should load with:
+After both fixes, models should load with:
 ```
 Loading model: unet
   ✓ Model loaded successfully
@@ -169,29 +249,39 @@ Loading model: attention_resunet
 ### Testing Checklist
 
 - [x] UNet loads without errors
-- [ ] Attention UNet loads without errors (should work after fix)
-- [ ] Attention ResUNet loads without errors (should work after fix)
+- [x] `safe_mode=False` added (Fix #1)
+- [x] `K` added to custom_objects (Fix #2)
+- [ ] Attention UNet loads without errors (should work after both fixes)
+- [ ] Attention ResUNet loads without errors (should work after both fixes)
 - [ ] All models have correct input/output shapes
 - [ ] Predictions run successfully
 
 ## Comparison with BinaryFocalLoss Fix
 
-### Serialization Issues Encountered
+### Three Serialization Issues Encountered
 
-| Issue | Component | Fix | Similarity |
-|-------|-----------|-----|------------|
-| **BinaryFocalLoss** | Custom loss class | Add `@keras.saving.register_keras_serializable` decorator | Serialization |
-| **Lambda Layers** | Attention mechanism | Add `safe_mode=False` parameter | Deserialization |
+| Issue | Component | Fix | Stage |
+|-------|-----------|-----|-------|
+| **BinaryFocalLoss** | Custom loss class | Add `@keras.saving.register_keras_serializable` decorator | Compilation config |
+| **Lambda Layers (Permission)** | Attention mechanism | Add `safe_mode=False` parameter | Architecture loading |
+| **Lambda Layers (Namespace)** | Keras backend `K` | Add `'K': K` to `custom_objects` | Lambda execution |
 
-Both issues relate to **Keras model serialization**, but at different stages:
+All three issues relate to **Keras model serialization/deserialization**, but at different stages:
 
 1. **BinaryFocalLoss:** Compilation config deserialization
    - Error: "Could not locate class 'BinaryFocalLoss'"
    - Solution: Register class with decorator
+   - Affects: All models using BinaryFocalLoss
 
-2. **Lambda Layers:** Architecture deserialization
+2. **Lambda Layers (Permission):** Architecture deserialization
    - Error: "Lambda layer with Python lambda is disallowed"
    - Solution: Allow Lambda loading with `safe_mode=False`
+   - Affects: Attention UNet, Attention ResUNet
+
+3. **Lambda Layers (Namespace):** Lambda function execution context
+   - Error: "name 'K' is not defined"
+   - Solution: Provide `K` in `custom_objects`
+   - Affects: Attention UNet, Attention ResUNet (Lambda functions using `K`)
 
 ## Future Considerations
 

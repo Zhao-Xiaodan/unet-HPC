@@ -526,18 +526,110 @@ After fix, all three models should load:
 ✓ Attention ResUNet loaded successfully  (requires safe_mode=False)
 ```
 
+**Status:** ✓ Fixed (Part 1)
+
+**But wait...**
+
+---
+
+## Fix #3: Keras Backend Namespace (Lambda Layer Variables)
+
+**Date:** October 15, 2025 (Additional fix)
+**Job:** `Density_MultiModel.o288545`
+
+### Issue
+
+After adding `safe_mode=False`, encountered new error:
+
+```
+NameError: Exception encountered when calling layer "lambda" (type Lambda).
+
+name 'K' is not defined
+
+File "/scratch/phyzxi/unet-HPC/models.py", line 92, in <lambda>
+    return layers.Lambda(lambda x, repnum: K.repeat_elements(x, repnum, axis=3),
+```
+
+**Location:** models.py line 92, in `repeat_elem()` function
+
+### Root Cause
+
+The Lambda layer uses `K.repeat_elements()` where `K` is the Keras backend. When deserializing:
+- `safe_mode=False` **allows** Lambda layers to load
+- But the Lambda function needs `K` in its execution context
+- `K` is not available during deserialization
+
+**From models.py:**
+```python
+from tensorflow.keras import backend as K
+
+def repeat_elem(tensor, rep):
+    return layers.Lambda(lambda x, repnum: K.repeat_elements(x, repnum, axis=3),
+                         arguments={'repnum': rep})(tensor)
+```
+
+**The Problem:** When model loads, Lambda function references `K` but it's not in scope.
+
+### Solution
+
+**Two-part fix:**
+
+1. **Import Keras backend:**
+   ```python
+   from tensorflow.keras import backend as K
+   ```
+
+2. **Add to custom_objects:**
+   ```python
+   custom_objects = {
+       'BinaryFocalLoss': BinaryFocalLoss,
+       'binary_focal_loss': BinaryFocalLoss,
+       'combined_dice_focal_loss': combined_dice_focal_loss,
+       'jacard_coef': jacard_coef,
+       'dice_coef': dice_coef,
+       'focal_loss': focal_loss,
+       'K': K,  # Keras backend for Lambda layers
+   }
+   ```
+
+**Why this works:** `custom_objects` provides variables to Lambda's execution context, like `eval(code, {'K': K})`.
+
+### Verification
+
+After all three fixes:
+
+```
+✓ UNet loaded successfully
+✓ Attention UNet loaded successfully  (requires safe_mode=False + K in custom_objects)
+✓ Attention ResUNet loaded successfully  (requires safe_mode=False + K in custom_objects)
+```
+
 **Status:** ✓ Fixed
 
 **See also:** `LAMBDA_LAYER_FIX.md` for detailed technical explanation
 
 ---
 
+## Summary of All Fixes
+
+| Fix # | Issue | Component | Solution | Affected Models |
+|-------|-------|-----------|----------|-----------------|
+| **#1** | BinaryFocalLoss not found | Loss class | Add `@keras.saving.register_keras_serializable` | All models |
+| **#2** | Lambda layers disallowed | Attention architecture | Add `safe_mode=False` | Attention UNet, Attention ResUNet |
+| **#3** | `K` not defined in Lambda | Keras backend namespace | Add `'K': K` to `custom_objects` | Attention UNet, Attention ResUNet |
+
+**All fixes applied in:** `density_analysis_xukuang.py`
+
+---
+
 **Dates:**
 - October 15, 2025 (BinaryFocalLoss fix)
-- October 15, 2025 (Lambda layer fix - Update)
+- October 15, 2025 (Lambda layer permission fix)
+- October 15, 2025 (Keras backend namespace fix)
 
 **Debugged by:** Claude Code
 
 **Based on logs:**
 - `Density_Xukuang.o288483` (BinaryFocalLoss error)
-- `Density_MultiModel.o288541` (Lambda layer error)
+- `Density_MultiModel.o288541` (Lambda layer permission error)
+- `Density_MultiModel.o288545` (Keras backend namespace error)

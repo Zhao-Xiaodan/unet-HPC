@@ -57,6 +57,7 @@ from collections import defaultdict
 
 import tensorflow as tf
 from tensorflow import keras
+from tensorflow.keras import backend as K
 
 # Import custom modules
 from loss_functions_fixed import combined_dice_focal_loss, jacard_coef, dice_coef, focal_loss
@@ -248,6 +249,8 @@ def load_model(model_dir, model_name):
             return config
 
     # Custom objects for loading
+    # Note: 'K' (Keras backend) is required for Lambda layers in Attention models
+    # that use K.repeat_elements() and other backend functions
     custom_objects = {
         'BinaryFocalLoss': BinaryFocalLoss,
         'binary_focal_loss': BinaryFocalLoss,
@@ -255,6 +258,7 @@ def load_model(model_dir, model_name):
         'jacard_coef': jacard_coef,
         'dice_coef': dice_coef,
         'focal_loss': focal_loss,
+        'K': K,  # Keras backend for Lambda layers
     }
 
     # Load model with safe_mode=False to allow Lambda layers
