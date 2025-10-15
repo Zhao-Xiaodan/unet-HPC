@@ -38,7 +38,24 @@ from pathlib import Path
 
 # Import custom modules
 from models import Attention_ResUNet, UNet, Attention_UNet, dice_coef, dice_coef_loss, jacard_coef
-from focal_loss import BinaryFocalLoss
+
+# Import loss functions
+# Note: bead_seg.ipynb uses BinaryFocalLoss from focal_loss package
+# We use the equivalent focal_loss function from loss_functions_fixed.py
+from loss_functions_fixed import focal_loss as focal_loss_function
+
+# Create a wrapper class to match the interface expected by Keras
+class BinaryFocalLoss:
+    """
+    Wrapper for focal_loss function to match the interface of focal_loss.BinaryFocalLoss
+    Used in bead_seg.ipynb: BinaryFocalLoss(gamma=2)
+    """
+    def __init__(self, gamma=2.0, alpha=0.25):
+        self.gamma = gamma
+        self.alpha = alpha
+
+    def __call__(self, y_true, y_pred):
+        return focal_loss_function(y_true, y_pred, alpha=self.alpha, gamma=self.gamma)
 
 # ============================================================================
 # GPU CONFIGURATION

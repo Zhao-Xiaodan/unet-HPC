@@ -107,11 +107,11 @@ if [ ! -f "./models.py" ]; then
 fi
 echo "   ✓ models.py found"
 
-if [ ! -f "./focal_loss.py" ]; then
-    echo "   ✗ ERROR: focal_loss.py not found!"
+if [ ! -f "./loss_functions_fixed.py" ]; then
+    echo "   ✗ ERROR: loss_functions_fixed.py not found!"
     exit 1
 fi
-echo "   ✓ focal_loss.py found"
+echo "   ✓ loss_functions_fixed.py found"
 
 echo ""
 echo "2. Checking dataset..."
@@ -206,12 +206,12 @@ for dep in deps:
         print(f'  ✗ {dep} - MISSING!')
         sys.exit(1)
 
-# Check focal_loss
+# Check loss_functions_fixed
 try:
-    from focal_loss import BinaryFocalLoss
-    print('  ✓ focal_loss.BinaryFocalLoss')
+    from loss_functions_fixed import focal_loss
+    print('  ✓ loss_functions_fixed.focal_loss')
 except ImportError:
-    print('  ✗ focal_loss.BinaryFocalLoss - MISSING!')
+    print('  ✗ loss_functions_fixed.focal_loss - MISSING!')
     sys.exit(1)
 
 print()

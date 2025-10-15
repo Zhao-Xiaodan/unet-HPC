@@ -70,8 +70,10 @@ dataset_shrunk_masks/
 2. **Dependencies:**
    - TensorFlow 2.16.1
    - models.py (UNet, Attention_UNet, Attention_ResUNet definitions)
-   - focal_loss.py (BinaryFocalLoss implementation)
+   - loss_functions_fixed.py (focal_loss implementation)
    - Standard libs: numpy, pandas, matplotlib, opencv, PIL, sklearn
+
+   **Note:** The original `bead_seg.ipynb` uses `BinaryFocalLoss` from the `focal_loss` pip package. Our implementation uses the equivalent `focal_loss` function from `loss_functions_fixed.py` with a wrapper class for compatibility.
 
 ## Usage
 
@@ -87,7 +89,7 @@ ls dataset_shrunk_masks/masks/ | wc -l
 # Verify required scripts exist
 ls train_shrunk_xukuang_parameters.py
 ls models.py
-ls focal_loss.py
+ls loss_functions_fixed.py
 
 # Submit job
 qsub pbs_train_shrunk_xukuang_parameters.sh
@@ -273,15 +275,17 @@ pwd
 
 ### Missing Dependencies
 
-**Error:** `ModuleNotFoundError: No module named 'focal_loss'`
+**Error:** `ModuleNotFoundError: No module named 'loss_functions_fixed'`
 
 **Solution:**
 ```bash
-# Check if focal_loss.py exists
-ls focal_loss.py
+# Check if loss_functions_fixed.py exists
+ls loss_functions_fixed.py
 
 # Check if models.py exists
 ls models.py
+
+# These files should be in the unet-HPC directory
 ```
 
 ### GPU Out of Memory
