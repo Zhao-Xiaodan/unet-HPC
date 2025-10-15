@@ -7,9 +7,16 @@ Uses the top 5 configurations from hyperparameter_search_512_20251014_235755
 to predict on test images and generate density analysis.
 
 Generates:
-- Box plots of density vs dilution factor (all models combined)
-- 5 representative 512×512 tiles with side-by-side predictions from all models
+- Individual box plots for each model (5 separate PNG files)
+- Representative 512×512 tiles with 4-panel comparison (Original + top 3 models)
 - CSV with all density data
+
+Process:
+1. Extract 512×512 tiles from test images (non-overlapping)
+2. Predict on each tile with all 5 models
+3. Calculate foreground density for each prediction
+4. Select 5 representative tiles per dilution
+5. Generate box plots and tile visualizations
 
 Models used (from hyperparameter_search_512_20251014_235755):
 1. unet_lr0.0001_drop0.3_bs4 (Best: 0.1533 ± 0.0578)
@@ -52,53 +59,38 @@ from loss_functions_fixed import combined_dice_focal_loss, jacard_coef, dice_coe
 TOP_CONFIGS = [
     {
         'name': 'unet_lr0.0001_drop0.3_bs4',
+        'short_name': 'unet_best',
         'architecture': 'unet',
-        'lr': 0.0001,
-        'dropout': 0.3,
         'mean_jaccard': 0.1533,
-        'std_jaccard': 0.0578,
-        'color': '#440154',  # Dark purple
         'label': 'U-Net (best)',
     },
     {
         'name': 'unet_lr5e-05_drop0.2_bs4',
+        'short_name': 'unet_lr5e-05_d0.2',
         'architecture': 'unet',
-        'lr': 5e-05,
-        'dropout': 0.2,
         'mean_jaccard': 0.1327,
-        'std_jaccard': 0.0176,
-        'color': '#31688e',  # Blue
-        'label': 'U-Net (lr5e-05)',
+        'label': 'U-Net (lr5e-05, d0.2)',
     },
     {
         'name': 'unet_lr5e-05_drop0.3_bs4',
+        'short_name': 'unet_lr5e-05_d0.3',
         'architecture': 'unet',
-        'lr': 5e-05,
-        'dropout': 0.3,
         'mean_jaccard': 0.1308,
-        'std_jaccard': 0.0137,
-        'color': '#35b779',  # Green
-        'label': 'U-Net (d0.3)',
+        'label': 'U-Net (lr5e-05, d0.3)',
     },
     {
         'name': 'resunet_lr5e-05_drop0.3_bs4',
+        'short_name': 'resunet',
         'architecture': 'resunet',
-        'lr': 5e-05,
-        'dropout': 0.3,
         'mean_jaccard': 0.1117,
-        'std_jaccard': 0.0131,
-        'color': '#fde724',  # Yellow
         'label': 'ResUNet',
     },
     {
         'name': 'attention_resunet_lr5e-05_drop0.2_bs4',
+        'short_name': 'attention_resunet',
         'architecture': 'attention_resunet',
-        'lr': 5e-05,
-        'dropout': 0.2,
         'mean_jaccard': 0.1091,
-        'std_jaccard': 0.0064,
-        'color': '#b5de2b',  # Light yellow-green
-        'label': 'Att-ResUNet',
+        'label': 'Attention ResUNet',
     }
 ]
 
@@ -109,21 +101,20 @@ CONFIG = {
     'output_dir': f'./density_analysis_512_grayscale_{datetime.now().strftime("%Y%m%d_%H%M%S")}',
 
     # Image settings (from training)
-    'img_size': 512,
+    'img_size': 512,  # Tile size
     'img_channels': 1,  # Grayscale
 
     # Prediction settings
     'batch_size': 4,
     'threshold': 0.5,  # Binary threshold for predictions
 
-    # Dilution factors to analyze
-    'dilution_factors': [10, 20, 40, 80, 160, 320, 640, 1280, 2560, 5120, 10240],
-
-    # Representative tiles for visualization
-    'num_representative_tiles': 5,
+    # Representative tiles
+    'n_representative_tiles': 5,
 
     # Plotting
     'dpi': 300,
+    'figsize_comparison': (16, 4),  # 4-panel comparison
+    'figsize_boxplot': (14, 8),
 }
 
 # Dilution factor patterns (for extracting from filenames)
@@ -145,7 +136,7 @@ print()
 
 print("Models to be used (Top 5 from hyperparameter search):")
 for i, config in enumerate(TOP_CONFIGS, 1):
-    print(f"  {i}. {config['label']}: {config['mean_jaccard']:.4f} ± {config['std_jaccard']:.4f}")
+    print(f"  {i}. {config['label']}: Jaccard {config['mean_jaccard']:.4f}")
 print("="*80)
 print()
 
@@ -160,18 +151,26 @@ def extract_dilution_from_filename(filename):
             return dilution
     return None
 
-def load_image_grayscale(image_path, img_size=512):
-    """Load and preprocess image to grayscale."""
-    from PIL import Image
+def rescale_image_full_range(img):
+    """Rescale image to full 0-255 range."""
+    img = img.astype(np.float32)
+    img_min, img_max = img.min(), img.max()
+    if img_max - img_min > 0:
+        img = 255.0 * (img - img_min) / (img_max - img_min)
+    return img.astype(np.uint8)
 
-    img = Image.open(image_path).convert('L')  # Convert to grayscale
-    if img.size != (img_size, img_size):
-        img = img.resize((img_size, img_size), Image.BILINEAR)
+def extract_tiles_512(image, tile_size=512):
+    """Extract 512×512 tiles (non-overlapping) from larger image."""
+    h, w = image.shape[:2]
+    tiles, positions = [], []
 
-    img_array = np.array(img, dtype=np.float32) / 255.0
-    img_array = img_array[..., np.newaxis]  # Add channel dimension
+    for y in range(0, h - tile_size + 1, tile_size):
+        for x in range(0, w - tile_size + 1, tile_size):
+            tile = image[y:y+tile_size, x:x+tile_size]
+            tiles.append(tile)
+            positions.append((y, x))
 
-    return img_array
+    return tiles, positions
 
 def calculate_foreground_percentage(mask, threshold=0.5):
     """Calculate percentage of foreground pixels."""
@@ -180,6 +179,22 @@ def calculate_foreground_percentage(mask, threshold=0.5):
     total_pixels = mask.size
     percentage = (foreground_pixels / total_pixels) * 100
     return percentage
+
+def select_representative_tiles(tiles, densities, n=5):
+    """Select n representative tiles spanning density range."""
+    if len(tiles) == 0:
+        return []
+    if len(tiles) <= n:
+        return list(range(len(tiles)))
+
+    # Sort by density
+    sorted_indices = np.argsort(densities)
+
+    # Select evenly spaced indices
+    step = len(sorted_indices) / n
+    selected = [sorted_indices[int(i * step)] for i in range(n)]
+
+    return selected
 
 def load_model_for_config(config_name, model_dir, fold=1):
     """Load trained model for a specific configuration and fold."""
@@ -204,6 +219,103 @@ def load_model_for_config(config_name, model_dir, fold=1):
     return model
 
 # ============================================================================
+# VISUALIZATION FUNCTIONS
+# ============================================================================
+
+def create_tile_comparison(original_tile, masks_dict, density_dict, image_name,
+                          tile_idx, dilution, output_dir):
+    """
+    Create 4-panel comparison: Original + top 3 models.
+    Format: [Original | Model1 | Model2 | Model3]
+    """
+    fig, axes = plt.subplots(1, 4, figsize=CONFIG['figsize_comparison'])
+
+    # Panel 1: Original
+    axes[0].imshow(original_tile, cmap='gray')
+    axes[0].set_title('Original Tile\n512×512', fontsize=12, fontweight='bold')
+    axes[0].axis('off')
+
+    # Panels 2-4: Top 3 models (all U-Net variants)
+    model_order = ['unet_best', 'unet_lr5e-05_d0.2', 'unet_lr5e-05_d0.3']
+    model_names = ['U-Net (best)', 'U-Net (lr5e-05, d0.2)', 'U-Net (lr5e-05, d0.3)']
+
+    for i, (model_key, name) in enumerate(zip(model_order, model_names), 1):
+        if model_key in masks_dict:
+            # Show binary mask
+            binary_mask = (masks_dict[model_key] > CONFIG['threshold']).astype(np.uint8) * 255
+            axes[i].imshow(binary_mask, cmap='gray')
+            density = density_dict.get(model_key, 0)
+            axes[i].set_title(f'{name}\nDensity: {density:.2f}%',
+                            fontsize=11, fontweight='bold')
+        else:
+            axes[i].text(0.5, 0.5, f'{name}\nN/A',
+                        ha='center', va='center', fontsize=12)
+        axes[i].axis('off')
+
+    plt.suptitle(f'{dilution}x Dilution - {image_name} - Tile {tile_idx}',
+                 fontsize=14, fontweight='bold', y=0.98)
+    plt.tight_layout()
+
+    filename = f'{image_name}_tile_{tile_idx:02d}_comparison.png'
+    save_path = output_dir / filename
+    plt.savefig(str(save_path), dpi=CONFIG['dpi'], bbox_inches='tight')
+    plt.close()
+
+def create_boxplot(df, model_name, model_label, output_path):
+    """Create boxplot for one model across all dilutions."""
+    df_model = df[df['model_name'] == model_name].copy()
+
+    if len(df_model) == 0:
+        print(f"  ⚠ No data for {model_label}")
+        return
+
+    df_model = df_model.sort_values('dilution_factor')
+    dilution_factors = sorted(df_model['dilution_factor'].unique())
+
+    fig, ax = plt.subplots(figsize=CONFIG['figsize_boxplot'])
+
+    data_to_plot = []
+    labels = []
+    positions = []
+
+    for i, dilution in enumerate(dilution_factors):
+        df_dilution = df_model[df_model['dilution_factor'] == dilution]
+        data_to_plot.append(df_dilution['foreground_pct'].values)
+        labels.append(f"{int(dilution)}x")
+        positions.append(i)
+
+    bp = ax.boxplot(
+        data_to_plot,
+        positions=positions,
+        widths=0.6,
+        patch_artist=True,
+        showfliers=True,
+        boxprops=dict(facecolor='lightblue', alpha=0.7, linewidth=1.5),
+        medianprops=dict(color='black', linewidth=2),
+        whiskerprops=dict(color='black', linewidth=1.5),
+        capprops=dict(color='black', linewidth=1.5),
+        flierprops=dict(marker='o', markerfacecolor='gray', markersize=4, alpha=0.5)
+    )
+
+    ax.set_xlabel('Dilution Factor', fontsize=14, fontweight='bold')
+    ax.set_ylabel('Foreground Percentage (log scale)', fontsize=14, fontweight='bold')
+    ax.set_title(f'Particle Density vs. Dilution Factor\n(Model: {model_label})',
+                 fontsize=16, fontweight='bold', pad=20)
+
+    ax.set_xticks(positions)
+    ax.set_xticklabels(labels, fontsize=12, rotation=45, ha='right')
+
+    ax.set_yscale('log')
+    ax.grid(True, alpha=0.3, linestyle='--', linewidth=0.5)
+    ax.set_axisbelow(True)
+
+    plt.tight_layout()
+    plt.savefig(str(output_path), dpi=CONFIG['dpi'], bbox_inches='tight')
+    plt.close()
+
+    print(f"✓ Saved: {output_path.name}")
+
+# ============================================================================
 # MAIN ANALYSIS
 # ============================================================================
 
@@ -217,15 +329,42 @@ def run_density_analysis():
     csv_dir = output_dir / 'csv_data'
     csv_dir.mkdir(exist_ok=True)
 
-    plots_dir = output_dir / 'plots'
+    plots_dir = output_dir / 'boxplots'
     plots_dir.mkdir(exist_ok=True)
 
     tiles_dir = output_dir / 'representative_tiles'
     tiles_dir.mkdir(exist_ok=True)
 
-    # Load test images
+    # ========================================================================
+    # PHASE 1: LOAD MODELS
+    # ========================================================================
     print("\n" + "="*80)
-    print("LOADING TEST IMAGES")
+    print("PHASE 1: LOADING MODELS")
+    print("="*80)
+
+    models = {}
+    for config in TOP_CONFIGS:
+        try:
+            model = load_model_for_config(config['name'], CONFIG['model_dir'], fold=1)
+            models[config['short_name']] = {
+                'model': model,
+                'config': config
+            }
+            print(f"  ✓ Loaded {config['label']}")
+        except FileNotFoundError as e:
+            print(f"  ✗ Failed to load {config['label']}: {e}")
+
+    if len(models) == 0:
+        raise ValueError("No models loaded successfully!")
+
+    print(f"\n✓ Successfully loaded {len(models)} models")
+    print()
+
+    # ========================================================================
+    # PHASE 2: LOAD TEST IMAGES
+    # ========================================================================
+    print("="*80)
+    print("PHASE 2: LOADING TEST IMAGES")
     print("="*80)
 
     test_dir = Path(CONFIG['test_images_dir'])
@@ -250,264 +389,123 @@ def run_density_analysis():
         print(f"  {dilution}x: {len(images_by_dilution[dilution])} images")
     print()
 
-    # Load all models (use fold 1 for each config)
+    # ========================================================================
+    # PHASE 3: PREDICT ON ALL IMAGES
+    # ========================================================================
     print("="*80)
-    print("LOADING MODELS")
-    print("="*80)
-
-    models = {}
-    for config in TOP_CONFIGS:
-        try:
-            model = load_model_for_config(config['name'], CONFIG['model_dir'], fold=1)
-            models[config['name']] = {
-                'model': model,
-                'config': config
-            }
-            print(f"  ✓ Loaded {config['label']}")
-        except FileNotFoundError as e:
-            print(f"  ✗ Failed to load {config['label']}: {e}")
-
-    if len(models) == 0:
-        raise ValueError("No models loaded successfully!")
-
-    print(f"\n✓ Successfully loaded {len(models)} models")
-    print()
-
-    # Run predictions on all images
-    print("="*80)
-    print("RUNNING PREDICTIONS")
+    print("PHASE 3: PREDICTION AND DENSITY ANALYSIS")
     print("="*80)
 
     all_results = []
-    representative_tiles = []  # Store tiles for visualization
 
     for dilution in tqdm(sorted(images_by_dilution.keys()), desc="Dilution factors"):
-        for img_idx, img_path in enumerate(tqdm(images_by_dilution[dilution],
-                                                  desc=f"  {dilution}x images",
-                                                  leave=False)):
+        for img_path in tqdm(images_by_dilution[dilution],
+                            desc=f"  {dilution}x images",
+                            leave=False):
+
+            print(f"\nProcessing: {img_path.name} (dilution: {dilution}x)")
+
             # Load image
-            img = load_image_grayscale(img_path, CONFIG['img_size'])
-            img_batch = np.expand_dims(img, axis=0)
+            img = cv2.imread(str(img_path), cv2.IMREAD_GRAYSCALE)
+            if img is None:
+                print(f"  ✗ Could not read {img_path.name}")
+                continue
 
-            # Store original image for visualization
-            img_for_viz = (img.squeeze() * 255).astype(np.uint8)
+            # Rescale and normalize
+            img_rescaled = rescale_image_full_range(img)
+            img_normalized = img_rescaled.astype(np.float32) / 255.0
 
-            # Predict with each model
-            predictions = {}
-            densities = {}
+            # Extract 512×512 tiles
+            tiles, positions = extract_tiles_512(img_normalized, tile_size=CONFIG['img_size'])
 
-            for model_name, model_data in models.items():
-                pred = model_data['model'].predict(img_batch, verbose=0)
-                pred_mask = pred[0, :, :, 0]  # Remove batch and channel dims
+            if len(tiles) == 0:
+                print(f"  ⚠ No tiles extracted")
+                continue
 
-                predictions[model_name] = pred_mask
-                densities[model_name] = calculate_foreground_percentage(
-                    pred_mask, CONFIG['threshold']
-                )
+            print(f"  Extracted {len(tiles)} tiles (512×512)")
 
-                # Record result
-                all_results.append({
-                    'image': img_path.name,
-                    'dilution_factor': dilution,
-                    'inverse_dilution': 1.0 / dilution,
-                    'model': model_data['config']['label'],
-                    'model_name': model_name,
-                    'architecture': model_data['config']['architecture'],
-                    'foreground_percentage': densities[model_name],
-                    'mean_jaccard': model_data['config']['mean_jaccard'],
-                })
+            # Predict with all models and calculate densities
+            tile_data = []
 
-            # Save representative tiles (evenly spaced across dilution range)
-            if len(representative_tiles) < CONFIG['num_representative_tiles']:
-                # Select tiles from different dilutions
-                target_dilutions = [10, 80, 320, 1280, 5120]
-                if dilution in target_dilutions and img_idx == 0:
-                    representative_tiles.append({
-                        'image': img_for_viz,
-                        'predictions': predictions,
-                        'dilution': dilution,
-                        'filename': img_path.name
+            for tile_idx, tile in enumerate(tiles):
+                tile_info = {
+                    'tile_idx': tile_idx,
+                    'tile': tile,
+                    'masks': {},
+                    'densities': {}
+                }
+
+                # Add channel dimension for prediction
+                tile_batch = np.expand_dims(tile, axis=(0, -1))  # (1, 512, 512, 1)
+
+                # Predict with each model
+                for model_key, model_data in models.items():
+                    pred = model_data['model'].predict(tile_batch, verbose=0)
+                    pred_mask = pred[0, :, :, 0]  # Remove batch and channel dims
+
+                    tile_info['masks'][model_key] = pred_mask
+                    foreground_pct = calculate_foreground_percentage(pred_mask, CONFIG['threshold'])
+                    tile_info['densities'][model_key] = foreground_pct
+
+                    # Record result
+                    all_results.append({
+                        'image': img_path.stem,
+                        'dilution_factor': dilution,
+                        'tile_idx': tile_idx,
+                        'model_name': model_key,
+                        'model_label': model_data['config']['label'],
+                        'architecture': model_data['config']['architecture'],
+                        'foreground_pct': foreground_pct
                     })
 
-    print(f"\n✓ Completed predictions on {len(all_results)} image-model combinations")
+                tile_data.append(tile_info)
+
+            # Select 5 representative tiles based on U-Net (best) densities
+            unet_best_densities = [t['densities']['unet_best'] for t in tile_data]
+            representative_indices = select_representative_tiles(
+                tiles, unet_best_densities, CONFIG['n_representative_tiles']
+            )
+
+            print(f"  Selected {len(representative_indices)} representative tiles")
+
+            # Create visualizations for representative tiles
+            for tile_idx in representative_indices:
+                tile_info = tile_data[tile_idx]
+
+                create_tile_comparison(
+                    tile_info['tile'],
+                    tile_info['masks'],
+                    tile_info['densities'],
+                    img_path.stem,
+                    tile_idx,
+                    dilution,
+                    tiles_dir
+                )
+
+            print(f"  ✓ Saved {len(representative_indices)} comparison images")
+
+    print(f"\n✓ Completed predictions on {len(all_results)} tile-model combinations")
     print()
 
-    # Save results to CSV
+    # ========================================================================
+    # PHASE 4: SAVE RESULTS AND CREATE BOXPLOTS
+    # ========================================================================
     print("="*80)
-    print("SAVING RESULTS")
+    print("PHASE 4: GENERATING OUTPUTS")
     print("="*80)
 
+    # Save CSV
     results_df = pd.DataFrame(all_results)
     csv_path = csv_dir / 'density_analysis_all_models.csv'
     results_df.to_csv(csv_path, index=False)
     print(f"✓ Saved CSV: {csv_path}")
     print()
 
-    # ========================================================================
-    # FIGURE 1: Box Plot - Density vs Dilution (All Models)
-    # ========================================================================
-
-    print("="*80)
-    print("GENERATING FIGURES")
-    print("="*80)
-
-    fig, ax = plt.subplots(figsize=(14, 8))
-
-    # Prepare data for box plot
-    dilutions = sorted(results_df['dilution_factor'].unique())
-    positions = np.arange(len(dilutions))
-    width = 0.15
-
-    # Plot box plots for each model
-    for i, config in enumerate(TOP_CONFIGS):
-        model_label = config['label']
-        model_data = []
-
-        for dilution in dilutions:
-            data = results_df[
-                (results_df['dilution_factor'] == dilution) &
-                (results_df['model'] == model_label)
-            ]['foreground_percentage'].values
-            model_data.append(data)
-
-        # Create box plot
-        bp = ax.boxplot(model_data,
-                        positions=positions + (i - 2) * width,
-                        widths=width * 0.9,
-                        patch_artist=True,
-                        showfliers=True,
-                        boxprops=dict(facecolor=config['color'], alpha=0.7),
-                        medianprops=dict(color='black', linewidth=2),
-                        whiskerprops=dict(color=config['color']),
-                        capprops=dict(color=config['color']))
-
-        # Add to legend
-        ax.plot([], [], color=config['color'], linewidth=10, alpha=0.7,
-                label=f"{model_label} (J={config['mean_jaccard']:.3f})")
-
-    ax.set_xlabel('Dilution Factor', fontsize=14, fontweight='bold')
-    ax.set_ylabel('Foreground Percentage (%)', fontsize=14, fontweight='bold')
-    ax.set_title('Density Analysis: 512×512 Grayscale Models (Top 5 Configurations)',
-                 fontsize=16, fontweight='bold')
-    ax.set_xticks(positions)
-    ax.set_xticklabels([f'{d}x' for d in dilutions], rotation=45, ha='right')
-    ax.set_yscale('log')
-    ax.legend(loc='upper right', fontsize=10, framealpha=0.9)
-    ax.grid(True, alpha=0.3, which='both')
-
-    plt.tight_layout()
-    plot_path = plots_dir / 'density_vs_dilution_all_models.png'
-    plt.savefig(plot_path, dpi=CONFIG['dpi'], bbox_inches='tight')
-    plt.close()
-
-    print(f"✓ Saved Figure 1: {plot_path}")
-
-    # ========================================================================
-    # FIGURE 2: Representative Tiles with Predictions
-    # ========================================================================
-
-    if len(representative_tiles) > 0:
-        n_tiles = len(representative_tiles)
-        n_models = len(models)
-
-        fig, axes = plt.subplots(n_tiles, n_models + 1,
-                                 figsize=(4 * (n_models + 1), 4 * n_tiles))
-
-        if n_tiles == 1:
-            axes = axes.reshape(1, -1)
-
-        fig.suptitle('Representative 512×512 Tiles: Model Comparison',
-                     fontsize=16, fontweight='bold', y=0.995)
-
-        for row, tile_data in enumerate(representative_tiles):
-            # Original image
-            ax = axes[row, 0]
-            ax.imshow(tile_data['image'], cmap='gray')
-            ax.set_title(f"Original\n{tile_data['dilution']}x dilution",
-                        fontsize=11, fontweight='bold')
-            ax.axis('off')
-
-            # Model predictions
-            for col, (model_name, model_data) in enumerate(models.items(), 1):
-                ax = axes[row, col]
-                pred_mask = tile_data['predictions'][model_name]
-
-                # Show prediction as binary mask
-                binary_pred = (pred_mask > CONFIG['threshold']).astype(np.uint8) * 255
-                ax.imshow(binary_pred, cmap='gray')
-
-                # Calculate density for this tile
-                density = calculate_foreground_percentage(pred_mask, CONFIG['threshold'])
-
-                ax.set_title(f"{model_data['config']['label']}\n"
-                            f"Density: {density:.2f}%",
-                            fontsize=10)
-                ax.axis('off')
-
-        plt.tight_layout()
-        tiles_path = tiles_dir / 'representative_tiles_comparison.png'
-        plt.savefig(tiles_path, dpi=CONFIG['dpi'], bbox_inches='tight')
-        plt.close()
-
-        print(f"✓ Saved Figure 2: {tiles_path}")
-
-    # ========================================================================
-    # FIGURE 3: Model Performance Comparison
-    # ========================================================================
-
-    fig, axes = plt.subplots(1, 2, figsize=(16, 6))
-
-    # (A) Mean density across all dilutions
-    ax = axes[0]
-    model_means = results_df.groupby('model')['foreground_percentage'].mean().sort_values(ascending=False)
-    model_stds = results_df.groupby('model')['foreground_percentage'].std()
-
-    colors = [config['color'] for config in TOP_CONFIGS]
-    bars = ax.barh(range(len(model_means)), model_means, xerr=model_stds,
-                   color=colors, alpha=0.7, capsize=5, edgecolor='black', linewidth=1.5)
-    ax.set_yticks(range(len(model_means)))
-    ax.set_yticklabels(model_means.index, fontsize=11)
-    ax.set_xlabel('Mean Foreground Percentage (%)', fontsize=12, fontweight='bold')
-    ax.set_title('(A) Average Density Across All Dilutions', fontsize=13, fontweight='bold')
-    ax.grid(True, alpha=0.3, axis='x')
-
-    # Add value labels
-    for i, (bar, val, std) in enumerate(zip(bars, model_means, model_stds)):
-        ax.text(val + std + 0.1, bar.get_y() + bar.get_height()/2,
-                f'{val:.2f}±{std:.2f}%', va='center', fontsize=10)
-
-    # (B) Correlation with training performance
-    ax = axes[1]
-    model_names = []
-    train_jaccards = []
-    pred_densities = []
-
+    # Create individual boxplots for each model
+    print("Creating box plots...")
     for config in TOP_CONFIGS:
-        model_label = config['label']
-        model_names.append(model_label)
-        train_jaccards.append(config['mean_jaccard'])
-
-        mean_density = results_df[results_df['model'] == model_label]['foreground_percentage'].mean()
-        pred_densities.append(mean_density)
-
-    for i, (name, jac, dens, color) in enumerate(zip(model_names, train_jaccards,
-                                                       pred_densities,
-                                                       [c['color'] for c in TOP_CONFIGS])):
-        ax.scatter(jac, dens, s=200, color=color, alpha=0.7,
-                  edgecolor='black', linewidth=2, label=name)
-
-    ax.set_xlabel('Training Jaccard (3-fold CV)', fontsize=12, fontweight='bold')
-    ax.set_ylabel('Mean Prediction Density (%)', fontsize=12, fontweight='bold')
-    ax.set_title('(B) Training Performance vs Prediction Density', fontsize=13, fontweight='bold')
-    ax.legend(loc='best', fontsize=9)
-    ax.grid(True, alpha=0.3)
-
-    plt.tight_layout()
-    comparison_path = plots_dir / 'model_performance_comparison.png'
-    plt.savefig(comparison_path, dpi=CONFIG['dpi'], bbox_inches='tight')
-    plt.close()
-
-    print(f"✓ Saved Figure 3: {comparison_path}")
+        plot_path = plots_dir / f"{config['short_name']}_density_vs_dilution.png"
+        create_boxplot(results_df, config['short_name'], config['label'], plot_path)
 
     # Save experiment metadata
     metadata = {
@@ -517,19 +515,21 @@ def run_density_analysis():
         'model_source': CONFIG['model_dir'],
         'test_images': CONFIG['test_images_dir'],
         'output_directory': str(output_dir),
+        'tile_size': CONFIG['img_size'],
         'models_used': [
             {
                 'name': config['name'],
+                'short_name': config['short_name'],
                 'label': config['label'],
                 'architecture': config['architecture'],
-                'mean_jaccard': config['mean_jaccard'],
-                'std_jaccard': config['std_jaccard']
+                'mean_jaccard': config['mean_jaccard']
             }
             for config in TOP_CONFIGS
         ],
         'num_test_images': len(image_files),
         'dilution_factors': sorted(list(images_by_dilution.keys())),
         'total_predictions': len(all_results),
+        'n_representative_tiles_per_image': CONFIG['n_representative_tiles'],
     }
 
     with open(output_dir / 'EXPERIMENT_INFO.json', 'w') as f:
@@ -542,9 +542,9 @@ def run_density_analysis():
     print("DENSITY ANALYSIS COMPLETE")
     print("="*80)
     print(f"Output directory: {output_dir}")
-    print(f"Figures: {plots_dir}")
-    print(f"CSV data: {csv_dir}")
-    print(f"Representative tiles: {tiles_dir}")
+    print(f"  - Box plots (5 models): {plots_dir}")
+    print(f"  - Representative tiles: {tiles_dir}")
+    print(f"  - CSV data: {csv_dir}")
     print("="*80)
 
 if __name__ == '__main__':

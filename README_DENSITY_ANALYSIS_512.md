@@ -89,58 +89,53 @@ density_analysis_512_grayscale_YYYYMMDD_HHMMSS/
 ├── csv_data/
 │   └── density_analysis_all_models.csv           # All density data
 │
-├── plots/
-│   ├── density_vs_dilution_all_models.png        # Main box plot
-│   └── model_performance_comparison.png          # Performance comparison
+├── boxplots/                                     # Individual boxplots per model
+│   ├── unet_best_density_vs_dilution.png
+│   ├── unet_lr5e-05_d0.2_density_vs_dilution.png
+│   ├── unet_lr5e-05_d0.3_density_vs_dilution.png
+│   ├── resunet_density_vs_dilution.png
+│   └── attention_resunet_density_vs_dilution.png
 │
-└── representative_tiles/
-    └── representative_tiles_comparison.png       # 5 tiles × 6 panels
+└── representative_tiles/                         # 4-panel tile comparisons
+    └── {image_name}_tile_{idx:02d}_comparison.png
 ```
 
 ## Generated Figures
 
-### Figure 1: Density vs Dilution (Box Plot)
+### Figure 1: Individual Density vs Dilution Box Plots (5 files)
 
-**File:** `plots/density_vs_dilution_all_models.png`
+**Files:** `boxplots/*.png` (5 individual PNG files)
+
+**Individual files:**
+- `unet_best_density_vs_dilution.png` - U-Net (best config)
+- `unet_lr5e-05_d0.2_density_vs_dilution.png` - U-Net variant 2
+- `unet_lr5e-05_d0.3_density_vs_dilution.png` - U-Net variant 3
+- `resunet_density_vs_dilution.png` - ResUNet
+- `attention_resunet_density_vs_dilution.png` - Attention ResUNet
 
 **Description:**
 - X-axis: Dilution factors (10x, 20x, 40x, ..., 10240x)
 - Y-axis: Foreground Percentage (log scale)
-- 5 box plots per dilution (one for each model)
-- Color-coded by model
-- Shows distribution of densities across replicates
+- Each file shows one model's performance across all dilutions
+- Box plots show distribution of densities across multiple tiles
 
-**Caption:** *Box plot showing foreground density predictions across dilution factors for the top 5 models from 512×512 grayscale hyperparameter search. Each box represents the distribution of density values across multiple test images at that dilution. Y-axis is log-scaled to show the wide dynamic range. Models are color-coded: U-Net (best) in dark purple, U-Net variants in blue/green, ResUNet in yellow, and Attention ResUNet in light yellow-green.*
+**Caption:** *Individual box plots showing foreground density predictions across dilution factors for each of the top 5 models from 512×512 grayscale hyperparameter search. Each box represents the distribution of density values across multiple 512×512 tiles extracted from test images at that dilution. Y-axis is log-scaled to show the wide dynamic range of densities.*
 
-### Figure 2: Representative Tiles Comparison
+### Figure 2: Representative 4-Panel Tile Comparisons
 
-**File:** `representative_tiles/representative_tiles_comparison.png`
+**Files:** `representative_tiles/{image_name}_tile_{idx:02d}_comparison.png`
 
 **Description:**
-- Grid layout: 5 rows × 6 columns
-- Each row: Different dilution factor (10x, 80x, 320x, 1280x, 5120x)
+- Layout: 1 row × 4 columns per comparison image
 - Column 1: Original 512×512 grayscale tile
-- Columns 2-6: Predictions from each of the 5 models
+- Column 2: U-Net (best) prediction
+- Column 3: U-Net (lr5e-05, d0.2) prediction
+- Column 4: U-Net (lr5e-05, d0.3) prediction
 - Binary masks shown (threshold = 0.5)
 - Density percentage displayed for each prediction
+- 5 representative tiles selected per dilution factor
 
-**Caption:** *Representative 512×512 tiles from different dilution factors showing side-by-side comparison of predictions from all 5 models. Left column shows original grayscale images, followed by binary predictions (threshold=0.5) from each model. Density percentages are shown in subplot titles. Visual comparison allows assessment of model agreement and sensitivity to dilution.*
-
-### Figure 3: Model Performance Comparison
-
-**File:** `plots/model_performance_comparison.png`
-
-**Description:**
-- Panel (A): Horizontal bar chart
-  - Mean density ± std across all dilutions
-  - Shows which model predicts highest/lowest density overall
-
-- Panel (B): Scatter plot
-  - X-axis: Training Jaccard (3-fold CV)
-  - Y-axis: Mean prediction density
-  - Shows correlation between training performance and density predictions
-
-**Caption:** *(A) Mean foreground density predicted by each model across all dilution factors, showing U-Net (best) predicts highest densities on average. (B) Relationship between training performance (Jaccard score) and prediction density, revealing whether better-trained models produce higher or lower density estimates.*
+**Caption:** *Representative 512×512 tiles extracted from test images at different dilution factors, showing 4-panel side-by-side comparison. Left panel shows original grayscale tile, followed by binary predictions (threshold=0.5) from the top 3 U-Net variants. Density percentages are shown in subplot titles. Tiles are selected to span the density range observed at each dilution. Visual comparison allows assessment of model agreement and prediction quality.*
 
 ## Analysis Insights
 

@@ -12,6 +12,11 @@
 # =======================================================================
 # Uses top 5 models from hyperparameter_search_512_20251014_235755
 # Predicts on test_images/ and generates density analysis
+#
+# Output:
+# - 5 individual boxplots (one per model)
+# - 4-panel tile comparisons (Original + top 3 U-Net models)
+# - Comprehensive CSV with all results
 # =======================================================================
 
 cd /home/svu/phyzxi/scratch/unet-HPC
@@ -70,10 +75,18 @@ echo "Test images: ./test_images/"
 echo "Output: ./density_analysis_512_grayscale_YYYYMMDD_HHMMSS/"
 echo ""
 echo "Will generate:"
-echo "  - Box plot: Density vs Dilution (all 5 models)"
-echo "  - Representative tiles: 5 tiles × 6 panels (original + 5 models)"
-echo "  - Model performance comparison plots"
-echo "  - CSV: All density data"
+echo "  - 5 individual boxplots (boxplots/*.png)"
+echo "    • unet_best_density_vs_dilution.png"
+echo "    • unet_lr5e-05_d0.2_density_vs_dilution.png"
+echo "    • unet_lr5e-05_d0.3_density_vs_dilution.png"
+echo "    • resunet_density_vs_dilution.png"
+echo "    • attention_resunet_density_vs_dilution.png"
+echo ""
+echo "  - 4-panel tile comparisons (representative_tiles/*.png)"
+echo "    • Format: Original | U-Net (best) | U-Net (2) | U-Net (3)"
+echo "    • 5 tiles per dilution factor"
+echo ""
+echo "  - CSV: All density data (csv_data/density_analysis_all_models.csv)"
 echo "=============================="
 echo ""
 
@@ -230,9 +243,12 @@ TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 echo "🚀 STARTING DENSITY ANALYSIS"
 echo "=============================================="
 echo "Phase 1: Load top 5 models"
-echo "Phase 2: Predict on all test images"
-echo "Phase 3: Calculate densities for each dilution"
-echo "Phase 4: Generate visualizations"
+echo "Phase 2: Extract 512×512 tiles from test images"
+echo "Phase 3: Predict on all tiles with all models"
+echo "Phase 4: Calculate densities for each dilution"
+echo "Phase 5: Generate visualizations"
+echo "  → 5 individual boxplots"
+echo "  → 4-panel tile comparisons"
 echo ""
 echo "Progress logged below..."
 echo "=============================================="
@@ -283,10 +299,17 @@ if [ $EXIT_CODE -eq 0 ]; then
 
         # Check results
         echo "📊 GENERATED FILES:"
-        if [ -d "$OUTPUT_DIR/plots" ]; then
-            plot_count=$(ls "$OUTPUT_DIR/plots"/*.png 2>/dev/null | wc -l)
-            echo "   Plots: $plot_count files in plots/"
-            ls "$OUTPUT_DIR/plots"/*.png 2>/dev/null | sed 's/^/     - /'
+
+        if [ -d "$OUTPUT_DIR/boxplots" ]; then
+            plot_count=$(ls "$OUTPUT_DIR/boxplots"/*.png 2>/dev/null | wc -l)
+            echo "   Boxplots: $plot_count individual files in boxplots/"
+            ls "$OUTPUT_DIR/boxplots"/*.png 2>/dev/null | sed 's/^/     - /'
+        fi
+
+        if [ -d "$OUTPUT_DIR/representative_tiles" ]; then
+            tile_count=$(ls "$OUTPUT_DIR/representative_tiles"/*.png 2>/dev/null | wc -l)
+            echo "   Representative tiles: $tile_count 4-panel comparisons"
+            echo "     Format: Original | U-Net (best) | U-Net (2) | U-Net (3)"
         fi
 
         if [ -d "$OUTPUT_DIR/csv_data" ]; then
@@ -295,26 +318,20 @@ if [ $EXIT_CODE -eq 0 ]; then
             ls "$OUTPUT_DIR/csv_data"/*.csv 2>/dev/null | sed 's/^/     - /'
         fi
 
-        if [ -d "$OUTPUT_DIR/representative_tiles" ]; then
-            tile_count=$(ls "$OUTPUT_DIR/representative_tiles"/*.png 2>/dev/null | wc -l)
-            echo "   Representative tiles: $tile_count files"
-            ls "$OUTPUT_DIR/representative_tiles"/*.png 2>/dev/null | sed 's/^/     - /'
-        fi
-
         echo ""
         echo "🎯 NEXT STEPS:"
         echo "============="
-        echo "1. View box plot:"
-        echo "   Display: $OUTPUT_DIR/plots/density_vs_dilution_all_models.png"
+        echo "1. View individual boxplots:"
+        echo "   Display: $OUTPUT_DIR/boxplots/*.png"
         echo ""
-        echo "2. View representative tiles:"
-        echo "   Display: $OUTPUT_DIR/representative_tiles/representative_tiles_comparison.png"
+        echo "2. View representative 4-panel tiles:"
+        echo "   Display: $OUTPUT_DIR/representative_tiles/*_comparison.png"
         echo ""
         echo "3. Analyze CSV data:"
         echo "   cat $OUTPUT_DIR/csv_data/density_analysis_all_models.csv"
         echo ""
         echo "4. Compare with 256×256 results:"
-        echo "   Compare with: density_analysis_arch_comparison_20251014_004358/"
+        echo "   Compare with: density_prediction_256_20251014_054939/"
 
     else
         echo "⚠ WARNING: Expected output directory not found!"
@@ -337,15 +354,20 @@ else
     echo "================="
     echo "1. Model loading errors:"
     echo "   - Check that model files exist in hyperparameter_search_512_20251014_235755/"
-    echo "   - Verify model naming: {config}_fold1_lr{val}_drop{val}_bs{val}_model.keras"
+    echo "   - Verify model naming: {arch}_fold1_lr{val}_drop{val}_bs{val}_model.keras"
     echo ""
     echo "2. Test image issues:"
     echo "   - Check that test_images/ contains .tif or .tiff files"
     echo "   - Verify filenames contain dilution factors (e.g., 10x, 20x, etc.)"
+    echo "   - Test images must be larger than 512×512 for tile extraction"
     echo ""
     echo "3. GPU memory issues:"
     echo "   - Check nvidia-smi for available memory"
     echo "   - Reduce batch size in CONFIG if needed"
+    echo ""
+    echo "4. Tile extraction issues:"
+    echo "   - Verify test images are larger than 512×512"
+    echo "   - Check image format and channel count"
 fi
 
 echo ""
