@@ -1,0 +1,138 @@
+========================================================================
+MULTI-MODEL DENSITY ANALYSIS - XUKUANG MODELS
+========================================================================
+Job ID: 288557.stdct-mgmt-02
+Job Name: Density_MultiModel
+Node: GN-A40-073
+Start time: Wed Oct 15 11:55:03 PM +08 2025
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================================================
+
+=== ENVIRONMENT SETUP ===
+✓ TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+===========================
+
+Verifying required files...
+✓ Model directory: ./xukuang_params_shrunk_20251015_071224
+✓ Test images directory: ./test_images
+✓ Found 3 model file(s)
+
+Found 10 test images
+
+Test images:
+  - 10240x_2560x_2025-05-16_00-59-00_002.tif
+  - 10x_2025-05-15_02-05-00.tif
+  - 1280x_2025-05-16_00-59-00_002.tif
+  - 160x_2025-05-15_02-05-00.tif
+  - 20x_2025-05-15_02-05-00.tif
+  - 2560x_2025-05-16_00-59-00_002.tif
+  - 320x_2025-05-15_02-05-00.tif
+  - 5120x_2025-05-16_00-59-00_002.tif
+  - 640x_2025-05-16_00-59-00_002.tif
+  - 80x_2_2025-05-22_14-48-00.tif
+
+========================================================================
+RUNNING DENSITY ANALYSIS
+========================================================================
+Command: singularity exec --nv "/app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif" python3 ./density_analysis_xukuang.py
+
+/usr/local/lib/python3.10/dist-packages/tf_keras/src/layers/core/lambda_layer.py:327: UserWarning: models is not loaded, but a Lambda layer uses it. It may cause errors.
+  function = cls._parse_function_from_config(
+================================================================================
+MULTI-MODEL DENSITY ANALYSIS - XUKUANG MODELS (RGB)
+================================================================================
+Script: density_analysis_xukuang.py
+PBS Script: pbs_density_analysis_xukuang.sh
+Timestamp: 2025-10-15 15:55:11
+Model directory: ./xukuang_params_shrunk_20251015_071224
+Test images: ./test_images
+Output directory: ./density_analysis_xukuang_multimodel_20251015_155511
+Image format: 512×512 RGB (3 channels)
+
+Models: UNet, Attention UNet, Attention ResUNet (FINAL epoch 200 models)
+  - Final Val IoU (Epoch 200): 0.6065 (UNet)
+  - Best Val IoU (Epoch 140): 0.6789 (UNet)
+  - Training: LR=0.005, 200 epochs, BinaryFocalLoss
+  - NOTE: Using FINAL epoch models, not best checkpoint
+================================================================================
+
+Output directory: density_analysis_xukuang_multimodel_20251015_155511
+
+================================================================================
+LOADING MODELS
+================================================================================
+
+Loading model: unet
+  Model file: xukuang_params_shrunk_20251015_071224/unet_xukuang_params_shrunk.keras
+  ✓ Model loaded successfully
+  Input shape: (None, 512, 512, 3)
+  Output shape: (None, 512, 512, 1)
+
+Loading model: attention_unet
+  Model file: xukuang_params_shrunk_20251015_071224/attention_unet_xukuang_params_shrunk.keras
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_xukuang.py", line 800, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_xukuang.py", line 754, in main
+    models = load_all_models(CONFIG)
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_xukuang.py", line 293, in load_all_models
+    models[model_name] = load_model(config['model_dir'], model_name)
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_xukuang.py", line 272, in load_model
+    model = keras.models.load_model(
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/saving_api.py", line 254, in load_model
+    return saving_lib.load_model(
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/saving_lib.py", line 271, in load_model
+    raise e
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/saving_lib.py", line 236, in load_model
+    model = deserialize_keras_object(
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/serialization_lib.py", line 727, in deserialize_keras_object
+    instance = cls.from_config(inner_config)
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/training.py", line 3325, in from_config
+    inputs, outputs, layers = functional.reconstruct_from_config(
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/functional.py", line 1504, in reconstruct_from_config
+    if process_node(layer, node_data):
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/functional.py", line 1444, in process_node
+    output_tensors = layer(input_tensors, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/utils/traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "/scratch/phyzxi/unet-HPC/models.py", line 92, in <lambda>
+    return layers.Lambda(lambda x, repnum: K.repeat_elements(x, repnum, axis=3),
+NameError: Exception encountered when calling layer "lambda" (type Lambda).
+
+name 'K' is not defined
+
+Call arguments received by layer "lambda" (type Lambda):
+  • inputs=tf.Tensor(shape=(None, 64, 64, 1), dtype=float32)
+  • mask=None
+  • training=None
+
+========================================================================
+DENSITY ANALYSIS COMPLETED
+========================================================================
+Exit code: 0
+End time: Wed Oct 15 11:55:48 PM +08 2025
+
+Output directory: ./density_analysis_xukuang_multimodel_20251015_155511
+
+Generated files:
+total 0
+
+
+✓ Analysis completed successfully!
+========================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-15 23:55:48.898085:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 288557.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:53
+	Memory: Requested(240gb), Used(2775176kb)
+	Vmem Used: 64063304kb
+	Walltime: Requested(08:00:00), Used(00:00:46)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-073[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
