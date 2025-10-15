@@ -5,10 +5,12 @@
 This pipeline performs bead density analysis on test images using the best UNet model from the Xukuang parameters experiment (`xukuang_params_shrunk_20251015_071224`).
 
 **Model Performance:**
-- Final Validation IoU: **0.6065**
-- Best Validation IoU: **0.6789** (Epoch 140)
+- **Using FINAL model from Epoch 200** (Val IoU: 0.6065)
+- Best checkpoint was at Epoch 140 (Val IoU: 0.6789), but model NOT saved
 - Training: LR=0.005, 200 epochs, BinaryFocalLoss(γ=2)
 - Image Format: 512×512 RGB
+
+**Important Note:** The Xukuang training script saves the FINAL model after 200 epochs, not the best checkpoint. This is still a high-performing model (IoU 0.6065), significantly better than the hyperparameter search models (IoU 0.219).
 
 ## Critical Fix: Dilution Label Ordering
 
@@ -40,8 +42,11 @@ DILUTION_LABELS = ['10x', '20x', '80x', '160x', '320x', '640x', '1280x', '2560x'
 ### Input
 
 **Models:** Located in `./xukuang_params_shrunk_20251015_071224/`
-- `unet_model.keras` (or similar naming)
+- `unet_xukuang_params_shrunk.keras` (FINAL epoch 200 model)
+- `attention_unet_xukuang_params_shrunk.keras`
+- `attention_resunet_xukuang_params_shrunk.keras`
 - Trained with RGB images (512×512×3)
+- **Note:** These are FINAL models, not best checkpoint models
 
 **Test Images:** Located in `./test_images/`
 - Format: TIFF files (`.tif` or `.tiff`)
@@ -115,7 +120,7 @@ Directory: `./density_analysis_xukuang_YYYYMMDD_HHMMSS/`
 1. **Ensure models are in correct location:**
    ```bash
    ls -la xukuang_params_shrunk_20251015_071224/*.keras
-   # Should see: unet_model.keras (or similar)
+   # Should see: unet_xukuang_params_shrunk.keras (and attention variants)
    ```
 
 2. **Verify test images:**
@@ -217,10 +222,10 @@ Generate Box Plot with Correct Ordering
 ```bash
 # Check model directory
 ls -la xukuang_params_shrunk_20251015_071224/
-# Should contain .keras or .h5 files
+# Should contain: unet_xukuang_params_shrunk.keras (and attention variants)
 ```
 
-**Solution:** Models are on HPC. Ensure you're running on HPC, not locally.
+**Solution:** Models are saved on HPC during training. Ensure you're running on HPC at `/home/svu/phyzxi/scratch/unet-HPC/`, not locally.
 
 ### Issue: Wrong image format (grayscale model on RGB images)
 **Error:** Input shape mismatch

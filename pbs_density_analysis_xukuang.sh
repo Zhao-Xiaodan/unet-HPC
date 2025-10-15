@@ -1,10 +1,11 @@
 #!/bin/bash
-#PBS -N Density_Analysis_Xukuang
-#PBS -l select=1:ncpus=4:mem=32gb:ngpus=1
-#PBS -l walltime=04:00:00
-#PBS -q gpu
+#PBS -l walltime=4:00:00
 #PBS -j oe
-#PBS -o density_analysis_xukuang.log
+#PBS -k oed
+#PBS -N Density_Xukuang
+#PBS -l select=1:ncpus=36:mpiprocs=1:ompthreads=36:ngpus=1:mem=240gb
+#PBS -M phyzxi@nus.edu.sg
+#PBS -m abe
 
 ################################################################################
 # Density Analysis Using Xukuang UNet Model
@@ -37,35 +38,30 @@ echo "========================================================================"
 echo ""
 
 # Navigate to working directory
-cd $PBS_O_WORKDIR || exit 1
+cd /home/svu/phyzxi/scratch/unet-HPC
 
-# Load modules
-echo "Loading modules..."
-module load anaconda/2023a
-module load cuda/11.8.0
-echo "✓ Modules loaded"
-echo ""
+# =======================================================================
+# ENVIRONMENT SETUP
+# =======================================================================
 
-# Activate conda environment
-echo "Activating conda environment: unetCNN"
-source activate unetCNN || { echo "ERROR: Failed to activate environment"; exit 1; }
-echo "✓ Environment activated"
-echo ""
+echo "=== ENVIRONMENT SETUP ==="
 
-# Verify Python and packages
-echo "Python version: $(python --version)"
-echo "TensorFlow version: $(python -c 'import tensorflow as tf; print(tf.__version__)')"
-echo "Keras version: $(python -c 'import tensorflow.keras as keras; print(keras.__version__)')"
-echo ""
-
-# GPU information
-echo "GPU Information:"
-nvidia-smi --query-gpu=name,driver_version,memory.total --format=csv
-echo ""
-
-# Set environment variables
 export TF_CPP_MIN_LOG_LEVEL=1
+export TF_ENABLE_ONEDNN_OPTS=1
 export CUDA_VISIBLE_DEVICES=0
+
+module load singularity
+
+image=/app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+
+if [ ! -f "$image" ]; then
+    echo "ERROR: TensorFlow container not found at $image"
+    exit 1
+fi
+
+echo "✓ TensorFlow Container: $image"
+echo "==========================="
+echo ""
 
 # Verify required files exist
 echo "Verifying required files..."
@@ -117,10 +113,11 @@ echo ""
 echo "========================================================================"
 echo "RUNNING DENSITY ANALYSIS"
 echo "========================================================================"
-echo "Command: python $SCRIPT"
+echo "Command: singularity exec --nv \"$image\" python3 $SCRIPT"
 echo ""
 
-python "$SCRIPT"
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+singularity exec --nv "$image" python3 "$SCRIPT" 2>&1 | tee "density_analysis_xukuang_console_${TIMESTAMP}.log"
 
 EXIT_CODE=$?
 

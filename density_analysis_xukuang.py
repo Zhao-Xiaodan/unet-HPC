@@ -114,10 +114,11 @@ print(f"Test images: {CONFIG['test_images_dir']}")
 print(f"Output directory: {CONFIG['output_dir']}")
 print(f"Image format: {CONFIG['img_size']}×{CONFIG['img_size']} RGB (3 channels)")
 print()
-print("Model: UNet (Best from Xukuang experiment)")
-print("  - Final Val IoU: 0.6065")
-print("  - Best Val IoU: 0.6789 (Epoch 140)")
+print("Model: UNet (FINAL model from Xukuang experiment)")
+print("  - Final Val IoU (Epoch 200): 0.6065")
+print("  - Best Val IoU (Epoch 140): 0.6789")
 print("  - Training: LR=0.005, 200 epochs, BinaryFocalLoss")
+print("  - NOTE: Using FINAL epoch model, not best checkpoint")
 print("="*80)
 print()
 
@@ -188,10 +189,26 @@ def calculate_foreground_density(prediction, threshold=0.5):
     return density
 
 def find_model_file(model_dir, model_name='unet'):
-    """Find the model file in the directory."""
+    """
+    Find the model file in the directory.
+
+    The Xukuang training script saves FINAL models (after 200 epochs) with naming:
+    - unet_xukuang_params_shrunk.keras
+    - attention_unet_xukuang_params_shrunk.keras
+    - attention_resunet_xukuang_params_shrunk.keras
+
+    These are the FINAL epoch models, NOT best checkpoint models.
+    """
     model_dir = Path(model_dir)
 
-    # Try different naming conventions
+    # Xukuang experiment naming convention
+    xukuang_name = f"{model_name}_xukuang_params_shrunk.keras"
+    model_path = model_dir / xukuang_name
+
+    if model_path.exists():
+        return model_path
+
+    # If not found, try alternative patterns
     patterns = [
         f"{model_name}_model.keras",
         f"{model_name}_best_model.keras",
@@ -206,7 +223,7 @@ def find_model_file(model_dir, model_name='unet'):
         if model_path.exists():
             return model_path
 
-    # If not found, list available models
+    # If still not found, list available models
     available = list(model_dir.glob("*.keras")) + list(model_dir.glob("*.h5"))
     if available:
         print(f"Available models in {model_dir}:")
@@ -470,11 +487,12 @@ def save_experiment_info(config, model_path, output_dir):
         'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
         'model_dir': str(config['model_dir']),
         'model_file': str(model_path),
-        'model_name': 'UNet (Xukuang)',
+        'model_name': 'UNet (Xukuang - FINAL epoch)',
+        'model_note': 'Using FINAL model from epoch 200, NOT best checkpoint from epoch 140',
         'model_performance': {
-            'final_val_iou': 0.6065,
-            'best_val_iou': 0.6789,
-            'best_epoch': 140,
+            'final_val_iou_epoch_200': 0.6065,
+            'best_val_iou_epoch_140': 0.6789,
+            'model_used': 'final_epoch_200',
         },
         'training_params': {
             'learning_rate': 0.005,
@@ -484,11 +502,15 @@ def save_experiment_info(config, model_path, output_dir):
             'image_size': 512,
             'image_channels': 3,
             'image_type': 'RGB',
+            'optimizer': 'Adam',
+            'test_split': 0.2,
+            'random_state': 0,
         },
         'test_images_dir': str(config['test_images_dir']),
         'prediction_threshold': config['threshold'],
         'dilution_order': DILUTION_ORDER,
         'dilution_labels': DILUTION_LABELS,
+        'dilution_order_note': 'CORRECTED ordering: 10x -> 10240x (not string sort)',
     }
 
     info_path = Path(output_dir) / 'EXPERIMENT_INFO.json'
