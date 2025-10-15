@@ -95,7 +95,7 @@ def res_conv_block(x, filter_size, size, dropout, batch_norm=False):
 
 def attention_block(x, gating, inter_shape):
     """
-    Attention gate mechanism.
+    Attention gate mechanism (FIXED: handles stride calculation properly).
 
     Args:
         x: Input feature map (from skip connection)
@@ -113,9 +113,13 @@ def attention_block(x, gating, inter_shape):
     shape_theta_x = K.int_shape(theta_x)
 
     phi_g = layers.Conv2D(inter_shape, (1, 1), padding='same')(gating)
+
+    # Calculate strides safely (avoid zeros)
+    stride_h = max(1, shape_theta_x[1] // shape_g[1])
+    stride_w = max(1, shape_theta_x[2] // shape_g[2])
+
     upsample_g = layers.Conv2DTranspose(inter_shape, (3, 3),
-                                       strides=(shape_theta_x[1] // shape_g[1],
-                                               shape_theta_x[2] // shape_g[2]),
+                                       strides=(stride_h, stride_w),
                                        padding='same')(phi_g)
 
     # Use Add layer instead of add function for better serialization
@@ -125,9 +129,11 @@ def attention_block(x, gating, inter_shape):
     psi = layers.Conv2D(1, (1, 1), padding='same')(act_xg)
     sigmoid_xg = layers.Activation('sigmoid')(psi)
 
-    # Upsample attention coefficients
-    upsample_psi = layers.UpSampling2D(size=(shape_x[1] // shape_theta_x[1],
-                                             shape_x[2] // shape_theta_x[2]))(sigmoid_xg)
+    # Upsample attention coefficients safely (avoid zeros)
+    upsample_h = max(1, shape_x[1] // shape_theta_x[1])
+    upsample_w = max(1, shape_x[2] // shape_theta_x[2])
+
+    upsample_psi = layers.UpSampling2D(size=(upsample_h, upsample_w))(sigmoid_xg)
 
     # Use repeat_elem with RepeatElements layer (no Lambda!)
     upsample_psi = repeat_elem(upsample_psi, shape_x[3])
