@@ -1,0 +1,34 @@
+{
+    "timestamp": "20251015_060902",
+    "dataset": "dataset_shrunk_masks",
+    "training_parameters": {
+        "learning_rate": 0.005,
+        "epochs": 200,
+        "batch_size": 4,
+        "image_size": 512,
+        "loss_function": "BinaryFocalLoss(gamma=2)",
+        "optimizer": "Adam",
+        "test_size": 0.2,
+        "random_state": 0
+    },
+    "dataset_info": {
+        "total_images": 98,
+        "training_samples": 78,
+        "testing_samples": 20,
+        "image_directory": "./dataset_shrunk_masks/images/",
+        "mask_directory": "./dataset_shrunk_masks/masks/"
+    },
+    "model_info": {
+        "input_shape": [
+            512,
+            512,
+            3
+        ],
+        "architectures": [
+            "UNet",
+            "Attention_UNet",
+            "Attention_ResUNet"
+        ]
+    },
+    "source": "bead_seg.ipynb (Xukuang parameters)"
+}
