@@ -3,6 +3,9 @@
 Density Analysis Using Xukuang Parameters UNet Model
 ====================================================
 
+Script: density_analysis_xukuang.py
+PBS Script: pbs_density_analysis_xukuang.sh
+
 Uses the best UNet model from xukuang_params_shrunk_20251015_071224
 to predict on test images and generate density analysis.
 
@@ -52,7 +55,7 @@ import tensorflow as tf
 from tensorflow import keras
 
 # Import custom modules
-from loss_functions_fixed import combined_dice_focal_loss, jacard_coef, dice_coef
+from loss_functions_fixed import combined_dice_focal_loss, jacard_coef, dice_coef, focal_loss
 
 # ============================================================================
 # CONFIGURATION
@@ -107,7 +110,8 @@ DILUTION_PATTERNS = {
 print("="*80)
 print("DENSITY ANALYSIS - XUKUANG UNET MODEL (RGB)")
 print("="*80)
-print(f"Script: density_analysis_xukuang.py")
+print(f"Python Script: density_analysis_xukuang.py")
+print(f"PBS Script: pbs_density_analysis_xukuang.sh")
 print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
 print(f"Model directory: {CONFIG['model_dir']}")
 print(f"Test images: {CONFIG['test_images_dir']}")
@@ -245,11 +249,34 @@ def load_model(model_dir, model_name='unet'):
     model_path = find_model_file(model_dir, model_name)
     print(f"  Model file: {model_path}")
 
+    # Define BinaryFocalLoss class for deserialization
+    @keras.saving.register_keras_serializable(package='Custom')
+    class BinaryFocalLoss(keras.losses.Loss):
+        """Binary Focal Loss for model loading compatibility."""
+        def __init__(self, gamma=2.0, alpha=0.25, **kwargs):
+            super().__init__(**kwargs)
+            self.gamma = gamma
+            self.alpha = alpha
+
+        def call(self, y_true, y_pred):
+            return focal_loss(y_true, y_pred, alpha=self.alpha, gamma=self.gamma)
+
+        def get_config(self):
+            config = super().get_config()
+            config.update({
+                'gamma': self.gamma,
+                'alpha': self.alpha,
+            })
+            return config
+
     # Custom objects for loading
     custom_objects = {
+        'BinaryFocalLoss': BinaryFocalLoss,
+        'binary_focal_loss': BinaryFocalLoss,
         'combined_dice_focal_loss': combined_dice_focal_loss,
         'jacard_coef': jacard_coef,
         'dice_coef': dice_coef,
+        'focal_loss': focal_loss,
     }
 
     model = keras.models.load_model(model_path, custom_objects=custom_objects)
