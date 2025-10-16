@@ -73,14 +73,13 @@ CONFIG = {
     'figsize_boxplot_low': (14, 8),
 }
 
-# Dilution factors in proper order (10240x - 10x)
-# X-axis goes from LOW density (1/10240x) to HIGH density (1/10x)
-DILUTION_ORDER = [10240, 5120, 2560, 1280, 640, 320, 160, 80, 20, 10]
-DILUTION_LABELS = ['10240x', '5120x', '2560x', '1280x', '640x', '320x', '160x', '80x', '20x', '10x']
+# Dilution factors in proper order (10x - 10240x)
+DILUTION_ORDER = [10, 20, 80, 160, 320, 640, 1280, 2560, 5120, 10240]
+DILUTION_LABELS = ['10x', '20x', '80x', '160x', '320x', '640x', '1280x', '2560x', '5120x', '10240x']
 
-# Low dilution range (1/10240 to 1/80) - reversed for low→high density
-DILUTION_ORDER_LOW = [10240, 5120, 2560, 1280, 640, 320, 160, 80]
-DILUTION_LABELS_LOW = ['10240x', '5120x', '2560x', '1280x', '640x', '320x', '160x', '80x']
+# Low dilution range (1/10240 to 1/80)
+DILUTION_ORDER_LOW = [80, 160, 320, 640, 1280, 2560, 5120, 10240]
+DILUTION_LABELS_LOW = ['80x', '160x', '320x', '640x', '1280x', '2560x', '5120x', '10240x']
 
 # Dilution factor patterns (for extracting from filenames)
 DILUTION_PATTERNS = {
@@ -695,18 +694,19 @@ def create_boxplot_low_dilution_range(df_tile_results, output_dir, config, densi
 
 def create_representative_tile_visualizations(tile_data, output_dir, config):
     """
-    Create 3-panel tile visualizations for each test image.
+    Create 6-panel tile visualizations for each test image.
     Shows 5 representative tiles per image with:
-    - Panel 1: Original tile (dark beads on bright background)
-    - Panel 2: Predicted mask threshold 0.5 (dark beads - NOT inverted)
-    - Panel 3: CLAHE+Otsu mask (dark beads - NOT inverted)
-
-    IMPORTANT: Beads appear DARK in all panels for consistent visualization.
+    - Panel 1: Original tile
+    - Panel 2: Threshold 0.2 (inverted)
+    - Panel 3: Threshold 0.5 (inverted)
+    - Panel 4: Threshold 0.8 (inverted)
+    - Panel 5: Threshold 0.95 (inverted)
+    - Panel 6: Inverted CLAHE+Otsu mask (white beads, denoised)
     """
-    print("\nGenerating representative tile visualizations (3-panel)...")
+    print("\nGenerating representative tile visualizations (6-panel)...")
 
     output_dir = Path(output_dir)
-    tiles_dir = output_dir / 'representative_tiles_3panel'
+    tiles_dir = output_dir / 'representative_tiles_6panel'
     tiles_dir.mkdir(parents=True, exist_ok=True)
 
     # Group tiles by image
@@ -736,50 +736,75 @@ def create_representative_tile_visualizations(tile_data, output_dir, config):
         # Get dilution label for filename
         dilution_label = tiles[0]['dilution_label']
 
-        # Create 3-panel figure (5 rows × 3 columns)
-        fig, axes = plt.subplots(5, 3, figsize=(15, 25))
+        # Create 6-panel figure (5 rows × 6 columns)
+        fig, axes = plt.subplots(5, 6, figsize=(30, 25))
 
         for row_idx, tile_info in enumerate(representative_tiles):
             tile = tile_info['tile']
             prediction = tile_info['prediction']
+            density_threshold_02 = tile_info['density_threshold_0.2']
             density_threshold_05 = tile_info['density_threshold_0.5']
+            density_threshold_08 = tile_info['density_threshold_0.8']
+            density_threshold_095 = tile_info['density_threshold_0.95']
             density_clahe_pred = tile_info['density_clahe_otsu_pred']
             binary_mask_pred = tile_info['binary_mask_pred']
             tile_idx = tile_info['tile_idx']
             pos = tile_info['position']
 
-            # Panel 1: Original tile (dark beads on bright background)
+            # Panel 1: Original tile
             axes[row_idx, 0].imshow(tile, cmap='gray')
             axes[row_idx, 0].set_title(f'Original Tile {tile_idx}\nPosition: ({pos[0]}, {pos[1]})',
-                                       fontsize=11)
+                                       fontsize=10)
             axes[row_idx, 0].axis('off')
 
-            # Panel 2: Predicted mask threshold 0.5 (dark beads - NOT inverted)
-            # Model predicts high probability for beads, so we show prediction directly
-            # This shows dark beads (low values = beads, high values = background)
+            # Panel 2: Threshold 0.2 (inverted - white beads on black)
             pred_squeeze = prediction.squeeze()
-            axes[row_idx, 1].imshow(pred_squeeze, cmap='gray', vmin=0, vmax=1)
-            axes[row_idx, 1].set_title(f'Predicted Mask (0.5)\n(Dark = Beads)\nDensity: {density_threshold_05:.4f}',
-                                       fontsize=11)
+            binary_02 = (pred_squeeze > 0.2).astype(np.float32)
+            inverted_02 = 1.0 - binary_02
+            axes[row_idx, 1].imshow(inverted_02, cmap='gray', vmin=0, vmax=1)
+            axes[row_idx, 1].set_title(f'Threshold 0.2\nDensity: {density_threshold_02:.4f}',
+                                       fontsize=10)
             axes[row_idx, 1].axis('off')
 
-            # Panel 3: CLAHE+Otsu mask (dark beads - NOT inverted)
-            # The binary mask has white foreground (255), so invert to show dark beads
-            # CLAHE+Otsu produces white beads (foreground=255), so we invert to show dark beads
-            dark_clahe = 255 - binary_mask_pred
-            axes[row_idx, 2].imshow(dark_clahe, cmap='gray', vmin=0, vmax=255)
-            axes[row_idx, 2].set_title(f'CLAHE+Otsu\n(Dark = Beads, Denoised)\nDensity: {density_clahe_pred:.4f}',
-                                       fontsize=11)
+            # Panel 3: Threshold 0.5 (inverted - white beads on black)
+            binary_05 = (pred_squeeze > 0.5).astype(np.float32)
+            inverted_05 = 1.0 - binary_05
+            axes[row_idx, 2].imshow(inverted_05, cmap='gray', vmin=0, vmax=1)
+            axes[row_idx, 2].set_title(f'Threshold 0.5\nDensity: {density_threshold_05:.4f}',
+                                       fontsize=10)
             axes[row_idx, 2].axis('off')
 
+            # Panel 4: Threshold 0.8 (inverted - white beads on black)
+            binary_08 = (pred_squeeze > 0.8).astype(np.float32)
+            inverted_08 = 1.0 - binary_08
+            axes[row_idx, 3].imshow(inverted_08, cmap='gray', vmin=0, vmax=1)
+            axes[row_idx, 3].set_title(f'Threshold 0.8\nDensity: {density_threshold_08:.4f}',
+                                       fontsize=10)
+            axes[row_idx, 3].axis('off')
+
+            # Panel 5: Threshold 0.95 (inverted - white beads on black)
+            binary_095 = (pred_squeeze > 0.95).astype(np.float32)
+            inverted_095 = 1.0 - binary_095
+            axes[row_idx, 4].imshow(inverted_095, cmap='gray', vmin=0, vmax=1)
+            axes[row_idx, 4].set_title(f'Threshold 0.95\nDensity: {density_threshold_095:.4f}',
+                                       fontsize=10)
+            axes[row_idx, 4].axis('off')
+
+            # Panel 6: Inverted CLAHE+Otsu mask (white beads on black, denoised)
+            inverted_clahe = 255 - binary_mask_pred
+            axes[row_idx, 5].imshow(inverted_clahe, cmap='gray', vmin=0, vmax=255)
+            axes[row_idx, 5].set_title(f'CLAHE+Otsu\nDensity: {density_clahe_pred:.4f}',
+                                       fontsize=10)
+            axes[row_idx, 5].axis('off')
+
         # Add overall title
-        fig.suptitle(f'{image_name} - Representative Tiles (5 tiles, Dark = Beads)',
+        fig.suptitle(f'{image_name} - Representative Tiles (5 tiles spanning density range)',
                     fontsize=16, fontweight='bold', y=0.995)
 
         plt.tight_layout(rect=[0, 0, 1, 0.995])
 
         # Save
-        output_filename = f'tiles_3panel_{dilution_label}_{image_name.replace(".tif", "").replace(".tiff", "")}.png'
+        output_filename = f'tiles_6panel_{dilution_label}_{image_name.replace(".tif", "").replace(".tiff", "")}.png'
         output_path = tiles_dir / output_filename
         plt.savefig(output_path, dpi=config['dpi'], bbox_inches='tight')
         plt.close()
@@ -788,7 +813,7 @@ def create_representative_tile_visualizations(tile_data, output_dir, config):
 
     print(f"\n  ✓ All tile visualizations saved to: {tiles_dir}")
     print(f"    Total images: {len(tiles_by_image)}")
-    print(f"    Format: 3 panels (Original, Predicted 0.5, CLAHE+Otsu) - Dark = Beads")
+    print(f"    Format: 6 panels (Original, Thr 0.2, Thr 0.5, Thr 0.8, Thr 0.95, CLAHE+Otsu)")
 
 # ============================================================================
 # SAVE RESULTS
@@ -981,10 +1006,13 @@ def main():
     print("     - density_boxplot_full_range_claheotsu_on_original.png")
     print("     - density_boxplot_low_dilution_range_claheotsu_on_original.png")
     print("\nTile visualizations:")
-    print("  - representative_tiles_3panel/ (5 tiles per image, 3 panels each)")
-    print("      * Panel 1: Original tile (dark beads)")
-    print("      * Panel 2: Predicted mask threshold 0.5 (dark beads)")
-    print("      * Panel 3: CLAHE+Otsu (dark beads, denoised)")
+    print("  - representative_tiles_6panel/ (5 tiles per image, 6 panels each)")
+    print("      * Panel 1: Original tile")
+    print("      * Panel 2: Threshold 0.2 (inverted)")
+    print("      * Panel 3: Threshold 0.5 (inverted)")
+    print("      * Panel 4: Threshold 0.8 (inverted)")
+    print("      * Panel 5: Threshold 0.95 (inverted)")
+    print("      * Panel 6: CLAHE+Otsu (inverted, denoised)")
     print("="*80)
 
 if __name__ == '__main__':
