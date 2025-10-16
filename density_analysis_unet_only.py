@@ -575,7 +575,7 @@ def create_boxplot_full_range(df_tile_results, output_dir, config, density_colum
 
     # Set y-axis to log scale like reference
     ax.set_yscale('log')
-    ax.set_ylim(0.002, 1.5)  # Slightly wider range for visibility
+    # ax.set_ylim(0.002, 1.5)  # Slightly wider range for visibility
 
     # Grid
     ax.grid(True, alpha=0.3, which='both', linestyle='-', linewidth=0.5)
