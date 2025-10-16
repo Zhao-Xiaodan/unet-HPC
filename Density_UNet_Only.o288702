@@ -1,0 +1,55 @@
+========================================================================
+UNET-ONLY DENSITY ANALYSIS - BEST MODEL
+========================================================================
+Job ID: 288702.stdct-mgmt-02
+Job Name: Density_UNet_Only
+Node: GN-A40-072
+Start time: Thu Oct 16 09:42:22 AM +08 2025
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================================================
+
+=== ENVIRONMENT SETUP ===
+✓ TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+===========================
+
+Verifying required files...
+✓ Model directory: ./unet_hyperparam_20251015_224125
+✓ Checkpoints directory: ./unet_hyperparam_20251015_224125/checkpoints
+✓ Test images directory: ./test_images
+✓ Found 27 UNet model(s)
+
+Found 10 test images
+
+Test images:
+  - 10240x_2560x_2025-05-16_00-59-00_002.tif
+  - 10x_2025-05-15_02-05-00.tif
+  - 1280x_2025-05-16_00-59-00_002.tif
+  - 160x_2025-05-15_02-05-00.tif
+  - 20x_2025-05-15_02-05-00.tif
+  - 2560x_2025-05-16_00-59-00_002.tif
+  - 320x_2025-05-15_02-05-00.tif
+  - 5120x_2025-05-16_00-59-00_002.tif
+  - 640x_2025-05-16_00-59-00_002.tif
+  - 80x_2_2025-05-22_14-48-00.tif
+
+========================================================================
+RUNNING DENSITY ANALYSIS
+========================================================================
+Command: singularity exec --nv "/app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif" python3 ./density_analysis_unet_only.py
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-16 09:42:39.522146:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 288702.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 271
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:20
+	Memory: Requested(240gb), Used(2559428kb)
+	Vmem Used: 63924272kb
+	Walltime: Requested(04:00:00), Used(00:00:17)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-072[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
