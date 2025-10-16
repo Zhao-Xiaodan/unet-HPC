@@ -20,15 +20,15 @@
 #   3. ✅ Two boxplot ranges:
 #      - Full range: 1/10240 to 1/10
 #      - Low dilution range: 1/10240 to 1/80
+#   4. ✅ 3-panel tile visualizations (5 representative tiles per image):
+#      - Panel 1: Original tile
+#      - Panel 2: Predicted mask
+#      - Panel 3: Inverted mask (white beads for easy comparison)
 #
 # Model Selection:
 #   - Automatically selects best UNet model based on validation IoU
 #   - From: unet_hyperparam_20251015_224125/checkpoints/
 #   - Training: 100 epochs, BinaryFocalLoss, 512×512 RGB
-#
-# Tile Visualizations:
-#   - Reuses previous visualizations from density_analysis_xukuang_20251015_142119
-#   - No need to regenerate (saves time)
 #
 # Date: October 16, 2025
 ################################################################################
@@ -172,17 +172,26 @@ if [ $EXIT_CODE -eq 0 ]; then
             echo "Experiment Info:"
             cat "$OUTPUT_DIR/EXPERIMENT_INFO.json"
         fi
+
+        if [ -d "$OUTPUT_DIR/representative_tiles_3panel" ]; then
+            echo ""
+            echo "3-Panel Tile Visualizations:"
+            ls -1 "$OUTPUT_DIR/representative_tiles_3panel"
+            TILE_COUNT=$(ls -1 "$OUTPUT_DIR/representative_tiles_3panel" | wc -l)
+            echo "Total: $TILE_COUNT image tile sets"
+        fi
     fi
 
     echo ""
     echo "✓ Analysis completed successfully!"
     echo ""
-    echo "Generated boxplots:"
+    echo "Generated visualizations:"
     echo "  1. density_boxplot_full_range.png (1/10 - 1/10240)"
     echo "  2. density_boxplot_low_dilution_range.png (1/80 - 1/10240)"
-    echo ""
-    echo "Note: Tile visualizations can be reused from previous analysis:"
-    echo "      density_analysis_xukuang_20251015_142119/representative_tiles/"
+    echo "  3. representative_tiles_3panel/ (5 tiles per image, 3 panels each)"
+    echo "     - Original tile"
+    echo "     - Predicted mask"
+    echo "     - Inverted mask (white beads for easy comparison)"
 else
     echo ""
     echo "✗ Analysis failed with exit code $EXIT_CODE"

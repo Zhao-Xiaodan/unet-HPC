@@ -12,6 +12,8 @@ Updates previous density analysis with **improved visualizations** and **tile-le
 | Boxplot x-axis | Linear, categorical | ✅ Log-scale, 1/Dilution |
 | Boxplot y-axis | Linear | ✅ Log-scale (0.002-1.5) |
 | Dilution ranges | Single plot | ✅ Two plots (full + low) |
+| Tile visualizations | 2-panel | ✅ 3-panel (+ inverted mask) |
+| Tiles shown | 5 per dilution | ✅ 5 per test image |
 | Model selection | Manual (xukuang) | ✅ Auto (best from search) |
 | Colors | Seaborn default | ✅ Blue boxes + orange medians |
 
@@ -42,7 +44,9 @@ density_analysis_unet_only_YYYYMMDD_HHMMSS/
 ├── density_results_image_summary.csv       # Per-image stats (11 rows)
 ├── density_boxplot_full_range.png          # 1/10 to 1/10240
 ├── density_boxplot_low_dilution_range.png  # 1/80 to 1/10240
-└── EXPERIMENT_INFO.json                    # Metadata
+├── EXPERIMENT_INFO.json                    # Metadata
+└── representative_tiles_3panel/            # 11 PNGs (one per image)
+    └── tiles_3panel_{dilution}_{image}.png
 ```
 
 ## Two Boxplot Ranges
@@ -56,6 +60,19 @@ density_analysis_unet_only_YYYYMMDD_HHMMSS/
 - **8 high dilution levels** (excludes 10x, 20x)
 - Better resolution for low-density samples
 - File: `density_boxplot_low_dilution_range.png`
+
+## 3-Panel Tile Visualizations
+
+**Per test image:**
+- 5 representative tiles (min, Q1, median, Q3, max density)
+- 3 panels per tile:
+  1. Original tile
+  2. Predicted mask
+  3. Inverted mask (white beads - easy to compare!)
+
+**Why inverted?** Beads are black in originals, so white beads on black makes visual comparison much easier.
+
+**Output:** `representative_tiles_3panel/` with 11 PNGs (one per image)
 
 ## Boxplot Style (Matching Reference)
 
@@ -189,6 +206,7 @@ This will generate:
 1. ✅ Tile-level data (28 tiles per image saved)
 2. ✅ Log-scale boxplots with 1/dilution x-axis
 3. ✅ Two dilution ranges (full + low)
+4. ✅ 3-panel tile visualizations (original + mask + inverted)
 
 **Runtime:** 1-2 hours
 

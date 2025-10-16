@@ -49,7 +49,22 @@ image,dilution,dilution_label,tile_idx,position_y,position_x,density
 - Better resolution for low-density samples
 - File: `density_boxplot_low_dilution_range.png`
 
-### 4. ✅ Best Model Selection
+### 4. ✅ 3-Panel Tile Visualizations
+**NEW:** Generate representative tile visualizations for each test image
+
+**Layout per image:**
+- 5 representative tiles (spanning density range: min, Q1, median, Q3, max)
+- 3 panels per tile:
+  - **Panel 1:** Original tile
+  - **Panel 2:** Predicted mask (black background, white foreground)
+  - **Panel 3:** Inverted mask (white beads on black background)
+
+**Why inverted mask?**
+Since beads are **black** in the original images, the inverted mask (white beads on black) makes it much easier to visually compare predictions with the original.
+
+**Output:** `representative_tiles_3panel/` directory with one PNG per test image
+
+### 5. ✅ Best Model Selection
 **Automatic:** Script finds the best UNet model from hyperparameter search based on validation IoU
 
 **Search location:** `unet_hyperparam_20251015_224125/checkpoints/`
@@ -104,7 +119,18 @@ density_analysis_unet_only_20251016_HHMMSS/
 ├── density_results_image_summary.csv       # Per-image statistics
 ├── density_boxplot_full_range.png          # Boxplot: 1/10 - 1/10240
 ├── density_boxplot_low_dilution_range.png  # Boxplot: 1/80 - 1/10240
-└── EXPERIMENT_INFO.json                    # Metadata
+├── EXPERIMENT_INFO.json                    # Metadata
+└── representative_tiles_3panel/            # 3-panel tile visualizations
+    ├── tiles_3panel_10x_<image_name>.png
+    ├── tiles_3panel_20x_<image_name>.png
+    ├── tiles_3panel_80x_<image_name>.png
+    ├── tiles_3panel_160x_<image_name>.png
+    ├── tiles_3panel_320x_<image_name>.png
+    ├── tiles_3panel_640x_<image_name>.png
+    ├── tiles_3panel_1280x_<image_name>.png
+    ├── tiles_3panel_2560x_<image_name>.png
+    ├── tiles_3panel_5120x_<image_name>.png
+    └── tiles_3panel_10240x_<image_name>.png
 ```
 
 ### Output Files Description
@@ -142,6 +168,16 @@ Metadata about the analysis:
 - Configuration parameters
 - Total images and tiles processed
 
+#### `representative_tiles_3panel/`
+3-panel tile visualizations (one PNG per test image):
+- **Format:** PNG, 300 DPI, 15×25 inches (5 rows × 3 columns)
+- **Rows:** 5 representative tiles (min, Q1, median, Q3, max density)
+- **Columns:**
+  - Column 1: Original tile
+  - Column 2: Predicted mask
+  - Column 3: Inverted mask (white beads on black)
+- **Usage:** Visual quality assessment, easy comparison with black beads in originals
+
 ## Analysis Workflow
 
 ### 1. Model Selection
@@ -167,7 +203,7 @@ For each test image:
 
 ### 3. Visualization Generation
 ```
-Two boxplots created:
+A. Two boxplots created:
 1. Full range (1/10 to 1/10240)
    - 10 dilution levels
    - Log-log scale
@@ -177,6 +213,17 @@ Two boxplots created:
    - 8 dilution levels (excludes 10x and 20x)
    - Log-log scale
    - Blue boxes, orange medians
+
+B. 3-panel tile visualizations:
+For each test image:
+1. Sort all 28 tiles by density
+2. Select 5 representative tiles (min, Q1, median, Q3, max)
+3. Create 5×3 grid:
+   - Row: Each representative tile
+   - Col 1: Original tile
+   - Col 2: Predicted mask
+   - Col 3: Inverted mask (white beads)
+4. Save as tiles_3panel_{dilution}_{image}.png
 ```
 
 ## Comparison with Previous Analysis
@@ -187,7 +234,9 @@ Two boxplots created:
 | **Boxplot style** | Linear scale | ✅ Log-log scale with 1/dilution |
 | **Dilution ranges** | Single plot | ✅ Two plots (full + low dilution) |
 | **Model selection** | Manual (xukuang params) | ✅ Automatic (best from hyperparam search) |
-| **Tile visualizations** | 2-panel (original + prediction) | ♻️ Reuse previous |
+| **Tile visualizations** | 2-panel (original + prediction) | ✅ 3-panel (original + mask + inverted) |
+| **Tiles per image** | 5 per dilution level | ✅ 5 per test image |
+| **Inverted mask** | ❌ No | ✅ Yes (white beads for comparison) |
 | **Colors** | Seaborn default | ✅ Blue boxes + orange medians |
 
 ## Statistical Analysis Opportunities
