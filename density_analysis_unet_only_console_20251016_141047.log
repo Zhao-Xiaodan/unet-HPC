@@ -1,0 +1,293 @@
+Searching for best UNet model...
+Found 27 UNet model configurations
+  New best: unet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4572)
+  New best: unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4853)
+
+✓ Selected best model: unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001
+  Best Val IoU: 0.4853
+
+================================================================================
+UNET-ONLY DENSITY ANALYSIS - BEST MODEL FROM HYPERPARAMETER SEARCH
+================================================================================
+Script: density_analysis_unet_only.py
+PBS Script: pbs_density_analysis_unet_only.sh
+Timestamp: 2025-10-16 06:10:55
+Model base directory: ./unet_hyperparam_20251015_224125
+Test images: ./test_images
+Output directory: ./density_analysis_unet_only_20251016_061055
+Image format: 512×512 RGB (3 channels)
+
+================================================================================
+BEST MODEL SELECTION
+================================================================================
+Model: unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001
+Hyperparameters:
+  - n_filters: 32
+  - dropout: 0.2
+  - batch_norm: True
+  - learning_rate: 0.001
+Best Val IoU: 0.4853
+Model path: unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001/best_model.keras
+================================================================================
+
+Loading model from: unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001/best_model.keras
+  ✓ Model loaded successfully
+  Input shape: (None, 512, 512, 3)
+  Output shape: (None, 512, 512, 1)
+
+================================================================================
+PREDICTION ON TEST IMAGES
+================================================================================
+Found 10 test images
+
+Processing images:   0%|          | 0/10 [00:00<?, ?it/s]Processing images:  10%|█         | 1/10 [00:13<01:58, 13.11s/it]Processing images:  20%|██        | 2/10 [00:14<00:48,  6.08s/it]Processing images:  30%|███       | 3/10 [00:14<00:25,  3.64s/it]Processing images:  40%|████      | 4/10 [00:15<00:14,  2.49s/it]Processing images:  50%|█████     | 5/10 [00:16<00:08,  1.80s/it]Processing images:  60%|██████    | 6/10 [00:16<00:05,  1.37s/it]Processing images:  70%|███████   | 7/10 [00:17<00:03,  1.10s/it]Processing images:  80%|████████  | 8/10 [00:17<00:01,  1.08it/s]Processing images:  90%|█████████ | 9/10 [00:18<00:00,  1.23it/s]Processing images: 100%|██████████| 10/10 [00:19<00:00,  1.36it/s]Processing images: 100%|██████████| 10/10 [00:19<00:00,  1.91s/it]
+
+Processing: 10240x_2560x_2025-05-16_00-59-00_002.tif
+  Dilution: 10240x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.0422
+    Threshold (0.5):        0.0130
+    Threshold (0.8):        0.0011
+    Threshold (0.95):       0.0000
+    CLAHE+Otsu on pred:     0.9466
+    CLAHE+Otsu on original: 0.1183
+
+Processing: 10x_2025-05-15_02-05-00.tif
+  Dilution: 10x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.9589
+    Threshold (0.5):        0.8353
+    Threshold (0.8):        0.4433
+    Threshold (0.95):       0.0275
+    CLAHE+Otsu on pred:     0.3871
+    CLAHE+Otsu on original: 0.6465
+
+Processing: 1280x_2025-05-16_00-59-00_002.tif
+  Dilution: 1280x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.0604
+    Threshold (0.5):        0.0177
+    Threshold (0.8):        0.0012
+    Threshold (0.95):       0.0000
+    CLAHE+Otsu on pred:     0.9318
+    CLAHE+Otsu on original: 0.0652
+
+Processing: 160x_2025-05-15_02-05-00.tif
+  Dilution: 160x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.6271
+    Threshold (0.5):        0.2809
+    Threshold (0.8):        0.0635
+    Threshold (0.95):       0.0006
+    CLAHE+Otsu on pred:     0.5539
+    CLAHE+Otsu on original: 0.3147
+
+Processing: 20x_2025-05-15_02-05-00.tif
+  Dilution: 20x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.8987
+    Threshold (0.5):        0.7833
+    Threshold (0.8):        0.5166
+    Threshold (0.95):       0.1036
+    CLAHE+Otsu on pred:     0.3961
+    CLAHE+Otsu on original: 0.5557
+
+Processing: 2560x_2025-05-16_00-59-00_002.tif
+  Dilution: 2560x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.0116
+    Threshold (0.5):        0.0029
+    Threshold (0.8):        0.0003
+    Threshold (0.95):       0.0000
+    CLAHE+Otsu on pred:     0.7426
+    CLAHE+Otsu on original: 0.4375
+
+Processing: 320x_2025-05-15_02-05-00.tif
+  Dilution: 320x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.3007
+    Threshold (0.5):        0.0972
+    Threshold (0.8):        0.0118
+    Threshold (0.95):       0.0001
+    CLAHE+Otsu on pred:     0.7391
+    CLAHE+Otsu on original: 0.1751
+
+Processing: 5120x_2025-05-16_00-59-00_002.tif
+  Dilution: 5120x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.0274
+    Threshold (0.5):        0.0060
+    Threshold (0.8):        0.0004
+    Threshold (0.95):       0.0000
+    CLAHE+Otsu on pred:     0.8903
+    CLAHE+Otsu on original: 0.3856
+
+Processing: 640x_2025-05-16_00-59-00_002.tif
+  Dilution: 640x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.1490
+    Threshold (0.5):        0.0471
+    Threshold (0.8):        0.0030
+    Threshold (0.95):       0.0001
+    CLAHE+Otsu on pred:     0.8582
+    CLAHE+Otsu on original: 0.1046
+
+Processing: 80x_2_2025-05-22_14-48-00.tif
+  Dilution: 80x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.8153
+    Threshold (0.5):        0.5512
+    Threshold (0.8):        0.2505
+    Threshold (0.95):       0.0157
+    CLAHE+Otsu on pred:     0.4950
+    CLAHE+Otsu on original: 0.4442
+
+================================================================================
+SAVING RESULTS
+================================================================================
+✓ Tile-level results saved: density_analysis_unet_only_20251016_061055/density_results_tile_level.csv
+  Total tiles: 280
+✓ Image-level summary saved: density_analysis_unet_only_20251016_061055/density_results_image_summary.csv
+  Total images: 10
+✓ Experiment info saved: density_analysis_unet_only_20251016_061055/EXPERIMENT_INFO.json
+
+
+================================================================================
+GENERATING VISUALIZATIONS
+================================================================================
+
+--- Threshold Method (0.2) ---
+
+Generating box plot (Full Range: 1/10240 to 1/10) -  - Threshold 0.2...
+  ✓ Saved: density_analysis_unet_only_20251016_061055/density_boxplot_full_range__threshold_0.2.png
+
+Generating box plot (Low Dilution Range: 1/10240 to 1/80) -  - Threshold 0.2...
+  ✓ Saved: density_analysis_unet_only_20251016_061055/density_boxplot_low_dilution_range__threshold_0.2.png
+
+--- Threshold Method (0.5) ---
+
+Generating box plot (Full Range: 1/10240 to 1/10) -  - Threshold 0.5...
+  ✓ Saved: density_analysis_unet_only_20251016_061055/density_boxplot_full_range__threshold_0.5.png
+
+Generating box plot (Low Dilution Range: 1/10240 to 1/80) -  - Threshold 0.5...
+  ✓ Saved: density_analysis_unet_only_20251016_061055/density_boxplot_low_dilution_range__threshold_0.5.png
+
+--- Threshold Method (0.8) ---
+
+Generating box plot (Full Range: 1/10240 to 1/10) -  - Threshold 0.8...
+  ✓ Saved: density_analysis_unet_only_20251016_061055/density_boxplot_full_range__threshold_0.8.png
+
+Generating box plot (Low Dilution Range: 1/10240 to 1/80) -  - Threshold 0.8...
+  ✓ Saved: density_analysis_unet_only_20251016_061055/density_boxplot_low_dilution_range__threshold_0.8.png
+
+--- Threshold Method (0.95) ---
+
+Generating box plot (Full Range: 1/10240 to 1/10) -  - Threshold 0.95...
+  ✓ Saved: density_analysis_unet_only_20251016_061055/density_boxplot_full_range__threshold_0.95.png
+
+Generating box plot (Low Dilution Range: 1/10240 to 1/80) -  - Threshold 0.95...
+  ✓ Saved: density_analysis_unet_only_20251016_061055/density_boxplot_low_dilution_range__threshold_0.95.png
+
+--- CLAHE+Otsu on Predicted Mask (Denoised) ---
+
+Generating box plot (Full Range: 1/10240 to 1/10) -  - CLAHE+Otsu on Pred...
+  ✓ Saved: density_analysis_unet_only_20251016_061055/density_boxplot_full_range__clahe+otsu_on_pred.png
+
+Generating box plot (Low Dilution Range: 1/10240 to 1/80) -  - CLAHE+Otsu on Pred...
+  ✓ Saved: density_analysis_unet_only_20251016_061055/density_boxplot_low_dilution_range__clahe+otsu_on_pred.png
+
+--- CLAHE+Otsu on Original Image (Baseline) ---
+
+Generating box plot (Full Range: 1/10240 to 1/10) -  - CLAHE+Otsu on Original...
+  ✓ Saved: density_analysis_unet_only_20251016_061055/density_boxplot_full_range__clahe+otsu_on_original.png
+
+Generating box plot (Low Dilution Range: 1/10240 to 1/80) -  - CLAHE+Otsu on Original...
+  ✓ Saved: density_analysis_unet_only_20251016_061055/density_boxplot_low_dilution_range__clahe+otsu_on_original.png
+
+--- Tile Visualizations ---
+
+Generating representative tile visualizations (6-panel)...
+  Creating tiles for: 10240x_2560x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_6panel_10240x_10240x_2560x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 10x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_6panel_10x_10x_2025-05-15_02-05-00.png
+  Creating tiles for: 1280x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_6panel_1280x_1280x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 160x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_6panel_160x_160x_2025-05-15_02-05-00.png
+  Creating tiles for: 20x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_6panel_20x_20x_2025-05-15_02-05-00.png
+  Creating tiles for: 2560x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_6panel_2560x_2560x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 320x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_6panel_320x_320x_2025-05-15_02-05-00.png
+  Creating tiles for: 5120x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_6panel_5120x_5120x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 640x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_6panel_640x_640x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 80x_2_2025-05-22_14-48-00.tif
+    ✓ Saved: tiles_6panel_80x_80x_2_2025-05-22_14-48-00.png
+
+  ✓ All tile visualizations saved to: density_analysis_unet_only_20251016_061055/representative_tiles_6panel
+    Total images: 10
+    Format: 6 panels (Original, Thr 0.2, Thr 0.5, Thr 0.8, Thr 0.95, CLAHE+Otsu)
+
+================================================================================
+ANALYSIS COMPLETE
+================================================================================
+Output directory: ./density_analysis_unet_only_20251016_061055
+
+Generated files:
+  - density_results_tile_level.csv (6 density methods per tile)
+  - density_results_image_summary.csv (summary statistics)
+  - EXPERIMENT_INFO.json
+
+Generated boxplots (12 total - 6 methods × 2 dilution ranges):
+  1. Threshold 0.2:
+     - density_boxplot_full_range_threshold_0.2.png
+     - density_boxplot_low_dilution_range_threshold_0.2.png
+  2. Threshold 0.5:
+     - density_boxplot_full_range_threshold_0.5.png
+     - density_boxplot_low_dilution_range_threshold_0.5.png
+  3. Threshold 0.8:
+     - density_boxplot_full_range_threshold_0.8.png
+     - density_boxplot_low_dilution_range_threshold_0.8.png
+  4. Threshold 0.95:
+     - density_boxplot_full_range_threshold_0.95.png
+     - density_boxplot_low_dilution_range_threshold_0.95.png
+  5. CLAHE+Otsu on predicted mask (denoised):
+     - density_boxplot_full_range_claheotsu_on_pred.png
+     - density_boxplot_low_dilution_range_claheotsu_on_pred.png
+  6. CLAHE+Otsu on original image (baseline):
+     - density_boxplot_full_range_claheotsu_on_original.png
+     - density_boxplot_low_dilution_range_claheotsu_on_original.png
+
+Tile visualizations:
+  - representative_tiles_6panel/ (5 tiles per image, 6 panels each)
+      * Panel 1: Original tile
+      * Panel 2: Threshold 0.2 (inverted)
+      * Panel 3: Threshold 0.5 (inverted)
+      * Panel 4: Threshold 0.8 (inverted)
+      * Panel 5: Threshold 0.95 (inverted)
+      * Panel 6: CLAHE+Otsu (inverted, denoised)
+================================================================================
