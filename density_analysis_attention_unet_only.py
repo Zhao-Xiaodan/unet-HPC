@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
 """
-UNet-Only Density Analysis with Improved Visualizations
-========================================================
+Attention UNet-Only Density Analysis with Improved Visualizations
+==================================================================
 
-Script: density_analysis_unet_only.py
-PBS Script: pbs_density_analysis_unet_only.sh
+Script: density_analysis_attention_unet_only.py
+PBS Script: pbs_density_analysis_attention_unet_only.sh
 
-Updates the previous density analysis (density_analysis_xukuang_20251015_142119)
-with the following improvements:
+Performs density analysis using the BEST Attention UNet model from hyperparameter search.
+
+Features:
 1. ✅ Tile-Level Density Tracking (all 28 tiles per image saved)
-2. ✅ Updated Boxplot Style (log-scale 1/dilution x-axis, matching reference)
-3. ✅ Two boxplot ranges:
-   - Full range: 1/10240 to 1/10
-   - Low dilution range: 1/10240 to 1/80
+2. ✅ Multiple threshold analysis (0.2, 0.5, 0.8, 0.95)
+3. ✅ CLAHE+Otsu denoising on predicted masks and original images
+4. ✅ Categorical boxplot x-axis (1/10240x → 1/10x)
+5. ✅ 3-panel tile visualizations (Original, Inverted Pred, Inverted CLAHE+Otsu)
 
-Uses the BEST UNet model from hyperparameter search:
-- Source: unet_hyperparam_20251015_224125/
+Uses the BEST Attention UNet model from hyperparameter search:
+- Source: attention_unet_hyperparam_20251015_230149/models/
 - Selects model with highest validation IoU
 - Training: 100 epochs, BinaryFocalLoss, 512×512 RGB
 
@@ -52,9 +53,9 @@ from loss_functions_fixed import combined_dice_focal_loss, jacard_coef, dice_coe
 
 CONFIG = {
     # Directories
-    'model_base_dir': './unet_hyperparam_20251015_224125',
+    'model_base_dir': './attention_unet_hyperparam_20251015_230149',
     'test_images_dir': './test_images',
-    'output_dir': f'./density_analysis_unet_only_{datetime.now().strftime("%Y%m%d_%H%M%S")}',
+    'output_dir': f'./density_analysis_attention_unet_only_{datetime.now().strftime("%Y%m%d_%H%M%S")}',
 
     # Image settings (RGB from training)
     'img_size': 512,  # Tile size
@@ -103,10 +104,10 @@ DILUTION_PATTERNS = {
 def print_header(config, best_model_info):
     """Print analysis header."""
     print("="*80)
-    print("UNET-ONLY DENSITY ANALYSIS - BEST MODEL FROM HYPERPARAMETER SEARCH")
+    print("ATTENTION UNET-ONLY DENSITY ANALYSIS - BEST MODEL FROM HYPERPARAMETER SEARCH")
     print("="*80)
-    print(f"Script: density_analysis_unet_only.py")
-    print(f"PBS Script: pbs_density_analysis_unet_only.sh")
+    print(f"Script: density_analysis_attention_unet_only.py")
+    print(f"PBS Script: pbs_density_analysis_attention_unet_only.sh")
     print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Model base directory: {config['model_base_dir']}")
     print(f"Test images: {config['test_images_dir']}")
@@ -131,35 +132,35 @@ def print_header(config, best_model_info):
 # MODEL SELECTION
 # ============================================================================
 
-def find_best_unet_model(base_dir):
+def find_best_attention_unet_model(base_dir):
     """
-    Find the best UNet model from hyperparameter search.
-    Looks through all checkpoints and finds the one with highest validation IoU.
+    Find the best Attention UNet model from hyperparameter search.
+    Looks through all models and finds the one with highest validation IoU.
     """
-    print("Searching for best UNet model...")
+    print("Searching for best Attention UNet model...")
     base_dir = Path(base_dir)
 
-    # Find all best_model.keras files in checkpoints
-    checkpoint_dirs = list((base_dir / 'checkpoints').glob('unet_*'))
+    # Find all best_model.keras files in models directory
+    model_dirs = list((base_dir / 'models').glob('attention_unet_*'))
 
-    if not checkpoint_dirs:
-        raise FileNotFoundError(f"No UNet checkpoint directories found in {base_dir / 'checkpoints'}")
+    if not model_dirs:
+        raise FileNotFoundError(f"No Attention UNet model directories found in {base_dir / 'models'}")
 
-    print(f"Found {len(checkpoint_dirs)} UNet model configurations")
+    print(f"Found {len(model_dirs)} Attention UNet model configurations")
 
     best_model_info = None
     best_iou = -1.0
 
-    # Search through each checkpoint directory
-    for ckpt_dir in checkpoint_dirs:
-        model_file = ckpt_dir / 'best_model.keras'
+    # Search through each model directory
+    for model_dir in model_dirs:
+        model_file = model_dir / 'best_model.keras'
 
         if not model_file.exists():
             continue
 
         # Parse hyperparameters from directory name
-        # Format: unet_n_filters16_dropout0p1_batch_normTrue_learning_rate0p001
-        dir_name = ckpt_dir.name
+        # Format: attention_unet_n_filters16_dropout0p1_batch_normTrue_learning_rate0p001
+        dir_name = model_dir.name
 
         try:
             # Extract hyperparameters
@@ -171,7 +172,7 @@ def find_best_unet_model(base_dir):
             learning_rate = float(lr_str.replace('p', '.'))
 
             # Find corresponding history CSV to get IoU
-            history_files = list((base_dir / 'logs').glob(f'unet_n_filters{n_filters}_dropout{dropout_str}_*_history.csv'))
+            history_files = list((base_dir / 'logs').glob(f'attention_unet_n_filters{n_filters}_dropout{dropout_str}_*_history.csv'))
 
             if history_files:
                 history_df = pd.read_csv(history_files[0])
@@ -195,7 +196,7 @@ def find_best_unet_model(base_dir):
             continue
 
     if best_model_info is None:
-        raise FileNotFoundError("Could not find any valid UNet models with validation IoU data")
+        raise FileNotFoundError("Could not find any valid Attention UNet models with validation IoU data")
 
     print()
     print(f"✓ Selected best model: {best_model_info['model_name']}")
