@@ -1,0 +1,54 @@
+================================================================================
+ATTENTION RESUNET HYPERPARAMETER SEARCH
+================================================================================
+Timestamp: 2025-10-15 23:56:44
+Output directory: ./attention_resunet_hyperparam_20251015_235644
+Model: Attention ResUNet
+Image size: 512×512×3
+Epochs: 100
+Batch size: 4
+
+Hyperparameter Grid:
+  n_filters: [16, 32, 64]
+  dropout: [0.1, 0.2, 0.3]
+  batch_norm: [True]
+  learning_rate: [0.001, 0.003, 0.005]
+================================================================================
+
+✓ Saved configuration: attention_resunet_hyperparam_20251015_235644/CONFIG.json
+
+Loading data...
+  Found 98 files in image directory
+  Loaded 98 image-mask pairs
+  Training samples: 78
+  Validation samples: 20
+  Image shape: (512, 512, 3)
+  Mask shape: (512, 512, 1)
+
+================================================================================
+HYPERPARAMETER SEARCH: ATTENTION RESUNET
+================================================================================
+
+Total combinations to try: 27
+
+
+================================================================================
+Combination 1/27
+================================================================================
+Hyperparameters:
+  n_filters: 16
+  dropout: 0.1
+  batch_norm: True
+  learning_rate: 0.001
+
+Building model...
+Model parameters: 2,170,245
+
+Starting training...
+Epoch 1/100
+2025-10-15 23:57:12.793696: E tensorflow/core/grappler/optimizers/meta_optimizer.cc:1021] layout failed: INVALID_ARGUMENT: Size of values 0 does not match size of permutation 4 @ fanin shape inAttention_ResUNet/dropout/dropout/SelectV2-2-TransposeNHWCToNCHW-LayoutOptimizer
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1760572638.399057 1881842 service.cc:145] XLA service 0x1521a9c24460 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1760572638.399080 1881842 service.cc:153]   StreamExecutor device (0): NVIDIA A40, Compute Capability 8.6
+I0000 00:00:1760572638.549370 1881842 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+ 1/20 [>.............................] - ETA: 12:24 - loss: 0.0825 - jacard_coef: 0.2259 - dice_coef: 0.3685
