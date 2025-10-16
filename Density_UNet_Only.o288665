@@ -1,0 +1,303 @@
+========================================================================
+UNET-ONLY DENSITY ANALYSIS - BEST MODEL
+========================================================================
+Job ID: 288665.stdct-mgmt-02
+Job Name: Density_UNet_Only
+Node: GN-A40-070
+Start time: Thu Oct 16 08:25:39 AM +08 2025
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================================================
+
+=== ENVIRONMENT SETUP ===
+✓ TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+===========================
+
+Verifying required files...
+✓ Model directory: ./unet_hyperparam_20251015_224125
+✓ Checkpoints directory: ./unet_hyperparam_20251015_224125/checkpoints
+✓ Test images directory: ./test_images
+✓ Found 25 UNet model(s)
+
+Found 10 test images
+
+Test images:
+  - 10240x_2560x_2025-05-16_00-59-00_002.tif
+  - 10x_2025-05-15_02-05-00.tif
+  - 1280x_2025-05-16_00-59-00_002.tif
+  - 160x_2025-05-15_02-05-00.tif
+  - 20x_2025-05-15_02-05-00.tif
+  - 2560x_2025-05-16_00-59-00_002.tif
+  - 320x_2025-05-15_02-05-00.tif
+  - 5120x_2025-05-16_00-59-00_002.tif
+  - 640x_2025-05-16_00-59-00_002.tif
+  - 80x_2_2025-05-22_14-48-00.tif
+
+========================================================================
+RUNNING DENSITY ANALYSIS
+========================================================================
+Command: singularity exec --nv "/app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif" python3 ./density_analysis_unet_only.py
+
+Searching for best UNet model...
+Found 25 UNet model configurations
+  New best: unet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4572)
+  New best: unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4853)
+
+✓ Selected best model: unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001
+  Best Val IoU: 0.4853
+
+================================================================================
+UNET-ONLY DENSITY ANALYSIS - BEST MODEL FROM HYPERPARAMETER SEARCH
+================================================================================
+Script: density_analysis_unet_only.py
+PBS Script: pbs_density_analysis_unet_only.sh
+Timestamp: 2025-10-16 00:25:49
+Model base directory: ./unet_hyperparam_20251015_224125
+Test images: ./test_images
+Output directory: ./density_analysis_unet_only_20251016_002549
+Image format: 512×512 RGB (3 channels)
+
+================================================================================
+BEST MODEL SELECTION
+================================================================================
+Model: unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001
+Hyperparameters:
+  - n_filters: 32
+  - dropout: 0.2
+  - batch_norm: True
+  - learning_rate: 0.001
+Best Val IoU: 0.4853
+Model path: unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001/best_model.keras
+================================================================================
+
+Loading model from: unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001/best_model.keras
+  ✓ Model loaded successfully
+  Input shape: (None, 512, 512, 3)
+  Output shape: (None, 512, 512, 1)
+
+================================================================================
+PREDICTION ON TEST IMAGES
+================================================================================
+Found 10 test images
+
+Processing images:   0%|          | 0/10 [00:00<?, ?it/s]Processing images:  10%|█         | 1/10 [00:11<01:47, 11.90s/it]Processing images:  20%|██        | 2/10 [00:12<00:43,  5.48s/it]Processing images:  30%|███       | 3/10 [00:13<00:22,  3.26s/it]Processing images:  40%|████      | 4/10 [00:14<00:13,  2.22s/it]Processing images:  50%|█████     | 5/10 [00:14<00:08,  1.60s/it]Processing images:  60%|██████    | 6/10 [00:15<00:04,  1.22s/it]Processing images:  70%|███████   | 7/10 [00:15<00:02,  1.02it/s]Processing images:  80%|████████  | 8/10 [00:16<00:01,  1.21it/s]Processing images:  90%|█████████ | 9/10 [00:16<00:00,  1.39it/s]Processing images: 100%|██████████| 10/10 [00:17<00:00,  1.54it/s]Processing images: 100%|██████████| 10/10 [00:17<00:00,  1.71s/it]
+
+Processing: 10240x_2560x_2025-05-16_00-59-00_002.tif
+  Dilution: 10240x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean density: 0.0130 ± 0.0015 (across 28 tiles)
+
+Processing: 10x_2025-05-15_02-05-00.tif
+  Dilution: 10x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean density: 0.8353 ± 0.0312 (across 28 tiles)
+
+Processing: 1280x_2025-05-16_00-59-00_002.tif
+  Dilution: 1280x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean density: 0.0177 ± 0.0038 (across 28 tiles)
+
+Processing: 160x_2025-05-15_02-05-00.tif
+  Dilution: 160x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean density: 0.2809 ± 0.0581 (across 28 tiles)
+
+Processing: 20x_2025-05-15_02-05-00.tif
+  Dilution: 20x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean density: 0.7833 ± 0.0256 (across 28 tiles)
+
+Processing: 2560x_2025-05-16_00-59-00_002.tif
+  Dilution: 2560x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean density: 0.0029 ± 0.0009 (across 28 tiles)
+
+Processing: 320x_2025-05-15_02-05-00.tif
+  Dilution: 320x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean density: 0.0972 ± 0.0209 (across 28 tiles)
+
+Processing: 5120x_2025-05-16_00-59-00_002.tif
+  Dilution: 5120x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean density: 0.0060 ± 0.0018 (across 28 tiles)
+
+Processing: 640x_2025-05-16_00-59-00_002.tif
+  Dilution: 640x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean density: 0.0471 ± 0.0168 (across 28 tiles)
+
+Processing: 80x_2_2025-05-22_14-48-00.tif
+  Dilution: 80x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean density: 0.5512 ± 0.0394 (across 28 tiles)
+
+================================================================================
+SAVING RESULTS
+================================================================================
+✓ Tile-level results saved: density_analysis_unet_only_20251016_002549/density_results_tile_level.csv
+  Total tiles: 280
+✓ Image-level summary saved: density_analysis_unet_only_20251016_002549/density_results_image_summary.csv
+  Total images: 10
+✓ Experiment info saved: density_analysis_unet_only_20251016_002549/EXPERIMENT_INFO.json
+
+
+================================================================================
+GENERATING VISUALIZATIONS
+================================================================================
+
+Generating box plot (Full Range: 1/10240 to 1/10)...
+  ✓ Saved: density_analysis_unet_only_20251016_002549/density_boxplot_full_range.png
+
+Generating box plot (Low Dilution Range: 1/10240 to 1/80)...
+  ✓ Saved: density_analysis_unet_only_20251016_002549/density_boxplot_low_dilution_range.png
+
+================================================================================
+ANALYSIS COMPLETE
+================================================================================
+Output directory: ./density_analysis_unet_only_20251016_002549
+
+Generated files:
+  - density_results_tile_level.csv
+  - density_results_image_summary.csv
+  - density_boxplot_full_range.png (1/10 - 1/10240)
+  - density_boxplot_low_dilution_range.png (1/80 - 1/10240)
+  - EXPERIMENT_INFO.json
+
+Note: Tile visualizations can be reused from previous analysis
+      (density_analysis_xukuang_20251015_142119/representative_tiles/)
+================================================================================
+
+========================================================================
+DENSITY ANALYSIS COMPLETED
+========================================================================
+Exit code: 0
+End time: Thu Oct 16 08:26:20 AM +08 2025
+
+Output directory: ./density_analysis_unet_only_20251016_002549
+
+Generated files:
+total 848K
+-rw-r----- 1 phyzxi svuusers 164K Oct 16 08:26 density_boxplot_full_range.png
+-rw-r----- 1 phyzxi svuusers 166K Oct 16 08:26 density_boxplot_low_dilution_range.png
+-rw-r----- 1 phyzxi svuusers 1.1K Oct 16 08:26 density_results_image_summary.csv
+-rw-r----- 1 phyzxi svuusers  18K Oct 16 08:26 density_results_tile_level.csv
+-rw-r----- 1 phyzxi svuusers 1.1K Oct 16 08:26 EXPERIMENT_INFO.json
+
+
+Tile-Level Density Results Summary (first 20 rows):
+image,dilution,dilution_label,tile_idx,position_y,position_x,density
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,0,0,0,0.01404953
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,1,0,512,0.012290955
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,2,0,1024,0.013523102
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,3,0,1536,0.012779236
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,4,0,2048,0.011726379
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,5,0,2560,0.013534546
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,6,0,3072,0.011295319
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,7,512,0,0.012447357
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,8,512,512,0.009399414
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,9,512,1024,0.0126953125
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,10,512,1536,0.014598846
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,11,512,2048,0.012042999
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,12,512,2560,0.012687683
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,13,512,3072,0.012630463
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,14,1024,0,0.016693115
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,15,1024,512,0.0134391785
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,16,1024,1024,0.011253357
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,17,1024,1536,0.014190674
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,18,1024,2048,0.014377594
+
+Image-Level Density Summary:
+image,dilution,dilution_label,n_tiles,mean_density,median_density,std_density,min_density,max_density
+10240x_2560x_2025-05-16_00-59-00_002.tif,10240,10240x,28,0.0129647935,0.013017654,0.0015254939,0.009399414,0.016693115
+10x_2025-05-15_02-05-00.tif,10,10x,28,0.83525974,0.8426151,0.03182275,0.77788544,0.8745537
+1280x_2025-05-16_00-59-00_002.tif,1280,1280x,28,0.017676353,0.017326355,0.0038368423,0.012031555,0.02532959
+160x_2025-05-15_02-05-00.tif,160,160x,28,0.2808804,0.2661171,0.059188582,0.21327591,0.43458176
+20x_2025-05-15_02-05-00.tif,20,20x,28,0.7833041,0.78868675,0.026021915,0.7160988,0.8202095
+2560x_2025-05-16_00-59-00_002.tif,2560,2560x,28,0.0029227394,0.002872467,0.00089124154,0.0012130737,0.0055236816
+320x_2025-05-15_02-05-00.tif,320,320x,28,0.09717859,0.091594696,0.021321783,0.06952667,0.17082596
+5120x_2025-05-16_00-59-00_002.tif,5120,5120x,28,0.0060338974,0.005712509,0.0018562147,0.0028800964,0.011577606
+640x_2025-05-16_00-59-00_002.tif,640,640x,28,0.04706437,0.041971207,0.01710148,0.025585175,0.08602905
+80x_2_2025-05-22_14-48-00.tif,80,80x,28,0.55119896,0.5490551,0.040157575,0.48913193,0.62789917
+
+Experiment Info:
+{
+  "timestamp": "2025-10-16 00:26:17",
+  "script": "density_analysis_unet_only.py",
+  "model_info": {
+    "model_path": "unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001/best_model.keras",
+    "model_name": "unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001",
+    "n_filters": 32,
+    "dropout": 0.2,
+    "batch_norm": true,
+    "learning_rate": 0.001,
+    "best_val_iou": 0.4853319227695465
+  },
+  "config": {
+    "model_base_dir": "./unet_hyperparam_20251015_224125",
+    "test_images_dir": "./test_images",
+    "output_dir": "./density_analysis_unet_only_20251016_002549",
+    "img_size": 512,
+    "img_channels": 3,
+    "batch_size": 8,
+    "threshold": 0.5,
+    "n_representative_tiles": 5,
+    "dpi": 300,
+    "figsize_boxplot_full": [
+      14,
+      8
+    ],
+    "figsize_boxplot_low": [
+      14,
+      8
+    ]
+  },
+  "total_images": 10,
+  "total_tiles": 280,
+  "dilutions": [
+    10,
+    20,
+    80,
+    160,
+    320,
+    640,
+    1280,
+    2560,
+    5120,
+    10240
+  ]
+}
+✓ Analysis completed successfully!
+
+Generated boxplots:
+  1. density_boxplot_full_range.png (1/10 - 1/10240)
+  2. density_boxplot_low_dilution_range.png (1/80 - 1/10240)
+
+Note: Tile visualizations can be reused from previous analysis:
+      density_analysis_xukuang_20251015_142119/representative_tiles/
+========================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-16 08:26:21.583606:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 288665.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:48
+	Memory: Requested(240gb), Used(4857708kb)
+	Vmem Used: 72471328kb
+	Walltime: Requested(04:00:00), Used(00:00:42)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-070[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
