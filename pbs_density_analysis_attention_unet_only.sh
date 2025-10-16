@@ -14,13 +14,29 @@
 # Purpose: Perform density analysis on test images using the BEST Attention UNet
 #          model from hyperparameter search (attention_unet_hyperparam_20251015_230149)
 #
-# This script is analogous to pbs_density_analysis_unet_only.sh but targets
-# the Attention UNet model and its corresponding analysis script.
+# Analysis includes:
+#   1. ✅ Tile-level density tracking (all 28 tiles per image saved)
+#   2. ✅ Updated boxplot style (categorical x-axis, evenly spaced)
+#   3. ✅ Two boxplot ranges:
+#      - Full range: 1/10240x to 1/10x (low to high density)
+#      - Low dilution range: 1/10240x to 1/80x
+#   4. ✅ Multiple density calculation methods (6 total):
+#      - Threshold 0.2, 0.5, 0.8, 0.95 (simple thresholding)
+#      - CLAHE+Otsu on predicted mask (denoised, FIXED with 1-density)
+#      - CLAHE+Otsu on original image (baseline)
+#   5. ✅ 3-panel tile visualizations (5 representative tiles per image):
+#      - Panel 1: Original tile
+#      - Panel 2: Inverted predicted mask (white beads, threshold 0.5)
+#      - Panel 3: Inverted CLAHE+Otsu (white beads, denoised)
 #
 # Model Selection:
 #   - Automatically selects best Attention UNet model based on validation IoU
 #   - From: attention_unet_hyperparam_20251015_230149/models/
 #   - Training: 100 epochs, BinaryFocalLoss, 512×512 RGB
+#
+# CRITICAL BUG FIX:
+#   - CLAHE+Otsu density calculation corrected to: 1 - (count_nonzero / size)
+#   - Previous versions measured background instead of beads
 #
 # Date: October 16, 2025
 ################################################################################
@@ -176,6 +192,20 @@ if [ $EXIT_CODE -eq 0 ]; then
 
     echo ""
     echo "✓ Analysis completed successfully!"
+    echo ""
+    echo "Generated visualizations (12 boxplots + tile visualizations):"
+    echo "  Boxplots (6 methods × 2 dilution ranges = 12 total):"
+    echo "    1. Threshold 0.2: density_boxplot_*_threshold_0.2.png"
+    echo "    2. Threshold 0.5: density_boxplot_*_threshold_0.5.png"
+    echo "    3. Threshold 0.8: density_boxplot_*_threshold_0.8.png"
+    echo "    4. Threshold 0.95: density_boxplot_*_threshold_0.95.png"
+    echo "    5. CLAHE+Otsu on pred: density_boxplot_*_claheotsu_on_pred.png (FIXED)"
+    echo "    6. CLAHE+Otsu on orig: density_boxplot_*_claheotsu_on_original.png"
+    echo "  Tile visualizations:"
+    echo "    - representative_tiles_3panel/ (5 tiles per image, 3 panels each)"
+    echo "      * Panel 1: Original tile"
+    echo "      * Panel 2: Inverted predicted mask (white beads, threshold 0.5)"
+    echo "      * Panel 3: Inverted CLAHE+Otsu (white beads, denoised)"
 else
     echo ""
     echo "✗ Analysis failed with exit code $EXIT_CODE"

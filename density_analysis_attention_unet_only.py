@@ -882,7 +882,7 @@ def main():
     """Main analysis pipeline."""
 
     # Find best model
-    best_model_info = find_best_unet_model(CONFIG['model_base_dir'])
+    best_model_info = find_best_attention_unet_model(CONFIG['model_base_dir'])
 
     # Print header
     print_header(CONFIG, best_model_info)
