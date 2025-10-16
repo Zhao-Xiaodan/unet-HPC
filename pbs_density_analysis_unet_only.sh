@@ -20,10 +20,14 @@
 #   3. ✅ Two boxplot ranges:
 #      - Full range: 1/10240 to 1/10
 #      - Low dilution range: 1/10240 to 1/80
-#   4. ✅ 3-panel tile visualizations (5 representative tiles per image):
+#   4. ✅ Multiple density calculation methods (5 total):
+#      - Threshold 0.2, 0.5, 0.8 (simple thresholding)
+#      - CLAHE+Otsu on predicted mask (denoised)
+#      - CLAHE+Otsu on original image (baseline)
+#   5. ✅ 3-panel tile visualizations (5 representative tiles per image):
 #      - Panel 1: Original tile
-#      - Panel 2: Predicted mask
-#      - Panel 3: Inverted mask (white beads for easy comparison)
+#      - Panel 2: Inverted predicted mask (white beads, threshold 0.5)
+#      - Panel 3: Inverted CLAHE+Otsu (white beads, denoised)
 #
 # Model Selection:
 #   - Automatically selects best UNet model based on validation IoU
@@ -185,13 +189,18 @@ if [ $EXIT_CODE -eq 0 ]; then
     echo ""
     echo "✓ Analysis completed successfully!"
     echo ""
-    echo "Generated visualizations:"
-    echo "  1. density_boxplot_full_range.png (1/10 - 1/10240)"
-    echo "  2. density_boxplot_low_dilution_range.png (1/80 - 1/10240)"
-    echo "  3. representative_tiles_3panel/ (5 tiles per image, 3 panels each)"
-    echo "     - Original tile"
-    echo "     - Predicted mask"
-    echo "     - Inverted mask (white beads for easy comparison)"
+    echo "Generated visualizations (10 boxplots + tile visualizations):"
+    echo "  Boxplots (5 methods × 2 dilution ranges = 10 total):"
+    echo "    1. Threshold 0.2: density_boxplot_*_threshold_0.2.png"
+    echo "    2. Threshold 0.5: density_boxplot_*_threshold_0.5.png"
+    echo "    3. Threshold 0.8: density_boxplot_*_threshold_0.8.png"
+    echo "    4. CLAHE+Otsu on pred: density_boxplot_*_claheotsu_on_pred.png"
+    echo "    5. CLAHE+Otsu on orig: density_boxplot_*_claheotsu_on_original.png"
+    echo "  Tile visualizations:"
+    echo "    - representative_tiles_3panel/ (5 tiles per image, 3 panels each)"
+    echo "      * Panel 1: Original tile"
+    echo "      * Panel 2: Inverted predicted mask (white beads, threshold 0.5)"
+    echo "      * Panel 3: Inverted CLAHE+Otsu (white beads, denoised)"
 else
     echo ""
     echo "✗ Analysis failed with exit code $EXIT_CODE"

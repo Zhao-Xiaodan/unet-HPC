@@ -62,7 +62,7 @@ CONFIG = {
 
     # Prediction settings
     'batch_size': 8,
-    'threshold': 0.5,  # Binary threshold for predictions
+    'thresholds': [0.2, 0.5, 0.8],  # Multiple thresholds to test
 
     # Representative tiles (reuse from previous analysis)
     'n_representative_tiles': 5,
@@ -336,6 +336,9 @@ def calculate_density_clahe_otsu_on_original(tile):
 
     This serves as a traditional CV baseline for comparison.
 
+    IMPORTANT: For original microscope images, beads are DARK on BRIGHT background.
+    We need to INVERT the image first so that THRESH_BINARY_INV works correctly.
+
     Args:
         tile: Original tile (RGB, 0-1 float32)
 
@@ -349,8 +352,13 @@ def calculate_density_clahe_otsu_on_original(tile):
     else:
         tile_gray = (tile * 255).astype(np.uint8)
 
-    # CRITICAL: Rescale to full 0-255 range FIRST
-    tile_rescaled = rescale_image_full_range(tile_gray)
+    # CRITICAL: Invert the grayscale image so beads become BRIGHT on DARK background
+    # This is necessary because original microscope images have dark beads on bright background,
+    # but our CLAHE+Otsu pipeline expects bright foreground on dark background
+    tile_gray_inverted = 255 - tile_gray
+
+    # CRITICAL: Rescale to full 0-255 range AFTER inversion
+    tile_rescaled = rescale_image_full_range(tile_gray_inverted)
 
     # Apply CLAHE+Otsu
     binary_mask = apply_clahe_otsu(tile_rescaled, clipLimit=2.0, tileGridSize=(8, 8))
@@ -452,18 +460,20 @@ def predict_on_test_images(model, test_images_dir, config):
         tiles = np.array([preprocess_tile(tile) for tile, pos in tiles_with_pos])
         predictions = model.predict(tiles, batch_size=config['batch_size'], verbose=0)
 
-        # Calculate densities for each tile (3 methods)
+        # Calculate densities for each tile (multiple methods)
         for tile_idx, ((tile, pos), prediction) in enumerate(zip(tiles_with_pos, predictions)):
-            # Method 1: Simple threshold (original method)
-            density_threshold = calculate_foreground_density(prediction, config['threshold'])
+            # Methods 1-3: Simple thresholds (0.2, 0.5, 0.8)
+            density_threshold_02 = calculate_foreground_density(prediction, 0.2)
+            density_threshold_05 = calculate_foreground_density(prediction, 0.5)
+            density_threshold_08 = calculate_foreground_density(prediction, 0.8)
 
-            # Method 2: CLAHE+Otsu on predicted mask (denoising)
+            # Method 4: CLAHE+Otsu on predicted mask (denoising)
             density_clahe_otsu_pred, binary_mask_pred = calculate_density_with_clahe_otsu(prediction)
 
-            # Method 3: CLAHE+Otsu on original tile (baseline CV method)
+            # Method 5: CLAHE+Otsu on original tile (baseline CV method)
             density_clahe_otsu_orig, binary_mask_orig = calculate_density_clahe_otsu_on_original(tile)
 
-            # Store tile-level results for all three methods
+            # Store tile-level results for all methods
             tile_results.append({
                 'image': img_file.name,
                 'dilution': dilution,
@@ -471,12 +481,14 @@ def predict_on_test_images(model, test_images_dir, config):
                 'tile_idx': tile_idx,
                 'position_y': pos[0],
                 'position_x': pos[1],
-                'density_threshold': density_threshold,
+                'density_threshold_0.2': density_threshold_02,
+                'density_threshold_0.5': density_threshold_05,
+                'density_threshold_0.8': density_threshold_08,
                 'density_clahe_otsu_pred': density_clahe_otsu_pred,
                 'density_clahe_otsu_orig': density_clahe_otsu_orig,
             })
 
-            # Store tile data for visualization
+            # Store tile data for visualization (use 0.5 threshold as default)
             tile_data.append({
                 'image': img_file.name,
                 'dilution': dilution,
@@ -485,21 +497,27 @@ def predict_on_test_images(model, test_images_dir, config):
                 'position': pos,
                 'tile': tile,
                 'prediction': prediction,
-                'density_threshold': density_threshold,
+                'density_threshold_0.2': density_threshold_02,
+                'density_threshold_0.5': density_threshold_05,
+                'density_threshold_0.8': density_threshold_08,
                 'density_clahe_otsu_pred': density_clahe_otsu_pred,
                 'density_clahe_otsu_orig': density_clahe_otsu_orig,
                 'binary_mask_pred': binary_mask_pred,  # For visualization
                 'binary_mask_orig': binary_mask_orig,  # For visualization
             })
 
-        # Print summary for this image (all 3 methods)
+        # Print summary for this image (all methods)
         img_results = [r for r in tile_results if r['image'] == img_file.name]
-        mean_threshold = np.mean([r['density_threshold'] for r in img_results])
+        mean_threshold_02 = np.mean([r['density_threshold_0.2'] for r in img_results])
+        mean_threshold_05 = np.mean([r['density_threshold_0.5'] for r in img_results])
+        mean_threshold_08 = np.mean([r['density_threshold_0.8'] for r in img_results])
         mean_clahe_pred = np.mean([r['density_clahe_otsu_pred'] for r in img_results])
         mean_clahe_orig = np.mean([r['density_clahe_otsu_orig'] for r in img_results])
 
         print(f"  Mean densities (across {len(tiles_with_pos)} tiles):")
-        print(f"    Threshold (0.5):        {mean_threshold:.4f}")
+        print(f"    Threshold (0.2):        {mean_threshold_02:.4f}")
+        print(f"    Threshold (0.5):        {mean_threshold_05:.4f}")
+        print(f"    Threshold (0.8):        {mean_threshold_08:.4f}")
         print(f"    CLAHE+Otsu on pred:     {mean_clahe_pred:.4f}")
         print(f"    CLAHE+Otsu on original: {mean_clahe_orig:.4f}")
 
@@ -661,7 +679,7 @@ def create_boxplot_low_dilution_range(df_tile_results, output_dir, config, densi
 
     # Set y-axis to log scale like reference
     ax.set_yscale('log')
-    ax.set_ylim(0.002, 1.5)  # Slightly wider range for visibility
+    # ax.set_ylim(0.002, 1.5)  # Commented out: fixed scale flattens the data
 
     # Grid
     ax.grid(True, alpha=0.3, which='both', linestyle='-', linewidth=0.5)
@@ -689,18 +707,16 @@ def create_boxplot_low_dilution_range(df_tile_results, output_dir, config, densi
 
 def create_representative_tile_visualizations(tile_data, output_dir, config):
     """
-    Create 5-panel tile visualizations for each test image.
+    Create 3-panel tile visualizations for each test image.
     Shows 5 representative tiles per image with:
     - Panel 1: Original tile
-    - Panel 2: Predicted mask
-    - Panel 3: CLAHE+Otsu on predicted mask
-    - Panel 4: Inverted predicted mask
-    - Panel 5: Inverted CLAHE+Otsu mask
+    - Panel 2: Inverted predicted mask (white beads on black)
+    - Panel 3: Inverted CLAHE+Otsu mask (white beads on black, denoised)
     """
-    print("\nGenerating representative tile visualizations (5-panel)...")
+    print("\nGenerating representative tile visualizations (3-panel)...")
 
     output_dir = Path(output_dir)
-    tiles_dir = output_dir / 'representative_tiles_5panel'
+    tiles_dir = output_dir / 'representative_tiles_3panel'
     tiles_dir.mkdir(parents=True, exist_ok=True)
 
     # Group tiles by image
@@ -730,16 +746,15 @@ def create_representative_tile_visualizations(tile_data, output_dir, config):
         # Get dilution label for filename
         dilution_label = tiles[0]['dilution_label']
 
-        # Create 5-panel figure (5 rows × 5 columns)
-        fig, axes = plt.subplots(5, 5, figsize=(25, 25))
+        # Create 3-panel figure (5 rows × 3 columns)
+        fig, axes = plt.subplots(5, 3, figsize=(15, 25))
 
         for row_idx, tile_info in enumerate(representative_tiles):
             tile = tile_info['tile']
             prediction = tile_info['prediction']
-            density_threshold = tile_info['density_threshold']
+            density_threshold_05 = tile_info['density_threshold_0.5']
             density_clahe_pred = tile_info['density_clahe_otsu_pred']
             binary_mask_pred = tile_info['binary_mask_pred']
-            binary_mask_orig = tile_info['binary_mask_orig']
             tile_idx = tile_info['tile_idx']
             pos = tile_info['position']
 
@@ -749,32 +764,20 @@ def create_representative_tile_visualizations(tile_data, output_dir, config):
                                        fontsize=11)
             axes[row_idx, 0].axis('off')
 
-            # Panel 2: Predicted mask
+            # Panel 2: Inverted predicted mask (white beads on black)
             pred_squeeze = prediction.squeeze()
-            axes[row_idx, 1].imshow(pred_squeeze, cmap='gray', vmin=0, vmax=1)
-            axes[row_idx, 1].set_title(f'Predicted Mask\nDensity: {density_threshold:.4f}',
+            inverted_pred = 1.0 - pred_squeeze
+            axes[row_idx, 1].imshow(inverted_pred, cmap='gray', vmin=0, vmax=1)
+            axes[row_idx, 1].set_title(f'Inverted Pred\n(White beads)\nDensity (0.5): {density_threshold_05:.4f}',
                                        fontsize=11)
             axes[row_idx, 1].axis('off')
 
-            # Panel 3: CLAHE+Otsu on predicted mask
-            axes[row_idx, 2].imshow(binary_mask_pred, cmap='gray', vmin=0, vmax=255)
-            axes[row_idx, 2].set_title(f'CLAHE+Otsu on Pred\nDensity: {density_clahe_pred:.4f}',
+            # Panel 3: Inverted CLAHE+Otsu mask (white beads on black, denoised)
+            inverted_clahe = 255 - binary_mask_pred
+            axes[row_idx, 2].imshow(inverted_clahe, cmap='gray', vmin=0, vmax=255)
+            axes[row_idx, 2].set_title(f'Inverted CLAHE+Otsu\n(White beads, denoised)\nDensity: {density_clahe_pred:.4f}',
                                        fontsize=11)
             axes[row_idx, 2].axis('off')
-
-            # Panel 4: Inverted predicted mask (white beads on black)
-            inverted_pred = 1.0 - pred_squeeze
-            axes[row_idx, 3].imshow(inverted_pred, cmap='gray', vmin=0, vmax=1)
-            axes[row_idx, 3].set_title(f'Inverted Pred\n(White beads)',
-                                       fontsize=11)
-            axes[row_idx, 3].axis('off')
-
-            # Panel 5: Inverted CLAHE+Otsu mask
-            inverted_clahe = 255 - binary_mask_pred
-            axes[row_idx, 4].imshow(inverted_clahe, cmap='gray', vmin=0, vmax=255)
-            axes[row_idx, 4].set_title(f'Inverted CLAHE+Otsu\n(White beads, denoised)',
-                                       fontsize=11)
-            axes[row_idx, 4].axis('off')
 
         # Add overall title
         fig.suptitle(f'{image_name} - Representative Tiles (5 tiles spanning density range)',
@@ -783,7 +786,7 @@ def create_representative_tile_visualizations(tile_data, output_dir, config):
         plt.tight_layout(rect=[0, 0, 1, 0.995])
 
         # Save
-        output_filename = f'tiles_5panel_{dilution_label}_{image_name.replace(".tif", "").replace(".tiff", "")}.png'
+        output_filename = f'tiles_3panel_{dilution_label}_{image_name.replace(".tif", "").replace(".tiff", "")}.png'
         output_path = tiles_dir / output_filename
         plt.savefig(output_path, dpi=config['dpi'], bbox_inches='tight')
         plt.close()
@@ -792,7 +795,7 @@ def create_representative_tile_visualizations(tile_data, output_dir, config):
 
     print(f"\n  ✓ All tile visualizations saved to: {tiles_dir}")
     print(f"    Total images: {len(tiles_by_image)}")
-    print(f"    Format: 5 panels (Original, Pred, CLAHE+Otsu, Inverted Pred, Inverted CLAHE+Otsu)")
+    print(f"    Format: 3 panels (Original, Inverted Pred, Inverted CLAHE+Otsu)")
 
 # ============================================================================
 # SAVE RESULTS
@@ -825,10 +828,18 @@ def save_results(df_tile_results, output_dir, best_model_info, config):
             'dilution': dilution,
             'dilution_label': dilution_label,
             'n_tiles': len(img_data),
-            # Threshold method
-            'mean_density_threshold': img_data['density_threshold'].mean(),
-            'median_density_threshold': img_data['density_threshold'].median(),
-            'std_density_threshold': img_data['density_threshold'].std(),
+            # Threshold 0.2
+            'mean_density_threshold_0.2': img_data['density_threshold_0.2'].mean(),
+            'median_density_threshold_0.2': img_data['density_threshold_0.2'].median(),
+            'std_density_threshold_0.2': img_data['density_threshold_0.2'].std(),
+            # Threshold 0.5
+            'mean_density_threshold_0.5': img_data['density_threshold_0.5'].mean(),
+            'median_density_threshold_0.5': img_data['density_threshold_0.5'].median(),
+            'std_density_threshold_0.5': img_data['density_threshold_0.5'].std(),
+            # Threshold 0.8
+            'mean_density_threshold_0.8': img_data['density_threshold_0.8'].mean(),
+            'median_density_threshold_0.8': img_data['density_threshold_0.8'].median(),
+            'std_density_threshold_0.8': img_data['density_threshold_0.8'].std(),
             # CLAHE+Otsu on predicted mask
             'mean_density_clahe_otsu_pred': img_data['density_clahe_otsu_pred'].mean(),
             'median_density_clahe_otsu_pred': img_data['density_clahe_otsu_pred'].median(),
@@ -892,14 +903,30 @@ def main():
     print("GENERATING VISUALIZATIONS")
     print("="*80)
 
-    # Generate boxplots for all 3 density calculation methods
+    # Generate boxplots for all 5 density calculation methods
+    print("\n--- Threshold Method (0.2) ---")
+    create_boxplot_full_range(df_tile_results, CONFIG['output_dir'], CONFIG,
+                              density_column='density_threshold_0.2',
+                              title_suffix=' - Threshold 0.2')
+    create_boxplot_low_dilution_range(df_tile_results, CONFIG['output_dir'], CONFIG,
+                                      density_column='density_threshold_0.2',
+                                      title_suffix=' - Threshold 0.2')
+
     print("\n--- Threshold Method (0.5) ---")
     create_boxplot_full_range(df_tile_results, CONFIG['output_dir'], CONFIG,
-                              density_column='density_threshold',
+                              density_column='density_threshold_0.5',
                               title_suffix=' - Threshold 0.5')
     create_boxplot_low_dilution_range(df_tile_results, CONFIG['output_dir'], CONFIG,
-                                      density_column='density_threshold',
+                                      density_column='density_threshold_0.5',
                                       title_suffix=' - Threshold 0.5')
+
+    print("\n--- Threshold Method (0.8) ---")
+    create_boxplot_full_range(df_tile_results, CONFIG['output_dir'], CONFIG,
+                              density_column='density_threshold_0.8',
+                              title_suffix=' - Threshold 0.8')
+    create_boxplot_low_dilution_range(df_tile_results, CONFIG['output_dir'], CONFIG,
+                                      density_column='density_threshold_0.8',
+                                      title_suffix=' - Threshold 0.8')
 
     print("\n--- CLAHE+Otsu on Predicted Mask (Denoised) ---")
     create_boxplot_full_range(df_tile_results, CONFIG['output_dir'], CONFIG,
@@ -926,26 +953,30 @@ def main():
     print("="*80)
     print(f"Output directory: {CONFIG['output_dir']}")
     print("\nGenerated files:")
-    print("  - density_results_tile_level.csv (3 density methods per tile)")
+    print("  - density_results_tile_level.csv (5 density methods per tile)")
     print("  - density_results_image_summary.csv (summary statistics)")
     print("  - EXPERIMENT_INFO.json")
-    print("\nGenerated boxplots (6 total - 3 methods × 2 dilution ranges):")
-    print("  1. Threshold method:")
+    print("\nGenerated boxplots (10 total - 5 methods × 2 dilution ranges):")
+    print("  1. Threshold 0.2:")
+    print("     - density_boxplot_full_range_threshold_0.2.png")
+    print("     - density_boxplot_low_dilution_range_threshold_0.2.png")
+    print("  2. Threshold 0.5:")
     print("     - density_boxplot_full_range_threshold_0.5.png")
     print("     - density_boxplot_low_dilution_range_threshold_0.5.png")
-    print("  2. CLAHE+Otsu on predicted mask (denoised):")
+    print("  3. Threshold 0.8:")
+    print("     - density_boxplot_full_range_threshold_0.8.png")
+    print("     - density_boxplot_low_dilution_range_threshold_0.8.png")
+    print("  4. CLAHE+Otsu on predicted mask (denoised):")
     print("     - density_boxplot_full_range_claheotsu_on_pred.png")
     print("     - density_boxplot_low_dilution_range_claheotsu_on_pred.png")
-    print("  3. CLAHE+Otsu on original image (baseline):")
+    print("  5. CLAHE+Otsu on original image (baseline):")
     print("     - density_boxplot_full_range_claheotsu_on_original.png")
     print("     - density_boxplot_low_dilution_range_claheotsu_on_original.png")
     print("\nTile visualizations:")
-    print("  - representative_tiles_5panel/ (5 tiles per image, 5 panels each)")
+    print("  - representative_tiles_3panel/ (5 tiles per image, 3 panels each)")
     print("      * Panel 1: Original tile")
-    print("      * Panel 2: Predicted mask")
-    print("      * Panel 3: CLAHE+Otsu on predicted mask (denoised)")
-    print("      * Panel 4: Inverted predicted mask (white beads)")
-    print("      * Panel 5: Inverted CLAHE+Otsu (white beads, denoised)")
+    print("      * Panel 2: Inverted predicted mask (white beads, threshold 0.5)")
+    print("      * Panel 3: Inverted CLAHE+Otsu (white beads, denoised)")
     print("="*80)
 
 if __name__ == '__main__':
