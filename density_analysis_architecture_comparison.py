@@ -345,6 +345,9 @@ def predict_on_test_images_all_architectures(models, test_images_dir, config):
             # Store predictions from all architectures
             arch_predictions = {arch: predictions_all[arch][tile_idx] for arch in ARCHITECTURES}
 
+            # Calculate CLAHE+Otsu on original once (same for all architectures)
+            density_clahe_orig, binary_orig = calculate_density_clahe_otsu_on_original(tile)
+
             # Calculate densities for each architecture and method
             for arch_name in ARCHITECTURES:
                 prediction = arch_predictions[arch_name]
@@ -357,12 +360,6 @@ def predict_on_test_images_all_architectures(models, test_images_dir, config):
 
                 # CLAHE+Otsu on predicted mask
                 density_clahe_pred, binary_pred = calculate_density_with_clahe_otsu(prediction)
-
-                # CLAHE+Otsu on original (same for all architectures)
-                if arch_name == 'UNet':  # Calculate only once
-                    density_clahe_orig, binary_orig = calculate_density_clahe_otsu_on_original(tile)
-                else:
-                    density_clahe_orig = tile_results[-3]['density_clahe_otsu_orig']  # Reuse from UNet
 
                 # Store tile-level results
                 tile_results.append({
