@@ -1,0 +1,225 @@
+
+================================================================================
+ARCHITECTURE COMPARISON DENSITY ANALYSIS
+================================================================================
+Script: density_analysis_architecture_comparison.py
+Timestamp: 2025-10-17 08:40:28
+Test images: ./test_images
+Output directory: ./density_analysis_architecture_comparison_20251017_084028
+Image format: 512×512 RGB (3 channels)
+================================================================================
+
+
+================================================================================
+LOADING BEST MODELS
+================================================================================
+
+Loading UNet model info...
+  Model: unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001
+  Val IoU: 0.4853
+  Path: best_models/unet/best_model.keras
+
+Loading Attention_UNet model info...
+  Model: attention_unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p003
+  Val IoU: 0.4759
+  Path: best_models/attention_unet/best_model.keras
+
+Loading Attention_ResUNet model info...
+  Model: attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001
+  Val IoU: 0.5039
+  Path: best_models/attention_resunet/best_model.keras
+
+================================================================================
+LOADING KERAS MODELS
+================================================================================
+
+--- UNet ---
+Loading model from: best_models/unet/best_model.keras
+  ✓ Model loaded successfully
+  Input shape: (None, 512, 512, 3)
+  Output shape: (None, 512, 512, 1)
+
+--- Attention_UNet ---
+Loading model from: best_models/attention_unet/best_model.keras
+  ✓ Model loaded successfully
+  Input shape: (None, 512, 512, 3)
+  Output shape: (None, 512, 512, 1)
+
+--- Attention_ResUNet ---
+Loading model from: best_models/attention_resunet/best_model.keras
+  ✓ Model loaded successfully
+  Input shape: (None, 512, 512, 3)
+  Output shape: (None, 512, 512, 1)
+
+================================================================================
+PREDICTION ON TEST IMAGES (ALL ARCHITECTURES)
+================================================================================
+Found 8 test images
+Architectures: UNet, Attention_UNet, Attention_ResUNet
+
+Processing images:   0%|          | 0/8 [00:00<?, ?it/s]Processing images:  12%|█▎        | 1/8 [00:17<02:00, 17.21s/it]Processing images:  25%|██▌       | 2/8 [00:18<00:47,  7.96s/it]Processing images:  38%|███▊      | 3/8 [00:20<00:25,  5.02s/it]Processing images:  50%|█████     | 4/8 [00:21<00:14,  3.62s/it]Processing images:  62%|██████▎   | 5/8 [00:23<00:08,  2.85s/it]Processing images:  75%|███████▌  | 6/8 [00:24<00:04,  2.39s/it]Processing images:  88%|████████▊ | 7/8 [00:26<00:02,  2.09s/it]Processing images: 100%|██████████| 8/8 [00:27<00:00,  1.91s/it]Processing images: 100%|██████████| 8/8 [00:27<00:00,  3.46s/it]
+
+Processing: 10240x_2025-05-29_02-22-00_002.tif
+  Dilution: 10240x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Predicting with UNet...
+  Predicting with Attention_UNet...
+  Predicting with Attention_ResUNet...
+  Summary across all tiles (threshold 0.5):
+    UNet                : 0.0007
+    Attention_UNet      : 0.0006
+    Attention_ResUNet   : 0.0005
+
+Processing: 1280x_2025-05-16_00-59-00_002.tif
+  Dilution: 1280x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Predicting with UNet...
+  Predicting with Attention_UNet...
+  Predicting with Attention_ResUNet...
+  Summary across all tiles (threshold 0.5):
+    UNet                : 0.0177
+    Attention_UNet      : 0.0144
+    Attention_ResUNet   : 0.0137
+
+Processing: 160x_2025-05-15_02-05-00.tif
+  Dilution: 160x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Predicting with UNet...
+  Predicting with Attention_UNet...
+  Predicting with Attention_ResUNet...
+  Summary across all tiles (threshold 0.5):
+    UNet                : 0.2809
+    Attention_UNet      : 0.2593
+    Attention_ResUNet   : 0.2715
+
+Processing: 2560x_2025-05-16_00-59-00_002.tif
+  Dilution: 2560x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Predicting with UNet...
+  Predicting with Attention_UNet...
+  Predicting with Attention_ResUNet...
+  Summary across all tiles (threshold 0.5):
+    UNet                : 0.0130
+    Attention_UNet      : 0.0105
+    Attention_ResUNet   : 0.0105
+
+Processing: 320x_2025-05-15_02-05-00.tif
+  Dilution: 320x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Predicting with UNet...
+  Predicting with Attention_UNet...
+  Predicting with Attention_ResUNet...
+  Summary across all tiles (threshold 0.5):
+    UNet                : 0.0972
+    Attention_UNet      : 0.0859
+    Attention_ResUNet   : 0.0893
+
+Processing: 5120x_2025-05-16_00-59-00.tif
+  Dilution: 5120x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Predicting with UNet...
+  Predicting with Attention_UNet...
+  Predicting with Attention_ResUNet...
+  Summary across all tiles (threshold 0.5):
+    UNet                : 0.0047
+    Attention_UNet      : 0.0037
+    Attention_ResUNet   : 0.0038
+
+Processing: 640x_2025-05-16_00-59-00_002.tif
+  Dilution: 640x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Predicting with UNet...
+  Predicting with Attention_UNet...
+  Predicting with Attention_ResUNet...
+  Summary across all tiles (threshold 0.5):
+    UNet                : 0.0471
+    Attention_UNet      : 0.0428
+    Attention_ResUNet   : 0.0371
+
+Processing: 80x_2025-05-22_14-48-00.tif
+  Dilution: 80x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Predicting with UNet...
+  Predicting with Attention_UNet...
+  Predicting with Attention_ResUNet...
+  Summary across all tiles (threshold 0.5):
+    UNet                : 0.5512
+    Attention_UNet      : 0.4720
+    Attention_ResUNet   : 0.5073
+
+================================================================================
+SAVING RESULTS
+================================================================================
+✓ Tile-level results saved: density_analysis_architecture_comparison_20251017_084028/architecture_comparison_tile_level.csv
+  Total rows: 672 (tiles × architectures)
+✓ Image-level summary saved: density_analysis_architecture_comparison_20251017_084028/architecture_comparison_image_summary.csv
+  Total rows: 24 (images × architectures)
+✓ Experiment info saved: density_analysis_architecture_comparison_20251017_084028/EXPERIMENT_INFO.json
+
+================================================================================
+GENERATING VISUALIZATIONS
+================================================================================
+
+Generating combined boxplot: Threshold 0.2
+  ✓ Saved: density_boxplot_comparison_threshold_0p2.png
+
+Generating combined boxplot: Threshold 0.5
+  ✓ Saved: density_boxplot_comparison_threshold_0p5.png
+
+Generating combined boxplot: Threshold 0.8
+  ✓ Saved: density_boxplot_comparison_threshold_0p8.png
+
+Generating combined boxplot: Threshold 0.95
+  ✓ Saved: density_boxplot_comparison_threshold_0p95.png
+
+Generating combined boxplot: CLAHE+Otsu on Pred
+  ✓ Saved: density_boxplot_comparison_claheotsu_on_pred.png
+
+Generating combined boxplot: CLAHE+Otsu on Original
+  ✓ Saved: density_boxplot_comparison_claheotsu_on_original.png
+
+--- 4-Panel Tile Visualizations (Architecture Comparison) ---
+Generating representative tile visualizations (4-panel)...
+  Creating 4-panel tiles for: 10240x_2025-05-29_02-22-00_002.tif
+    ✓ Saved: tiles_4panel_10240x_10240x_2025-05-29_02-22-00_002.png
+  Creating 4-panel tiles for: 1280x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_1280x_1280x_2025-05-16_00-59-00_002.png
+  Creating 4-panel tiles for: 160x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_4panel_160x_160x_2025-05-15_02-05-00.png
+  Creating 4-panel tiles for: 2560x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_2560x_2560x_2025-05-16_00-59-00_002.png
+  Creating 4-panel tiles for: 320x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_4panel_320x_320x_2025-05-15_02-05-00.png
+  Creating 4-panel tiles for: 5120x_2025-05-16_00-59-00.tif
+    ✓ Saved: tiles_4panel_5120x_5120x_2025-05-16_00-59-00.png
+  Creating 4-panel tiles for: 640x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_640x_640x_2025-05-16_00-59-00_002.png
+  Creating 4-panel tiles for: 80x_2025-05-22_14-48-00.tif
+    ✓ Saved: tiles_4panel_80x_80x_2025-05-22_14-48-00.png
+
+  ✓ All 4-panel tile visualizations saved to: density_analysis_architecture_comparison_20251017_084028/representative_tiles_4panel
+    Total images: 8
+    Format: 4 panels (Original, UNet, Attention UNet, Attention ResUNet) - Inverted Predictions
+
+================================================================================
+ANALYSIS COMPLETE
+================================================================================
+Output directory: density_analysis_architecture_comparison_20251017_084028
+
+Generated files:
+  - architecture_comparison_tile_level.csv
+  - architecture_comparison_image_summary.csv
+  - EXPERIMENT_INFO.json
+
+Generated visualizations:
+  - 6 combined boxplots (3 architectures per plot)
+  - 4-panel tile visualizations (Original + 3 architectures)
+================================================================================

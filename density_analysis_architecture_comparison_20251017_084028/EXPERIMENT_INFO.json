@@ -1,0 +1,47 @@
+{
+  "timestamp": "2025-10-17 08:41:52",
+  "script": "density_analysis_architecture_comparison.py",
+  "architectures": {
+    "UNet": {
+      "model_path": "best_models/unet/best_model.keras",
+      "model_name": "unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001",
+      "best_val_iou": 0.4853319227695465
+    },
+    "Attention_UNet": {
+      "model_path": "best_models/attention_unet/best_model.keras",
+      "model_name": "attention_unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p003",
+      "best_val_iou": 0.4758650362491607
+    },
+    "Attention_ResUNet": {
+      "model_path": "best_models/attention_resunet/best_model.keras",
+      "model_name": "attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001",
+      "best_val_iou": 0.5038761496543884
+    }
+  },
+  "config": {
+    "best_models_dir": "./best_models",
+    "test_images_dir": "./test_images",
+    "output_dir": "./density_analysis_architecture_comparison_20251017_084028",
+    "img_size": 512,
+    "img_channels": 3,
+    "batch_size": 2,
+    "thresholds": [
+      0.2,
+      0.5,
+      0.8,
+      0.95
+    ],
+    "n_representative_tiles": 5,
+    "dpi": 300,
+    "figsize_boxplot": [
+      16,
+      8
+    ],
+    "figsize_tiles": [
+      20,
+      5
+    ]
+  },
+  "total_images": 8,
+  "total_tiles_per_arch": 224
+}
