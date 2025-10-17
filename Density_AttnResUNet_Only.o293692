@@ -1,0 +1,84 @@
+========================================================================
+ATTENTION RESUNET-ONLY DENSITY ANALYSIS - BEST MODEL
+========================================================================
+Job ID: 293692.stdct-mgmt-02
+Job Name: Density_AttnResUNet_Only
+Node: GN-A40-009
+Start time: Fri Oct 17 11:51:03 AM +08 2025
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================================================
+
+=== ENVIRONMENT SETUP ===
+✓ TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+===========================
+
+Verifying required files...
+✓ Model directory: ./attention_resunet_hyperparam_20251015_235542
+✓ Checkpoints subdirectory: ./attention_resunet_hyperparam_20251015_235542/checkpoints
+✓ Test images directory: ./test_images
+✓ Found 27 Attention ResUNet model(s)
+
+Found 8 test images
+
+Test images:
+  - 10240x_2025-05-29_02-22-00_002.tif
+  - 1280x_2025-05-16_00-59-00_002.tif
+  - 160x_2025-05-15_02-05-00.tif
+  - 2560x_2025-05-16_00-59-00_002.tif
+  - 320x_2025-05-15_02-05-00.tif
+  - 5120x_2025-05-16_00-59-00.tif
+  - 640x_2025-05-16_00-59-00_002.tif
+  - 80x_2025-05-22_14-48-00.tif
+
+========================================================================
+RUNNING DENSITY ANALYSIS (ATTENTION RESUNET)
+========================================================================
+Command: singularity exec --nv "/app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif" python3 ./density_analysis_attention_resunet_only.py
+
+Searching for best Attention ResUNet model...
+Found 27 Attention ResUNet model configurations
+  New best: attention_resunet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.2688)
+  New best: attention_resunet_n_filters64_dropout0p1_batch_normTrue_learning_rate0p003 (IoU: 0.3374)
+  New best: attention_resunet_n_filters64_dropout0p2_batch_normTrue_learning_rate0p003 (IoU: 0.3815)
+  New best: attention_resunet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4355)
+  New best: attention_resunet_n_filters16_dropout0p1_batch_normTrue_learning_rate0p003 (IoU: 0.4708)
+  New best: attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001 (IoU: 0.5039)
+
+✓ Selected best model: attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001
+  Best Val IoU: 0.5039
+
+================================================================================
+ATTENTION RESUNET-ONLY DENSITY ANALYSIS - BEST MODEL FROM HYPERPARAMETER SEARCH
+================================================================================
+Script: density_analysis_attention_resunet_only.py
+PBS Script: pbs_density_analysis_attention_resunet_only.sh
+Timestamp: 2025-10-17 03:51:14
+Model base directory: ./attention_resunet_hyperparam_20251015_235542
+Test images: ./test_images
+Output directory: ./density_analysis_attention_resunet_only_20251017_035114
+Image format: 512×512 RGB (3 channels)
+
+================================================================================
+BEST MODEL SELECTION
+================================================================================
+Model: attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001
+Hyperparameters:
+  - n_filters: 32
+  - dropout: 0.1
+  - batch_norm: True
+  - learning_rate: 0.001
+Best Val IoU: 0.5039
+Model path: attention_resunet_hyperparam_20251015_235542/checkpoints/attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001/best_model.keras
+================================================================================
+
+Loading model from: attention_resunet_hyperparam_20251015_235542/checkpoints/attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001/best_model.keras
+  ✓ Model loaded successfully
+  Input shape: (None, 512, 512, 3)
+  Output shape: (None, 512, 512, 1)
+
+================================================================================
+PREDICTION ON TEST IMAGES
+================================================================================
+Found 8 test images
+
+Processing images:   0%|          | 0/8 [00:00<?, ?it/s]
