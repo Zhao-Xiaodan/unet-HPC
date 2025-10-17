@@ -46,6 +46,7 @@ from tensorflow.keras import backend as K
 
 # Import custom modules
 from loss_functions_fixed import combined_dice_focal_loss, jacard_coef, dice_coef, focal_loss
+from models_fixed import RepeatElements  # Custom layer for Attention UNet
 
 # ============================================================================
 # CONFIGURATION
@@ -410,6 +411,7 @@ def load_model(model_path):
         'dice_coef': dice_coef,
         'focal_loss': focal_loss,
         'BinaryFocalLoss': BinaryFocalLoss,
+        'RepeatElements': RepeatElements,  # Custom layer for Attention UNet
     }
 
     model = keras.models.load_model(str(model_path), custom_objects=custom_objects)
