@@ -63,7 +63,7 @@ CONFIG = {
     'img_channels': 3,  # RGB
 
     # Prediction settings
-    'batch_size': 8,
+    'batch_size': 2,  # Conservative for large model (training used 4, but residual+attention needs more memory)
     'thresholds': [0.2, 0.5, 0.8, 0.95],  # Multiple thresholds to test
 
     # Representative tiles (reuse from previous analysis)
