@@ -1,0 +1,63 @@
+========================================================================
+ARCHITECTURE COMPARISON DENSITY ANALYSIS
+========================================================================
+Job ID: 293791.stdct-mgmt-02
+Job Name: Density_Arch_Comparison
+Node: GN-A40-014
+Start time: Fri Oct 17 03:53:14 PM +08 2025
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================================================
+
+=== ENVIRONMENT SETUP ===
+✓ TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+============================
+
+Verifying required files...
+✓ UNet checkpoints: ./unet_hyperparam_20251015_224125/checkpoints
+✓ Attention UNet checkpoints: ./attention_unet_hyperparam_20251015_230149/checkpoints
+✓ Attention ResUNet checkpoints: ./attention_resunet_hyperparam_20251015_235542/checkpoints
+✓ Test images directory: ./test_images
+✓ Copy script: ./copy_best_models.py
+✓ Analysis script: ./density_analysis_architecture_comparison.py
+
+========================================================================
+STEP 1: COPYING BEST MODELS TO ./best_models/
+========================================================================
+This finds the best model from each architecture's hyperparameter search
+and copies it to ./best_models/ for faster access.
+
+================================================================================
+COPY BEST MODELS TO CENTRALIZED LOCATION
+================================================================================
+
+✓ Created output directory: best_models
+
+Searching for best UNet model...
+  Base directory: ./unet_hyperparam_20251015_224125
+  Found 27 model configurations
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/./copy_best_models.py", line 222, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/./copy_best_models.py", line 184, in main
+    best_model_info = find_best_model(base_dir, arch_name, glob_pattern)
+  File "/scratch/phyzxi/unet-HPC/./copy_best_models.py", line 88, in find_best_model
+    raise FileNotFoundError(f"No valid {architecture_name} models found")
+FileNotFoundError: No valid UNet models found
+
+ERROR: Failed to copy best models (exit code: 1)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-17 15:53:21.446491:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 293791.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:08
+	Memory: Requested(240gb), Used(233816kb)
+	Vmem Used: 3460768kb
+	Walltime: Requested(06:00:00), Used(00:00:08)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-014[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
