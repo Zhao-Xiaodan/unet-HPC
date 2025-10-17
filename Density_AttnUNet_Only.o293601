@@ -1,0 +1,132 @@
+========================================================================
+ATTENTION UNET-ONLY DENSITY ANALYSIS - BEST MODEL
+========================================================================
+Job ID: 293601.stdct-mgmt-02
+Job Name: Density_AttnUNet_Only
+Node: GN-A40-070
+Start time: Fri Oct 17 10:53:33 AM +08 2025
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================================================
+
+=== ENVIRONMENT SETUP ===
+✓ TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+===========================
+
+Verifying required files...
+✓ Model directory: ./attention_unet_hyperparam_20251015_230149
+✓ Checkpoints subdirectory: ./attention_unet_hyperparam_20251015_230149/checkpoints
+✓ Test images directory: ./test_images
+✓ Found 27 Attention UNet model(s)
+
+Found 8 test images
+
+Test images:
+  - 10240x_2025-05-29_02-22-00_002.tif
+  - 1280x_2025-05-16_00-59-00_002.tif
+  - 160x_2025-05-15_02-05-00.tif
+  - 2560x_2025-05-16_00-59-00_002.tif
+  - 320x_2025-05-15_02-05-00.tif
+  - 5120x_2025-05-16_00-59-00.tif
+  - 640x_2025-05-16_00-59-00_002.tif
+  - 80x_2025-05-22_14-48-00.tif
+
+========================================================================
+RUNNING DENSITY ANALYSIS (ATTENTION UNET)
+========================================================================
+Command: singularity exec --nv "/app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif" python3 ./density_analysis_attention_unet_only.py
+
+Searching for best Attention UNet model...
+Found 27 Attention UNet model configurations
+  New best: attention_unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p005 (IoU: 0.3000)
+  New best: attention_unet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001 (IoU: 0.4749)
+  New best: attention_unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p003 (IoU: 0.4759)
+
+✓ Selected best model: attention_unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p003
+  Best Val IoU: 0.4759
+
+================================================================================
+ATTENTION UNET-ONLY DENSITY ANALYSIS - BEST MODEL FROM HYPERPARAMETER SEARCH
+================================================================================
+Script: density_analysis_attention_unet_only.py
+PBS Script: pbs_density_analysis_attention_unet_only.sh
+Timestamp: 2025-10-17 02:53:43
+Model base directory: ./attention_unet_hyperparam_20251015_230149
+Test images: ./test_images
+Output directory: ./density_analysis_attention_unet_only_20251017_025343
+Image format: 512×512 RGB (3 channels)
+
+================================================================================
+BEST MODEL SELECTION
+================================================================================
+Model: attention_unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p003
+Hyperparameters:
+  - n_filters: 32
+  - dropout: 0.3
+  - batch_norm: True
+  - learning_rate: 0.003
+Best Val IoU: 0.4759
+Model path: attention_unet_hyperparam_20251015_230149/checkpoints/attention_unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p003/best_model.keras
+================================================================================
+
+Loading model from: attention_unet_hyperparam_20251015_230149/checkpoints/attention_unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p003/best_model.keras
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_attention_unet_only.py", line 992, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_attention_unet_only.py", line 891, in main
+    model = load_model(best_model_info['model_path'])
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_attention_unet_only.py", line 415, in load_model
+    model = keras.models.load_model(str(model_path), custom_objects=custom_objects)
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/saving_api.py", line 254, in load_model
+    return saving_lib.load_model(
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/saving_lib.py", line 271, in load_model
+    raise e
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/saving_lib.py", line 236, in load_model
+    model = deserialize_keras_object(
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/saving/serialization_lib.py", line 727, in deserialize_keras_object
+    instance = cls.from_config(inner_config)
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/training.py", line 3325, in from_config
+    inputs, outputs, layers = functional.reconstruct_from_config(
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/functional.py", line 1504, in reconstruct_from_config
+    if process_node(layer, node_data):
+  File "/usr/local/lib/python3.10/dist-packages/tf_keras/src/engine/functional.py", line 1444, in process_node
+    output_tensors = layer(input_tensors, **kwargs)
+TypeError: 'str' object is not callable
+
+========================================================================
+DENSITY ANALYSIS COMPLETED (ATTENTION UNET)
+========================================================================
+Exit code: 0
+End time: Fri Oct 17 10:53:46 AM +08 2025
+
+✓ Analysis completed successfully!
+
+Generated visualizations (12 boxplots + tile visualizations):
+  Boxplots (6 methods × 2 dilution ranges = 12 total):
+    1. Threshold 0.2: density_boxplot_*_threshold_0.2.png
+    2. Threshold 0.5: density_boxplot_*_threshold_0.5.png
+    3. Threshold 0.8: density_boxplot_*_threshold_0.8.png
+    4. Threshold 0.95: density_boxplot_*_threshold_0.95.png
+    5. CLAHE+Otsu on pred: density_boxplot_*_claheotsu_on_pred.png (FIXED)
+    6. CLAHE+Otsu on orig: density_boxplot_*_claheotsu_on_original.png
+  Tile visualizations:
+    - representative_tiles_3panel/ (5 tiles per image, 3 panels each)
+      * Panel 1: Original tile
+      * Panel 2: Inverted predicted mask (white beads, threshold 0.5)
+      * Panel 3: Inverted CLAHE+Otsu (white beads, denoised)
+========================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-17 10:53:47.165925:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 293601.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:18
+	Memory: Requested(240gb), Used(2799560kb)
+	Vmem Used: 6689088kb
+	Walltime: Requested(04:00:00), Used(00:00:14)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-070[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
