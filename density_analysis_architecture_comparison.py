@@ -33,10 +33,8 @@ from models_fixed import RepeatElements
 # ============================================================================
 
 CONFIG = {
-    # Model directories (use best models from hyperparameter searches)
-    'unet_model_dir': './unet_hyperparam_20251013_034824',
-    'attention_unet_model_dir': './attention_unet_hyperparam_20251015_230149',
-    'attention_resunet_model_dir': './attention_resunet_hyperparam_20251015_235542',
+    # Best models directory (created by copy_best_models.py)
+    'best_models_dir': './best_models',
 
     # Test images
     'test_images_dir': './test_images',
@@ -97,67 +95,47 @@ def print_header(config):
 # MODEL LOADING
 # ============================================================================
 
-def find_best_model(base_dir, architecture_name, glob_pattern):
+def load_best_model_info(best_models_dir, architecture_name):
     """
-    Find best model from hyperparameter search by validation IoU.
+    Load best model info from ./best_models/ directory.
 
     Args:
-        base_dir: Base directory containing checkpoints
-        architecture_name: Name for display (e.g., 'UNet')
-        glob_pattern: Glob pattern for model directories (e.g., 'unet_*')
+        best_models_dir: Directory containing copied best models
+        architecture_name: Architecture name (e.g., 'UNet', 'Attention_UNet')
 
     Returns:
-        dict with model_path, model_name, hyperparameters, best_val_iou
+        dict with model_path, model_name, best_val_iou
     """
-    print(f"\nSearching for best {architecture_name} model...")
+    print(f"\nLoading {architecture_name} model info...")
 
-    base_dir = Path(base_dir)
-    checkpoints_dir = base_dir / 'checkpoints'
+    best_models_dir = Path(best_models_dir)
+    arch_dir = best_models_dir / architecture_name.lower().replace(' ', '_')
 
-    if not checkpoints_dir.exists():
-        raise FileNotFoundError(f"Checkpoints directory not found: {checkpoints_dir}")
+    if not arch_dir.exists():
+        raise FileNotFoundError(f"Architecture directory not found: {arch_dir}")
 
-    model_dirs = list(checkpoints_dir.glob(glob_pattern))
+    model_file = arch_dir / 'best_model.keras'
+    info_file = arch_dir / 'model_info.json'
 
-    if not model_dirs:
-        raise FileNotFoundError(f"No {architecture_name} models found in {checkpoints_dir}")
+    if not model_file.exists():
+        raise FileNotFoundError(f"Model file not found: {model_file}")
 
-    print(f"Found {len(model_dirs)} {architecture_name} model configurations")
+    if not info_file.exists():
+        raise FileNotFoundError(f"Model info file not found: {info_file}")
 
-    best_model = None
-    best_iou = -1
+    # Load metadata
+    with open(info_file, 'r') as f:
+        info = json.load(f)
 
-    for model_dir in model_dirs:
-        history_csv = model_dir / 'training_history.csv'
-        model_file = model_dir / 'best_model.keras'
+    print(f"  Model: {info['model_name']}")
+    print(f"  Val IoU: {info['best_val_iou']:.4f}")
+    print(f"  Path: {model_file}")
 
-        if not history_csv.exists() or not model_file.exists():
-            continue
-
-        # Read training history
-        try:
-            df = pd.read_csv(history_csv)
-            max_iou = df['val_jacard_coef'].max()
-
-            if max_iou > best_iou:
-                best_iou = max_iou
-                best_model = {
-                    'model_path': model_file,
-                    'model_name': model_dir.name,
-                    'best_val_iou': max_iou
-                }
-                print(f"  New best: {model_dir.name} (IoU: {max_iou:.4f})")
-        except Exception as e:
-            print(f"  Warning: Failed to read {history_csv}: {e}")
-            continue
-
-    if best_model is None:
-        raise FileNotFoundError(f"No valid {architecture_name} models found")
-
-    print(f"\n✓ Selected best {architecture_name} model: {best_model['model_name']}")
-    print(f"  Best Val IoU: {best_model['best_val_iou']:.4f}")
-
-    return best_model
+    return {
+        'model_path': model_file,
+        'model_name': info['model_name'],
+        'best_val_iou': info['best_val_iou']
+    }
 
 def load_model(model_path):
     """Load Keras model with custom objects"""
@@ -599,7 +577,7 @@ def main():
     output_dir.mkdir(exist_ok=True, parents=True)
 
     # ========================================================================
-    # LOAD BEST MODELS FROM EACH ARCHITECTURE
+    # LOAD BEST MODELS FROM ./best_models/ DIRECTORY
     # ========================================================================
 
     print("\n" + "="*80)
@@ -609,24 +587,21 @@ def main():
     best_models = {}
 
     # UNet
-    best_models['UNet'] = find_best_model(
-        config['unet_model_dir'],
-        'UNet',
-        'unet_*'
+    best_models['UNet'] = load_best_model_info(
+        config['best_models_dir'],
+        'UNet'
     )
 
     # Attention UNet
-    best_models['Attention_UNet'] = find_best_model(
-        config['attention_unet_model_dir'],
-        'Attention UNet',
-        'attention_unet_*'
+    best_models['Attention_UNet'] = load_best_model_info(
+        config['best_models_dir'],
+        'Attention_UNet'
     )
 
     # Attention ResUNet
-    best_models['Attention_ResUNet'] = find_best_model(
-        config['attention_resunet_model_dir'],
-        'Attention ResUNet',
-        'attention_resunet_*'
+    best_models['Attention_ResUNet'] = load_best_model_info(
+        config['best_models_dir'],
+        'Attention_ResUNet'
     )
 
     # Load all models

@@ -66,34 +66,21 @@ echo ""
 # Verify required files exist
 echo "Verifying required files..."
 
-UNET_DIR="./unet_hyperparam_20251013_034824"
+UNET_DIR="./unet_hyperparam_20251015_224125"
 ATTN_UNET_DIR="./attention_unet_hyperparam_20251015_230149"
 ATTN_RESUNET_DIR="./attention_resunet_hyperparam_20251015_235542"
 TEST_DIR="./test_images"
-SCRIPT="./density_analysis_architecture_comparison.py"
+COPY_SCRIPT="./copy_best_models.py"
+ANALYSIS_SCRIPT="./density_analysis_architecture_comparison.py"
 
-if [ ! -d "$UNET_DIR" ]; then
-    echo "ERROR: UNet model directory not found: $UNET_DIR"
-    exit 1
-fi
-
+# Check source directories
 if [ ! -d "$UNET_DIR/checkpoints" ]; then
     echo "ERROR: UNet checkpoints directory not found: $UNET_DIR/checkpoints"
     exit 1
 fi
 
-if [ ! -d "$ATTN_UNET_DIR" ]; then
-    echo "ERROR: Attention UNet model directory not found: $ATTN_UNET_DIR"
-    exit 1
-fi
-
 if [ ! -d "$ATTN_UNET_DIR/checkpoints" ]; then
     echo "ERROR: Attention UNet checkpoints directory not found: $ATTN_UNET_DIR/checkpoints"
-    exit 1
-fi
-
-if [ ! -d "$ATTN_RESUNET_DIR" ]; then
-    echo "ERROR: Attention ResUNet model directory not found: $ATTN_RESUNET_DIR"
     exit 1
 fi
 
@@ -107,61 +94,72 @@ if [ ! -d "$TEST_DIR" ]; then
     exit 1
 fi
 
-if [ ! -f "$SCRIPT" ]; then
-    echo "ERROR: Analysis script not found: $SCRIPT"
+if [ ! -f "$COPY_SCRIPT" ]; then
+    echo "ERROR: Copy script not found: $COPY_SCRIPT"
     exit 1
 fi
 
-# Check for model files in each architecture
-UNET_COUNT=$(find "$UNET_DIR/checkpoints" -name "best_model.keras" | wc -l)
-ATTN_UNET_COUNT=$(find "$ATTN_UNET_DIR/checkpoints" -name "best_model.keras" | wc -l)
-ATTN_RESUNET_COUNT=$(find "$ATTN_RESUNET_DIR/checkpoints" -name "best_model.keras" | wc -l)
-
-if [ "$UNET_COUNT" -eq 0 ]; then
-    echo "ERROR: No best_model.keras files found in $UNET_DIR/checkpoints"
+if [ ! -f "$ANALYSIS_SCRIPT" ]; then
+    echo "ERROR: Analysis script not found: $ANALYSIS_SCRIPT"
     exit 1
 fi
 
-if [ "$ATTN_UNET_COUNT" -eq 0 ]; then
-    echo "ERROR: No best_model.keras files found in $ATTN_UNET_DIR/checkpoints"
-    exit 1
-fi
-
-if [ "$ATTN_RESUNET_COUNT" -eq 0 ]; then
-    echo "ERROR: No best_model.keras files found in $ATTN_RESUNET_DIR/checkpoints"
-    exit 1
-fi
-
-echo "✓ UNet model directory: $UNET_DIR"
-echo "✓ UNet checkpoints: $UNET_DIR/checkpoints ($UNET_COUNT models)"
-echo "✓ Attention UNet model directory: $ATTN_UNET_DIR"
-echo "✓ Attention UNet checkpoints: $ATTN_UNET_DIR/checkpoints ($ATTN_UNET_COUNT models)"
-echo "✓ Attention ResUNet model directory: $ATTN_RESUNET_DIR"
-echo "✓ Attention ResUNet checkpoints: $ATTN_RESUNET_DIR/checkpoints ($ATTN_RESUNET_COUNT models)"
+echo "✓ UNet checkpoints: $UNET_DIR/checkpoints"
+echo "✓ Attention UNet checkpoints: $ATTN_UNET_DIR/checkpoints"
+echo "✓ Attention ResUNet checkpoints: $ATTN_RESUNET_DIR/checkpoints"
 echo "✓ Test images directory: $TEST_DIR"
+echo "✓ Copy script: $COPY_SCRIPT"
+echo "✓ Analysis script: $ANALYSIS_SCRIPT"
 echo ""
 
-# Count test images
-TEST_COUNT=$(find "$TEST_DIR" -name "*.tif" -o -name "*.tiff" | wc -l)
-echo "Found $TEST_COUNT test images"
-echo ""
+# =======================================================================
+# STEP 1: COPY BEST MODELS TO CENTRALIZED LOCATION
+# =======================================================================
 
-# List test images
-echo "Test images:"
-ls -1 "$TEST_DIR"/*.tif "$TEST_DIR"/*.tiff 2>/dev/null | while read img; do
-    echo "  - $(basename "$img")"
-done
-echo ""
-
-# Run architecture comparison analysis
 echo "========================================================================"
-echo "RUNNING ARCHITECTURE COMPARISON DENSITY ANALYSIS"
+echo "STEP 1: COPYING BEST MODELS TO ./best_models/"
 echo "========================================================================"
-echo "Command: singularity exec --nv \"$image\" python3 $SCRIPT"
+echo "This finds the best model from each architecture's hyperparameter search"
+echo "and copies it to ./best_models/ for faster access."
+echo ""
+
+singularity exec --nv "$image" python3 "$COPY_SCRIPT"
+
+COPY_EXIT=$?
+
+if [ $COPY_EXIT -ne 0 ]; then
+    echo ""
+    echo "ERROR: Failed to copy best models (exit code: $COPY_EXIT)"
+    exit 1
+fi
+
+echo ""
+echo "✓ Best models copied to ./best_models/"
+echo ""
+
+# Verify best_models directory was created
+if [ ! -d "./best_models" ]; then
+    echo "ERROR: ./best_models/ directory was not created"
+    exit 1
+fi
+
+# List best models
+echo "Best models ready:"
+ls -lh ./best_models/*/best_model.keras
+echo ""
+
+# =======================================================================
+# STEP 2: RUN ARCHITECTURE COMPARISON DENSITY ANALYSIS
+# =======================================================================
+
+echo "========================================================================"
+echo "STEP 2: RUNNING ARCHITECTURE COMPARISON DENSITY ANALYSIS"
+echo "========================================================================"
+echo "Command: singularity exec --nv \"$image\" python3 $ANALYSIS_SCRIPT"
 echo ""
 
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-singularity exec --nv "$image" python3 "$SCRIPT" 2>&1 | tee "density_analysis_architecture_comparison_console_${TIMESTAMP}.log"
+singularity exec --nv "$image" python3 "$ANALYSIS_SCRIPT" 2>&1 | tee "density_analysis_architecture_comparison_console_${TIMESTAMP}.log"
 
 EXIT_CODE=$?
 
