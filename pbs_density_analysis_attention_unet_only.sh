@@ -31,7 +31,7 @@
 #
 # Model Selection:
 #   - Automatically selects best Attention UNet model based on validation IoU
-#   - From: attention_unet_hyperparam_20251015_230149/models/
+#   - From: attention_unet_hyperparam_20251015_230149/checkpoints/
 #   - Training: 100 epochs, BinaryFocalLoss, 512×512 RGB
 #
 # CRITICAL BUG FIX:
@@ -90,8 +90,8 @@ if [ ! -d "$MODEL_DIR" ]; then
     exit 1
 fi
 
-if [ ! -d "$MODEL_DIR/models" ]; then
-    echo "ERROR: Models directory not found: $MODEL_DIR/models"
+if [ ! -d "$MODEL_DIR/checkpoints" ]; then
+    echo "ERROR: Checkpoints directory not found: $MODEL_DIR/checkpoints"
     exit 1
 fi
 
@@ -106,15 +106,15 @@ if [ ! -f "$SCRIPT" ]; then
 fi
 
 # Check for model files
-MODEL_COUNT=$(find "$MODEL_DIR/models" -name "best_model.keras" | wc -l)
+MODEL_COUNT=$(find "$MODEL_DIR/checkpoints" -name "best_model.keras" | wc -l)
 if [ "$MODEL_COUNT" -eq 0 ]; then
-    echo "ERROR: No best_model.keras files found in $MODEL_DIR/models"
+    echo "ERROR: No best_model.keras files found in $MODEL_DIR/checkpoints"
     echo "       Make sure Attention UNet hyperparameter search has completed!"
     exit 1
 fi
 
 echo "✓ Model directory: $MODEL_DIR"
-echo "✓ Models subdirectory: $MODEL_DIR/models"
+echo "✓ Checkpoints subdirectory: $MODEL_DIR/checkpoints"
 echo "✓ Test images directory: $TEST_DIR"
 echo "✓ Found $MODEL_COUNT Attention UNet model(s)"
 echo ""

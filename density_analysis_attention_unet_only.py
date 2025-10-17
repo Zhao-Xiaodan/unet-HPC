@@ -140,11 +140,11 @@ def find_best_attention_unet_model(base_dir):
     print("Searching for best Attention UNet model...")
     base_dir = Path(base_dir)
 
-    # Find all best_model.keras files in models directory
-    model_dirs = list((base_dir / 'models').glob('attention_unet_*'))
+    # Find all best_model.keras files in checkpoints directory
+    model_dirs = list((base_dir / 'checkpoints').glob('attention_unet_*'))
 
     if not model_dirs:
-        raise FileNotFoundError(f"No Attention UNet model directories found in {base_dir / 'models'}")
+        raise FileNotFoundError(f"No Attention UNet model directories found in {base_dir / 'checkpoints'}")
 
     print(f"Found {len(model_dirs)} Attention UNet model configurations")
 

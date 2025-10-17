@@ -48,15 +48,15 @@ This fix ensures we measure **beads** (dark regions) instead of **background** (
 
 ```
 attention_unet_hyperparam_20251015_230149/
-├── models/                           # Model files here (NOT checkpoints/)
-│   ├── attention_unet_n_filters16_dropout0p0_batchnormTrue_lr0p0001/
+├── checkpoints/                      # Model files here
+│   ├── attention_unet_n_filters16_dropout0p1_batch_normTrue_learning_rate0p001/
 │   │   └── best_model.keras
-│   ├── attention_unet_n_filters16_dropout0p0_batchnormTrue_lr0p001/
+│   ├── attention_unet_n_filters16_dropout0p1_batch_normTrue_learning_rate0p003/
 │   │   └── best_model.keras
 │   └── ... (27 total model combinations)
 └── logs/                             # Training history CSVs
-    ├── attention_unet_n_filters16_dropout0p0_batchnormTrue_lr0p0001_history.csv
-    ├── attention_unet_n_filters16_dropout0p0_batchnormTrue_lr0p001_history.csv
+    ├── attention_unet_n_filters16_dropout0p1_batch_normTrue_learning_rate0p001_history.csv
+    ├── attention_unet_n_filters16_dropout0p1_batch_normTrue_learning_rate0p003_history.csv
     └── ...
 ```
 
@@ -66,8 +66,8 @@ attention_unet_hyperparam_20251015_230149/
 def find_best_attention_unet_model(base_dir):
     """Find best Attention UNet model from hyperparameter search."""
 
-    # 1. Find all model directories in models/
-    model_dirs = list((base_dir / 'models').glob('attention_unet_*'))
+    # 1. Find all model directories in checkpoints/
+    model_dirs = list((base_dir / 'checkpoints').glob('attention_unet_*'))
 
     # 2. For each model, parse hyperparameters from directory name
     #    Example: attention_unet_n_filters16_dropout0p1_batchnormTrue_lr0p0001
@@ -273,7 +273,7 @@ ls -lh density_analysis_attention_unet_only_*/
 | Aspect | UNet | Attention UNet |
 |--------|------|----------------|
 | Model directory | `unet_hyperparam_20251015_224125` | `attention_unet_hyperparam_20251015_230149` |
-| Model path | `checkpoints/` | `models/` |
+| Model path | `checkpoints/` | `checkpoints/` |
 | Model glob pattern | `unet_*` | `attention_unet_*` |
 | Job name | `Density_UNet_Only` | `Density_AttentionUNet_Only` |
 | Script | `density_analysis_unet_only.py` | `density_analysis_attention_unet_only.py` |
