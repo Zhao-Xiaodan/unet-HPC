@@ -1,0 +1,7 @@
+{
+  "architecture": "UNet",
+  "model_name": "unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001",
+  "best_val_iou": 0.4853319227695465,
+  "source_path": "unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001/best_model.keras",
+  "copied_path": "best_models/unet/best_model.keras"
+}

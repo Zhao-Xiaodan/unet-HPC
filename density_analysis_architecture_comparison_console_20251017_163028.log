@@ -1,0 +1,76 @@
+
+================================================================================
+ARCHITECTURE COMPARISON DENSITY ANALYSIS
+================================================================================
+Script: density_analysis_architecture_comparison.py
+Timestamp: 2025-10-17 08:30:51
+Test images: ./test_images
+Output directory: ./density_analysis_architecture_comparison_20251017_083051
+Image format: 512×512 RGB (3 channels)
+================================================================================
+
+
+================================================================================
+LOADING BEST MODELS
+================================================================================
+
+Loading UNet model info...
+  Model: unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001
+  Val IoU: 0.4853
+  Path: best_models/unet/best_model.keras
+
+Loading Attention_UNet model info...
+  Model: attention_unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p003
+  Val IoU: 0.4759
+  Path: best_models/attention_unet/best_model.keras
+
+Loading Attention_ResUNet model info...
+  Model: attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001
+  Val IoU: 0.5039
+  Path: best_models/attention_resunet/best_model.keras
+
+================================================================================
+LOADING KERAS MODELS
+================================================================================
+
+--- UNet ---
+Loading model from: best_models/unet/best_model.keras
+  ✓ Model loaded successfully
+  Input shape: (None, 512, 512, 3)
+  Output shape: (None, 512, 512, 1)
+
+--- Attention_UNet ---
+Loading model from: best_models/attention_unet/best_model.keras
+  ✓ Model loaded successfully
+  Input shape: (None, 512, 512, 3)
+  Output shape: (None, 512, 512, 1)
+
+--- Attention_ResUNet ---
+Loading model from: best_models/attention_resunet/best_model.keras
+  ✓ Model loaded successfully
+  Input shape: (None, 512, 512, 3)
+  Output shape: (None, 512, 512, 1)
+
+================================================================================
+PREDICTION ON TEST IMAGES (ALL ARCHITECTURES)
+================================================================================
+Found 8 test images
+Architectures: UNet, Attention_UNet, Attention_ResUNet
+
+Processing images:   0%|          | 0/8 [00:00<?, ?it/s]Processing images:   0%|          | 0/8 [00:23<?, ?it/s]
+
+Processing: 10240x_2025-05-29_02-22-00_002.tif
+  Dilution: 10240x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Predicting with UNet...
+  Predicting with Attention_UNet...
+  Predicting with Attention_ResUNet...
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_architecture_comparison.py", line 723, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_architecture_comparison.py", line 621, in main
+    df_results, tile_data = predict_on_test_images_all_architectures(
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_architecture_comparison.py", line 365, in predict_on_test_images_all_architectures
+    density_clahe_orig = tile_results[-3]['density_clahe_otsu_orig']  # Reuse from UNet
+IndexError: list index out of range

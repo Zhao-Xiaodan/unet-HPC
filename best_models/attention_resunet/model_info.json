@@ -1,0 +1,7 @@
+{
+  "architecture": "Attention_ResUNet",
+  "model_name": "attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001",
+  "best_val_iou": 0.5038761496543884,
+  "source_path": "attention_resunet_hyperparam_20251015_235542/checkpoints/attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001/best_model.keras",
+  "copied_path": "best_models/attention_resunet/best_model.keras"
+}
