@@ -60,15 +60,46 @@ def find_best_model(base_dir, architecture_name, glob_pattern):
     best_iou = -1
 
     for model_dir in model_dirs:
-        history_csv = model_dir / 'training_history.csv'
         model_file = model_dir / 'best_model.keras'
 
-        if not history_csv.exists() or not model_file.exists():
+        if not model_file.exists():
             continue
 
-        # Read training history
+        # Parse hyperparameters from directory name to find history CSV
+        # Format: {arch}_n_filters16_dropout0p1_batch_normTrue_learning_rate0p001
+        dir_name = model_dir.name
+
         try:
+            # Extract key parameters for history file matching
+            import re
+            n_filters_match = re.search(r'n_filters(\d+)', dir_name)
+            dropout_match = re.search(r'dropout(\d+p\d+)', dir_name)
+
+            if not n_filters_match or not dropout_match:
+                print(f"    Skip: {dir_name} (cannot parse hyperparameters)")
+                continue
+
+            n_filters = n_filters_match.group(1)
+            dropout_str = dropout_match.group(1)
+
+            # Find history CSV in logs directory
+            # Pattern: {glob_pattern}_n_filters{}_dropout{}_*_history.csv
+            arch_prefix = glob_pattern.replace('*', '')  # e.g., 'unet_' from 'unet_*'
+            history_pattern = f'{arch_prefix}n_filters{n_filters}_dropout{dropout_str}_*_history.csv'
+            history_files = list((base_dir / 'logs').glob(history_pattern))
+
+            if not history_files:
+                print(f"    Skip: {dir_name} (no history CSV in logs/)")
+                continue
+
+            # Read history and get max IoU
+            history_csv = history_files[0]
             df = pd.read_csv(history_csv)
+
+            if 'val_jacard_coef' not in df.columns:
+                print(f"    Skip: {dir_name} (no val_jacard_coef in history)")
+                continue
+
             max_iou = df['val_jacard_coef'].max()
 
             if max_iou > best_iou:
@@ -80,8 +111,9 @@ def find_best_model(base_dir, architecture_name, glob_pattern):
                     'history_csv': history_csv,
                 }
                 print(f"    New best: {model_dir.name} (IoU: {max_iou:.4f})")
+
         except Exception as e:
-            print(f"    Warning: Failed to read {history_csv}: {e}")
+            print(f"    Warning: Failed to process {dir_name}: {e}")
             continue
 
     if best_model is None:
