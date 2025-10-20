@@ -871,7 +871,7 @@ def main():
         train_dataset,
         batch_size=CONFIG['batch_size'],
         shuffle=True,
-        num_workers=4,
+        num_workers=8,  # Increased for 36 CPUs
         pin_memory=True,
         drop_last=False
     )
@@ -880,7 +880,7 @@ def main():
         val_dataset,
         batch_size=CONFIG['batch_size'],
         shuffle=False,
-        num_workers=4,
+        num_workers=8,  # Increased for 36 CPUs
         pin_memory=True,
         drop_last=False
     )

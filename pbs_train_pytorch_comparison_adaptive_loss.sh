@@ -1,10 +1,11 @@
 #!/bin/bash
-#PBS -N PyTorch_AdaptiveLoss_Comparison
-#PBS -l select=1:ncpus=8:mem=240gb:ngpus=1:gpu_model=a100,walltime=24:00:00
+#PBS -l walltime=48:00:00
 #PBS -j oe
-#PBS -o ./pytorch_comparison_adaptive_loss_${PBS_JOBID}.log
+#PBS -k oed
+#PBS -N PyTorch_AdaptiveLoss_Comparison
+#PBS -l select=1:ncpus=36:mpiprocs=1:ompthreads=36:ngpus=1:mem=240gb
+#PBS -M phyzxi@nus.edu.sg
 #PBS -m abe
-#PBS -M xiaodan@clemson.edu
 
 # ==============================================================================
 # PyTorch Training: Fair Comparison Using AdaptiveBGDiceLoss
