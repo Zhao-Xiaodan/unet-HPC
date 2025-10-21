@@ -9,3 +9,4 @@ test_images/
 **/*.hdf5
 **/*.h5
 **/*.keras
+**/*.pth
