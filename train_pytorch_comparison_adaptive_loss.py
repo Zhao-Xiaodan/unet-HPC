@@ -639,11 +639,11 @@ class AttentionUNet(nn.Module):
         # Bottleneck
         self.bottleneck = ConvBlock(n_filters * 8, n_filters * 16, dropout)
 
-        # Attention gates
-        self.att4 = AttentionGate(F_g=n_filters * 16, F_l=n_filters * 8, F_int=n_filters * 4)
-        self.att3 = AttentionGate(F_g=n_filters * 8, F_l=n_filters * 4, F_int=n_filters * 2)
-        self.att2 = AttentionGate(F_g=n_filters * 4, F_l=n_filters * 2, F_int=n_filters)
-        self.att1 = AttentionGate(F_g=n_filters * 2, F_l=n_filters, F_int=n_filters // 2)
+        # Attention gates (F_g is gating signal channels AFTER upsampling)
+        self.att4 = AttentionGate(F_g=n_filters * 8, F_l=n_filters * 8, F_int=n_filters * 4)
+        self.att3 = AttentionGate(F_g=n_filters * 4, F_l=n_filters * 4, F_int=n_filters * 2)
+        self.att2 = AttentionGate(F_g=n_filters * 2, F_l=n_filters * 2, F_int=n_filters)
+        self.att1 = AttentionGate(F_g=n_filters, F_l=n_filters, F_int=n_filters // 2)
 
         # Decoder
         self.up4 = nn.ConvTranspose2d(n_filters * 16, n_filters * 8, 2, stride=2)
@@ -716,11 +716,11 @@ class AttentionResUNet(nn.Module):
         # Bottleneck
         self.bottleneck = ResConvBlock(n_filters * 8, n_filters * 16, dropout)
 
-        # Attention gates
-        self.att4 = AttentionGate(F_g=n_filters * 16, F_l=n_filters * 8, F_int=n_filters * 4)
-        self.att3 = AttentionGate(F_g=n_filters * 8, F_l=n_filters * 4, F_int=n_filters * 2)
-        self.att2 = AttentionGate(F_g=n_filters * 4, F_l=n_filters * 2, F_int=n_filters)
-        self.att1 = AttentionGate(F_g=n_filters * 2, F_l=n_filters, F_int=n_filters // 2)
+        # Attention gates (F_g is gating signal channels AFTER upsampling)
+        self.att4 = AttentionGate(F_g=n_filters * 8, F_l=n_filters * 8, F_int=n_filters * 4)
+        self.att3 = AttentionGate(F_g=n_filters * 4, F_l=n_filters * 4, F_int=n_filters * 2)
+        self.att2 = AttentionGate(F_g=n_filters * 2, F_l=n_filters * 2, F_int=n_filters)
+        self.att1 = AttentionGate(F_g=n_filters, F_l=n_filters, F_int=n_filters // 2)
 
         # Decoder
         self.up4 = nn.ConvTranspose2d(n_filters * 16, n_filters * 8, 2, stride=2)
