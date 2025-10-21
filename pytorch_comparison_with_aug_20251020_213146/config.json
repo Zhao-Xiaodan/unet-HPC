@@ -1,0 +1,44 @@
+{
+  "images_dir": "./dataset_shrunk_masks/images/",
+  "masks_dir": "./dataset_shrunk_masks/masks/",
+  "train_val_split": 0.8,
+  "output_dir_base": "./pytorch_comparison_with_aug",
+  "augment_train": true,
+  "no_art_ratio": 0.4,
+  "old_art_ratio": 0.3,
+  "new_art_ratio": 0.3,
+  "img_size": 512,
+  "img_channels": 1,
+  "architectures": [
+    "unet",
+    "attention_unet",
+    "attention_resunet"
+  ],
+  "hyperparam_grid": {
+    "n_filters": [
+      16,
+      32,
+      64
+    ],
+    "dropout": [
+      0.1,
+      0.2,
+      0.3
+    ],
+    "learning_rate": [
+      0.001,
+      0.003,
+      0.005
+    ]
+  },
+  "epochs": 100,
+  "batch_size": 4,
+  "early_stopping_patience": 20,
+  "reduce_lr_patience": 10,
+  "reduce_lr_factor": 0.5,
+  "min_lr": 1e-07,
+  "focal_gamma": 2.0,
+  "focal_alpha": 0.25,
+  "random_seed": 42,
+  "output_dir": "./pytorch_comparison_with_aug_20251020_213146"
+}

@@ -1,0 +1,6292 @@
+========================================
+Job ID: 302535.stdct-mgmt-02
+Job Name: PyTorch_NoAug_Comparison
+Node: GN-A40-073
+Start Time: Mon Oct 20 09:27:27 PM +08 2025
+Working Directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================
+
+GPU Information:
+Mon Oct 20 21:27:27 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     Off |   00000000:AE:00.0 Off |                    0 |
+|  0%   32C    P8             22W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+Python version:
+Python 3.10.12
+
+PyTorch version:
+PyTorch: 2.4.0a0+f70bd71a48.nv24.06
+CUDA available: True
+CUDA version: 12.5
+
+========================================
+Starting PyTorch Training (No Augmentation)
+Training 3 architectures × 27 configs = 81 models
+========================================
+
+/usr/local/lib/python3.10/dist-packages/torch/optim/lr_scheduler.py:46: UserWarning: The verbose parameter is deprecated. Please use get_last_lr() to access the learning rate.
+  warnings.warn(
+Using device: cuda
+
+Output directory: ./pytorch_comparison_no_aug_20251020_212738
+
+Loading dataset...
+[Dataset] Found 98 image-mask pairs
+Train samples: 78
+Val samples: 20
+
+
+################################################################################
+# Training Architecture: UNET
+################################################################################
+
+================================================================================
+Training: unet_n_filters16_dropout0.1_learning_rate0.001
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0868, IoU: 0.2953, Dice: 0.4104
+Val   - Loss: 0.0767, IoU: 0.0314, Dice: 0.0599
+✓ Saved best model (val_iou: 0.0314)
+
+Epoch 2/100
+Train - Loss: 0.0592, IoU: 0.3415, Dice: 0.4649
+Val   - Loss: 0.0452, IoU: 0.3173, Dice: 0.4524
+✓ Saved best model (val_iou: 0.3173)
+
+Epoch 3/100
+Train - Loss: 0.0452, IoU: 0.3511, Dice: 0.4806
+Val   - Loss: 0.0365, IoU: 0.3842, Dice: 0.5294
+✓ Saved best model (val_iou: 0.3842)
+
+Epoch 4/100
+Train - Loss: 0.0356, IoU: 0.3668, Dice: 0.5042
+Val   - Loss: 0.0285, IoU: 0.4142, Dice: 0.5642
+✓ Saved best model (val_iou: 0.4142)
+
+Epoch 5/100
+Train - Loss: 0.0331, IoU: 0.4041, Dice: 0.5390
+Val   - Loss: 0.0254, IoU: 0.4187, Dice: 0.5480
+✓ Saved best model (val_iou: 0.4187)
+
+Epoch 6/100
+Train - Loss: 0.0305, IoU: 0.3825, Dice: 0.5189
+Val   - Loss: 0.0252, IoU: 0.3640, Dice: 0.5197
+
+Epoch 7/100
+Train - Loss: 0.0270, IoU: 0.4120, Dice: 0.5507
+Val   - Loss: 0.0210, IoU: 0.4410, Dice: 0.5981
+✓ Saved best model (val_iou: 0.4410)
+
+Epoch 8/100
+Train - Loss: 0.0281, IoU: 0.3906, Dice: 0.5274
+Val   - Loss: 0.0283, IoU: 0.3689, Dice: 0.5042
+
+Epoch 9/100
+Train - Loss: 0.0269, IoU: 0.3960, Dice: 0.5381
+Val   - Loss: 0.0208, IoU: 0.4343, Dice: 0.5862
+
+Epoch 10/100
+Train - Loss: 0.0234, IoU: 0.4423, Dice: 0.5821
+Val   - Loss: 0.0150, IoU: 0.4553, Dice: 0.5808
+✓ Saved best model (val_iou: 0.4553)
+
+Epoch 11/100
+Train - Loss: 0.0215, IoU: 0.4264, Dice: 0.5654
+Val   - Loss: 0.0149, IoU: 0.5399, Dice: 0.6755
+✓ Saved best model (val_iou: 0.5399)
+
+Epoch 12/100
+Train - Loss: 0.0202, IoU: 0.4714, Dice: 0.6026
+Val   - Loss: 0.0142, IoU: 0.5239, Dice: 0.6605
+
+Epoch 13/100
+Train - Loss: 0.0197, IoU: 0.4620, Dice: 0.5982
+Val   - Loss: 0.0203, IoU: 0.4905, Dice: 0.6077
+
+Epoch 14/100
+Train - Loss: 0.0174, IoU: 0.4684, Dice: 0.5996
+Val   - Loss: 0.0137, IoU: 0.5897, Dice: 0.7206
+✓ Saved best model (val_iou: 0.5897)
+
+Epoch 15/100
+Train - Loss: 0.0168, IoU: 0.4942, Dice: 0.6299
+Val   - Loss: 0.0150, IoU: 0.5570, Dice: 0.6911
+
+Epoch 16/100
+Train - Loss: 0.0180, IoU: 0.4804, Dice: 0.6142
+Val   - Loss: 0.0125, IoU: 0.5369, Dice: 0.6652
+
+Epoch 17/100
+Train - Loss: 0.0185, IoU: 0.4535, Dice: 0.5814
+Val   - Loss: 0.0125, IoU: 0.4717, Dice: 0.5986
+
+Epoch 18/100
+Train - Loss: 0.0176, IoU: 0.4914, Dice: 0.6214
+Val   - Loss: 0.0135, IoU: 0.4554, Dice: 0.5856
+
+Epoch 19/100
+Train - Loss: 0.0164, IoU: 0.4591, Dice: 0.5881
+Val   - Loss: 0.0233, IoU: 0.4671, Dice: 0.6173
+
+Epoch 20/100
+Train - Loss: 0.0160, IoU: 0.5355, Dice: 0.6662
+Val   - Loss: 0.0113, IoU: 0.5299, Dice: 0.6568
+
+Epoch 21/100
+Train - Loss: 0.0140, IoU: 0.4864, Dice: 0.6146
+Val   - Loss: 0.0117, IoU: 0.5419, Dice: 0.6759
+
+Epoch 22/100
+Train - Loss: 0.0159, IoU: 0.5347, Dice: 0.6661
+Val   - Loss: 0.0118, IoU: 0.4918, Dice: 0.6244
+
+Epoch 23/100
+Train - Loss: 0.0149, IoU: 0.4975, Dice: 0.6239
+Val   - Loss: 0.0109, IoU: 0.5390, Dice: 0.6680
+
+Epoch 24/100
+Train - Loss: 0.0154, IoU: 0.4838, Dice: 0.6134
+Val   - Loss: 0.0125, IoU: 0.3744, Dice: 0.4779
+
+Epoch 25/100
+Train - Loss: 0.0152, IoU: 0.5149, Dice: 0.6416
+Val   - Loss: 0.0131, IoU: 0.4821, Dice: 0.6249
+
+Epoch 26/100
+Train - Loss: 0.0165, IoU: 0.4832, Dice: 0.6206
+Val   - Loss: 0.0109, IoU: 0.6146, Dice: 0.7364
+✓ Saved best model (val_iou: 0.6146)
+
+Epoch 27/100
+Train - Loss: 0.0135, IoU: 0.5702, Dice: 0.6961
+Val   - Loss: 0.0109, IoU: 0.5209, Dice: 0.6472
+
+Epoch 28/100
+Train - Loss: 0.0130, IoU: 0.4983, Dice: 0.6251
+Val   - Loss: 0.0110, IoU: 0.5268, Dice: 0.6581
+
+Epoch 29/100
+Train - Loss: 0.0124, IoU: 0.5539, Dice: 0.6822
+Val   - Loss: 0.0103, IoU: 0.5637, Dice: 0.6923
+
+Epoch 30/100
+Train - Loss: 0.0125, IoU: 0.5320, Dice: 0.6562
+Val   - Loss: 0.0103, IoU: 0.5489, Dice: 0.6782
+
+Epoch 31/100
+Train - Loss: 0.0126, IoU: 0.5231, Dice: 0.6508
+Val   - Loss: 0.0102, IoU: 0.6053, Dice: 0.7284
+
+Epoch 32/100
+Train - Loss: 0.0117, IoU: 0.5460, Dice: 0.6762
+Val   - Loss: 0.0098, IoU: 0.5949, Dice: 0.7170
+
+Epoch 33/100
+Train - Loss: 0.0122, IoU: 0.5576, Dice: 0.6853
+Val   - Loss: 0.0098, IoU: 0.5494, Dice: 0.6773
+
+Epoch 34/100
+Train - Loss: 0.0111, IoU: 0.5399, Dice: 0.6668
+Val   - Loss: 0.0095, IoU: 0.5790, Dice: 0.7055
+
+Epoch 35/100
+Train - Loss: 0.0121, IoU: 0.5032, Dice: 0.6312
+Val   - Loss: 0.0097, IoU: 0.5324, Dice: 0.6585
+
+Epoch 36/100
+Train - Loss: 0.0115, IoU: 0.4987, Dice: 0.6215
+Val   - Loss: 0.0093, IoU: 0.5821, Dice: 0.7075
+
+Epoch 37/100
+Train - Loss: 0.0114, IoU: 0.5350, Dice: 0.6639
+Val   - Loss: 0.0092, IoU: 0.5776, Dice: 0.7047
+
+Epoch 38/100
+Train - Loss: 0.0104, IoU: 0.5567, Dice: 0.6850
+Val   - Loss: 0.0091, IoU: 0.5381, Dice: 0.6647
+
+Epoch 39/100
+Train - Loss: 0.0110, IoU: 0.5506, Dice: 0.6754
+Val   - Loss: 0.0094, IoU: 0.5473, Dice: 0.6745
+
+Epoch 40/100
+Train - Loss: 0.0108, IoU: 0.5072, Dice: 0.6318
+Val   - Loss: 0.0090, IoU: 0.5834, Dice: 0.7100
+
+Epoch 41/100
+Train - Loss: 0.0137, IoU: 0.5465, Dice: 0.6801
+Val   - Loss: 0.0089, IoU: 0.5639, Dice: 0.6901
+
+Epoch 42/100
+Train - Loss: 0.0113, IoU: 0.5261, Dice: 0.6512
+Val   - Loss: 0.0091, IoU: 0.5833, Dice: 0.7088
+
+Epoch 43/100
+Train - Loss: 0.0108, IoU: 0.5600, Dice: 0.6865
+Val   - Loss: 0.0089, IoU: 0.5921, Dice: 0.7162
+
+Epoch 44/100
+Train - Loss: 0.0106, IoU: 0.5422, Dice: 0.6699
+Val   - Loss: 0.0088, IoU: 0.5970, Dice: 0.7206
+
+Epoch 45/100
+Train - Loss: 0.0114, IoU: 0.5425, Dice: 0.6691
+Val   - Loss: 0.0088, IoU: 0.5782, Dice: 0.7044
+
+Epoch 46/100
+Train - Loss: 0.0108, IoU: 0.5505, Dice: 0.6765
+Val   - Loss: 0.0088, IoU: 0.5949, Dice: 0.7179
+
+Early stopping triggered after 46 epochs
+
+================================================================================
+Training: unet_n_filters16_dropout0.1_learning_rate0.003
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0537, IoU: 0.2944, Dice: 0.4172
+Val   - Loss: 0.0765, IoU: 0.0412, Dice: 0.0766
+✓ Saved best model (val_iou: 0.0412)
+
+Epoch 2/100
+Train - Loss: 0.0353, IoU: 0.2646, Dice: 0.3829
+Val   - Loss: 0.0325, IoU: 0.0476, Dice: 0.0865
+✓ Saved best model (val_iou: 0.0476)
+
+Epoch 3/100
+Train - Loss: 0.0285, IoU: 0.2420, Dice: 0.3570
+Val   - Loss: 0.0251, IoU: 0.3148, Dice: 0.4606
+✓ Saved best model (val_iou: 0.3148)
+
+Epoch 4/100
+Train - Loss: 0.0250, IoU: 0.3400, Dice: 0.4599
+Val   - Loss: 0.0242, IoU: 0.3873, Dice: 0.5179
+✓ Saved best model (val_iou: 0.3873)
+
+Epoch 5/100
+Train - Loss: 0.0244, IoU: 0.3508, Dice: 0.4765
+Val   - Loss: 0.0203, IoU: 0.4204, Dice: 0.5673
+✓ Saved best model (val_iou: 0.4204)
+
+Epoch 6/100
+Train - Loss: 0.0233, IoU: 0.3581, Dice: 0.4896
+Val   - Loss: 0.0176, IoU: 0.3818, Dice: 0.5344
+
+Epoch 7/100
+Train - Loss: 0.0212, IoU: 0.3615, Dice: 0.4968
+Val   - Loss: 0.0228, IoU: 0.4760, Dice: 0.6030
+✓ Saved best model (val_iou: 0.4760)
+
+Epoch 8/100
+Train - Loss: 0.0209, IoU: 0.4051, Dice: 0.5427
+Val   - Loss: 0.0261, IoU: 0.5208, Dice: 0.6695
+✓ Saved best model (val_iou: 0.5208)
+
+Epoch 9/100
+Train - Loss: 0.0215, IoU: 0.4076, Dice: 0.5494
+Val   - Loss: 0.0207, IoU: 0.5115, Dice: 0.6526
+
+Epoch 10/100
+Train - Loss: 0.0192, IoU: 0.4101, Dice: 0.5467
+Val   - Loss: 0.0159, IoU: 0.4400, Dice: 0.5684
+
+Epoch 11/100
+Train - Loss: 0.0228, IoU: 0.3800, Dice: 0.5140
+Val   - Loss: 0.0191, IoU: 0.3462, Dice: 0.4979
+
+Epoch 12/100
+Train - Loss: 0.0214, IoU: 0.4219, Dice: 0.5636
+Val   - Loss: 0.0174, IoU: 0.5167, Dice: 0.6643
+
+Epoch 13/100
+Train - Loss: 0.0196, IoU: 0.3645, Dice: 0.5006
+Val   - Loss: 0.0151, IoU: 0.4638, Dice: 0.6124
+
+Epoch 14/100
+Train - Loss: 0.0167, IoU: 0.4557, Dice: 0.5869
+Val   - Loss: 0.0145, IoU: 0.3693, Dice: 0.5012
+
+Epoch 15/100
+Train - Loss: 0.0224, IoU: 0.4159, Dice: 0.5567
+Val   - Loss: 0.0218, IoU: 0.5265, Dice: 0.6660
+✓ Saved best model (val_iou: 0.5265)
+
+Epoch 16/100
+Train - Loss: 0.0165, IoU: 0.4292, Dice: 0.5657
+Val   - Loss: 0.0140, IoU: 0.4638, Dice: 0.6111
+
+Epoch 17/100
+Train - Loss: 0.0161, IoU: 0.4109, Dice: 0.5393
+Val   - Loss: 0.0133, IoU: 0.5177, Dice: 0.6561
+
+Epoch 18/100
+Train - Loss: 0.0164, IoU: 0.4852, Dice: 0.6245
+Val   - Loss: 0.0147, IoU: 0.3803, Dice: 0.5252
+
+Epoch 19/100
+Train - Loss: 0.0137, IoU: 0.4698, Dice: 0.6036
+Val   - Loss: 0.0138, IoU: 0.4317, Dice: 0.5754
+
+Epoch 20/100
+Train - Loss: 0.0148, IoU: 0.4721, Dice: 0.6105
+Val   - Loss: 0.0124, IoU: 0.4884, Dice: 0.6305
+
+Epoch 21/100
+Train - Loss: 0.0152, IoU: 0.4510, Dice: 0.5860
+Val   - Loss: 0.0131, IoU: 0.4867, Dice: 0.6344
+
+Epoch 22/100
+Train - Loss: 0.0133, IoU: 0.4916, Dice: 0.6298
+Val   - Loss: 0.0119, IoU: 0.4526, Dice: 0.5847
+
+Epoch 23/100
+Train - Loss: 0.0138, IoU: 0.4461, Dice: 0.5735
+Val   - Loss: 0.0134, IoU: 0.4580, Dice: 0.5907
+
+Epoch 24/100
+Train - Loss: 0.0133, IoU: 0.5049, Dice: 0.6418
+Val   - Loss: 0.0113, IoU: 0.4741, Dice: 0.6118
+
+Epoch 25/100
+Train - Loss: 0.0132, IoU: 0.4234, Dice: 0.5426
+Val   - Loss: 0.0113, IoU: 0.5147, Dice: 0.6493
+
+Epoch 26/100
+Train - Loss: 0.0132, IoU: 0.4997, Dice: 0.6345
+Val   - Loss: 0.0127, IoU: 0.4608, Dice: 0.6019
+
+Epoch 27/100
+Train - Loss: 0.0137, IoU: 0.4872, Dice: 0.6223
+Val   - Loss: 0.0111, IoU: 0.4927, Dice: 0.6266
+
+Epoch 28/100
+Train - Loss: 0.0121, IoU: 0.4796, Dice: 0.6142
+Val   - Loss: 0.0104, IoU: 0.5488, Dice: 0.6756
+✓ Saved best model (val_iou: 0.5488)
+
+Epoch 29/100
+Train - Loss: 0.0119, IoU: 0.5068, Dice: 0.6354
+Val   - Loss: 0.0107, IoU: 0.5500, Dice: 0.6773
+✓ Saved best model (val_iou: 0.5500)
+
+Epoch 30/100
+Train - Loss: 0.0124, IoU: 0.5300, Dice: 0.6615
+Val   - Loss: 0.0134, IoU: 0.4622, Dice: 0.6001
+
+Epoch 31/100
+Train - Loss: 0.0168, IoU: 0.4922, Dice: 0.6289
+Val   - Loss: 0.0100, IoU: 0.5191, Dice: 0.6501
+
+Epoch 32/100
+Train - Loss: 0.0137, IoU: 0.4442, Dice: 0.5665
+Val   - Loss: 0.0112, IoU: 0.5716, Dice: 0.6973
+✓ Saved best model (val_iou: 0.5716)
+
+Epoch 33/100
+Train - Loss: 0.0154, IoU: 0.4939, Dice: 0.6225
+Val   - Loss: 0.0100, IoU: 0.5528, Dice: 0.6837
+
+Epoch 34/100
+Train - Loss: 0.0129, IoU: 0.5378, Dice: 0.6749
+Val   - Loss: 0.0115, IoU: 0.5816, Dice: 0.7101
+✓ Saved best model (val_iou: 0.5816)
+
+Epoch 35/100
+Train - Loss: 0.0125, IoU: 0.5219, Dice: 0.6529
+Val   - Loss: 0.0099, IoU: 0.5394, Dice: 0.6676
+
+Epoch 36/100
+Train - Loss: 0.0144, IoU: 0.5162, Dice: 0.6544
+Val   - Loss: 0.0107, IoU: 0.5096, Dice: 0.6410
+
+Epoch 37/100
+Train - Loss: 0.0128, IoU: 0.4921, Dice: 0.6239
+Val   - Loss: 0.0095, IoU: 0.5328, Dice: 0.6632
+
+Epoch 38/100
+Train - Loss: 0.0131, IoU: 0.4929, Dice: 0.6203
+Val   - Loss: 0.0101, IoU: 0.5101, Dice: 0.6406
+
+Epoch 39/100
+Train - Loss: 0.0133, IoU: 0.4927, Dice: 0.6222
+Val   - Loss: 0.0117, IoU: 0.4721, Dice: 0.6091
+
+Epoch 40/100
+Train - Loss: 0.0114, IoU: 0.5002, Dice: 0.6294
+Val   - Loss: 0.0093, IoU: 0.5444, Dice: 0.6691
+
+Epoch 41/100
+Train - Loss: 0.0114, IoU: 0.4883, Dice: 0.6144
+Val   - Loss: 0.0103, IoU: 0.5330, Dice: 0.6616
+
+Epoch 42/100
+Train - Loss: 0.0108, IoU: 0.5126, Dice: 0.6426
+Val   - Loss: 0.0094, IoU: 0.5379, Dice: 0.6634
+
+Epoch 43/100
+Train - Loss: 0.0112, IoU: 0.5299, Dice: 0.6560
+Val   - Loss: 0.0093, IoU: 0.5048, Dice: 0.6332
+
+Epoch 44/100
+Train - Loss: 0.0129, IoU: 0.5181, Dice: 0.6516
+Val   - Loss: 0.0103, IoU: 0.5202, Dice: 0.6505
+
+Epoch 45/100
+Train - Loss: 0.0112, IoU: 0.5160, Dice: 0.6446
+Val   - Loss: 0.0088, IoU: 0.5540, Dice: 0.6811
+
+Epoch 46/100
+Train - Loss: 0.0113, IoU: 0.5053, Dice: 0.6357
+Val   - Loss: 0.0092, IoU: 0.5250, Dice: 0.6512
+
+Epoch 47/100
+Train - Loss: 0.0132, IoU: 0.5101, Dice: 0.6441
+Val   - Loss: 0.0091, IoU: 0.5230, Dice: 0.6494
+
+Epoch 48/100
+Train - Loss: 0.0125, IoU: 0.4852, Dice: 0.6179
+Val   - Loss: 0.0100, IoU: 0.5107, Dice: 0.6399
+
+Epoch 49/100
+Train - Loss: 0.0108, IoU: 0.5109, Dice: 0.6416
+Val   - Loss: 0.0090, IoU: 0.5380, Dice: 0.6639
+
+Epoch 50/100
+Train - Loss: 0.0106, IoU: 0.5125, Dice: 0.6427
+Val   - Loss: 0.0090, IoU: 0.5110, Dice: 0.6363
+
+Epoch 51/100
+Train - Loss: 0.0106, IoU: 0.4797, Dice: 0.6048
+Val   - Loss: 0.0092, IoU: 0.5131, Dice: 0.6367
+
+Epoch 52/100
+Train - Loss: 0.0116, IoU: 0.5276, Dice: 0.6541
+Val   - Loss: 0.0087, IoU: 0.5394, Dice: 0.6659
+
+Epoch 53/100
+Train - Loss: 0.0104, IoU: 0.5492, Dice: 0.6725
+Val   - Loss: 0.0093, IoU: 0.5403, Dice: 0.6693
+
+Epoch 54/100
+Train - Loss: 0.0118, IoU: 0.5186, Dice: 0.6524
+Val   - Loss: 0.0093, IoU: 0.5476, Dice: 0.6736
+
+Early stopping triggered after 54 epochs
+
+================================================================================
+Training: unet_n_filters16_dropout0.1_learning_rate0.005
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0525, IoU: 0.2266, Dice: 0.3246
+Val   - Loss: 0.1087, IoU: 0.0002, Dice: 0.0004
+✓ Saved best model (val_iou: 0.0002)
+
+Epoch 2/100
+Train - Loss: 0.0324, IoU: 0.1318, Dice: 0.2033
+Val   - Loss: 0.0440, IoU: 0.0000, Dice: 0.0000
+
+Epoch 3/100
+Train - Loss: 0.0275, IoU: 0.1742, Dice: 0.2679
+Val   - Loss: 0.0385, IoU: 0.0051, Dice: 0.0101
+✓ Saved best model (val_iou: 0.0051)
+
+Epoch 4/100
+Train - Loss: 0.0281, IoU: 0.1104, Dice: 0.1711
+Val   - Loss: 0.0457, IoU: 0.2700, Dice: 0.3994
+✓ Saved best model (val_iou: 0.2700)
+
+Epoch 5/100
+Train - Loss: 0.0274, IoU: 0.2066, Dice: 0.2964
+Val   - Loss: 0.0240, IoU: 0.1606, Dice: 0.2687
+
+Epoch 6/100
+Train - Loss: 0.0222, IoU: 0.2532, Dice: 0.3659
+Val   - Loss: 0.0202, IoU: 0.3490, Dice: 0.5080
+✓ Saved best model (val_iou: 0.3490)
+
+Epoch 7/100
+Train - Loss: 0.0212, IoU: 0.3093, Dice: 0.4343
+Val   - Loss: 0.0214, IoU: 0.3629, Dice: 0.5208
+✓ Saved best model (val_iou: 0.3629)
+
+Epoch 8/100
+Train - Loss: 0.0191, IoU: 0.3443, Dice: 0.4743
+Val   - Loss: 0.0256, IoU: 0.3326, Dice: 0.4772
+
+Epoch 9/100
+Train - Loss: 0.0189, IoU: 0.3935, Dice: 0.5227
+Val   - Loss: 0.0173, IoU: 0.3309, Dice: 0.4535
+
+Epoch 10/100
+Train - Loss: 0.0193, IoU: 0.3988, Dice: 0.5265
+Val   - Loss: 0.0249, IoU: 0.5055, Dice: 0.6381
+✓ Saved best model (val_iou: 0.5055)
+
+Epoch 11/100
+Train - Loss: 0.0185, IoU: 0.3705, Dice: 0.5024
+Val   - Loss: 0.0170, IoU: 0.4078, Dice: 0.5325
+
+Epoch 12/100
+Train - Loss: 0.0172, IoU: 0.4104, Dice: 0.5350
+Val   - Loss: 0.0159, IoU: 0.3854, Dice: 0.5238
+
+Epoch 13/100
+Train - Loss: 0.0188, IoU: 0.3768, Dice: 0.4882
+Val   - Loss: 0.0165, IoU: 0.5093, Dice: 0.6416
+✓ Saved best model (val_iou: 0.5093)
+
+Epoch 14/100
+Train - Loss: 0.0208, IoU: 0.4118, Dice: 0.5437
+Val   - Loss: 0.0171, IoU: 0.3558, Dice: 0.4820
+
+Epoch 15/100
+Train - Loss: 0.0227, IoU: 0.3326, Dice: 0.4555
+Val   - Loss: 0.0191, IoU: 0.4649, Dice: 0.6063
+
+Epoch 16/100
+Train - Loss: 0.0184, IoU: 0.3606, Dice: 0.4937
+Val   - Loss: 0.0162, IoU: 0.3976, Dice: 0.5116
+
+Epoch 17/100
+Train - Loss: 0.0160, IoU: 0.4330, Dice: 0.5647
+Val   - Loss: 0.0165, IoU: 0.4715, Dice: 0.6098
+
+Epoch 18/100
+Train - Loss: 0.0157, IoU: 0.4046, Dice: 0.5278
+Val   - Loss: 0.0135, IoU: 0.3879, Dice: 0.5130
+
+Epoch 19/100
+Train - Loss: 0.0160, IoU: 0.4267, Dice: 0.5510
+Val   - Loss: 0.0728, IoU: 0.0438, Dice: 0.0795
+
+Epoch 20/100
+Train - Loss: 0.0219, IoU: 0.3396, Dice: 0.4594
+Val   - Loss: 0.0187, IoU: 0.4024, Dice: 0.5333
+
+Epoch 21/100
+Train - Loss: 0.0200, IoU: 0.3706, Dice: 0.5025
+Val   - Loss: 0.0182, IoU: 0.3708, Dice: 0.5087
+
+Epoch 22/100
+Train - Loss: 0.0184, IoU: 0.3687, Dice: 0.5042
+Val   - Loss: 0.0159, IoU: 0.3985, Dice: 0.5336
+
+Epoch 23/100
+Train - Loss: 0.0168, IoU: 0.4290, Dice: 0.5611
+Val   - Loss: 0.0156, IoU: 0.4036, Dice: 0.5514
+
+Epoch 24/100
+Train - Loss: 0.0168, IoU: 0.3521, Dice: 0.4832
+Val   - Loss: 0.0162, IoU: 0.4543, Dice: 0.5973
+
+Epoch 25/100
+Train - Loss: 0.0184, IoU: 0.4268, Dice: 0.5571
+Val   - Loss: 0.0160, IoU: 0.4640, Dice: 0.6037
+
+Epoch 26/100
+Train - Loss: 0.0161, IoU: 0.4056, Dice: 0.5360
+Val   - Loss: 0.0137, IoU: 0.3991, Dice: 0.5306
+
+Epoch 27/100
+Train - Loss: 0.0145, IoU: 0.4603, Dice: 0.5928
+Val   - Loss: 0.0135, IoU: 0.4739, Dice: 0.6030
+
+Epoch 28/100
+Train - Loss: 0.0139, IoU: 0.4685, Dice: 0.5946
+Val   - Loss: 0.0125, IoU: 0.4803, Dice: 0.6102
+
+Epoch 29/100
+Train - Loss: 0.0140, IoU: 0.4454, Dice: 0.5722
+Val   - Loss: 0.0136, IoU: 0.4856, Dice: 0.6105
+
+Epoch 30/100
+Train - Loss: 0.0146, IoU: 0.4683, Dice: 0.5929
+Val   - Loss: 0.0124, IoU: 0.4810, Dice: 0.6042
+
+Epoch 31/100
+Train - Loss: 0.0137, IoU: 0.4126, Dice: 0.5331
+Val   - Loss: 0.0127, IoU: 0.4562, Dice: 0.5850
+
+Epoch 32/100
+Train - Loss: 0.0164, IoU: 0.4567, Dice: 0.5832
+Val   - Loss: 0.0123, IoU: 0.4994, Dice: 0.6291
+
+Epoch 33/100
+Train - Loss: 0.0135, IoU: 0.4676, Dice: 0.5903
+Val   - Loss: 0.0136, IoU: 0.4824, Dice: 0.6004
+
+Early stopping triggered after 33 epochs
+
+================================================================================
+Training: unet_n_filters16_dropout0.2_learning_rate0.001
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0616, IoU: 0.1796, Dice: 0.2736
+Val   - Loss: 0.0554, IoU: 0.0000, Dice: 0.0000
+✓ Saved best model (val_iou: 0.0000)
+
+Epoch 2/100
+Train - Loss: 0.0455, IoU: 0.2982, Dice: 0.4220
+Val   - Loss: 0.0373, IoU: 0.0066, Dice: 0.0130
+✓ Saved best model (val_iou: 0.0066)
+
+Epoch 3/100
+Train - Loss: 0.0379, IoU: 0.2237, Dice: 0.3258
+Val   - Loss: 0.0294, IoU: 0.0352, Dice: 0.0658
+✓ Saved best model (val_iou: 0.0352)
+
+Epoch 4/100
+Train - Loss: 0.0321, IoU: 0.1757, Dice: 0.2615
+Val   - Loss: 0.0263, IoU: 0.2557, Dice: 0.3928
+✓ Saved best model (val_iou: 0.2557)
+
+Epoch 5/100
+Train - Loss: 0.0288, IoU: 0.2242, Dice: 0.3224
+Val   - Loss: 0.0267, IoU: 0.3983, Dice: 0.5377
+✓ Saved best model (val_iou: 0.3983)
+
+Epoch 6/100
+Train - Loss: 0.0258, IoU: 0.2251, Dice: 0.3293
+Val   - Loss: 0.0292, IoU: 0.4612, Dice: 0.6117
+✓ Saved best model (val_iou: 0.4612)
+
+Epoch 7/100
+Train - Loss: 0.0224, IoU: 0.3067, Dice: 0.4354
+Val   - Loss: 0.0182, IoU: 0.3507, Dice: 0.4953
+
+Epoch 8/100
+Train - Loss: 0.0252, IoU: 0.2997, Dice: 0.4201
+Val   - Loss: 0.0351, IoU: 0.0267, Dice: 0.0512
+
+Epoch 9/100
+Train - Loss: 0.0230, IoU: 0.3156, Dice: 0.4421
+Val   - Loss: 0.0162, IoU: 0.3664, Dice: 0.5109
+
+Epoch 10/100
+Train - Loss: 0.0221, IoU: 0.3943, Dice: 0.5257
+Val   - Loss: 0.0278, IoU: 0.4878, Dice: 0.6244
+✓ Saved best model (val_iou: 0.4878)
+
+Epoch 11/100
+Train - Loss: 0.0246, IoU: 0.2913, Dice: 0.4118
+Val   - Loss: 0.0179, IoU: 0.3346, Dice: 0.4655
+
+Epoch 12/100
+Train - Loss: 0.0256, IoU: 0.3368, Dice: 0.4693
+Val   - Loss: 0.0177, IoU: 0.3717, Dice: 0.5110
+
+Epoch 13/100
+Train - Loss: 0.0195, IoU: 0.3705, Dice: 0.4992
+Val   - Loss: 0.0180, IoU: 0.5457, Dice: 0.6757
+✓ Saved best model (val_iou: 0.5457)
+
+Epoch 14/100
+Train - Loss: 0.0211, IoU: 0.4196, Dice: 0.5498
+Val   - Loss: 0.0188, IoU: 0.4618, Dice: 0.6178
+
+Epoch 15/100
+Train - Loss: 0.0224, IoU: 0.3849, Dice: 0.5186
+Val   - Loss: 0.0220, IoU: 0.4715, Dice: 0.6045
+
+Epoch 16/100
+Train - Loss: 0.0192, IoU: 0.3661, Dice: 0.5006
+Val   - Loss: 0.0146, IoU: 0.5191, Dice: 0.6590
+
+Epoch 17/100
+Train - Loss: 0.0187, IoU: 0.3969, Dice: 0.5309
+Val   - Loss: 0.0155, IoU: 0.5149, Dice: 0.6565
+
+Epoch 18/100
+Train - Loss: 0.0175, IoU: 0.4312, Dice: 0.5693
+Val   - Loss: 0.0132, IoU: 0.5483, Dice: 0.6807
+✓ Saved best model (val_iou: 0.5483)
+
+Epoch 19/100
+Train - Loss: 0.0174, IoU: 0.3985, Dice: 0.5360
+Val   - Loss: 0.0148, IoU: 0.4484, Dice: 0.5940
+
+Epoch 20/100
+Train - Loss: 0.0183, IoU: 0.4207, Dice: 0.5552
+Val   - Loss: 0.0208, IoU: 0.3988, Dice: 0.5437
+
+Epoch 21/100
+Train - Loss: 0.0172, IoU: 0.4225, Dice: 0.5568
+Val   - Loss: 0.0157, IoU: 0.5406, Dice: 0.6753
+
+Epoch 22/100
+Train - Loss: 0.0157, IoU: 0.4607, Dice: 0.6001
+Val   - Loss: 0.0130, IoU: 0.5285, Dice: 0.6667
+
+Epoch 23/100
+Train - Loss: 0.0167, IoU: 0.4346, Dice: 0.5696
+Val   - Loss: 0.0854, IoU: 0.2594, Dice: 0.3626
+
+Epoch 24/100
+Train - Loss: 0.0179, IoU: 0.4231, Dice: 0.5568
+Val   - Loss: 0.0294, IoU: 0.2765, Dice: 0.4124
+
+Epoch 25/100
+Train - Loss: 0.0164, IoU: 0.4279, Dice: 0.5506
+Val   - Loss: 0.0131, IoU: 0.5881, Dice: 0.7186
+✓ Saved best model (val_iou: 0.5881)
+
+Epoch 26/100
+Train - Loss: 0.0162, IoU: 0.4948, Dice: 0.6311
+Val   - Loss: 0.0224, IoU: 0.2687, Dice: 0.4079
+
+Epoch 27/100
+Train - Loss: 0.0176, IoU: 0.5021, Dice: 0.6428
+Val   - Loss: 0.0125, IoU: 0.5739, Dice: 0.7050
+
+Epoch 28/100
+Train - Loss: 0.0150, IoU: 0.4016, Dice: 0.5263
+Val   - Loss: 0.0113, IoU: 0.5170, Dice: 0.6469
+
+Epoch 29/100
+Train - Loss: 0.0156, IoU: 0.3690, Dice: 0.4860
+Val   - Loss: 0.0130, IoU: 0.4496, Dice: 0.5872
+
+Epoch 30/100
+Train - Loss: 0.0161, IoU: 0.4337, Dice: 0.5677
+Val   - Loss: 0.0158, IoU: 0.5827, Dice: 0.7076
+
+Epoch 31/100
+Train - Loss: 0.0150, IoU: 0.5183, Dice: 0.6530
+Val   - Loss: 0.0167, IoU: 0.5736, Dice: 0.7037
+
+Epoch 32/100
+Train - Loss: 0.0174, IoU: 0.4179, Dice: 0.5472
+Val   - Loss: 0.0126, IoU: 0.5579, Dice: 0.6895
+
+Epoch 33/100
+Train - Loss: 0.0188, IoU: 0.4119, Dice: 0.5417
+Val   - Loss: 0.0145, IoU: 0.5133, Dice: 0.6367
+
+Epoch 34/100
+Train - Loss: 0.0152, IoU: 0.3587, Dice: 0.4699
+Val   - Loss: 0.0111, IoU: 0.4856, Dice: 0.6098
+
+Epoch 35/100
+Train - Loss: 0.0145, IoU: 0.4569, Dice: 0.5870
+Val   - Loss: 0.0120, IoU: 0.5222, Dice: 0.6473
+
+Epoch 36/100
+Train - Loss: 0.0157, IoU: 0.4421, Dice: 0.5772
+Val   - Loss: 0.0133, IoU: 0.5071, Dice: 0.6420
+
+Epoch 37/100
+Train - Loss: 0.0160, IoU: 0.4433, Dice: 0.5723
+Val   - Loss: 0.0117, IoU: 0.5148, Dice: 0.6423
+
+Epoch 38/100
+Train - Loss: 0.0141, IoU: 0.4625, Dice: 0.5940
+Val   - Loss: 0.0119, IoU: 0.5530, Dice: 0.6829
+
+Epoch 39/100
+Train - Loss: 0.0142, IoU: 0.4980, Dice: 0.6353
+Val   - Loss: 0.0110, IoU: 0.4965, Dice: 0.6280
+
+Epoch 40/100
+Train - Loss: 0.0137, IoU: 0.4415, Dice: 0.5650
+Val   - Loss: 0.0108, IoU: 0.5469, Dice: 0.6727
+
+Epoch 41/100
+Train - Loss: 0.0138, IoU: 0.4766, Dice: 0.6012
+Val   - Loss: 0.0114, IoU: 0.5237, Dice: 0.6500
+
+Epoch 42/100
+Train - Loss: 0.0135, IoU: 0.4492, Dice: 0.5800
+Val   - Loss: 0.0106, IoU: 0.5076, Dice: 0.6357
+
+Epoch 43/100
+Train - Loss: 0.0129, IoU: 0.4592, Dice: 0.5875
+Val   - Loss: 0.0103, IoU: 0.5082, Dice: 0.6347
+
+Epoch 44/100
+Train - Loss: 0.0131, IoU: 0.4144, Dice: 0.5345
+Val   - Loss: 0.0112, IoU: 0.5434, Dice: 0.6725
+
+Epoch 45/100
+Train - Loss: 0.0124, IoU: 0.4908, Dice: 0.6143
+Val   - Loss: 0.0105, IoU: 0.4989, Dice: 0.6255
+
+Early stopping triggered after 45 epochs
+
+================================================================================
+Training: unet_n_filters16_dropout0.2_learning_rate0.003
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.1129, IoU: 0.1968, Dice: 0.2866
+Val   - Loss: 0.0579, IoU: 0.0285, Dice: 0.0493
+✓ Saved best model (val_iou: 0.0285)
+
+Epoch 2/100
+Train - Loss: 0.0520, IoU: 0.2375, Dice: 0.3477
+Val   - Loss: 0.0378, IoU: 0.1288, Dice: 0.2155
+✓ Saved best model (val_iou: 0.1288)
+
+Epoch 3/100
+Train - Loss: 0.0381, IoU: 0.2738, Dice: 0.3834
+Val   - Loss: 0.0374, IoU: 0.1005, Dice: 0.1731
+
+Epoch 4/100
+Train - Loss: 0.0356, IoU: 0.1592, Dice: 0.2430
+Val   - Loss: 0.0282, IoU: 0.0878, Dice: 0.1551
+
+Epoch 5/100
+Train - Loss: 0.0299, IoU: 0.2420, Dice: 0.3512
+Val   - Loss: 0.0474, IoU: 0.3960, Dice: 0.5229
+✓ Saved best model (val_iou: 0.3960)
+
+Epoch 6/100
+Train - Loss: 0.0336, IoU: 0.1996, Dice: 0.2987
+Val   - Loss: 0.0277, IoU: 0.1132, Dice: 0.1886
+
+Epoch 7/100
+Train - Loss: 0.0276, IoU: 0.2426, Dice: 0.3493
+Val   - Loss: 0.0270, IoU: 0.3180, Dice: 0.4603
+
+Epoch 8/100
+Train - Loss: 0.0296, IoU: 0.2806, Dice: 0.3968
+Val   - Loss: 0.0803, IoU: 0.2244, Dice: 0.3467
+
+Epoch 9/100
+Train - Loss: 0.0286, IoU: 0.2728, Dice: 0.3886
+Val   - Loss: 0.0485, IoU: 0.3111, Dice: 0.4509
+
+Epoch 10/100
+Train - Loss: 0.0282, IoU: 0.2105, Dice: 0.3102
+Val   - Loss: 0.0231, IoU: 0.2471, Dice: 0.3688
+
+Epoch 11/100
+Train - Loss: 0.0276, IoU: 0.3123, Dice: 0.4440
+Val   - Loss: 0.0227, IoU: 0.3117, Dice: 0.4454
+
+Epoch 12/100
+Train - Loss: 0.0241, IoU: 0.3243, Dice: 0.4556
+Val   - Loss: 0.0484, IoU: 0.3216, Dice: 0.4464
+
+Epoch 13/100
+Train - Loss: 0.0221, IoU: 0.3772, Dice: 0.5110
+Val   - Loss: 0.0176, IoU: 0.4730, Dice: 0.6122
+✓ Saved best model (val_iou: 0.4730)
+
+Epoch 14/100
+Train - Loss: 0.0273, IoU: 0.3704, Dice: 0.5015
+Val   - Loss: 0.0179, IoU: 0.4128, Dice: 0.5657
+
+Epoch 15/100
+Train - Loss: 0.0218, IoU: 0.3633, Dice: 0.4980
+Val   - Loss: 0.0412, IoU: 0.5079, Dice: 0.6513
+✓ Saved best model (val_iou: 0.5079)
+
+Epoch 16/100
+Train - Loss: 0.0235, IoU: 0.4092, Dice: 0.5427
+Val   - Loss: 0.0158, IoU: 0.5049, Dice: 0.6436
+
+Epoch 17/100
+Train - Loss: 0.0210, IoU: 0.4012, Dice: 0.5368
+Val   - Loss: 0.0278, IoU: 0.2994, Dice: 0.4433
+
+Epoch 18/100
+Train - Loss: 0.0225, IoU: 0.4116, Dice: 0.5525
+Val   - Loss: 0.0244, IoU: 0.5014, Dice: 0.6439
+
+Epoch 19/100
+Train - Loss: 0.0196, IoU: 0.3886, Dice: 0.5212
+Val   - Loss: 0.0146, IoU: 0.4791, Dice: 0.6226
+
+Epoch 20/100
+Train - Loss: 0.0190, IoU: 0.4612, Dice: 0.6043
+Val   - Loss: 0.0143, IoU: 0.5761, Dice: 0.7079
+✓ Saved best model (val_iou: 0.5761)
+
+Epoch 21/100
+Train - Loss: 0.0203, IoU: 0.3906, Dice: 0.5208
+Val   - Loss: 0.0165, IoU: 0.4404, Dice: 0.5866
+
+Epoch 22/100
+Train - Loss: 0.0188, IoU: 0.3838, Dice: 0.5142
+Val   - Loss: 0.0156, IoU: 0.4502, Dice: 0.5808
+
+Epoch 23/100
+Train - Loss: 0.0176, IoU: 0.4282, Dice: 0.5664
+Val   - Loss: 0.0134, IoU: 0.4318, Dice: 0.5526
+
+Epoch 24/100
+Train - Loss: 0.0197, IoU: 0.4052, Dice: 0.5427
+Val   - Loss: 0.0370, IoU: 0.4371, Dice: 0.5771
+
+Epoch 25/100
+Train - Loss: 0.0197, IoU: 0.4294, Dice: 0.5655
+Val   - Loss: 0.0151, IoU: 0.3794, Dice: 0.5260
+
+Epoch 26/100
+Train - Loss: 0.0172, IoU: 0.4542, Dice: 0.5987
+Val   - Loss: 0.0141, IoU: 0.3458, Dice: 0.4700
+
+Epoch 27/100
+Train - Loss: 0.0157, IoU: 0.4463, Dice: 0.5805
+Val   - Loss: 0.0121, IoU: 0.5206, Dice: 0.6595
+
+Epoch 28/100
+Train - Loss: 0.0183, IoU: 0.4545, Dice: 0.5966
+Val   - Loss: 0.0146, IoU: 0.4983, Dice: 0.6428
+
+Epoch 29/100
+Train - Loss: 0.0170, IoU: 0.4149, Dice: 0.5535
+Val   - Loss: 0.0131, IoU: 0.4623, Dice: 0.6012
+
+Epoch 30/100
+Train - Loss: 0.0161, IoU: 0.4590, Dice: 0.5983
+Val   - Loss: 0.0125, IoU: 0.4532, Dice: 0.5872
+
+Epoch 31/100
+Train - Loss: 0.0173, IoU: 0.4168, Dice: 0.5611
+Val   - Loss: 0.0130, IoU: 0.4371, Dice: 0.5809
+
+Epoch 32/100
+Train - Loss: 0.0162, IoU: 0.4768, Dice: 0.6156
+Val   - Loss: 0.0171, IoU: 0.5203, Dice: 0.6562
+
+Epoch 33/100
+Train - Loss: 0.0148, IoU: 0.4397, Dice: 0.5697
+Val   - Loss: 0.0122, IoU: 0.4791, Dice: 0.6165
+
+Epoch 34/100
+Train - Loss: 0.0144, IoU: 0.4907, Dice: 0.6323
+Val   - Loss: 0.0112, IoU: 0.5285, Dice: 0.6614
+
+Epoch 35/100
+Train - Loss: 0.0143, IoU: 0.5026, Dice: 0.6435
+Val   - Loss: 0.0117, IoU: 0.4992, Dice: 0.6360
+
+Epoch 36/100
+Train - Loss: 0.0146, IoU: 0.4943, Dice: 0.6309
+Val   - Loss: 0.0126, IoU: 0.5548, Dice: 0.6810
+
+Epoch 37/100
+Train - Loss: 0.0134, IoU: 0.4856, Dice: 0.6197
+Val   - Loss: 0.0133, IoU: 0.4519, Dice: 0.5945
+
+Epoch 38/100
+Train - Loss: 0.0137, IoU: 0.5014, Dice: 0.6352
+Val   - Loss: 0.0106, IoU: 0.5463, Dice: 0.6738
+
+Epoch 39/100
+Train - Loss: 0.0133, IoU: 0.5192, Dice: 0.6537
+Val   - Loss: 0.0123, IoU: 0.4660, Dice: 0.6059
+
+Epoch 40/100
+Train - Loss: 0.0136, IoU: 0.4830, Dice: 0.6199
+Val   - Loss: 0.0115, IoU: 0.4942, Dice: 0.6319
+
+Early stopping triggered after 40 epochs
+
+================================================================================
+Training: unet_n_filters16_dropout0.2_learning_rate0.005
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0585, IoU: 0.2014, Dice: 0.2890
+Val   - Loss: 0.2473, IoU: 0.0067, Dice: 0.0131
+✓ Saved best model (val_iou: 0.0067)
+
+Epoch 2/100
+Train - Loss: 0.0351, IoU: 0.1890, Dice: 0.2731
+Val   - Loss: 0.0321, IoU: 0.0029, Dice: 0.0057
+
+Epoch 3/100
+Train - Loss: 0.0328, IoU: 0.2054, Dice: 0.2831
+Val   - Loss: 0.0282, IoU: 0.2081, Dice: 0.3060
+✓ Saved best model (val_iou: 0.2081)
+
+Epoch 4/100
+Train - Loss: 0.0318, IoU: 0.2452, Dice: 0.3419
+Val   - Loss: 0.0277, IoU: 0.2670, Dice: 0.3952
+✓ Saved best model (val_iou: 0.2670)
+
+Epoch 5/100
+Train - Loss: 0.0293, IoU: 0.1701, Dice: 0.2449
+Val   - Loss: 0.0420, IoU: 0.1401, Dice: 0.2257
+
+Epoch 6/100
+Train - Loss: 0.0286, IoU: 0.2064, Dice: 0.2842
+Val   - Loss: 0.0273, IoU: 0.0979, Dice: 0.1644
+
+Epoch 7/100
+Train - Loss: 0.0292, IoU: 0.1570, Dice: 0.2301
+Val   - Loss: 0.0600, IoU: 0.1907, Dice: 0.2947
+
+Epoch 8/100
+Train - Loss: 0.0296, IoU: 0.2010, Dice: 0.2825
+Val   - Loss: 0.0384, IoU: 0.0012, Dice: 0.0024
+
+Epoch 9/100
+Train - Loss: 0.0268, IoU: 0.1591, Dice: 0.2338
+Val   - Loss: 0.0422, IoU: 0.1021, Dice: 0.1762
+
+Epoch 10/100
+Train - Loss: 0.0304, IoU: 0.1361, Dice: 0.2027
+Val   - Loss: 0.0290, IoU: 0.2215, Dice: 0.3431
+
+Epoch 11/100
+Train - Loss: 0.0239, IoU: 0.2065, Dice: 0.2993
+Val   - Loss: 0.0437, IoU: 0.2498, Dice: 0.3796
+
+Epoch 12/100
+Train - Loss: 0.0236, IoU: 0.2378, Dice: 0.3385
+Val   - Loss: 0.0306, IoU: 0.3356, Dice: 0.4776
+✓ Saved best model (val_iou: 0.3356)
+
+Epoch 13/100
+Train - Loss: 0.0215, IoU: 0.3232, Dice: 0.4499
+Val   - Loss: 0.0192, IoU: 0.2150, Dice: 0.3433
+
+Epoch 14/100
+Train - Loss: 0.0241, IoU: 0.2633, Dice: 0.3724
+Val   - Loss: 0.0249, IoU: 0.1835, Dice: 0.2958
+
+Epoch 15/100
+Train - Loss: 0.0232, IoU: 0.2581, Dice: 0.3655
+Val   - Loss: 0.0199, IoU: 0.4178, Dice: 0.5566
+✓ Saved best model (val_iou: 0.4178)
+
+Epoch 16/100
+Train - Loss: 0.0195, IoU: 0.3424, Dice: 0.4670
+Val   - Loss: 0.0187, IoU: 0.4057, Dice: 0.5276
+
+Epoch 17/100
+Train - Loss: 0.0231, IoU: 0.3558, Dice: 0.4843
+Val   - Loss: 0.0175, IoU: 0.3016, Dice: 0.4459
+
+Epoch 18/100
+Train - Loss: 0.0218, IoU: 0.3632, Dice: 0.4913
+Val   - Loss: 0.0202, IoU: 0.3316, Dice: 0.4848
+
+Epoch 19/100
+Train - Loss: 0.0230, IoU: 0.3808, Dice: 0.5092
+Val   - Loss: 0.0206, IoU: 0.4606, Dice: 0.6107
+✓ Saved best model (val_iou: 0.4606)
+
+Epoch 20/100
+Train - Loss: 0.0238, IoU: 0.3435, Dice: 0.4775
+Val   - Loss: 0.0303, IoU: 0.3822, Dice: 0.5287
+
+Epoch 21/100
+Train - Loss: 0.0197, IoU: 0.3910, Dice: 0.5154
+Val   - Loss: 0.0188, IoU: 0.2564, Dice: 0.3935
+
+Epoch 22/100
+Train - Loss: 0.0206, IoU: 0.3032, Dice: 0.4212
+Val   - Loss: 0.0194, IoU: 0.3355, Dice: 0.4764
+
+Epoch 23/100
+Train - Loss: 0.0201, IoU: 0.3885, Dice: 0.5203
+Val   - Loss: 0.0170, IoU: 0.4474, Dice: 0.5796
+
+Epoch 24/100
+Train - Loss: 0.0198, IoU: 0.3888, Dice: 0.5295
+Val   - Loss: 0.0209, IoU: 0.3644, Dice: 0.5077
+
+Epoch 25/100
+Train - Loss: 0.0184, IoU: 0.3596, Dice: 0.4901
+Val   - Loss: 0.0179, IoU: 0.4763, Dice: 0.6287
+✓ Saved best model (val_iou: 0.4763)
+
+Epoch 26/100
+Train - Loss: 0.0176, IoU: 0.4140, Dice: 0.5531
+Val   - Loss: 0.0175, IoU: 0.3126, Dice: 0.4528
+
+Epoch 27/100
+Train - Loss: 0.0177, IoU: 0.3798, Dice: 0.5083
+Val   - Loss: 0.0189, IoU: 0.5071, Dice: 0.6485
+✓ Saved best model (val_iou: 0.5071)
+
+Epoch 28/100
+Train - Loss: 0.0160, IoU: 0.4352, Dice: 0.5618
+Val   - Loss: 0.0154, IoU: 0.4774, Dice: 0.6249
+
+Epoch 29/100
+Train - Loss: 0.0189, IoU: 0.4156, Dice: 0.5487
+Val   - Loss: 0.0170, IoU: 0.4005, Dice: 0.5373
+
+Epoch 30/100
+Train - Loss: 0.0165, IoU: 0.4768, Dice: 0.6098
+Val   - Loss: 0.0144, IoU: 0.5286, Dice: 0.6665
+✓ Saved best model (val_iou: 0.5286)
+
+Epoch 31/100
+Train - Loss: 0.0172, IoU: 0.3904, Dice: 0.5233
+Val   - Loss: 0.0161, IoU: 0.3532, Dice: 0.4955
+
+Epoch 32/100
+Train - Loss: 0.0154, IoU: 0.4483, Dice: 0.5862
+Val   - Loss: 0.0194, IoU: 0.5318, Dice: 0.6596
+✓ Saved best model (val_iou: 0.5318)
+
+Epoch 33/100
+Train - Loss: 0.0181, IoU: 0.4079, Dice: 0.5416
+Val   - Loss: 0.0173, IoU: 0.4877, Dice: 0.6314
+
+Epoch 34/100
+Train - Loss: 0.0173, IoU: 0.4003, Dice: 0.5340
+Val   - Loss: 0.0154, IoU: 0.5213, Dice: 0.6495
+
+Epoch 35/100
+Train - Loss: 0.0160, IoU: 0.4331, Dice: 0.5684
+Val   - Loss: 0.0137, IoU: 0.4911, Dice: 0.6312
+
+Epoch 36/100
+Train - Loss: 0.0155, IoU: 0.4602, Dice: 0.5984
+Val   - Loss: 0.0125, IoU: 0.4749, Dice: 0.6019
+
+Epoch 37/100
+Train - Loss: 0.0156, IoU: 0.4182, Dice: 0.5488
+Val   - Loss: 0.0176, IoU: 0.4633, Dice: 0.6159
+
+Epoch 38/100
+Train - Loss: 0.0156, IoU: 0.4545, Dice: 0.5795
+Val   - Loss: 0.0154, IoU: 0.4262, Dice: 0.5670
+
+Epoch 39/100
+Train - Loss: 0.0186, IoU: 0.4006, Dice: 0.5178
+Val   - Loss: 0.0197, IoU: 0.4387, Dice: 0.5948
+
+Epoch 40/100
+Train - Loss: 0.0168, IoU: 0.3946, Dice: 0.5228
+Val   - Loss: 0.0155, IoU: 0.3976, Dice: 0.5196
+
+Epoch 41/100
+Train - Loss: 0.0192, IoU: 0.3936, Dice: 0.5247
+Val   - Loss: 0.0262, IoU: 0.4483, Dice: 0.5891
+
+Epoch 42/100
+Train - Loss: 0.0159, IoU: 0.3920, Dice: 0.5124
+Val   - Loss: 0.0129, IoU: 0.4824, Dice: 0.6118
+
+Epoch 43/100
+Train - Loss: 0.0148, IoU: 0.4556, Dice: 0.5858
+Val   - Loss: 0.0120, IoU: 0.4670, Dice: 0.5974
+
+Epoch 44/100
+Train - Loss: 0.0145, IoU: 0.4352, Dice: 0.5541
+Val   - Loss: 0.0124, IoU: 0.4082, Dice: 0.5335
+
+Epoch 45/100
+Train - Loss: 0.0146, IoU: 0.4349, Dice: 0.5609
+Val   - Loss: 0.0119, IoU: 0.4337, Dice: 0.5603
+
+Epoch 46/100
+Train - Loss: 0.0140, IoU: 0.4049, Dice: 0.5198
+Val   - Loss: 0.0112, IoU: 0.4789, Dice: 0.6085
+
+Epoch 47/100
+Train - Loss: 0.0151, IoU: 0.4196, Dice: 0.5451
+Val   - Loss: 0.0181, IoU: 0.4235, Dice: 0.5669
+
+Epoch 48/100
+Train - Loss: 0.0184, IoU: 0.4742, Dice: 0.6044
+Val   - Loss: 0.0131, IoU: 0.4494, Dice: 0.5887
+
+Epoch 49/100
+Train - Loss: 0.0158, IoU: 0.4499, Dice: 0.5700
+Val   - Loss: 0.0119, IoU: 0.5301, Dice: 0.6531
+
+Epoch 50/100
+Train - Loss: 0.0147, IoU: 0.4357, Dice: 0.5618
+Val   - Loss: 0.0129, IoU: 0.4193, Dice: 0.5566
+
+Epoch 51/100
+Train - Loss: 0.0157, IoU: 0.4567, Dice: 0.5793
+Val   - Loss: 0.0136, IoU: 0.5191, Dice: 0.6592
+
+Epoch 52/100
+Train - Loss: 0.0144, IoU: 0.4757, Dice: 0.6020
+Val   - Loss: 0.0123, IoU: 0.4845, Dice: 0.6132
+
+Early stopping triggered after 52 epochs
+
+================================================================================
+Training: unet_n_filters16_dropout0.3_learning_rate0.001
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.1315, IoU: 0.2285, Dice: 0.3151
+Val   - Loss: 0.0873, IoU: 0.1718, Dice: 0.2627
+✓ Saved best model (val_iou: 0.1718)
+
+Epoch 2/100
+Train - Loss: 0.0835, IoU: 0.3043, Dice: 0.4254
+Val   - Loss: 0.0652, IoU: 0.2751, Dice: 0.4006
+✓ Saved best model (val_iou: 0.2751)
+
+Epoch 3/100
+Train - Loss: 0.0686, IoU: 0.3106, Dice: 0.4351
+Val   - Loss: 0.0550, IoU: 0.2950, Dice: 0.4269
+✓ Saved best model (val_iou: 0.2950)
+
+Epoch 4/100
+Train - Loss: 0.0568, IoU: 0.2185, Dice: 0.3258
+Val   - Loss: 0.0509, IoU: 0.3334, Dice: 0.4732
+✓ Saved best model (val_iou: 0.3334)
+
+Epoch 5/100
+Train - Loss: 0.0516, IoU: 0.2401, Dice: 0.3545
+Val   - Loss: 0.0435, IoU: 0.3485, Dice: 0.4961
+✓ Saved best model (val_iou: 0.3485)
+
+Epoch 6/100
+Train - Loss: 0.0473, IoU: 0.2485, Dice: 0.3624
+Val   - Loss: 0.0391, IoU: 0.3311, Dice: 0.4725
+
+Epoch 7/100
+Train - Loss: 0.0449, IoU: 0.2173, Dice: 0.3173
+Val   - Loss: 0.0370, IoU: 0.3350, Dice: 0.4835
+
+Epoch 8/100
+Train - Loss: 0.0406, IoU: 0.2203, Dice: 0.3266
+Val   - Loss: 0.0352, IoU: 0.3227, Dice: 0.4590
+
+Epoch 9/100
+Train - Loss: 0.0382, IoU: 0.2223, Dice: 0.3243
+Val   - Loss: 0.0321, IoU: 0.3429, Dice: 0.4906
+
+Epoch 10/100
+Train - Loss: 0.0386, IoU: 0.2540, Dice: 0.3655
+Val   - Loss: 0.0315, IoU: 0.3353, Dice: 0.4772
+
+Epoch 11/100
+Train - Loss: 0.0344, IoU: 0.2559, Dice: 0.3687
+Val   - Loss: 0.0328, IoU: 0.2948, Dice: 0.4270
+
+Epoch 12/100
+Train - Loss: 0.0350, IoU: 0.2508, Dice: 0.3592
+Val   - Loss: 0.0301, IoU: 0.3099, Dice: 0.4335
+
+Epoch 13/100
+Train - Loss: 0.0368, IoU: 0.2580, Dice: 0.3724
+Val   - Loss: 0.0304, IoU: 0.3577, Dice: 0.4990
+✓ Saved best model (val_iou: 0.3577)
+
+Epoch 14/100
+Train - Loss: 0.0305, IoU: 0.2678, Dice: 0.3814
+Val   - Loss: 0.0277, IoU: 0.3199, Dice: 0.4492
+
+Epoch 15/100
+Train - Loss: 0.0341, IoU: 0.3030, Dice: 0.4216
+Val   - Loss: 0.0262, IoU: 0.3374, Dice: 0.4727
+
+Epoch 16/100
+Train - Loss: 0.0315, IoU: 0.3075, Dice: 0.4241
+Val   - Loss: 0.0264, IoU: 0.3198, Dice: 0.4396
+
+Epoch 17/100
+Train - Loss: 0.0318, IoU: 0.3201, Dice: 0.4463
+Val   - Loss: 0.0280, IoU: 0.3883, Dice: 0.5333
+✓ Saved best model (val_iou: 0.3883)
+
+Epoch 18/100
+Train - Loss: 0.0296, IoU: 0.3348, Dice: 0.4643
+Val   - Loss: 0.0271, IoU: 0.3927, Dice: 0.5421
+✓ Saved best model (val_iou: 0.3927)
+
+Epoch 19/100
+Train - Loss: 0.0269, IoU: 0.3277, Dice: 0.4498
+Val   - Loss: 0.0255, IoU: 0.3663, Dice: 0.5076
+
+Epoch 20/100
+Train - Loss: 0.0301, IoU: 0.3146, Dice: 0.4327
+Val   - Loss: 0.0250, IoU: 0.4039, Dice: 0.5477
+✓ Saved best model (val_iou: 0.4039)
+
+Epoch 21/100
+Train - Loss: 0.0272, IoU: 0.3300, Dice: 0.4514
+Val   - Loss: 0.0236, IoU: 0.3849, Dice: 0.5243
+
+Epoch 22/100
+Train - Loss: 0.0261, IoU: 0.3536, Dice: 0.4854
+Val   - Loss: 0.0213, IoU: 0.3834, Dice: 0.5298
+
+Epoch 23/100
+Train - Loss: 0.0265, IoU: 0.3621, Dice: 0.4863
+Val   - Loss: 0.0224, IoU: 0.3958, Dice: 0.5396
+
+Epoch 24/100
+Train - Loss: 0.0264, IoU: 0.3444, Dice: 0.4693
+Val   - Loss: 0.0223, IoU: 0.4328, Dice: 0.5793
+✓ Saved best model (val_iou: 0.4328)
+
+Epoch 25/100
+Train - Loss: 0.0260, IoU: 0.3624, Dice: 0.4933
+Val   - Loss: 0.0196, IoU: 0.4211, Dice: 0.5707
+
+Epoch 26/100
+Train - Loss: 0.0236, IoU: 0.3102, Dice: 0.4421
+Val   - Loss: 0.0176, IoU: 0.4445, Dice: 0.5952
+✓ Saved best model (val_iou: 0.4445)
+
+Epoch 27/100
+Train - Loss: 0.0266, IoU: 0.4067, Dice: 0.5377
+Val   - Loss: 0.0207, IoU: 0.5165, Dice: 0.6684
+✓ Saved best model (val_iou: 0.5165)
+
+Epoch 28/100
+Train - Loss: 0.0245, IoU: 0.3499, Dice: 0.4838
+Val   - Loss: 0.0195, IoU: 0.4016, Dice: 0.5534
+
+Epoch 29/100
+Train - Loss: 0.0225, IoU: 0.4348, Dice: 0.5798
+Val   - Loss: 0.0170, IoU: 0.5061, Dice: 0.6555
+
+Epoch 30/100
+Train - Loss: 0.0307, IoU: 0.3846, Dice: 0.5150
+Val   - Loss: 0.0236, IoU: 0.5477, Dice: 0.6917
+✓ Saved best model (val_iou: 0.5477)
+
+Epoch 31/100
+Train - Loss: 0.0236, IoU: 0.3762, Dice: 0.5128
+Val   - Loss: 0.0177, IoU: 0.5238, Dice: 0.6582
+
+Epoch 32/100
+Train - Loss: 0.0244, IoU: 0.4012, Dice: 0.5336
+Val   - Loss: 0.0184, IoU: 0.1997, Dice: 0.3219
+
+Epoch 33/100
+Train - Loss: 0.0210, IoU: 0.4155, Dice: 0.5448
+Val   - Loss: 0.0163, IoU: 0.5927, Dice: 0.7192
+✓ Saved best model (val_iou: 0.5927)
+
+Epoch 34/100
+Train - Loss: 0.0269, IoU: 0.4263, Dice: 0.5649
+Val   - Loss: 0.0156, IoU: 0.5700, Dice: 0.7053
+
+Epoch 35/100
+Train - Loss: 0.0288, IoU: 0.3754, Dice: 0.5072
+Val   - Loss: 0.0174, IoU: 0.4395, Dice: 0.5876
+
+Epoch 36/100
+Train - Loss: 0.0248, IoU: 0.3880, Dice: 0.5240
+Val   - Loss: 0.0164, IoU: 0.5650, Dice: 0.6995
+
+Epoch 37/100
+Train - Loss: 0.0233, IoU: 0.4175, Dice: 0.5481
+Val   - Loss: 0.0153, IoU: 0.5278, Dice: 0.6588
+
+Epoch 38/100
+Train - Loss: 0.0202, IoU: 0.4422, Dice: 0.5763
+Val   - Loss: 0.0144, IoU: 0.4924, Dice: 0.6290
+
+Epoch 39/100
+Train - Loss: 0.0217, IoU: 0.4216, Dice: 0.5564
+Val   - Loss: 0.0164, IoU: 0.5368, Dice: 0.6766
+
+Epoch 40/100
+Train - Loss: 0.0198, IoU: 0.4546, Dice: 0.5894
+Val   - Loss: 0.0282, IoU: 0.4600, Dice: 0.5866
+
+Epoch 41/100
+Train - Loss: 0.0232, IoU: 0.4240, Dice: 0.5578
+Val   - Loss: 0.0153, IoU: 0.4960, Dice: 0.6424
+
+Epoch 42/100
+Train - Loss: 0.0215, IoU: 0.3982, Dice: 0.5208
+Val   - Loss: 0.0141, IoU: 0.5381, Dice: 0.6675
+
+Epoch 43/100
+Train - Loss: 0.0198, IoU: 0.4505, Dice: 0.5849
+Val   - Loss: 0.0146, IoU: 0.4565, Dice: 0.5995
+
+Epoch 44/100
+Train - Loss: 0.0175, IoU: 0.4367, Dice: 0.5682
+Val   - Loss: 0.0137, IoU: 0.5920, Dice: 0.7175
+
+Epoch 45/100
+Train - Loss: 0.0197, IoU: 0.4728, Dice: 0.6105
+Val   - Loss: 0.0142, IoU: 0.5556, Dice: 0.6827
+
+Epoch 46/100
+Train - Loss: 0.0174, IoU: 0.5071, Dice: 0.6424
+Val   - Loss: 0.0125, IoU: 0.5709, Dice: 0.7001
+
+Epoch 47/100
+Train - Loss: 0.0194, IoU: 0.4634, Dice: 0.5993
+Val   - Loss: 0.0123, IoU: 0.5339, Dice: 0.6649
+
+Epoch 48/100
+Train - Loss: 0.0181, IoU: 0.4349, Dice: 0.5658
+Val   - Loss: 0.0122, IoU: 0.5583, Dice: 0.6877
+
+Epoch 49/100
+Train - Loss: 0.0200, IoU: 0.4572, Dice: 0.5927
+Val   - Loss: 0.0131, IoU: 0.5682, Dice: 0.6976
+
+Epoch 50/100
+Train - Loss: 0.0175, IoU: 0.4277, Dice: 0.5609
+Val   - Loss: 0.0141, IoU: 0.5072, Dice: 0.6376
+
+Epoch 51/100
+Train - Loss: 0.0178, IoU: 0.4524, Dice: 0.5806
+Val   - Loss: 0.0127, IoU: 0.5635, Dice: 0.6935
+
+Epoch 52/100
+Train - Loss: 0.0174, IoU: 0.4945, Dice: 0.6274
+Val   - Loss: 0.0137, IoU: 0.5611, Dice: 0.6855
+
+Epoch 53/100
+Train - Loss: 0.0201, IoU: 0.3649, Dice: 0.4963
+Val   - Loss: 0.0138, IoU: 0.5384, Dice: 0.6664
+
+Early stopping triggered after 53 epochs
+
+================================================================================
+Training: unet_n_filters16_dropout0.3_learning_rate0.003
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0915, IoU: 0.2472, Dice: 0.3513
+Val   - Loss: 0.0578, IoU: 0.0000, Dice: 0.0000
+✓ Saved best model (val_iou: 0.0000)
+
+Epoch 2/100
+Train - Loss: 0.0482, IoU: 0.2902, Dice: 0.4161
+Val   - Loss: 0.0383, IoU: 0.3616, Dice: 0.4917
+✓ Saved best model (val_iou: 0.3616)
+
+Epoch 3/100
+Train - Loss: 0.0405, IoU: 0.1966, Dice: 0.2847
+Val   - Loss: 0.0302, IoU: 0.1367, Dice: 0.2192
+
+Epoch 4/100
+Train - Loss: 0.0355, IoU: 0.1965, Dice: 0.2831
+Val   - Loss: 0.0299, IoU: 0.3177, Dice: 0.4492
+
+Epoch 5/100
+Train - Loss: 0.0309, IoU: 0.2415, Dice: 0.3471
+Val   - Loss: 0.0305, IoU: 0.3504, Dice: 0.4821
+
+Epoch 6/100
+Train - Loss: 0.0312, IoU: 0.2611, Dice: 0.3677
+Val   - Loss: 0.0269, IoU: 0.3459, Dice: 0.4772
+
+Epoch 7/100
+Train - Loss: 0.0302, IoU: 0.2574, Dice: 0.3602
+Val   - Loss: 0.0286, IoU: 0.3101, Dice: 0.4324
+
+Epoch 8/100
+Train - Loss: 0.0311, IoU: 0.2590, Dice: 0.3640
+Val   - Loss: 0.0254, IoU: 0.4249, Dice: 0.5694
+✓ Saved best model (val_iou: 0.4249)
+
+Epoch 9/100
+Train - Loss: 0.0280, IoU: 0.2991, Dice: 0.4136
+Val   - Loss: 0.0255, IoU: 0.2852, Dice: 0.4060
+
+Epoch 10/100
+Train - Loss: 0.0288, IoU: 0.2839, Dice: 0.3934
+Val   - Loss: 0.0230, IoU: 0.3178, Dice: 0.4556
+
+Epoch 11/100
+Train - Loss: 0.0277, IoU: 0.3332, Dice: 0.4587
+Val   - Loss: 0.0279, IoU: 0.4436, Dice: 0.5896
+✓ Saved best model (val_iou: 0.4436)
+
+Epoch 12/100
+Train - Loss: 0.0298, IoU: 0.2494, Dice: 0.3482
+Val   - Loss: 0.0249, IoU: 0.3908, Dice: 0.5371
+
+Epoch 13/100
+Train - Loss: 0.0302, IoU: 0.2592, Dice: 0.3656
+Val   - Loss: 0.0250, IoU: 0.1838, Dice: 0.2837
+
+Epoch 14/100
+Train - Loss: 0.0261, IoU: 0.2644, Dice: 0.3713
+Val   - Loss: 0.0244, IoU: 0.3646, Dice: 0.4978
+
+Epoch 15/100
+Train - Loss: 0.0276, IoU: 0.3413, Dice: 0.4586
+Val   - Loss: 0.0261, IoU: 0.3194, Dice: 0.4480
+
+Epoch 16/100
+Train - Loss: 0.0262, IoU: 0.2561, Dice: 0.3595
+Val   - Loss: 0.0237, IoU: 0.2234, Dice: 0.3402
+
+Epoch 17/100
+Train - Loss: 0.0253, IoU: 0.3419, Dice: 0.4700
+Val   - Loss: 0.0211, IoU: 0.4589, Dice: 0.6077
+✓ Saved best model (val_iou: 0.4589)
+
+Epoch 18/100
+Train - Loss: 0.0256, IoU: 0.2948, Dice: 0.4134
+Val   - Loss: 0.0202, IoU: 0.4006, Dice: 0.5500
+
+Epoch 19/100
+Train - Loss: 0.0250, IoU: 0.3502, Dice: 0.4785
+Val   - Loss: 0.0311, IoU: 0.3124, Dice: 0.4551
+
+Epoch 20/100
+Train - Loss: 0.0241, IoU: 0.3263, Dice: 0.4535
+Val   - Loss: 0.0208, IoU: 0.3902, Dice: 0.5467
+
+Epoch 21/100
+Train - Loss: 0.0316, IoU: 0.3188, Dice: 0.4454
+Val   - Loss: 0.0215, IoU: 0.3854, Dice: 0.5379
+
+Epoch 22/100
+Train - Loss: 0.0239, IoU: 0.4250, Dice: 0.5685
+Val   - Loss: 0.0186, IoU: 0.4881, Dice: 0.6385
+✓ Saved best model (val_iou: 0.4881)
+
+Epoch 23/100
+Train - Loss: 0.0244, IoU: 0.3558, Dice: 0.4942
+Val   - Loss: 0.0228, IoU: 0.4810, Dice: 0.6158
+
+Epoch 24/100
+Train - Loss: 0.0212, IoU: 0.3832, Dice: 0.5087
+Val   - Loss: 0.0279, IoU: 0.2827, Dice: 0.4153
+
+Epoch 25/100
+Train - Loss: 0.0227, IoU: 0.3664, Dice: 0.5007
+Val   - Loss: 0.0179, IoU: 0.4477, Dice: 0.6032
+
+Epoch 26/100
+Train - Loss: 0.0247, IoU: 0.3444, Dice: 0.4724
+Val   - Loss: 0.0176, IoU: 0.4307, Dice: 0.5834
+
+Epoch 27/100
+Train - Loss: 0.0228, IoU: 0.3391, Dice: 0.4723
+Val   - Loss: 0.0177, IoU: 0.4197, Dice: 0.5713
+
+Epoch 28/100
+Train - Loss: 0.0215, IoU: 0.3796, Dice: 0.5188
+Val   - Loss: 0.0173, IoU: 0.4597, Dice: 0.6146
+
+Epoch 29/100
+Train - Loss: 0.0218, IoU: 0.3725, Dice: 0.5018
+Val   - Loss: 0.0214, IoU: 0.5337, Dice: 0.6818
+✓ Saved best model (val_iou: 0.5337)
+
+Epoch 30/100
+Train - Loss: 0.0240, IoU: 0.3434, Dice: 0.4666
+Val   - Loss: 0.0337, IoU: 0.3813, Dice: 0.5362
+
+Epoch 31/100
+Train - Loss: 0.0246, IoU: 0.2966, Dice: 0.4202
+Val   - Loss: 0.0196, IoU: 0.3422, Dice: 0.4885
+
+Epoch 32/100
+Train - Loss: 0.0245, IoU: 0.3675, Dice: 0.5049
+Val   - Loss: 0.0210, IoU: 0.4939, Dice: 0.6459
+
+Epoch 33/100
+Train - Loss: 0.0211, IoU: 0.4034, Dice: 0.5418
+Val   - Loss: 0.0351, IoU: 0.5309, Dice: 0.6736
+
+Epoch 34/100
+Train - Loss: 0.0253, IoU: 0.3206, Dice: 0.4500
+Val   - Loss: 0.0201, IoU: 0.4483, Dice: 0.6031
+
+Epoch 35/100
+Train - Loss: 0.0190, IoU: 0.4166, Dice: 0.5532
+Val   - Loss: 0.0177, IoU: 0.4858, Dice: 0.6318
+
+Epoch 36/100
+Train - Loss: 0.0210, IoU: 0.4156, Dice: 0.5577
+Val   - Loss: 0.0183, IoU: 0.5060, Dice: 0.6521
+
+Epoch 37/100
+Train - Loss: 0.0216, IoU: 0.3913, Dice: 0.5283
+Val   - Loss: 0.0168, IoU: 0.4723, Dice: 0.6220
+
+Epoch 38/100
+Train - Loss: 0.0196, IoU: 0.3975, Dice: 0.5397
+Val   - Loss: 0.0247, IoU: 0.4483, Dice: 0.6023
+
+Epoch 39/100
+Train - Loss: 0.0179, IoU: 0.4080, Dice: 0.5514
+Val   - Loss: 0.0157, IoU: 0.4411, Dice: 0.5895
+
+Epoch 40/100
+Train - Loss: 0.0224, IoU: 0.3729, Dice: 0.5125
+Val   - Loss: 0.0188, IoU: 0.4740, Dice: 0.6145
+
+Epoch 41/100
+Train - Loss: 0.0192, IoU: 0.4317, Dice: 0.5772
+Val   - Loss: 0.0163, IoU: 0.4615, Dice: 0.6174
+
+Epoch 42/100
+Train - Loss: 0.0203, IoU: 0.4403, Dice: 0.5842
+Val   - Loss: 0.0183, IoU: 0.5207, Dice: 0.6659
+
+Epoch 43/100
+Train - Loss: 0.0188, IoU: 0.4467, Dice: 0.5865
+Val   - Loss: 0.0154, IoU: 0.4920, Dice: 0.6398
+
+Epoch 44/100
+Train - Loss: 0.0179, IoU: 0.4268, Dice: 0.5673
+Val   - Loss: 0.0143, IoU: 0.5191, Dice: 0.6635
+
+Epoch 45/100
+Train - Loss: 0.0178, IoU: 0.4683, Dice: 0.6132
+Val   - Loss: 0.0146, IoU: 0.4574, Dice: 0.6103
+
+Epoch 46/100
+Train - Loss: 0.0191, IoU: 0.4204, Dice: 0.5679
+Val   - Loss: 0.0162, IoU: 0.4786, Dice: 0.6311
+
+Epoch 47/100
+Train - Loss: 0.0162, IoU: 0.4829, Dice: 0.6253
+Val   - Loss: 0.0140, IoU: 0.5281, Dice: 0.6700
+
+Epoch 48/100
+Train - Loss: 0.0170, IoU: 0.4748, Dice: 0.6212
+Val   - Loss: 0.0152, IoU: 0.4551, Dice: 0.6077
+
+Epoch 49/100
+Train - Loss: 0.0179, IoU: 0.4542, Dice: 0.5953
+Val   - Loss: 0.0176, IoU: 0.5301, Dice: 0.6762
+
+Early stopping triggered after 49 epochs
+
+================================================================================
+Training: unet_n_filters16_dropout0.3_learning_rate0.005
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0824, IoU: 0.2322, Dice: 0.3306
+Val   - Loss: 0.0428, IoU: 0.0482, Dice: 0.0816
+✓ Saved best model (val_iou: 0.0482)
+
+Epoch 2/100
+Train - Loss: 0.0440, IoU: 0.1251, Dice: 0.1826
+Val   - Loss: 0.0387, IoU: 0.0000, Dice: 0.0000
+
+Epoch 3/100
+Train - Loss: 0.0350, IoU: 0.1376, Dice: 0.2007
+Val   - Loss: 0.0343, IoU: 0.1973, Dice: 0.2938
+✓ Saved best model (val_iou: 0.1973)
+
+Epoch 4/100
+Train - Loss: 0.0299, IoU: 0.2117, Dice: 0.3013
+Val   - Loss: 0.0343, IoU: 0.0430, Dice: 0.0771
+
+Epoch 5/100
+Train - Loss: 0.0317, IoU: 0.1334, Dice: 0.1999
+Val   - Loss: 0.0344, IoU: 0.2225, Dice: 0.3299
+✓ Saved best model (val_iou: 0.2225)
+
+Epoch 6/100
+Train - Loss: 0.0283, IoU: 0.1529, Dice: 0.2215
+Val   - Loss: 0.0653, IoU: 0.3502, Dice: 0.4881
+✓ Saved best model (val_iou: 0.3502)
+
+Epoch 7/100
+Train - Loss: 0.0297, IoU: 0.2182, Dice: 0.3022
+Val   - Loss: 0.0283, IoU: 0.1536, Dice: 0.2350
+
+Epoch 8/100
+Train - Loss: 0.0260, IoU: 0.1786, Dice: 0.2570
+Val   - Loss: 0.0255, IoU: 0.1086, Dice: 0.1793
+
+Epoch 9/100
+Train - Loss: 0.0339, IoU: 0.1834, Dice: 0.2634
+Val   - Loss: 0.0280, IoU: 0.1401, Dice: 0.2243
+
+Epoch 10/100
+Train - Loss: 0.0269, IoU: 0.1680, Dice: 0.2360
+Val   - Loss: 0.0299, IoU: 0.3168, Dice: 0.4624
+
+Epoch 11/100
+Train - Loss: 0.0290, IoU: 0.2438, Dice: 0.3326
+Val   - Loss: 0.0400, IoU: 0.1303, Dice: 0.2087
+
+Epoch 12/100
+Train - Loss: 0.0303, IoU: 0.1734, Dice: 0.2455
+Val   - Loss: 0.0549, IoU: 0.0655, Dice: 0.1100
+
+Epoch 13/100
+Train - Loss: 0.0285, IoU: 0.1415, Dice: 0.1990
+Val   - Loss: 0.0399, IoU: 0.2507, Dice: 0.3481
+
+Epoch 14/100
+Train - Loss: 0.0291, IoU: 0.2862, Dice: 0.3801
+Val   - Loss: 0.0259, IoU: 0.2987, Dice: 0.4175
+
+Epoch 15/100
+Train - Loss: 0.0284, IoU: 0.1857, Dice: 0.2602
+Val   - Loss: 0.0260, IoU: 0.1448, Dice: 0.2259
+
+Epoch 16/100
+Train - Loss: 0.0265, IoU: 0.2232, Dice: 0.3078
+Val   - Loss: 0.0399, IoU: 0.2282, Dice: 0.3286
+
+Epoch 17/100
+Train - Loss: 0.0274, IoU: 0.1141, Dice: 0.1669
+Val   - Loss: 0.0290, IoU: 0.1716, Dice: 0.2618
+
+Epoch 18/100
+Train - Loss: 0.0258, IoU: 0.2083, Dice: 0.2935
+Val   - Loss: 0.0253, IoU: 0.2220, Dice: 0.3267
+
+Epoch 19/100
+Train - Loss: 0.0243, IoU: 0.2567, Dice: 0.3561
+Val   - Loss: 0.0261, IoU: 0.3403, Dice: 0.4742
+
+Epoch 20/100
+Train - Loss: 0.0256, IoU: 0.2944, Dice: 0.4034
+Val   - Loss: 0.0263, IoU: 0.2869, Dice: 0.4160
+
+Epoch 21/100
+Train - Loss: 0.0267, IoU: 0.2975, Dice: 0.4049
+Val   - Loss: 0.0217, IoU: 0.2847, Dice: 0.4151
+
+Epoch 22/100
+Train - Loss: 0.0243, IoU: 0.2845, Dice: 0.3950
+Val   - Loss: 0.0258, IoU: 0.3461, Dice: 0.4818
+
+Epoch 23/100
+Train - Loss: 0.0251, IoU: 0.3098, Dice: 0.4163
+Val   - Loss: 0.0250, IoU: 0.3483, Dice: 0.4874
+
+Epoch 24/100
+Train - Loss: 0.0258, IoU: 0.2305, Dice: 0.3314
+Val   - Loss: 0.0244, IoU: 0.2744, Dice: 0.3886
+
+Epoch 25/100
+Train - Loss: 0.0244, IoU: 0.2528, Dice: 0.3504
+Val   - Loss: 0.0222, IoU: 0.3283, Dice: 0.4627
+
+Epoch 26/100
+Train - Loss: 0.0236, IoU: 0.2869, Dice: 0.3903
+Val   - Loss: 0.0218, IoU: 0.3572, Dice: 0.4981
+✓ Saved best model (val_iou: 0.3572)
+
+Epoch 27/100
+Train - Loss: 0.0258, IoU: 0.2868, Dice: 0.3918
+Val   - Loss: 0.0248, IoU: 0.2103, Dice: 0.3143
+
+Epoch 28/100
+Train - Loss: 0.0242, IoU: 0.2922, Dice: 0.4018
+Val   - Loss: 0.0224, IoU: 0.3623, Dice: 0.5098
+✓ Saved best model (val_iou: 0.3623)
+
+Epoch 29/100
+Train - Loss: 0.0278, IoU: 0.2892, Dice: 0.4027
+Val   - Loss: 0.0239, IoU: 0.3226, Dice: 0.4552
+
+Epoch 30/100
+Train - Loss: 0.0251, IoU: 0.3287, Dice: 0.4417
+Val   - Loss: 0.0219, IoU: 0.4226, Dice: 0.5694
+✓ Saved best model (val_iou: 0.4226)
+
+Epoch 31/100
+Train - Loss: 0.0250, IoU: 0.3481, Dice: 0.4615
+Val   - Loss: 0.0223, IoU: 0.2371, Dice: 0.3536
+
+Epoch 32/100
+Train - Loss: 0.0277, IoU: 0.2614, Dice: 0.3653
+Val   - Loss: 0.0201, IoU: 0.3212, Dice: 0.4645
+
+Epoch 33/100
+Train - Loss: 0.0238, IoU: 0.3033, Dice: 0.4121
+Val   - Loss: 0.0235, IoU: 0.3777, Dice: 0.5215
+
+Epoch 34/100
+Train - Loss: 0.0249, IoU: 0.2790, Dice: 0.3889
+Val   - Loss: 0.0239, IoU: 0.4185, Dice: 0.5660
+
+Epoch 35/100
+Train - Loss: 0.0232, IoU: 0.2850, Dice: 0.4000
+Val   - Loss: 0.0210, IoU: 0.4364, Dice: 0.5687
+✓ Saved best model (val_iou: 0.4364)
+
+Epoch 36/100
+Train - Loss: 0.0268, IoU: 0.2835, Dice: 0.3926
+Val   - Loss: 0.0400, IoU: 0.1325, Dice: 0.2139
+
+Epoch 37/100
+Train - Loss: 0.0210, IoU: 0.2715, Dice: 0.3839
+Val   - Loss: 0.0191, IoU: 0.4050, Dice: 0.5561
+
+Epoch 38/100
+Train - Loss: 0.0219, IoU: 0.3578, Dice: 0.4786
+Val   - Loss: 0.0196, IoU: 0.4258, Dice: 0.5750
+
+Epoch 39/100
+Train - Loss: 0.0205, IoU: 0.3310, Dice: 0.4623
+Val   - Loss: 0.0224, IoU: 0.3806, Dice: 0.5258
+
+Epoch 40/100
+Train - Loss: 0.0205, IoU: 0.3422, Dice: 0.4720
+Val   - Loss: 0.0208, IoU: 0.4350, Dice: 0.5652
+
+Epoch 41/100
+Train - Loss: 0.0224, IoU: 0.3348, Dice: 0.4493
+Val   - Loss: 0.0193, IoU: 0.3722, Dice: 0.5188
+
+Epoch 42/100
+Train - Loss: 0.0216, IoU: 0.3495, Dice: 0.4709
+Val   - Loss: 0.0189, IoU: 0.3499, Dice: 0.4965
+
+Epoch 43/100
+Train - Loss: 0.0219, IoU: 0.3266, Dice: 0.4490
+Val   - Loss: 0.0196, IoU: 0.4473, Dice: 0.5754
+✓ Saved best model (val_iou: 0.4473)
+
+Epoch 44/100
+Train - Loss: 0.0199, IoU: 0.3546, Dice: 0.4663
+Val   - Loss: 0.0210, IoU: 0.4582, Dice: 0.6035
+✓ Saved best model (val_iou: 0.4582)
+
+Epoch 45/100
+Train - Loss: 0.0216, IoU: 0.3436, Dice: 0.4673
+Val   - Loss: 0.0182, IoU: 0.3852, Dice: 0.5343
+
+Epoch 46/100
+Train - Loss: 0.0208, IoU: 0.3740, Dice: 0.5010
+Val   - Loss: 0.0254, IoU: 0.3382, Dice: 0.4766
+
+Epoch 47/100
+Train - Loss: 0.0194, IoU: 0.3939, Dice: 0.5239
+Val   - Loss: 0.0278, IoU: 0.2854, Dice: 0.4150
+
+Epoch 48/100
+Train - Loss: 0.0221, IoU: 0.3934, Dice: 0.5211
+Val   - Loss: 0.0231, IoU: 0.2888, Dice: 0.4260
+
+Epoch 49/100
+Train - Loss: 0.0197, IoU: 0.2583, Dice: 0.3648
+Val   - Loss: 0.0166, IoU: 0.3773, Dice: 0.5176
+
+Epoch 50/100
+Train - Loss: 0.0189, IoU: 0.3774, Dice: 0.5047
+Val   - Loss: 0.0164, IoU: 0.4690, Dice: 0.5955
+✓ Saved best model (val_iou: 0.4690)
+
+Epoch 51/100
+Train - Loss: 0.0199, IoU: 0.3690, Dice: 0.5007
+Val   - Loss: 0.0252, IoU: 0.4612, Dice: 0.5778
+
+Epoch 52/100
+Train - Loss: 0.0199, IoU: 0.3893, Dice: 0.5144
+Val   - Loss: 0.0184, IoU: 0.3855, Dice: 0.5381
+
+Epoch 53/100
+Train - Loss: 0.0188, IoU: 0.3506, Dice: 0.4740
+Val   - Loss: 0.0328, IoU: 0.3175, Dice: 0.4415
+
+Epoch 54/100
+Train - Loss: 0.0228, IoU: 0.3276, Dice: 0.4501
+Val   - Loss: 0.0249, IoU: 0.2103, Dice: 0.3300
+
+Epoch 55/100
+Train - Loss: 0.0199, IoU: 0.2762, Dice: 0.3795
+Val   - Loss: 0.0181, IoU: 0.3183, Dice: 0.4583
+
+Epoch 56/100
+Train - Loss: 0.0205, IoU: 0.3120, Dice: 0.4281
+Val   - Loss: 0.0164, IoU: 0.3927, Dice: 0.5335
+
+Epoch 57/100
+Train - Loss: 0.0169, IoU: 0.4056, Dice: 0.5221
+Val   - Loss: 0.0142, IoU: 0.4573, Dice: 0.5854
+
+Epoch 58/100
+Train - Loss: 0.0184, IoU: 0.3619, Dice: 0.4777
+Val   - Loss: 0.0217, IoU: 0.3814, Dice: 0.4965
+
+Epoch 59/100
+Train - Loss: 0.0206, IoU: 0.3481, Dice: 0.4679
+Val   - Loss: 0.0291, IoU: 0.2632, Dice: 0.3883
+
+Epoch 60/100
+Train - Loss: 0.0177, IoU: 0.3330, Dice: 0.4435
+Val   - Loss: 0.0158, IoU: 0.3091, Dice: 0.4332
+
+Epoch 61/100
+Train - Loss: 0.0155, IoU: 0.3535, Dice: 0.4535
+Val   - Loss: 0.0244, IoU: 0.4275, Dice: 0.5395
+
+Epoch 62/100
+Train - Loss: 0.0160, IoU: 0.3969, Dice: 0.5044
+Val   - Loss: 0.0150, IoU: 0.3745, Dice: 0.5128
+
+Epoch 63/100
+Train - Loss: 0.0168, IoU: 0.3546, Dice: 0.4669
+Val   - Loss: 0.0156, IoU: 0.4718, Dice: 0.6095
+✓ Saved best model (val_iou: 0.4718)
+
+Epoch 64/100
+Train - Loss: 0.0163, IoU: 0.3949, Dice: 0.5146
+Val   - Loss: 0.0135, IoU: 0.4221, Dice: 0.5378
+
+Epoch 65/100
+Train - Loss: 0.0162, IoU: 0.3958, Dice: 0.5124
+Val   - Loss: 0.0144, IoU: 0.4898, Dice: 0.6247
+✓ Saved best model (val_iou: 0.4898)
+
+Epoch 66/100
+Train - Loss: 0.0148, IoU: 0.4588, Dice: 0.5759
+Val   - Loss: 0.0129, IoU: 0.4256, Dice: 0.5568
+
+Epoch 67/100
+Train - Loss: 0.0157, IoU: 0.4114, Dice: 0.5244
+Val   - Loss: 0.0140, IoU: 0.4535, Dice: 0.5907
+
+Epoch 68/100
+Train - Loss: 0.0160, IoU: 0.3950, Dice: 0.5098
+Val   - Loss: 0.0119, IoU: 0.3844, Dice: 0.4908
+
+Epoch 69/100
+Train - Loss: 0.0179, IoU: 0.3928, Dice: 0.5014
+Val   - Loss: 0.0121, IoU: 0.4498, Dice: 0.5581
+
+Epoch 70/100
+Train - Loss: 0.0149, IoU: 0.3749, Dice: 0.4866
+Val   - Loss: 0.0135, IoU: 0.3888, Dice: 0.5103
+
+Epoch 71/100
+Train - Loss: 0.0182, IoU: 0.3769, Dice: 0.4861
+Val   - Loss: 0.0137, IoU: 0.3688, Dice: 0.5017
+
+Epoch 72/100
+Train - Loss: 0.0155, IoU: 0.4002, Dice: 0.5084
+Val   - Loss: 0.0189, IoU: 0.3191, Dice: 0.4663
+
+Epoch 73/100
+Train - Loss: 0.0171, IoU: 0.4108, Dice: 0.5318
+Val   - Loss: 0.0129, IoU: 0.4822, Dice: 0.6116
+
+Epoch 74/100
+Train - Loss: 0.0166, IoU: 0.4209, Dice: 0.5381
+Val   - Loss: 0.0116, IoU: 0.4371, Dice: 0.5513
+
+Epoch 75/100
+Train - Loss: 0.0141, IoU: 0.3547, Dice: 0.4522
+Val   - Loss: 0.0140, IoU: 0.4464, Dice: 0.5772
+
+Epoch 76/100
+Train - Loss: 0.0150, IoU: 0.4001, Dice: 0.5206
+Val   - Loss: 0.0124, IoU: 0.3747, Dice: 0.4965
+
+Epoch 77/100
+Train - Loss: 0.0149, IoU: 0.3570, Dice: 0.4610
+Val   - Loss: 0.0125, IoU: 0.3786, Dice: 0.4983
+
+Epoch 78/100
+Train - Loss: 0.0143, IoU: 0.3603, Dice: 0.4695
+Val   - Loss: 0.0131, IoU: 0.3794, Dice: 0.5055
+
+Epoch 79/100
+Train - Loss: 0.0135, IoU: 0.3765, Dice: 0.4833
+Val   - Loss: 0.0115, IoU: 0.4731, Dice: 0.5991
+
+Epoch 80/100
+Train - Loss: 0.0146, IoU: 0.3898, Dice: 0.5001
+Val   - Loss: 0.0111, IoU: 0.4416, Dice: 0.5653
+
+Epoch 81/100
+Train - Loss: 0.0136, IoU: 0.3769, Dice: 0.4788
+Val   - Loss: 0.0109, IoU: 0.4692, Dice: 0.5940
+
+Epoch 82/100
+Train - Loss: 0.0141, IoU: 0.4379, Dice: 0.5545
+Val   - Loss: 0.0107, IoU: 0.4924, Dice: 0.6164
+✓ Saved best model (val_iou: 0.4924)
+
+Epoch 83/100
+Train - Loss: 0.0141, IoU: 0.4237, Dice: 0.5341
+Val   - Loss: 0.0112, IoU: 0.4590, Dice: 0.5848
+
+Epoch 84/100
+Train - Loss: 0.0135, IoU: 0.4077, Dice: 0.5232
+Val   - Loss: 0.0121, IoU: 0.4634, Dice: 0.5946
+
+Epoch 85/100
+Train - Loss: 0.0139, IoU: 0.4010, Dice: 0.5074
+Val   - Loss: 0.0112, IoU: 0.5333, Dice: 0.6569
+✓ Saved best model (val_iou: 0.5333)
+
+Epoch 86/100
+Train - Loss: 0.0145, IoU: 0.4397, Dice: 0.5570
+Val   - Loss: 0.0120, IoU: 0.4501, Dice: 0.5859
+
+Epoch 87/100
+Train - Loss: 0.0146, IoU: 0.4009, Dice: 0.5117
+Val   - Loss: 0.0117, IoU: 0.5104, Dice: 0.6399
+
+Epoch 88/100
+Train - Loss: 0.0136, IoU: 0.3806, Dice: 0.4868
+Val   - Loss: 0.0112, IoU: 0.4623, Dice: 0.5900
+
+Epoch 89/100
+Train - Loss: 0.0140, IoU: 0.3943, Dice: 0.5039
+Val   - Loss: 0.0109, IoU: 0.4893, Dice: 0.6145
+
+Epoch 90/100
+Train - Loss: 0.0134, IoU: 0.4039, Dice: 0.5082
+Val   - Loss: 0.0107, IoU: 0.4981, Dice: 0.6257
+
+Epoch 91/100
+Train - Loss: 0.0129, IoU: 0.4027, Dice: 0.5038
+Val   - Loss: 0.0109, IoU: 0.5046, Dice: 0.6224
+
+Epoch 92/100
+Train - Loss: 0.0155, IoU: 0.3682, Dice: 0.4846
+Val   - Loss: 0.0107, IoU: 0.5050, Dice: 0.6312
+
+Epoch 93/100
+Train - Loss: 0.0140, IoU: 0.3965, Dice: 0.5078
+Val   - Loss: 0.0103, IoU: 0.4652, Dice: 0.5855
+
+Epoch 94/100
+Train - Loss: 0.0143, IoU: 0.3907, Dice: 0.4950
+Val   - Loss: 0.0122, IoU: 0.4923, Dice: 0.6267
+
+Epoch 95/100
+Train - Loss: 0.0126, IoU: 0.4420, Dice: 0.5546
+Val   - Loss: 0.0105, IoU: 0.4804, Dice: 0.6059
+
+Epoch 96/100
+Train - Loss: 0.0137, IoU: 0.4317, Dice: 0.5475
+Val   - Loss: 0.0112, IoU: 0.4629, Dice: 0.5926
+
+Epoch 97/100
+Train - Loss: 0.0122, IoU: 0.4320, Dice: 0.5485
+Val   - Loss: 0.0106, IoU: 0.5109, Dice: 0.6367
+
+Epoch 98/100
+Train - Loss: 0.0136, IoU: 0.4244, Dice: 0.5270
+Val   - Loss: 0.0106, IoU: 0.4885, Dice: 0.6144
+
+Epoch 99/100
+Train - Loss: 0.0129, IoU: 0.4335, Dice: 0.5383
+Val   - Loss: 0.0101, IoU: 0.4715, Dice: 0.5940
+
+Epoch 100/100
+Train - Loss: 0.0122, IoU: 0.4630, Dice: 0.5767
+Val   - Loss: 0.0103, IoU: 0.5002, Dice: 0.6203
+
+================================================================================
+Training: unet_n_filters32_dropout0.1_learning_rate0.001
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0725, IoU: 0.3044, Dice: 0.4278
+Val   - Loss: 0.0539, IoU: 0.0000, Dice: 0.0000
+✓ Saved best model (val_iou: 0.0000)
+
+Epoch 2/100
+Train - Loss: 0.0455, IoU: 0.2898, Dice: 0.4107
+Val   - Loss: 0.0334, IoU: 0.2791, Dice: 0.4077
+✓ Saved best model (val_iou: 0.2791)
+
+Epoch 3/100
+Train - Loss: 0.0332, IoU: 0.3312, Dice: 0.4617
+Val   - Loss: 0.0292, IoU: 0.3812, Dice: 0.5273
+✓ Saved best model (val_iou: 0.3812)
+
+Epoch 4/100
+Train - Loss: 0.0293, IoU: 0.3919, Dice: 0.5286
+Val   - Loss: 0.0229, IoU: 0.4058, Dice: 0.5318
+✓ Saved best model (val_iou: 0.4058)
+
+Epoch 5/100
+Train - Loss: 0.0280, IoU: 0.4134, Dice: 0.5532
+Val   - Loss: 0.0186, IoU: 0.4725, Dice: 0.6240
+✓ Saved best model (val_iou: 0.4725)
+
+Epoch 6/100
+Train - Loss: 0.0233, IoU: 0.4452, Dice: 0.5901
+Val   - Loss: 0.0178, IoU: 0.5067, Dice: 0.6529
+✓ Saved best model (val_iou: 0.5067)
+
+Epoch 7/100
+Train - Loss: 0.0220, IoU: 0.3935, Dice: 0.5321
+Val   - Loss: 0.0169, IoU: 0.5402, Dice: 0.6686
+✓ Saved best model (val_iou: 0.5402)
+
+Epoch 8/100
+Train - Loss: 0.0224, IoU: 0.4343, Dice: 0.5703
+Val   - Loss: 0.0180, IoU: 0.5606, Dice: 0.6896
+✓ Saved best model (val_iou: 0.5606)
+
+Epoch 9/100
+Train - Loss: 0.0198, IoU: 0.4465, Dice: 0.5782
+Val   - Loss: 0.0169, IoU: 0.5951, Dice: 0.7170
+✓ Saved best model (val_iou: 0.5951)
+
+Epoch 10/100
+Train - Loss: 0.0211, IoU: 0.4571, Dice: 0.5912
+Val   - Loss: 0.0245, IoU: 0.5648, Dice: 0.6895
+
+Epoch 11/100
+Train - Loss: 0.0152, IoU: 0.4956, Dice: 0.6217
+Val   - Loss: 0.0128, IoU: 0.5649, Dice: 0.6965
+
+Epoch 12/100
+Train - Loss: 0.0152, IoU: 0.5141, Dice: 0.6427
+Val   - Loss: 0.0130, IoU: 0.5195, Dice: 0.6494
+
+Epoch 13/100
+Train - Loss: 0.0151, IoU: 0.5029, Dice: 0.6372
+Val   - Loss: 0.0121, IoU: 0.4888, Dice: 0.6216
+
+Epoch 14/100
+Train - Loss: 0.0135, IoU: 0.5412, Dice: 0.6771
+Val   - Loss: 0.0128, IoU: 0.5433, Dice: 0.6766
+
+Epoch 15/100
+Train - Loss: 0.0169, IoU: 0.4950, Dice: 0.6336
+Val   - Loss: 0.0121, IoU: 0.5279, Dice: 0.6634
+
+Epoch 16/100
+Train - Loss: 0.0129, IoU: 0.5435, Dice: 0.6688
+Val   - Loss: 0.0104, IoU: 0.6330, Dice: 0.7521
+✓ Saved best model (val_iou: 0.6330)
+
+Epoch 17/100
+Train - Loss: 0.0151, IoU: 0.4894, Dice: 0.6225
+Val   - Loss: 0.0144, IoU: 0.4165, Dice: 0.5564
+
+Epoch 18/100
+Train - Loss: 0.0147, IoU: 0.5434, Dice: 0.6722
+Val   - Loss: 0.0220, IoU: 0.4043, Dice: 0.5631
+
+Epoch 19/100
+Train - Loss: 0.0132, IoU: 0.4893, Dice: 0.6222
+Val   - Loss: 0.0109, IoU: 0.5852, Dice: 0.7084
+
+Epoch 20/100
+Train - Loss: 0.0131, IoU: 0.5011, Dice: 0.6267
+Val   - Loss: 0.0121, IoU: 0.5739, Dice: 0.7054
+
+Epoch 21/100
+Train - Loss: 0.0125, IoU: 0.5323, Dice: 0.6659
+Val   - Loss: 0.0112, IoU: 0.5160, Dice: 0.6465
+
+Epoch 22/100
+Train - Loss: 0.0135, IoU: 0.5224, Dice: 0.6534
+Val   - Loss: 0.0112, IoU: 0.5931, Dice: 0.7142
+
+Epoch 23/100
+Train - Loss: 0.0118, IoU: 0.4491, Dice: 0.5780
+Val   - Loss: 0.0115, IoU: 0.5546, Dice: 0.6827
+
+Epoch 24/100
+Train - Loss: 0.0138, IoU: 0.5347, Dice: 0.6714
+Val   - Loss: 0.0196, IoU: 0.3113, Dice: 0.4513
+
+Epoch 25/100
+Train - Loss: 0.0119, IoU: 0.5379, Dice: 0.6714
+Val   - Loss: 0.0113, IoU: 0.5384, Dice: 0.6733
+
+Epoch 26/100
+Train - Loss: 0.0119, IoU: 0.5545, Dice: 0.6802
+Val   - Loss: 0.0106, IoU: 0.5752, Dice: 0.7069
+
+Epoch 27/100
+Train - Loss: 0.0108, IoU: 0.5940, Dice: 0.7199
+Val   - Loss: 0.0104, IoU: 0.5445, Dice: 0.6735
+
+Epoch 28/100
+Train - Loss: 0.0102, IoU: 0.5487, Dice: 0.6795
+Val   - Loss: 0.0090, IoU: 0.5989, Dice: 0.7217
+
+Epoch 29/100
+Train - Loss: 0.0101, IoU: 0.5736, Dice: 0.7007
+Val   - Loss: 0.0095, IoU: 0.5444, Dice: 0.6730
+
+Epoch 30/100
+Train - Loss: 0.0134, IoU: 0.5307, Dice: 0.6606
+Val   - Loss: 0.0098, IoU: 0.5802, Dice: 0.7083
+
+Epoch 31/100
+Train - Loss: 0.0114, IoU: 0.5801, Dice: 0.7021
+Val   - Loss: 0.0093, IoU: 0.5544, Dice: 0.6769
+
+Epoch 32/100
+Train - Loss: 0.0110, IoU: 0.4608, Dice: 0.5842
+Val   - Loss: 0.0102, IoU: 0.4808, Dice: 0.6062
+
+Epoch 33/100
+Train - Loss: 0.0101, IoU: 0.5282, Dice: 0.6546
+Val   - Loss: 0.0096, IoU: 0.5421, Dice: 0.6677
+
+Epoch 34/100
+Train - Loss: 0.0105, IoU: 0.5219, Dice: 0.6485
+Val   - Loss: 0.0089, IoU: 0.5902, Dice: 0.7156
+
+Epoch 35/100
+Train - Loss: 0.0103, IoU: 0.5883, Dice: 0.7112
+Val   - Loss: 0.0086, IoU: 0.5758, Dice: 0.7005
+
+Epoch 36/100
+Train - Loss: 0.0102, IoU: 0.5274, Dice: 0.6531
+Val   - Loss: 0.0089, IoU: 0.6080, Dice: 0.7310
+
+Early stopping triggered after 36 epochs
+
+================================================================================
+Training: unet_n_filters32_dropout0.1_learning_rate0.003
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0849, IoU: 0.3000, Dice: 0.4135
+Val   - Loss: 0.0435, IoU: 0.0000, Dice: 0.0000
+✓ Saved best model (val_iou: 0.0000)
+
+Epoch 2/100
+Train - Loss: 0.0355, IoU: 0.1468, Dice: 0.2229
+Val   - Loss: 0.0325, IoU: 0.1489, Dice: 0.2319
+✓ Saved best model (val_iou: 0.1489)
+
+Epoch 3/100
+Train - Loss: 0.0320, IoU: 0.2638, Dice: 0.3773
+Val   - Loss: 0.0264, IoU: 0.2738, Dice: 0.4004
+✓ Saved best model (val_iou: 0.2738)
+
+Epoch 4/100
+Train - Loss: 0.0279, IoU: 0.2684, Dice: 0.3840
+Val   - Loss: 0.0333, IoU: 0.1094, Dice: 0.1876
+
+Epoch 5/100
+Train - Loss: 0.0284, IoU: 0.2581, Dice: 0.3641
+Val   - Loss: 0.0265, IoU: 0.1892, Dice: 0.2946
+
+Epoch 6/100
+Train - Loss: 0.0277, IoU: 0.3648, Dice: 0.4902
+Val   - Loss: 0.0219, IoU: 0.3447, Dice: 0.4907
+✓ Saved best model (val_iou: 0.3447)
+
+Epoch 7/100
+Train - Loss: 0.0238, IoU: 0.3910, Dice: 0.5298
+Val   - Loss: 0.0171, IoU: 0.4297, Dice: 0.5781
+✓ Saved best model (val_iou: 0.4297)
+
+Epoch 8/100
+Train - Loss: 0.0215, IoU: 0.3798, Dice: 0.5194
+Val   - Loss: 0.0245, IoU: 0.4969, Dice: 0.6290
+✓ Saved best model (val_iou: 0.4969)
+
+Epoch 9/100
+Train - Loss: 0.0241, IoU: 0.2985, Dice: 0.4241
+Val   - Loss: 0.0243, IoU: 0.4586, Dice: 0.5679
+
+Epoch 10/100
+Train - Loss: 0.0226, IoU: 0.3788, Dice: 0.5136
+Val   - Loss: 0.0174, IoU: 0.4300, Dice: 0.5732
+
+Epoch 11/100
+Train - Loss: 0.0184, IoU: 0.3988, Dice: 0.5346
+Val   - Loss: 0.0161, IoU: 0.3305, Dice: 0.4537
+
+Epoch 12/100
+Train - Loss: 0.0240, IoU: 0.3463, Dice: 0.4758
+Val   - Loss: 0.0268, IoU: 0.2758, Dice: 0.4015
+
+Epoch 13/100
+Train - Loss: 0.0181, IoU: 0.4490, Dice: 0.5953
+Val   - Loss: 0.0149, IoU: 0.4465, Dice: 0.5894
+
+Epoch 14/100
+Train - Loss: 0.0170, IoU: 0.4151, Dice: 0.5482
+Val   - Loss: 0.0287, IoU: 0.4238, Dice: 0.5437
+
+Epoch 15/100
+Train - Loss: 0.0153, IoU: 0.4906, Dice: 0.6269
+Val   - Loss: 0.0124, IoU: 0.5127, Dice: 0.6456
+✓ Saved best model (val_iou: 0.5127)
+
+Epoch 16/100
+Train - Loss: 0.0144, IoU: 0.4530, Dice: 0.5815
+Val   - Loss: 0.0119, IoU: 0.4940, Dice: 0.6204
+
+Epoch 17/100
+Train - Loss: 0.0173, IoU: 0.4770, Dice: 0.6085
+Val   - Loss: 0.0163, IoU: 0.4356, Dice: 0.5863
+
+Epoch 18/100
+Train - Loss: 0.0144, IoU: 0.4040, Dice: 0.5302
+Val   - Loss: 0.0132, IoU: 0.5590, Dice: 0.6941
+✓ Saved best model (val_iou: 0.5590)
+
+Epoch 19/100
+Train - Loss: 0.0129, IoU: 0.5154, Dice: 0.6448
+Val   - Loss: 0.0117, IoU: 0.4972, Dice: 0.6293
+
+Epoch 20/100
+Train - Loss: 0.0181, IoU: 0.4621, Dice: 0.5887
+Val   - Loss: 0.0131, IoU: 0.5159, Dice: 0.6511
+
+Epoch 21/100
+Train - Loss: 0.0136, IoU: 0.3988, Dice: 0.5140
+Val   - Loss: 0.0128, IoU: 0.5618, Dice: 0.6850
+✓ Saved best model (val_iou: 0.5618)
+
+Epoch 22/100
+Train - Loss: 0.0136, IoU: 0.4935, Dice: 0.6255
+Val   - Loss: 0.0113, IoU: 0.5421, Dice: 0.6708
+
+Epoch 23/100
+Train - Loss: 0.0143, IoU: 0.4566, Dice: 0.5811
+Val   - Loss: 0.0217, IoU: 0.4934, Dice: 0.6377
+
+Epoch 24/100
+Train - Loss: 0.0158, IoU: 0.4311, Dice: 0.5618
+Val   - Loss: 0.0160, IoU: 0.5390, Dice: 0.6659
+
+Epoch 25/100
+Train - Loss: 0.0131, IoU: 0.4686, Dice: 0.5962
+Val   - Loss: 0.0135, IoU: 0.4712, Dice: 0.6096
+
+Epoch 26/100
+Train - Loss: 0.0126, IoU: 0.4802, Dice: 0.6034
+Val   - Loss: 0.0129, IoU: 0.4457, Dice: 0.5834
+
+Epoch 27/100
+Train - Loss: 0.0131, IoU: 0.4361, Dice: 0.5478
+Val   - Loss: 0.0198, IoU: 0.5002, Dice: 0.6223
+
+Epoch 28/100
+Train - Loss: 0.0133, IoU: 0.4869, Dice: 0.6102
+Val   - Loss: 0.0144, IoU: 0.3868, Dice: 0.5224
+
+Epoch 29/100
+Train - Loss: 0.0112, IoU: 0.5366, Dice: 0.6632
+Val   - Loss: 0.0106, IoU: 0.5260, Dice: 0.6512
+
+Epoch 30/100
+Train - Loss: 0.0125, IoU: 0.5083, Dice: 0.6356
+Val   - Loss: 0.0130, IoU: 0.4223, Dice: 0.5581
+
+Epoch 31/100
+Train - Loss: 0.0122, IoU: 0.4694, Dice: 0.5925
+Val   - Loss: 0.0139, IoU: 0.4176, Dice: 0.5535
+
+Epoch 32/100
+Train - Loss: 0.0128, IoU: 0.4616, Dice: 0.5838
+Val   - Loss: 0.0101, IoU: 0.5479, Dice: 0.6694
+
+Epoch 33/100
+Train - Loss: 0.0127, IoU: 0.4877, Dice: 0.6113
+Val   - Loss: 0.0111, IoU: 0.5721, Dice: 0.7026
+✓ Saved best model (val_iou: 0.5721)
+
+Epoch 34/100
+Train - Loss: 0.0116, IoU: 0.4844, Dice: 0.6110
+Val   - Loss: 0.0106, IoU: 0.5157, Dice: 0.6436
+
+Epoch 35/100
+Train - Loss: 0.0139, IoU: 0.5228, Dice: 0.6493
+Val   - Loss: 0.0114, IoU: 0.5127, Dice: 0.6455
+
+Epoch 36/100
+Train - Loss: 0.0111, IoU: 0.5291, Dice: 0.6571
+Val   - Loss: 0.0108, IoU: 0.5391, Dice: 0.6666
+
+Epoch 37/100
+Train - Loss: 0.0109, IoU: 0.5654, Dice: 0.6893
+Val   - Loss: 0.0099, IoU: 0.4705, Dice: 0.5918
+
+Epoch 38/100
+Train - Loss: 0.0130, IoU: 0.5015, Dice: 0.6299
+Val   - Loss: 0.0119, IoU: 0.5096, Dice: 0.6471
+
+Epoch 39/100
+Train - Loss: 0.0112, IoU: 0.5159, Dice: 0.6347
+Val   - Loss: 0.0093, IoU: 0.5119, Dice: 0.6383
+
+Epoch 40/100
+Train - Loss: 0.0108, IoU: 0.4910, Dice: 0.6164
+Val   - Loss: 0.0105, IoU: 0.5470, Dice: 0.6739
+
+Epoch 41/100
+Train - Loss: 0.0102, IoU: 0.5322, Dice: 0.6564
+Val   - Loss: 0.0100, IoU: 0.5493, Dice: 0.6814
+
+Epoch 42/100
+Train - Loss: 0.0099, IoU: 0.5564, Dice: 0.6789
+Val   - Loss: 0.0092, IoU: 0.5140, Dice: 0.6374
+
+Epoch 43/100
+Train - Loss: 0.0104, IoU: 0.5637, Dice: 0.6886
+Val   - Loss: 0.0092, IoU: 0.5098, Dice: 0.6356
+
+Epoch 44/100
+Train - Loss: 0.0101, IoU: 0.5207, Dice: 0.6493
+Val   - Loss: 0.0097, IoU: 0.5173, Dice: 0.6452
+
+Epoch 45/100
+Train - Loss: 0.0099, IoU: 0.5497, Dice: 0.6765
+Val   - Loss: 0.0096, IoU: 0.5664, Dice: 0.6934
+
+Epoch 46/100
+Train - Loss: 0.0098, IoU: 0.5660, Dice: 0.6890
+Val   - Loss: 0.0091, IoU: 0.5569, Dice: 0.6849
+
+Epoch 47/100
+Train - Loss: 0.0098, IoU: 0.5263, Dice: 0.6482
+Val   - Loss: 0.0093, IoU: 0.5516, Dice: 0.6786
+
+Epoch 48/100
+Train - Loss: 0.0103, IoU: 0.5498, Dice: 0.6736
+Val   - Loss: 0.0091, IoU: 0.5512, Dice: 0.6790
+
+Epoch 49/100
+Train - Loss: 0.0100, IoU: 0.5528, Dice: 0.6802
+Val   - Loss: 0.0089, IoU: 0.5678, Dice: 0.6924
+
+Epoch 50/100
+Train - Loss: 0.0094, IoU: 0.5742, Dice: 0.6942
+Val   - Loss: 0.0083, IoU: 0.5687, Dice: 0.6901
+
+Epoch 51/100
+Train - Loss: 0.0099, IoU: 0.5593, Dice: 0.6829
+Val   - Loss: 0.0092, IoU: 0.5284, Dice: 0.6553
+
+Epoch 52/100
+Train - Loss: 0.0096, IoU: 0.5542, Dice: 0.6775
+Val   - Loss: 0.0097, IoU: 0.5419, Dice: 0.6725
+
+Epoch 53/100
+Train - Loss: 0.0092, IoU: 0.5531, Dice: 0.6778
+Val   - Loss: 0.0093, IoU: 0.5578, Dice: 0.6869
+
+Early stopping triggered after 53 epochs
+
+================================================================================
+Training: unet_n_filters32_dropout0.1_learning_rate0.005
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.1065, IoU: 0.2442, Dice: 0.3473
+Val   - Loss: 0.0492, IoU: 0.0931, Dice: 0.1587
+✓ Saved best model (val_iou: 0.0931)
+
+Epoch 2/100
+Train - Loss: 0.0377, IoU: 0.0681, Dice: 0.1152
+Val   - Loss: 0.0287, IoU: 0.0036, Dice: 0.0072
+
+Epoch 3/100
+Train - Loss: 0.0318, IoU: 0.0363, Dice: 0.0592
+Val   - Loss: 0.0292, IoU: 0.1095, Dice: 0.1805
+✓ Saved best model (val_iou: 0.1095)
+
+Epoch 4/100
+Train - Loss: 0.0281, IoU: 0.3215, Dice: 0.4452
+Val   - Loss: 0.0254, IoU: 0.2941, Dice: 0.4292
+✓ Saved best model (val_iou: 0.2941)
+
+Epoch 5/100
+Train - Loss: 0.0284, IoU: 0.2154, Dice: 0.3194
+Val   - Loss: 0.0258, IoU: 0.1234, Dice: 0.2121
+
+Epoch 6/100
+Train - Loss: 0.0277, IoU: 0.2408, Dice: 0.3526
+Val   - Loss: 0.0297, IoU: 0.0381, Dice: 0.0706
+
+Epoch 7/100
+Train - Loss: 0.0250, IoU: 0.2797, Dice: 0.4012
+Val   - Loss: 0.0214, IoU: 0.2429, Dice: 0.3609
+
+Epoch 8/100
+Train - Loss: 0.0198, IoU: 0.3238, Dice: 0.4489
+Val   - Loss: 0.0182, IoU: 0.3599, Dice: 0.4792
+✓ Saved best model (val_iou: 0.3599)
+
+Epoch 9/100
+Train - Loss: 0.0216, IoU: 0.3148, Dice: 0.4465
+Val   - Loss: 0.0503, IoU: 0.0719, Dice: 0.1258
+
+Epoch 10/100
+Train - Loss: 0.0205, IoU: 0.3101, Dice: 0.4373
+Val   - Loss: 0.0245, IoU: 0.2705, Dice: 0.3750
+
+Epoch 11/100
+Train - Loss: 0.0197, IoU: 0.4003, Dice: 0.5260
+Val   - Loss: 0.0218, IoU: 0.2374, Dice: 0.3495
+
+Epoch 12/100
+Train - Loss: 0.0183, IoU: 0.3462, Dice: 0.4710
+Val   - Loss: 0.0283, IoU: 0.4435, Dice: 0.5610
+✓ Saved best model (val_iou: 0.4435)
+
+Epoch 13/100
+Train - Loss: 0.0192, IoU: 0.3628, Dice: 0.4922
+Val   - Loss: 1.0352, IoU: 0.0161, Dice: 0.0307
+
+Epoch 14/100
+Train - Loss: 0.0189, IoU: 0.3148, Dice: 0.4370
+Val   - Loss: 0.0180, IoU: 0.4587, Dice: 0.5775
+✓ Saved best model (val_iou: 0.4587)
+
+Epoch 15/100
+Train - Loss: 0.0165, IoU: 0.3797, Dice: 0.4963
+Val   - Loss: 0.0137, IoU: 0.5077, Dice: 0.6381
+✓ Saved best model (val_iou: 0.5077)
+
+Epoch 16/100
+Train - Loss: 0.0164, IoU: 0.3788, Dice: 0.5045
+Val   - Loss: 0.0356, IoU: 0.0876, Dice: 0.1249
+
+Epoch 17/100
+Train - Loss: 0.0186, IoU: 0.3165, Dice: 0.4327
+Val   - Loss: 0.0281, IoU: 0.4702, Dice: 0.5790
+
+Epoch 18/100
+Train - Loss: 0.0159, IoU: 0.3970, Dice: 0.5207
+Val   - Loss: 0.0430, IoU: 0.3355, Dice: 0.4259
+
+Epoch 19/100
+Train - Loss: 0.0161, IoU: 0.3896, Dice: 0.5241
+Val   - Loss: 0.0140, IoU: 0.5167, Dice: 0.6521
+✓ Saved best model (val_iou: 0.5167)
+
+Epoch 20/100
+Train - Loss: 0.0161, IoU: 0.4063, Dice: 0.5199
+Val   - Loss: 0.0170, IoU: 0.2819, Dice: 0.3729
+
+Epoch 21/100
+Train - Loss: 0.0148, IoU: 0.3608, Dice: 0.4756
+Val   - Loss: 0.0126, IoU: 0.3034, Dice: 0.3855
+
+Epoch 22/100
+Train - Loss: 0.0160, IoU: 0.4421, Dice: 0.5673
+Val   - Loss: 0.0380, IoU: 0.4915, Dice: 0.6296
+
+Epoch 23/100
+Train - Loss: 0.0153, IoU: 0.4110, Dice: 0.5443
+Val   - Loss: 0.0118, IoU: 0.4749, Dice: 0.6065
+
+Epoch 24/100
+Train - Loss: 0.0130, IoU: 0.3605, Dice: 0.4700
+Val   - Loss: 0.0129, IoU: 0.4654, Dice: 0.6022
+
+Epoch 25/100
+Train - Loss: 0.0145, IoU: 0.4729, Dice: 0.6049
+Val   - Loss: 0.0143, IoU: 0.5046, Dice: 0.6387
+
+Epoch 26/100
+Train - Loss: 0.0155, IoU: 0.4156, Dice: 0.5432
+Val   - Loss: 0.0169, IoU: 0.5562, Dice: 0.6782
+✓ Saved best model (val_iou: 0.5562)
+
+Epoch 27/100
+Train - Loss: 0.0131, IoU: 0.4579, Dice: 0.5883
+Val   - Loss: 0.0119, IoU: 0.5043, Dice: 0.6341
+
+Epoch 28/100
+Train - Loss: 0.0144, IoU: 0.4554, Dice: 0.5834
+Val   - Loss: 0.0188, IoU: 0.4769, Dice: 0.6269
+
+Epoch 29/100
+Train - Loss: 0.0145, IoU: 0.4644, Dice: 0.5945
+Val   - Loss: 0.0140, IoU: 0.4446, Dice: 0.5818
+
+Epoch 30/100
+Train - Loss: 0.0127, IoU: 0.4580, Dice: 0.5844
+Val   - Loss: 0.0124, IoU: 0.4558, Dice: 0.5950
+
+Epoch 31/100
+Train - Loss: 0.0149, IoU: 0.4488, Dice: 0.5844
+Val   - Loss: 0.0133, IoU: 0.5699, Dice: 0.6929
+✓ Saved best model (val_iou: 0.5699)
+
+Epoch 32/100
+Train - Loss: 0.0124, IoU: 0.4314, Dice: 0.5574
+Val   - Loss: 0.0128, IoU: 0.4809, Dice: 0.6161
+
+Epoch 33/100
+Train - Loss: 0.0130, IoU: 0.4684, Dice: 0.5932
+Val   - Loss: 0.0134, IoU: 0.4585, Dice: 0.5962
+
+Epoch 34/100
+Train - Loss: 0.0123, IoU: 0.4722, Dice: 0.5990
+Val   - Loss: 0.0223, IoU: 0.3449, Dice: 0.4988
+
+Epoch 35/100
+Train - Loss: 0.0114, IoU: 0.4723, Dice: 0.5965
+Val   - Loss: 0.0113, IoU: 0.5013, Dice: 0.6333
+
+Epoch 36/100
+Train - Loss: 0.0116, IoU: 0.4735, Dice: 0.6043
+Val   - Loss: 0.0119, IoU: 0.5526, Dice: 0.6833
+
+Epoch 37/100
+Train - Loss: 0.0107, IoU: 0.5077, Dice: 0.6315
+Val   - Loss: 0.0096, IoU: 0.5232, Dice: 0.6527
+
+Epoch 38/100
+Train - Loss: 0.0118, IoU: 0.4204, Dice: 0.5298
+Val   - Loss: 0.0133, IoU: 0.4682, Dice: 0.5990
+
+Epoch 39/100
+Train - Loss: 0.0111, IoU: 0.4748, Dice: 0.5970
+Val   - Loss: 0.0101, IoU: 0.4469, Dice: 0.5653
+
+Epoch 40/100
+Train - Loss: 0.0119, IoU: 0.4897, Dice: 0.6121
+Val   - Loss: 0.0148, IoU: 0.5084, Dice: 0.6237
+
+Epoch 41/100
+Train - Loss: 0.0106, IoU: 0.4848, Dice: 0.6089
+Val   - Loss: 0.0096, IoU: 0.5398, Dice: 0.6638
+
+Epoch 42/100
+Train - Loss: 0.0112, IoU: 0.5010, Dice: 0.6252
+Val   - Loss: 0.0102, IoU: 0.5561, Dice: 0.6838
+
+Epoch 43/100
+Train - Loss: 0.0105, IoU: 0.5405, Dice: 0.6681
+Val   - Loss: 0.0105, IoU: 0.5701, Dice: 0.7033
+✓ Saved best model (val_iou: 0.5701)
+
+Epoch 44/100
+Train - Loss: 0.0103, IoU: 0.5164, Dice: 0.6394
+Val   - Loss: 0.0096, IoU: 0.5642, Dice: 0.6917
+
+Epoch 45/100
+Train - Loss: 0.0097, IoU: 0.5312, Dice: 0.6562
+Val   - Loss: 0.0094, IoU: 0.5594, Dice: 0.6861
+
+Epoch 46/100
+Train - Loss: 0.0094, IoU: 0.5230, Dice: 0.6507
+Val   - Loss: 0.0089, IoU: 0.5602, Dice: 0.6859
+
+Epoch 47/100
+Train - Loss: 0.0097, IoU: 0.5580, Dice: 0.6818
+Val   - Loss: 0.0092, IoU: 0.5875, Dice: 0.7118
+✓ Saved best model (val_iou: 0.5875)
+
+Epoch 48/100
+Train - Loss: 0.0097, IoU: 0.5375, Dice: 0.6568
+Val   - Loss: 0.0090, IoU: 0.5847, Dice: 0.7078
+
+Epoch 49/100
+Train - Loss: 0.0100, IoU: 0.5390, Dice: 0.6604
+Val   - Loss: 0.0116, IoU: 0.5531, Dice: 0.6812
+
+Epoch 50/100
+Train - Loss: 0.0095, IoU: 0.5575, Dice: 0.6824
+Val   - Loss: 0.0085, IoU: 0.5876, Dice: 0.7094
+✓ Saved best model (val_iou: 0.5876)
+
+Epoch 51/100
+Train - Loss: 0.0111, IoU: 0.5248, Dice: 0.6504
+Val   - Loss: 0.0089, IoU: 0.5859, Dice: 0.7079
+
+Epoch 52/100
+Train - Loss: 0.0099, IoU: 0.5424, Dice: 0.6676
+Val   - Loss: 0.0090, IoU: 0.5877, Dice: 0.7148
+✓ Saved best model (val_iou: 0.5877)
+
+Epoch 53/100
+Train - Loss: 0.0105, IoU: 0.5525, Dice: 0.6777
+Val   - Loss: 0.0098, IoU: 0.5222, Dice: 0.6521
+
+Epoch 54/100
+Train - Loss: 0.0095, IoU: 0.5516, Dice: 0.6771
+Val   - Loss: 0.0104, IoU: 0.5692, Dice: 0.7017
+
+Epoch 55/100
+Train - Loss: 0.0103, IoU: 0.5590, Dice: 0.6812
+Val   - Loss: 0.0093, IoU: 0.5640, Dice: 0.6888
+
+Epoch 56/100
+Train - Loss: 0.0096, IoU: 0.5506, Dice: 0.6738
+Val   - Loss: 0.0087, IoU: 0.5821, Dice: 0.7051
+
+Epoch 57/100
+Train - Loss: 0.0145, IoU: 0.5503, Dice: 0.6768
+Val   - Loss: 0.0115, IoU: 0.5205, Dice: 0.6560
+
+Epoch 58/100
+Train - Loss: 0.0113, IoU: 0.5309, Dice: 0.6549
+Val   - Loss: 0.0135, IoU: 0.5218, Dice: 0.6672
+
+Epoch 59/100
+Train - Loss: 0.0097, IoU: 0.5245, Dice: 0.6487
+Val   - Loss: 0.0105, IoU: 0.5940, Dice: 0.7172
+✓ Saved best model (val_iou: 0.5940)
+
+Epoch 60/100
+Train - Loss: 0.0100, IoU: 0.5510, Dice: 0.6684
+Val   - Loss: 0.0100, IoU: 0.6142, Dice: 0.7319
+✓ Saved best model (val_iou: 0.6142)
+
+Epoch 61/100
+Train - Loss: 0.0104, IoU: 0.5749, Dice: 0.6969
+Val   - Loss: 0.1879, IoU: 0.2891, Dice: 0.4059
+
+Epoch 62/100
+Train - Loss: 0.0103, IoU: 0.5097, Dice: 0.6301
+Val   - Loss: 0.0102, IoU: 0.5256, Dice: 0.6543
+
+Epoch 63/100
+Train - Loss: 0.0099, IoU: 0.4766, Dice: 0.5924
+Val   - Loss: 0.0098, IoU: 0.5967, Dice: 0.7165
+
+Epoch 64/100
+Train - Loss: 0.0121, IoU: 0.5636, Dice: 0.6890
+Val   - Loss: 0.0121, IoU: 0.5499, Dice: 0.6873
+
+Epoch 65/100
+Train - Loss: 0.0093, IoU: 0.5382, Dice: 0.6645
+Val   - Loss: 0.0097, IoU: 0.5652, Dice: 0.6908
+
+Epoch 66/100
+Train - Loss: 0.0107, IoU: 0.5561, Dice: 0.6787
+Val   - Loss: 0.0097, IoU: 0.5867, Dice: 0.7114
+
+Epoch 67/100
+Train - Loss: 0.0096, IoU: 0.4960, Dice: 0.6163
+Val   - Loss: 0.0098, IoU: 0.5875, Dice: 0.7093
+
+Epoch 68/100
+Train - Loss: 0.0092, IoU: 0.5798, Dice: 0.7006
+Val   - Loss: 0.0086, IoU: 0.6067, Dice: 0.7286
+
+Epoch 69/100
+Train - Loss: 0.0124, IoU: 0.5552, Dice: 0.6783
+Val   - Loss: 0.0135, IoU: 0.5533, Dice: 0.6870
+
+Epoch 70/100
+Train - Loss: 0.0104, IoU: 0.5301, Dice: 0.6533
+Val   - Loss: 0.0096, IoU: 0.5882, Dice: 0.7122
+
+Epoch 71/100
+Train - Loss: 0.0093, IoU: 0.5469, Dice: 0.6725
+Val   - Loss: 0.0089, IoU: 0.5678, Dice: 0.6919
+
+Epoch 72/100
+Train - Loss: 0.0090, IoU: 0.5595, Dice: 0.6833
+Val   - Loss: 0.0083, IoU: 0.5790, Dice: 0.7017
+
+Epoch 73/100
+Train - Loss: 0.0098, IoU: 0.5760, Dice: 0.6993
+Val   - Loss: 0.0083, IoU: 0.5941, Dice: 0.7157
+
+Epoch 74/100
+Train - Loss: 0.0091, IoU: 0.5683, Dice: 0.6960
+Val   - Loss: 0.0094, IoU: 0.6056, Dice: 0.7296
+
+Epoch 75/100
+Train - Loss: 0.0094, IoU: 0.5315, Dice: 0.6561
+Val   - Loss: 0.0118, IoU: 0.5926, Dice: 0.7205
+
+Epoch 76/100
+Train - Loss: 0.0109, IoU: 0.5809, Dice: 0.7076
+Val   - Loss: 0.0096, IoU: 0.5793, Dice: 0.7064
+
+Epoch 77/100
+Train - Loss: 0.0093, IoU: 0.5509, Dice: 0.6750
+Val   - Loss: 0.0101, IoU: 0.5683, Dice: 0.7006
+
+Epoch 78/100
+Train - Loss: 0.0090, IoU: 0.5551, Dice: 0.6807
+Val   - Loss: 0.0101, IoU: 0.5791, Dice: 0.7096
+
+Epoch 79/100
+Train - Loss: 0.0094, IoU: 0.5596, Dice: 0.6825
+Val   - Loss: 0.0091, IoU: 0.5944, Dice: 0.7163
+
+Epoch 80/100
+Train - Loss: 0.0089, IoU: 0.5690, Dice: 0.6929
+Val   - Loss: 0.0088, IoU: 0.5997, Dice: 0.7201
+
+Early stopping triggered after 80 epochs
+
+================================================================================
+Training: unet_n_filters32_dropout0.2_learning_rate0.001
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.1363, IoU: 0.2434, Dice: 0.3365
+Val   - Loss: 0.0913, IoU: 0.0200, Dice: 0.0380
+✓ Saved best model (val_iou: 0.0200)
+
+Epoch 2/100
+Train - Loss: 0.0788, IoU: 0.2730, Dice: 0.3993
+Val   - Loss: 0.0513, IoU: 0.2626, Dice: 0.3797
+✓ Saved best model (val_iou: 0.2626)
+
+Epoch 3/100
+Train - Loss: 0.0522, IoU: 0.3613, Dice: 0.5006
+Val   - Loss: 0.0481, IoU: 0.2699, Dice: 0.3914
+✓ Saved best model (val_iou: 0.2699)
+
+Epoch 4/100
+Train - Loss: 0.0437, IoU: 0.3577, Dice: 0.5027
+Val   - Loss: 0.0398, IoU: 0.4294, Dice: 0.5539
+✓ Saved best model (val_iou: 0.4294)
+
+Epoch 5/100
+Train - Loss: 0.0392, IoU: 0.2949, Dice: 0.4224
+Val   - Loss: 0.0328, IoU: 0.3598, Dice: 0.5029
+
+Epoch 6/100
+Train - Loss: 0.0383, IoU: 0.3364, Dice: 0.4722
+Val   - Loss: 0.0342, IoU: 0.4160, Dice: 0.5645
+
+Epoch 7/100
+Train - Loss: 0.0342, IoU: 0.3436, Dice: 0.4780
+Val   - Loss: 0.0321, IoU: 0.2780, Dice: 0.4125
+
+Epoch 8/100
+Train - Loss: 0.0296, IoU: 0.3479, Dice: 0.4910
+Val   - Loss: 0.0253, IoU: 0.4154, Dice: 0.5640
+
+Epoch 9/100
+Train - Loss: 0.0320, IoU: 0.3585, Dice: 0.4976
+Val   - Loss: 0.0251, IoU: 0.3969, Dice: 0.5447
+
+Epoch 10/100
+Train - Loss: 0.0282, IoU: 0.3675, Dice: 0.5058
+Val   - Loss: 0.0194, IoU: 0.4551, Dice: 0.6054
+✓ Saved best model (val_iou: 0.4551)
+
+Epoch 11/100
+Train - Loss: 0.0279, IoU: 0.3945, Dice: 0.5371
+Val   - Loss: 0.0240, IoU: 0.4033, Dice: 0.5547
+
+Epoch 12/100
+Train - Loss: 0.0258, IoU: 0.4120, Dice: 0.5508
+Val   - Loss: 0.0228, IoU: 0.4638, Dice: 0.6195
+✓ Saved best model (val_iou: 0.4638)
+
+Epoch 13/100
+Train - Loss: 0.0285, IoU: 0.3683, Dice: 0.5098
+Val   - Loss: 0.0268, IoU: 0.4085, Dice: 0.5636
+
+Epoch 14/100
+Train - Loss: 0.0233, IoU: 0.4204, Dice: 0.5672
+Val   - Loss: 0.0175, IoU: 0.4686, Dice: 0.6239
+✓ Saved best model (val_iou: 0.4686)
+
+Epoch 15/100
+Train - Loss: 0.0212, IoU: 0.4781, Dice: 0.6242
+Val   - Loss: 0.0160, IoU: 0.5400, Dice: 0.6868
+✓ Saved best model (val_iou: 0.5400)
+
+Epoch 16/100
+Train - Loss: 0.0220, IoU: 0.4597, Dice: 0.6059
+Val   - Loss: 0.0158, IoU: 0.5216, Dice: 0.6616
+
+Epoch 17/100
+Train - Loss: 0.0209, IoU: 0.4621, Dice: 0.6027
+Val   - Loss: 0.0165, IoU: 0.3092, Dice: 0.4332
+
+Epoch 18/100
+Train - Loss: 0.0211, IoU: 0.4329, Dice: 0.5758
+Val   - Loss: 0.0140, IoU: 0.5722, Dice: 0.6976
+✓ Saved best model (val_iou: 0.5722)
+
+Epoch 19/100
+Train - Loss: 0.0170, IoU: 0.5023, Dice: 0.6435
+Val   - Loss: 0.0139, IoU: 0.5577, Dice: 0.6866
+
+Epoch 20/100
+Train - Loss: 0.0160, IoU: 0.5183, Dice: 0.6524
+Val   - Loss: 0.0130, IoU: 0.5781, Dice: 0.7115
+✓ Saved best model (val_iou: 0.5781)
+
+Epoch 21/100
+Train - Loss: 0.0189, IoU: 0.4834, Dice: 0.6209
+Val   - Loss: 0.0134, IoU: 0.5624, Dice: 0.6985
+
+Epoch 22/100
+Train - Loss: 0.0156, IoU: 0.4914, Dice: 0.6303
+Val   - Loss: 0.0127, IoU: 0.5699, Dice: 0.6963
+
+Epoch 23/100
+Train - Loss: 0.0171, IoU: 0.5017, Dice: 0.6392
+Val   - Loss: 0.0131, IoU: 0.5870, Dice: 0.7151
+✓ Saved best model (val_iou: 0.5870)
+
+Epoch 24/100
+Train - Loss: 0.0151, IoU: 0.5102, Dice: 0.6505
+Val   - Loss: 0.0123, IoU: 0.5934, Dice: 0.7173
+✓ Saved best model (val_iou: 0.5934)
+
+Epoch 25/100
+Train - Loss: 0.0208, IoU: 0.4537, Dice: 0.5878
+Val   - Loss: 0.0139, IoU: 0.5991, Dice: 0.7189
+✓ Saved best model (val_iou: 0.5991)
+
+Epoch 26/100
+Train - Loss: 0.0173, IoU: 0.4712, Dice: 0.6116
+Val   - Loss: 0.0130, IoU: 0.5396, Dice: 0.6725
+
+Epoch 27/100
+Train - Loss: 0.0151, IoU: 0.5127, Dice: 0.6474
+Val   - Loss: 0.0130, IoU: 0.6079, Dice: 0.7299
+✓ Saved best model (val_iou: 0.6079)
+
+Epoch 28/100
+Train - Loss: 0.0148, IoU: 0.4949, Dice: 0.6311
+Val   - Loss: 0.0120, IoU: 0.5954, Dice: 0.7261
+
+Epoch 29/100
+Train - Loss: 0.0138, IoU: 0.5627, Dice: 0.6971
+Val   - Loss: 0.0120, IoU: 0.5637, Dice: 0.6930
+
+Epoch 30/100
+Train - Loss: 0.0146, IoU: 0.5108, Dice: 0.6495
+Val   - Loss: 0.0121, IoU: 0.4914, Dice: 0.6314
+
+Epoch 31/100
+Train - Loss: 0.0131, IoU: 0.5231, Dice: 0.6586
+Val   - Loss: 0.0108, IoU: 0.5824, Dice: 0.7075
+
+Epoch 32/100
+Train - Loss: 0.0166, IoU: 0.5417, Dice: 0.6792
+Val   - Loss: 0.0131, IoU: 0.5464, Dice: 0.6876
+
+Epoch 33/100
+Train - Loss: 0.0141, IoU: 0.5457, Dice: 0.6786
+Val   - Loss: 0.0113, IoU: 0.5663, Dice: 0.6953
+
+Epoch 34/100
+Train - Loss: 0.0129, IoU: 0.5113, Dice: 0.6452
+Val   - Loss: 0.0105, IoU: 0.6000, Dice: 0.7245
+
+Epoch 35/100
+Train - Loss: 0.0133, IoU: 0.5606, Dice: 0.6946
+Val   - Loss: 0.0136, IoU: 0.4529, Dice: 0.5999
+
+Epoch 36/100
+Train - Loss: 0.0130, IoU: 0.5322, Dice: 0.6646
+Val   - Loss: 0.0111, IoU: 0.5175, Dice: 0.6503
+
+Epoch 37/100
+Train - Loss: 0.0122, IoU: 0.5393, Dice: 0.6700
+Val   - Loss: 0.0101, IoU: 0.5569, Dice: 0.6869
+
+Epoch 38/100
+Train - Loss: 0.0126, IoU: 0.5398, Dice: 0.6686
+Val   - Loss: 0.0100, IoU: 0.6255, Dice: 0.7470
+✓ Saved best model (val_iou: 0.6255)
+
+Epoch 39/100
+Train - Loss: 0.0120, IoU: 0.5135, Dice: 0.6460
+Val   - Loss: 0.0105, IoU: 0.5727, Dice: 0.6962
+
+Epoch 40/100
+Train - Loss: 0.0131, IoU: 0.5462, Dice: 0.6759
+Val   - Loss: 0.0098, IoU: 0.5857, Dice: 0.7093
+
+Epoch 41/100
+Train - Loss: 0.0113, IoU: 0.5336, Dice: 0.6663
+Val   - Loss: 0.0097, IoU: 0.5659, Dice: 0.6938
+
+Epoch 42/100
+Train - Loss: 0.0117, IoU: 0.5321, Dice: 0.6655
+Val   - Loss: 0.0098, IoU: 0.5553, Dice: 0.6835
+
+Epoch 43/100
+Train - Loss: 0.0111, IoU: 0.5264, Dice: 0.6574
+Val   - Loss: 0.0098, IoU: 0.5523, Dice: 0.6829
+
+Epoch 44/100
+Train - Loss: 0.0109, IoU: 0.5652, Dice: 0.6942
+Val   - Loss: 0.0095, IoU: 0.5514, Dice: 0.6804
+
+Epoch 45/100
+Train - Loss: 0.0169, IoU: 0.5331, Dice: 0.6660
+Val   - Loss: 0.0105, IoU: 0.6171, Dice: 0.7369
+
+Epoch 46/100
+Train - Loss: 0.0124, IoU: 0.5392, Dice: 0.6708
+Val   - Loss: 0.0100, IoU: 0.6254, Dice: 0.7474
+
+Epoch 47/100
+Train - Loss: 0.0119, IoU: 0.5251, Dice: 0.6592
+Val   - Loss: 0.0105, IoU: 0.5790, Dice: 0.7072
+
+Epoch 48/100
+Train - Loss: 0.0122, IoU: 0.5676, Dice: 0.6991
+Val   - Loss: 0.0097, IoU: 0.5943, Dice: 0.7211
+
+Epoch 49/100
+Train - Loss: 0.0117, IoU: 0.5307, Dice: 0.6666
+Val   - Loss: 0.0092, IoU: 0.6377, Dice: 0.7558
+✓ Saved best model (val_iou: 0.6377)
+
+Epoch 50/100
+Train - Loss: 0.0112, IoU: 0.5965, Dice: 0.7200
+Val   - Loss: 0.0093, IoU: 0.5560, Dice: 0.6840
+
+Epoch 51/100
+Train - Loss: 0.0111, IoU: 0.4970, Dice: 0.6251
+Val   - Loss: 0.0100, IoU: 0.5697, Dice: 0.6986
+
+Epoch 52/100
+Train - Loss: 0.0112, IoU: 0.4886, Dice: 0.6187
+Val   - Loss: 0.0092, IoU: 0.6249, Dice: 0.7455
+
+Epoch 53/100
+Train - Loss: 0.0111, IoU: 0.5780, Dice: 0.7066
+Val   - Loss: 0.0089, IoU: 0.5974, Dice: 0.7214
+
+Epoch 54/100
+Train - Loss: 0.0104, IoU: 0.5742, Dice: 0.7016
+Val   - Loss: 0.0097, IoU: 0.5650, Dice: 0.6946
+
+Epoch 55/100
+Train - Loss: 0.0103, IoU: 0.5335, Dice: 0.6643
+Val   - Loss: 0.0091, IoU: 0.5326, Dice: 0.6592
+
+Epoch 56/100
+Train - Loss: 0.0104, IoU: 0.5256, Dice: 0.6581
+Val   - Loss: 0.0132, IoU: 0.4744, Dice: 0.6207
+
+Epoch 57/100
+Train - Loss: 0.0104, IoU: 0.5467, Dice: 0.6760
+Val   - Loss: 0.0088, IoU: 0.6061, Dice: 0.7306
+
+Epoch 58/100
+Train - Loss: 0.0119, IoU: 0.5487, Dice: 0.6797
+Val   - Loss: 0.0096, IoU: 0.5741, Dice: 0.7043
+
+Epoch 59/100
+Train - Loss: 0.0108, IoU: 0.5661, Dice: 0.6949
+Val   - Loss: 0.0118, IoU: 0.5751, Dice: 0.7115
+
+Epoch 60/100
+Train - Loss: 0.0111, IoU: 0.5640, Dice: 0.6928
+Val   - Loss: 0.0090, IoU: 0.6122, Dice: 0.7356
+
+Epoch 61/100
+Train - Loss: 0.0110, IoU: 0.5452, Dice: 0.6758
+Val   - Loss: 0.0085, IoU: 0.5826, Dice: 0.7060
+
+Epoch 62/100
+Train - Loss: 0.0104, IoU: 0.5509, Dice: 0.6795
+Val   - Loss: 0.0092, IoU: 0.5711, Dice: 0.7001
+
+Epoch 63/100
+Train - Loss: 0.0129, IoU: 0.5498, Dice: 0.6770
+Val   - Loss: 0.0090, IoU: 0.6150, Dice: 0.7320
+
+Epoch 64/100
+Train - Loss: 0.0114, IoU: 0.5668, Dice: 0.6926
+Val   - Loss: 0.0092, IoU: 0.5716, Dice: 0.6964
+
+Epoch 65/100
+Train - Loss: 0.0109, IoU: 0.5370, Dice: 0.6686
+Val   - Loss: 0.0095, IoU: 0.5503, Dice: 0.6816
+
+Epoch 66/100
+Train - Loss: 0.0118, IoU: 0.5177, Dice: 0.6512
+Val   - Loss: 0.0090, IoU: 0.5881, Dice: 0.7100
+
+Epoch 67/100
+Train - Loss: 0.0106, IoU: 0.5654, Dice: 0.6959
+Val   - Loss: 0.0089, IoU: 0.5632, Dice: 0.6915
+
+Epoch 68/100
+Train - Loss: 0.0112, IoU: 0.5421, Dice: 0.6709
+Val   - Loss: 0.0092, IoU: 0.5707, Dice: 0.6998
+
+Epoch 69/100
+Train - Loss: 0.0103, IoU: 0.5722, Dice: 0.7000
+Val   - Loss: 0.0094, IoU: 0.5872, Dice: 0.7156
+
+Early stopping triggered after 69 epochs
+
+================================================================================
+Training: unet_n_filters32_dropout0.2_learning_rate0.003
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0863, IoU: 0.2630, Dice: 0.3717
+Val   - Loss: 0.0851, IoU: 0.0375, Dice: 0.0708
+✓ Saved best model (val_iou: 0.0375)
+
+Epoch 2/100
+Train - Loss: 0.0397, IoU: 0.2335, Dice: 0.3258
+Val   - Loss: 0.0323, IoU: 0.0381, Dice: 0.0676
+✓ Saved best model (val_iou: 0.0381)
+
+Epoch 3/100
+Train - Loss: 0.0312, IoU: 0.3015, Dice: 0.4234
+Val   - Loss: 0.0283, IoU: 0.2902, Dice: 0.4181
+✓ Saved best model (val_iou: 0.2902)
+
+Epoch 4/100
+Train - Loss: 0.0320, IoU: 0.3023, Dice: 0.4142
+Val   - Loss: 0.0250, IoU: 0.3407, Dice: 0.4833
+✓ Saved best model (val_iou: 0.3407)
+
+Epoch 5/100
+Train - Loss: 0.0287, IoU: 0.2915, Dice: 0.3992
+Val   - Loss: 0.0301, IoU: 0.3018, Dice: 0.4128
+
+Epoch 6/100
+Train - Loss: 0.0263, IoU: 0.3110, Dice: 0.4271
+Val   - Loss: 0.0278, IoU: 0.2703, Dice: 0.3886
+
+Epoch 7/100
+Train - Loss: 0.0253, IoU: 0.2965, Dice: 0.4006
+Val   - Loss: 0.0439, IoU: 0.3670, Dice: 0.5035
+✓ Saved best model (val_iou: 0.3670)
+
+Epoch 8/100
+Train - Loss: 0.0286, IoU: 0.3188, Dice: 0.4332
+Val   - Loss: 0.0280, IoU: 0.3098, Dice: 0.4232
+
+Epoch 9/100
+Train - Loss: 0.0255, IoU: 0.3489, Dice: 0.4709
+Val   - Loss: 0.0255, IoU: 0.3948, Dice: 0.5306
+✓ Saved best model (val_iou: 0.3948)
+
+Epoch 10/100
+Train - Loss: 0.0239, IoU: 0.2770, Dice: 0.3844
+Val   - Loss: 0.0270, IoU: 0.3910, Dice: 0.5436
+
+Epoch 11/100
+Train - Loss: 0.0227, IoU: 0.3207, Dice: 0.4437
+Val   - Loss: 0.0208, IoU: 0.2005, Dice: 0.3165
+
+Epoch 12/100
+Train - Loss: 0.0223, IoU: 0.3584, Dice: 0.4910
+Val   - Loss: 0.0193, IoU: 0.3561, Dice: 0.5135
+
+Epoch 13/100
+Train - Loss: 0.0192, IoU: 0.3981, Dice: 0.5344
+Val   - Loss: 0.0181, IoU: 0.4712, Dice: 0.6132
+✓ Saved best model (val_iou: 0.4712)
+
+Epoch 14/100
+Train - Loss: 0.0216, IoU: 0.4429, Dice: 0.5753
+Val   - Loss: 0.0178, IoU: 0.3806, Dice: 0.5335
+
+Epoch 15/100
+Train - Loss: 0.0182, IoU: 0.3446, Dice: 0.4717
+Val   - Loss: 0.0173, IoU: 0.4319, Dice: 0.5674
+
+Epoch 16/100
+Train - Loss: 0.0175, IoU: 0.4434, Dice: 0.5729
+Val   - Loss: 0.0187, IoU: 0.4715, Dice: 0.6211
+✓ Saved best model (val_iou: 0.4715)
+
+Epoch 17/100
+Train - Loss: 0.0173, IoU: 0.4518, Dice: 0.5834
+Val   - Loss: 0.0138, IoU: 0.4824, Dice: 0.6239
+✓ Saved best model (val_iou: 0.4824)
+
+Epoch 18/100
+Train - Loss: 0.0171, IoU: 0.4153, Dice: 0.5385
+Val   - Loss: 0.0130, IoU: 0.4398, Dice: 0.5748
+
+Epoch 19/100
+Train - Loss: 0.0162, IoU: 0.4386, Dice: 0.5657
+Val   - Loss: 0.0164, IoU: 0.5134, Dice: 0.6577
+✓ Saved best model (val_iou: 0.5134)
+
+Epoch 20/100
+Train - Loss: 0.0155, IoU: 0.4452, Dice: 0.5713
+Val   - Loss: 0.0148, IoU: 0.4411, Dice: 0.5816
+
+Epoch 21/100
+Train - Loss: 0.0170, IoU: 0.4206, Dice: 0.5469
+Val   - Loss: 0.0190, IoU: 0.3627, Dice: 0.5101
+
+Epoch 22/100
+Train - Loss: 0.0150, IoU: 0.4342, Dice: 0.5551
+Val   - Loss: 0.0122, IoU: 0.5365, Dice: 0.6693
+✓ Saved best model (val_iou: 0.5365)
+
+Epoch 23/100
+Train - Loss: 0.0138, IoU: 0.4585, Dice: 0.5850
+Val   - Loss: 0.0136, IoU: 0.4975, Dice: 0.6369
+
+Epoch 24/100
+Train - Loss: 0.0152, IoU: 0.4722, Dice: 0.6039
+Val   - Loss: 0.0154, IoU: 0.4459, Dice: 0.5891
+
+Epoch 25/100
+Train - Loss: 0.0161, IoU: 0.4160, Dice: 0.5382
+Val   - Loss: 0.0225, IoU: 0.3125, Dice: 0.3883
+
+Epoch 26/100
+Train - Loss: 0.0149, IoU: 0.3792, Dice: 0.4914
+Val   - Loss: 0.0128, IoU: 0.4686, Dice: 0.5982
+
+Epoch 27/100
+Train - Loss: 0.0149, IoU: 0.4524, Dice: 0.5751
+Val   - Loss: 0.0127, IoU: 0.3899, Dice: 0.5126
+
+Epoch 28/100
+Train - Loss: 0.0165, IoU: 0.4482, Dice: 0.5699
+Val   - Loss: 0.0117, IoU: 0.4208, Dice: 0.5466
+
+Epoch 29/100
+Train - Loss: 0.0209, IoU: 0.4021, Dice: 0.5311
+Val   - Loss: 0.0181, IoU: 0.4873, Dice: 0.6384
+
+Epoch 30/100
+Train - Loss: 0.0145, IoU: 0.4449, Dice: 0.5695
+Val   - Loss: 0.0109, IoU: 0.5673, Dice: 0.6923
+✓ Saved best model (val_iou: 0.5673)
+
+Epoch 31/100
+Train - Loss: 0.0172, IoU: 0.4295, Dice: 0.5523
+Val   - Loss: 0.0159, IoU: 0.5003, Dice: 0.6321
+
+Epoch 32/100
+Train - Loss: 0.0199, IoU: 0.4177, Dice: 0.5519
+Val   - Loss: 0.0134, IoU: 0.4518, Dice: 0.5884
+
+Epoch 33/100
+Train - Loss: 0.0182, IoU: 0.4494, Dice: 0.5669
+Val   - Loss: 0.0238, IoU: 0.3884, Dice: 0.5247
+
+Epoch 34/100
+Train - Loss: 0.0156, IoU: 0.4307, Dice: 0.5551
+Val   - Loss: 0.0197, IoU: 0.5505, Dice: 0.6758
+
+Epoch 35/100
+Train - Loss: 0.0137, IoU: 0.4432, Dice: 0.5654
+Val   - Loss: 0.0116, IoU: 0.5561, Dice: 0.6853
+
+Epoch 36/100
+Train - Loss: 0.0136, IoU: 0.4328, Dice: 0.5568
+Val   - Loss: 0.0113, IoU: 0.4621, Dice: 0.5877
+
+Epoch 37/100
+Train - Loss: 0.0133, IoU: 0.5000, Dice: 0.6192
+Val   - Loss: 0.0112, IoU: 0.5139, Dice: 0.6394
+
+Epoch 38/100
+Train - Loss: 0.0149, IoU: 0.4593, Dice: 0.5786
+Val   - Loss: 0.0112, IoU: 0.5840, Dice: 0.7012
+✓ Saved best model (val_iou: 0.5840)
+
+Epoch 39/100
+Train - Loss: 0.0132, IoU: 0.4789, Dice: 0.5989
+Val   - Loss: 0.0117, IoU: 0.4512, Dice: 0.5795
+
+Epoch 40/100
+Train - Loss: 0.0112, IoU: 0.4799, Dice: 0.5966
+Val   - Loss: 0.0103, IoU: 0.5094, Dice: 0.6372
+
+Epoch 41/100
+Train - Loss: 0.0124, IoU: 0.4835, Dice: 0.6040
+Val   - Loss: 0.0095, IoU: 0.5523, Dice: 0.6788
+
+Epoch 42/100
+Train - Loss: 0.0123, IoU: 0.4888, Dice: 0.6047
+Val   - Loss: 0.0291, IoU: 0.3764, Dice: 0.5072
+
+Epoch 43/100
+Train - Loss: 0.0121, IoU: 0.5075, Dice: 0.6298
+Val   - Loss: 0.0118, IoU: 0.4890, Dice: 0.6227
+
+Epoch 44/100
+Train - Loss: 0.0130, IoU: 0.4683, Dice: 0.5888
+Val   - Loss: 0.0103, IoU: 0.5266, Dice: 0.6505
+
+Epoch 45/100
+Train - Loss: 0.0124, IoU: 0.5626, Dice: 0.6844
+Val   - Loss: 0.0101, IoU: 0.4560, Dice: 0.5736
+
+Epoch 46/100
+Train - Loss: 0.0140, IoU: 0.4628, Dice: 0.5875
+Val   - Loss: 0.0130, IoU: 0.5459, Dice: 0.6671
+
+Epoch 47/100
+Train - Loss: 0.0120, IoU: 0.5208, Dice: 0.6445
+Val   - Loss: 0.0129, IoU: 0.4798, Dice: 0.6001
+
+Epoch 48/100
+Train - Loss: 0.0122, IoU: 0.5053, Dice: 0.6258
+Val   - Loss: 0.0109, IoU: 0.4925, Dice: 0.6260
+
+Epoch 49/100
+Train - Loss: 0.0121, IoU: 0.5203, Dice: 0.6392
+Val   - Loss: 0.0097, IoU: 0.5401, Dice: 0.6656
+
+Epoch 50/100
+Train - Loss: 0.0108, IoU: 0.5058, Dice: 0.6324
+Val   - Loss: 0.0091, IoU: 0.5314, Dice: 0.6553
+
+Epoch 51/100
+Train - Loss: 0.0111, IoU: 0.5215, Dice: 0.6452
+Val   - Loss: 0.0106, IoU: 0.5702, Dice: 0.6913
+
+Epoch 52/100
+Train - Loss: 0.0108, IoU: 0.5295, Dice: 0.6486
+Val   - Loss: 0.0109, IoU: 0.4814, Dice: 0.6108
+
+Epoch 53/100
+Train - Loss: 0.0107, IoU: 0.4662, Dice: 0.5782
+Val   - Loss: 0.0132, IoU: 0.5256, Dice: 0.6647
+
+Epoch 54/100
+Train - Loss: 0.0109, IoU: 0.5171, Dice: 0.6337
+Val   - Loss: 0.0094, IoU: 0.4914, Dice: 0.6148
+
+Epoch 55/100
+Train - Loss: 0.0103, IoU: 0.5250, Dice: 0.6461
+Val   - Loss: 0.0094, IoU: 0.5832, Dice: 0.7046
+
+Epoch 56/100
+Train - Loss: 0.0115, IoU: 0.5329, Dice: 0.6606
+Val   - Loss: 0.0170, IoU: 0.4406, Dice: 0.5945
+
+Epoch 57/100
+Train - Loss: 0.0109, IoU: 0.4988, Dice: 0.6186
+Val   - Loss: 0.0103, IoU: 0.4900, Dice: 0.6197
+
+Epoch 58/100
+Train - Loss: 0.0112, IoU: 0.4996, Dice: 0.6243
+Val   - Loss: 0.0109, IoU: 0.5399, Dice: 0.6739
+
+Early stopping triggered after 58 epochs
+
+================================================================================
+Training: unet_n_filters32_dropout0.2_learning_rate0.005
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0615, IoU: 0.1174, Dice: 0.1831
+Val   - Loss: 0.4893, IoU: 0.1737, Dice: 0.2471
+✓ Saved best model (val_iou: 0.1737)
+
+Epoch 2/100
+Train - Loss: 0.0306, IoU: 0.1390, Dice: 0.2207
+Val   - Loss: 0.3586, IoU: 0.0091, Dice: 0.0176
+
+Epoch 3/100
+Train - Loss: 0.0273, IoU: 0.2044, Dice: 0.3037
+Val   - Loss: 0.0295, IoU: 0.0056, Dice: 0.0110
+
+Epoch 4/100
+Train - Loss: 0.0280, IoU: 0.1294, Dice: 0.1990
+Val   - Loss: 0.0436, IoU: 0.2806, Dice: 0.4025
+✓ Saved best model (val_iou: 0.2806)
+
+Epoch 5/100
+Train - Loss: 0.0295, IoU: 0.2846, Dice: 0.4022
+Val   - Loss: 0.0298, IoU: 0.1767, Dice: 0.2687
+
+Epoch 6/100
+Train - Loss: 0.0277, IoU: 0.1200, Dice: 0.1804
+Val   - Loss: 0.0360, IoU: 0.0115, Dice: 0.0224
+
+Epoch 7/100
+Train - Loss: 0.0241, IoU: 0.1466, Dice: 0.2306
+Val   - Loss: 0.0331, IoU: 0.1296, Dice: 0.2192
+
+Epoch 8/100
+Train - Loss: 0.0241, IoU: 0.2430, Dice: 0.3565
+Val   - Loss: 0.0240, IoU: 0.2258, Dice: 0.3424
+
+Epoch 9/100
+Train - Loss: 0.0235, IoU: 0.3110, Dice: 0.4322
+Val   - Loss: 0.0226, IoU: 0.1263, Dice: 0.2147
+
+Epoch 10/100
+Train - Loss: 0.0266, IoU: 0.2605, Dice: 0.3706
+Val   - Loss: 0.0281, IoU: 0.4044, Dice: 0.5636
+✓ Saved best model (val_iou: 0.4044)
+
+Epoch 11/100
+Train - Loss: 0.0229, IoU: 0.2396, Dice: 0.3470
+Val   - Loss: 0.0193, IoU: 0.4195, Dice: 0.5575
+✓ Saved best model (val_iou: 0.4195)
+
+Epoch 12/100
+Train - Loss: 0.0214, IoU: 0.3261, Dice: 0.4560
+Val   - Loss: 0.0202, IoU: 0.4488, Dice: 0.5861
+✓ Saved best model (val_iou: 0.4488)
+
+Epoch 13/100
+Train - Loss: 0.0189, IoU: 0.3707, Dice: 0.5028
+Val   - Loss: 0.0177, IoU: 0.3725, Dice: 0.5082
+
+Epoch 14/100
+Train - Loss: 0.0196, IoU: 0.3421, Dice: 0.4715
+Val   - Loss: 0.0171, IoU: 0.4543, Dice: 0.5867
+✓ Saved best model (val_iou: 0.4543)
+
+Epoch 15/100
+Train - Loss: 0.0203, IoU: 0.3691, Dice: 0.5092
+Val   - Loss: 0.0198, IoU: 0.4525, Dice: 0.5965
+
+Epoch 16/100
+Train - Loss: 0.0206, IoU: 0.3179, Dice: 0.4423
+Val   - Loss: 0.0181, IoU: 0.2368, Dice: 0.3420
+
+Epoch 17/100
+Train - Loss: 0.0180, IoU: 0.3917, Dice: 0.5271
+Val   - Loss: 0.0183, IoU: 0.5181, Dice: 0.6587
+✓ Saved best model (val_iou: 0.5181)
+
+Epoch 18/100
+Train - Loss: 0.0177, IoU: 0.3816, Dice: 0.5218
+Val   - Loss: 0.0168, IoU: 0.3122, Dice: 0.4343
+
+Epoch 19/100
+Train - Loss: 0.0172, IoU: 0.4227, Dice: 0.5626
+Val   - Loss: 0.0174, IoU: 0.4570, Dice: 0.6037
+
+Epoch 20/100
+Train - Loss: 0.0192, IoU: 0.3802, Dice: 0.5166
+Val   - Loss: 0.0348, IoU: 0.3419, Dice: 0.4975
+
+Epoch 21/100
+Train - Loss: 0.0173, IoU: 0.4561, Dice: 0.5963
+Val   - Loss: 0.0310, IoU: 0.4849, Dice: 0.6270
+
+Epoch 22/100
+Train - Loss: 0.0168, IoU: 0.3975, Dice: 0.5375
+Val   - Loss: 0.0153, IoU: 0.4976, Dice: 0.6384
+
+Epoch 23/100
+Train - Loss: 0.0155, IoU: 0.4507, Dice: 0.5885
+Val   - Loss: 0.0143, IoU: 0.4380, Dice: 0.5835
+
+Epoch 24/100
+Train - Loss: 0.0154, IoU: 0.4389, Dice: 0.5781
+Val   - Loss: 0.0166, IoU: 0.4294, Dice: 0.5809
+
+Epoch 25/100
+Train - Loss: 0.0159, IoU: 0.4374, Dice: 0.5717
+Val   - Loss: 0.0158, IoU: 0.4322, Dice: 0.5776
+
+Epoch 26/100
+Train - Loss: 0.0156, IoU: 0.4160, Dice: 0.5476
+Val   - Loss: 0.0139, IoU: 0.5320, Dice: 0.6672
+✓ Saved best model (val_iou: 0.5320)
+
+Epoch 27/100
+Train - Loss: 0.0162, IoU: 0.4181, Dice: 0.5532
+Val   - Loss: 0.0194, IoU: 0.4458, Dice: 0.5994
+
+Epoch 28/100
+Train - Loss: 0.0208, IoU: 0.4349, Dice: 0.5717
+Val   - Loss: 0.0220, IoU: 0.4218, Dice: 0.5678
+
+Epoch 29/100
+Train - Loss: 0.0171, IoU: 0.3934, Dice: 0.5237
+Val   - Loss: 0.0145, IoU: 0.4555, Dice: 0.5767
+
+Epoch 30/100
+Train - Loss: 0.0160, IoU: 0.3976, Dice: 0.5286
+Val   - Loss: 0.0133, IoU: 0.4846, Dice: 0.6265
+
+Epoch 31/100
+Train - Loss: 0.0162, IoU: 0.4364, Dice: 0.5763
+Val   - Loss: 0.0160, IoU: 0.3854, Dice: 0.5278
+
+Epoch 32/100
+Train - Loss: 0.0158, IoU: 0.4561, Dice: 0.5944
+Val   - Loss: 0.0141, IoU: 0.5194, Dice: 0.6580
+
+Epoch 33/100
+Train - Loss: 0.0149, IoU: 0.4722, Dice: 0.6088
+Val   - Loss: 0.0124, IoU: 0.4757, Dice: 0.6079
+
+Epoch 34/100
+Train - Loss: 0.0143, IoU: 0.4643, Dice: 0.6014
+Val   - Loss: 0.0117, IoU: 0.5110, Dice: 0.6380
+
+Epoch 35/100
+Train - Loss: 0.0141, IoU: 0.4119, Dice: 0.5460
+Val   - Loss: 0.0187, IoU: 0.5004, Dice: 0.6269
+
+Epoch 36/100
+Train - Loss: 0.0221, IoU: 0.3765, Dice: 0.5024
+Val   - Loss: 0.0391, IoU: 0.3271, Dice: 0.4167
+
+Epoch 37/100
+Train - Loss: 0.0176, IoU: 0.3812, Dice: 0.5000
+Val   - Loss: 0.0137, IoU: 0.4029, Dice: 0.5264
+
+Epoch 38/100
+Train - Loss: 0.0151, IoU: 0.3995, Dice: 0.5270
+Val   - Loss: 0.0126, IoU: 0.4107, Dice: 0.5352
+
+Epoch 39/100
+Train - Loss: 0.0144, IoU: 0.4532, Dice: 0.5771
+Val   - Loss: 0.0147, IoU: 0.5110, Dice: 0.6342
+
+Epoch 40/100
+Train - Loss: 0.0140, IoU: 0.4413, Dice: 0.5713
+Val   - Loss: 0.0202, IoU: 0.4675, Dice: 0.5883
+
+Epoch 41/100
+Train - Loss: 0.0143, IoU: 0.4151, Dice: 0.5371
+Val   - Loss: 0.0134, IoU: 0.3682, Dice: 0.4903
+
+Epoch 42/100
+Train - Loss: 0.0138, IoU: 0.4444, Dice: 0.5717
+Val   - Loss: 0.0123, IoU: 0.5529, Dice: 0.6807
+✓ Saved best model (val_iou: 0.5529)
+
+Epoch 43/100
+Train - Loss: 0.0138, IoU: 0.4374, Dice: 0.5563
+Val   - Loss: 0.0112, IoU: 0.4678, Dice: 0.5976
+
+Epoch 44/100
+Train - Loss: 0.0135, IoU: 0.4761, Dice: 0.6070
+Val   - Loss: 0.0127, IoU: 0.5159, Dice: 0.6571
+
+Epoch 45/100
+Train - Loss: 0.0128, IoU: 0.5075, Dice: 0.6358
+Val   - Loss: 0.0132, IoU: 0.5150, Dice: 0.6501
+
+Epoch 46/100
+Train - Loss: 0.0126, IoU: 0.4511, Dice: 0.5786
+Val   - Loss: 0.0124, IoU: 0.5066, Dice: 0.6257
+
+Epoch 47/100
+Train - Loss: 0.0130, IoU: 0.5046, Dice: 0.6318
+Val   - Loss: 0.0121, IoU: 0.4798, Dice: 0.6133
+
+Epoch 48/100
+Train - Loss: 0.0136, IoU: 0.4639, Dice: 0.5941
+Val   - Loss: 0.0117, IoU: 0.5030, Dice: 0.6255
+
+Epoch 49/100
+Train - Loss: 0.0119, IoU: 0.4894, Dice: 0.6164
+Val   - Loss: 0.0109, IoU: 0.5360, Dice: 0.6681
+
+Epoch 50/100
+Train - Loss: 0.0123, IoU: 0.4710, Dice: 0.5973
+Val   - Loss: 0.0102, IoU: 0.4729, Dice: 0.5988
+
+Epoch 51/100
+Train - Loss: 0.0125, IoU: 0.4943, Dice: 0.6231
+Val   - Loss: 0.0103, IoU: 0.5057, Dice: 0.6364
+
+Epoch 52/100
+Train - Loss: 0.0150, IoU: 0.5186, Dice: 0.6455
+Val   - Loss: 0.0119, IoU: 0.4882, Dice: 0.6302
+
+Epoch 53/100
+Train - Loss: 0.0130, IoU: 0.4842, Dice: 0.6132
+Val   - Loss: 0.0124, IoU: 0.5179, Dice: 0.6412
+
+Epoch 54/100
+Train - Loss: 0.0120, IoU: 0.3889, Dice: 0.5012
+Val   - Loss: 0.0100, IoU: 0.4592, Dice: 0.5769
+
+Epoch 55/100
+Train - Loss: 0.0114, IoU: 0.4808, Dice: 0.6071
+Val   - Loss: 0.0110, IoU: 0.5051, Dice: 0.6365
+
+Epoch 56/100
+Train - Loss: 0.0115, IoU: 0.4888, Dice: 0.6131
+Val   - Loss: 0.0108, IoU: 0.5239, Dice: 0.6489
+
+Epoch 57/100
+Train - Loss: 0.0114, IoU: 0.5039, Dice: 0.6286
+Val   - Loss: 0.0102, IoU: 0.4685, Dice: 0.5958
+
+Epoch 58/100
+Train - Loss: 0.0122, IoU: 0.4540, Dice: 0.5706
+Val   - Loss: 0.0099, IoU: 0.4540, Dice: 0.5755
+
+Epoch 59/100
+Train - Loss: 0.0121, IoU: 0.4574, Dice: 0.5774
+Val   - Loss: 0.0103, IoU: 0.5491, Dice: 0.6721
+
+Epoch 60/100
+Train - Loss: 0.0109, IoU: 0.4828, Dice: 0.6072
+Val   - Loss: 0.0098, IoU: 0.4848, Dice: 0.6104
+
+Epoch 61/100
+Train - Loss: 0.0114, IoU: 0.4994, Dice: 0.6226
+Val   - Loss: 0.0090, IoU: 0.4987, Dice: 0.6194
+
+Epoch 62/100
+Train - Loss: 0.0116, IoU: 0.4942, Dice: 0.6198
+Val   - Loss: 0.0098, IoU: 0.4974, Dice: 0.6226
+
+Early stopping triggered after 62 epochs
+
+================================================================================
+Training: unet_n_filters32_dropout0.3_learning_rate0.001
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0927, IoU: 0.2655, Dice: 0.3673
+Val   - Loss: 0.0545, IoU: 0.0000, Dice: 0.0000
+✓ Saved best model (val_iou: 0.0000)
+
+Epoch 2/100
+Train - Loss: 0.0614, IoU: 0.2747, Dice: 0.3952
+Val   - Loss: 0.0418, IoU: 0.1754, Dice: 0.2648
+✓ Saved best model (val_iou: 0.1754)
+
+Epoch 3/100
+Train - Loss: 0.0491, IoU: 0.2666, Dice: 0.3708
+Val   - Loss: 0.0367, IoU: 0.4078, Dice: 0.5342
+✓ Saved best model (val_iou: 0.4078)
+
+Epoch 4/100
+Train - Loss: 0.0407, IoU: 0.3151, Dice: 0.4361
+Val   - Loss: 0.0306, IoU: 0.2494, Dice: 0.3764
+
+Epoch 5/100
+Train - Loss: 0.0367, IoU: 0.2548, Dice: 0.3652
+Val   - Loss: 0.0320, IoU: 0.2461, Dice: 0.3639
+
+Epoch 6/100
+Train - Loss: 0.0336, IoU: 0.2481, Dice: 0.3607
+Val   - Loss: 0.0251, IoU: 0.3764, Dice: 0.5181
+
+Epoch 7/100
+Train - Loss: 0.0330, IoU: 0.3012, Dice: 0.4243
+Val   - Loss: 0.0289, IoU: 0.2928, Dice: 0.4158
+
+Epoch 8/100
+Train - Loss: 0.0305, IoU: 0.2922, Dice: 0.4151
+Val   - Loss: 0.0245, IoU: 0.4079, Dice: 0.5581
+✓ Saved best model (val_iou: 0.4079)
+
+Epoch 9/100
+Train - Loss: 0.0315, IoU: 0.3215, Dice: 0.4456
+Val   - Loss: 0.0265, IoU: 0.3126, Dice: 0.4537
+
+Epoch 10/100
+Train - Loss: 0.0283, IoU: 0.3051, Dice: 0.4276
+Val   - Loss: 0.0202, IoU: 0.3815, Dice: 0.5306
+
+Epoch 11/100
+Train - Loss: 0.0262, IoU: 0.3502, Dice: 0.4865
+Val   - Loss: 0.0200, IoU: 0.4011, Dice: 0.5508
+
+Epoch 12/100
+Train - Loss: 0.0250, IoU: 0.3339, Dice: 0.4680
+Val   - Loss: 0.0313, IoU: 0.4973, Dice: 0.6161
+✓ Saved best model (val_iou: 0.4973)
+
+Epoch 13/100
+Train - Loss: 0.0248, IoU: 0.3791, Dice: 0.5115
+Val   - Loss: 0.0184, IoU: 0.5167, Dice: 0.6550
+✓ Saved best model (val_iou: 0.5167)
+
+Epoch 14/100
+Train - Loss: 0.0225, IoU: 0.3798, Dice: 0.5189
+Val   - Loss: 0.0187, IoU: 0.3154, Dice: 0.4622
+
+Epoch 15/100
+Train - Loss: 0.0228, IoU: 0.3535, Dice: 0.4888
+Val   - Loss: 0.0166, IoU: 0.4956, Dice: 0.6354
+
+Epoch 16/100
+Train - Loss: 0.0214, IoU: 0.3858, Dice: 0.5278
+Val   - Loss: 0.0164, IoU: 0.3923, Dice: 0.5331
+
+Epoch 17/100
+Train - Loss: 0.0201, IoU: 0.3847, Dice: 0.5243
+Val   - Loss: 0.0146, IoU: 0.5632, Dice: 0.7029
+✓ Saved best model (val_iou: 0.5632)
+
+Epoch 18/100
+Train - Loss: 0.0188, IoU: 0.4500, Dice: 0.5860
+Val   - Loss: 0.0144, IoU: 0.4413, Dice: 0.5823
+
+Epoch 19/100
+Train - Loss: 0.0200, IoU: 0.4125, Dice: 0.5381
+Val   - Loss: 0.0153, IoU: 0.5040, Dice: 0.6401
+
+Epoch 20/100
+Train - Loss: 0.0193, IoU: 0.4411, Dice: 0.5759
+Val   - Loss: 0.0181, IoU: 0.2497, Dice: 0.3687
+
+Epoch 21/100
+Train - Loss: 0.0231, IoU: 0.3571, Dice: 0.4999
+Val   - Loss: 0.0144, IoU: 0.5317, Dice: 0.6693
+
+Epoch 22/100
+Train - Loss: 0.0191, IoU: 0.4387, Dice: 0.5771
+Val   - Loss: 0.0157, IoU: 0.3942, Dice: 0.5291
+
+Epoch 23/100
+Train - Loss: 0.0215, IoU: 0.3963, Dice: 0.5272
+Val   - Loss: 0.0160, IoU: 0.5526, Dice: 0.6828
+
+Epoch 24/100
+Train - Loss: 0.0172, IoU: 0.4679, Dice: 0.6082
+Val   - Loss: 0.0138, IoU: 0.5632, Dice: 0.6920
+
+Epoch 25/100
+Train - Loss: 0.0166, IoU: 0.4376, Dice: 0.5702
+Val   - Loss: 0.0146, IoU: 0.4735, Dice: 0.6058
+
+Epoch 26/100
+Train - Loss: 0.0173, IoU: 0.4633, Dice: 0.5976
+Val   - Loss: 0.0131, IoU: 0.5027, Dice: 0.6410
+
+Epoch 27/100
+Train - Loss: 0.0163, IoU: 0.4562, Dice: 0.5930
+Val   - Loss: 0.0126, IoU: 0.5481, Dice: 0.6779
+
+Epoch 28/100
+Train - Loss: 0.0174, IoU: 0.4313, Dice: 0.5687
+Val   - Loss: 0.0126, IoU: 0.5205, Dice: 0.6594
+
+Epoch 29/100
+Train - Loss: 0.0180, IoU: 0.4339, Dice: 0.5738
+Val   - Loss: 0.0125, IoU: 0.4646, Dice: 0.5946
+
+Epoch 30/100
+Train - Loss: 0.0164, IoU: 0.4291, Dice: 0.5594
+Val   - Loss: 0.0125, IoU: 0.5187, Dice: 0.6479
+
+Epoch 31/100
+Train - Loss: 0.0171, IoU: 0.4287, Dice: 0.5572
+Val   - Loss: 0.0126, IoU: 0.5194, Dice: 0.6570
+
+Epoch 32/100
+Train - Loss: 0.0154, IoU: 0.4925, Dice: 0.6302
+Val   - Loss: 0.0122, IoU: 0.5030, Dice: 0.6339
+
+Epoch 33/100
+Train - Loss: 0.0157, IoU: 0.4742, Dice: 0.6011
+Val   - Loss: 0.0126, IoU: 0.5632, Dice: 0.6955
+
+Epoch 34/100
+Train - Loss: 0.0158, IoU: 0.5192, Dice: 0.6494
+Val   - Loss: 0.0114, IoU: 0.5064, Dice: 0.6353
+
+Epoch 35/100
+Train - Loss: 0.0128, IoU: 0.4650, Dice: 0.5925
+Val   - Loss: 0.0109, IoU: 0.5084, Dice: 0.6363
+
+Epoch 36/100
+Train - Loss: 0.0140, IoU: 0.4776, Dice: 0.6051
+Val   - Loss: 0.0112, IoU: 0.5194, Dice: 0.6516
+
+Epoch 37/100
+Train - Loss: 0.0162, IoU: 0.5007, Dice: 0.6310
+Val   - Loss: 0.0112, IoU: 0.5386, Dice: 0.6660
+
+Early stopping triggered after 37 epochs
+
+================================================================================
+Training: unet_n_filters32_dropout0.3_learning_rate0.003
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0597, IoU: 0.2442, Dice: 0.3456
+Val   - Loss: 0.9590, IoU: 0.1376, Dice: 0.2126
+✓ Saved best model (val_iou: 0.1376)
+
+Epoch 2/100
+Train - Loss: 0.0323, IoU: 0.1343, Dice: 0.2029
+Val   - Loss: 0.0332, IoU: 0.0007, Dice: 0.0015
+
+Epoch 3/100
+Train - Loss: 0.0344, IoU: 0.1322, Dice: 0.1935
+Val   - Loss: 0.0284, IoU: 0.1409, Dice: 0.2194
+✓ Saved best model (val_iou: 0.1409)
+
+Epoch 4/100
+Train - Loss: 0.0305, IoU: 0.1778, Dice: 0.2531
+Val   - Loss: 0.0266, IoU: 0.2233, Dice: 0.3354
+✓ Saved best model (val_iou: 0.2233)
+
+Epoch 5/100
+Train - Loss: 0.0308, IoU: 0.2303, Dice: 0.3196
+Val   - Loss: 0.0274, IoU: 0.1933, Dice: 0.2882
+
+Epoch 6/100
+Train - Loss: 0.0270, IoU: 0.3250, Dice: 0.4407
+Val   - Loss: 0.0333, IoU: 0.3525, Dice: 0.4951
+✓ Saved best model (val_iou: 0.3525)
+
+Epoch 7/100
+Train - Loss: 0.0273, IoU: 0.2590, Dice: 0.3578
+Val   - Loss: 0.0208, IoU: 0.1897, Dice: 0.2970
+
+Epoch 8/100
+Train - Loss: 0.0273, IoU: 0.2373, Dice: 0.3232
+Val   - Loss: 0.0197, IoU: 0.3426, Dice: 0.4818
+
+Epoch 9/100
+Train - Loss: 0.0250, IoU: 0.2907, Dice: 0.3915
+Val   - Loss: 0.0249, IoU: 0.2731, Dice: 0.3937
+
+Epoch 10/100
+Train - Loss: 0.0277, IoU: 0.2976, Dice: 0.4079
+Val   - Loss: 0.0186, IoU: 0.4182, Dice: 0.5644
+✓ Saved best model (val_iou: 0.4182)
+
+Epoch 11/100
+Train - Loss: 0.0288, IoU: 0.3012, Dice: 0.4191
+Val   - Loss: 0.0308, IoU: 0.1150, Dice: 0.1962
+
+Epoch 12/100
+Train - Loss: 0.0236, IoU: 0.2728, Dice: 0.3785
+Val   - Loss: 0.0187, IoU: 0.4561, Dice: 0.5869
+✓ Saved best model (val_iou: 0.4561)
+
+Epoch 13/100
+Train - Loss: 0.0211, IoU: 0.3314, Dice: 0.4584
+Val   - Loss: 0.0269, IoU: 0.4354, Dice: 0.5539
+
+Epoch 14/100
+Train - Loss: 0.0253, IoU: 0.3517, Dice: 0.4770
+Val   - Loss: 0.0209, IoU: 0.3587, Dice: 0.5009
+
+Epoch 15/100
+Train - Loss: 0.0265, IoU: 0.2916, Dice: 0.4075
+Val   - Loss: 0.0218, IoU: 0.3837, Dice: 0.5315
+
+Epoch 16/100
+Train - Loss: 0.0259, IoU: 0.3211, Dice: 0.4379
+Val   - Loss: 0.0244, IoU: 0.2959, Dice: 0.4407
+
+Epoch 17/100
+Train - Loss: 0.0235, IoU: 0.2643, Dice: 0.3816
+Val   - Loss: 0.0173, IoU: 0.3855, Dice: 0.5271
+
+Epoch 18/100
+Train - Loss: 0.0200, IoU: 0.3851, Dice: 0.5184
+Val   - Loss: 0.0235, IoU: 0.3887, Dice: 0.5246
+
+Epoch 19/100
+Train - Loss: 0.0199, IoU: 0.3417, Dice: 0.4736
+Val   - Loss: 0.0179, IoU: 0.3764, Dice: 0.5169
+
+Epoch 20/100
+Train - Loss: 0.0183, IoU: 0.3753, Dice: 0.5077
+Val   - Loss: 0.0153, IoU: 0.4198, Dice: 0.5629
+
+Epoch 21/100
+Train - Loss: 0.0240, IoU: 0.3652, Dice: 0.5042
+Val   - Loss: 0.0200, IoU: 0.3179, Dice: 0.4506
+
+Epoch 22/100
+Train - Loss: 0.0209, IoU: 0.3605, Dice: 0.4897
+Val   - Loss: 0.0187, IoU: 0.4595, Dice: 0.6044
+✓ Saved best model (val_iou: 0.4595)
+
+Epoch 23/100
+Train - Loss: 0.0221, IoU: 0.3297, Dice: 0.4596
+Val   - Loss: 0.0217, IoU: 0.4313, Dice: 0.5865
+
+Epoch 24/100
+Train - Loss: 0.0209, IoU: 0.3213, Dice: 0.4557
+Val   - Loss: 0.0257, IoU: 0.4670, Dice: 0.6194
+✓ Saved best model (val_iou: 0.4670)
+
+Epoch 25/100
+Train - Loss: 0.0184, IoU: 0.3662, Dice: 0.4983
+Val   - Loss: 0.0150, IoU: 0.4374, Dice: 0.5766
+
+Epoch 26/100
+Train - Loss: 0.0172, IoU: 0.4074, Dice: 0.5448
+Val   - Loss: 0.0147, IoU: 0.3656, Dice: 0.5045
+
+Epoch 27/100
+Train - Loss: 0.0196, IoU: 0.3661, Dice: 0.5068
+Val   - Loss: 0.0155, IoU: 0.3564, Dice: 0.4967
+
+Epoch 28/100
+Train - Loss: 0.0211, IoU: 0.3947, Dice: 0.5364
+Val   - Loss: 0.0156, IoU: 0.3392, Dice: 0.4635
+
+Epoch 29/100
+Train - Loss: 0.0203, IoU: 0.4002, Dice: 0.5396
+Val   - Loss: 0.0164, IoU: 0.4757, Dice: 0.6168
+✓ Saved best model (val_iou: 0.4757)
+
+Epoch 30/100
+Train - Loss: 0.0185, IoU: 0.3812, Dice: 0.5172
+Val   - Loss: 0.0203, IoU: 0.5048, Dice: 0.6492
+✓ Saved best model (val_iou: 0.5048)
+
+Epoch 31/100
+Train - Loss: 0.0173, IoU: 0.3798, Dice: 0.5154
+Val   - Loss: 0.0144, IoU: 0.3570, Dice: 0.4863
+
+Epoch 32/100
+Train - Loss: 0.0185, IoU: 0.3576, Dice: 0.4921
+Val   - Loss: 0.0328, IoU: 0.5011, Dice: 0.6420
+
+Epoch 33/100
+Train - Loss: 0.0171, IoU: 0.4073, Dice: 0.5490
+Val   - Loss: 0.0156, IoU: 0.3621, Dice: 0.5025
+
+Epoch 34/100
+Train - Loss: 0.0173, IoU: 0.4273, Dice: 0.5691
+Val   - Loss: 0.0142, IoU: 0.4492, Dice: 0.5915
+
+Epoch 35/100
+Train - Loss: 0.0168, IoU: 0.3818, Dice: 0.5157
+Val   - Loss: 0.0130, IoU: 0.4260, Dice: 0.5570
+
+Epoch 36/100
+Train - Loss: 0.0170, IoU: 0.4340, Dice: 0.5725
+Val   - Loss: 0.0136, IoU: 0.5156, Dice: 0.6582
+✓ Saved best model (val_iou: 0.5156)
+
+Epoch 37/100
+Train - Loss: 0.0172, IoU: 0.4068, Dice: 0.5400
+Val   - Loss: 0.0145, IoU: 0.4707, Dice: 0.6147
+
+Epoch 38/100
+Train - Loss: 0.0163, IoU: 0.3830, Dice: 0.5196
+Val   - Loss: 0.0168, IoU: 0.3898, Dice: 0.5440
+
+Epoch 39/100
+Train - Loss: 0.0168, IoU: 0.4358, Dice: 0.5772
+Val   - Loss: 0.0153, IoU: 0.4317, Dice: 0.5788
+
+Epoch 40/100
+Train - Loss: 0.0159, IoU: 0.3847, Dice: 0.5218
+Val   - Loss: 0.0134, IoU: 0.4361, Dice: 0.5734
+
+Epoch 41/100
+Train - Loss: 0.0160, IoU: 0.4256, Dice: 0.5622
+Val   - Loss: 0.0130, IoU: 0.3725, Dice: 0.4994
+
+Epoch 42/100
+Train - Loss: 0.0185, IoU: 0.4220, Dice: 0.5593
+Val   - Loss: 0.0452, IoU: 0.3774, Dice: 0.5043
+
+Epoch 43/100
+Train - Loss: 0.0174, IoU: 0.4598, Dice: 0.6003
+Val   - Loss: 0.0148, IoU: 0.4555, Dice: 0.5955
+
+Epoch 44/100
+Train - Loss: 0.0180, IoU: 0.3466, Dice: 0.4743
+Val   - Loss: 0.0155, IoU: 0.5052, Dice: 0.6379
+
+Epoch 45/100
+Train - Loss: 0.0183, IoU: 0.3334, Dice: 0.4515
+Val   - Loss: 0.0260, IoU: 0.4415, Dice: 0.5687
+
+Epoch 46/100
+Train - Loss: 0.0201, IoU: 0.4095, Dice: 0.5443
+Val   - Loss: 0.0167, IoU: 0.4204, Dice: 0.5610
+
+Epoch 47/100
+Train - Loss: 0.0155, IoU: 0.3989, Dice: 0.5275
+Val   - Loss: 0.0133, IoU: 0.3815, Dice: 0.5072
+
+Epoch 48/100
+Train - Loss: 0.0156, IoU: 0.3885, Dice: 0.5195
+Val   - Loss: 0.0122, IoU: 0.4106, Dice: 0.5344
+
+Epoch 49/100
+Train - Loss: 0.0147, IoU: 0.4025, Dice: 0.5297
+Val   - Loss: 0.0120, IoU: 0.4475, Dice: 0.5673
+
+Epoch 50/100
+Train - Loss: 0.0146, IoU: 0.4047, Dice: 0.5299
+Val   - Loss: 0.0121, IoU: 0.3848, Dice: 0.5096
+
+Epoch 51/100
+Train - Loss: 0.0162, IoU: 0.4216, Dice: 0.5533
+Val   - Loss: 0.0126, IoU: 0.4739, Dice: 0.6029
+
+Epoch 52/100
+Train - Loss: 0.0143, IoU: 0.3940, Dice: 0.5153
+Val   - Loss: 0.0122, IoU: 0.4366, Dice: 0.5580
+
+Epoch 53/100
+Train - Loss: 0.0155, IoU: 0.4260, Dice: 0.5604
+Val   - Loss: 0.0118, IoU: 0.4701, Dice: 0.5988
+
+Epoch 54/100
+Train - Loss: 0.0137, IoU: 0.4322, Dice: 0.5555
+Val   - Loss: 0.0120, IoU: 0.4936, Dice: 0.6244
+
+Epoch 55/100
+Train - Loss: 0.0162, IoU: 0.4543, Dice: 0.5836
+Val   - Loss: 0.0119, IoU: 0.4530, Dice: 0.5865
+
+Epoch 56/100
+Train - Loss: 0.0149, IoU: 0.4349, Dice: 0.5652
+Val   - Loss: 0.0122, IoU: 0.4902, Dice: 0.6205
+
+Early stopping triggered after 56 epochs
+
+================================================================================
+Training: unet_n_filters32_dropout0.3_learning_rate0.005
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0564, IoU: 0.2183, Dice: 0.3109
+Val   - Loss: 0.0671, IoU: 0.0227, Dice: 0.0440
+✓ Saved best model (val_iou: 0.0227)
+
+Epoch 2/100
+Train - Loss: 0.0326, IoU: 0.0935, Dice: 0.1357
+Val   - Loss: 0.0664, IoU: 0.0000, Dice: 0.0000
+
+Epoch 3/100
+Train - Loss: 0.0323, IoU: 0.1002, Dice: 0.1404
+Val   - Loss: 0.0241, IoU: 0.0603, Dice: 0.1106
+✓ Saved best model (val_iou: 0.0603)
+
+Epoch 4/100
+Train - Loss: 0.0324, IoU: 0.1573, Dice: 0.2355
+Val   - Loss: 0.0296, IoU: 0.0908, Dice: 0.1630
+✓ Saved best model (val_iou: 0.0908)
+
+Epoch 5/100
+Train - Loss: 0.0285, IoU: 0.1800, Dice: 0.2495
+Val   - Loss: 0.0234, IoU: 0.1388, Dice: 0.2323
+✓ Saved best model (val_iou: 0.1388)
+
+Epoch 6/100
+Train - Loss: 0.0247, IoU: 0.2441, Dice: 0.3449
+Val   - Loss: 0.0384, IoU: 0.2067, Dice: 0.3040
+✓ Saved best model (val_iou: 0.2067)
+
+Epoch 7/100
+Train - Loss: 0.0260, IoU: 0.2744, Dice: 0.3755
+Val   - Loss: 0.0211, IoU: 0.3488, Dice: 0.4826
+✓ Saved best model (val_iou: 0.3488)
+
+Epoch 8/100
+Train - Loss: 0.0246, IoU: 0.1948, Dice: 0.2867
+Val   - Loss: 0.0241, IoU: 0.0294, Dice: 0.0554
+
+Epoch 9/100
+Train - Loss: 0.0245, IoU: 0.2159, Dice: 0.3116
+Val   - Loss: 0.0236, IoU: 0.2753, Dice: 0.4065
+
+Epoch 10/100
+Train - Loss: 0.0248, IoU: 0.2696, Dice: 0.3748
+Val   - Loss: 0.0229, IoU: 0.3191, Dice: 0.4666
+
+Epoch 11/100
+Train - Loss: 0.0274, IoU: 0.1961, Dice: 0.2870
+Val   - Loss: 0.0227, IoU: 0.3072, Dice: 0.4511
+
+Epoch 12/100
+Train - Loss: 0.0229, IoU: 0.2440, Dice: 0.3484
+Val   - Loss: 0.0207, IoU: 0.3265, Dice: 0.4576
+
+Epoch 13/100
+Train - Loss: 0.0194, IoU: 0.3138, Dice: 0.4370
+Val   - Loss: 0.0165, IoU: 0.4417, Dice: 0.5823
+✓ Saved best model (val_iou: 0.4417)
+
+Epoch 14/100
+Train - Loss: 0.0225, IoU: 0.3396, Dice: 0.4712
+Val   - Loss: 0.0186, IoU: 0.3447, Dice: 0.4817
+
+Epoch 15/100
+Train - Loss: 0.0229, IoU: 0.3190, Dice: 0.4456
+Val   - Loss: 0.0197, IoU: 0.3287, Dice: 0.4494
+
+Epoch 16/100
+Train - Loss: 0.0194, IoU: 0.3265, Dice: 0.4543
+Val   - Loss: 0.0161, IoU: 0.2832, Dice: 0.3805
+
+Epoch 17/100
+Train - Loss: 0.0209, IoU: 0.2901, Dice: 0.4042
+Val   - Loss: 0.0198, IoU: 0.2454, Dice: 0.3438
+
+Epoch 18/100
+Train - Loss: 0.0216, IoU: 0.2928, Dice: 0.4137
+Val   - Loss: 0.0170, IoU: 0.3609, Dice: 0.5008
+
+Epoch 19/100
+Train - Loss: 0.0187, IoU: 0.3324, Dice: 0.4482
+Val   - Loss: 0.0187, IoU: 0.4212, Dice: 0.5645
+
+Epoch 20/100
+Train - Loss: 0.0209, IoU: 0.3472, Dice: 0.4728
+Val   - Loss: 0.0230, IoU: 0.4073, Dice: 0.5455
+
+Epoch 21/100
+Train - Loss: 0.0235, IoU: 0.2767, Dice: 0.3864
+Val   - Loss: 0.0421, IoU: 0.3766, Dice: 0.5254
+
+Epoch 22/100
+Train - Loss: 0.0238, IoU: 0.2660, Dice: 0.3835
+Val   - Loss: 0.0199, IoU: 0.2455, Dice: 0.3516
+
+Epoch 23/100
+Train - Loss: 0.0234, IoU: 0.3262, Dice: 0.4596
+Val   - Loss: 0.0206, IoU: 0.4063, Dice: 0.5215
+
+Epoch 24/100
+Train - Loss: 0.0194, IoU: 0.3319, Dice: 0.4607
+Val   - Loss: 0.0666, IoU: 0.4964, Dice: 0.6367
+✓ Saved best model (val_iou: 0.4964)
+
+Epoch 25/100
+Train - Loss: 0.0201, IoU: 0.3806, Dice: 0.5228
+Val   - Loss: 0.0328, IoU: 0.4562, Dice: 0.6118
+
+Epoch 26/100
+Train - Loss: 0.0184, IoU: 0.3262, Dice: 0.4554
+Val   - Loss: 0.0175, IoU: 0.4046, Dice: 0.5391
+
+Epoch 27/100
+Train - Loss: 0.0191, IoU: 0.2540, Dice: 0.3621
+Val   - Loss: 0.0181, IoU: 0.2403, Dice: 0.3562
+
+Epoch 28/100
+Train - Loss: 0.0165, IoU: 0.3968, Dice: 0.5341
+Val   - Loss: 0.0141, IoU: 0.3418, Dice: 0.4501
+
+Epoch 29/100
+Train - Loss: 0.0184, IoU: 0.3626, Dice: 0.4935
+Val   - Loss: 0.0154, IoU: 0.3330, Dice: 0.4457
+
+Epoch 30/100
+Train - Loss: 0.0175, IoU: 0.3989, Dice: 0.5329
+Val   - Loss: 0.0136, IoU: 0.4727, Dice: 0.6078
+
+Epoch 31/100
+Train - Loss: 0.0159, IoU: 0.3625, Dice: 0.4899
+Val   - Loss: 0.0138, IoU: 0.3328, Dice: 0.4542
+
+Epoch 32/100
+Train - Loss: 0.0172, IoU: 0.3983, Dice: 0.5345
+Val   - Loss: 0.0153, IoU: 0.3693, Dice: 0.4947
+
+Epoch 33/100
+Train - Loss: 0.0189, IoU: 0.3648, Dice: 0.4925
+Val   - Loss: 0.0151, IoU: 0.4504, Dice: 0.5997
+
+Epoch 34/100
+Train - Loss: 0.0156, IoU: 0.3197, Dice: 0.4290
+Val   - Loss: 0.0155, IoU: 0.4633, Dice: 0.5894
+
+Epoch 35/100
+Train - Loss: 0.0192, IoU: 0.3488, Dice: 0.4671
+Val   - Loss: 0.0158, IoU: 0.4580, Dice: 0.5792
+
+Epoch 36/100
+Train - Loss: 0.0172, IoU: 0.3850, Dice: 0.5195
+Val   - Loss: 0.0133, IoU: 0.4105, Dice: 0.5467
+
+Epoch 37/100
+Train - Loss: 0.0150, IoU: 0.3611, Dice: 0.4728
+Val   - Loss: 0.0122, IoU: 0.4066, Dice: 0.5248
+
+Epoch 38/100
+Train - Loss: 0.0153, IoU: 0.3882, Dice: 0.5048
+Val   - Loss: 0.0126, IoU: 0.3372, Dice: 0.4442
+
+Epoch 39/100
+Train - Loss: 0.0165, IoU: 0.4075, Dice: 0.5432
+Val   - Loss: 0.0127, IoU: 0.4117, Dice: 0.5497
+
+Epoch 40/100
+Train - Loss: 0.0143, IoU: 0.3976, Dice: 0.5223
+Val   - Loss: 0.0128, IoU: 0.5001, Dice: 0.6374
+✓ Saved best model (val_iou: 0.5001)
+
+Epoch 41/100
+Train - Loss: 0.0154, IoU: 0.4307, Dice: 0.5591
+Val   - Loss: 0.0135, IoU: 0.3877, Dice: 0.5219
+
+Epoch 42/100
+Train - Loss: 0.0145, IoU: 0.3785, Dice: 0.4962
+Val   - Loss: 0.0130, IoU: 0.3838, Dice: 0.5095
+
+Epoch 43/100
+Train - Loss: 0.0145, IoU: 0.4182, Dice: 0.5391
+Val   - Loss: 0.0113, IoU: 0.4634, Dice: 0.5879
+
+Epoch 44/100
+Train - Loss: 0.0141, IoU: 0.4046, Dice: 0.5218
+Val   - Loss: 0.0122, IoU: 0.3977, Dice: 0.5175
+
+Epoch 45/100
+Train - Loss: 0.0128, IoU: 0.4194, Dice: 0.5420
+Val   - Loss: 0.0117, IoU: 0.4703, Dice: 0.6013
+
+Epoch 46/100
+Train - Loss: 0.0134, IoU: 0.4300, Dice: 0.5525
+Val   - Loss: 0.0108, IoU: 0.4224, Dice: 0.5423
+
+Epoch 47/100
+Train - Loss: 0.0157, IoU: 0.3699, Dice: 0.4837
+Val   - Loss: 0.0113, IoU: 0.3943, Dice: 0.5130
+
+Epoch 48/100
+Train - Loss: 0.0139, IoU: 0.4106, Dice: 0.5278
+Val   - Loss: 0.0109, IoU: 0.3550, Dice: 0.4455
+
+Epoch 49/100
+Train - Loss: 0.0128, IoU: 0.3798, Dice: 0.4922
+Val   - Loss: 0.0109, IoU: 0.4083, Dice: 0.5225
+
+Epoch 50/100
+Train - Loss: 0.0130, IoU: 0.4211, Dice: 0.5422
+Val   - Loss: 0.0126, IoU: 0.3573, Dice: 0.4662
+
+Epoch 51/100
+Train - Loss: 0.0150, IoU: 0.3844, Dice: 0.4974
+Val   - Loss: 0.0117, IoU: 0.4884, Dice: 0.6153
+
+Epoch 52/100
+Train - Loss: 0.0134, IoU: 0.4408, Dice: 0.5662
+Val   - Loss: 0.0101, IoU: 0.4584, Dice: 0.5854
+
+Epoch 53/100
+Train - Loss: 0.0128, IoU: 0.4049, Dice: 0.5190
+Val   - Loss: 0.0100, IoU: 0.4422, Dice: 0.5634
+
+Epoch 54/100
+Train - Loss: 0.0127, IoU: 0.4114, Dice: 0.5291
+Val   - Loss: 0.0102, IoU: 0.4201, Dice: 0.5365
+
+Epoch 55/100
+Train - Loss: 0.0138, IoU: 0.4144, Dice: 0.5338
+Val   - Loss: 0.0111, IoU: 0.4057, Dice: 0.5236
+
+Epoch 56/100
+Train - Loss: 0.0127, IoU: 0.3778, Dice: 0.4904
+Val   - Loss: 0.0105, IoU: 0.4049, Dice: 0.5214
+
+Epoch 57/100
+Train - Loss: 0.0130, IoU: 0.4273, Dice: 0.5406
+Val   - Loss: 0.0108, IoU: 0.4140, Dice: 0.5359
+
+Epoch 58/100
+Train - Loss: 0.0116, IoU: 0.4201, Dice: 0.5332
+Val   - Loss: 0.0106, IoU: 0.3971, Dice: 0.5103
+
+Epoch 59/100
+Train - Loss: 0.0121, IoU: 0.4081, Dice: 0.5265
+Val   - Loss: 0.0106, IoU: 0.4536, Dice: 0.5769
+
+Epoch 60/100
+Train - Loss: 0.0122, IoU: 0.3807, Dice: 0.4838
+Val   - Loss: 0.0105, IoU: 0.3093, Dice: 0.3854
+
+Early stopping triggered after 60 epochs
+
+================================================================================
+Training: unet_n_filters64_dropout0.1_learning_rate0.001
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0615, IoU: 0.3506, Dice: 0.4767
+Val   - Loss: 0.0426, IoU: 0.0000, Dice: 0.0001
+✓ Saved best model (val_iou: 0.0000)
+
+Epoch 2/100
+Train - Loss: 0.0340, IoU: 0.2923, Dice: 0.4075
+Val   - Loss: 0.0321, IoU: 0.2795, Dice: 0.4043
+✓ Saved best model (val_iou: 0.2795)
+
+Epoch 3/100
+Train - Loss: 0.0304, IoU: 0.3203, Dice: 0.4449
+Val   - Loss: 0.0237, IoU: 0.4125, Dice: 0.5666
+✓ Saved best model (val_iou: 0.4125)
+
+Epoch 4/100
+Train - Loss: 0.0313, IoU: 0.3123, Dice: 0.4379
+Val   - Loss: 0.0470, IoU: 0.4506, Dice: 0.5647
+✓ Saved best model (val_iou: 0.4506)
+
+Epoch 5/100
+Train - Loss: 0.0265, IoU: 0.3166, Dice: 0.4470
+Val   - Loss: 0.0225, IoU: 0.3620, Dice: 0.5087
+
+Epoch 6/100
+Train - Loss: 0.0234, IoU: 0.4075, Dice: 0.5348
+Val   - Loss: 0.0235, IoU: 0.4290, Dice: 0.5533
+
+Epoch 7/100
+Train - Loss: 0.0237, IoU: 0.3603, Dice: 0.4907
+Val   - Loss: 0.0211, IoU: 0.3914, Dice: 0.5370
+
+Epoch 8/100
+Train - Loss: 0.0215, IoU: 0.3540, Dice: 0.4873
+Val   - Loss: 0.0156, IoU: 0.4989, Dice: 0.6266
+✓ Saved best model (val_iou: 0.4989)
+
+Epoch 9/100
+Train - Loss: 0.0235, IoU: 0.3960, Dice: 0.5422
+Val   - Loss: 0.0178, IoU: 0.3608, Dice: 0.5186
+
+Epoch 10/100
+Train - Loss: 0.0177, IoU: 0.4568, Dice: 0.5964
+Val   - Loss: 0.0173, IoU: 0.4504, Dice: 0.6040
+
+Epoch 11/100
+Train - Loss: 0.0157, IoU: 0.4656, Dice: 0.6002
+Val   - Loss: 0.0128, IoU: 0.5472, Dice: 0.6839
+✓ Saved best model (val_iou: 0.5472)
+
+Epoch 12/100
+Train - Loss: 0.0142, IoU: 0.4648, Dice: 0.5942
+Val   - Loss: 0.0125, IoU: 0.5694, Dice: 0.7027
+✓ Saved best model (val_iou: 0.5694)
+
+Epoch 13/100
+Train - Loss: 0.0179, IoU: 0.4672, Dice: 0.5946
+Val   - Loss: 0.0432, IoU: 0.4211, Dice: 0.5331
+
+Epoch 14/100
+Train - Loss: 0.0179, IoU: 0.4422, Dice: 0.5770
+Val   - Loss: 0.0131, IoU: 0.5235, Dice: 0.6565
+
+Epoch 15/100
+Train - Loss: 0.0143, IoU: 0.4340, Dice: 0.5657
+Val   - Loss: 0.0129, IoU: 0.4642, Dice: 0.6073
+
+Epoch 16/100
+Train - Loss: 0.0142, IoU: 0.5235, Dice: 0.6554
+Val   - Loss: 0.0128, IoU: 0.4436, Dice: 0.5863
+
+Epoch 17/100
+Train - Loss: 0.0124, IoU: 0.4257, Dice: 0.5510
+Val   - Loss: 0.0109, IoU: 0.5431, Dice: 0.6724
+
+Epoch 18/100
+Train - Loss: 0.0129, IoU: 0.5546, Dice: 0.6847
+Val   - Loss: 0.0163, IoU: 0.3687, Dice: 0.5115
+
+Epoch 19/100
+Train - Loss: 0.0129, IoU: 0.4724, Dice: 0.6049
+Val   - Loss: 0.0114, IoU: 0.4733, Dice: 0.6088
+
+Epoch 20/100
+Train - Loss: 0.0118, IoU: 0.5002, Dice: 0.6345
+Val   - Loss: 0.0102, IoU: 0.5370, Dice: 0.6642
+
+Epoch 21/100
+Train - Loss: 0.0118, IoU: 0.5431, Dice: 0.6720
+Val   - Loss: 0.0132, IoU: 0.4277, Dice: 0.5640
+
+Epoch 22/100
+Train - Loss: 0.0119, IoU: 0.4831, Dice: 0.6115
+Val   - Loss: 0.0117, IoU: 0.4722, Dice: 0.6061
+
+Epoch 23/100
+Train - Loss: 0.0126, IoU: 0.5263, Dice: 0.6541
+Val   - Loss: 0.0116, IoU: 0.5520, Dice: 0.6797
+
+Epoch 24/100
+Train - Loss: 0.0118, IoU: 0.4883, Dice: 0.6099
+Val   - Loss: 0.0098, IoU: 0.5448, Dice: 0.6719
+
+Epoch 25/100
+Train - Loss: 0.0108, IoU: 0.5048, Dice: 0.6364
+Val   - Loss: 0.0101, IoU: 0.5616, Dice: 0.6906
+
+Epoch 26/100
+Train - Loss: 0.0107, IoU: 0.5647, Dice: 0.6925
+Val   - Loss: 0.0103, IoU: 0.5501, Dice: 0.6841
+
+Epoch 27/100
+Train - Loss: 0.0106, IoU: 0.5720, Dice: 0.7008
+Val   - Loss: 0.0100, IoU: 0.5585, Dice: 0.6871
+
+Epoch 28/100
+Train - Loss: 0.0105, IoU: 0.5450, Dice: 0.6723
+Val   - Loss: 0.0094, IoU: 0.5694, Dice: 0.6990
+
+Epoch 29/100
+Train - Loss: 0.0101, IoU: 0.5077, Dice: 0.6395
+Val   - Loss: 0.0102, IoU: 0.5280, Dice: 0.6622
+
+Epoch 30/100
+Train - Loss: 0.0099, IoU: 0.5875, Dice: 0.7135
+Val   - Loss: 0.0093, IoU: 0.5488, Dice: 0.6767
+
+Epoch 31/100
+Train - Loss: 0.0101, IoU: 0.4793, Dice: 0.6010
+Val   - Loss: 0.0093, IoU: 0.5638, Dice: 0.6924
+
+Epoch 32/100
+Train - Loss: 0.0137, IoU: 0.5615, Dice: 0.6912
+Val   - Loss: 0.0109, IoU: 0.5457, Dice: 0.6822
+
+Early stopping triggered after 32 epochs
+
+================================================================================
+Training: unet_n_filters64_dropout0.1_learning_rate0.003
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0910, IoU: 0.2677, Dice: 0.3599
+Val   - Loss: 4.8700, IoU: 0.0000, Dice: 0.0000
+✓ Saved best model (val_iou: 0.0000)
+
+Epoch 2/100
+Train - Loss: 0.0381, IoU: 0.0573, Dice: 0.0860
+Val   - Loss: 0.0773, IoU: 0.0349, Dice: 0.0662
+✓ Saved best model (val_iou: 0.0349)
+
+Epoch 3/100
+Train - Loss: 0.0315, IoU: 0.2417, Dice: 0.3417
+Val   - Loss: 0.0326, IoU: 0.0000, Dice: 0.0000
+
+Epoch 4/100
+Train - Loss: 0.0299, IoU: 0.1166, Dice: 0.1685
+Val   - Loss: 0.0356, IoU: 0.3022, Dice: 0.4412
+✓ Saved best model (val_iou: 0.3022)
+
+Epoch 5/100
+Train - Loss: 0.0307, IoU: 0.2069, Dice: 0.2907
+Val   - Loss: 0.0322, IoU: 0.0067, Dice: 0.0130
+
+Epoch 6/100
+Train - Loss: 0.0275, IoU: 0.1646, Dice: 0.2297
+Val   - Loss: 0.0244, IoU: 0.3026, Dice: 0.4402
+✓ Saved best model (val_iou: 0.3026)
+
+Epoch 7/100
+Train - Loss: 0.0250, IoU: 0.2572, Dice: 0.3691
+Val   - Loss: 0.0423, IoU: 0.1061, Dice: 0.1822
+
+Epoch 8/100
+Train - Loss: 0.0212, IoU: 0.2005, Dice: 0.2901
+Val   - Loss: 0.0263, IoU: 0.2562, Dice: 0.3817
+
+Epoch 9/100
+Train - Loss: 0.0291, IoU: 0.3414, Dice: 0.4529
+Val   - Loss: 0.0353, IoU: 0.3591, Dice: 0.5124
+✓ Saved best model (val_iou: 0.3591)
+
+Epoch 10/100
+Train - Loss: 0.0249, IoU: 0.2052, Dice: 0.3034
+Val   - Loss: 0.0230, IoU: 0.2831, Dice: 0.4115
+
+Epoch 11/100
+Train - Loss: 0.0249, IoU: 0.2046, Dice: 0.2928
+Val   - Loss: 0.0435, IoU: 0.3429, Dice: 0.4732
+
+Epoch 12/100
+Train - Loss: 0.0218, IoU: 0.3081, Dice: 0.4243
+Val   - Loss: 0.0289, IoU: 0.3444, Dice: 0.4761
+
+Epoch 13/100
+Train - Loss: 0.0220, IoU: 0.2364, Dice: 0.3393
+Val   - Loss: 0.0207, IoU: 0.4096, Dice: 0.5537
+✓ Saved best model (val_iou: 0.4096)
+
+Epoch 14/100
+Train - Loss: 0.0182, IoU: 0.2905, Dice: 0.4031
+Val   - Loss: 0.0145, IoU: 0.3857, Dice: 0.5088
+
+Epoch 15/100
+Train - Loss: 0.0191, IoU: 0.3618, Dice: 0.4725
+Val   - Loss: 0.0181, IoU: 0.5405, Dice: 0.6566
+✓ Saved best model (val_iou: 0.5405)
+
+Epoch 16/100
+Train - Loss: 0.0238, IoU: 0.2832, Dice: 0.3876
+Val   - Loss: 0.0187, IoU: 0.2622, Dice: 0.3912
+
+Epoch 17/100
+Train - Loss: 0.0176, IoU: 0.3085, Dice: 0.4030
+Val   - Loss: 0.0212, IoU: 0.4557, Dice: 0.5730
+
+Epoch 18/100
+Train - Loss: 0.0222, IoU: 0.3397, Dice: 0.4656
+Val   - Loss: 0.0201, IoU: 0.4492, Dice: 0.5851
+
+Epoch 19/100
+Train - Loss: 0.0187, IoU: 0.4090, Dice: 0.5332
+Val   - Loss: 0.0178, IoU: 0.3270, Dice: 0.4453
+
+Epoch 20/100
+Train - Loss: 0.0173, IoU: 0.3531, Dice: 0.4656
+Val   - Loss: 0.0147, IoU: 0.4040, Dice: 0.5361
+
+Epoch 21/100
+Train - Loss: 0.0155, IoU: 0.4596, Dice: 0.5829
+Val   - Loss: 0.0133, IoU: 0.4461, Dice: 0.5640
+
+Epoch 22/100
+Train - Loss: 0.0141, IoU: 0.3801, Dice: 0.4874
+Val   - Loss: 0.0399, IoU: 0.0300, Dice: 0.0570
+
+Epoch 23/100
+Train - Loss: 0.0134, IoU: 0.4817, Dice: 0.6023
+Val   - Loss: 0.0154, IoU: 0.4265, Dice: 0.5583
+
+Epoch 24/100
+Train - Loss: 0.0136, IoU: 0.4575, Dice: 0.5775
+Val   - Loss: 0.0188, IoU: 0.2601, Dice: 0.3885
+
+Epoch 25/100
+Train - Loss: 0.0153, IoU: 0.4134, Dice: 0.5264
+Val   - Loss: 0.0185, IoU: 0.4427, Dice: 0.5959
+
+Epoch 26/100
+Train - Loss: 0.0131, IoU: 0.4223, Dice: 0.5355
+Val   - Loss: 0.0133, IoU: 0.4954, Dice: 0.6275
+
+Epoch 27/100
+Train - Loss: 0.0132, IoU: 0.4135, Dice: 0.5340
+Val   - Loss: 0.0134, IoU: 0.4619, Dice: 0.5996
+
+Epoch 28/100
+Train - Loss: 0.0125, IoU: 0.5006, Dice: 0.6251
+Val   - Loss: 0.0115, IoU: 0.5506, Dice: 0.6768
+✓ Saved best model (val_iou: 0.5506)
+
+Epoch 29/100
+Train - Loss: 0.0122, IoU: 0.4449, Dice: 0.5601
+Val   - Loss: 0.0127, IoU: 0.4435, Dice: 0.5762
+
+Epoch 30/100
+Train - Loss: 0.0155, IoU: 0.5249, Dice: 0.6498
+Val   - Loss: 0.0141, IoU: 0.4797, Dice: 0.6245
+
+Epoch 31/100
+Train - Loss: 0.0138, IoU: 0.4566, Dice: 0.5786
+Val   - Loss: 0.0124, IoU: 0.5580, Dice: 0.6788
+✓ Saved best model (val_iou: 0.5580)
+
+Epoch 32/100
+Train - Loss: 0.0132, IoU: 0.4043, Dice: 0.5177
+Val   - Loss: 0.0128, IoU: 0.5318, Dice: 0.6601
+
+Epoch 33/100
+Train - Loss: 0.0112, IoU: 0.5131, Dice: 0.6331
+Val   - Loss: 0.0113, IoU: 0.5179, Dice: 0.6541
+
+Epoch 34/100
+Train - Loss: 0.0117, IoU: 0.4731, Dice: 0.5890
+Val   - Loss: 0.0112, IoU: 0.5120, Dice: 0.6446
+
+Epoch 35/100
+Train - Loss: 0.0125, IoU: 0.4684, Dice: 0.5868
+Val   - Loss: 0.0128, IoU: 0.4628, Dice: 0.6010
+
+Epoch 36/100
+Train - Loss: 0.0114, IoU: 0.4824, Dice: 0.5957
+Val   - Loss: 0.0115, IoU: 0.5412, Dice: 0.6756
+
+Epoch 37/100
+Train - Loss: 0.0113, IoU: 0.4701, Dice: 0.5866
+Val   - Loss: 0.0128, IoU: 0.5662, Dice: 0.6951
+✓ Saved best model (val_iou: 0.5662)
+
+Epoch 38/100
+Train - Loss: 0.0110, IoU: 0.5324, Dice: 0.6549
+Val   - Loss: 0.0103, IoU: 0.5487, Dice: 0.6785
+
+Epoch 39/100
+Train - Loss: 0.0122, IoU: 0.4996, Dice: 0.6238
+Val   - Loss: 0.0141, IoU: 0.4605, Dice: 0.6047
+
+Epoch 40/100
+Train - Loss: 0.0134, IoU: 0.4493, Dice: 0.5626
+Val   - Loss: 0.0116, IoU: 0.5623, Dice: 0.6885
+
+Epoch 41/100
+Train - Loss: 0.0117, IoU: 0.4305, Dice: 0.5395
+Val   - Loss: 0.0108, IoU: 0.5672, Dice: 0.6926
+✓ Saved best model (val_iou: 0.5672)
+
+Epoch 42/100
+Train - Loss: 0.0115, IoU: 0.5020, Dice: 0.6198
+Val   - Loss: 0.0112, IoU: 0.5116, Dice: 0.6463
+
+Epoch 43/100
+Train - Loss: 0.0104, IoU: 0.5281, Dice: 0.6504
+Val   - Loss: 0.0107, IoU: 0.4961, Dice: 0.6269
+
+Epoch 44/100
+Train - Loss: 0.0105, IoU: 0.4806, Dice: 0.5985
+Val   - Loss: 0.0118, IoU: 0.5045, Dice: 0.6443
+
+Epoch 45/100
+Train - Loss: 0.0104, IoU: 0.5317, Dice: 0.6513
+Val   - Loss: 0.0411, IoU: 0.3511, Dice: 0.4443
+
+Epoch 46/100
+Train - Loss: 0.0145, IoU: 0.4641, Dice: 0.5848
+Val   - Loss: 0.0611, IoU: 0.2266, Dice: 0.3304
+
+Epoch 47/100
+Train - Loss: 0.0130, IoU: 0.4712, Dice: 0.5988
+Val   - Loss: 0.0114, IoU: 0.5681, Dice: 0.6947
+✓ Saved best model (val_iou: 0.5681)
+
+Epoch 48/100
+Train - Loss: 0.0124, IoU: 0.4527, Dice: 0.5627
+Val   - Loss: 0.0105, IoU: 0.5510, Dice: 0.6766
+
+Epoch 49/100
+Train - Loss: 0.0105, IoU: 0.4901, Dice: 0.6020
+Val   - Loss: 0.0106, IoU: 0.4584, Dice: 0.5792
+
+Epoch 50/100
+Train - Loss: 0.0105, IoU: 0.4380, Dice: 0.5446
+Val   - Loss: 0.0098, IoU: 0.5321, Dice: 0.6587
+
+Epoch 51/100
+Train - Loss: 0.0105, IoU: 0.5076, Dice: 0.6234
+Val   - Loss: 0.0099, IoU: 0.5503, Dice: 0.6732
+
+Epoch 52/100
+Train - Loss: 0.0101, IoU: 0.5287, Dice: 0.6506
+Val   - Loss: 0.0106, IoU: 0.5294, Dice: 0.6570
+
+Epoch 53/100
+Train - Loss: 0.0108, IoU: 0.5207, Dice: 0.6430
+Val   - Loss: 0.0107, IoU: 0.5527, Dice: 0.6848
+
+Epoch 54/100
+Train - Loss: 0.0106, IoU: 0.4469, Dice: 0.5502
+Val   - Loss: 0.0096, IoU: 0.4848, Dice: 0.6074
+
+Epoch 55/100
+Train - Loss: 0.0101, IoU: 0.5215, Dice: 0.6389
+Val   - Loss: 0.0095, IoU: 0.5638, Dice: 0.6872
+
+Epoch 56/100
+Train - Loss: 0.0103, IoU: 0.5178, Dice: 0.6326
+Val   - Loss: 0.0102, IoU: 0.5699, Dice: 0.6956
+✓ Saved best model (val_iou: 0.5699)
+
+Epoch 57/100
+Train - Loss: 0.0105, IoU: 0.4519, Dice: 0.5504
+Val   - Loss: 0.0107, IoU: 0.5525, Dice: 0.6868
+
+Epoch 58/100
+Train - Loss: 0.0104, IoU: 0.5385, Dice: 0.6555
+Val   - Loss: 0.0095, IoU: 0.5250, Dice: 0.6516
+
+Epoch 59/100
+Train - Loss: 0.0195, IoU: 0.4524, Dice: 0.5809
+Val   - Loss: 0.0146, IoU: 0.3688, Dice: 0.4532
+
+Epoch 60/100
+Train - Loss: 0.0121, IoU: 0.5057, Dice: 0.6276
+Val   - Loss: 0.0131, IoU: 0.5201, Dice: 0.6526
+
+Epoch 61/100
+Train - Loss: 0.0114, IoU: 0.4242, Dice: 0.5310
+Val   - Loss: 0.0117, IoU: 0.5292, Dice: 0.6632
+
+Epoch 62/100
+Train - Loss: 0.0106, IoU: 0.5135, Dice: 0.6299
+Val   - Loss: 0.0095, IoU: 0.5487, Dice: 0.6745
+
+Epoch 63/100
+Train - Loss: 0.0118, IoU: 0.5097, Dice: 0.6277
+Val   - Loss: 0.0101, IoU: 0.4718, Dice: 0.6004
+
+Epoch 64/100
+Train - Loss: 0.0114, IoU: 0.4960, Dice: 0.6118
+Val   - Loss: 0.0164, IoU: 0.5070, Dice: 0.6291
+
+Epoch 65/100
+Train - Loss: 0.0104, IoU: 0.4813, Dice: 0.5996
+Val   - Loss: 0.0105, IoU: 0.5193, Dice: 0.6467
+
+Epoch 66/100
+Train - Loss: 0.0101, IoU: 0.5232, Dice: 0.6487
+Val   - Loss: 0.0100, IoU: 0.5558, Dice: 0.6773
+
+Epoch 67/100
+Train - Loss: 0.0103, IoU: 0.4775, Dice: 0.5867
+Val   - Loss: 0.0101, IoU: 0.5672, Dice: 0.6947
+
+Epoch 68/100
+Train - Loss: 0.0109, IoU: 0.5259, Dice: 0.6537
+Val   - Loss: 0.0094, IoU: 0.5396, Dice: 0.6639
+
+Epoch 69/100
+Train - Loss: 0.0102, IoU: 0.4946, Dice: 0.6155
+Val   - Loss: 0.0089, IoU: 0.5355, Dice: 0.6602
+
+Epoch 70/100
+Train - Loss: 0.0100, IoU: 0.5203, Dice: 0.6390
+Val   - Loss: 0.0142, IoU: 0.4610, Dice: 0.6099
+
+Epoch 71/100
+Train - Loss: 0.0094, IoU: 0.4967, Dice: 0.6110
+Val   - Loss: 0.0106, IoU: 0.5170, Dice: 0.6509
+
+Epoch 72/100
+Train - Loss: 0.0093, IoU: 0.5088, Dice: 0.6314
+Val   - Loss: 0.0109, IoU: 0.5156, Dice: 0.6524
+
+Epoch 73/100
+Train - Loss: 0.0091, IoU: 0.5442, Dice: 0.6693
+Val   - Loss: 0.0098, IoU: 0.5285, Dice: 0.6592
+
+Epoch 74/100
+Train - Loss: 0.0094, IoU: 0.4993, Dice: 0.6147
+Val   - Loss: 0.0107, IoU: 0.5099, Dice: 0.6466
+
+Epoch 75/100
+Train - Loss: 0.0095, IoU: 0.4966, Dice: 0.6180
+Val   - Loss: 0.0089, IoU: 0.5453, Dice: 0.6707
+
+Epoch 76/100
+Train - Loss: 0.0092, IoU: 0.5229, Dice: 0.6426
+Val   - Loss: 0.0097, IoU: 0.5244, Dice: 0.6527
+
+Early stopping triggered after 76 epochs
+
+================================================================================
+Training: unet_n_filters64_dropout0.1_learning_rate0.005
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0455, IoU: 0.2020, Dice: 0.2814
+Val   - Loss: 0.0572, IoU: 0.0000, Dice: 0.0000
+✓ Saved best model (val_iou: 0.0000)
+
+Epoch 2/100
+Train - Loss: 0.0311, IoU: 0.1568, Dice: 0.2314
+Val   - Loss: 0.0266, IoU: 0.2361, Dice: 0.3635
+✓ Saved best model (val_iou: 0.2361)
+
+Epoch 3/100
+Train - Loss: 0.0273, IoU: 0.2091, Dice: 0.2981
+Val   - Loss: 0.0292, IoU: 0.1079, Dice: 0.1788
+
+Epoch 4/100
+Train - Loss: 0.0256, IoU: 0.2679, Dice: 0.3751
+Val   - Loss: 0.0241, IoU: 0.1655, Dice: 0.2672
+
+Epoch 5/100
+Train - Loss: 0.0290, IoU: 0.2835, Dice: 0.3990
+Val   - Loss: 0.0277, IoU: 0.1750, Dice: 0.2707
+
+Epoch 6/100
+Train - Loss: 0.0283, IoU: 0.2049, Dice: 0.2915
+Val   - Loss: 0.4718, IoU: 0.0173, Dice: 0.0319
+
+Epoch 7/100
+Train - Loss: 0.0241, IoU: 0.3767, Dice: 0.5030
+Val   - Loss: 0.0192, IoU: 0.4143, Dice: 0.5663
+✓ Saved best model (val_iou: 0.4143)
+
+Epoch 8/100
+Train - Loss: 0.0250, IoU: 0.3069, Dice: 0.4296
+Val   - Loss: 0.2055, IoU: 0.1488, Dice: 0.2363
+
+Epoch 9/100
+Train - Loss: 0.0230, IoU: 0.3294, Dice: 0.4583
+Val   - Loss: 0.1897, IoU: 0.0614, Dice: 0.1049
+
+Epoch 10/100
+Train - Loss: 0.0188, IoU: 0.3037, Dice: 0.4159
+Val   - Loss: 0.0263, IoU: 0.1313, Dice: 0.1958
+
+Epoch 11/100
+Train - Loss: 0.0169, IoU: 0.4378, Dice: 0.5776
+Val   - Loss: 0.0274, IoU: 0.3621, Dice: 0.5202
+
+Epoch 12/100
+Train - Loss: 0.0196, IoU: 0.4125, Dice: 0.5482
+Val   - Loss: 0.0164, IoU: 0.4054, Dice: 0.5455
+
+Epoch 13/100
+Train - Loss: 0.0169, IoU: 0.4044, Dice: 0.5136
+Val   - Loss: 0.0145, IoU: 0.4514, Dice: 0.5994
+✓ Saved best model (val_iou: 0.4514)
+
+Epoch 14/100
+Train - Loss: 0.0144, IoU: 0.4412, Dice: 0.5778
+Val   - Loss: 0.0122, IoU: 0.4991, Dice: 0.6262
+✓ Saved best model (val_iou: 0.4991)
+
+Epoch 15/100
+Train - Loss: 0.0218, IoU: 0.3545, Dice: 0.4739
+Val   - Loss: 0.4242, IoU: 0.1586, Dice: 0.2468
+
+Epoch 16/100
+Train - Loss: 0.0234, IoU: 0.2919, Dice: 0.4122
+Val   - Loss: 0.0619, IoU: 0.0431, Dice: 0.0786
+
+Epoch 17/100
+Train - Loss: 0.0165, IoU: 0.3866, Dice: 0.5163
+Val   - Loss: 0.0215, IoU: 0.3978, Dice: 0.5468
+
+Epoch 18/100
+Train - Loss: 0.0146, IoU: 0.4709, Dice: 0.6082
+Val   - Loss: 0.0238, IoU: 0.4338, Dice: 0.5833
+
+Epoch 19/100
+Train - Loss: 0.0147, IoU: 0.4850, Dice: 0.6119
+Val   - Loss: 0.0155, IoU: 0.3595, Dice: 0.5010
+
+Epoch 20/100
+Train - Loss: 0.0161, IoU: 0.3925, Dice: 0.5097
+Val   - Loss: 0.0125, IoU: 0.4599, Dice: 0.5833
+
+Epoch 21/100
+Train - Loss: 0.0156, IoU: 0.4073, Dice: 0.5270
+Val   - Loss: 0.0125, IoU: 0.4984, Dice: 0.6300
+
+Epoch 22/100
+Train - Loss: 0.0154, IoU: 0.4505, Dice: 0.5776
+Val   - Loss: 0.0137, IoU: 0.4949, Dice: 0.6413
+
+Epoch 23/100
+Train - Loss: 0.0145, IoU: 0.4107, Dice: 0.5186
+Val   - Loss: 0.0157, IoU: 0.3299, Dice: 0.4494
+
+Epoch 24/100
+Train - Loss: 0.0138, IoU: 0.4349, Dice: 0.5528
+Val   - Loss: 0.0157, IoU: 0.5070, Dice: 0.6519
+✓ Saved best model (val_iou: 0.5070)
+
+Epoch 25/100
+Train - Loss: 0.0125, IoU: 0.5048, Dice: 0.6309
+Val   - Loss: 0.0134, IoU: 0.5308, Dice: 0.6698
+✓ Saved best model (val_iou: 0.5308)
+
+Epoch 26/100
+Train - Loss: 0.0128, IoU: 0.4863, Dice: 0.6016
+Val   - Loss: 0.0123, IoU: 0.4888, Dice: 0.6199
+
+Epoch 27/100
+Train - Loss: 0.0115, IoU: 0.4495, Dice: 0.5653
+Val   - Loss: 0.0103, IoU: 0.5132, Dice: 0.6386
+
+Epoch 28/100
+Train - Loss: 0.0121, IoU: 0.5026, Dice: 0.6259
+Val   - Loss: 0.0225, IoU: 0.3770, Dice: 0.5301
+
+Epoch 29/100
+Train - Loss: 0.0122, IoU: 0.4964, Dice: 0.6191
+Val   - Loss: 0.0107, IoU: 0.4823, Dice: 0.6033
+
+Epoch 30/100
+Train - Loss: 0.0142, IoU: 0.3784, Dice: 0.4904
+Val   - Loss: 0.1117, IoU: 0.2897, Dice: 0.4113
+
+Epoch 31/100
+Train - Loss: 0.0117, IoU: 0.4994, Dice: 0.6282
+Val   - Loss: 0.0122, IoU: 0.5058, Dice: 0.6459
+
+Epoch 32/100
+Train - Loss: 0.0113, IoU: 0.5223, Dice: 0.6483
+Val   - Loss: 0.0134, IoU: 0.4973, Dice: 0.6369
+
+Epoch 33/100
+Train - Loss: 0.0112, IoU: 0.5473, Dice: 0.6710
+Val   - Loss: 0.0135, IoU: 0.4391, Dice: 0.5820
+
+Epoch 34/100
+Train - Loss: 0.0173, IoU: 0.4596, Dice: 0.5798
+Val   - Loss: 0.0189, IoU: 0.4486, Dice: 0.5985
+
+Epoch 35/100
+Train - Loss: 0.0162, IoU: 0.4139, Dice: 0.5323
+Val   - Loss: 0.2900, IoU: 0.1468, Dice: 0.2365
+
+Epoch 36/100
+Train - Loss: 0.0127, IoU: 0.4904, Dice: 0.6157
+Val   - Loss: 0.1256, IoU: 0.2827, Dice: 0.4179
+
+Epoch 37/100
+Train - Loss: 0.0126, IoU: 0.5035, Dice: 0.6295
+Val   - Loss: 0.0132, IoU: 0.3286, Dice: 0.4367
+
+Epoch 38/100
+Train - Loss: 0.0119, IoU: 0.3771, Dice: 0.4743
+Val   - Loss: 0.0096, IoU: 0.5470, Dice: 0.6735
+✓ Saved best model (val_iou: 0.5470)
+
+Epoch 39/100
+Train - Loss: 0.0108, IoU: 0.5529, Dice: 0.6814
+Val   - Loss: 0.0097, IoU: 0.5473, Dice: 0.6734
+✓ Saved best model (val_iou: 0.5473)
+
+Epoch 40/100
+Train - Loss: 0.0108, IoU: 0.5291, Dice: 0.6549
+Val   - Loss: 0.0113, IoU: 0.5225, Dice: 0.6600
+
+Epoch 41/100
+Train - Loss: 0.0100, IoU: 0.5464, Dice: 0.6731
+Val   - Loss: 0.0118, IoU: 0.5273, Dice: 0.6652
+
+Epoch 42/100
+Train - Loss: 0.0103, IoU: 0.5797, Dice: 0.7049
+Val   - Loss: 0.0092, IoU: 0.5417, Dice: 0.6699
+
+Epoch 43/100
+Train - Loss: 0.0098, IoU: 0.5544, Dice: 0.6830
+Val   - Loss: 0.0124, IoU: 0.5126, Dice: 0.6556
+
+Epoch 44/100
+Train - Loss: 0.0100, IoU: 0.5507, Dice: 0.6753
+Val   - Loss: 0.0097, IoU: 0.5256, Dice: 0.6561
+
+Epoch 45/100
+Train - Loss: 0.0149, IoU: 0.5472, Dice: 0.6772
+Val   - Loss: 0.0201, IoU: 0.4493, Dice: 0.6059
+
+Epoch 46/100
+Train - Loss: 0.0118, IoU: 0.4698, Dice: 0.5946
+Val   - Loss: 0.0342, IoU: 0.3627, Dice: 0.5120
+
+Epoch 47/100
+Train - Loss: 0.0108, IoU: 0.5164, Dice: 0.6398
+Val   - Loss: 0.0269, IoU: 0.3741, Dice: 0.5324
+
+Epoch 48/100
+Train - Loss: 0.0126, IoU: 0.5067, Dice: 0.6380
+Val   - Loss: 0.0159, IoU: 0.5688, Dice: 0.6984
+✓ Saved best model (val_iou: 0.5688)
+
+Epoch 49/100
+Train - Loss: 0.0106, IoU: 0.4481, Dice: 0.5688
+Val   - Loss: 0.0145, IoU: 0.4356, Dice: 0.5762
+
+Epoch 50/100
+Train - Loss: 0.0102, IoU: 0.5324, Dice: 0.6592
+Val   - Loss: 0.0093, IoU: 0.5459, Dice: 0.6752
+
+Epoch 51/100
+Train - Loss: 0.0102, IoU: 0.5296, Dice: 0.6574
+Val   - Loss: 0.0105, IoU: 0.5535, Dice: 0.6892
+
+Epoch 52/100
+Train - Loss: 0.0128, IoU: 0.5410, Dice: 0.6692
+Val   - Loss: 0.0104, IoU: 0.5107, Dice: 0.6402
+
+Epoch 53/100
+Train - Loss: 0.0110, IoU: 0.5112, Dice: 0.6319
+Val   - Loss: 0.0100, IoU: 0.5324, Dice: 0.6556
+
+Epoch 54/100
+Train - Loss: 0.0096, IoU: 0.5586, Dice: 0.6789
+Val   - Loss: 0.0096, IoU: 0.5416, Dice: 0.6714
+
+Epoch 55/100
+Train - Loss: 0.0091, IoU: 0.5614, Dice: 0.6882
+Val   - Loss: 0.0106, IoU: 0.5498, Dice: 0.6804
+
+Epoch 56/100
+Train - Loss: 0.0090, IoU: 0.5792, Dice: 0.7013
+Val   - Loss: 0.0092, IoU: 0.5652, Dice: 0.6911
+
+Epoch 57/100
+Train - Loss: 0.0096, IoU: 0.5732, Dice: 0.6958
+Val   - Loss: 0.0089, IoU: 0.5406, Dice: 0.6647
+
+Epoch 58/100
+Train - Loss: 0.0093, IoU: 0.5748, Dice: 0.6946
+Val   - Loss: 0.0099, IoU: 0.5237, Dice: 0.6565
+
+Epoch 59/100
+Train - Loss: 0.0091, IoU: 0.5528, Dice: 0.6778
+Val   - Loss: 0.0085, IoU: 0.5545, Dice: 0.6798
+
+Epoch 60/100
+Train - Loss: 0.0089, IoU: 0.5647, Dice: 0.6907
+Val   - Loss: 0.0090, IoU: 0.5865, Dice: 0.7119
+✓ Saved best model (val_iou: 0.5865)
+
+Epoch 61/100
+Train - Loss: 0.0091, IoU: 0.6005, Dice: 0.7206
+Val   - Loss: 0.0090, IoU: 0.5616, Dice: 0.6895
+
+Epoch 62/100
+Train - Loss: 0.0091, IoU: 0.5300, Dice: 0.6531
+Val   - Loss: 0.0091, IoU: 0.5775, Dice: 0.7025
+
+Epoch 63/100
+Train - Loss: 0.0090, IoU: 0.5983, Dice: 0.7218
+Val   - Loss: 0.0086, IoU: 0.5960, Dice: 0.7203
+✓ Saved best model (val_iou: 0.5960)
+
+Epoch 64/100
+Train - Loss: 0.0091, IoU: 0.5630, Dice: 0.6873
+Val   - Loss: 0.0092, IoU: 0.5674, Dice: 0.6945
+
+Epoch 65/100
+Train - Loss: 0.0088, IoU: 0.5959, Dice: 0.7180
+Val   - Loss: 0.0112, IoU: 0.5590, Dice: 0.6952
+
+Epoch 66/100
+Train - Loss: 0.0090, IoU: 0.5856, Dice: 0.7081
+Val   - Loss: 0.0090, IoU: 0.5665, Dice: 0.6935
+
+Epoch 67/100
+Train - Loss: 0.0090, IoU: 0.6019, Dice: 0.7228
+Val   - Loss: 0.0088, IoU: 0.5777, Dice: 0.7052
+
+Epoch 68/100
+Train - Loss: 0.0092, IoU: 0.5735, Dice: 0.6973
+Val   - Loss: 0.0094, IoU: 0.5745, Dice: 0.6988
+
+Epoch 69/100
+Train - Loss: 0.0107, IoU: 0.5653, Dice: 0.6913
+Val   - Loss: 0.0089, IoU: 0.5871, Dice: 0.7124
+
+Epoch 70/100
+Train - Loss: 0.0091, IoU: 0.5926, Dice: 0.7165
+Val   - Loss: 0.0089, IoU: 0.5754, Dice: 0.7020
+
+Epoch 71/100
+Train - Loss: 0.0087, IoU: 0.5644, Dice: 0.6892
+Val   - Loss: 0.0081, IoU: 0.5837, Dice: 0.7079
+
+Epoch 72/100
+Train - Loss: 0.0089, IoU: 0.6027, Dice: 0.7246
+Val   - Loss: 0.0087, IoU: 0.5797, Dice: 0.7048
+
+Epoch 73/100
+Train - Loss: 0.0084, IoU: 0.5844, Dice: 0.7097
+Val   - Loss: 0.0097, IoU: 0.5801, Dice: 0.7081
+
+Epoch 74/100
+Train - Loss: 0.0090, IoU: 0.6018, Dice: 0.7228
+Val   - Loss: 0.0088, IoU: 0.5755, Dice: 0.7038
+
+Epoch 75/100
+Train - Loss: 0.0089, IoU: 0.5878, Dice: 0.7097
+Val   - Loss: 0.0090, IoU: 0.5821, Dice: 0.7089
+
+Epoch 76/100
+Train - Loss: 0.0086, IoU: 0.5868, Dice: 0.7109
+Val   - Loss: 0.0081, IoU: 0.5891, Dice: 0.7122
+
+Epoch 77/100
+Train - Loss: 0.0095, IoU: 0.5991, Dice: 0.7170
+Val   - Loss: 0.0088, IoU: 0.5810, Dice: 0.7075
+
+Epoch 78/100
+Train - Loss: 0.0087, IoU: 0.6049, Dice: 0.7262
+Val   - Loss: 0.0085, IoU: 0.5718, Dice: 0.6988
+
+Epoch 79/100
+Train - Loss: 0.0093, IoU: 0.5751, Dice: 0.7009
+Val   - Loss: 0.0106, IoU: 0.5614, Dice: 0.6954
+
+Epoch 80/100
+Train - Loss: 0.0109, IoU: 0.5463, Dice: 0.6757
+Val   - Loss: 0.0116, IoU: 0.5634, Dice: 0.6998
+
+Epoch 81/100
+Train - Loss: 0.0113, IoU: 0.5943, Dice: 0.7201
+Val   - Loss: 0.0114, IoU: 0.5561, Dice: 0.6943
+
+Epoch 82/100
+Train - Loss: 0.0091, IoU: 0.5606, Dice: 0.6827
+Val   - Loss: 0.0093, IoU: 0.5460, Dice: 0.6739
+
+Epoch 83/100
+Train - Loss: 0.0093, IoU: 0.5643, Dice: 0.6883
+Val   - Loss: 0.0089, IoU: 0.5860, Dice: 0.7113
+
+Early stopping triggered after 83 epochs
+
+================================================================================
+Training: unet_n_filters64_dropout0.2_learning_rate0.001
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.1382, IoU: 0.2578, Dice: 0.3565
+Val   - Loss: 0.0603, IoU: 0.1318, Dice: 0.2070
+✓ Saved best model (val_iou: 0.1318)
+
+Epoch 2/100
+Train - Loss: 0.0499, IoU: 0.2934, Dice: 0.4255
+Val   - Loss: 0.0356, IoU: 0.2345, Dice: 0.3445
+✓ Saved best model (val_iou: 0.2345)
+
+Epoch 3/100
+Train - Loss: 0.0350, IoU: 0.3348, Dice: 0.4660
+Val   - Loss: 0.0281, IoU: 0.4342, Dice: 0.5866
+✓ Saved best model (val_iou: 0.4342)
+
+Epoch 4/100
+Train - Loss: 0.0328, IoU: 0.3352, Dice: 0.4674
+Val   - Loss: 0.0296, IoU: 0.4131, Dice: 0.5681
+
+Epoch 5/100
+Train - Loss: 0.0307, IoU: 0.3312, Dice: 0.4686
+Val   - Loss: 0.0285, IoU: 0.4404, Dice: 0.5880
+✓ Saved best model (val_iou: 0.4404)
+
+Epoch 6/100
+Train - Loss: 0.0281, IoU: 0.3465, Dice: 0.4858
+Val   - Loss: 0.0280, IoU: 0.2766, Dice: 0.4165
+
+Epoch 7/100
+Train - Loss: 0.0274, IoU: 0.3289, Dice: 0.4639
+Val   - Loss: 0.0242, IoU: 0.4404, Dice: 0.5929
+
+Epoch 8/100
+Train - Loss: 0.0242, IoU: 0.3855, Dice: 0.5243
+Val   - Loss: 0.0276, IoU: 0.3840, Dice: 0.5262
+
+Epoch 9/100
+Train - Loss: 0.0234, IoU: 0.3881, Dice: 0.5176
+Val   - Loss: 0.0214, IoU: 0.4507, Dice: 0.6052
+✓ Saved best model (val_iou: 0.4507)
+
+Epoch 10/100
+Train - Loss: 0.0234, IoU: 0.3457, Dice: 0.4695
+Val   - Loss: 0.0221, IoU: 0.3109, Dice: 0.4563
+
+Epoch 11/100
+Train - Loss: 0.0243, IoU: 0.3746, Dice: 0.5112
+Val   - Loss: 0.0226, IoU: 0.3851, Dice: 0.5371
+
+Epoch 12/100
+Train - Loss: 0.0220, IoU: 0.3941, Dice: 0.5269
+Val   - Loss: 0.0212, IoU: 0.4865, Dice: 0.6225
+✓ Saved best model (val_iou: 0.4865)
+
+Epoch 13/100
+Train - Loss: 0.0223, IoU: 0.4299, Dice: 0.5694
+Val   - Loss: 0.0147, IoU: 0.4215, Dice: 0.5610
+
+Epoch 14/100
+Train - Loss: 0.0213, IoU: 0.4118, Dice: 0.5436
+Val   - Loss: 0.0149, IoU: 0.5419, Dice: 0.6710
+✓ Saved best model (val_iou: 0.5419)
+
+Epoch 15/100
+Train - Loss: 0.0186, IoU: 0.4085, Dice: 0.5342
+Val   - Loss: 0.0181, IoU: 0.5288, Dice: 0.6739
+
+Epoch 16/100
+Train - Loss: 0.0159, IoU: 0.4494, Dice: 0.5814
+Val   - Loss: 0.0208, IoU: 0.4794, Dice: 0.6347
+
+Epoch 17/100
+Train - Loss: 0.0175, IoU: 0.4568, Dice: 0.5887
+Val   - Loss: 0.0169, IoU: 0.5785, Dice: 0.7075
+✓ Saved best model (val_iou: 0.5785)
+
+Epoch 18/100
+Train - Loss: 0.0186, IoU: 0.4110, Dice: 0.5479
+Val   - Loss: 0.0189, IoU: 0.4319, Dice: 0.5885
+
+Epoch 19/100
+Train - Loss: 0.0159, IoU: 0.5049, Dice: 0.6419
+Val   - Loss: 0.0144, IoU: 0.5212, Dice: 0.6578
+
+Epoch 20/100
+Train - Loss: 0.0155, IoU: 0.4690, Dice: 0.6044
+Val   - Loss: 0.0126, IoU: 0.4657, Dice: 0.5991
+
+Epoch 21/100
+Train - Loss: 0.0159, IoU: 0.4587, Dice: 0.5927
+Val   - Loss: 0.0157, IoU: 0.5484, Dice: 0.6668
+
+Epoch 22/100
+Train - Loss: 0.0136, IoU: 0.5356, Dice: 0.6656
+Val   - Loss: 0.0113, IoU: 0.5650, Dice: 0.6977
+
+Epoch 23/100
+Train - Loss: 0.0141, IoU: 0.5286, Dice: 0.6601
+Val   - Loss: 0.0128, IoU: 0.6022, Dice: 0.7359
+✓ Saved best model (val_iou: 0.6022)
+
+Epoch 24/100
+Train - Loss: 0.0133, IoU: 0.5309, Dice: 0.6566
+Val   - Loss: 0.0143, IoU: 0.4372, Dice: 0.5633
+
+Epoch 25/100
+Train - Loss: 0.0165, IoU: 0.5276, Dice: 0.6610
+Val   - Loss: 0.0137, IoU: 0.4428, Dice: 0.5861
+
+Epoch 26/100
+Train - Loss: 0.0137, IoU: 0.4887, Dice: 0.6196
+Val   - Loss: 0.0114, IoU: 0.5165, Dice: 0.6453
+
+Epoch 27/100
+Train - Loss: 0.0143, IoU: 0.5206, Dice: 0.6458
+Val   - Loss: 0.0232, IoU: 0.5534, Dice: 0.6859
+
+Epoch 28/100
+Train - Loss: 0.0193, IoU: 0.4502, Dice: 0.5904
+Val   - Loss: 0.0165, IoU: 0.5679, Dice: 0.6899
+
+Epoch 29/100
+Train - Loss: 0.0174, IoU: 0.4932, Dice: 0.6225
+Val   - Loss: 0.0199, IoU: 0.3988, Dice: 0.5140
+
+Epoch 30/100
+Train - Loss: 0.0139, IoU: 0.4827, Dice: 0.6083
+Val   - Loss: 0.0119, IoU: 0.5483, Dice: 0.6852
+
+Epoch 31/100
+Train - Loss: 0.0141, IoU: 0.5019, Dice: 0.6371
+Val   - Loss: 0.0333, IoU: 0.5128, Dice: 0.6093
+
+Epoch 32/100
+Train - Loss: 0.0140, IoU: 0.5425, Dice: 0.6695
+Val   - Loss: 0.0141, IoU: 0.3440, Dice: 0.4541
+
+Epoch 33/100
+Train - Loss: 0.0133, IoU: 0.4964, Dice: 0.6158
+Val   - Loss: 0.0166, IoU: 0.4618, Dice: 0.6147
+
+Epoch 34/100
+Train - Loss: 0.0121, IoU: 0.5035, Dice: 0.6395
+Val   - Loss: 0.0108, IoU: 0.5666, Dice: 0.6982
+
+Epoch 35/100
+Train - Loss: 0.0166, IoU: 0.5459, Dice: 0.6793
+Val   - Loss: 0.0114, IoU: 0.6065, Dice: 0.7307
+✓ Saved best model (val_iou: 0.6065)
+
+Epoch 36/100
+Train - Loss: 0.0108, IoU: 0.5349, Dice: 0.6676
+Val   - Loss: 0.0100, IoU: 0.5682, Dice: 0.6954
+
+Epoch 37/100
+Train - Loss: 0.0118, IoU: 0.5719, Dice: 0.7008
+Val   - Loss: 0.0098, IoU: 0.5810, Dice: 0.7075
+
+Epoch 38/100
+Train - Loss: 0.0106, IoU: 0.5641, Dice: 0.6899
+Val   - Loss: 0.0092, IoU: 0.6074, Dice: 0.7300
+✓ Saved best model (val_iou: 0.6074)
+
+Epoch 39/100
+Train - Loss: 0.0099, IoU: 0.5773, Dice: 0.7041
+Val   - Loss: 0.0088, IoU: 0.6095, Dice: 0.7322
+✓ Saved best model (val_iou: 0.6095)
+
+Epoch 40/100
+Train - Loss: 0.0120, IoU: 0.5777, Dice: 0.7073
+Val   - Loss: 0.0101, IoU: 0.5546, Dice: 0.6859
+
+Epoch 41/100
+Train - Loss: 0.0100, IoU: 0.5454, Dice: 0.6716
+Val   - Loss: 0.0088, IoU: 0.6268, Dice: 0.7469
+✓ Saved best model (val_iou: 0.6268)
+
+Epoch 42/100
+Train - Loss: 0.0098, IoU: 0.6005, Dice: 0.7248
+Val   - Loss: 0.0092, IoU: 0.6076, Dice: 0.7326
+
+Epoch 43/100
+Train - Loss: 0.0097, IoU: 0.5865, Dice: 0.7135
+Val   - Loss: 0.0091, IoU: 0.6042, Dice: 0.7296
+
+Epoch 44/100
+Train - Loss: 0.0120, IoU: 0.5759, Dice: 0.7026
+Val   - Loss: 0.0090, IoU: 0.6230, Dice: 0.7468
+
+Epoch 45/100
+Train - Loss: 0.0107, IoU: 0.5913, Dice: 0.7171
+Val   - Loss: 0.0091, IoU: 0.6212, Dice: 0.7421
+
+Epoch 46/100
+Train - Loss: 0.0100, IoU: 0.5957, Dice: 0.7228
+Val   - Loss: 0.0086, IoU: 0.6106, Dice: 0.7326
+
+Epoch 47/100
+Train - Loss: 0.0101, IoU: 0.5667, Dice: 0.6941
+Val   - Loss: 0.0093, IoU: 0.5727, Dice: 0.7021
+
+Epoch 48/100
+Train - Loss: 0.0098, IoU: 0.5782, Dice: 0.7048
+Val   - Loss: 0.0090, IoU: 0.6301, Dice: 0.7512
+✓ Saved best model (val_iou: 0.6301)
+
+Epoch 49/100
+Train - Loss: 0.0095, IoU: 0.6224, Dice: 0.7402
+Val   - Loss: 0.0098, IoU: 0.5839, Dice: 0.7141
+
+Epoch 50/100
+Train - Loss: 0.0101, IoU: 0.5686, Dice: 0.6926
+Val   - Loss: 0.0084, IoU: 0.5899, Dice: 0.7141
+
+Epoch 51/100
+Train - Loss: 0.0093, IoU: 0.5301, Dice: 0.6589
+Val   - Loss: 0.0084, IoU: 0.6251, Dice: 0.7456
+
+Epoch 52/100
+Train - Loss: 0.0095, IoU: 0.6040, Dice: 0.7266
+Val   - Loss: 0.0090, IoU: 0.5925, Dice: 0.7192
+
+Epoch 53/100
+Train - Loss: 0.0098, IoU: 0.5805, Dice: 0.7093
+Val   - Loss: 0.0087, IoU: 0.6014, Dice: 0.7259
+
+Epoch 54/100
+Train - Loss: 0.0100, IoU: 0.6047, Dice: 0.7261
+Val   - Loss: 0.0091, IoU: 0.6120, Dice: 0.7360
+
+Epoch 55/100
+Train - Loss: 0.0095, IoU: 0.5761, Dice: 0.7039
+Val   - Loss: 0.0084, IoU: 0.6198, Dice: 0.7407
+
+Epoch 56/100
+Train - Loss: 0.0100, IoU: 0.5761, Dice: 0.7041
+Val   - Loss: 0.0097, IoU: 0.5498, Dice: 0.6801
+
+Epoch 57/100
+Train - Loss: 0.0094, IoU: 0.5901, Dice: 0.7124
+Val   - Loss: 0.0085, IoU: 0.6368, Dice: 0.7559
+✓ Saved best model (val_iou: 0.6368)
+
+Epoch 58/100
+Train - Loss: 0.0117, IoU: 0.5855, Dice: 0.7140
+Val   - Loss: 0.0083, IoU: 0.6001, Dice: 0.7233
+
+Epoch 59/100
+Train - Loss: 0.0103, IoU: 0.5811, Dice: 0.7057
+Val   - Loss: 0.0090, IoU: 0.5969, Dice: 0.7204
+
+Epoch 60/100
+Train - Loss: 0.0098, IoU: 0.5630, Dice: 0.6917
+Val   - Loss: 0.0085, IoU: 0.6167, Dice: 0.7384
+
+Epoch 61/100
+Train - Loss: 0.0091, IoU: 0.5828, Dice: 0.7069
+Val   - Loss: 0.0083, IoU: 0.5994, Dice: 0.7225
+
+Epoch 62/100
+Train - Loss: 0.0090, IoU: 0.5794, Dice: 0.7061
+Val   - Loss: 0.0082, IoU: 0.6118, Dice: 0.7333
+
+Epoch 63/100
+Train - Loss: 0.0091, IoU: 0.6255, Dice: 0.7448
+Val   - Loss: 0.0087, IoU: 0.5908, Dice: 0.7165
+
+Epoch 64/100
+Train - Loss: 0.0090, IoU: 0.5847, Dice: 0.7114
+Val   - Loss: 0.0086, IoU: 0.6115, Dice: 0.7353
+
+Epoch 65/100
+Train - Loss: 0.0090, IoU: 0.5625, Dice: 0.6903
+Val   - Loss: 0.0090, IoU: 0.5818, Dice: 0.7089
+
+Epoch 66/100
+Train - Loss: 0.0088, IoU: 0.6242, Dice: 0.7443
+Val   - Loss: 0.0081, IoU: 0.6121, Dice: 0.7343
+
+Epoch 67/100
+Train - Loss: 0.0093, IoU: 0.6071, Dice: 0.7296
+Val   - Loss: 0.0083, IoU: 0.6198, Dice: 0.7425
+
+Epoch 68/100
+Train - Loss: 0.0090, IoU: 0.6052, Dice: 0.7281
+Val   - Loss: 0.0080, IoU: 0.6080, Dice: 0.7291
+
+Epoch 69/100
+Train - Loss: 0.0090, IoU: 0.6032, Dice: 0.7272
+Val   - Loss: 0.0080, IoU: 0.5908, Dice: 0.7153
+
+Epoch 70/100
+Train - Loss: 0.0087, IoU: 0.5943, Dice: 0.7193
+Val   - Loss: 0.0081, IoU: 0.6140, Dice: 0.7364
+
+Epoch 71/100
+Train - Loss: 0.0112, IoU: 0.6002, Dice: 0.7265
+Val   - Loss: 0.0079, IoU: 0.6079, Dice: 0.7305
+
+Epoch 72/100
+Train - Loss: 0.0089, IoU: 0.5996, Dice: 0.7248
+Val   - Loss: 0.0080, IoU: 0.5979, Dice: 0.7201
+
+Epoch 73/100
+Train - Loss: 0.0092, IoU: 0.5852, Dice: 0.7130
+Val   - Loss: 0.0079, IoU: 0.6332, Dice: 0.7509
+
+Epoch 74/100
+Train - Loss: 0.0098, IoU: 0.5806, Dice: 0.7065
+Val   - Loss: 0.0082, IoU: 0.6149, Dice: 0.7377
+
+Epoch 75/100
+Train - Loss: 0.0091, IoU: 0.6242, Dice: 0.7448
+Val   - Loss: 0.0081, IoU: 0.6363, Dice: 0.7545
+
+Epoch 76/100
+Train - Loss: 0.0103, IoU: 0.5449, Dice: 0.6728
+Val   - Loss: 0.0092, IoU: 0.5826, Dice: 0.7114
+
+Epoch 77/100
+Train - Loss: 0.0090, IoU: 0.6262, Dice: 0.7471
+Val   - Loss: 0.0080, IoU: 0.6361, Dice: 0.7548
+
+Early stopping triggered after 77 epochs
+
+================================================================================
+Training: unet_n_filters64_dropout0.2_learning_rate0.003
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0537, IoU: 0.2574, Dice: 0.3629
+Val   - Loss: 4.3975, IoU: 0.2020, Dice: 0.2724
+✓ Saved best model (val_iou: 0.2020)
+
+Epoch 2/100
+Train - Loss: 0.0323, IoU: 0.1794, Dice: 0.2563
+Val   - Loss: 0.0365, IoU: 0.0555, Dice: 0.0974
+
+Epoch 3/100
+Train - Loss: 0.0290, IoU: 0.2560, Dice: 0.3626
+Val   - Loss: 0.0485, IoU: 0.2591, Dice: 0.3642
+✓ Saved best model (val_iou: 0.2591)
+
+Epoch 4/100
+Train - Loss: 0.0308, IoU: 0.2536, Dice: 0.3552
+Val   - Loss: 0.0240, IoU: 0.3814, Dice: 0.5294
+✓ Saved best model (val_iou: 0.3814)
+
+Epoch 5/100
+Train - Loss: 0.0282, IoU: 0.3086, Dice: 0.4180
+Val   - Loss: 0.0208, IoU: 0.3415, Dice: 0.4919
+
+Epoch 6/100
+Train - Loss: 0.0264, IoU: 0.3738, Dice: 0.5123
+Val   - Loss: 0.0245, IoU: 0.3028, Dice: 0.4436
+
+Epoch 7/100
+Train - Loss: 0.0264, IoU: 0.3390, Dice: 0.4654
+Val   - Loss: 0.0228, IoU: 0.1133, Dice: 0.1984
+
+Epoch 8/100
+Train - Loss: 0.0192, IoU: 0.3458, Dice: 0.4583
+Val   - Loss: 0.0190, IoU: 0.4981, Dice: 0.6104
+✓ Saved best model (val_iou: 0.4981)
+
+Epoch 9/100
+Train - Loss: 0.0275, IoU: 0.3468, Dice: 0.4807
+Val   - Loss: 0.0294, IoU: 0.3303, Dice: 0.4703
+
+Epoch 10/100
+Train - Loss: 0.0244, IoU: 0.3838, Dice: 0.5217
+Val   - Loss: 0.0181, IoU: 0.3992, Dice: 0.5396
+
+Epoch 11/100
+Train - Loss: 0.0200, IoU: 0.3956, Dice: 0.5313
+Val   - Loss: 0.0162, IoU: 0.4687, Dice: 0.5867
+
+Epoch 12/100
+Train - Loss: 0.0172, IoU: 0.4154, Dice: 0.5482
+Val   - Loss: 0.0150, IoU: 0.4837, Dice: 0.6052
+
+Epoch 13/100
+Train - Loss: 0.0190, IoU: 0.4043, Dice: 0.5354
+Val   - Loss: 0.0164, IoU: 0.4580, Dice: 0.5844
+
+Epoch 14/100
+Train - Loss: 0.0189, IoU: 0.4091, Dice: 0.5468
+Val   - Loss: 0.0156, IoU: 0.4816, Dice: 0.6216
+
+Epoch 15/100
+Train - Loss: 0.0159, IoU: 0.4364, Dice: 0.5643
+Val   - Loss: 0.0196, IoU: 0.3309, Dice: 0.4602
+
+Epoch 16/100
+Train - Loss: 0.0178, IoU: 0.4155, Dice: 0.5501
+Val   - Loss: 0.0175, IoU: 0.5405, Dice: 0.6680
+✓ Saved best model (val_iou: 0.5405)
+
+Epoch 17/100
+Train - Loss: 0.0159, IoU: 0.4252, Dice: 0.5519
+Val   - Loss: 0.0137, IoU: 0.4329, Dice: 0.5665
+
+Epoch 18/100
+Train - Loss: 0.0142, IoU: 0.4586, Dice: 0.5912
+Val   - Loss: 0.0119, IoU: 0.4665, Dice: 0.5974
+
+Epoch 19/100
+Train - Loss: 0.0184, IoU: 0.4231, Dice: 0.5534
+Val   - Loss: 0.0295, IoU: 0.3767, Dice: 0.5198
+
+Epoch 20/100
+Train - Loss: 0.0197, IoU: 0.4032, Dice: 0.5313
+Val   - Loss: 0.0311, IoU: 0.3142, Dice: 0.4481
+
+Epoch 21/100
+Train - Loss: 0.0159, IoU: 0.4192, Dice: 0.5463
+Val   - Loss: 0.0127, IoU: 0.4552, Dice: 0.5817
+
+Epoch 22/100
+Train - Loss: 0.0188, IoU: 0.4526, Dice: 0.5825
+Val   - Loss: 0.0191, IoU: 0.4076, Dice: 0.5395
+
+Epoch 23/100
+Train - Loss: 0.0180, IoU: 0.4063, Dice: 0.5419
+Val   - Loss: 0.0216, IoU: 0.3883, Dice: 0.5196
+
+Epoch 24/100
+Train - Loss: 0.0153, IoU: 0.4751, Dice: 0.5967
+Val   - Loss: 0.0141, IoU: 0.4637, Dice: 0.6085
+
+Epoch 25/100
+Train - Loss: 0.0154, IoU: 0.4484, Dice: 0.5810
+Val   - Loss: 0.0118, IoU: 0.4801, Dice: 0.6058
+
+Epoch 26/100
+Train - Loss: 0.0150, IoU: 0.4737, Dice: 0.6046
+Val   - Loss: 0.0123, IoU: 0.4587, Dice: 0.5774
+
+Epoch 27/100
+Train - Loss: 0.0168, IoU: 0.4376, Dice: 0.5639
+Val   - Loss: 0.0130, IoU: 0.5834, Dice: 0.7059
+✓ Saved best model (val_iou: 0.5834)
+
+Epoch 28/100
+Train - Loss: 0.0155, IoU: 0.4460, Dice: 0.5720
+Val   - Loss: 0.0149, IoU: 0.4974, Dice: 0.6165
+
+Epoch 29/100
+Train - Loss: 0.0149, IoU: 0.4174, Dice: 0.5389
+Val   - Loss: 0.0122, IoU: 0.4557, Dice: 0.5823
+
+Epoch 30/100
+Train - Loss: 0.0126, IoU: 0.4766, Dice: 0.6048
+Val   - Loss: 0.0141, IoU: 0.5269, Dice: 0.6511
+
+Epoch 31/100
+Train - Loss: 0.0117, IoU: 0.4636, Dice: 0.5883
+Val   - Loss: 0.0103, IoU: 0.5496, Dice: 0.6742
+
+Epoch 32/100
+Train - Loss: 0.0122, IoU: 0.4899, Dice: 0.6161
+Val   - Loss: 0.0141, IoU: 0.4343, Dice: 0.5493
+
+Epoch 33/100
+Train - Loss: 0.0119, IoU: 0.4561, Dice: 0.5755
+Val   - Loss: 0.0107, IoU: 0.4847, Dice: 0.6130
+
+Epoch 34/100
+Train - Loss: 0.0125, IoU: 0.4414, Dice: 0.5664
+Val   - Loss: 0.0111, IoU: 0.4459, Dice: 0.5604
+
+Epoch 35/100
+Train - Loss: 0.0133, IoU: 0.4435, Dice: 0.5683
+Val   - Loss: 0.0167, IoU: 0.5465, Dice: 0.6703
+
+Epoch 36/100
+Train - Loss: 0.0127, IoU: 0.4618, Dice: 0.5863
+Val   - Loss: 0.0101, IoU: 0.4798, Dice: 0.5931
+
+Epoch 37/100
+Train - Loss: 0.0115, IoU: 0.4862, Dice: 0.6109
+Val   - Loss: 0.0100, IoU: 0.4373, Dice: 0.5488
+
+Epoch 38/100
+Train - Loss: 0.0114, IoU: 0.4645, Dice: 0.5876
+Val   - Loss: 0.0119, IoU: 0.5252, Dice: 0.6478
+
+Epoch 39/100
+Train - Loss: 0.0111, IoU: 0.5095, Dice: 0.6334
+Val   - Loss: 0.0114, IoU: 0.4637, Dice: 0.5961
+
+Epoch 40/100
+Train - Loss: 0.0104, IoU: 0.5150, Dice: 0.6398
+Val   - Loss: 0.0104, IoU: 0.5785, Dice: 0.6983
+
+Epoch 41/100
+Train - Loss: 0.0107, IoU: 0.5043, Dice: 0.6324
+Val   - Loss: 0.0090, IoU: 0.4802, Dice: 0.6005
+
+Epoch 42/100
+Train - Loss: 0.0106, IoU: 0.4980, Dice: 0.6171
+Val   - Loss: 0.0089, IoU: 0.5564, Dice: 0.6785
+
+Epoch 43/100
+Train - Loss: 0.0103, IoU: 0.4893, Dice: 0.6087
+Val   - Loss: 0.0092, IoU: 0.4676, Dice: 0.5860
+
+Epoch 44/100
+Train - Loss: 0.0130, IoU: 0.4927, Dice: 0.6216
+Val   - Loss: 0.0112, IoU: 0.4771, Dice: 0.6026
+
+Epoch 45/100
+Train - Loss: 0.0119, IoU: 0.4632, Dice: 0.5903
+Val   - Loss: 0.0173, IoU: 0.4206, Dice: 0.5522
+
+Epoch 46/100
+Train - Loss: 0.0107, IoU: 0.4828, Dice: 0.6063
+Val   - Loss: 0.0096, IoU: 0.5329, Dice: 0.6528
+
+Epoch 47/100
+Train - Loss: 0.0104, IoU: 0.5283, Dice: 0.6557
+Val   - Loss: 0.0089, IoU: 0.5022, Dice: 0.6234
+
+Early stopping triggered after 47 epochs
+
+================================================================================
+Training: unet_n_filters64_dropout0.2_learning_rate0.005
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0523, IoU: 0.0585, Dice: 0.0923
+Val   - Loss: 0.1353, IoU: 0.0000, Dice: 0.0000
+✓ Saved best model (val_iou: 0.0000)
+
+Epoch 2/100
+Train - Loss: 0.0326, IoU: 0.1116, Dice: 0.1636
+Val   - Loss: 0.0302, IoU: 0.0286, Dice: 0.0545
+✓ Saved best model (val_iou: 0.0286)
+
+Epoch 3/100
+Train - Loss: 0.0297, IoU: 0.2167, Dice: 0.3036
+Val   - Loss: 0.0663, IoU: 0.0025, Dice: 0.0049
+
+Epoch 4/100
+Train - Loss: 0.0242, IoU: 0.2437, Dice: 0.3407
+Val   - Loss: 0.0538, IoU: 0.2696, Dice: 0.3721
+✓ Saved best model (val_iou: 0.2696)
+
+Epoch 5/100
+Train - Loss: 0.0254, IoU: 0.2586, Dice: 0.3662
+Val   - Loss: 0.0260, IoU: 0.3152, Dice: 0.4464
+✓ Saved best model (val_iou: 0.3152)
+
+Epoch 6/100
+Train - Loss: 0.0239, IoU: 0.2671, Dice: 0.3736
+Val   - Loss: 0.0345, IoU: 0.2142, Dice: 0.3244
+
+Epoch 7/100
+Train - Loss: 0.0247, IoU: 0.2372, Dice: 0.3269
+Val   - Loss: 0.0283, IoU: 0.1473, Dice: 0.2376
+
+Epoch 8/100
+Train - Loss: 0.0266, IoU: 0.3307, Dice: 0.4535
+Val   - Loss: 0.0245, IoU: 0.3062, Dice: 0.4515
+
+Epoch 9/100
+Train - Loss: 0.0210, IoU: 0.2904, Dice: 0.4132
+Val   - Loss: 0.0216, IoU: 0.2588, Dice: 0.3873
+
+Epoch 10/100
+Train - Loss: 0.0229, IoU: 0.3058, Dice: 0.4321
+Val   - Loss: 0.0213, IoU: 0.2822, Dice: 0.3874
+
+Epoch 11/100
+Train - Loss: 0.0208, IoU: 0.3642, Dice: 0.4956
+Val   - Loss: 0.0214, IoU: 0.3221, Dice: 0.4751
+✓ Saved best model (val_iou: 0.3221)
+
+Epoch 12/100
+Train - Loss: 0.0185, IoU: 0.3346, Dice: 0.4678
+Val   - Loss: 0.0160, IoU: 0.3835, Dice: 0.5026
+✓ Saved best model (val_iou: 0.3835)
+
+Epoch 13/100
+Train - Loss: 0.0203, IoU: 0.3998, Dice: 0.5260
+Val   - Loss: 0.0188, IoU: 0.5056, Dice: 0.6475
+✓ Saved best model (val_iou: 0.5056)
+
+Epoch 14/100
+Train - Loss: 0.0198, IoU: 0.3789, Dice: 0.4981
+Val   - Loss: 0.0215, IoU: 0.4522, Dice: 0.6091
+
+Epoch 15/100
+Train - Loss: 0.0179, IoU: 0.4144, Dice: 0.5488
+Val   - Loss: 0.0250, IoU: 0.2299, Dice: 0.3467
+
+Epoch 16/100
+Train - Loss: 0.0181, IoU: 0.3656, Dice: 0.4925
+Val   - Loss: 0.0392, IoU: 0.1636, Dice: 0.2619
+
+Epoch 17/100
+Train - Loss: 0.0165, IoU: 0.4416, Dice: 0.5755
+Val   - Loss: 0.0167, IoU: 0.4768, Dice: 0.6292
+
+Epoch 18/100
+Train - Loss: 0.0149, IoU: 0.4027, Dice: 0.5205
+Val   - Loss: 0.0138, IoU: 0.4346, Dice: 0.5730
+
+Epoch 19/100
+Train - Loss: 0.0148, IoU: 0.4423, Dice: 0.5675
+Val   - Loss: 0.0183, IoU: 0.4276, Dice: 0.5397
+
+Epoch 20/100
+Train - Loss: 0.0156, IoU: 0.4498, Dice: 0.5728
+Val   - Loss: 0.0143, IoU: 0.4110, Dice: 0.5397
+
+Epoch 21/100
+Train - Loss: 0.0207, IoU: 0.3796, Dice: 0.5007
+Val   - Loss: 0.0144, IoU: 0.4290, Dice: 0.5698
+
+Epoch 22/100
+Train - Loss: 0.0177, IoU: 0.3523, Dice: 0.4676
+Val   - Loss: 0.0172, IoU: 0.4982, Dice: 0.6314
+
+Epoch 23/100
+Train - Loss: 0.0174, IoU: 0.3934, Dice: 0.5096
+Val   - Loss: 0.0261, IoU: 0.3966, Dice: 0.5207
+
+Epoch 24/100
+Train - Loss: 0.0177, IoU: 0.3191, Dice: 0.4364
+Val   - Loss: 0.0163, IoU: 0.3165, Dice: 0.4372
+
+Epoch 25/100
+Train - Loss: 0.0160, IoU: 0.3396, Dice: 0.4545
+Val   - Loss: 0.0135, IoU: 0.3723, Dice: 0.4921
+
+Epoch 26/100
+Train - Loss: 0.0152, IoU: 0.4098, Dice: 0.5376
+Val   - Loss: 0.0151, IoU: 0.3906, Dice: 0.5180
+
+Epoch 27/100
+Train - Loss: 0.0146, IoU: 0.3880, Dice: 0.5109
+Val   - Loss: 0.0129, IoU: 0.4391, Dice: 0.5544
+
+Epoch 28/100
+Train - Loss: 0.0139, IoU: 0.4201, Dice: 0.5452
+Val   - Loss: 0.0129, IoU: 0.4470, Dice: 0.5645
+
+Epoch 29/100
+Train - Loss: 0.0127, IoU: 0.4528, Dice: 0.5772
+Val   - Loss: 0.0123, IoU: 0.4730, Dice: 0.6127
+
+Epoch 30/100
+Train - Loss: 0.0132, IoU: 0.4849, Dice: 0.6157
+Val   - Loss: 0.0127, IoU: 0.4999, Dice: 0.6367
+
+Epoch 31/100
+Train - Loss: 0.0151, IoU: 0.4504, Dice: 0.5756
+Val   - Loss: 0.0149, IoU: 0.4361, Dice: 0.5718
+
+Epoch 32/100
+Train - Loss: 0.0196, IoU: 0.3854, Dice: 0.5024
+Val   - Loss: 0.0221, IoU: 0.3994, Dice: 0.5434
+
+Epoch 33/100
+Train - Loss: 0.0173, IoU: 0.3779, Dice: 0.5074
+Val   - Loss: 0.0136, IoU: 0.3914, Dice: 0.4987
+
+Early stopping triggered after 33 epochs
+
+================================================================================
+Training: unet_n_filters64_dropout0.3_learning_rate0.001
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0847, IoU: 0.2217, Dice: 0.3170
+Val   - Loss: 0.0445, IoU: 0.1630, Dice: 0.2542
+✓ Saved best model (val_iou: 0.1630)
+
+Epoch 2/100
+Train - Loss: 0.0447, IoU: 0.2539, Dice: 0.3518
+Val   - Loss: 0.0323, IoU: 0.0022, Dice: 0.0044
+
+Epoch 3/100
+Train - Loss: 0.0387, IoU: 0.1800, Dice: 0.2664
+Val   - Loss: 0.0360, IoU: 0.3685, Dice: 0.4880
+✓ Saved best model (val_iou: 0.3685)
+
+Epoch 4/100
+Train - Loss: 0.0301, IoU: 0.2873, Dice: 0.4064
+Val   - Loss: 0.0290, IoU: 0.2538, Dice: 0.3800
+
+Epoch 5/100
+Train - Loss: 0.0315, IoU: 0.2442, Dice: 0.3402
+Val   - Loss: 0.0352, IoU: 0.0335, Dice: 0.0619
+
+Epoch 6/100
+Train - Loss: 0.0308, IoU: 0.2021, Dice: 0.2927
+Val   - Loss: 0.0397, IoU: 0.2266, Dice: 0.3268
+
+Epoch 7/100
+Train - Loss: 0.0289, IoU: 0.2659, Dice: 0.3747
+Val   - Loss: 0.0185, IoU: 0.4293, Dice: 0.5690
+✓ Saved best model (val_iou: 0.4293)
+
+Epoch 8/100
+Train - Loss: 0.0281, IoU: 0.2927, Dice: 0.4040
+Val   - Loss: 0.0247, IoU: 0.3801, Dice: 0.5331
+
+Epoch 9/100
+Train - Loss: 0.0260, IoU: 0.2912, Dice: 0.4106
+Val   - Loss: 0.0181, IoU: 0.4358, Dice: 0.5715
+✓ Saved best model (val_iou: 0.4358)
+
+Epoch 10/100
+Train - Loss: 0.0260, IoU: 0.2792, Dice: 0.3941
+Val   - Loss: 0.0221, IoU: 0.2419, Dice: 0.3655
+
+Epoch 11/100
+Train - Loss: 0.0244, IoU: 0.3473, Dice: 0.4678
+Val   - Loss: 0.0211, IoU: 0.3478, Dice: 0.4791
+
+Epoch 12/100
+Train - Loss: 0.0226, IoU: 0.2802, Dice: 0.3858
+Val   - Loss: 0.0210, IoU: 0.5507, Dice: 0.6575
+✓ Saved best model (val_iou: 0.5507)
+
+Epoch 13/100
+Train - Loss: 0.0219, IoU: 0.3219, Dice: 0.4433
+Val   - Loss: 0.0156, IoU: 0.4195, Dice: 0.5701
+
+Epoch 14/100
+Train - Loss: 0.0183, IoU: 0.3811, Dice: 0.5091
+Val   - Loss: 0.0157, IoU: 0.3113, Dice: 0.4216
+
+Epoch 15/100
+Train - Loss: 0.0192, IoU: 0.3678, Dice: 0.4912
+Val   - Loss: 0.0158, IoU: 0.5467, Dice: 0.6730
+
+Epoch 16/100
+Train - Loss: 0.0218, IoU: 0.3453, Dice: 0.4633
+Val   - Loss: 0.0269, IoU: 0.0115, Dice: 0.0221
+
+Epoch 17/100
+Train - Loss: 0.0187, IoU: 0.3487, Dice: 0.4706
+Val   - Loss: 0.0153, IoU: 0.5607, Dice: 0.6800
+✓ Saved best model (val_iou: 0.5607)
+
+Epoch 18/100
+Train - Loss: 0.0199, IoU: 0.4132, Dice: 0.5430
+Val   - Loss: 0.0149, IoU: 0.3916, Dice: 0.5252
+
+Epoch 19/100
+Train - Loss: 0.0175, IoU: 0.4269, Dice: 0.5508
+Val   - Loss: 0.0164, IoU: 0.4809, Dice: 0.6093
+
+Epoch 20/100
+Train - Loss: 0.0149, IoU: 0.4437, Dice: 0.5693
+Val   - Loss: 0.0132, IoU: 0.5430, Dice: 0.6666
+
+Epoch 21/100
+Train - Loss: 0.0209, IoU: 0.3957, Dice: 0.5208
+Val   - Loss: 0.0131, IoU: 0.4911, Dice: 0.6225
+
+Epoch 22/100
+Train - Loss: 0.0156, IoU: 0.4643, Dice: 0.5862
+Val   - Loss: 0.0146, IoU: 0.5359, Dice: 0.6640
+
+Epoch 23/100
+Train - Loss: 0.0146, IoU: 0.4427, Dice: 0.5725
+Val   - Loss: 0.0126, IoU: 0.4517, Dice: 0.5829
+
+Epoch 24/100
+Train - Loss: 0.0156, IoU: 0.4379, Dice: 0.5631
+Val   - Loss: 0.0129, IoU: 0.4703, Dice: 0.6089
+
+Epoch 25/100
+Train - Loss: 0.0132, IoU: 0.4433, Dice: 0.5645
+Val   - Loss: 0.0124, IoU: 0.4488, Dice: 0.5789
+
+Epoch 26/100
+Train - Loss: 0.0140, IoU: 0.4509, Dice: 0.5724
+Val   - Loss: 0.0143, IoU: 0.3971, Dice: 0.5147
+
+Epoch 27/100
+Train - Loss: 0.0134, IoU: 0.4085, Dice: 0.5288
+Val   - Loss: 0.0146, IoU: 0.4672, Dice: 0.6108
+
+Epoch 28/100
+Train - Loss: 0.0133, IoU: 0.4297, Dice: 0.5504
+Val   - Loss: 0.0129, IoU: 0.5134, Dice: 0.6391
+
+Epoch 29/100
+Train - Loss: 0.0119, IoU: 0.4842, Dice: 0.6084
+Val   - Loss: 0.0103, IoU: 0.5215, Dice: 0.6516
+
+Epoch 30/100
+Train - Loss: 0.0166, IoU: 0.4614, Dice: 0.5868
+Val   - Loss: 0.0106, IoU: 0.5340, Dice: 0.6593
+
+Epoch 31/100
+Train - Loss: 0.0130, IoU: 0.4302, Dice: 0.5531
+Val   - Loss: 0.0119, IoU: 0.4392, Dice: 0.5644
+
+Epoch 32/100
+Train - Loss: 0.0126, IoU: 0.4613, Dice: 0.5825
+Val   - Loss: 0.0119, IoU: 0.4998, Dice: 0.6278
+
+Epoch 33/100
+Train - Loss: 0.0115, IoU: 0.4420, Dice: 0.5657
+Val   - Loss: 0.0102, IoU: 0.4791, Dice: 0.6032
+
+Epoch 34/100
+Train - Loss: 0.0119, IoU: 0.4927, Dice: 0.6175
+Val   - Loss: 0.0108, IoU: 0.4952, Dice: 0.6205
+
+Epoch 35/100
+Train - Loss: 0.0113, IoU: 0.4734, Dice: 0.6000
+Val   - Loss: 0.0099, IoU: 0.5127, Dice: 0.6402
+
+Epoch 36/100
+Train - Loss: 0.0119, IoU: 0.4999, Dice: 0.6250
+Val   - Loss: 0.0107, IoU: 0.4757, Dice: 0.6046
+
+Epoch 37/100
+Train - Loss: 0.0114, IoU: 0.4918, Dice: 0.6142
+Val   - Loss: 0.0095, IoU: 0.4906, Dice: 0.6158
+
+Early stopping triggered after 37 epochs
+
+================================================================================
+Training: unet_n_filters64_dropout0.3_learning_rate0.003
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0612, IoU: 0.1410, Dice: 0.2126
+Val   - Loss: 1.9956, IoU: 0.0000, Dice: 0.0000
+✓ Saved best model (val_iou: 0.0000)
+
+Epoch 2/100
+Train - Loss: 0.0319, IoU: 0.1213, Dice: 0.1760
+Val   - Loss: 0.0346, IoU: 0.0000, Dice: 0.0000
+
+Epoch 3/100
+Train - Loss: 0.0313, IoU: 0.1305, Dice: 0.1901
+Val   - Loss: 0.0325, IoU: 0.0178, Dice: 0.0338
+✓ Saved best model (val_iou: 0.0178)
+
+Epoch 4/100
+Train - Loss: 0.0310, IoU: 0.1552, Dice: 0.2128
+Val   - Loss: 0.0258, IoU: 0.1649, Dice: 0.2738
+✓ Saved best model (val_iou: 0.1649)
+
+Epoch 5/100
+Train - Loss: 0.0252, IoU: 0.2215, Dice: 0.3139
+Val   - Loss: 0.0238, IoU: 0.2689, Dice: 0.3988
+✓ Saved best model (val_iou: 0.2689)
+
+Epoch 6/100
+Train - Loss: 0.0318, IoU: 0.1271, Dice: 0.1875
+Val   - Loss: 0.0223, IoU: 0.0866, Dice: 0.1491
+
+Epoch 7/100
+Train - Loss: 0.0275, IoU: 0.2151, Dice: 0.2973
+Val   - Loss: 0.0212, IoU: 0.3543, Dice: 0.4878
+✓ Saved best model (val_iou: 0.3543)
+
+Epoch 8/100
+Train - Loss: 0.0221, IoU: 0.3471, Dice: 0.4747
+Val   - Loss: 0.0196, IoU: 0.4192, Dice: 0.5434
+✓ Saved best model (val_iou: 0.4192)
+
+Epoch 9/100
+Train - Loss: 0.0211, IoU: 0.3280, Dice: 0.4519
+Val   - Loss: 0.0172, IoU: 0.2944, Dice: 0.3654
+
+Epoch 10/100
+Train - Loss: 0.0192, IoU: 0.3767, Dice: 0.5026
+Val   - Loss: 0.0165, IoU: 0.4992, Dice: 0.6338
+✓ Saved best model (val_iou: 0.4992)
+
+Epoch 11/100
+Train - Loss: 0.0247, IoU: 0.3196, Dice: 0.4449
+Val   - Loss: 0.0191, IoU: 0.3367, Dice: 0.4727
+
+Epoch 12/100
+Train - Loss: 0.0221, IoU: 0.3135, Dice: 0.4323
+Val   - Loss: 0.0170, IoU: 0.5136, Dice: 0.6364
+✓ Saved best model (val_iou: 0.5136)
+
+Epoch 13/100
+Train - Loss: 0.0233, IoU: 0.3576, Dice: 0.4859
+Val   - Loss: 0.0160, IoU: 0.3737, Dice: 0.4865
+
+Epoch 14/100
+Train - Loss: 0.0221, IoU: 0.3555, Dice: 0.4806
+Val   - Loss: 0.0157, IoU: 0.3700, Dice: 0.5116
+
+Epoch 15/100
+Train - Loss: 0.0214, IoU: 0.3393, Dice: 0.4593
+Val   - Loss: 0.0211, IoU: 0.4983, Dice: 0.6431
+
+Epoch 16/100
+Train - Loss: 0.0190, IoU: 0.3949, Dice: 0.5201
+Val   - Loss: 0.0140, IoU: 0.3799, Dice: 0.5082
+
+Epoch 17/100
+Train - Loss: 0.0182, IoU: 0.3624, Dice: 0.4889
+Val   - Loss: 0.0166, IoU: 0.3501, Dice: 0.4440
+
+Epoch 18/100
+Train - Loss: 0.0171, IoU: 0.3623, Dice: 0.4859
+Val   - Loss: 0.0160, IoU: 0.3958, Dice: 0.5344
+
+Epoch 19/100
+Train - Loss: 0.0168, IoU: 0.4240, Dice: 0.5599
+Val   - Loss: 0.0140, IoU: 0.4710, Dice: 0.6032
+
+Epoch 20/100
+Train - Loss: 0.0177, IoU: 0.3804, Dice: 0.4940
+Val   - Loss: 0.0264, IoU: 0.4124, Dice: 0.5387
+
+Epoch 21/100
+Train - Loss: 0.0166, IoU: 0.4041, Dice: 0.5400
+Val   - Loss: 0.0134, IoU: 0.4590, Dice: 0.5998
+
+Epoch 22/100
+Train - Loss: 0.0176, IoU: 0.4193, Dice: 0.5467
+Val   - Loss: 0.0135, IoU: 0.5132, Dice: 0.6451
+
+Epoch 23/100
+Train - Loss: 0.0152, IoU: 0.4210, Dice: 0.5523
+Val   - Loss: 0.0132, IoU: 0.3433, Dice: 0.4306
+
+Epoch 24/100
+Train - Loss: 0.0152, IoU: 0.3305, Dice: 0.4358
+Val   - Loss: 0.0131, IoU: 0.4491, Dice: 0.5620
+
+Epoch 25/100
+Train - Loss: 0.0135, IoU: 0.4093, Dice: 0.5229
+Val   - Loss: 0.0113, IoU: 0.4594, Dice: 0.5748
+
+Epoch 26/100
+Train - Loss: 0.0137, IoU: 0.3988, Dice: 0.5103
+Val   - Loss: 0.0118, IoU: 0.4141, Dice: 0.5315
+
+Epoch 27/100
+Train - Loss: 0.0138, IoU: 0.4135, Dice: 0.5330
+Val   - Loss: 0.0116, IoU: 0.5080, Dice: 0.6296
+
+Epoch 28/100
+Train - Loss: 0.0128, IoU: 0.4395, Dice: 0.5634
+Val   - Loss: 0.0113, IoU: 0.4270, Dice: 0.5465
+
+Epoch 29/100
+Train - Loss: 0.0128, IoU: 0.4153, Dice: 0.5321
+Val   - Loss: 0.0107, IoU: 0.4494, Dice: 0.5620
+
+Epoch 30/100
+Train - Loss: 0.0126, IoU: 0.4539, Dice: 0.5771
+Val   - Loss: 0.0105, IoU: 0.4474, Dice: 0.5647
+
+Epoch 31/100
+Train - Loss: 0.0155, IoU: 0.4188, Dice: 0.5427
+Val   - Loss: 0.0126, IoU: 0.4008, Dice: 0.5260
+
+Epoch 32/100
+Train - Loss: 0.0155, IoU: 0.4423, Dice: 0.5641
+Val   - Loss: 0.0143, IoU: 0.3919, Dice: 0.4934
+
+Early stopping triggered after 32 epochs
+
+================================================================================
+Training: unet_n_filters64_dropout0.3_learning_rate0.005
+================================================================================
+
+Epoch 1/100
+Train - Loss: 0.0523, IoU: 0.1582, Dice: 0.2212
+Val   - Loss: 17.7517, IoU: 0.0000, Dice: 0.0000
+✓ Saved best model (val_iou: 0.0000)
+
+Epoch 2/100
+Train - Loss: 0.0333, IoU: 0.1232, Dice: 0.1794
+Val   - Loss: 0.3176, IoU: 0.0000, Dice: 0.0000
+
+Epoch 3/100
+Train - Loss: 0.0304, IoU: 0.0904, Dice: 0.1271
+Val   - Loss: 0.0383, IoU: 0.0012, Dice: 0.0025
+✓ Saved best model (val_iou: 0.0012)
+
+Epoch 4/100
+Train - Loss: 0.0298, IoU: 0.1031, Dice: 0.1549
+Val   - Loss: 0.0272, IoU: 0.0000, Dice: 0.0000
+
+Epoch 5/100
+Train - Loss: 0.0276, IoU: 0.0666, Dice: 0.0942
+Val   - Loss: 0.0287, IoU: 0.0000, Dice: 0.0000
+
+Epoch 6/100
+Train - Loss: 0.0254, IoU: 0.0206, Dice: 0.0294
+Val   - Loss: 0.0254, IoU: 0.0000, Dice: 0.0000
+
+Epoch 7/100
+Train - Loss: 0.0259, IoU: 0.0103, Dice: 0.0176
+Val   - Loss: 0.0236, IoU: 0.0000, Dice: 0.0000
+
+Epoch 8/100
+Train - Loss: 0.0246, IoU: 0.0676, Dice: 0.0989
+Val   - Loss: 0.0234, IoU: 0.0000, Dice: 0.0000
+
+Epoch 9/100
+Train - Loss: 0.0331, IoU: 0.0608, Dice: 0.0933
+Val   - Loss: 0.0485, IoU: 0.0000, Dice: 0.0000
+
+Epoch 10/100
+Train - Loss: 0.0249, IoU: 0.0506, Dice: 0.0783
+Val   - Loss: 0.0252, IoU: 0.0215, Dice: 0.0391
+✓ Saved best model (val_iou: 0.0215)
+
+Epoch 11/100
+Train - Loss: 0.0242, IoU: 0.1339, Dice: 0.1981
+Val   - Loss: 0.0210, IoU: 0.0050, Dice: 0.0097
+
+Epoch 12/100
+Train - Loss: 0.0216, IoU: 0.1520, Dice: 0.2252
+Val   - Loss: 0.0174, IoU: 0.2559, Dice: 0.3960
+✓ Saved best model (val_iou: 0.2559)
+
+Epoch 13/100
+Train - Loss: 0.0258, IoU: 0.2949, Dice: 0.4103
+Val   - Loss: 0.0214, IoU: 0.4319, Dice: 0.5786
+✓ Saved best model (val_iou: 0.4319)
+
+Epoch 14/100
+Train - Loss: 0.0218, IoU: 0.3370, Dice: 0.4509
+Val   - Loss: 0.0273, IoU: 0.3516, Dice: 0.4728
+
+Epoch 15/100
+Train - Loss: 0.0203, IoU: 0.3803, Dice: 0.5062
+Val   - Loss: 0.0192, IoU: 0.4774, Dice: 0.6183
+✓ Saved best model (val_iou: 0.4774)
+
+Epoch 16/100
+Train - Loss: 0.0258, IoU: 0.2930, Dice: 0.4124
+Val   - Loss: 0.0309, IoU: 0.2162, Dice: 0.3323
+
+Epoch 17/100
+Train - Loss: 0.0277, IoU: 0.3450, Dice: 0.4634
+Val   - Loss: 0.0212, IoU: 0.4035, Dice: 0.5575
+
+Epoch 18/100
+Train - Loss: 0.0219, IoU: 0.3418, Dice: 0.4701
+Val   - Loss: 0.0166, IoU: 0.4364, Dice: 0.5807
+
+Epoch 19/100
+Train - Loss: 0.0205, IoU: 0.3191, Dice: 0.4268
+Val   - Loss: 0.0216, IoU: 0.3700, Dice: 0.5035
+
+Epoch 20/100
+Train - Loss: 0.0204, IoU: 0.3737, Dice: 0.4953
+Val   - Loss: 0.0214, IoU: 0.4650, Dice: 0.6097
+
+Epoch 21/100
+Train - Loss: 0.0220, IoU: 0.2159, Dice: 0.2983
+Val   - Loss: 0.0196, IoU: 0.4253, Dice: 0.5793
+
+Epoch 22/100
+Train - Loss: 0.0190, IoU: 0.3831, Dice: 0.5148
+Val   - Loss: 0.0151, IoU: 0.4136, Dice: 0.5615
+
+Epoch 23/100
+Train - Loss: 0.0190, IoU: 0.3421, Dice: 0.4660
+Val   - Loss: 0.0153, IoU: 0.2107, Dice: 0.2760
+
+Epoch 24/100
+Train - Loss: 0.0201, IoU: 0.2492, Dice: 0.3389
+Val   - Loss: 0.0148, IoU: 0.2784, Dice: 0.3605
+
+Epoch 25/100
+Train - Loss: 0.0175, IoU: 0.3164, Dice: 0.4171
+Val   - Loss: 0.0278, IoU: 0.3660, Dice: 0.4978
+
+Epoch 26/100
+Train - Loss: 0.0185, IoU: 0.3670, Dice: 0.4878
+Val   - Loss: 0.0147, IoU: 0.2652, Dice: 0.3682
+
+Epoch 27/100
+Train - Loss: 0.0153, IoU: 0.3673, Dice: 0.4934
+Val   - Loss: 0.0127, IoU: 0.3872, Dice: 0.5111
+
+Epoch 28/100
+Train - Loss: 0.0152, IoU: 0.3746, Dice: 0.4995
+Val   - Loss: 0.0132, IoU: 0.3748, Dice: 0.4993
+
+Epoch 29/100
+Train - Loss: 0.0203, IoU: 0.3472, Dice: 0.4583
+Val   - Loss: 0.0140, IoU: 0.2430, Dice: 0.3149
+
+Epoch 30/100
+Train - Loss: 0.0167, IoU: 0.3767, Dice: 0.4917
+Val   - Loss: 0.0124, IoU: 0.3601, Dice: 0.4651
+
+Epoch 31/100
+Train - Loss: 0.0166, IoU: 0.3036, Dice: 0.4071
+Val   - Loss: 0.0126, IoU: 0.3271, Dice: 0.4183
+
+Epoch 32/100
+Train - Loss: 0.0159, IoU: 0.3392, Dice: 0.4453
+Val   - Loss: 0.0155, IoU: 0.4003, Dice: 0.5104
+
+Epoch 33/100
+Train - Loss: 0.0150, IoU: 0.3479, Dice: 0.4552
+Val   - Loss: 0.0123, IoU: 0.4290, Dice: 0.5522
+
+Epoch 34/100
+Train - Loss: 0.0136, IoU: 0.4011, Dice: 0.5228
+Val   - Loss: 0.0118, IoU: 0.4221, Dice: 0.5373
+
+Epoch 35/100
+Train - Loss: 0.0140, IoU: 0.3443, Dice: 0.4519
+Val   - Loss: 0.0137, IoU: 0.4484, Dice: 0.5768
+
+Early stopping triggered after 35 epochs
+
+
+################################################################################
+# Training Architecture: ATTENTION_UNET
+################################################################################
+
+================================================================================
+Training: attention_unet_n_filters16_dropout0.1_learning_rate0.001
+================================================================================
+
+Epoch 1/100
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/train_pytorch_comparison_no_aug.py", line 819, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/train_pytorch_comparison_no_aug.py", line 780, in main
+    best_iou, model_name = train_model(
+  File "/scratch/phyzxi/unet-HPC/train_pytorch_comparison_no_aug.py", line 654, in train_model
+    train_metrics = train_one_epoch(model, train_loader, criterion, optimizer, device, scaler)
+  File "/scratch/phyzxi/unet-HPC/train_pytorch_comparison_no_aug.py", line 555, in train_one_epoch
+    outputs = model(images)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/scratch/phyzxi/unet-HPC/train_pytorch_comparison_no_aug.py", line 428, in forward
+    e4_att = self.att4(g=d4, x=e4)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/scratch/phyzxi/unet-HPC/train_pytorch_comparison_no_aug.py", line 290, in forward
+    g1 = self.W_g(g)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+RuntimeError: Given groups=1, weight of size [64, 256, 1, 1], expected input[4, 128, 64, 64] to have 256 channels, but got 128 channels instead
+
+========================================
+Job completed at: Mon Oct 20 10:21:51 PM +08 2025
+Exit status: 1
+========================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-20 22:21:52.352378:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 302535.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 01:32:37
+	Memory: Requested(240gb), Used(7360644kb)
+	Vmem Used: 179356160kb
+	Walltime: Requested(48:00:00), Used(00:54:26)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-073[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
