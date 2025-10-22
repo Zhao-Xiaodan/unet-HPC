@@ -65,28 +65,33 @@ class ResConvBlock(nn.Module):
         return x + residual
 
 class AttentionGate(nn.Module):
-    """Attention gate for skip connections"""
+    """Attention gate (matching training script)"""
     def __init__(self, F_g, F_l, F_int):
         super().__init__()
-        self.W_g = nn.Sequential(
-            nn.Conv2d(F_g, F_int, kernel_size=1),
-            nn.BatchNorm2d(F_int)
-        )
-        self.W_x = nn.Sequential(
-            nn.Conv2d(F_l, F_int, kernel_size=1),
-            nn.BatchNorm2d(F_int)
-        )
-        self.psi = nn.Sequential(
-            nn.Conv2d(F_int, 1, kernel_size=1),
-            nn.BatchNorm2d(1),
-            nn.Sigmoid()
-        )
+        self.W_g = nn.Conv2d(F_g, F_int, 1, stride=1, padding=0)
+        self.W_x = nn.Conv2d(F_l, F_int, 2, stride=2, padding=0)
+        self.psi = nn.Conv2d(F_int, 1, 1, stride=1, padding=0)
+        self.relu = nn.ReLU(inplace=True)
+        self.sigmoid = nn.Sigmoid()
 
     def forward(self, g, x):
+        """
+        g: gating signal from decoder
+        x: skip connection from encoder
+        """
         g1 = self.W_g(g)
         x1 = self.W_x(x)
-        psi = F.relu(g1 + x1)
-        psi = self.psi(psi)
+
+        # Align dimensions
+        if g1.shape[2] != x1.shape[2] or g1.shape[3] != x1.shape[3]:
+            g1 = F.interpolate(g1, size=x1.shape[2:], mode='bilinear', align_corners=False)
+
+        psi = self.relu(g1 + x1)
+        psi = self.sigmoid(self.psi(psi))
+
+        # Upsample attention map to match skip connection size
+        psi = F.interpolate(psi, size=x.shape[2:], mode='bilinear', align_corners=False)
+
         return x * psi
 
 class UNet(nn.Module):
