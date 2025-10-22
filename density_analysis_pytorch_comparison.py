@@ -209,7 +209,7 @@ def analyze_predictions(pred_dir, test_image_dir, threshold=0.5):
 # ============================================================================
 
 def create_density_boxplot(df_tiles, dilution_order, dilution_labels,
-                           output_path, title_suffix=""):
+                           output_path, title_suffix="", use_log_scale=True):
     """Create density boxplot for specified dilution range"""
 
     # Filter to specified dilutions
@@ -253,18 +253,86 @@ def create_density_boxplot(df_tiles, dilution_order, dilution_labels,
     )
 
     ax.set_xlabel('Dilution Factor', fontsize=14, fontweight='bold')
-    ax.set_ylabel('Bead Density (%)', fontsize=14, fontweight='bold')
+    ax.set_ylabel('Bead Density (%) - Log Scale' if use_log_scale else 'Bead Density (%)',
+                  fontsize=14, fontweight='bold')
     ax.set_title(f'Bead Density vs Dilution Factor (Threshold={THRESHOLD}) - {title_suffix}',
                 fontsize=16, fontweight='bold', pad=20)
     ax.set_xticklabels(dilution_labels, rotation=45, ha='right')
     ax.legend(title='Architecture', fontsize=11, title_fontsize=12)
     ax.grid(axis='y', alpha=0.3)
 
+    # Apply log scale if requested
+    if use_log_scale:
+        ax.set_yscale('log')
+
     plt.tight_layout()
     plt.savefig(output_path, bbox_inches='tight', dpi=300)
     plt.close()
 
     print(f"  Saved: {output_path}")
+
+
+def create_individual_model_boxplots(df_tiles, dilution_order, dilution_labels,
+                                      output_dir, title_suffix="", use_log_scale=True):
+    """
+    Create separate boxplots for each individual model.
+    This provides clearer per-architecture visualization.
+    """
+    output_dir = Path(output_dir)
+    output_dir.mkdir(exist_ok=True)
+
+    # Filter to specified dilutions
+    df_plot = df_tiles[df_tiles['dilution'].isin(dilution_order)].copy()
+
+    # Create categorical dilution column for proper ordering
+    df_plot['dilution_cat'] = pd.Categorical(
+        df_plot['dilution'],
+        categories=dilution_order,
+        ordered=True
+    )
+
+    # Architecture configurations
+    architectures = [
+        ('unet_density', 'UNet', 'tab:blue'),
+        ('attention_unet_density', 'Attention UNet', 'tab:orange'),
+        ('attention_resunet_density', 'Attention ResUNet', 'tab:green')
+    ]
+
+    for density_col, arch_name, color in architectures:
+        fig, ax = plt.subplots(figsize=(16, 8))
+
+        sns.boxplot(
+            data=df_plot,
+            x='dilution_cat',
+            y=density_col,
+            ax=ax,
+            color=color,
+            showfliers=True
+        )
+
+        ax.set_xlabel('Dilution Factor', fontsize=14, fontweight='bold')
+        ax.set_ylabel('Bead Density (%) - Log Scale' if use_log_scale else 'Bead Density (%)',
+                      fontsize=14, fontweight='bold')
+        ax.set_title(f'{arch_name} - Bead Density vs Dilution Factor (Threshold={THRESHOLD}) - {title_suffix}',
+                    fontsize=16, fontweight='bold', pad=20)
+        ax.set_xticklabels(dilution_labels, rotation=45, ha='right')
+        ax.grid(axis='y', alpha=0.3)
+
+        # Apply log scale if requested
+        if use_log_scale:
+            ax.set_yscale('log')
+
+        plt.tight_layout()
+
+        # Save with architecture-specific filename
+        arch_filename = arch_name.lower().replace(' ', '_')
+        range_suffix = "full_range" if len(dilution_order) > 8 else "low_dilution_range"
+        output_path = output_dir / f'density_boxplot_{arch_filename}_{range_suffix}_threshold_{THRESHOLD}.png'
+        plt.savefig(output_path, bbox_inches='tight', dpi=300)
+        plt.close()
+
+        print(f"  Saved: {output_path}")
+
 
 # ============================================================================
 # VISUALIZATION: 4-PANEL REPRESENTATIVE TILES
@@ -273,19 +341,23 @@ def create_density_boxplot(df_tiles, dilution_order, dilution_labels,
 def create_4panel_representative_tiles(df_tiles, predictions_dir, test_images_dir, output_dir):
     """
     Create 4-panel tiles showing:
-    - Column 1: Original image
-    - Column 2: UNet prediction (inverted)
-    - Column 3: Attention UNet prediction (inverted)
-    - Column 4: Attention ResUNet prediction (inverted)
+    - Column 1: Original image (512x512)
+    - Column 2: Inverted UNet prediction (black background, white beads)
+    - Column 3: Inverted Attention UNet prediction (black background, white beads)
+    - Column 4: Inverted Attention ResUNet prediction (black background, white beads)
 
-    Rows: 5 representative tiles per dilution factor
+    IMPORTANT: Predictions are INVERTED to make predicted masks black (background)
+    easier to compare with original images where beads appear as dark spots.
+
+    Layout: 5 rows × 4 columns per dilution factor (5 representative tiles)
+    Selection: Tiles are selected to represent density distribution (min, 25%, median, 75%, max)
     """
     predictions_dir = Path(predictions_dir)
     test_images_dir = Path(test_images_dir)
     output_dir = Path(output_dir)
     output_dir.mkdir(exist_ok=True)
 
-    print("\nCreating 4-panel representative tiles...")
+    print("\nCreating 4-panel representative tiles (5 rows × 4 columns)...")
 
     for dilution in tqdm(DILUTION_ORDER, desc="Processing dilutions"):
         # Filter tiles for this dilution
@@ -295,13 +367,22 @@ def create_4panel_representative_tiles(df_tiles, predictions_dir, test_images_di
             print(f"  Warning: No tiles for {dilution}x")
             continue
 
-        # Select 5 representative tiles (varied density)
+        # Select 5 representative tiles (varied density distribution)
         n_tiles = min(5, len(dilution_tiles))
 
-        # Sort by UNet density and select evenly spaced tiles
+        # Sort by UNet density and select percentiles for representative spread
         sorted_tiles = dilution_tiles.sort_values('unet_density')
-        indices = np.linspace(0, len(sorted_tiles)-1, n_tiles, dtype=int)
-        selected_tiles = sorted_tiles.iloc[indices]
+        n_total = len(sorted_tiles)
+
+        # Select 5 tiles: min, 25th percentile, median, 75th percentile, max
+        indices = [
+            0,                      # Min density
+            n_total // 4,           # 25th percentile
+            n_total // 2,           # Median
+            3 * n_total // 4,       # 75th percentile
+            n_total - 1,            # Max density
+        ]
+        selected_tiles = sorted_tiles.iloc[indices[:n_tiles]]
 
         # Create figure with 5 rows × 4 columns
         fig, axes = plt.subplots(n_tiles, 4, figsize=(16, 4*n_tiles))
@@ -326,36 +407,38 @@ def create_4panel_representative_tiles(df_tiles, predictions_dir, test_images_di
                 pred_path = predictions_dir / arch / f"{image_name}_pred.png"
                 pred_full = load_prediction(pred_path)
                 pred_tile = pred_full[pos_y:pos_y+TILE_SIZE, pos_x:pos_x+TILE_SIZE]
-                # Invert prediction (0→1, 1→0)
+                # CRITICAL: Invert prediction (0→1, 1→0)
+                # This makes predicted background BLACK (easier to compare with originals)
                 pred_tiles[arch] = 1.0 - pred_tile
 
             # Plot panels
-            # Column 0: Original
+            # Column 0: Original image
             axes[row_idx, 0].imshow(orig_tile, cmap='gray')
-            axes[row_idx, 0].set_title(f'Original\nTile {tile_idx}', fontsize=10, fontweight='bold')
+            axes[row_idx, 0].set_title(f'Original Image\nTile {tile_idx} @ ({pos_y},{pos_x})',
+                                       fontsize=10, fontweight='bold')
             axes[row_idx, 0].axis('off')
 
-            # Column 1: UNet prediction (inverted)
+            # Column 1: Inverted UNet prediction
             axes[row_idx, 1].imshow(pred_tiles['unet'], cmap='gray', vmin=0, vmax=1)
-            axes[row_idx, 1].set_title(f'UNet Pred (Inverted)\nDensity: {tile_info["unet_density"]:.2f}%',
+            axes[row_idx, 1].set_title(f'Inverted UNet\n(Black=BG, White=Beads)\nDensity: {tile_info["unet_density"]:.2f}%',
                                       fontsize=10, fontweight='bold')
             axes[row_idx, 1].axis('off')
 
-            # Column 2: Attention UNet prediction (inverted)
+            # Column 2: Inverted Attention UNet prediction
             axes[row_idx, 2].imshow(pred_tiles['attention_unet'], cmap='gray', vmin=0, vmax=1)
-            axes[row_idx, 2].set_title(f'Attention UNet Pred (Inverted)\nDensity: {tile_info["attention_unet_density"]:.2f}%',
+            axes[row_idx, 2].set_title(f'Inverted Attention UNet\n(Black=BG, White=Beads)\nDensity: {tile_info["attention_unet_density"]:.2f}%',
                                       fontsize=10, fontweight='bold')
             axes[row_idx, 2].axis('off')
 
-            # Column 3: Attention ResUNet prediction (inverted)
+            # Column 3: Inverted Attention ResUNet prediction
             axes[row_idx, 3].imshow(pred_tiles['attention_resunet'], cmap='gray', vmin=0, vmax=1)
-            axes[row_idx, 3].set_title(f'Attention ResUNet Pred (Inverted)\nDensity: {tile_info["attention_resunet_density"]:.2f}%',
+            axes[row_idx, 3].set_title(f'Inverted Attention ResUNet\n(Black=BG, White=Beads)\nDensity: {tile_info["attention_resunet_density"]:.2f}%',
                                       fontsize=10, fontweight='bold')
             axes[row_idx, 3].axis('off')
 
         # Overall title
         dilution_label = f'1/{dilution}x'
-        fig.suptitle(f'Representative Tiles - Dilution {dilution_label} (Threshold={THRESHOLD})',
+        fig.suptitle(f'Representative Tiles - Dilution {dilution_label} (5 rows × 4 columns, Threshold={THRESHOLD})',
                     fontsize=16, fontweight='bold', y=0.995)
 
         plt.tight_layout()
@@ -363,7 +446,7 @@ def create_4panel_representative_tiles(df_tiles, predictions_dir, test_images_di
         plt.savefig(output_path, bbox_inches='tight', dpi=300)
         plt.close()
 
-    print(f"  Saved 4-panel tiles to: {output_dir}")
+    print(f"  ✓ Saved 4-panel tiles (5 rows × 4 columns) to: {output_dir}")
 
 # ============================================================================
 # MAIN FUNCTION
@@ -420,22 +503,47 @@ def main():
     print("STEP 2: CREATING DENSITY BOXPLOTS")
     print("="*80)
 
-    # Full range boxplot
+    # Full range boxplot (combined)
+    print("\n2a. Combined Architecture Boxplots (with log scale):")
     create_density_boxplot(
         df_tiles,
         DILUTION_ORDER,
         DILUTION_LABELS,
         output_dir / f'density_boxplot_full_range__threshold_{THRESHOLD}.png',
-        title_suffix="Full Range"
+        title_suffix="Full Range",
+        use_log_scale=True
     )
 
-    # Low dilution range boxplot
+    # Low dilution range boxplot (combined)
     create_density_boxplot(
         df_tiles,
         DILUTION_ORDER_LOW,
         DILUTION_LABELS_LOW,
         output_dir / f'density_boxplot_low_dilution_range__threshold_{THRESHOLD}.png',
-        title_suffix="Low Dilution Range"
+        title_suffix="Low Dilution Range",
+        use_log_scale=True
+    )
+
+    # Individual model boxplots - Full range
+    print("\n2b. Individual Model Boxplots - Full Range (with log scale):")
+    create_individual_model_boxplots(
+        df_tiles,
+        DILUTION_ORDER,
+        DILUTION_LABELS,
+        output_dir,
+        title_suffix="Full Range",
+        use_log_scale=True
+    )
+
+    # Individual model boxplots - Low dilution range
+    print("\n2c. Individual Model Boxplots - Low Dilution Range (with log scale):")
+    create_individual_model_boxplots(
+        df_tiles,
+        DILUTION_ORDER_LOW,
+        DILUTION_LABELS_LOW,
+        output_dir,
+        title_suffix="Low Dilution Range",
+        use_log_scale=True
     )
 
     # Step 3: Create 4-panel representative tiles
@@ -496,10 +604,19 @@ def main():
     print("\nGenerated files:")
     print("  - density_results_tile_level.csv")
     print("  - density_results_image_summary.csv")
-    print(f"  - density_boxplot_full_range__threshold_{THRESHOLD}.png")
-    print(f"  - density_boxplot_low_dilution_range__threshold_{THRESHOLD}.png")
-    print("  - representative_tiles_4panel/ (10 images)")
-    print("  - EXPERIMENT_INFO.json")
+    print(f"\n  Combined Boxplots (log scale):")
+    print(f"    - density_boxplot_full_range__threshold_{THRESHOLD}.png")
+    print(f"    - density_boxplot_low_dilution_range__threshold_{THRESHOLD}.png")
+    print(f"\n  Individual Model Boxplots (log scale):")
+    print(f"    - density_boxplot_unet_full_range_threshold_{THRESHOLD}.png")
+    print(f"    - density_boxplot_attention_unet_full_range_threshold_{THRESHOLD}.png")
+    print(f"    - density_boxplot_attention_resunet_full_range_threshold_{THRESHOLD}.png")
+    print(f"    - density_boxplot_unet_low_dilution_range_threshold_{THRESHOLD}.png")
+    print(f"    - density_boxplot_attention_unet_low_dilution_range_threshold_{THRESHOLD}.png")
+    print(f"    - density_boxplot_attention_resunet_low_dilution_range_threshold_{THRESHOLD}.png")
+    print(f"\n  Representative Tiles (5 rows × 4 columns, inverted predictions):")
+    print("    - representative_tiles_4panel/ (10 images)")
+    print("\n  - EXPERIMENT_INFO.json")
 
 if __name__ == "__main__":
     main()

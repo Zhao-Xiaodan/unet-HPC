@@ -21,8 +21,13 @@
 #
 # Output:
 #   - Predictions for each architecture (UNet, Attention UNet, Attention ResUNet)
-#   - Density boxplots (full range and low dilution range)
-#   - 4-panel representative tiles (5 rows × 4 columns per dilution factor)
+#   - Density boxplots with log scale:
+#     * Combined architecture boxplots (full range and low dilution range)
+#     * Individual model boxplots (3 models × 2 ranges = 6 plots)
+#   - 4-panel representative tiles:
+#     * 5 rows × 4 columns per dilution factor (10 dilution factors total)
+#     * Columns: Original, Inverted UNet, Inverted Attention UNet, Inverted Attention ResUNet
+#     * Predictions are inverted (black=background, white=beads) for easier comparison
 #
 # Expected runtime: ~2-3 hours
 # ==============================================================================
@@ -217,9 +222,22 @@ echo ""
 echo "  Analysis:"
 echo "    - $ANALYSIS_DIR/density_results_tile_level.csv"
 echo "    - $ANALYSIS_DIR/density_results_image_summary.csv"
-echo "    - $ANALYSIS_DIR/density_boxplot_full_range__threshold_0.5.png"
-echo "    - $ANALYSIS_DIR/density_boxplot_low_dilution_range__threshold_0.5.png"
-echo "    - $ANALYSIS_DIR/representative_tiles_4panel/"
+echo ""
+echo "    Combined Boxplots (log scale):"
+echo "      - $ANALYSIS_DIR/density_boxplot_full_range__threshold_0.5.png"
+echo "      - $ANALYSIS_DIR/density_boxplot_low_dilution_range__threshold_0.5.png"
+echo ""
+echo "    Individual Model Boxplots (log scale, 6 total):"
+echo "      - $ANALYSIS_DIR/density_boxplot_unet_full_range_threshold_0.5.png"
+echo "      - $ANALYSIS_DIR/density_boxplot_attention_unet_full_range_threshold_0.5.png"
+echo "      - $ANALYSIS_DIR/density_boxplot_attention_resunet_full_range_threshold_0.5.png"
+echo "      - $ANALYSIS_DIR/density_boxplot_unet_low_dilution_range_threshold_0.5.png"
+echo "      - $ANALYSIS_DIR/density_boxplot_attention_unet_low_dilution_range_threshold_0.5.png"
+echo "      - $ANALYSIS_DIR/density_boxplot_attention_resunet_low_dilution_range_threshold_0.5.png"
+echo ""
+echo "    Representative Tiles (5 rows × 4 columns, inverted predictions):"
+echo "      - $ANALYSIS_DIR/representative_tiles_4panel/ (10 dilution factors)"
+echo ""
 echo "    - $ANALYSIS_DIR/EXPERIMENT_INFO.json"
 echo ""
 echo "========================================"
