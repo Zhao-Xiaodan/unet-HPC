@@ -1,0 +1,9 @@
+{
+  "n_filters": 32,
+  "dropout": 0.2,
+  "learning_rate": 0.001,
+  "best_val_iou": 0.6377273201942444,
+  "model_name": "unet_n_filters32_dropout0.2_learning_rate0.001",
+  "source_experiment": "pytorch_comparison_no_aug_20251021_121918",
+  "cached_date": "2025-10-22 12:57:51"
+}
