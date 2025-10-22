@@ -1,8 +1,10 @@
-# Bug Fix: Prediction Script AttentionGate Mismatch
+# Bug Fix: Prediction Script Architecture Mismatch
 
 **Date:** October 22, 2025
-**Job Affected:** PyTorch_Density_Analysis.o304081
-**Status:** ✅ Fixed
+**Jobs Affected:**
+- PyTorch_Density_Analysis.o304081 (AttentionGate)
+- PyTorch_Density_Analysis.o304168 (ResConvBlock)
+**Status:** ✅ Fixed (Both Issues)
 
 ---
 
@@ -160,8 +162,74 @@ class AttentionGate(nn.Module):
 ## Files Modified
 
 ✅ `predict_pytorch_comparison.py`
-- Class `AttentionGate` (lines 67-95)
-- Now matches `train_pytorch_comparison_no_aug.py` exactly
+- Class `AttentionGate` (lines 81-109) - Fixed in first iteration
+- Class `ResConvBlock` (lines 55-79) - Fixed in second iteration
+- Now both match `train_pytorch_comparison_no_aug.py` exactly
+
+---
+
+## Problem #2: ResConvBlock Structure Mismatch (Job o304168)
+
+After fixing `AttentionGate`, job failed when loading `AttentionResUNet`:
+
+```
+RuntimeError: Error(s) in loading state_dict for AttentionResUNet:
+    Missing key(s): "enc1.conv_block.conv1.weight", "enc1.conv_block.bn1.weight", ...
+    Unexpected key(s): "enc1.conv1.weight", "enc1.bn1.weight", "enc1.shortcut.weight", ...
+```
+
+### Root Cause #2
+
+**Trained Model (train_pytorch_comparison_no_aug.py):**
+```python
+class ResConvBlock(nn.Module):
+    def __init__(self, in_channels, out_channels, dropout=0.0):
+        super().__init__()
+        self.conv1 = nn.Conv2d(in_channels, out_channels, 3, padding=1)  # Flat
+        self.bn1 = nn.BatchNorm2d(out_channels)
+        self.conv2 = nn.Conv2d(out_channels, out_channels, 3, padding=1)
+        self.bn2 = nn.BatchNorm2d(out_channels)
+        self.shortcut = nn.Conv2d(...)  # Direct shortcut
+```
+
+**Prediction Script (WRONG):**
+```python
+class ResConvBlock(nn.Module):
+    def __init__(self, in_channels, out_channels, dropout=0.0):
+        super().__init__()
+        self.conv_block = ConvBlock(...)  # Nested structure - WRONG!
+        self.skip_conv = nn.Conv2d(...)   # Different name - WRONG!
+```
+
+### Fix #2: Updated ResConvBlock
+
+```python
+class ResConvBlock(nn.Module):
+    """Residual convolution block (matching training script)"""
+    def __init__(self, in_channels, out_channels, dropout=0.0):
+        super().__init__()
+        self.conv1 = nn.Conv2d(in_channels, out_channels, 3, padding=1)
+        self.bn1 = nn.BatchNorm2d(out_channels)
+        self.conv2 = nn.Conv2d(out_channels, out_channels, 3, padding=1)
+        self.bn2 = nn.BatchNorm2d(out_channels)
+
+        # Residual connection
+        self.shortcut = nn.Conv2d(in_channels, out_channels, 1) if in_channels != out_channels else nn.Identity()
+
+        self.dropout = nn.Dropout2d(dropout) if dropout > 0 else None
+
+    def forward(self, x):
+        residual = self.shortcut(x)
+
+        out = F.relu(self.bn1(self.conv1(x)))
+        out = self.bn2(self.conv2(out))
+        out = out + residual
+        out = F.relu(out)
+
+        if self.dropout is not None:
+            out = self.dropout(out)
+        return out
+```
 
 ---
 

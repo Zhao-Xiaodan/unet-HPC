@@ -53,16 +53,30 @@ class ConvBlock(nn.Module):
         return x
 
 class ResConvBlock(nn.Module):
-    """Residual convolution block with skip connection"""
+    """Residual convolution block (matching training script)"""
     def __init__(self, in_channels, out_channels, dropout=0.0):
         super().__init__()
-        self.conv_block = ConvBlock(in_channels, out_channels, dropout)
-        self.skip_conv = nn.Conv2d(in_channels, out_channels, kernel_size=1) if in_channels != out_channels else None
+        self.conv1 = nn.Conv2d(in_channels, out_channels, 3, padding=1)
+        self.bn1 = nn.BatchNorm2d(out_channels)
+        self.conv2 = nn.Conv2d(out_channels, out_channels, 3, padding=1)
+        self.bn2 = nn.BatchNorm2d(out_channels)
+
+        # Residual connection
+        self.shortcut = nn.Conv2d(in_channels, out_channels, 1) if in_channels != out_channels else nn.Identity()
+
+        self.dropout = nn.Dropout2d(dropout) if dropout > 0 else None
 
     def forward(self, x):
-        residual = x if self.skip_conv is None else self.skip_conv(x)
-        x = self.conv_block(x)
-        return x + residual
+        residual = self.shortcut(x)
+
+        out = F.relu(self.bn1(self.conv1(x)))
+        out = self.bn2(self.conv2(out))
+        out = out + residual
+        out = F.relu(out)
+
+        if self.dropout is not None:
+            out = self.dropout(out)
+        return out
 
 class AttentionGate(nn.Module):
     """Attention gate (matching training script)"""
