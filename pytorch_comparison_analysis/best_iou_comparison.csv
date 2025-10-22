@@ -1,0 +1,4 @@
+Architecture,No Aug + BinaryFocal,With Aug + AdaptiveLoss,With Aug + BinaryFocal
+Attention ResUNet,0.6127,0.6260,0.6030
+Attention UNet,0.6254,0.6234,0.5871
+UNet,0.6377,0.6417,0.5974
