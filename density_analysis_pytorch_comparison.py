@@ -210,7 +210,7 @@ def analyze_predictions(pred_dir, test_image_dir, threshold=0.5):
 
 def create_density_boxplot(df_tiles, dilution_order, dilution_labels,
                            output_path, title_suffix="", use_log_scale=True):
-    """Create density boxplot for specified dilution range"""
+    """Create density boxplot for specified dilution range with styled appearance"""
 
     # Filter to specified dilutions
     df_plot = df_tiles[df_tiles['dilution'].isin(dilution_order)].copy()
@@ -239,31 +239,79 @@ def create_density_boxplot(df_tiles, dilution_order, dilution_labels,
     }
     df_long['Architecture'] = df_long['Architecture'].map(arch_rename)
 
-    # Create plot
+    # Create plot with styled appearance
     fig, ax = plt.subplots(figsize=(16, 8))
 
-    sns.boxplot(
+    # Define colors: blue-ish boxes with orange median lines (matching reference style)
+    box_colors = ['#6baed6', '#fd8d3c', '#74c476']  # Blue, Orange, Green
+
+    # Create boxplot with custom styling
+    bp = sns.boxplot(
         data=df_long,
         x='dilution_cat',
         y='Density',
         hue='Architecture',
         ax=ax,
-        palette='Set2',
-        showfliers=True
+        palette=box_colors,
+        showfliers=False,  # Hide outliers, will show all points as scatter
+        width=0.6
     )
 
-    ax.set_xlabel('Dilution Factor', fontsize=14, fontweight='bold')
+    # Customize box appearance: make boxes semi-transparent with orange median
+    for i, artist in enumerate(ax.artists):
+        # Box face color (semi-transparent)
+        artist.set_facecolor(box_colors[i % 3])
+        artist.set_alpha(0.7)
+        artist.set_edgecolor('black')
+        artist.set_linewidth(1.2)
+
+    # Customize median lines to orange
+    for i, line in enumerate(ax.lines):
+        if i % 6 == 4:  # Median line
+            line.set_color('#ff7f0e')  # Orange for median
+            line.set_linewidth(2.5)
+        else:
+            line.set_color('black')
+            line.set_linewidth(1.0)
+
+    # Add scatter points (strip plot) overlay - black dots with transparency
+    sns.stripplot(
+        data=df_long,
+        x='dilution_cat',
+        y='Density',
+        hue='Architecture',
+        ax=ax,
+        color='black',
+        alpha=0.4,
+        size=3,
+        dodge=True,
+        legend=False
+    )
+
+    # Styling
+    ax.set_xlabel('1 / Dilution Factor', fontsize=16, fontweight='bold')
     ax.set_ylabel('Bead Density (%) - Log Scale' if use_log_scale else 'Bead Density (%)',
-                  fontsize=14, fontweight='bold')
-    ax.set_title(f'Bead Density vs Dilution Factor (Threshold={THRESHOLD}) - {title_suffix}',
-                fontsize=16, fontweight='bold', pad=20)
-    ax.set_xticklabels(dilution_labels, rotation=45, ha='right')
-    ax.legend(title='Architecture', fontsize=11, title_fontsize=12)
-    ax.grid(axis='y', alpha=0.3)
+                  fontsize=16, fontweight='bold')
+    ax.set_title(f'Bead Density vs Dilution Factor - {title_suffix}',
+                fontsize=18, fontweight='bold', pad=20)
+    ax.set_xticklabels(dilution_labels, rotation=45, ha='right', fontsize=12)
+    ax.tick_params(axis='y', labelsize=12)
+
+    # Legend styling
+    ax.legend(title='Architecture', fontsize=12, title_fontsize=13,
+              loc='upper left', framealpha=0.9)
+
+    # Grid styling
+    ax.grid(axis='y', alpha=0.3, linestyle='--', linewidth=0.7)
+    ax.set_axisbelow(True)
 
     # Apply log scale if requested
     if use_log_scale:
         ax.set_yscale('log')
+        # Set y-limits for better visualization (auto with some padding)
+        ymin = df_long['Density'].min() * 0.5
+        ymax = df_long['Density'].max() * 1.5
+        ax.set_ylim(ymin, ymax)
 
     plt.tight_layout()
     plt.savefig(output_path, bbox_inches='tight', dpi=300)
@@ -275,7 +323,7 @@ def create_density_boxplot(df_tiles, dilution_order, dilution_labels,
 def create_individual_model_boxplots(df_tiles, dilution_order, dilution_labels,
                                       output_dir, title_suffix="", use_log_scale=True):
     """
-    Create separate boxplots for each individual model.
+    Create separate boxplots for each individual model with styled appearance.
     This provides clearer per-architecture visualization.
     """
     output_dir = Path(output_dir)
@@ -291,36 +339,57 @@ def create_individual_model_boxplots(df_tiles, dilution_order, dilution_labels,
         ordered=True
     )
 
-    # Architecture configurations
+    # Architecture configurations with styled colors (blue-ish boxes)
     architectures = [
-        ('unet_density', 'UNet', 'tab:blue'),
-        ('attention_unet_density', 'Attention UNet', 'tab:orange'),
-        ('attention_resunet_density', 'Attention ResUNet', 'tab:green')
+        ('unet_density', 'UNet', '#6baed6'),           # Blue
+        ('attention_unet_density', 'Attention UNet', '#fd8d3c'),  # Orange
+        ('attention_resunet_density', 'Attention ResUNet', '#74c476')  # Green
     ]
 
-    for density_col, arch_name, color in architectures:
+    for density_col, arch_name, box_color in architectures:
         fig, ax = plt.subplots(figsize=(16, 8))
 
-        sns.boxplot(
-            data=df_plot,
-            x='dilution_cat',
-            y=density_col,
-            ax=ax,
-            color=color,
-            showfliers=True
+        # Create boxplot with custom styling
+        bp = ax.boxplot(
+            [df_plot[df_plot['dilution_cat'] == dil][density_col].values
+             for dil in dilution_order],
+            positions=range(len(dilution_order)),
+            widths=0.6,
+            patch_artist=True,
+            showfliers=False,  # Hide outliers, show as scatter instead
+            boxprops=dict(facecolor=box_color, alpha=0.7, edgecolor='black', linewidth=1.2),
+            whiskerprops=dict(color='black', linewidth=1.0),
+            capprops=dict(color='black', linewidth=1.0),
+            medianprops=dict(color='#ff7f0e', linewidth=2.5)  # Orange median
         )
 
-        ax.set_xlabel('Dilution Factor', fontsize=14, fontweight='bold')
+        # Add scatter points overlay - black dots with transparency
+        for i, dil in enumerate(dilution_order):
+            ydata = df_plot[df_plot['dilution_cat'] == dil][density_col].values
+            xdata = np.random.normal(i, 0.04, size=len(ydata))  # Add jitter
+            ax.scatter(xdata, ydata, alpha=0.4, color='black', s=20, zorder=3)
+
+        # Styling
+        ax.set_xlabel('1 / Dilution Factor', fontsize=16, fontweight='bold')
         ax.set_ylabel('Bead Density (%) - Log Scale' if use_log_scale else 'Bead Density (%)',
-                      fontsize=14, fontweight='bold')
-        ax.set_title(f'{arch_name} - Bead Density vs Dilution Factor (Threshold={THRESHOLD}) - {title_suffix}',
-                    fontsize=16, fontweight='bold', pad=20)
-        ax.set_xticklabels(dilution_labels, rotation=45, ha='right')
-        ax.grid(axis='y', alpha=0.3)
+                      fontsize=16, fontweight='bold')
+        ax.set_title(f'{arch_name} - Bead Density vs Dilution Factor',
+                    fontsize=18, fontweight='bold', pad=20)
+        ax.set_xticks(range(len(dilution_order)))
+        ax.set_xticklabels(dilution_labels, rotation=45, ha='right', fontsize=12)
+        ax.tick_params(axis='y', labelsize=12)
+
+        # Grid styling
+        ax.grid(axis='y', alpha=0.3, linestyle='--', linewidth=0.7)
+        ax.set_axisbelow(True)
 
         # Apply log scale if requested
         if use_log_scale:
             ax.set_yscale('log')
+            # Set y-limits for better visualization
+            ymin = df_plot[density_col].min() * 0.5
+            ymax = df_plot[density_col].max() * 1.5
+            ax.set_ylim(ymin, ymax)
 
         plt.tight_layout()
 
