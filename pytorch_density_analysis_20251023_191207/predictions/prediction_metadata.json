@@ -1,0 +1,26 @@
+{
+  "experiment_dir": "pytorch_comparison_no_aug_20251021_121918",
+  "test_images_dir": "./test_images",
+  "n_test_images": 8,
+  "models": {
+    "unet": {
+      "model_name": "unet_n_filters32_dropout0.2_learning_rate0.001",
+      "n_filters": 32,
+      "dropout": 0.2,
+      "best_val_iou": 0.6377273201942444
+    },
+    "attention_unet": {
+      "model_name": "attention_unet_n_filters32_dropout0.1_learning_rate0.003",
+      "n_filters": 32,
+      "dropout": 0.1,
+      "best_val_iou": 0.6254194617271424
+    },
+    "attention_resunet": {
+      "model_name": "attention_resunet_n_filters64_dropout0.1_learning_rate0.001",
+      "n_filters": 64,
+      "dropout": 0.1,
+      "best_val_iou": 0.6126907587051391
+    }
+  },
+  "timestamp": "2025-10-23 19:12:55"
+}
