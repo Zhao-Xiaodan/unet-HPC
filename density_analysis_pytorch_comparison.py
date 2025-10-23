@@ -105,9 +105,9 @@ def extract_tiles(image, tile_size=512):
     return tiles, positions
 
 def calculate_density(mask, threshold=0.5):
-    """Calculate bead density as percentage of pixels above threshold"""
+    """Calculate bead density as fraction of pixels above threshold [0, 1]"""
     binary_mask = (mask > threshold).astype(np.float32)
-    density = np.mean(binary_mask) * 100  # Percentage
+    density = np.mean(binary_mask)  # Fraction [0, 1]
     return density
 
 # ============================================================================
@@ -290,8 +290,7 @@ def create_density_boxplot(df_tiles, dilution_order, dilution_labels,
 
     # Styling
     ax.set_xlabel('1 / Dilution Factor', fontsize=16, fontweight='bold')
-    ax.set_ylabel('Bead Density (%) - Log Scale' if use_log_scale else 'Bead Density (%)',
-                  fontsize=16, fontweight='bold')
+    ax.set_ylabel('Foreground Percentage (0-1)', fontsize=16, fontweight='bold')
     ax.set_title(f'Bead Density vs Dilution Factor - {title_suffix}',
                 fontsize=18, fontweight='bold', pad=20)
     ax.set_xticklabels(dilution_labels, rotation=45, ha='right', fontsize=12)
@@ -309,7 +308,8 @@ def create_density_boxplot(df_tiles, dilution_order, dilution_labels,
     if use_log_scale:
         ax.set_yscale('log')
         # Set fixed y-limits for consistent visualization across all plots
-        ax.set_ylim(3e-4, 7e-1)
+        # Density values are fractions [0, 1] matching reference style
+        ax.set_ylim(3e-4, 7e-1)  # 0.0003 to 0.7
 
     plt.tight_layout()
     plt.savefig(output_path, bbox_inches='tight', dpi=300)
@@ -373,8 +373,7 @@ def create_individual_model_boxplots(df_tiles, dilution_order, dilution_labels,
 
         # Styling
         ax.set_xlabel('1 / Dilution Factor', fontsize=16, fontweight='bold')
-        ax.set_ylabel('Bead Density (%) - Log Scale' if use_log_scale else 'Bead Density (%)',
-                      fontsize=16, fontweight='bold')
+        ax.set_ylabel('Foreground Percentage (0-1)', fontsize=16, fontweight='bold')
         ax.set_title(f'{arch_name} - Bead Density vs Dilution Factor',
                     fontsize=18, fontweight='bold', pad=20)
         ax.set_xticks(range(len(dilution_order)))
@@ -389,7 +388,8 @@ def create_individual_model_boxplots(df_tiles, dilution_order, dilution_labels,
         if use_log_scale:
             ax.set_yscale('log')
             # Set fixed y-limits for consistent visualization across all plots
-            ax.set_ylim(3e-4, 7e-1)
+            # Density values are fractions [0, 1] matching reference style
+            ax.set_ylim(3e-4, 7e-1)  # 0.0003 to 0.7
 
         plt.tight_layout()
 
