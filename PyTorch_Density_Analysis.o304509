@@ -1,0 +1,373 @@
+========================================
+Job ID: 304509.stdct-mgmt-02
+Job Name: PyTorch_Density_Analysis
+Node: GN-A40-101
+Start Time: Thu Oct 23 10:23:06 AM +08 2025
+Working Directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================
+
+Configuration:
+  Experiment: pytorch_comparison_no_aug_20251021_121918
+  Test Images: ./test_images
+  Output: pytorch_density_analysis_20251023_102306
+========================================
+
+GPU Information:
+Thu Oct 23 10:23:08 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     Off |   00000000:0A:00.0 Off |                    0 |
+|  0%   30C    P8             22W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+Python version:
+Python 3.10.12
+
+PyTorch version:
+PyTorch: 2.4.0a0+f70bd71a48.nv24.06
+CUDA available: True
+
+========================================
+VERIFYING MODEL CHECKPOINTS
+========================================
+
+✓ Found 81 model checkpoint(s)
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters64_dropout0.3_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters32_dropout0.2_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters32_dropout0.1_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters64_dropout0.2_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters16_dropout0.2_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters32_dropout0.2_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters16_dropout0.2_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters32_dropout0.2_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters16_dropout0.3_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters32_dropout0.1_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters32_dropout0.1_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters64_dropout0.2_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters64_dropout0.1_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters64_dropout0.1_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters64_dropout0.3_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters16_dropout0.2_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters32_dropout0.3_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters16_dropout0.1_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters16_dropout0.3_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters32_dropout0.3_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters32_dropout0.3_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters64_dropout0.1_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters16_dropout0.3_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters64_dropout0.2_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters16_dropout0.1_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters64_dropout0.3_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_resunet/checkpoints/attention_resunet_n_filters16_dropout0.1_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters64_dropout0.1_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters16_dropout0.2_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters64_dropout0.1_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters32_dropout0.3_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters16_dropout0.3_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters32_dropout0.3_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters32_dropout0.1_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters32_dropout0.1_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters64_dropout0.2_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters16_dropout0.1_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters64_dropout0.2_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters16_dropout0.2_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters64_dropout0.3_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters32_dropout0.2_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters16_dropout0.2_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters64_dropout0.1_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters64_dropout0.3_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters16_dropout0.1_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters32_dropout0.2_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters32_dropout0.3_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters64_dropout0.2_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters16_dropout0.3_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters32_dropout0.1_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters16_dropout0.1_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters64_dropout0.3_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters16_dropout0.3_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/attention_unet/checkpoints/attention_unet_n_filters32_dropout0.2_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters64_dropout0.3_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters64_dropout0.2_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters16_dropout0.2_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters16_dropout0.2_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters32_dropout0.3_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters32_dropout0.1_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters64_dropout0.3_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters32_dropout0.1_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters16_dropout0.1_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters32_dropout0.2_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters64_dropout0.1_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters64_dropout0.2_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters16_dropout0.1_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters64_dropout0.1_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters16_dropout0.3_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters32_dropout0.2_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters16_dropout0.3_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters32_dropout0.3_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters32_dropout0.2_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters16_dropout0.1_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters64_dropout0.2_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters32_dropout0.1_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters16_dropout0.3_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters32_dropout0.3_learning_rate0.005/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters16_dropout0.2_learning_rate0.003/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters64_dropout0.3_learning_rate0.001/best_model.pth
+  - pytorch_comparison_no_aug_20251021_121918/unet/checkpoints/unet_n_filters64_dropout0.1_learning_rate0.001/best_model.pth
+
+========================================
+STEP 1: GENERATING PREDICTIONS
+========================================
+
+Note: Best models will be cached to ./best_models_PyTorch/
+      First run: Searches experiment dir and copies best models
+      Future runs: Loads directly from cache (faster)
+
+Using device: cuda
+
+================================================================================
+FINDING BEST MODELS
+================================================================================
+✓ unet: Loaded from cache (IoU=0.6377)
+✓ attention_unet: Loaded from cache (IoU=0.6254)
+✓ attention_resunet: Loaded from cache (IoU=0.6127)
+
+✓ All models loaded from cache: best_models_PyTorch
+
+================================================================================
+LOADING MODELS
+================================================================================
+Loading unet...
+Loading attention_unet...
+Loading attention_resunet...
+
+================================================================================
+PROCESSING 8 TEST IMAGES
+================================================================================
+
+Processing images:   0%|          | 0/8 [00:00<?, ?it/s]Processing images:  12%|█▎        | 1/8 [00:07<00:51,  7.39s/it]Processing images:  25%|██▌       | 2/8 [00:09<00:26,  4.50s/it]Processing images:  38%|███▊      | 3/8 [00:12<00:17,  3.55s/it]Processing images:  50%|█████     | 4/8 [00:14<00:11,  2.93s/it]Processing images:  62%|██████▎   | 5/8 [00:16<00:07,  2.59s/it]Processing images:  75%|███████▌  | 6/8 [00:18<00:04,  2.38s/it]Processing images:  88%|████████▊ | 7/8 [00:20<00:02,  2.26s/it]Processing images: 100%|██████████| 8/8 [00:22<00:00,  2.21s/it]Processing images: 100%|██████████| 8/8 [00:22<00:00,  2.79s/it]
+
+================================================================================
+PREDICTION COMPLETE
+================================================================================
+Predictions saved to: pytorch_density_analysis_20251023_102306/predictions
+Architectures: ['unet', 'attention_unet', 'attention_resunet']
+Images processed: 8
+
+✓ Predictions complete
+
+========================================
+STEP 2: DENSITY ANALYSIS
+========================================
+
+================================================================================
+PYTORCH DENSITY ANALYSIS - 4-PANEL COMPARISON
+================================================================================
+Predictions: pytorch_density_analysis_20251023_102306/predictions
+Test images: ./test_images
+Output: pytorch_density_analysis_20251023_102306/analysis
+Threshold: 0.5
+================================================================================
+
+================================================================================
+STEP 1: ANALYZING PREDICTIONS
+================================================================================
+
+Analyzing 8 images...
+Processing images:   0%|          | 0/8 [00:00<?, ?it/s]Processing images:  12%|█▎        | 1/8 [00:00<00:04,  1.61it/s]Processing images:  25%|██▌       | 2/8 [00:01<00:03,  1.58it/s]Processing images:  38%|███▊      | 3/8 [00:01<00:03,  1.52it/s]Processing images:  50%|█████     | 4/8 [00:02<00:02,  1.54it/s]Processing images:  62%|██████▎   | 5/8 [00:03<00:01,  1.54it/s]Processing images:  75%|███████▌  | 6/8 [00:03<00:01,  1.55it/s]Processing images:  88%|████████▊ | 7/8 [00:04<00:00,  1.54it/s]Processing images: 100%|██████████| 8/8 [00:05<00:00,  1.50it/s]Processing images: 100%|██████████| 8/8 [00:05<00:00,  1.53it/s]
+/scratch/phyzxi/unet-HPC/density_analysis_pytorch_comparison.py:278: FutureWarning: 
+
+Setting a gradient palette using color= is deprecated and will be removed in v0.14.0. Set `palette='dark:black'` for the same effect.
+
+  sns.stripplot(
+/scratch/phyzxi/unet-HPC/density_analysis_pytorch_comparison.py:297: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  ax.set_xticklabels(dilution_labels, rotation=45, ha='right', fontsize=12)
+/scratch/phyzxi/unet-HPC/density_analysis_pytorch_comparison.py:314: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+  ax.set_ylim(ymin, ymax)
+/scratch/phyzxi/unet-HPC/density_analysis_pytorch_comparison.py:278: FutureWarning: 
+
+Setting a gradient palette using color= is deprecated and will be removed in v0.14.0. Set `palette='dark:black'` for the same effect.
+
+  sns.stripplot(
+/scratch/phyzxi/unet-HPC/density_analysis_pytorch_comparison.py:297: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  ax.set_xticklabels(dilution_labels, rotation=45, ha='right', fontsize=12)
+/scratch/phyzxi/unet-HPC/density_analysis_pytorch_comparison.py:314: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+  ax.set_ylim(ymin, ymax)
+/scratch/phyzxi/unet-HPC/density_analysis_pytorch_comparison.py:392: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+  ax.set_ylim(ymin, ymax)
+/scratch/phyzxi/unet-HPC/density_analysis_pytorch_comparison.py:392: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+  ax.set_ylim(ymin, ymax)
+/scratch/phyzxi/unet-HPC/density_analysis_pytorch_comparison.py:392: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+  ax.set_ylim(ymin, ymax)
+/scratch/phyzxi/unet-HPC/density_analysis_pytorch_comparison.py:392: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+  ax.set_ylim(ymin, ymax)
+/scratch/phyzxi/unet-HPC/density_analysis_pytorch_comparison.py:392: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+  ax.set_ylim(ymin, ymax)
+/scratch/phyzxi/unet-HPC/density_analysis_pytorch_comparison.py:392: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+  ax.set_ylim(ymin, ymax)
+
+✓ Analyzed 8 images, 224 tiles
+  Saved: pytorch_density_analysis_20251023_102306/analysis/density_results_tile_level.csv
+  Saved: pytorch_density_analysis_20251023_102306/analysis/density_results_image_summary.csv
+
+================================================================================
+STEP 2: CREATING DENSITY BOXPLOTS
+================================================================================
+
+2a. Combined Architecture Boxplots (with log scale):
+  Saved: pytorch_density_analysis_20251023_102306/analysis/density_boxplot_full_range__threshold_0.5.png
+  Saved: pytorch_density_analysis_20251023_102306/analysis/density_boxplot_low_dilution_range__threshold_0.5.png
+
+2b. Individual Model Boxplots - Full Range (with log scale):
+  Saved: pytorch_density_analysis_20251023_102306/analysis/density_boxplot_unet_full_range_threshold_0.5.png
+  Saved: pytorch_density_analysis_20251023_102306/analysis/density_boxplot_attention_unet_full_range_threshold_0.5.png
+  Saved: pytorch_density_analysis_20251023_102306/analysis/density_boxplot_attention_resunet_full_range_threshold_0.5.png
+
+2c. Individual Model Boxplots - Low Dilution Range (with log scale):
+  Saved: pytorch_density_analysis_20251023_102306/analysis/density_boxplot_unet_low_dilution_range_threshold_0.5.png
+  Saved: pytorch_density_analysis_20251023_102306/analysis/density_boxplot_attention_unet_low_dilution_range_threshold_0.5.png
+  Saved: pytorch_density_analysis_20251023_102306/analysis/density_boxplot_attention_resunet_low_dilution_range_threshold_0.5.png
+
+================================================================================
+STEP 3: CREATING 4-PANEL REPRESENTATIVE TILES
+================================================================================
+
+Creating 4-panel representative tiles (5 rows × 4 columns)...
+Processing dilutions:   0%|          | 0/10 [00:00<?, ?it/s]Processing dilutions:  10%|█         | 1/10 [00:09<01:21,  9.04s/it]Processing dilutions:  20%|██        | 2/10 [00:18<01:15,  9.42s/it]Processing dilutions:  30%|███       | 3/10 [00:28<01:06,  9.45s/it]Processing dilutions:  40%|████      | 4/10 [00:38<00:57,  9.60s/it]Processing dilutions:  50%|█████     | 5/10 [00:47<00:48,  9.63s/it]Processing dilutions:  60%|██████    | 6/10 [00:57<00:38,  9.59s/it]Processing dilutions:  70%|███████   | 7/10 [01:08<00:29,  9.99s/it]Processing dilutions:  80%|████████  | 8/10 [01:18<00:20, 10.27s/it]Processing dilutions: 100%|██████████| 10/10 [01:18<00:00,  7.89s/it]
+  Warning: No tiles for 20x
+  Warning: No tiles for 10x
+  ✓ Saved 4-panel tiles (5 rows × 4 columns) to: pytorch_density_analysis_20251023_102306/analysis/representative_tiles_4panel
+
+================================================================================
+SUMMARY STATISTICS
+================================================================================
+
+Unet:
+  Overall mean density: 8.74% ± 14.30%
+  By dilution:
+    1/10240x: 0.14%
+    1/5120x: 0.64%
+    1/2560x: 1.09%
+    1/1280x: 1.41%
+    1/640x: 3.31%
+    1/320x: 5.94%
+    1/160x: 15.52%
+    1/80x: 41.86%
+
+Attention Unet:
+  Overall mean density: 8.95% ± 16.31%
+  By dilution:
+    1/10240x: 0.10%
+    1/5120x: 0.48%
+    1/2560x: 0.84%
+    1/1280x: 1.09%
+    1/640x: 2.62%
+    1/320x: 4.37%
+    1/160x: 14.56%
+    1/80x: 47.58%
+
+Attention Resunet:
+  Overall mean density: 7.83% ± 12.38%
+  By dilution:
+    1/10240x: 0.16%
+    1/5120x: 0.69%
+    1/2560x: 1.10%
+    1/1280x: 1.41%
+    1/640x: 3.25%
+    1/320x: 5.62%
+    1/160x: 14.15%
+    1/80x: 36.29%
+
+================================================================================
+ANALYSIS COMPLETE
+================================================================================
+Results saved to: pytorch_density_analysis_20251023_102306/analysis
+
+Generated files:
+  - density_results_tile_level.csv
+  - density_results_image_summary.csv
+
+  Combined Boxplots (log scale):
+    - density_boxplot_full_range__threshold_0.5.png
+    - density_boxplot_low_dilution_range__threshold_0.5.png
+
+  Individual Model Boxplots (log scale):
+    - density_boxplot_unet_full_range_threshold_0.5.png
+    - density_boxplot_attention_unet_full_range_threshold_0.5.png
+    - density_boxplot_attention_resunet_full_range_threshold_0.5.png
+    - density_boxplot_unet_low_dilution_range_threshold_0.5.png
+    - density_boxplot_attention_unet_low_dilution_range_threshold_0.5.png
+    - density_boxplot_attention_resunet_low_dilution_range_threshold_0.5.png
+
+  Representative Tiles (5 rows × 4 columns, inverted predictions):
+    - representative_tiles_4panel/ (10 images)
+
+  - EXPERIMENT_INFO.json
+
+✓ Density analysis complete
+
+========================================
+JOB COMPLETE
+========================================
+End Time: Thu Oct 23 10:25:51 AM +08 2025
+
+Output directory: pytorch_density_analysis_20251023_102306
+
+Generated files:
+  Predictions:
+    - pytorch_density_analysis_20251023_102306/predictions/unet/
+    - pytorch_density_analysis_20251023_102306/predictions/attention_unet/
+    - pytorch_density_analysis_20251023_102306/predictions/attention_resunet/
+    - pytorch_density_analysis_20251023_102306/predictions/prediction_metadata.json
+
+  Analysis:
+    - pytorch_density_analysis_20251023_102306/analysis/density_results_tile_level.csv
+    - pytorch_density_analysis_20251023_102306/analysis/density_results_image_summary.csv
+
+    Combined Boxplots (log scale):
+      - pytorch_density_analysis_20251023_102306/analysis/density_boxplot_full_range__threshold_0.5.png
+      - pytorch_density_analysis_20251023_102306/analysis/density_boxplot_low_dilution_range__threshold_0.5.png
+
+    Individual Model Boxplots (log scale, 6 total):
+      - pytorch_density_analysis_20251023_102306/analysis/density_boxplot_unet_full_range_threshold_0.5.png
+      - pytorch_density_analysis_20251023_102306/analysis/density_boxplot_attention_unet_full_range_threshold_0.5.png
+      - pytorch_density_analysis_20251023_102306/analysis/density_boxplot_attention_resunet_full_range_threshold_0.5.png
+      - pytorch_density_analysis_20251023_102306/analysis/density_boxplot_unet_low_dilution_range_threshold_0.5.png
+      - pytorch_density_analysis_20251023_102306/analysis/density_boxplot_attention_unet_low_dilution_range_threshold_0.5.png
+      - pytorch_density_analysis_20251023_102306/analysis/density_boxplot_attention_resunet_low_dilution_range_threshold_0.5.png
+
+    Representative Tiles (5 rows × 4 columns, inverted predictions):
+      - pytorch_density_analysis_20251023_102306/analysis/representative_tiles_4panel/ (10 dilution factors)
+
+    - pytorch_density_analysis_20251023_102306/analysis/EXPERIMENT_INFO.json
+
+========================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-23 10:25:51.850094:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 304509.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:02:46
+	Memory: Requested(240gb), Used(2510748kb)
+	Vmem Used: 22025044kb
+	Walltime: Requested(04:00:00), Used(00:02:48)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-101[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
