@@ -1,0 +1,26 @@
+{
+  "predictions_dir": "pytorch_density_analysis_20251023_160349/predictions",
+  "test_images_dir": "./test_images",
+  "output_dir": "pytorch_density_analysis_20251023_160349/analysis",
+  "threshold": 0.5,
+  "n_images": 8,
+  "n_tiles": 224,
+  "dilution_factors": [
+    10240,
+    5120,
+    2560,
+    1280,
+    640,
+    320,
+    160,
+    80,
+    20,
+    10
+  ],
+  "architectures": [
+    "unet",
+    "attention_unet",
+    "attention_resunet"
+  ],
+  "timestamp": "2025-10-23 16:06:32"
+}
