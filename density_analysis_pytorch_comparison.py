@@ -308,10 +308,8 @@ def create_density_boxplot(df_tiles, dilution_order, dilution_labels,
     # Apply log scale if requested
     if use_log_scale:
         ax.set_yscale('log')
-        # Set y-limits for better visualization (auto with some padding)
-        ymin = df_long['Density'].min() * 0.5
-        ymax = df_long['Density'].max() * 1.5
-        ax.set_ylim(ymin, ymax)
+        # Set fixed y-limits for consistent visualization across all plots
+        ax.set_ylim(3e-4, 7e-1)
 
     plt.tight_layout()
     plt.savefig(output_path, bbox_inches='tight', dpi=300)
@@ -339,17 +337,21 @@ def create_individual_model_boxplots(df_tiles, dilution_order, dilution_labels,
         ordered=True
     )
 
-    # Architecture configurations with styled colors (blue-ish boxes)
+    # Architecture configurations - ALL use same color scheme (blue box + orange median)
     architectures = [
-        ('unet_density', 'UNet', '#6baed6'),           # Blue
-        ('attention_unet_density', 'Attention UNet', '#fd8d3c'),  # Orange
-        ('attention_resunet_density', 'Attention ResUNet', '#74c476')  # Green
+        ('unet_density', 'UNet'),
+        ('attention_unet_density', 'Attention UNet'),
+        ('attention_resunet_density', 'Attention ResUNet')
     ]
 
-    for density_col, arch_name, box_color in architectures:
+    # Consistent color scheme for all individual plots
+    box_color = '#6baed6'  # Blue for all boxes
+    median_color = '#ff7f0e'  # Orange for all medians
+
+    for density_col, arch_name in architectures:
         fig, ax = plt.subplots(figsize=(16, 8))
 
-        # Create boxplot with custom styling
+        # Create boxplot with consistent styling (blue boxes, orange median)
         bp = ax.boxplot(
             [df_plot[df_plot['dilution_cat'] == dil][density_col].values
              for dil in dilution_order],
@@ -360,7 +362,7 @@ def create_individual_model_boxplots(df_tiles, dilution_order, dilution_labels,
             boxprops=dict(facecolor=box_color, alpha=0.7, edgecolor='black', linewidth=1.2),
             whiskerprops=dict(color='black', linewidth=1.0),
             capprops=dict(color='black', linewidth=1.0),
-            medianprops=dict(color='#ff7f0e', linewidth=2.5)  # Orange median
+            medianprops=dict(color=median_color, linewidth=2.5)
         )
 
         # Add scatter points overlay - black dots with transparency
@@ -386,10 +388,8 @@ def create_individual_model_boxplots(df_tiles, dilution_order, dilution_labels,
         # Apply log scale if requested
         if use_log_scale:
             ax.set_yscale('log')
-            # Set y-limits for better visualization
-            ymin = df_plot[density_col].min() * 0.5
-            ymax = df_plot[density_col].max() * 1.5
-            ax.set_ylim(ymin, ymax)
+            # Set fixed y-limits for consistent visualization across all plots
+            ax.set_ylim(3e-4, 7e-1)
 
         plt.tight_layout()
 
