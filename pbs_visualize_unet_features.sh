@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l walltime=2:00:00
+#PBS -l walltime=8:00:00
 #PBS -j oe
 #PBS -k oed
 #PBS -N UNet_Visualization
@@ -8,39 +8,38 @@
 #PBS -m abe
 
 # ==============================================================================
-# U-Net Feature Visualization
+# U-Net Feature Visualization - All Test Images
 # ==============================================================================
 #
 # This script visualizes the internal workings of trained U-Net models by:
-# 1. Extracting a representative 512x512 tile from test images
-# 2. Visualizing feature maps at each encoder and decoder layer
+# 1. Extracting center tiles (row 3, col 4) from ALL test images
+# 2. Visualizing feature maps at BOTH conv layers in each encoder/decoder block
 # 3. Reconstructing input from layer activations (feature inversion)
 #
 # Input:
 #   - Trained models from ./best_models_PyTorch/
-#   - Test image (512x512 tile will be extracted)
+#   - All test images in ./test_images/ (8 images)
 #
-# Output:
-#   - Input tile (original and preprocessed)
-#   - Model prediction
-#   - Feature maps for 9 layers (encoder_1 to decoder_1)
-#   - Feature inversions for 6 key layers
+# Output (per image):
+#   - 3-panel figure: original + preprocessed + prediction
+#   - Feature maps: 18 images (9 blocks × 2 conv layers, showing 32 channels each)
+#   - Feature inversions: 9 images (all conv2 layers from encoder to decoder)
 #
-# Expected runtime: ~30-60 minutes (feature inversions take time)
+# Expected runtime: ~4-6 hours for 8 images
+#   - Feature maps: ~10 min per image
+#   - Feature inversions: ~45-60 min per image (9 layers × 5-7 min each)
 # ==============================================================================
 
-# Configuration - MODIFY THESE VARIABLES
+# Configuration - MODIFY THESE VARIABLES IF NEEDED
 # ==============================================================================
 
-# Test image to visualize (will extract 512x512 tile)
-# Choose a representative image from your test set
-TEST_IMAGE="./test_images/1280x_2025-05-16_00-59-00_002.tif"
+# Test images directory (will process ALL .tif images)
+TEST_IMAGES_DIR="./test_images"
 
-# Tile position (top-left corner of 512x512 tile to extract)
-# Default: (0, 0) extracts top-left corner
-# Adjust these to select different regions of the image
-TILE_X=0
-TILE_Y=0
+# Tile position for extraction (1-indexed)
+# Row 3, Column 4 = center-ish tile for most images
+TILE_ROW=3
+TILE_COL=4
 
 # Model cache directory (created by pbs_pytorch_density_analysis.sh)
 MODEL_CACHE="./best_models_PyTorch"
@@ -76,8 +75,8 @@ echo "========================================"
 echo ""
 
 echo "Configuration:"
-echo "  Test Image: $TEST_IMAGE"
-echo "  Tile Position: ($TILE_X, $TILE_Y)"
+echo "  Test Images Dir: $TEST_IMAGES_DIR"
+echo "  Tile Position: row $TILE_ROW, column $TILE_COL"
 echo "  Model Cache: $MODEL_CACHE"
 echo "  Output: $OUTPUT_DIR"
 echo "========================================"
@@ -106,12 +105,19 @@ echo "VERIFYING PREREQUISITES"
 echo "========================================"
 echo ""
 
-# Check if test image exists
-if [ ! -f "$TEST_IMAGE" ]; then
-    echo "ERROR: Test image not found: $TEST_IMAGE"
+# Check if test images directory exists
+if [ ! -d "$TEST_IMAGES_DIR" ]; then
+    echo "ERROR: Test images directory not found: $TEST_IMAGES_DIR"
     exit 1
 fi
-echo "✓ Test image found: $TEST_IMAGE"
+
+# Count test images
+NUM_IMAGES=$(ls -1 "$TEST_IMAGES_DIR"/*.tif 2>/dev/null | wc -l)
+if [ "$NUM_IMAGES" -eq 0 ]; then
+    echo "ERROR: No .tif images found in $TEST_IMAGES_DIR"
+    exit 1
+fi
+echo "✓ Found $NUM_IMAGES test images in $TEST_IMAGES_DIR"
 
 # Check if model cache exists
 if [ ! -d "$MODEL_CACHE" ]; then
@@ -144,15 +150,26 @@ echo "========================================"
 echo "RUNNING U-NET FEATURE VISUALIZATION"
 echo "========================================"
 echo ""
-echo "Note: Feature inversions involve optimization and may take 30-60 minutes"
+echo "Processing $NUM_IMAGES test images..."
+echo "Each image will generate:"
+echo "  - 1 × 3-panel figure (original + preprocessed + prediction)"
+echo "  - 18 × feature maps (encoder_1-4, bottleneck, decoder_1-4, conv1 & conv2)"
+echo "  - 9 × feature inversions (all conv2 layers)"
+echo ""
+echo "Estimated time: 4-6 hours total (~30-45 min per image)"
+echo "  - Feature maps: ~10 min per image"
+echo "  - Feature inversions: ~35-45 min per image"
+echo ""
+echo "Note: Feature inversions involve optimization and take significant time"
+echo "========================================"
 echo ""
 
 singularity exec --nv $image python visualize_unet_features.py \
     --model_cache "$MODEL_CACHE" \
-    --test_image "$TEST_IMAGE" \
+    --test_images "$TEST_IMAGES_DIR" \
     --output "$OUTPUT_DIR" \
-    --tile_x $TILE_X \
-    --tile_y $TILE_Y
+    --tile_row $TILE_ROW \
+    --tile_col $TILE_COL
 
 # Capture exit status
 EXIT_STATUS=$?
@@ -175,38 +192,57 @@ echo "End Time: $(date)"
 echo ""
 echo "Output directory: $OUTPUT_DIR"
 echo ""
-echo "Generated files:"
-echo "  Input:"
-echo "    - $OUTPUT_DIR/input_tile_original.png"
-echo "    - $OUTPUT_DIR/input_tile_preprocessed.png"
-echo "    - $OUTPUT_DIR/prediction.png"
+echo "Generated structure:"
 echo ""
-echo "  Feature Maps (9 layers):"
-echo "    - $OUTPUT_DIR/feature_maps/feature_map_encoder_1.png"
-echo "    - $OUTPUT_DIR/feature_maps/feature_map_encoder_2.png"
-echo "    - $OUTPUT_DIR/feature_maps/feature_map_encoder_3.png"
-echo "    - $OUTPUT_DIR/feature_maps/feature_map_encoder_4.png"
-echo "    - $OUTPUT_DIR/feature_maps/feature_map_bottleneck.png"
-echo "    - $OUTPUT_DIR/feature_maps/feature_map_decoder_4.png"
-echo "    - $OUTPUT_DIR/feature_maps/feature_map_decoder_3.png"
-echo "    - $OUTPUT_DIR/feature_maps/feature_map_decoder_2.png"
-echo "    - $OUTPUT_DIR/feature_maps/feature_map_decoder_1.png"
+echo "$OUTPUT_DIR/"
+echo "  ├── <image_1>/"
+echo "  │   ├── <image_1>_3panel.png"
+echo "  │   ├── feature_maps/"
+echo "  │   │   ├── feature_map_encoder_1_conv1.png"
+echo "  │   │   ├── feature_map_encoder_1_conv2.png"
+echo "  │   │   ├── feature_map_encoder_2_conv1.png"
+echo "  │   │   ├── feature_map_encoder_2_conv2.png"
+echo "  │   │   ├── feature_map_encoder_3_conv1.png"
+echo "  │   │   ├── feature_map_encoder_3_conv2.png"
+echo "  │   │   ├── feature_map_encoder_4_conv1.png"
+echo "  │   │   ├── feature_map_encoder_4_conv2.png"
+echo "  │   │   ├── feature_map_bottleneck_conv1.png"
+echo "  │   │   ├── feature_map_bottleneck_conv2.png"
+echo "  │   │   ├── feature_map_decoder_4_conv1.png"
+echo "  │   │   ├── feature_map_decoder_4_conv2.png"
+echo "  │   │   ├── feature_map_decoder_3_conv1.png"
+echo "  │   │   ├── feature_map_decoder_3_conv2.png"
+echo "  │   │   ├── feature_map_decoder_2_conv1.png"
+echo "  │   │   ├── feature_map_decoder_2_conv2.png"
+echo "  │   │   ├── feature_map_decoder_1_conv1.png"
+echo "  │   │   └── feature_map_decoder_1_conv2.png"
+echo "  │   ├── feature_inversions/"
+echo "  │   │   ├── feature_inversion_encoder_1_conv2.png"
+echo "  │   │   ├── feature_inversion_encoder_2_conv2.png"
+echo "  │   │   ├── feature_inversion_encoder_3_conv2.png"
+echo "  │   │   ├── feature_inversion_encoder_4_conv2.png"
+echo "  │   │   ├── feature_inversion_bottleneck_conv2.png"
+echo "  │   │   ├── feature_inversion_decoder_4_conv2.png"
+echo "  │   │   ├── feature_inversion_decoder_3_conv2.png"
+echo "  │   │   ├── feature_inversion_decoder_2_conv2.png"
+echo "  │   │   └── feature_inversion_decoder_1_conv2.png"
+echo "  │   └── tile_metadata.json"
+echo "  ├── <image_2>/"
+echo "  │   └── ..."
+echo "  ├── ... (8 images total)"
+echo "  └── visualization_metadata.json"
 echo ""
-echo "  Feature Inversions (6 layers):"
-echo "    - $OUTPUT_DIR/feature_inversions/feature_inversion_encoder_1.png"
-echo "    - $OUTPUT_DIR/feature_inversions/feature_inversion_encoder_2.png"
-echo "    - $OUTPUT_DIR/feature_inversions/feature_inversion_encoder_3.png"
-echo "    - $OUTPUT_DIR/feature_inversions/feature_inversion_encoder_4.png"
-echo "    - $OUTPUT_DIR/feature_inversions/feature_inversion_bottleneck.png"
-echo "    - $OUTPUT_DIR/feature_inversions/feature_inversion_decoder_1.png"
+echo "Total per image:"
+echo "  - 1 × 3-panel figure"
+echo "  - 18 × feature maps (32 channels each)"
+echo "  - 9 × feature inversions"
 echo ""
-echo "  Metadata:"
-echo "    - $OUTPUT_DIR/visualization_metadata.json"
+echo "Total files: ~$((NUM_IMAGES * 28)) visualization images"
 echo ""
 echo "========================================"
 echo ""
 echo "To view results, sync from HPC to your local machine:"
-echo "  rsync -avz <user>@hpc:<path>/$OUTPUT_DIR /local/path/"
+echo "  rsync -avz <user>@hpc:$(pwd)/$OUTPUT_DIR /local/path/"
 echo ""
 echo "========================================"
 

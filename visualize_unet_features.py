@@ -4,12 +4,13 @@ U-Net Feature Visualization for PyTorch Models
 ==============================================
 
 This script visualizes the internal workings of trained U-Net models by showing:
-1. Feature maps at each encoder and decoder layer
+1. Feature maps at each encoder and decoder layer (both conv1 and conv2)
 2. Reconstructed input from layer activations (feature inversion)
 
-The script processes a representative 512x512 tile from test images and generates:
-- Feature map visualizations for all encoder/decoder layers
+The script processes all test images and generates:
+- Feature map visualizations for all encoder/decoder layers (both convolutions)
 - Feature inversion results showing what each layer "sees"
+- 3-panel input/preprocessed/prediction figures
 
 Based on models trained by train_pytorch_comparison_no_aug.py
 
@@ -43,36 +44,55 @@ def _percentile_norm(arr: np.ndarray):
     arr = np.clip((arr - lo) / (hi - lo), 0.0, 1.0)
     return arr.astype(np.float32)
 
-def preprocess_image(img_path, img_size=512):
+def extract_center_tile(image_array, tile_size=512, row=3, col=4):
     """
-    Loads and preprocesses a single image, matching BeadsDataset implementation.
+    Extract a tile at specific row and column position.
 
     Args:
-        img_path: Path to image file
-        img_size: Target size (default 512)
+        image_array: Input image array [H, W]
+        tile_size: Size of tile (default 512)
+        row: Row index (1-indexed for user, 0-indexed internally)
+        col: Column index (1-indexed for user, 0-indexed internally)
 
     Returns:
-        tensor: [1, 1, H, W] preprocessed image tensor
+        tile: Extracted tile [tile_size, tile_size]
+        position: (y, x) position of tile
     """
-    # Load as grayscale
-    im = Image.open(str(img_path)).convert("L")
-    arr = np.array(im, dtype=np.float32)
+    h, w = image_array.shape[:2]
 
+    # Calculate number of tiles that fit
+    n_rows = h // tile_size
+    n_cols = w // tile_size
+
+    # Adjust row/col if they exceed available tiles
+    row_idx = min(row - 1, n_rows - 1)  # Convert to 0-indexed
+    col_idx = min(col - 1, n_cols - 1)  # Convert to 0-indexed
+
+    # Calculate position
+    y = row_idx * tile_size
+    x = col_idx * tile_size
+
+    # Extract tile
+    tile = image_array[y:y+tile_size, x:x+tile_size]
+
+    return tile, (y, x)
+
+def preprocess_tile(tile_array):
+    """
+    Preprocess a tile matching BeadsDataset implementation.
+
+    Args:
+        tile_array: Tile array [H, W]
+
+    Returns:
+        tensor: [1, 1, H, W] preprocessed tensor
+    """
     # Apply percentile normalization
-    arr_norm = _percentile_norm(arr)
+    arr_norm = _percentile_norm(tile_array)
 
     # Convert to tensor
-    tensor = torch.from_numpy(arr_norm).unsqueeze(0)  # [1, H, W]
+    tensor = torch.from_numpy(arr_norm).unsqueeze(0).unsqueeze(0)  # [1, 1, H, W]
 
-    # Resize if needed
-    if tensor.shape[1] != img_size or tensor.shape[2] != img_size:
-        tensor = F.interpolate(tensor.unsqueeze(0),
-                             size=(img_size, img_size),
-                             mode="bilinear",
-                             align_corners=False).squeeze(0)
-
-    # Add batch dimension
-    tensor = tensor.unsqueeze(0)  # [1, 1, H, W]
     return tensor
 
 def postprocess_tensor(tensor):
@@ -399,7 +419,7 @@ def build_model(arch_name, n_filters, dropout):
 # FEATURE VISUALIZATION: HOOKS AND PLOTTING
 # ============================================================================
 
-def plot_feature_maps(maps, layer_name, output_path, max_channels=16):
+def plot_feature_maps(maps, layer_name, output_path, max_channels=32):
     """
     Plot feature maps from a layer.
 
@@ -407,7 +427,7 @@ def plot_feature_maps(maps, layer_name, output_path, max_channels=16):
         maps: [1, C, H, W] tensor
         layer_name: Name of the layer
         output_path: Path to save the plot
-        max_channels: Maximum number of channels to plot (default 16)
+        max_channels: Maximum number of channels to plot (default 32)
     """
     maps = maps.cpu().squeeze(0)  # Remove batch dim: [C, H, W]
     num_channels = maps.shape[0]
@@ -416,18 +436,20 @@ def plot_feature_maps(maps, layer_name, output_path, max_channels=16):
     channels_to_plot = min(num_channels, max_channels)
 
     # Determine grid size
-    cols = 8 if channels_to_plot > 8 else channels_to_plot
+    cols = 8
     rows = int(np.ceil(channels_to_plot / cols))
 
-    fig, axes = plt.subplots(rows, cols, figsize=(cols * 2, rows * 2))
-    fig.suptitle(f"Feature Maps: {layer_name} (Showing {channels_to_plot}/{num_channels} channels)",
-                 fontsize=14, fontweight='bold')
+    fig, axes = plt.subplots(rows, cols, figsize=(cols * 2.5, rows * 2.5))
+    fig.suptitle(f"Feature Maps: {layer_name}\n(Showing {channels_to_plot}/{num_channels} channels)",
+                 fontsize=16, fontweight='bold')
 
     # Flatten axes array for easy iteration
     if rows > 1:
         axes = axes.flatten()
     elif channels_to_plot == 1:
         axes = [axes]
+    else:
+        axes = axes.flatten()
 
     for i in range(channels_to_plot):
         ax = axes[i]
@@ -435,7 +457,7 @@ def plot_feature_maps(maps, layer_name, output_path, max_channels=16):
 
         # Plot with viridis colormap
         im = ax.imshow(fmap, cmap='viridis')
-        ax.set_title(f"Ch {i}", fontsize=9)
+        ax.set_title(f"Ch {i}", fontsize=10)
         ax.axis('off')
 
         # Add colorbar
@@ -446,12 +468,47 @@ def plot_feature_maps(maps, layer_name, output_path, max_channels=16):
         axes[j].axis('off')
 
     plt.tight_layout()
-    plt.savefig(output_path, bbox_inches='tight', dpi=200)
+    plt.savefig(output_path, bbox_inches='tight', dpi=150)
     plt.close()
+
+def register_conv_hooks(model):
+    """
+    Register hooks for BOTH conv1 and conv2 in each ConvBlock/ResConvBlock.
+
+    Returns:
+        layers_dict: Dictionary mapping layer names to modules
+    """
+    layers_dict = {}
+
+    # Helper function to get conv layers from a block
+    def get_conv_layers(block, prefix):
+        if hasattr(block, 'conv1') and hasattr(block, 'bn1'):
+            # Register hook after conv1+bn1+relu
+            layers_dict[f'{prefix}_conv1'] = block.bn1
+        if hasattr(block, 'conv2') and hasattr(block, 'bn2'):
+            # Register hook after conv2+bn2+relu (or before adding residual)
+            layers_dict[f'{prefix}_conv2'] = block.bn2
+
+    # Encoder blocks
+    get_conv_layers(model.enc1, 'encoder_1')
+    get_conv_layers(model.enc2, 'encoder_2')
+    get_conv_layers(model.enc3, 'encoder_3')
+    get_conv_layers(model.enc4, 'encoder_4')
+
+    # Bottleneck
+    get_conv_layers(model.bottleneck, 'bottleneck')
+
+    # Decoder blocks
+    get_conv_layers(model.dec4, 'decoder_4')
+    get_conv_layers(model.dec3, 'decoder_3')
+    get_conv_layers(model.dec2, 'decoder_2')
+    get_conv_layers(model.dec1, 'decoder_1')
+
+    return layers_dict
 
 def visualize_feature_maps(model, image_tensor, output_dir, device):
     """
-    Visualize feature maps at each encoder and decoder layer using hooks.
+    Visualize feature maps at each conv layer using hooks.
 
     Args:
         model: Trained model
@@ -468,22 +525,12 @@ def visualize_feature_maps(model, image_tensor, output_dir, device):
     activations = {}
 
     def get_activation(name):
-        def hook(model, input, output):
+        def hook(module, input, output):
             activations[name] = output.detach()
         return hook
 
-    # Register hooks for all encoder and decoder layers
-    layers_to_visualize = {
-        'encoder_1': model.enc1,
-        'encoder_2': model.enc2,
-        'encoder_3': model.enc3,
-        'encoder_4': model.enc4,
-        'bottleneck': model.bottleneck,
-        'decoder_4': model.dec4,
-        'decoder_3': model.dec3,
-        'decoder_2': model.dec2,
-        'decoder_1': model.dec1,
-    }
+    # Register hooks for all conv layers
+    layers_to_visualize = register_conv_hooks(model)
 
     hooks = {}
     for name, layer in layers_to_visualize.items():
@@ -496,13 +543,13 @@ def visualize_feature_maps(model, image_tensor, output_dir, device):
     # Plot feature maps
     for name, activation in tqdm(activations.items(), desc="Plotting feature maps"):
         output_path = output_dir / f"feature_map_{name}.png"
-        plot_feature_maps(activation, name, output_path, max_channels=16)
+        plot_feature_maps(activation, name, output_path, max_channels=32)
 
     # Remove hooks
     for handle in hooks.values():
         handle.remove()
 
-    print(f"✓ Saved {len(activations)} feature map visualizations to: {output_dir}")
+    print(f"  ✓ Saved {len(activations)} feature map visualizations to: {output_dir}")
 
 # ============================================================================
 # FEATURE INVERSION: RECONSTRUCT INPUT FROM LAYER ACTIVATIONS
@@ -536,13 +583,13 @@ def reconstruct_from_layer(model, target_image_tensor, layer_name, layer_module,
         optimized_image: Reconstructed image
         target_feature_map: Target feature map
     """
-    print(f"\n--- Starting Feature Inversion for: {layer_name} ---")
+    print(f"  Starting feature inversion: {layer_name}")
 
     # Step 1: Get target feature map
     target_activations = {}
 
     def get_target_hook(name):
-        def hook(model, input, output):
+        def hook(module, input, output):
             target_activations[name] = output.detach()
         return hook
 
@@ -555,8 +602,6 @@ def reconstruct_from_layer(model, target_image_tensor, layer_name, layer_module,
     # This is the feature map we want to match
     target_feature_map = target_activations[layer_name].clone()
     hook_handle.remove()
-
-    print(f"Target feature map shape: {target_feature_map.shape}")
 
     # Step 2: Create image to optimize
     # Start with random noise
@@ -573,7 +618,7 @@ def reconstruct_from_layer(model, target_image_tensor, layer_name, layer_module,
     current_activations = {}
 
     def get_current_hook(name):
-        def hook(model, input, output):
+        def hook(module, input, output):
             current_activations[name] = output  # Keep in graph
         return hook
 
@@ -582,7 +627,7 @@ def reconstruct_from_layer(model, target_image_tensor, layer_name, layer_module,
     # Loss function
     feature_loss_fn = nn.MSELoss()
 
-    # Step 4: Optimization loop
+    # Step 4: Optimization loop (silent, only print at key milestones)
     for i in range(n_steps + 1):
         optimizer.zero_grad()
 
@@ -607,12 +652,7 @@ def reconstruct_from_layer(model, target_image_tensor, layer_name, layer_module,
         with torch.no_grad():
             optimized_image.data.clamp_(0, 1)
 
-        if i % 200 == 0:
-            print(f"  Step {i:4d}/{n_steps} | Total Loss: {total_loss.item():.4f} | "
-                  f"Feature Loss: {feature_loss.item():.4f} | TV Loss: {tv_loss.item():.4f}")
-
     hook_handle.remove()
-    print("Optimization finished.")
 
     return optimized_image, target_feature_map
 
@@ -629,16 +669,22 @@ def visualize_feature_inversions(model, image_tensor, output_dir, device):
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    print("\nVisualizing feature inversions...")
+    print("\nVisualizing feature inversions (this may take 30-60 minutes)...")
 
-    # Select key layers to invert
+    # Get all conv layers
+    all_layers = register_conv_hooks(model)
+
+    # Select key layers to invert (all encoder and decoder conv2 layers + bottleneck)
     layers_to_invert = {
-        'encoder_1': model.enc1,
-        'encoder_2': model.enc2,
-        'encoder_3': model.enc3,
-        'encoder_4': model.enc4,
-        'bottleneck': model.bottleneck,
-        'decoder_1': model.dec1,
+        'encoder_1_conv2': all_layers['encoder_1_conv2'],
+        'encoder_2_conv2': all_layers['encoder_2_conv2'],
+        'encoder_3_conv2': all_layers['encoder_3_conv2'],
+        'encoder_4_conv2': all_layers['encoder_4_conv2'],
+        'bottleneck_conv2': all_layers['bottleneck_conv2'],
+        'decoder_4_conv2': all_layers['decoder_4_conv2'],
+        'decoder_3_conv2': all_layers['decoder_3_conv2'],
+        'decoder_2_conv2': all_layers['decoder_2_conv2'],
+        'decoder_1_conv2': all_layers['decoder_1_conv2'],
     }
 
     original_img_plot = postprocess_tensor(image_tensor)
@@ -654,7 +700,7 @@ def visualize_feature_inversions(model, image_tensor, output_dir, device):
         recon_img_plot = postprocess_tensor(reconstructed_image)
 
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
-        fig.suptitle(f"Feature Inversion from Layer: '{layer_name}'", fontsize=16, fontweight='bold')
+        fig.suptitle(f"Feature Inversion: {layer_name}", fontsize=16, fontweight='bold')
 
         ax1.imshow(original_img_plot, cmap='gray')
         ax1.set_title("Original Image", fontsize=14)
@@ -666,10 +712,46 @@ def visualize_feature_inversions(model, image_tensor, output_dir, device):
 
         plt.tight_layout()
         output_path = output_dir / f"feature_inversion_{layer_name}.png"
-        plt.savefig(output_path, bbox_inches='tight', dpi=200)
+        plt.savefig(output_path, bbox_inches='tight', dpi=150)
         plt.close()
 
-    print(f"✓ Saved {len(layers_to_invert)} feature inversion visualizations to: {output_dir}")
+    print(f"  ✓ Saved {len(layers_to_invert)} feature inversion visualizations to: {output_dir}")
+
+def create_3panel_figure(tile_original, tile_preprocessed, prediction, image_name, output_path):
+    """
+    Create a 3-panel figure showing original, preprocessed, and prediction.
+
+    Args:
+        tile_original: Original tile array
+        tile_preprocessed: Preprocessed tile tensor
+        prediction: Prediction tensor
+        image_name: Name of original image
+        output_path: Path to save figure
+    """
+    fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+
+    fig.suptitle(f"Input and Prediction: {image_name}", fontsize=18, fontweight='bold', y=0.98)
+
+    # Panel 1: Original tile
+    axes[0].imshow(tile_original, cmap='gray')
+    axes[0].set_title("Original Tile (512x512)", fontsize=14, fontweight='bold')
+    axes[0].axis('off')
+
+    # Panel 2: Preprocessed tile
+    tile_prep_img = postprocess_tensor(tile_preprocessed)
+    axes[1].imshow(tile_prep_img, cmap='gray')
+    axes[1].set_title("Preprocessed (Percentile Norm)", fontsize=14, fontweight='bold')
+    axes[1].axis('off')
+
+    # Panel 3: Prediction
+    pred_img = postprocess_tensor(prediction)
+    axes[2].imshow(pred_img, cmap='gray')
+    axes[2].set_title("Model Prediction", fontsize=14, fontweight='bold')
+    axes[2].axis('off')
+
+    plt.tight_layout()
+    plt.savefig(output_path, bbox_inches='tight', dpi=150)
+    plt.close()
 
 # ============================================================================
 # MAIN FUNCTION
@@ -726,18 +808,91 @@ def find_best_model(cache_dir='./best_models_PyTorch'):
 
     return model_path, metadata
 
+def process_single_image(test_image_path, model, metadata, output_base_dir, device, tile_row=3, tile_col=4):
+    """
+    Process a single test image: extract tile, generate visualizations.
+
+    Args:
+        test_image_path: Path to test image
+        model: Trained model
+        metadata: Model metadata
+        output_base_dir: Base output directory
+        device: torch device
+        tile_row: Row index for tile extraction (1-indexed)
+        tile_col: Column index for tile extraction (1-indexed)
+    """
+    # Create output subdirectory named by image
+    image_name = test_image_path.stem
+    image_output_dir = output_base_dir / image_name
+    image_output_dir.mkdir(parents=True, exist_ok=True)
+
+    print(f"\n{'='*80}")
+    print(f"Processing: {image_name}")
+    print(f"{'='*80}")
+
+    # Load full image
+    full_image = Image.open(test_image_path).convert("L")
+    full_array = np.array(full_image, dtype=np.float32)
+
+    print(f"  Full image shape: {full_array.shape}")
+
+    # Extract center tile
+    tile, (tile_y, tile_x) = extract_center_tile(full_array, tile_size=512, row=tile_row, col=tile_col)
+    print(f"  Extracted tile at position: row={tile_row}, col={tile_col} (pixel position: y={tile_y}, x={tile_x})")
+
+    # Preprocess tile
+    tile_tensor = preprocess_tile(tile)
+
+    # Generate prediction
+    print("  Generating prediction...")
+    with torch.no_grad():
+        prediction = model(tile_tensor.to(device))
+        prediction_sigmoid = torch.sigmoid(prediction)
+
+    # Create 3-panel figure
+    print("  Creating 3-panel input/prediction figure...")
+    create_3panel_figure(
+        tile, tile_tensor, prediction_sigmoid, image_name,
+        image_output_dir / f"{image_name}_3panel.png"
+    )
+
+    # Visualize feature maps
+    print("  Visualizing feature maps...")
+    feature_maps_dir = image_output_dir / 'feature_maps'
+    visualize_feature_maps(model, tile_tensor, feature_maps_dir, device)
+
+    # Feature inversions
+    print("  Visualizing feature inversions...")
+    feature_inversions_dir = image_output_dir / 'feature_inversions'
+    visualize_feature_inversions(model, tile_tensor, feature_inversions_dir, device)
+
+    # Save tile metadata
+    tile_metadata = {
+        'image_name': image_name,
+        'full_image_shape': full_array.shape,
+        'tile_position': {'y': int(tile_y), 'x': int(tile_x)},
+        'tile_row': tile_row,
+        'tile_col': tile_col,
+        'tile_size': 512
+    }
+
+    with open(image_output_dir / 'tile_metadata.json', 'w') as f:
+        json.dump(tile_metadata, f, indent=2)
+
+    print(f"  ✓ Completed processing: {image_name}")
+
 def main():
     parser = argparse.ArgumentParser(description='Visualize U-Net Feature Maps')
     parser.add_argument('--model_cache', type=str, default='./best_models_PyTorch',
                        help='Directory containing cached best models')
-    parser.add_argument('--test_image', type=str, required=True,
-                       help='Path to test image (will extract 512x512 tile)')
+    parser.add_argument('--test_images', type=str, default='./test_images',
+                       help='Directory containing test images')
     parser.add_argument('--output', type=str, required=True,
                        help='Output directory for visualizations')
-    parser.add_argument('--tile_x', type=int, default=0,
-                       help='X position of 512x512 tile to extract')
-    parser.add_argument('--tile_y', type=int, default=0,
-                       help='Y position of 512x512 tile to extract')
+    parser.add_argument('--tile_row', type=int, default=3,
+                       help='Row index for tile extraction (1-indexed, default: 3)')
+    parser.add_argument('--tile_col', type=int, default=4,
+                       help='Column index for tile extraction (1-indexed, default: 4)')
 
     args = parser.parse_args()
 
@@ -750,11 +905,11 @@ def main():
     output_dir.mkdir(parents=True, exist_ok=True)
 
     print("="*80)
-    print("U-NET FEATURE VISUALIZATION")
+    print("U-NET FEATURE VISUALIZATION - ALL TEST IMAGES")
     print("="*80)
     print(f"Model cache: {args.model_cache}")
-    print(f"Test image: {args.test_image}")
-    print(f"Tile position: ({args.tile_x}, {args.tile_y})")
+    print(f"Test images: {args.test_images}")
+    print(f"Tile position: row {args.tile_row}, column {args.tile_col}")
     print(f"Output: {args.output}")
     print("="*80)
 
@@ -784,85 +939,40 @@ def main():
 
     print("\n✓ Model loaded successfully")
 
-    # Step 2: Load and preprocess image
+    # Step 2: Find all test images
     print("\n" + "="*80)
-    print("STEP 2: LOADING IMAGE")
+    print("STEP 2: FINDING TEST IMAGES")
     print("="*80)
 
-    # Load full image
-    full_image = Image.open(args.test_image).convert("L")
-    full_array = np.array(full_image, dtype=np.float32)
+    test_images_dir = Path(args.test_images)
+    test_images = sorted(test_images_dir.glob('*.tif'))
 
-    print(f"\nFull image shape: {full_array.shape}")
+    if not test_images:
+        print(f"ERROR: No .tif images found in {test_images_dir}")
+        return
 
-    # Extract 512x512 tile
-    tile_size = 512
-    tile = full_array[args.tile_y:args.tile_y+tile_size, args.tile_x:args.tile_x+tile_size]
+    print(f"\nFound {len(test_images)} test images:")
+    for img in test_images:
+        print(f"  - {img.name}")
 
-    # Save tile as reference
-    tile_img = Image.fromarray(tile.astype(np.uint8))
-    tile_img.save(output_dir / 'input_tile_original.png')
-
-    # Preprocess tile
-    tile_norm = _percentile_norm(tile)
-    tile_tensor = torch.from_numpy(tile_norm).unsqueeze(0).unsqueeze(0)  # [1, 1, H, W]
-
-    # Save preprocessed tile
-    plt.figure(figsize=(6, 6))
-    plt.imshow(tile_norm, cmap='gray')
-    plt.title('Preprocessed Input Tile (512x512)', fontsize=14, fontweight='bold')
-    plt.axis('off')
-    plt.tight_layout()
-    plt.savefig(output_dir / 'input_tile_preprocessed.png', bbox_inches='tight', dpi=200)
-    plt.close()
-
-    print(f"Extracted tile: {tile.shape}")
-    print(f"Preprocessed tile: {tile_tensor.shape}")
-    print(f"✓ Saved input tiles to: {output_dir}")
-
-    # Step 3: Generate prediction
+    # Step 3: Process all images
     print("\n" + "="*80)
-    print("STEP 3: GENERATING PREDICTION")
+    print("STEP 3: PROCESSING ALL TEST IMAGES")
     print("="*80)
 
-    with torch.no_grad():
-        prediction = model(tile_tensor.to(device))
-        prediction_sigmoid = torch.sigmoid(prediction)
+    for test_image_path in test_images:
+        process_single_image(
+            test_image_path, model, metadata, output_dir, device,
+            tile_row=args.tile_row, tile_col=args.tile_col
+        )
 
-    # Save prediction
-    pred_img = postprocess_tensor(prediction_sigmoid)
-    plt.figure(figsize=(6, 6))
-    plt.imshow(pred_img, cmap='gray')
-    plt.title('Model Prediction', fontsize=14, fontweight='bold')
-    plt.axis('off')
-    plt.tight_layout()
-    plt.savefig(output_dir / 'prediction.png', bbox_inches='tight', dpi=200)
-    plt.close()
-
-    print(f"✓ Saved prediction to: {output_dir}")
-
-    # Step 4: Visualize feature maps
-    print("\n" + "="*80)
-    print("STEP 4: VISUALIZING FEATURE MAPS")
-    print("="*80)
-
-    feature_maps_dir = output_dir / 'feature_maps'
-    visualize_feature_maps(model, tile_tensor, feature_maps_dir, device)
-
-    # Step 5: Feature inversions
-    print("\n" + "="*80)
-    print("STEP 5: VISUALIZING FEATURE INVERSIONS")
-    print("="*80)
-
-    feature_inversions_dir = output_dir / 'feature_inversions'
-    visualize_feature_inversions(model, tile_tensor, feature_inversions_dir, device)
-
-    # Save metadata
+    # Save overall metadata
     viz_metadata = {
         'model_metadata': metadata,
-        'test_image': str(args.test_image),
-        'tile_position': {'x': args.tile_x, 'y': args.tile_y},
-        'tile_size': tile_size,
+        'test_images_dir': str(args.test_images),
+        'num_images_processed': len(test_images),
+        'tile_position': {'row': args.tile_row, 'col': args.tile_col},
+        'tile_size': 512,
         'output_dir': str(args.output),
         'timestamp': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     }
@@ -874,16 +984,17 @@ def main():
     print("VISUALIZATION COMPLETE")
     print("="*80)
     print(f"Results saved to: {output_dir}")
-    print("\nGenerated files:")
-    print("  Input:")
-    print("    - input_tile_original.png")
-    print("    - input_tile_preprocessed.png")
-    print("    - prediction.png")
-    print("  Feature Maps:")
-    print("    - feature_maps/ (9 layers)")
-    print("  Feature Inversions:")
-    print("    - feature_inversions/ (6 layers)")
-    print("  - visualization_metadata.json")
+    print(f"\nProcessed {len(test_images)} images:")
+    for img in test_images:
+        img_name = img.stem
+        print(f"\n  {img_name}/")
+        print(f"    - {img_name}_3panel.png (original + preprocessed + prediction)")
+        print(f"    - feature_maps/ (18 images: encoder_1-4, bottleneck, decoder_1-4, each with conv1 & conv2)")
+        print(f"    - feature_inversions/ (9 images: all conv2 layers)")
+        print(f"    - tile_metadata.json")
+
+    print(f"\n  - visualization_metadata.json")
+    print("\n" + "="*80)
 
 if __name__ == "__main__":
     main()
