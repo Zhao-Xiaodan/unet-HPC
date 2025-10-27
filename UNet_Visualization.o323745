@@ -1,0 +1,272 @@
+========================================
+Job ID: 323745.stdct-mgmt-02
+Job Name: UNet_Visualization
+Node: GN-A40-102
+Start Time: Mon Oct 27 04:52:35 PM +08 2025
+Working Directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================
+
+Configuration:
+  Test Image: ./test_images/1280x_2025-05-16_00-59-00_002.tif
+  Tile Position: (0, 0)
+  Model Cache: ./best_models_PyTorch
+  Output: unet_visualization_20251027_165235
+========================================
+
+GPU Information:
+Mon Oct 27 16:52:35 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     Off |   00000000:0A:00.0 Off |                    0 |
+|  0%   32C    P8             21W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+Python version:
+Python 3.10.12
+
+PyTorch version:
+PyTorch: 2.4.0a0+f70bd71a48.nv24.06
+CUDA available: True
+
+========================================
+VERIFYING PREREQUISITES
+========================================
+
+✓ Test image found: ./test_images/1280x_2025-05-16_00-59-00_002.tif
+✓ Found 3 cached model(s)
+
+========================================
+RUNNING U-NET FEATURE VISUALIZATION
+========================================
+
+Note: Feature inversions involve optimization and may take 30-60 minutes
+
+Using device: cuda
+================================================================================
+U-NET FEATURE VISUALIZATION
+================================================================================
+Model cache: ./best_models_PyTorch
+Test image: ./test_images/1280x_2025-05-16_00-59-00_002.tif
+Tile position: (0, 0)
+Output: unet_visualization_20251027_165235
+================================================================================
+
+================================================================================
+STEP 1: LOADING MODEL
+================================================================================
+
+Found model:
+  Architecture: unet
+  n_filters: 32
+  dropout: 0.1
+  Path: best_models_PyTorch/unet/best_model.pth
+
+✓ Model loaded successfully
+
+================================================================================
+STEP 2: LOADING IMAGE
+================================================================================
+
+Full image shape: (2160, 3840)
+Extracted tile: (512, 512)
+Preprocessed tile: torch.Size([1, 1, 512, 512])
+✓ Saved input tiles to: unet_visualization_20251027_165235
+
+================================================================================
+STEP 3: GENERATING PREDICTION
+================================================================================
+✓ Saved prediction to: unet_visualization_20251027_165235
+
+================================================================================
+STEP 4: VISUALIZING FEATURE MAPS
+================================================================================
+
+Visualizing feature maps...
+Plotting feature maps:   0%|          | 0/9 [00:00<?, ?it/s]Plotting feature maps:  11%|█         | 1/9 [00:01<00:15,  1.90s/it]Plotting feature maps:  22%|██▏       | 2/9 [00:03<00:11,  1.67s/it]Plotting feature maps:  33%|███▎      | 3/9 [00:04<00:09,  1.54s/it]Plotting feature maps:  44%|████▍     | 4/9 [00:05<00:06,  1.40s/it]Plotting feature maps:  56%|█████▌    | 5/9 [00:07<00:05,  1.33s/it]Plotting feature maps:  67%|██████▋   | 6/9 [00:08<00:03,  1.26s/it]Plotting feature maps:  78%|███████▊  | 7/9 [00:09<00:02,  1.30s/it]Plotting feature maps:  89%|████████▉ | 8/9 [00:11<00:01,  1.37s/it]Plotting feature maps: 100%|██████████| 9/9 [00:13<00:00,  1.53s/it]Plotting feature maps: 100%|██████████| 9/9 [00:13<00:00,  1.45s/it]
+✓ Saved 9 feature map visualizations to: unet_visualization_20251027_165235/feature_maps
+
+================================================================================
+STEP 5: VISUALIZING FEATURE INVERSIONS
+================================================================================
+
+Visualizing feature inversions...
+Running feature inversions:   0%|          | 0/6 [00:00<?, ?it/s]Running feature inversions:  17%|█▋        | 1/6 [00:26<02:12, 26.42s/it]Running feature inversions:  33%|███▎      | 2/6 [00:52<01:45, 26.30s/it]Running feature inversions:  50%|█████     | 3/6 [01:20<01:21, 27.09s/it]Running feature inversions:  67%|██████▋   | 4/6 [01:49<00:55, 27.95s/it]Running feature inversions:  83%|████████▎ | 5/6 [02:20<00:28, 28.89s/it]Running feature inversions: 100%|██████████| 6/6 [03:10<00:00, 36.06s/it]Running feature inversions: 100%|██████████| 6/6 [03:10<00:00, 31.75s/it]
+
+--- Starting Feature Inversion for: encoder_1 ---
+Target feature map shape: torch.Size([1, 32, 512, 512])
+  Step    0/2000 | Total Loss: 60.1439 | Feature Loss: 60.1399 | TV Loss: 3.9922
+  Step  200/2000 | Total Loss: 0.2088 | Feature Loss: 0.2088 | TV Loss: 0.0197
+  Step  400/2000 | Total Loss: 0.1188 | Feature Loss: 0.1187 | TV Loss: 0.0174
+  Step  600/2000 | Total Loss: 0.0552 | Feature Loss: 0.0552 | TV Loss: 0.0124
+  Step  800/2000 | Total Loss: 0.0088 | Feature Loss: 0.0088 | TV Loss: 0.0061
+  Step 1000/2000 | Total Loss: 0.0000 | Feature Loss: 0.0000 | TV Loss: 0.0047
+  Step 1200/2000 | Total Loss: 0.0000 | Feature Loss: 0.0000 | TV Loss: 0.0047
+  Step 1400/2000 | Total Loss: 0.0000 | Feature Loss: 0.0000 | TV Loss: 0.0047
+  Step 1600/2000 | Total Loss: 0.0000 | Feature Loss: 0.0000 | TV Loss: 0.0047
+  Step 1800/2000 | Total Loss: 0.0000 | Feature Loss: 0.0000 | TV Loss: 0.0047
+  Step 2000/2000 | Total Loss: 0.0000 | Feature Loss: 0.0000 | TV Loss: 0.0047
+Optimization finished.
+
+--- Starting Feature Inversion for: encoder_2 ---
+Target feature map shape: torch.Size([1, 64, 256, 256])
+  Step    0/2000 | Total Loss: 146.9730 | Feature Loss: 146.9690 | TV Loss: 4.0037
+  Step  200/2000 | Total Loss: 0.1484 | Feature Loss: 0.1484 | TV Loss: 0.0510
+  Step  400/2000 | Total Loss: 0.1129 | Feature Loss: 0.1128 | TV Loss: 0.0424
+  Step  600/2000 | Total Loss: 0.0967 | Feature Loss: 0.0967 | TV Loss: 0.0395
+  Step  800/2000 | Total Loss: 0.0821 | Feature Loss: 0.0821 | TV Loss: 0.0384
+  Step 1000/2000 | Total Loss: 0.0658 | Feature Loss: 0.0657 | TV Loss: 0.0385
+  Step 1200/2000 | Total Loss: 0.0508 | Feature Loss: 0.0508 | TV Loss: 0.0391
+  Step 1400/2000 | Total Loss: 0.0391 | Feature Loss: 0.0391 | TV Loss: 0.0392
+  Step 1600/2000 | Total Loss: 0.0291 | Feature Loss: 0.0291 | TV Loss: 0.0377
+  Step 1800/2000 | Total Loss: 0.0191 | Feature Loss: 0.0190 | TV Loss: 0.0336
+  Step 2000/2000 | Total Loss: 0.0110 | Feature Loss: 0.0109 | TV Loss: 0.0276
+Optimization finished.
+
+--- Starting Feature Inversion for: encoder_3 ---
+Target feature map shape: torch.Size([1, 128, 128, 128])
+  Step    0/2000 | Total Loss: 220.3699 | Feature Loss: 220.3659 | TV Loss: 4.0032
+  Step  200/2000 | Total Loss: 0.0573 | Feature Loss: 0.0572 | TV Loss: 0.1257
+  Step  400/2000 | Total Loss: 0.0337 | Feature Loss: 0.0335 | TV Loss: 0.1111
+  Step  600/2000 | Total Loss: 0.0251 | Feature Loss: 0.0250 | TV Loss: 0.1060
+  Step  800/2000 | Total Loss: 0.0201 | Feature Loss: 0.0200 | TV Loss: 0.1033
+  Step 1000/2000 | Total Loss: 0.0166 | Feature Loss: 0.0165 | TV Loss: 0.1012
+  Step 1200/2000 | Total Loss: 0.0138 | Feature Loss: 0.0137 | TV Loss: 0.0996
+  Step 1400/2000 | Total Loss: 0.0116 | Feature Loss: 0.0115 | TV Loss: 0.0981
+  Step 1600/2000 | Total Loss: 0.0096 | Feature Loss: 0.0095 | TV Loss: 0.0967
+  Step 1800/2000 | Total Loss: 0.0079 | Feature Loss: 0.0078 | TV Loss: 0.0952
+  Step 2000/2000 | Total Loss: 0.0065 | Feature Loss: 0.0064 | TV Loss: 0.0937
+Optimization finished.
+
+--- Starting Feature Inversion for: encoder_4 ---
+Target feature map shape: torch.Size([1, 256, 64, 64])
+  Step    0/2000 | Total Loss: 226.4854 | Feature Loss: 226.4814 | TV Loss: 3.9840
+  Step  200/2000 | Total Loss: 0.4185 | Feature Loss: 0.4182 | TV Loss: 0.2693
+  Step  400/2000 | Total Loss: 0.2758 | Feature Loss: 0.2755 | TV Loss: 0.2073
+  Step  600/2000 | Total Loss: 0.0952 | Feature Loss: 0.0951 | TV Loss: 0.1545
+  Step  800/2000 | Total Loss: 0.0097 | Feature Loss: 0.0095 | TV Loss: 0.1330
+  Step 1000/2000 | Total Loss: 0.0013 | Feature Loss: 0.0012 | TV Loss: 0.1271
+  Step 1200/2000 | Total Loss: 0.0010 | Feature Loss: 0.0008 | TV Loss: 0.1242
+  Step 1400/2000 | Total Loss: 0.0008 | Feature Loss: 0.0007 | TV Loss: 0.1220
+  Step 1600/2000 | Total Loss: 0.0007 | Feature Loss: 0.0005 | TV Loss: 0.1202
+  Step 1800/2000 | Total Loss: 0.0006 | Feature Loss: 0.0005 | TV Loss: 0.1186
+  Step 2000/2000 | Total Loss: 0.0005 | Feature Loss: 0.0004 | TV Loss: 0.1172
+Optimization finished.
+
+--- Starting Feature Inversion for: bottleneck ---
+Target feature map shape: torch.Size([1, 512, 32, 32])
+  Step    0/2000 | Total Loss: 180.1737 | Feature Loss: 180.1697 | TV Loss: 4.0009
+  Step  200/2000 | Total Loss: 0.3054 | Feature Loss: 0.3049 | TV Loss: 0.5053
+  Step  400/2000 | Total Loss: 0.2690 | Feature Loss: 0.2685 | TV Loss: 0.5174
+  Step  600/2000 | Total Loss: 0.2495 | Feature Loss: 0.2490 | TV Loss: 0.5228
+  Step  800/2000 | Total Loss: 0.2357 | Feature Loss: 0.2352 | TV Loss: 0.5273
+  Step 1000/2000 | Total Loss: 0.2251 | Feature Loss: 0.2246 | TV Loss: 0.5316
+  Step 1200/2000 | Total Loss: 0.2166 | Feature Loss: 0.2161 | TV Loss: 0.5353
+  Step 1400/2000 | Total Loss: 0.2098 | Feature Loss: 0.2092 | TV Loss: 0.5386
+  Step 1600/2000 | Total Loss: 0.2041 | Feature Loss: 0.2036 | TV Loss: 0.5413
+  Step 1800/2000 | Total Loss: 0.1994 | Feature Loss: 0.1989 | TV Loss: 0.5434
+  Step 2000/2000 | Total Loss: 0.1954 | Feature Loss: 0.1949 | TV Loss: 0.5449
+Optimization finished.
+
+--- Starting Feature Inversion for: decoder_1 ---
+Target feature map shape: torch.Size([1, 32, 512, 512])
+  Step    0/2000 | Total Loss: 6.9076 | Feature Loss: 6.9036 | TV Loss: 3.9978
+  Step  200/2000 | Total Loss: 0.0381 | Feature Loss: 0.0379 | TV Loss: 0.1889
+  Step  400/2000 | Total Loss: 0.0146 | Feature Loss: 0.0145 | TV Loss: 0.1198
+  Step  600/2000 | Total Loss: 0.0074 | Feature Loss: 0.0073 | TV Loss: 0.0692
+  Step  800/2000 | Total Loss: 0.0020 | Feature Loss: 0.0020 | TV Loss: 0.0300
+  Step 1000/2000 | Total Loss: 0.0007 | Feature Loss: 0.0007 | TV Loss: 0.0211
+  Step 1200/2000 | Total Loss: 0.0006 | Feature Loss: 0.0006 | TV Loss: 0.0184
+  Step 1400/2000 | Total Loss: 0.0004 | Feature Loss: 0.0004 | TV Loss: 0.0163
+  Step 1600/2000 | Total Loss: 0.0004 | Feature Loss: 0.0004 | TV Loss: 0.0146
+  Step 1800/2000 | Total Loss: 0.0003 | Feature Loss: 0.0003 | TV Loss: 0.0130
+  Step 2000/2000 | Total Loss: 0.0003 | Feature Loss: 0.0002 | TV Loss: 0.0115
+Optimization finished.
+✓ Saved 6 feature inversion visualizations to: unet_visualization_20251027_165235/feature_inversions
+
+================================================================================
+VISUALIZATION COMPLETE
+================================================================================
+Results saved to: unet_visualization_20251027_165235
+
+Generated files:
+  Input:
+    - input_tile_original.png
+    - input_tile_preprocessed.png
+    - prediction.png
+  Feature Maps:
+    - feature_maps/ (9 layers)
+  Feature Inversions:
+    - feature_inversions/ (6 layers)
+  - visualization_metadata.json
+
+========================================
+VISUALIZATION COMPLETE
+========================================
+End Time: Mon Oct 27 04:56:13 PM +08 2025
+
+Output directory: unet_visualization_20251027_165235
+
+Generated files:
+  Input:
+    - unet_visualization_20251027_165235/input_tile_original.png
+    - unet_visualization_20251027_165235/input_tile_preprocessed.png
+    - unet_visualization_20251027_165235/prediction.png
+
+  Feature Maps (9 layers):
+    - unet_visualization_20251027_165235/feature_maps/feature_map_encoder_1.png
+    - unet_visualization_20251027_165235/feature_maps/feature_map_encoder_2.png
+    - unet_visualization_20251027_165235/feature_maps/feature_map_encoder_3.png
+    - unet_visualization_20251027_165235/feature_maps/feature_map_encoder_4.png
+    - unet_visualization_20251027_165235/feature_maps/feature_map_bottleneck.png
+    - unet_visualization_20251027_165235/feature_maps/feature_map_decoder_4.png
+    - unet_visualization_20251027_165235/feature_maps/feature_map_decoder_3.png
+    - unet_visualization_20251027_165235/feature_maps/feature_map_decoder_2.png
+    - unet_visualization_20251027_165235/feature_maps/feature_map_decoder_1.png
+
+  Feature Inversions (6 layers):
+    - unet_visualization_20251027_165235/feature_inversions/feature_inversion_encoder_1.png
+    - unet_visualization_20251027_165235/feature_inversions/feature_inversion_encoder_2.png
+    - unet_visualization_20251027_165235/feature_inversions/feature_inversion_encoder_3.png
+    - unet_visualization_20251027_165235/feature_inversions/feature_inversion_encoder_4.png
+    - unet_visualization_20251027_165235/feature_inversions/feature_inversion_bottleneck.png
+    - unet_visualization_20251027_165235/feature_inversions/feature_inversion_decoder_1.png
+
+  Metadata:
+    - unet_visualization_20251027_165235/visualization_metadata.json
+
+========================================
+
+To view results, sync from HPC to your local machine:
+  rsync -avz <user>@hpc:<path>/unet_visualization_20251027_165235 /local/path/
+
+========================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-27 16:56:14.290709:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 323745.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:03:45
+	Memory: Requested(240gb), Used(2221676kb)
+	Vmem Used: 15183872kb
+	Walltime: Requested(02:00:00), Used(00:03:40)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-102[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.

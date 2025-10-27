@@ -1,0 +1,16 @@
+{
+  "model_metadata": {
+    "architecture": "unet",
+    "n_filters": 32,
+    "dropout": 0.1,
+    "model_path": "best_models_PyTorch/unet/best_model.pth"
+  },
+  "test_image": "./test_images/1280x_2025-05-16_00-59-00_002.tif",
+  "tile_position": {
+    "x": 0,
+    "y": 0
+  },
+  "tile_size": 512,
+  "output_dir": "unet_visualization_20251027_165235",
+  "timestamp": "2025-10-27 16:56:12"
+}
