@@ -1,0 +1,17 @@
+{
+  "model_metadata": {
+    "architecture": "unet",
+    "n_filters": 32,
+    "dropout": 0.1,
+    "model_path": "best_models_PyTorch/unet/best_model.pth"
+  },
+  "test_images_dir": "./test_images",
+  "num_images_processed": 8,
+  "tile_position": {
+    "row": 3,
+    "col": 4
+  },
+  "n_clusters": 8,
+  "umap_available": false,
+  "timestamp": "2025-10-28 01:01:49"
+}

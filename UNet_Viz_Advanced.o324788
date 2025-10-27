@@ -1,0 +1,448 @@
+========================================
+Job ID: 324788.stdct-mgmt-02
+Job Name: UNet_Viz_Advanced
+Node: GN-A40-074
+Start Time: Tue Oct 28 12:05:07 AM +08 2025
+Working Directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================
+
+Configuration:
+  Test Images: ./test_images
+  Tile Position: row 3, col 4
+  Model Cache: ./best_models_PyTorch
+  UMAP Clusters: 8
+  Output: unet_visualization_advanced_20251028_000507
+========================================
+
+GPU Information:
+Tue Oct 28 00:05:07 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     Off |   00000000:AE:00.0 Off |                    0 |
+|  0%   32C    P8             22W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+Software versions:
+Python 3.10.12
+PyTorch: 2.4.0a0+f70bd71a48.nv24.06
+
+Checking UMAP availability:
+✗ UMAP not available (will skip clustering)
+  Install with: pip install umap-learn
+
+========================================
+VERIFYING PREREQUISITES
+========================================
+
+✓ Found 8 test images
+✓ Found 3 cached model(s)
+
+========================================
+RUNNING ADVANCED U-NET VISUALIZATION
+========================================
+
+Processing 8 test images...
+
+Enhanced features:
+  1. Feature inversions at correct dimensions
+     - encoder_1: 512×512
+     - encoder_2: 256×256 (after pool1)
+     - encoder_3: 128×128 (after pool2)
+     - encoder_4: 64×64 (after pool3)
+     - bottleneck: 32×32 (after pool4)
+     - decoder layers: 64→128→256→512
+
+  2. UMAP clustering of feature maps
+     - Reduces ~32-512 feature maps to 8 representatives
+     - Shows UMAP scatter plots with cluster assignments
+     - Plots only representative feature maps per cluster
+
+Output per image:
+  - 1 × 3-panel figure
+  - 9 × UMAP cluster scatter plots
+  - 9 × representative feature maps (~8 channels each)
+  - 9 × feature inversions (at correct dimensions)
+
+Estimated time: 4-6 hours total (~30-45 min per image)
+========================================
+
+WARNING: UMAP not available. Install with: pip install umap-learn
+Using device: cuda
+
+WARNING: UMAP not available. Clustering will be skipped.
+Install with: pip install umap-learn scikit-learn
+================================================================================
+ADVANCED U-NET FEATURE VISUALIZATION
+================================================================================
+Model cache: ./best_models_PyTorch
+Test images: ./test_images
+Tile position: row 3, col 4
+UMAP clusters: 8
+Output: unet_visualization_advanced_20251028_000507
+================================================================================
+
+================================================================================
+LOADING MODEL
+================================================================================
+
+Model: unet
+  n_filters: 32
+  dropout: 0.1
+✓ Model loaded
+
+================================================================================
+FINDING TEST IMAGES
+================================================================================
+
+Found 8 images:
+  - 10240x_2025-05-29_02-22-00_002.tif
+  - 1280x_2025-05-16_00-59-00_002.tif
+  - 160x_2025-05-15_02-05-00.tif
+  - 2560x_2025-05-16_00-59-00_002.tif
+  - 320x_2025-05-15_02-05-00.tif
+  - 5120x_2025-05-16_00-59-00.tif
+  - 640x_2025-05-16_00-59-00_002.tif
+  - 80x_2025-05-22_14-48-00.tif
+
+================================================================================
+PROCESSING ALL TEST IMAGES
+================================================================================
+
+================================================================================
+Processing: 10240x_2025-05-29_02-22-00_002
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with UMAP clustering...
+  Clustering feature maps...
+  WARNING: UMAP not available, returning all channels
+Plotting representative feature maps:   0%|          | 0/9 [00:00<?, ?it/s]Plotting representative feature maps:  11%|█         | 1/9 [00:04<00:34,  4.32s/it]Plotting representative feature maps:  22%|██▏       | 2/9 [00:12<00:44,  6.35s/it]Plotting representative feature maps:  33%|███▎      | 3/9 [00:23<00:52,  8.76s/it]Plotting representative feature maps:  44%|████▍     | 4/9 [00:43<01:05, 13.16s/it]Plotting representative feature maps:  56%|█████▌    | 5/9 [01:22<01:30, 22.54s/it]Plotting representative feature maps:  67%|██████▋   | 6/9 [01:44<01:06, 22.25s/it]Plotting representative feature maps:  78%|███████▊  | 7/9 [01:57<00:38, 19.10s/it]Plotting representative feature maps:  89%|████████▉ | 8/9 [02:04<00:15, 15.36s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:08<00:00, 11.96s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:08<00:00, 14.33s/it]
+  ✓ Saved 9 representative feature map visualizations
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:25<03:26, 25.82s/it]Running feature inversions:  22%|██▏       | 2/9 [00:51<02:59, 25.71s/it]Running feature inversions:  33%|███▎      | 3/9 [01:18<02:38, 26.42s/it]Running feature inversions:  44%|████▍     | 4/9 [01:47<02:16, 27.31s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:17<01:53, 28.30s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:49<01:28, 29.65s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:25<01:03, 31.53s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:05<00:34, 34.40s/it]Running feature inversions: 100%|██████████| 9/9 [04:54<00:00, 39.01s/it]Running feature inversions: 100%|██████████| 9/9 [04:54<00:00, 32.76s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 10240x_2025-05-29_02-22-00_002
+
+================================================================================
+Processing: 1280x_2025-05-16_00-59-00_002
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with UMAP clustering...
+  Clustering feature maps...
+  WARNING: UMAP not available, returning all channels
+Plotting representative feature maps:   0%|          | 0/9 [00:00<?, ?it/s]Plotting representative feature maps:  11%|█         | 1/9 [00:04<00:35,  4.45s/it]Plotting representative feature maps:  22%|██▏       | 2/9 [00:11<00:43,  6.14s/it]Plotting representative feature maps:  33%|███▎      | 3/9 [00:25<00:56,  9.42s/it]Plotting representative feature maps:  44%|████▍     | 4/9 [00:46<01:09, 13.96s/it]Plotting representative feature maps:  56%|█████▌    | 5/9 [01:25<01:33, 23.30s/it]Plotting representative feature maps:  67%|██████▋   | 6/9 [01:47<01:08, 22.79s/it]Plotting representative feature maps:  78%|███████▊  | 7/9 [02:01<00:39, 19.90s/it]Plotting representative feature maps:  89%|████████▉ | 8/9 [02:09<00:15, 15.94s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:13<00:00, 12.31s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:13<00:00, 14.82s/it]
+  ✓ Saved 9 representative feature map visualizations
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:22<03:02, 22.76s/it]Running feature inversions:  22%|██▏       | 2/9 [00:48<02:51, 24.44s/it]Running feature inversions:  33%|███▎      | 3/9 [01:15<02:34, 25.75s/it]Running feature inversions:  44%|████▍     | 4/9 [01:44<02:14, 26.87s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:14<01:52, 28.03s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:46<01:28, 29.49s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:22<01:02, 31.44s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:02<00:34, 34.35s/it]Running feature inversions: 100%|██████████| 9/9 [04:52<00:00, 39.06s/it]Running feature inversions: 100%|██████████| 9/9 [04:52<00:00, 32.46s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 1280x_2025-05-16_00-59-00_002
+
+================================================================================
+Processing: 160x_2025-05-15_02-05-00
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with UMAP clustering...
+  Clustering feature maps...
+  WARNING: UMAP not available, returning all channels
+Plotting representative feature maps:   0%|          | 0/9 [00:00<?, ?it/s]Plotting representative feature maps:  11%|█         | 1/9 [00:04<00:34,  4.26s/it]Plotting representative feature maps:  22%|██▏       | 2/9 [00:11<00:42,  6.13s/it]Plotting representative feature maps:  33%|███▎      | 3/9 [00:26<00:59,  9.99s/it]Plotting representative feature maps:  44%|████▍     | 4/9 [00:46<01:10, 14.09s/it]Plotting representative feature maps:  56%|█████▌    | 5/9 [01:26<01:34, 23.53s/it]Plotting representative feature maps:  67%|██████▋   | 6/9 [01:48<01:08, 22.85s/it]Plotting representative feature maps:  78%|███████▊  | 7/9 [02:02<00:39, 19.83s/it]Plotting representative feature maps:  89%|████████▉ | 8/9 [02:09<00:15, 15.94s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:14<00:00, 12.33s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:14<00:00, 14.90s/it]
+  ✓ Saved 9 representative feature map visualizations
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:22<03:02, 22.81s/it]Running feature inversions:  22%|██▏       | 2/9 [00:48<02:51, 24.48s/it]Running feature inversions:  33%|███▎      | 3/9 [01:15<02:34, 25.77s/it]Running feature inversions:  44%|████▍     | 4/9 [01:44<02:14, 26.90s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:14<01:52, 28.05s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:46<01:28, 29.50s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:22<01:02, 31.45s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:02<00:34, 34.35s/it]Running feature inversions: 100%|██████████| 9/9 [04:52<00:00, 39.01s/it]Running feature inversions: 100%|██████████| 9/9 [04:52<00:00, 32.45s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 160x_2025-05-15_02-05-00
+
+================================================================================
+Processing: 2560x_2025-05-16_00-59-00_002
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with UMAP clustering...
+  Clustering feature maps...
+  WARNING: UMAP not available, returning all channels
+Plotting representative feature maps:   0%|          | 0/9 [00:00<?, ?it/s]Plotting representative feature maps:  11%|█         | 1/9 [00:04<00:35,  4.42s/it]Plotting representative feature maps:  22%|██▏       | 2/9 [00:11<00:42,  6.12s/it]Plotting representative feature maps:  33%|███▎      | 3/9 [00:24<00:55,  9.22s/it]Plotting representative feature maps:  44%|████▍     | 4/9 [00:45<01:08, 13.63s/it]Plotting representative feature maps:  56%|█████▌    | 5/9 [01:23<01:30, 22.68s/it]Plotting representative feature maps:  67%|██████▋   | 6/9 [01:44<01:06, 22.14s/it]Plotting representative feature maps:  78%|███████▊  | 7/9 [01:58<00:38, 19.40s/it]Plotting representative feature maps:  89%|████████▉ | 8/9 [02:05<00:15, 15.49s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:09<00:00, 11.98s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:09<00:00, 14.44s/it]
+  ✓ Saved 9 representative feature map visualizations
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:22<03:02, 22.77s/it]Running feature inversions:  22%|██▏       | 2/9 [00:48<02:51, 24.45s/it]Running feature inversions:  33%|███▎      | 3/9 [01:15<02:34, 25.74s/it]Running feature inversions:  44%|████▍     | 4/9 [01:44<02:14, 26.87s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:14<01:52, 28.03s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:46<01:28, 29.48s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:22<01:02, 31.43s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:02<00:34, 34.34s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 38.98s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 32.43s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 2560x_2025-05-16_00-59-00_002
+
+================================================================================
+Processing: 320x_2025-05-15_02-05-00
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with UMAP clustering...
+  Clustering feature maps...
+  WARNING: UMAP not available, returning all channels
+Plotting representative feature maps:   0%|          | 0/9 [00:00<?, ?it/s]Plotting representative feature maps:  11%|█         | 1/9 [00:04<00:32,  4.02s/it]Plotting representative feature maps:  22%|██▏       | 2/9 [00:11<00:40,  5.80s/it]Plotting representative feature maps:  33%|███▎      | 3/9 [00:25<00:57,  9.60s/it]Plotting representative feature maps:  44%|████▍     | 4/9 [00:44<01:08, 13.60s/it]Plotting representative feature maps:  56%|█████▌    | 5/9 [01:23<01:30, 22.66s/it]Plotting representative feature maps:  67%|██████▋   | 6/9 [01:44<01:06, 22.02s/it]Plotting representative feature maps:  78%|███████▊  | 7/9 [01:57<00:38, 19.11s/it]Plotting representative feature maps:  89%|████████▉ | 8/9 [02:04<00:15, 15.32s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:09<00:00, 11.86s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:09<00:00, 14.33s/it]
+  ✓ Saved 9 representative feature map visualizations
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:22<03:02, 22.76s/it]Running feature inversions:  22%|██▏       | 2/9 [00:48<02:51, 24.43s/it]Running feature inversions:  33%|███▎      | 3/9 [01:15<02:34, 25.74s/it]Running feature inversions:  44%|████▍     | 4/9 [01:44<02:14, 26.87s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:14<01:52, 28.03s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:46<01:28, 29.48s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:22<01:02, 31.43s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:02<00:34, 34.34s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 38.99s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 32.43s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 320x_2025-05-15_02-05-00
+
+================================================================================
+Processing: 5120x_2025-05-16_00-59-00
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with UMAP clustering...
+  Clustering feature maps...
+  WARNING: UMAP not available, returning all channels
+Plotting representative feature maps:   0%|          | 0/9 [00:00<?, ?it/s]Plotting representative feature maps:  11%|█         | 1/9 [00:04<00:34,  4.29s/it]Plotting representative feature maps:  22%|██▏       | 2/9 [00:11<00:42,  6.05s/it]Plotting representative feature maps:  33%|███▎      | 3/9 [00:24<00:53,  8.99s/it]Plotting representative feature maps:  44%|████▍     | 4/9 [00:43<01:06, 13.25s/it]Plotting representative feature maps:  56%|█████▌    | 5/9 [01:22<01:29, 22.28s/it]Plotting representative feature maps:  67%|██████▋   | 6/9 [01:43<01:05, 21.87s/it]Plotting representative feature maps:  78%|███████▊  | 7/9 [01:56<00:38, 19.09s/it]Plotting representative feature maps:  89%|████████▉ | 8/9 [02:03<00:15, 15.16s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:07<00:00, 11.73s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:07<00:00, 14.17s/it]
+  ✓ Saved 9 representative feature map visualizations
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:22<03:02, 22.77s/it]Running feature inversions:  22%|██▏       | 2/9 [00:48<02:51, 24.45s/it]Running feature inversions:  33%|███▎      | 3/9 [01:15<02:34, 25.75s/it]Running feature inversions:  44%|████▍     | 4/9 [01:44<02:14, 26.87s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:14<01:52, 28.03s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:46<01:28, 29.48s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:22<01:02, 31.42s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:02<00:34, 34.33s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 38.98s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 32.43s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 5120x_2025-05-16_00-59-00
+
+================================================================================
+Processing: 640x_2025-05-16_00-59-00_002
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with UMAP clustering...
+  Clustering feature maps...
+  WARNING: UMAP not available, returning all channels
+Plotting representative feature maps:   0%|          | 0/9 [00:00<?, ?it/s]Plotting representative feature maps:  11%|█         | 1/9 [00:04<00:34,  4.37s/it]Plotting representative feature maps:  22%|██▏       | 2/9 [00:11<00:42,  6.07s/it]Plotting representative feature maps:  33%|███▎      | 3/9 [00:25<00:56,  9.45s/it]Plotting representative feature maps:  44%|████▍     | 4/9 [00:44<01:07, 13.42s/it]Plotting representative feature maps:  56%|█████▌    | 5/9 [01:22<01:29, 22.32s/it]Plotting representative feature maps:  67%|██████▋   | 6/9 [01:43<01:05, 21.89s/it]Plotting representative feature maps:  78%|███████▊  | 7/9 [01:56<00:37, 18.98s/it]Plotting representative feature maps:  89%|████████▉ | 8/9 [02:03<00:15, 15.22s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:08<00:00, 11.78s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:08<00:00, 14.24s/it]
+  ✓ Saved 9 representative feature map visualizations
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:22<03:02, 22.76s/it]Running feature inversions:  22%|██▏       | 2/9 [00:48<02:51, 24.44s/it]Running feature inversions:  33%|███▎      | 3/9 [01:15<02:34, 25.74s/it]Running feature inversions:  44%|████▍     | 4/9 [01:44<02:14, 26.86s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:14<01:52, 28.08s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:46<01:28, 29.52s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:22<01:02, 31.45s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:02<00:34, 34.35s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 38.99s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 32.44s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 640x_2025-05-16_00-59-00_002
+
+================================================================================
+Processing: 80x_2025-05-22_14-48-00
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with UMAP clustering...
+  Clustering feature maps...
+  WARNING: UMAP not available, returning all channels
+Plotting representative feature maps:   0%|          | 0/9 [00:00<?, ?it/s]Plotting representative feature maps:  11%|█         | 1/9 [00:04<00:34,  4.28s/it]Plotting representative feature maps:  22%|██▏       | 2/9 [00:11<00:41,  5.99s/it]Plotting representative feature maps:  33%|███▎      | 3/9 [00:25<00:58,  9.80s/it]Plotting representative feature maps:  44%|████▍     | 4/9 [00:45<01:08, 13.62s/it]Plotting representative feature maps:  56%|█████▌    | 5/9 [01:23<01:29, 22.47s/it]Plotting representative feature maps:  67%|██████▋   | 6/9 [01:44<01:06, 22.06s/it]Plotting representative feature maps:  78%|███████▊  | 7/9 [01:58<00:38, 19.24s/it]Plotting representative feature maps:  89%|████████▉ | 8/9 [02:05<00:15, 15.50s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:09<00:00, 11.99s/it]Plotting representative feature maps: 100%|██████████| 9/9 [02:09<00:00, 14.43s/it]
+  ✓ Saved 9 representative feature map visualizations
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:22<03:03, 22.88s/it]Running feature inversions:  22%|██▏       | 2/9 [00:48<02:51, 24.51s/it]Running feature inversions:  33%|███▎      | 3/9 [01:15<02:34, 25.79s/it]Running feature inversions:  44%|████▍     | 4/9 [01:44<02:14, 26.91s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:14<01:52, 28.05s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:46<01:28, 29.52s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:22<01:02, 31.46s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:02<00:34, 34.37s/it]Running feature inversions: 100%|██████████| 9/9 [04:52<00:00, 39.02s/it]Running feature inversions: 100%|██████████| 9/9 [04:52<00:00, 32.47s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 80x_2025-05-22_14-48-00
+
+================================================================================
+VISUALIZATION COMPLETE
+================================================================================
+Results: unet_visualization_advanced_20251028_000507
+
+Processed 8 images with:
+  - 3-panel figures (original + preprocessed + prediction)
+  - UMAP clustered feature maps (8 clusters per layer)
+  - Feature inversions at correct dimensions (512→256→128→64→32)
+================================================================================
+
+========================================
+VISUALIZATION COMPLETE
+========================================
+End Time: Tue Oct 28 01:01:50 AM +08 2025
+
+Output directory: unet_visualization_advanced_20251028_000507
+
+Generated structure:
+
+unet_visualization_advanced_20251028_000507/
+  ├── <image_1>/
+  │   ├── <image_1>_3panel.png
+  │   ├── feature_maps/
+  │   │   ├── umap_clusters/
+  │   │   │   ├── umap_clusters_encoder_1_conv2.png
+  │   │   │   ├── umap_clusters_encoder_2_conv2.png
+  │   │   │   ├── ... (9 UMAP plots)
+  │   │   │   └── umap_clusters_decoder_1_conv2.png
+  │   │   └── representative_feature_maps/
+  │   │       ├── feature_map_encoder_1_conv2.png (~8 reps)
+  │   │       ├── feature_map_encoder_2_conv2.png
+  │   │       ├── ... (9 layers)
+  │   │       └── feature_map_decoder_1_conv2.png
+  │   ├── feature_inversions/
+  │   │   ├── feature_inversion_encoder_1_conv2.png (from 512×512)
+  │   │   ├── feature_inversion_encoder_2_conv2.png (from 256×256)
+  │   │   ├── feature_inversion_encoder_3_conv2.png (from 128×128)
+  │   │   ├── feature_inversion_encoder_4_conv2.png (from 64×64)
+  │   │   ├── feature_inversion_bottleneck_conv2.png (from 32×32)
+  │   │   ├── feature_inversion_decoder_4_conv2.png (from 64×64)
+  │   │   ├── feature_inversion_decoder_3_conv2.png (from 128×128)
+  │   │   ├── feature_inversion_decoder_2_conv2.png (from 256×256)
+  │   │   └── feature_inversion_decoder_1_conv2.png (from 512×512)
+  │   └── tile_metadata.json
+  ├── <image_2>/
+  │   └── ...
+  ├── ... (8 images total)
+  └── visualization_metadata.json
+
+Key improvements over basic version:
+  ✓ Feature inversions match architecture dimensions
+  ✓ UMAP clustering reduces feature map redundancy
+  ✓ Only ~8 representative features per layer (vs 32-512)
+  ✓ Cluster visualization shows feature map groupings
+
+Total files per image: ~27 visualizations
+  - 1 3-panel figure
+  - 9 UMAP cluster plots
+  - 9 representative feature maps
+  - 9 feature inversions
+
+========================================
+
+To view results, sync from HPC:
+  rsync -avz <user>@hpc:/home/svu/phyzxi/scratch/unet-HPC/unet_visualization_advanced_20251028_000507 /local/path/
+
+========================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-28 01:01:51.403988:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 324788.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:57:46
+	Memory: Requested(240gb), Used(3983260kb)
+	Vmem Used: 16682140kb
+	Walltime: Requested(08:00:00), Used(00:56:44)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-074[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.

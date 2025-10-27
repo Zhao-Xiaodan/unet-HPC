@@ -1,0 +1,15 @@
+{
+  "image_name": "2560x_2025-05-16_00-59-00_002",
+  "full_image_shape": [
+    2160,
+    3840
+  ],
+  "tile_position": {
+    "y": 1024,
+    "x": 1536
+  },
+  "tile_row": 3,
+  "tile_col": 4,
+  "tile_size": 512,
+  "n_clusters": 8
+}
