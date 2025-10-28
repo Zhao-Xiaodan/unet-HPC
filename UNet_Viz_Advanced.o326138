@@ -1,0 +1,480 @@
+========================================
+Job ID: 326138.stdct-mgmt-02
+Job Name: UNet_Viz_Advanced
+Node: GN-A40-072
+Start Time: Tue Oct 28 09:18:57 AM +08 2025
+Working Directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================
+
+Configuration:
+  Test Images: ./test_images
+  Tile Position: row 3, col 4
+  Model Cache: ./best_models_PyTorch
+  UMAP Clusters: 8
+  Output: unet_visualization_advanced_20251028_091857
+========================================
+
+GPU Information:
+Tue Oct 28 09:18:58 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     Off |   00000000:0A:00.0 Off |                    0 |
+|  0%   31C    P8             21W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+Software versions:
+Python 3.10.12
+PyTorch: 2.4.0a0+f70bd71a48.nv24.06
+
+Checking UMAP availability:
+✗ UMAP not available (will skip clustering)
+  Install with: pip install umap-learn
+
+========================================
+VERIFYING PREREQUISITES
+========================================
+
+✓ Found 8 test images
+✓ Found 3 cached model(s)
+
+========================================
+RUNNING ADVANCED U-NET VISUALIZATION
+========================================
+
+Processing 8 test images...
+
+Enhanced features:
+  1. Feature inversions at correct dimensions
+     - encoder_1: 512×512
+     - encoder_2: 256×256 (after pool1)
+     - encoder_3: 128×128 (after pool2)
+     - encoder_4: 64×64 (after pool3)
+     - bottleneck: 32×32 (after pool4)
+     - decoder layers: 64→128→256→512
+
+  2. UMAP clustering of feature maps
+     - Reduces ~32-512 feature maps to 8 representatives
+     - Shows UMAP scatter plots with cluster assignments
+     - Plots only representative feature maps per cluster
+
+Output per image:
+  - 1 × 3-panel figure
+  - 9 × UMAP cluster scatter plots
+  - 9 × representative feature maps (~8 channels each)
+  - 9 × feature inversions (at correct dimensions)
+
+Estimated time: 4-6 hours total (~30-45 min per image)
+========================================
+
+⚠ UMAP not available. Will use PCA only. Install with: pip install umap-learn
+Using device: cuda
+
+WARNING: UMAP not available. Clustering will be skipped.
+Install with: pip install umap-learn scikit-learn
+================================================================================
+ADVANCED U-NET FEATURE VISUALIZATION
+================================================================================
+Model cache: ./best_models_PyTorch
+Test images: ./test_images
+Tile position: row 3, col 4
+UMAP clusters: 8
+Output: unet_visualization_advanced_20251028_091857
+================================================================================
+
+================================================================================
+LOADING MODEL
+================================================================================
+
+Model: unet
+  n_filters: 32
+  dropout: 0.1
+✓ Model loaded
+
+================================================================================
+FINDING TEST IMAGES
+================================================================================
+
+Found 8 images:
+  - 10240x_2025-05-29_02-22-00_002.tif
+  - 1280x_2025-05-16_00-59-00_002.tif
+  - 160x_2025-05-15_02-05-00.tif
+  - 2560x_2025-05-16_00-59-00_002.tif
+  - 320x_2025-05-15_02-05-00.tif
+  - 5120x_2025-05-16_00-59-00.tif
+  - 640x_2025-05-16_00-59-00_002.tif
+  - 80x_2025-05-22_14-48-00.tif
+
+================================================================================
+PROCESSING ALL TEST IMAGES
+================================================================================
+
+================================================================================
+Processing: 10240x_2025-05-29_02-22-00_002
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with dual UMAP/PCA clustering...
+  Clustering feature maps with dual methods...
+  Clustering with PCA...
+Clustering (PCA):   0%|          | 0/9 [00:00<?, ?it/s]Clustering (PCA):  11%|█         | 1/9 [00:00<00:04,  1.97it/s]Clustering (PCA):  22%|██▏       | 2/9 [00:00<00:01,  3.59it/s]Clustering (PCA):  56%|█████▌    | 5/9 [00:00<00:00,  9.16it/s]Clustering (PCA):  89%|████████▉ | 8/9 [00:00<00:00, 11.33it/s]Clustering (PCA): 100%|██████████| 9/9 [00:01<00:00,  6.95it/s]
+  UMAP not available, only PCA results will be generated
+  ✓ Saved 9 PCA cluster plots to: unet_visualization_advanced_20251028_091857/10240x_2025-05-29_02-22-00_002/feature_maps/pca_clusters
+  Plotting representative feature maps...
+Plotting PCA representatives:   0%|          | 0/9 [00:00<?, ?it/s]Plotting PCA representatives:  11%|█         | 1/9 [00:01<00:08,  1.04s/it]Plotting PCA representatives:  22%|██▏       | 2/9 [00:01<00:06,  1.12it/s]Plotting PCA representatives:  33%|███▎      | 3/9 [00:02<00:05,  1.18it/s]Plotting PCA representatives:  44%|████▍     | 4/9 [00:03<00:03,  1.34it/s]Plotting PCA representatives:  56%|█████▌    | 5/9 [00:03<00:02,  1.38it/s]Plotting PCA representatives:  67%|██████▋   | 6/9 [00:04<00:02,  1.45it/s]Plotting PCA representatives:  78%|███████▊  | 7/9 [00:05<00:01,  1.37it/s]Plotting PCA representatives:  89%|████████▉ | 8/9 [00:06<00:00,  1.34it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:07<00:00,  1.20it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:07<00:00,  1.26it/s]
+  ✓ Saved dual PCA/UMAP analyses for 9 layers
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:25<03:26, 25.81s/it]Running feature inversions:  22%|██▏       | 2/9 [00:51<02:59, 25.70s/it]Running feature inversions:  33%|███▎      | 3/9 [01:18<02:38, 26.41s/it]Running feature inversions:  44%|████▍     | 4/9 [01:47<02:16, 27.26s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:17<01:53, 28.27s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:49<01:28, 29.62s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:24<01:03, 31.51s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:05<00:34, 34.38s/it]Running feature inversions: 100%|██████████| 9/9 [04:54<00:00, 38.99s/it]Running feature inversions: 100%|██████████| 9/9 [04:54<00:00, 32.74s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 10240x_2025-05-29_02-22-00_002
+
+================================================================================
+Processing: 1280x_2025-05-16_00-59-00_002
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with dual UMAP/PCA clustering...
+  Clustering feature maps with dual methods...
+  Clustering with PCA...
+Clustering (PCA):   0%|          | 0/9 [00:00<?, ?it/s]Clustering (PCA):  11%|█         | 1/9 [00:00<00:02,  2.93it/s]Clustering (PCA):  22%|██▏       | 2/9 [00:00<00:01,  4.83it/s]Clustering (PCA):  56%|█████▌    | 5/9 [00:00<00:00, 11.63it/s]Clustering (PCA):  89%|████████▉ | 8/9 [00:00<00:00, 13.02it/s]Clustering (PCA): 100%|██████████| 9/9 [00:01<00:00,  8.13it/s]
+  UMAP not available, only PCA results will be generated
+  ✓ Saved 9 PCA cluster plots to: unet_visualization_advanced_20251028_091857/1280x_2025-05-16_00-59-00_002/feature_maps/pca_clusters
+  Plotting representative feature maps...
+Plotting PCA representatives:   0%|          | 0/9 [00:00<?, ?it/s]Plotting PCA representatives:  11%|█         | 1/9 [00:00<00:07,  1.05it/s]Plotting PCA representatives:  22%|██▏       | 2/9 [00:01<00:06,  1.09it/s]Plotting PCA representatives:  33%|███▎      | 3/9 [00:02<00:04,  1.23it/s]Plotting PCA representatives:  44%|████▍     | 4/9 [00:03<00:03,  1.38it/s]Plotting PCA representatives:  56%|█████▌    | 5/9 [00:03<00:02,  1.39it/s]Plotting PCA representatives:  67%|██████▋   | 6/9 [00:04<00:02,  1.47it/s]Plotting PCA representatives:  78%|███████▊  | 7/9 [00:05<00:01,  1.38it/s]Plotting PCA representatives:  89%|████████▉ | 8/9 [00:06<00:00,  1.35it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:07<00:00,  1.21it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:07<00:00,  1.28it/s]
+  ✓ Saved dual PCA/UMAP analyses for 9 layers
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:22<03:02, 22.76s/it]Running feature inversions:  22%|██▏       | 2/9 [00:48<02:51, 24.44s/it]Running feature inversions:  33%|███▎      | 3/9 [01:15<02:34, 25.73s/it]Running feature inversions:  44%|████▍     | 4/9 [01:44<02:14, 26.86s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:14<01:52, 28.02s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:46<01:28, 29.47s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:22<01:02, 31.42s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:02<00:34, 34.32s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 38.97s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 32.42s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 1280x_2025-05-16_00-59-00_002
+
+================================================================================
+Processing: 160x_2025-05-15_02-05-00
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with dual UMAP/PCA clustering...
+  Clustering feature maps with dual methods...
+  Clustering with PCA...
+Clustering (PCA):   0%|          | 0/9 [00:00<?, ?it/s]Clustering (PCA):  11%|█         | 1/9 [00:00<00:02,  2.89it/s]Clustering (PCA):  22%|██▏       | 2/9 [00:00<00:01,  4.79it/s]Clustering (PCA):  56%|█████▌    | 5/9 [00:00<00:00, 11.72it/s]Clustering (PCA):  89%|████████▉ | 8/9 [00:00<00:00, 13.17it/s]Clustering (PCA): 100%|██████████| 9/9 [00:01<00:00,  8.16it/s]
+  UMAP not available, only PCA results will be generated
+  ✓ Saved 9 PCA cluster plots to: unet_visualization_advanced_20251028_091857/160x_2025-05-15_02-05-00/feature_maps/pca_clusters
+  Plotting representative feature maps...
+Plotting PCA representatives:   0%|          | 0/9 [00:00<?, ?it/s]Plotting PCA representatives:  11%|█         | 1/9 [00:01<00:08,  1.03s/it]Plotting PCA representatives:  22%|██▏       | 2/9 [00:01<00:06,  1.14it/s]Plotting PCA representatives:  33%|███▎      | 3/9 [00:02<00:05,  1.16it/s]Plotting PCA representatives:  44%|████▍     | 4/9 [00:03<00:03,  1.33it/s]Plotting PCA representatives:  56%|█████▌    | 5/9 [00:03<00:02,  1.43it/s]Plotting PCA representatives:  67%|██████▋   | 6/9 [00:04<00:02,  1.41it/s]Plotting PCA representatives:  78%|███████▊  | 7/9 [00:05<00:01,  1.39it/s]Plotting PCA representatives:  89%|████████▉ | 8/9 [00:06<00:00,  1.30it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:07<00:00,  1.24it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:07<00:00,  1.27it/s]
+  ✓ Saved dual PCA/UMAP analyses for 9 layers
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:22<03:02, 22.79s/it]Running feature inversions:  22%|██▏       | 2/9 [00:48<02:51, 24.45s/it]Running feature inversions:  33%|███▎      | 3/9 [01:15<02:34, 25.75s/it]Running feature inversions:  44%|████▍     | 4/9 [01:44<02:14, 26.87s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:14<01:52, 28.02s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:46<01:28, 29.52s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:22<01:02, 31.45s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:02<00:34, 34.35s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 38.99s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 32.44s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 160x_2025-05-15_02-05-00
+
+================================================================================
+Processing: 2560x_2025-05-16_00-59-00_002
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with dual UMAP/PCA clustering...
+  Clustering feature maps with dual methods...
+  Clustering with PCA...
+Clustering (PCA):   0%|          | 0/9 [00:00<?, ?it/s]Clustering (PCA):  11%|█         | 1/9 [00:00<00:02,  2.88it/s]Clustering (PCA):  22%|██▏       | 2/9 [00:00<00:01,  4.77it/s]Clustering (PCA):  56%|█████▌    | 5/9 [00:00<00:00, 11.71it/s]Clustering (PCA):  89%|████████▉ | 8/9 [00:00<00:00, 13.30it/s]Clustering (PCA): 100%|██████████| 9/9 [00:01<00:00,  8.21it/s]
+  UMAP not available, only PCA results will be generated
+  ✓ Saved 9 PCA cluster plots to: unet_visualization_advanced_20251028_091857/2560x_2025-05-16_00-59-00_002/feature_maps/pca_clusters
+  Plotting representative feature maps...
+Plotting PCA representatives:   0%|          | 0/9 [00:00<?, ?it/s]Plotting PCA representatives:  11%|█         | 1/9 [00:00<00:07,  1.07it/s]Plotting PCA representatives:  22%|██▏       | 2/9 [00:01<00:06,  1.10it/s]Plotting PCA representatives:  33%|███▎      | 3/9 [00:02<00:04,  1.24it/s]Plotting PCA representatives:  44%|████▍     | 4/9 [00:03<00:03,  1.32it/s]Plotting PCA representatives:  56%|█████▌    | 5/9 [00:03<00:02,  1.44it/s]Plotting PCA representatives:  67%|██████▋   | 6/9 [00:04<00:01,  1.53it/s]Plotting PCA representatives:  78%|███████▊  | 7/9 [00:05<00:01,  1.41it/s]Plotting PCA representatives:  89%|████████▉ | 8/9 [00:05<00:00,  1.38it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:06<00:00,  1.23it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:06<00:00,  1.30it/s]
+  ✓ Saved dual PCA/UMAP analyses for 9 layers
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:22<03:02, 22.75s/it]Running feature inversions:  22%|██▏       | 2/9 [00:48<02:51, 24.43s/it]Running feature inversions:  33%|███▎      | 3/9 [01:15<02:34, 25.73s/it]Running feature inversions:  44%|████▍     | 4/9 [01:44<02:14, 26.85s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:14<01:52, 28.01s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:46<01:28, 29.47s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:21<01:02, 31.42s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:02<00:34, 34.33s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 38.97s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 32.42s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 2560x_2025-05-16_00-59-00_002
+
+================================================================================
+Processing: 320x_2025-05-15_02-05-00
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with dual UMAP/PCA clustering...
+  Clustering feature maps with dual methods...
+  Clustering with PCA...
+Clustering (PCA):   0%|          | 0/9 [00:00<?, ?it/s]Clustering (PCA):  11%|█         | 1/9 [00:00<00:02,  2.91it/s]Clustering (PCA):  22%|██▏       | 2/9 [00:00<00:01,  4.81it/s]Clustering (PCA):  56%|█████▌    | 5/9 [00:00<00:00, 11.71it/s]Clustering (PCA):  89%|████████▉ | 8/9 [00:00<00:00, 13.31it/s]Clustering (PCA): 100%|██████████| 9/9 [00:01<00:00,  8.22it/s]
+  UMAP not available, only PCA results will be generated
+  ✓ Saved 9 PCA cluster plots to: unet_visualization_advanced_20251028_091857/320x_2025-05-15_02-05-00/feature_maps/pca_clusters
+  Plotting representative feature maps...
+Plotting PCA representatives:   0%|          | 0/9 [00:00<?, ?it/s]Plotting PCA representatives:  11%|█         | 1/9 [00:00<00:07,  1.10it/s]Plotting PCA representatives:  22%|██▏       | 2/9 [00:01<00:05,  1.22it/s]Plotting PCA representatives:  33%|███▎      | 3/9 [00:02<00:04,  1.20it/s]Plotting PCA representatives:  44%|████▍     | 4/9 [00:03<00:03,  1.36it/s]Plotting PCA representatives:  56%|█████▌    | 5/9 [00:03<00:02,  1.38it/s]Plotting PCA representatives:  67%|██████▋   | 6/9 [00:04<00:02,  1.47it/s]Plotting PCA representatives:  78%|███████▊  | 7/9 [00:05<00:01,  1.34it/s]Plotting PCA representatives:  89%|████████▉ | 8/9 [00:06<00:00,  1.33it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:06<00:00,  1.26it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:06<00:00,  1.30it/s]
+  ✓ Saved dual PCA/UMAP analyses for 9 layers
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:22<03:02, 22.75s/it]Running feature inversions:  22%|██▏       | 2/9 [00:48<02:51, 24.51s/it]Running feature inversions:  33%|███▎      | 3/9 [01:15<02:34, 25.77s/it]Running feature inversions:  44%|████▍     | 4/9 [01:44<02:14, 26.87s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:14<01:52, 28.02s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:46<01:28, 29.47s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:22<01:02, 31.41s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:02<00:34, 34.31s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 38.95s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 32.41s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 320x_2025-05-15_02-05-00
+
+================================================================================
+Processing: 5120x_2025-05-16_00-59-00
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with dual UMAP/PCA clustering...
+  Clustering feature maps with dual methods...
+  Clustering with PCA...
+Clustering (PCA):   0%|          | 0/9 [00:00<?, ?it/s]Clustering (PCA):  11%|█         | 1/9 [00:00<00:02,  2.88it/s]Clustering (PCA):  22%|██▏       | 2/9 [00:00<00:01,  4.74it/s]Clustering (PCA):  56%|█████▌    | 5/9 [00:00<00:00, 11.51it/s]Clustering (PCA):  89%|████████▉ | 8/9 [00:00<00:00, 13.00it/s]Clustering (PCA): 100%|██████████| 9/9 [00:01<00:00,  8.09it/s]
+  UMAP not available, only PCA results will be generated
+  ✓ Saved 9 PCA cluster plots to: unet_visualization_advanced_20251028_091857/5120x_2025-05-16_00-59-00/feature_maps/pca_clusters
+  Plotting representative feature maps...
+Plotting PCA representatives:   0%|          | 0/9 [00:00<?, ?it/s]Plotting PCA representatives:  11%|█         | 1/9 [00:01<00:08,  1.02s/it]Plotting PCA representatives:  22%|██▏       | 2/9 [00:01<00:06,  1.14it/s]Plotting PCA representatives:  33%|███▎      | 3/9 [00:02<00:05,  1.20it/s]Plotting PCA representatives:  44%|████▍     | 4/9 [00:03<00:03,  1.38it/s]Plotting PCA representatives:  56%|█████▌    | 5/9 [00:03<00:02,  1.50it/s]Plotting PCA representatives:  67%|██████▋   | 6/9 [00:04<00:02,  1.49it/s]Plotting PCA representatives:  78%|███████▊  | 7/9 [00:05<00:01,  1.46it/s]Plotting PCA representatives:  89%|████████▉ | 8/9 [00:05<00:00,  1.35it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:06<00:00,  1.27it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:06<00:00,  1.32it/s]
+  ✓ Saved dual PCA/UMAP analyses for 9 layers
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:22<03:02, 22.76s/it]Running feature inversions:  22%|██▏       | 2/9 [00:48<02:51, 24.44s/it]Running feature inversions:  33%|███▎      | 3/9 [01:15<02:34, 25.73s/it]Running feature inversions:  44%|████▍     | 4/9 [01:44<02:14, 26.85s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:14<01:52, 28.01s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:46<01:28, 29.46s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:21<01:02, 31.41s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:02<00:34, 34.32s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 39.01s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 32.43s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 5120x_2025-05-16_00-59-00
+
+================================================================================
+Processing: 640x_2025-05-16_00-59-00_002
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with dual UMAP/PCA clustering...
+  Clustering feature maps with dual methods...
+  Clustering with PCA...
+Clustering (PCA):   0%|          | 0/9 [00:00<?, ?it/s]Clustering (PCA):  11%|█         | 1/9 [00:00<00:02,  2.93it/s]Clustering (PCA):  22%|██▏       | 2/9 [00:00<00:01,  4.84it/s]Clustering (PCA):  56%|█████▌    | 5/9 [00:00<00:00, 11.75it/s]Clustering (PCA):  89%|████████▉ | 8/9 [00:00<00:00, 13.03it/s]Clustering (PCA): 100%|██████████| 9/9 [00:01<00:00,  8.09it/s]
+  UMAP not available, only PCA results will be generated
+  ✓ Saved 9 PCA cluster plots to: unet_visualization_advanced_20251028_091857/640x_2025-05-16_00-59-00_002/feature_maps/pca_clusters
+  Plotting representative feature maps...
+Plotting PCA representatives:   0%|          | 0/9 [00:00<?, ?it/s]Plotting PCA representatives:  11%|█         | 1/9 [00:00<00:07,  1.07it/s]Plotting PCA representatives:  22%|██▏       | 2/9 [00:01<00:06,  1.11it/s]Plotting PCA representatives:  33%|███▎      | 3/9 [00:02<00:04,  1.24it/s]Plotting PCA representatives:  44%|████▍     | 4/9 [00:03<00:03,  1.32it/s]Plotting PCA representatives:  56%|█████▌    | 5/9 [00:03<00:02,  1.45it/s]Plotting PCA representatives:  67%|██████▋   | 6/9 [00:04<00:01,  1.53it/s]Plotting PCA representatives:  78%|███████▊  | 7/9 [00:05<00:01,  1.40it/s]Plotting PCA representatives:  89%|████████▉ | 8/9 [00:05<00:00,  1.37it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:06<00:00,  1.22it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:06<00:00,  1.29it/s]
+  ✓ Saved dual PCA/UMAP analyses for 9 layers
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:22<03:01, 22.75s/it]Running feature inversions:  22%|██▏       | 2/9 [00:48<02:51, 24.43s/it]Running feature inversions:  33%|███▎      | 3/9 [01:15<02:34, 25.73s/it]Running feature inversions:  44%|████▍     | 4/9 [01:44<02:14, 26.86s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:14<01:52, 28.01s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:46<01:28, 29.47s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:21<01:02, 31.41s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:02<00:34, 34.34s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 38.98s/it]Running feature inversions: 100%|██████████| 9/9 [04:51<00:00, 32.42s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 640x_2025-05-16_00-59-00_002
+
+================================================================================
+Processing: 80x_2025-05-22_14-48-00
+================================================================================
+  Full image shape: (2160, 3840)
+  Extracted tile at: row=3, col=4 (y=1024, x=1536)
+  Generating prediction...
+  Creating 3-panel figure...
+  Visualizing feature maps with UMAP clustering...
+
+Visualizing feature maps with dual UMAP/PCA clustering...
+  Clustering feature maps with dual methods...
+  Clustering with PCA...
+Clustering (PCA):   0%|          | 0/9 [00:00<?, ?it/s]Clustering (PCA):  11%|█         | 1/9 [00:00<00:02,  2.97it/s]Clustering (PCA):  22%|██▏       | 2/9 [00:00<00:01,  4.86it/s]Clustering (PCA):  56%|█████▌    | 5/9 [00:00<00:00, 11.91it/s]Clustering (PCA):  89%|████████▉ | 8/9 [00:00<00:00, 13.33it/s]Clustering (PCA): 100%|██████████| 9/9 [00:01<00:00,  8.27it/s]
+  UMAP not available, only PCA results will be generated
+  ✓ Saved 9 PCA cluster plots to: unet_visualization_advanced_20251028_091857/80x_2025-05-22_14-48-00/feature_maps/pca_clusters
+  Plotting representative feature maps...
+Plotting PCA representatives:   0%|          | 0/9 [00:00<?, ?it/s]Plotting PCA representatives:  11%|█         | 1/9 [00:01<00:08,  1.01s/it]Plotting PCA representatives:  22%|██▏       | 2/9 [00:01<00:06,  1.16it/s]Plotting PCA representatives:  33%|███▎      | 3/9 [00:02<00:05,  1.17it/s]Plotting PCA representatives:  44%|████▍     | 4/9 [00:03<00:03,  1.34it/s]Plotting PCA representatives:  56%|█████▌    | 5/9 [00:03<00:02,  1.46it/s]Plotting PCA representatives:  67%|██████▋   | 6/9 [00:04<00:02,  1.44it/s]Plotting PCA representatives:  78%|███████▊  | 7/9 [00:05<00:01,  1.41it/s]Plotting PCA representatives:  89%|████████▉ | 8/9 [00:06<00:00,  1.31it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:06<00:00,  1.25it/s]Plotting PCA representatives: 100%|██████████| 9/9 [00:06<00:00,  1.29it/s]
+  ✓ Saved dual PCA/UMAP analyses for 9 layers
+  Visualizing feature inversions at correct dimensions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:22<03:02, 22.86s/it]Running feature inversions:  22%|██▏       | 2/9 [00:48<02:51, 24.49s/it]Running feature inversions:  33%|███▎      | 3/9 [01:15<02:34, 25.78s/it]Running feature inversions:  44%|████▍     | 4/9 [01:44<02:14, 26.89s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:14<01:52, 28.04s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:46<01:28, 29.49s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:22<01:02, 31.44s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:02<00:34, 34.35s/it]Running feature inversions: 100%|██████████| 9/9 [04:52<00:00, 39.04s/it]Running feature inversions: 100%|██████████| 9/9 [04:52<00:00, 32.46s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+  ✓ Completed: 80x_2025-05-22_14-48-00
+
+================================================================================
+VISUALIZATION COMPLETE
+================================================================================
+Results: unet_visualization_advanced_20251028_091857
+
+Processed 8 images with:
+  - 3-panel figures (original + preprocessed + prediction)
+  - UMAP clustered feature maps (8 clusters per layer)
+  - Feature inversions at correct dimensions (512→256→128→64→32)
+================================================================================
+
+========================================
+VISUALIZATION COMPLETE
+========================================
+End Time: Tue Oct 28 10:00:09 AM +08 2025
+
+Output directory: unet_visualization_advanced_20251028_091857
+
+Generated structure:
+
+unet_visualization_advanced_20251028_091857/
+  ├── <image_1>/
+  │   ├── <image_1>_3panel.png
+  │   ├── feature_maps/
+  │   │   ├── umap_clusters/
+  │   │   │   ├── umap_clusters_encoder_1_conv2.png
+  │   │   │   ├── umap_clusters_encoder_2_conv2.png
+  │   │   │   ├── ... (9 UMAP plots)
+  │   │   │   └── umap_clusters_decoder_1_conv2.png
+  │   │   └── representative_feature_maps/
+  │   │       ├── feature_map_encoder_1_conv2.png (~8 reps)
+  │   │       ├── feature_map_encoder_2_conv2.png
+  │   │       ├── ... (9 layers)
+  │   │       └── feature_map_decoder_1_conv2.png
+  │   ├── feature_inversions/
+  │   │   ├── feature_inversion_encoder_1_conv2.png (from 512×512)
+  │   │   ├── feature_inversion_encoder_2_conv2.png (from 256×256)
+  │   │   ├── feature_inversion_encoder_3_conv2.png (from 128×128)
+  │   │   ├── feature_inversion_encoder_4_conv2.png (from 64×64)
+  │   │   ├── feature_inversion_bottleneck_conv2.png (from 32×32)
+  │   │   ├── feature_inversion_decoder_4_conv2.png (from 64×64)
+  │   │   ├── feature_inversion_decoder_3_conv2.png (from 128×128)
+  │   │   ├── feature_inversion_decoder_2_conv2.png (from 256×256)
+  │   │   └── feature_inversion_decoder_1_conv2.png (from 512×512)
+  │   └── tile_metadata.json
+  ├── <image_2>/
+  │   └── ...
+  ├── ... (8 images total)
+  └── visualization_metadata.json
+
+Key improvements over basic version:
+  ✓ Feature inversions match architecture dimensions
+  ✓ UMAP clustering reduces feature map redundancy
+  ✓ Only ~8 representative features per layer (vs 32-512)
+  ✓ Cluster visualization shows feature map groupings
+
+Total files per image: ~27 visualizations
+  - 1 3-panel figure
+  - 9 UMAP cluster plots
+  - 9 representative feature maps
+  - 9 feature inversions
+
+========================================
+
+To view results, sync from HPC:
+  rsync -avz <user>@hpc:/home/svu/phyzxi/scratch/unet-HPC/unet_visualization_advanced_20251028_091857 /local/path/
+
+========================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-28 10:00:10.192385:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 326138.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:44:32
+	Memory: Requested(240gb), Used(2706012kb)
+	Vmem Used: 16047188kb
+	Walltime: Requested(08:00:00), Used(00:41:14)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-072[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
