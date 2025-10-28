@@ -1,0 +1,128 @@
+========================================
+Job ID: 327467.stdct-mgmt-02
+Job Name: UNet_CRP_Analysis
+Node: GN-A40-024
+Start Time: Tue Oct 28 05:03:00 PM +08 2025
+Working Directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================
+
+Configuration:
+  Model: ./best_models_PyTorch/unet/best_model.pth
+  Test Image: ./test_images/320x_2025-05-15_02-05-00.tif
+  Start: decoder_1_conv2 Ch4
+  Top-K: 2
+========================================
+
+GPU Information:
+Tue Oct 28 17:03:02 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     Off |   00000000:AD:00.0 Off |                    0 |
+|  0%   34C    P8             22W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+Python version:
+Python 3.10.12
+
+PyTorch version:
+PyTorch: 2.4.0a0+f70bd71a48.nv24.06
+CUDA available: True
+
+========================================
+VERIFYING FILES
+========================================
+
+✓ Model found: ./best_models_PyTorch/unet/best_model.pth
+✓ Test image found: ./test_images/320x_2025-05-15_02-05-00.tif
+
+========================================
+RUNNING CRP ANALYSIS
+========================================
+
+Tracing hierarchical concept composition:
+  decoder_1_conv2 Ch4
+  ↓
+  decoder_2_conv2 (top 2 channels)
+  ↓
+  decoder_3_conv2 (top 2 channels)
+  ↓
+  decoder_4_conv2 (top 2 channels)
+  ↓
+  bottleneck_conv2 (top 2 channels)
+
+⚠ Zennit not available. Will use gradient-based approximation.
+  Install with: pip install zennit
+
+Using device: cuda
+Output directory: unet_crp_analysis_20251028_170335
+
+Loading U-Net model from: ./best_models_PyTorch/unet/best_model.pth
+✓ Model loaded successfully (epoch 48)
+  Best validation IoU: 0.6377
+
+Loading test image: ./test_images/320x_2025-05-15_02-05-00.tif
+✓ Image loaded: shape=(2160, 3840), dtype=float32
+Extracted tile at position (1024, 1536)
+
+============================================================
+INITIALIZING U-NET CRP ANALYSIS
+============================================================
+Start Layer: decoder_1_conv2
+Start Channel: Ch4
+Top-K Contributors: 2
+
+============================================================
+TRACING HIERARCHICAL CONCEPT COMPOSITION
+============================================================
+
+============================================================
+Tracing from decoder_1_conv2 (Ch [4]) → decoder_2_conv2
+============================================================
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/unet_crp_hierarchical_concepts.py", line 665, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/unet_crp_hierarchical_concepts.py", line 605, in main
+    hierarchy = crp.trace_hierarchical_concepts(
+  File "/scratch/phyzxi/unet-HPC/unet_crp_hierarchical_concepts.py", line 364, in trace_hierarchical_concepts
+    result = self.conditional_relevance_propagation(
+  File "/scratch/phyzxi/unet-HPC/unet_crp_hierarchical_concepts.py", line 279, in conditional_relevance_propagation
+    loss.backward()
+  File "/usr/local/lib/python3.10/dist-packages/torch/_tensor.py", line 523, in backward
+    torch.autograd.backward(
+  File "/usr/local/lib/python3.10/dist-packages/torch/autograd/__init__.py", line 267, in backward
+    _engine_run_backward(
+  File "/usr/local/lib/python3.10/dist-packages/torch/autograd/graph.py", line 767, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+RuntimeError: element 0 of tensors does not require grad and does not have a grad_fn
+
+ERROR: CRP analysis failed with exit code 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-28 17:03:44.456241:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 327467.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:38
+	Memory: Requested(240gb), Used(1687896kb)
+	Vmem Used: 11795272kb
+	Walltime: Requested(02:00:00), Used(00:00:45)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-024[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
