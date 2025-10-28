@@ -247,7 +247,7 @@ class UNetCRP:
             conditional_heatmap: Spatial heatmap showing where relevance comes from
         """
 
-        # Register hooks
+        # Register hooks for gradient capture only
         layers_to_track = [target_layer]
         if source_layer:
             layers_to_track.append(source_layer)
@@ -260,8 +260,12 @@ class UNetCRP:
         input_tensor = input_tensor.to(self.device).requires_grad_(True)
         output, intermediates = self.model(input_tensor, return_intermediates=True)
 
-        # Get target layer activation
-        target_activation = self.activations[target_layer]  # [1, C, H, W]
+        # Get target layer activation from intermediates (NOT from hooks!)
+        # Intermediates retain gradient information, hook activations are detached
+        if target_layer not in intermediates:
+            raise ValueError(f"Layer {target_layer} not found in intermediates. Available: {list(intermediates.keys())}")
+
+        target_activation = intermediates[target_layer]  # [1, C, H, W] with gradients ✓
 
         # Create conditional signal: only activate specified channels
         batch_size, num_channels, h, w = target_activation.shape
@@ -279,8 +283,13 @@ class UNetCRP:
         loss.backward()
 
         # Compute relevance scores at source layer
-        if source_layer and source_layer in self.activations:
-            source_activation = self.activations[source_layer]
+        if source_layer:
+            # Get source activation from intermediates (for consistency)
+            if source_layer not in intermediates:
+                print(f"Warning: {source_layer} not in intermediates, available: {list(intermediates.keys())}")
+                return {'spatial_heatmap': None, 'all_relevance': None}
+
+            source_activation = intermediates[source_layer].detach()  # Detach since we don't need further gradients
             source_gradient = self.gradients.get(source_layer, None)
 
             if source_gradient is not None:
@@ -307,6 +316,9 @@ class UNetCRP:
                     'spatial_heatmap': heatmap,
                     'all_relevance': relevance.cpu().numpy()
                 }
+            else:
+                print(f"Warning: No gradient captured for {source_layer}")
+                return {'spatial_heatmap': None, 'all_relevance': None}
 
         # If no source layer specified, return input gradient heatmap
         input_gradient = input_tensor.grad[0, 0].cpu().numpy()
