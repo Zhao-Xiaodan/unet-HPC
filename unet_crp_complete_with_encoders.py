@@ -244,6 +244,9 @@ class CompleteCRP:
 
         print(f"\nExtracting feature maps...")
 
+        # Move input to correct device (model is on GPU, input might be on CPU)
+        input_tensor = input_tensor.to(self.device)
+
         # Forward pass to get all intermediates
         with torch.no_grad():
             output, intermediates = self.model(input_tensor, return_intermediates=True)
