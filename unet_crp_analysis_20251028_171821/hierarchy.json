@@ -1,0 +1,81 @@
+{
+  "decoder_1_conv2": {
+    "channels": [
+      4
+    ],
+    "contributes_from": {
+      "layer": "decoder_2_conv2",
+      "channels": [
+        7,
+        19
+      ],
+      "relevance": [
+        0.05065533518791199,
+        0.03363233059644699
+      ]
+    }
+  },
+  "decoder_2_conv2": {
+    "channels": [
+      7,
+      19
+    ],
+    "contributes_from": {
+      "layer": "decoder_3_conv2",
+      "channels": [
+        94,
+        71,
+        125,
+        71
+      ],
+      "relevance": [
+        0.03666764497756958,
+        0.017777100205421448,
+        0.02777867391705513,
+        0.026325952261686325
+      ]
+    }
+  },
+  "decoder_3_conv2": {
+    "channels": [
+      71,
+      94
+    ],
+    "contributes_from": {
+      "layer": "decoder_4_conv2",
+      "channels": [
+        37,
+        107,
+        37,
+        142
+      ],
+      "relevance": [
+        0.012971339747309685,
+        0.008800070732831955,
+        0.005165247246623039,
+        0.005024404264986515
+      ]
+    }
+  },
+  "decoder_4_conv2": {
+    "channels": [
+      37,
+      107
+    ],
+    "contributes_from": {
+      "layer": "bottleneck_conv2",
+      "channels": [
+        364,
+        167,
+        364,
+        167
+      ],
+      "relevance": [
+        0.005251397844403982,
+        0.0028738388791680336,
+        0.0038451645523309708,
+        0.003462993772700429
+      ]
+    }
+  }
+}

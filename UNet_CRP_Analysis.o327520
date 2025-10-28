@@ -1,0 +1,258 @@
+========================================
+Job ID: 327520.stdct-mgmt-02
+Job Name: UNet_CRP_Analysis
+Node: GN-A40-038
+Start Time: Tue Oct 28 05:17:44 PM +08 2025
+Working Directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================
+
+Configuration:
+  Model: ./best_models_PyTorch/unet/best_model.pth
+  Test Image: ./test_images/320x_2025-05-15_02-05-00.tif
+  Start: decoder_1_conv2 Ch4
+  Top-K: 2
+========================================
+
+GPU Information:
+Tue Oct 28 17:17:45 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     Off |   00000000:0A:00.0 Off |                    0 |
+|  0%   31C    P8             22W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+Python version:
+Python 3.10.12
+
+PyTorch version:
+PyTorch: 2.4.0a0+f70bd71a48.nv24.06
+CUDA available: True
+
+========================================
+VERIFYING FILES
+========================================
+
+✓ Model found: ./best_models_PyTorch/unet/best_model.pth
+✓ Test image found: ./test_images/320x_2025-05-15_02-05-00.tif
+
+========================================
+RUNNING CRP ANALYSIS
+========================================
+
+Tracing hierarchical concept composition:
+  decoder_1_conv2 Ch4
+  ↓
+  decoder_2_conv2 (top 2 channels)
+  ↓
+  decoder_3_conv2 (top 2 channels)
+  ↓
+  decoder_4_conv2 (top 2 channels)
+  ↓
+  bottleneck_conv2 (top 2 channels)
+
+⚠ Zennit not available. Will use gradient-based approximation.
+  Install with: pip install zennit
+
+Using device: cuda
+Output directory: unet_crp_analysis_20251028_171821
+
+Loading U-Net model from: ./best_models_PyTorch/unet/best_model.pth
+✓ Model loaded successfully (epoch 48)
+  Best validation IoU: 0.6377
+
+Loading test image: ./test_images/320x_2025-05-15_02-05-00.tif
+✓ Image loaded: shape=(2160, 3840), dtype=float32
+Extracted tile at position (1024, 1536)
+
+============================================================
+INITIALIZING U-NET CRP ANALYSIS
+============================================================
+Start Layer: decoder_1_conv2
+Start Channel: Ch4
+Top-K Contributors: 2
+
+============================================================
+TRACING HIERARCHICAL CONCEPT COMPOSITION
+============================================================
+
+============================================================
+Tracing from decoder_1_conv2 (Ch [4]) → decoder_2_conv2
+============================================================
+
+  Ch4 ← Top 2 from decoder_2_conv2:
+    Ch7: relevance=0.0507
+    Ch19: relevance=0.0336
+
+============================================================
+Tracing from decoder_2_conv2 (Ch [7, 19]) → decoder_3_conv2
+============================================================
+
+  Ch7 ← Top 2 from decoder_3_conv2:
+    Ch94: relevance=0.0367
+    Ch71: relevance=0.0178
+
+  Ch19 ← Top 2 from decoder_3_conv2:
+    Ch125: relevance=0.0278
+    Ch71: relevance=0.0263
+
+============================================================
+Tracing from decoder_3_conv2 (Ch [71, 94]) → decoder_4_conv2
+============================================================
+
+  Ch71 ← Top 2 from decoder_4_conv2:
+    Ch37: relevance=0.0130
+    Ch107: relevance=0.0088
+
+  Ch94 ← Top 2 from decoder_4_conv2:
+    Ch37: relevance=0.0052
+    Ch142: relevance=0.0050
+
+============================================================
+Tracing from decoder_4_conv2 (Ch [37, 107]) → bottleneck_conv2
+============================================================
+
+  Ch37 ← Top 2 from bottleneck_conv2:
+    Ch364: relevance=0.0053
+    Ch167: relevance=0.0029
+
+  Ch107 ← Top 2 from bottleneck_conv2:
+    Ch364: relevance=0.0038
+    Ch167: relevance=0.0035
+
+✓ Hierarchy data saved to: unet_crp_analysis_20251028_171821/hierarchy.json
+
+============================================================
+GENERATING VISUALIZATIONS
+============================================================
+
+✓ Hierarchical concept graph saved to: unet_crp_analysis_20251028_171821/hierarchical_concept_graph.png
+
+============================================================
+ANALYSIS COMPLETE
+============================================================
+
+Results saved to: unet_crp_analysis_20251028_171821
+
+Generated files:
+  - input_tile.png: Input image tile
+  - hierarchy.json: Hierarchical concept data
+  - hierarchical_concept_graph.png: Concept composition graph
+
+============================================================
+SUMMARY OF CONCEPT HIERARCHY
+============================================================
+
+decoder_1_conv2:
+  Channels: [4]
+  ← decoder_2_conv2:
+      Ch7: 0.0507
+      Ch19: 0.0336
+
+decoder_2_conv2:
+  Channels: [7, 19]
+  ← decoder_3_conv2:
+      Ch94: 0.0367
+      Ch71: 0.0178
+      Ch125: 0.0278
+      Ch71: 0.0263
+
+decoder_3_conv2:
+  Channels: [71, 94]
+  ← decoder_4_conv2:
+      Ch37: 0.0130
+      Ch107: 0.0088
+      Ch37: 0.0052
+      Ch142: 0.0050
+
+decoder_4_conv2:
+  Channels: [37, 107]
+  ← bottleneck_conv2:
+      Ch364: 0.0053
+      Ch167: 0.0029
+      Ch364: 0.0038
+      Ch167: 0.0035
+
+✓ CRP analysis complete
+
+========================================
+JOB COMPLETE
+========================================
+End Time: Tue Oct 28 05:18:34 PM +08 2025
+
+Output directory: ./unet_crp_analysis_20251028_171821
+
+Generated files:
+total 1.4M
+-rw-r----- 1 phyzxi svuusers 511K Oct 28 17:18 hierarchical_concept_graph.png
+-rw-r----- 1 phyzxi svuusers 1.4K Oct 28 17:18 hierarchy.json
+-rw-r----- 1 phyzxi svuusers 292K Oct 28 17:18 input_tile.png
+
+Key results:
+  - input_tile.png: Input image tile
+  - hierarchy.json: Hierarchical concept composition data
+  - hierarchical_concept_graph.png: Concept composition graph
+
+Concept Hierarchy Summary:
+========================================
+
+decoder_1_conv2:
+  Channels: [4]
+  ← decoder_2_conv2:
+      Ch7: 0.0507
+      Ch19: 0.0336
+
+decoder_2_conv2:
+  Channels: [7, 19]
+  ← decoder_3_conv2:
+      Ch94: 0.0367
+      Ch71: 0.0178
+      Ch125: 0.0278
+      Ch71: 0.0263
+
+decoder_3_conv2:
+  Channels: [71, 94]
+  ← decoder_4_conv2:
+      Ch37: 0.0130
+      Ch107: 0.0088
+      Ch37: 0.0052
+      Ch142: 0.0050
+
+decoder_4_conv2:
+  Channels: [37, 107]
+  ← bottleneck_conv2:
+      Ch364: 0.0053
+      Ch167: 0.0029
+      Ch364: 0.0038
+      Ch167: 0.0035
+
+========================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-28 17:18:37.166973:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 327520.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:47
+	Memory: Requested(240gb), Used(2061448kb)
+	Vmem Used: 14380632kb
+	Walltime: Requested(02:00:00), Used(00:00:54)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-038[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
