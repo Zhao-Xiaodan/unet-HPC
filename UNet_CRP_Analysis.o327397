@@ -1,0 +1,101 @@
+========================================
+Job ID: 327397.stdct-mgmt-02
+Job Name: UNet_CRP_Analysis
+Node: GN-A40-023
+Start Time: Tue Oct 28 04:45:42 PM +08 2025
+Working Directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================
+
+Configuration:
+  Model: ./best_models_PyTorch/unet/best_model.pth
+  Test Image: ./test_images/320x_2025-05-15_02-05-00.tif
+  Start: decoder_1_conv2 Ch4
+  Top-K: 2
+========================================
+
+GPU Information:
+Tue Oct 28 16:45:44 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     Off |   00000000:0A:00.0 Off |                    0 |
+|  0%   30C    P8             22W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+Python version:
+Python 3.10.12
+
+PyTorch version:
+PyTorch: 2.4.0a0+f70bd71a48.nv24.06
+CUDA available: True
+
+========================================
+VERIFYING FILES
+========================================
+
+✓ Model found: ./best_models_PyTorch/unet/best_model.pth
+✓ Test image found: ./test_images/320x_2025-05-15_02-05-00.tif
+
+========================================
+RUNNING CRP ANALYSIS
+========================================
+
+Tracing hierarchical concept composition:
+  decoder_1_conv2 Ch4
+  ↓
+  decoder_2_conv2 (top 2 channels)
+  ↓
+  decoder_3_conv2 (top 2 channels)
+  ↓
+  decoder_4_conv2 (top 2 channels)
+  ↓
+  bottleneck_conv2 (top 2 channels)
+
+⚠ Zennit not available. Will use gradient-based approximation.
+  Install with: pip install zennit
+
+Using device: cuda
+Output directory: unet_crp_analysis_20251028_164619
+
+Loading U-Net model from: ./best_models_PyTorch/unet/best_model.pth
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/unet_crp_hierarchical_concepts.py", line 646, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/unet_crp_hierarchical_concepts.py", line 545, in main
+    model.load_state_dict(checkpoint)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 2191, in load_state_dict
+    raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(
+RuntimeError: Error(s) in loading state_dict for UNet:
+	Missing key(s) in state_dict: "enc1.conv1.weight", "enc1.conv1.bias", "enc1.bn1.weight", "enc1.bn1.bias", "enc1.bn1.running_mean", "enc1.bn1.running_var", "enc1.conv2.weight", "enc1.conv2.bias", "enc1.bn2.weight", "enc1.bn2.bias", "enc1.bn2.running_mean", "enc1.bn2.running_var", "enc2.conv1.weight", "enc2.conv1.bias", "enc2.bn1.weight", "enc2.bn1.bias", "enc2.bn1.running_mean", "enc2.bn1.running_var", "enc2.conv2.weight", "enc2.conv2.bias", "enc2.bn2.weight", "enc2.bn2.bias", "enc2.bn2.running_mean", "enc2.bn2.running_var", "enc3.conv1.weight", "enc3.conv1.bias", "enc3.bn1.weight", "enc3.bn1.bias", "enc3.bn1.running_mean", "enc3.bn1.running_var", "enc3.conv2.weight", "enc3.conv2.bias", "enc3.bn2.weight", "enc3.bn2.bias", "enc3.bn2.running_mean", "enc3.bn2.running_var", "enc4.conv1.weight", "enc4.conv1.bias", "enc4.bn1.weight", "enc4.bn1.bias", "enc4.bn1.running_mean", "enc4.bn1.running_var", "enc4.conv2.weight", "enc4.conv2.bias", "enc4.bn2.weight", "enc4.bn2.bias", "enc4.bn2.running_mean", "enc4.bn2.running_var", "bottleneck.conv1.weight", "bottleneck.conv1.bias", "bottleneck.bn1.weight", "bottleneck.bn1.bias", "bottleneck.bn1.running_mean", "bottleneck.bn1.running_var", "bottleneck.conv2.weight", "bottleneck.conv2.bias", "bottleneck.bn2.weight", "bottleneck.bn2.bias", "bottleneck.bn2.running_mean", "bottleneck.bn2.running_var", "up4.weight", "up4.bias", "dec4.conv1.weight", "dec4.conv1.bias", "dec4.bn1.weight", "dec4.bn1.bias", "dec4.bn1.running_mean", "dec4.bn1.running_var", "dec4.conv2.weight", "dec4.conv2.bias", "dec4.bn2.weight", "dec4.bn2.bias", "dec4.bn2.running_mean", "dec4.bn2.running_var", "up3.weight", "up3.bias", "dec3.conv1.weight", "dec3.conv1.bias", "dec3.bn1.weight", "dec3.bn1.bias", "dec3.bn1.running_mean", "dec3.bn1.running_var", "dec3.conv2.weight", "dec3.conv2.bias", "dec3.bn2.weight", "dec3.bn2.bias", "dec3.bn2.running_mean", "dec3.bn2.running_var", "up2.weight", "up2.bias", "dec2.conv1.weight", "dec2.conv1.bias", "dec2.bn1.weight", "dec2.bn1.bias", "dec2.bn1.running_mean", "dec2.bn1.running_var", "dec2.conv2.weight", "dec2.conv2.bias", "dec2.bn2.weight", "dec2.bn2.bias", "dec2.bn2.running_mean", "dec2.bn2.running_var", "up1.weight", "up1.bias", "dec1.conv1.weight", "dec1.conv1.bias", "dec1.bn1.weight", "dec1.bn1.bias", "dec1.bn1.running_mean", "dec1.bn1.running_var", "dec1.conv2.weight", "dec1.conv2.bias", "dec1.bn2.weight", "dec1.bn2.bias", "dec1.bn2.running_mean", "dec1.bn2.running_var", "out.weight", "out.bias". 
+	Unexpected key(s) in state_dict: "epoch", "model_state_dict", "optimizer_state_dict", "best_val_iou", "history". 
+
+ERROR: CRP analysis failed with exit code 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-28 16:46:24.192784:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 327397.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:36
+	Memory: Requested(240gb), Used(1204472kb)
+	Vmem Used: 10572852kb
+	Walltime: Requested(02:00:00), Used(00:00:43)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-023[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
