@@ -542,16 +542,35 @@ def main():
 
     if Path(args.model_path).exists():
         checkpoint = torch.load(args.model_path, map_location=device)
-        model.load_state_dict(checkpoint)
-        print("✓ Model loaded successfully")
+
+        # Handle different checkpoint formats
+        if isinstance(checkpoint, dict) and 'model_state_dict' in checkpoint:
+            # Checkpoint is a dict with training info (epoch, optimizer, etc.)
+            model.load_state_dict(checkpoint['model_state_dict'])
+            print(f"✓ Model loaded successfully (epoch {checkpoint.get('epoch', '?')})")
+            if 'best_val_iou' in checkpoint:
+                print(f"  Best validation IoU: {checkpoint['best_val_iou']:.4f}")
+        else:
+            # Checkpoint is just the state dict
+            model.load_state_dict(checkpoint)
+            print("✓ Model loaded successfully")
     else:
         print(f"⚠ Model file not found: {args.model_path}")
         print("  Will use randomly initialized model for demonstration")
 
     # Load and preprocess test image
     print(f"\nLoading test image: {args.test_image}")
-    image = Image.open(args.test_image).convert('L')
-    image_array = np.array(image, dtype=np.float32)
+    try:
+        image = Image.open(args.test_image)
+        # Convert to grayscale if not already
+        if image.mode != 'L':
+            image = image.convert('L')
+        image_array = np.array(image, dtype=np.float32)
+        print(f"✓ Image loaded: shape={image_array.shape}, dtype={image_array.dtype}")
+    except Exception as e:
+        print(f"ERROR: Failed to load image: {e}")
+        import sys
+        sys.exit(1)
 
     # Extract center tile
     tile, (y, x) = extract_center_tile(image_array, tile_size=512, row=3, col=4)

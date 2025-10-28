@@ -97,14 +97,46 @@ echo "VERIFYING FILES"
 echo "========================================"
 echo ""
 
+# Check if model exists, if not try to find it from source experiment
 if [ ! -f "$MODEL_PATH" ]; then
-    echo "ERROR: Model not found: $MODEL_PATH"
-    echo ""
-    echo "Available models:"
-    ls -la ./best_models_PyTorch/*/
-    echo ""
-    echo "Note: Run visualization analysis first to cache best models"
-    exit 1
+    echo "⚠ Model not found at: $MODEL_PATH"
+    echo "  Searching for model in source experiments..."
+
+    # Try to find model info
+    if [ -f "./best_models_PyTorch/unet/model_info.json" ]; then
+        echo "  Found model_info.json, extracting source experiment..."
+        SOURCE_EXP=$(singularity exec $image python -c "import json; d=json.load(open('./best_models_PyTorch/unet/model_info.json')); print(d['source_experiment'])" 2>/dev/null)
+        MODEL_NAME=$(singularity exec $image python -c "import json; d=json.load(open('./best_models_PyTorch/unet/model_info.json')); print(d['model_name'])" 2>/dev/null)
+
+        if [ -n "$SOURCE_EXP" ] && [ -n "$MODEL_NAME" ]; then
+            echo "  Source: $SOURCE_EXP"
+            echo "  Model: $MODEL_NAME"
+
+            # Look for checkpoint in source experiment
+            SOURCE_MODEL="./${SOURCE_EXP}/unet/checkpoints/${MODEL_NAME}/best_model.pth"
+            if [ -f "$SOURCE_MODEL" ]; then
+                echo "  ✓ Found checkpoint: $SOURCE_MODEL"
+                MODEL_PATH="$SOURCE_MODEL"
+            else
+                echo "  ✗ Checkpoint not found: $SOURCE_MODEL"
+            fi
+        fi
+    fi
+
+    # If still not found, list available models
+    if [ ! -f "$MODEL_PATH" ]; then
+        echo ""
+        echo "ERROR: Could not locate model checkpoint"
+        echo ""
+        echo "Available model directories:"
+        ls -la ./best_models_PyTorch/*/ 2>/dev/null || echo "  No models cached"
+        echo ""
+        echo "Available experiment directories:"
+        ls -ld ./pytorch_comparison_*/ 2>/dev/null | tail -5 || echo "  No experiments found"
+        echo ""
+        echo "Note: Run visualization analysis first to cache best models"
+        exit 1
+    fi
 fi
 
 if [ ! -f "$TEST_IMAGE" ]; then
