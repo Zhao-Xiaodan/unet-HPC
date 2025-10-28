@@ -35,13 +35,17 @@ from sklearn.preprocessing import StandardScaler
 import warnings
 warnings.filterwarnings('ignore')
 
+# Import PCA (always available via scikit-learn)
+from sklearn.decomposition import PCA
+
 # Try to import UMAP, provide fallback
 try:
     from umap import UMAP
     UMAP_AVAILABLE = True
+    print("✓ UMAP is available for clustering")
 except ImportError:
     UMAP_AVAILABLE = False
-    print("WARNING: UMAP not available. Install with: pip install umap-learn")
+    print("⚠ UMAP not available. Will use PCA only. Install with: pip install umap-learn")
 
 # ============================================================================
 # PREPROCESSING (Same as training)
@@ -325,33 +329,55 @@ def get_layer_dimensions(n_filters=32):
 # UMAP CLUSTERING FOR FEATURE MAPS
 # ============================================================================
 
-def cluster_feature_maps(activations_dict, n_clusters=8):
+def cluster_feature_maps_dual(activations_dict, n_clusters=8):
     """
-    Cluster feature maps using UMAP + KMeans to find representatives.
+    Cluster feature maps using BOTH UMAP and PCA for comparison.
 
     Args:
         activations_dict: Dict of {layer_name: activation_tensor}
         n_clusters: Number of clusters to form
 
     Returns:
-        representatives: Dict of {layer_name: [(channel_idx, cluster_id), ...]}
-        umap_embeddings: Dict of {layer_name: umap_2d_coords}
-        cluster_labels: Dict of {layer_name: cluster_labels_array}
+        results: Dict with keys 'umap' and 'pca', each containing:
+            - representatives: Dict of {layer_name: [(channel_idx, cluster_id), ...]}
+            - embeddings: Dict of {layer_name: 2d_coords}
+            - cluster_labels: Dict of {layer_name: cluster_labels_array}
+            - method_name: String ('UMAP' or 'PCA')
     """
-    if not UMAP_AVAILABLE:
-        print("  WARNING: UMAP not available, returning all channels")
-        # Return all channels without clustering
-        representatives = {}
-        for name, activation in activations_dict.items():
-            n_channels = activation.shape[1]
-            representatives[name] = [(i, 0) for i in range(n_channels)]
-        return representatives, {}, {}
+    results = {'pca': {}, 'umap': {}}
 
+    # Always compute PCA
+    results['pca'] = _cluster_with_method(activations_dict, n_clusters, method='pca')
+
+    # Compute UMAP if available
+    if UMAP_AVAILABLE:
+        results['umap'] = _cluster_with_method(activations_dict, n_clusters, method='umap')
+    else:
+        print("  UMAP not available, only PCA results will be generated")
+        results['umap'] = None
+
+    return results
+
+def _cluster_with_method(activations_dict, n_clusters, method='pca'):
+    """
+    Cluster feature maps using specified dimensionality reduction method.
+
+    Args:
+        activations_dict: Dict of {layer_name: activation_tensor}
+        n_clusters: Number of clusters
+        method: 'pca' or 'umap'
+
+    Returns:
+        Dict with representatives, embeddings, cluster_labels, method_name
+    """
     representatives = {}
-    umap_embeddings = {}
+    embeddings_dict = {}
     cluster_labels_dict = {}
 
-    for layer_name, activation in tqdm(activations_dict.items(), desc="Clustering feature maps"):
+    method_name = method.upper()
+    print(f"  Clustering with {method_name}...")
+
+    for layer_name, activation in tqdm(activations_dict.items(), desc=f"Clustering ({method_name})"):
         # activation: [1, C, H, W]
         fmaps = activation.cpu().squeeze(0).numpy()  # [C, H, W]
         n_channels = fmaps.shape[0]
@@ -368,13 +394,18 @@ def cluster_feature_maps(activations_dict, n_clusters=8):
         scaler = StandardScaler()
         fmaps_scaled = scaler.fit_transform(fmaps_flat)
 
-        # UMAP dimensionality reduction
-        n_neighbors = min(15, n_channels - 1)
-        umap = UMAP(n_components=2, n_neighbors=n_neighbors, min_dist=0.1, random_state=42)
-        embedding = umap.fit_transform(fmaps_scaled)
-        umap_embeddings[layer_name] = embedding
+        # Dimensionality reduction to 2D
+        if method == 'umap':
+            n_neighbors = min(15, n_channels - 1)
+            reducer = UMAP(n_components=2, n_neighbors=n_neighbors, min_dist=0.1, random_state=42)
+            embedding = reducer.fit_transform(fmaps_scaled)
+        else:  # pca
+            reducer = PCA(n_components=2, random_state=42)
+            embedding = reducer.fit_transform(fmaps_scaled)
 
-        # KMeans clustering
+        embeddings_dict[layer_name] = embedding
+
+        # KMeans clustering in 2D space
         kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
         cluster_labels = kmeans.fit_predict(embedding)
         cluster_labels_dict[layer_name] = cluster_labels
@@ -395,22 +426,35 @@ def cluster_feature_maps(activations_dict, n_clusters=8):
 
         representatives[layer_name] = reps
 
-    return representatives, umap_embeddings, cluster_labels_dict
+    return {
+        'representatives': representatives,
+        'embeddings': embeddings_dict,
+        'cluster_labels': cluster_labels_dict,
+        'method_name': method_name
+    }
 
-def plot_umap_clusters(umap_embeddings, cluster_labels_dict, output_dir):
-    """Plot UMAP scatter plots showing feature map clusters"""
+def plot_clustering_results(embeddings_dict, cluster_labels_dict, output_dir, method_name='UMAP'):
+    """
+    Plot dimensionality reduction scatter plots showing feature map clusters.
+
+    Args:
+        embeddings_dict: Dict of {layer_name: 2d_embeddings}
+        cluster_labels_dict: Dict of {layer_name: cluster_labels}
+        output_dir: Output directory
+        method_name: 'UMAP' or 'PCA' (for labeling)
+    """
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    for layer_name, embedding in umap_embeddings.items():
+    for layer_name, embedding in embeddings_dict.items():
         labels = cluster_labels_dict[layer_name]
 
         fig, ax = plt.subplots(figsize=(10, 8))
         scatter = ax.scatter(embedding[:, 0], embedding[:, 1], c=labels, cmap='tab10', s=50, alpha=0.7)
 
-        ax.set_xlabel('UMAP 1', fontsize=12)
-        ax.set_ylabel('UMAP 2', fontsize=12)
-        ax.set_title(f'Feature Map Clusters: {layer_name}', fontsize=14, fontweight='bold')
+        ax.set_xlabel(f'{method_name} Component 1', fontsize=12)
+        ax.set_ylabel(f'{method_name} Component 2', fontsize=12)
+        ax.set_title(f'Feature Map Clusters ({method_name}): {layer_name}', fontsize=14, fontweight='bold')
 
         # Add colorbar
         cbar = plt.colorbar(scatter, ax=ax)
@@ -421,13 +465,69 @@ def plot_umap_clusters(umap_embeddings, cluster_labels_dict, output_dir):
             ax.annotate(str(i), (x, y), fontsize=8, alpha=0.6, ha='center')
 
         plt.tight_layout()
-        output_path = output_dir / f'umap_clusters_{layer_name}.png'
+        output_path = output_dir / f'{method_name.lower()}_clusters_{layer_name}.png'
         plt.savefig(output_path, bbox_inches='tight', dpi=150)
         plt.close()
 
-    print(f"  ✓ Saved {len(umap_embeddings)} UMAP cluster plots to: {output_dir}")
+    print(f"  ✓ Saved {len(embeddings_dict)} {method_name} cluster plots to: {output_dir}")
 
-def plot_representative_feature_maps(activation, layer_name, representatives, output_path):
+def plot_umap_pca_comparison(pca_embeddings, pca_labels, umap_embeddings, umap_labels, output_dir):
+    """
+    Create side-by-side comparison plots of UMAP vs PCA clustering.
+
+    Args:
+        pca_embeddings: Dict of {layer_name: pca_2d_coords}
+        pca_labels: Dict of {layer_name: pca_cluster_labels}
+        umap_embeddings: Dict of {layer_name: umap_2d_coords}
+        umap_labels: Dict of {layer_name: umap_cluster_labels}
+        output_dir: Output directory
+    """
+    output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    for layer_name in pca_embeddings.keys():
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(18, 7))
+        fig.suptitle(f'Dimensionality Reduction Comparison: {layer_name}',
+                     fontsize=16, fontweight='bold')
+
+        # PCA plot
+        pca_embed = pca_embeddings[layer_name]
+        pca_label = pca_labels[layer_name]
+        scatter1 = ax1.scatter(pca_embed[:, 0], pca_embed[:, 1],
+                              c=pca_label, cmap='tab10', s=50, alpha=0.7)
+        ax1.set_xlabel('PCA Component 1', fontsize=12)
+        ax1.set_ylabel('PCA Component 2', fontsize=12)
+        ax1.set_title('PCA Clustering', fontsize=14, fontweight='bold')
+        cbar1 = plt.colorbar(scatter1, ax=ax1)
+        cbar1.set_label('Cluster', fontsize=12)
+
+        # Annotate PCA
+        for i, (x, y) in enumerate(pca_embed):
+            ax1.annotate(str(i), (x, y), fontsize=7, alpha=0.5, ha='center')
+
+        # UMAP plot
+        umap_embed = umap_embeddings[layer_name]
+        umap_label = umap_labels[layer_name]
+        scatter2 = ax2.scatter(umap_embed[:, 0], umap_embed[:, 1],
+                              c=umap_label, cmap='tab10', s=50, alpha=0.7)
+        ax2.set_xlabel('UMAP Component 1', fontsize=12)
+        ax2.set_ylabel('UMAP Component 2', fontsize=12)
+        ax2.set_title('UMAP Clustering', fontsize=14, fontweight='bold')
+        cbar2 = plt.colorbar(scatter2, ax=ax2)
+        cbar2.set_label('Cluster', fontsize=12)
+
+        # Annotate UMAP
+        for i, (x, y) in enumerate(umap_embed):
+            ax2.annotate(str(i), (x, y), fontsize=7, alpha=0.5, ha='center')
+
+        plt.tight_layout()
+        output_path = output_dir / f'comparison_{layer_name}.png'
+        plt.savefig(output_path, bbox_inches='tight', dpi=150)
+        plt.close()
+
+    print(f"  ✓ Saved {len(pca_embeddings)} UMAP vs PCA comparison plots to: {output_dir}")
+
+def plot_representative_feature_maps(activation, layer_name, representatives, output_path, method_name=''):
     """
     Plot only representative feature maps from each cluster.
 
@@ -436,6 +536,7 @@ def plot_representative_feature_maps(activation, layer_name, representatives, ou
         layer_name: Name of layer
         representatives: List of (channel_idx, cluster_id) tuples
         output_path: Path to save plot
+        method_name: 'PCA' or 'UMAP' (for labeling)
     """
     maps = activation.cpu().squeeze(0)  # [C, H, W]
 
@@ -443,8 +544,9 @@ def plot_representative_feature_maps(activation, layer_name, representatives, ou
     cols = min(8, n_reps)
     rows = int(np.ceil(n_reps / cols))
 
+    method_suffix = f" ({method_name})" if method_name else ""
     fig, axes = plt.subplots(rows, cols, figsize=(cols * 2.5, rows * 2.5))
-    fig.suptitle(f"Representative Feature Maps: {layer_name}\n({n_reps} clusters)",
+    fig.suptitle(f"Representative Feature Maps{method_suffix}: {layer_name}\n({n_reps} clusters)",
                  fontsize=16, fontweight='bold')
 
     # Flatten axes
@@ -497,11 +599,18 @@ def register_conv_hooks(model):
     return layers_dict
 
 def visualize_feature_maps_with_clustering(model, image_tensor, output_dir, device, n_clusters=8):
-    """Visualize representative feature maps using UMAP clustering"""
+    """
+    Visualize representative feature maps using BOTH UMAP and PCA clustering for comparison.
+
+    Generates:
+    - PCA cluster plots and representatives (always)
+    - UMAP cluster plots and representatives (if UMAP available)
+    - Side-by-side comparison plots
+    """
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    print("\nVisualizing feature maps with UMAP clustering...")
+    print("\nVisualizing feature maps with dual UMAP/PCA clustering...")
 
     # Capture activations
     activations = {}
@@ -523,25 +632,63 @@ def visualize_feature_maps_with_clustering(model, image_tensor, output_dir, devi
     for handle in hooks.values():
         handle.remove()
 
-    # Cluster feature maps
-    print("  Clustering feature maps...")
-    representatives, umap_embeddings, cluster_labels = cluster_feature_maps(activations, n_clusters=n_clusters)
+    # Cluster feature maps with BOTH methods
+    print("  Clustering feature maps with dual methods...")
+    clustering_results = cluster_feature_maps_dual(activations, n_clusters=n_clusters)
 
-    # Plot UMAP clusters
-    if umap_embeddings:
+    # Plot PCA clusters (always available)
+    pca_results = clustering_results['pca']
+    pca_dir = output_dir / 'pca_clusters'
+    plot_clustering_results(
+        pca_results['embeddings'],
+        pca_results['cluster_labels'],
+        pca_dir,
+        method_name='PCA'
+    )
+
+    # Plot UMAP clusters (if available)
+    if clustering_results['umap'] is not None:
+        umap_results = clustering_results['umap']
         umap_dir = output_dir / 'umap_clusters'
-        plot_umap_clusters(umap_embeddings, cluster_labels, umap_dir)
+        plot_clustering_results(
+            umap_results['embeddings'],
+            umap_results['cluster_labels'],
+            umap_dir,
+            method_name='UMAP'
+        )
 
-    # Plot representative feature maps
-    feature_maps_dir = output_dir / 'representative_feature_maps'
-    feature_maps_dir.mkdir(parents=True, exist_ok=True)
+        # Plot side-by-side comparison
+        print("  Creating UMAP vs PCA comparison plots...")
+        comparison_dir = output_dir / 'comparison_umap_vs_pca'
+        plot_umap_pca_comparison(
+            pca_results['embeddings'],
+            pca_results['cluster_labels'],
+            umap_results['embeddings'],
+            umap_results['cluster_labels'],
+            comparison_dir
+        )
 
-    for layer_name, activation in tqdm(activations.items(), desc="Plotting representative feature maps"):
-        reps = representatives[layer_name]
-        output_path = feature_maps_dir / f"feature_map_{layer_name}.png"
-        plot_representative_feature_maps(activation, layer_name, reps, output_path)
+    # Plot representative feature maps for BOTH methods
+    print("  Plotting representative feature maps...")
 
-    print(f"  ✓ Saved {len(activations)} representative feature map visualizations")
+    # PCA representatives
+    pca_feature_maps_dir = output_dir / 'representative_feature_maps_pca'
+    pca_feature_maps_dir.mkdir(parents=True, exist_ok=True)
+    for layer_name, activation in tqdm(activations.items(), desc="Plotting PCA representatives"):
+        reps = pca_results['representatives'][layer_name]
+        output_path = pca_feature_maps_dir / f"feature_map_{layer_name}_pca.png"
+        plot_representative_feature_maps(activation, layer_name, reps, output_path, method_name='PCA')
+
+    # UMAP representatives (if available)
+    if clustering_results['umap'] is not None:
+        umap_feature_maps_dir = output_dir / 'representative_feature_maps_umap'
+        umap_feature_maps_dir.mkdir(parents=True, exist_ok=True)
+        for layer_name, activation in tqdm(activations.items(), desc="Plotting UMAP representatives"):
+            reps = umap_results['representatives'][layer_name]
+            output_path = umap_feature_maps_dir / f"feature_map_{layer_name}_umap.png"
+            plot_representative_feature_maps(activation, layer_name, reps, output_path, method_name='UMAP')
+
+    print(f"  ✓ Saved dual PCA/UMAP analyses for {len(activations)} layers")
 
 # ============================================================================
 # FEATURE INVERSION AT CORRECT DIMENSIONS
