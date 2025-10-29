@@ -347,7 +347,18 @@ class DistillFeatureVisualizer:
     def __init__(self, model, device='cuda', use_fourier=True):
         self.model = model.to(device)
         self.device = device
+
+        # CRITICAL FIX: Set model to eval mode but keep BatchNorm in train mode
+        # This prevents NaN issues during feature visualization
         self.model.eval()
+
+        # Set all BatchNorm layers to training mode
+        # This allows them to compute statistics from the optimized images
+        # rather than using fixed training statistics (which causes NaN)
+        for module in self.model.modules():
+            if isinstance(module, nn.BatchNorm2d):
+                module.train()
+
         self.use_fourier = use_fourier
 
         # Disable gradient computation for model parameters
@@ -360,7 +371,7 @@ class DistillFeatureVisualizer:
         channel_idx,
         size=(512, 512),
         iterations=500,
-        lr=0.05,
+        lr=0.01,  # Reduced from 0.05 for stability with BatchNorm
         use_fourier=None,
         regularization_config=None
     ):
@@ -385,8 +396,8 @@ class DistillFeatureVisualizer:
 
         if regularization_config is None:
             regularization_config = {
-                'l2_weight': 1e-4,
-                'tv_weight': 1e-2,
+                'l2_weight': 5e-4,  # Increased for stability with BatchNorm
+                'tv_weight': 2e-2,  # Increased for smoother results
                 'jitter': 16,  # Distill uses 8-16 pixels
                 'rotate': True,
                 'rotate_max_angle': 10,
@@ -465,6 +476,15 @@ class DistillFeatureVisualizer:
 
             # Backward
             total_loss.backward()
+
+            # SAFETY: Gradient clipping to prevent explosion
+            torch.nn.utils.clip_grad_norm_(param_module.parameters(), max_norm=1.0)
+
+            # SAFETY: Check for NaN before optimizer step
+            if torch.isnan(total_loss) or torch.isinf(total_loss):
+                print(f"    WARNING: NaN/Inf detected at iteration {iteration}, stopping early")
+                break
+
             optimizer.step()
 
             # Undo jitter (important for spatial consistency)
