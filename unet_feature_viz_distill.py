@@ -240,13 +240,18 @@ class TransformRobustness:
 
         # Crop or pad to original size
         if scale > 1.0:  # Zoom in - crop center
+            # Handle odd differences correctly
             start_h = (new_h - h) // 2
             start_w = (new_w - w) // 2
             img_scaled = img_scaled[:, :, start_h:start_h + h, start_w:start_w + w]
         else:  # Zoom out - pad
-            pad_h = (h - new_h) // 2
-            pad_w = (w - new_w) // 2
-            img_scaled = F.pad(img_scaled, (pad_w, pad_w, pad_h, pad_h), mode='constant', value=0)
+            # Handle odd differences correctly (avoid off-by-one errors)
+            pad_h_left = (h - new_h) // 2
+            pad_h_right = h - new_h - pad_h_left
+            pad_w_left = (w - new_w) // 2
+            pad_w_right = w - new_w - pad_w_left
+            img_scaled = F.pad(img_scaled, (pad_w_left, pad_w_right, pad_h_left, pad_h_right),
+                              mode='constant', value=0)
 
         return img_scaled, scale
 
