@@ -1,0 +1,72 @@
+Unloading shared
+  WARNING: Did not unuse /cm/shared/modulefiles
+ERROR: Unable to locate a modulefile for 'anaconda3/2023.09-0-gcc/12.3.0-bvbszyk'
+
+EnvironmentNameNotFound: Could not find conda environment: unetCNN
+You can list all discoverable environments with `conda info --envs`.
+
+
+==================================================================
+Job started: Wed Oct 29 04:26:28 PM +08 2025
+Node: GN-A40-073
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+==================================================================
+
+Wed Oct 29 16:26:28 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     Off |   00000000:AE:00.0 Off |                    0 |
+|  0%   34C    P8             22W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+==================================================================
+Distill 2017 Enhanced Feature Visualization
+==================================================================
+Model: /path/to/your/trained/unet_model.pth
+Output: unet_viz_distill
+Layers: encoder_1_conv2 encoder_3_conv2 decoder_1_conv2 bottleneck_conv2
+Channels per layer: 12
+Diverse examples: 3
+Iterations: 500
+Fourier preconditioning: ENABLED
+Enhanced transforms: ENABLED (jitter ±16px, rotation ±10°, scale 0.95-1.05×)
+==================================================================
+
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/unet_feature_viz_distill.py", line 22, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+
+==================================================================
+❌ Visualization failed with error code 0
+==================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-29 16:26:29.579214:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 329240.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:00
+	Memory: Requested(240gb), Used(29096kb)
+	Vmem Used: 0kb
+	Walltime: Requested(06:00:00), Used(00:00:02)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-073[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
