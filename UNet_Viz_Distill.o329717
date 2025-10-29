@@ -1,0 +1,99 @@
+==================================================================
+Job started: Wed Oct 29 09:09:39 PM +08 2025
+Node: GN-A40-018
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+Singularity image: /app1/common/singularity-img/hopper/pytorch/pytorch_2.4.0a0-cuda_12.5.0_ngc_24.06.sif
+==================================================================
+
+Wed Oct 29 21:09:39 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     Off |   00000000:0A:00.0 Off |                    0 |
+|  0%   30C    P8             22W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+==================================================================
+Distill 2017 Enhanced Feature Visualization
+==================================================================
+Model: ./best_models_PyTorch/unet/best_model.pth
+Output: unet_viz_distill
+Layers: encoder_1_conv2 encoder_3_conv2 decoder_1_conv2 bottleneck_conv2
+Channels per layer: 12
+Diverse examples: 3
+Iterations: 500
+Fourier preconditioning: ENABLED
+Enhanced transforms: ENABLED (jitter ±16px, rotation ±10°, scale 0.95-1.05×)
+==================================================================
+
+Loading model from ./best_models_PyTorch/unet/best_model.pth
+  ✓ Loading from checkpoint (epoch 48)
+  ✓ Best validation IoU: 0.6377
+
+======================================================================
+Distill 2017 Enhanced Feature Visualization
+======================================================================
+Fourier preconditioning: ENABLED
+Enhanced transforms: ENABLED (jitter ±16px, rotation ±10°, scale 0.95-1.05×)
+Output directory: unet_viz_distill_20251029_210955
+======================================================================
+
+
+======================================================================
+Visualizing layer: encoder_1_conv2
+======================================================================
+
+Visualizing 12 channels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Channels in encoder_1_conv2:   0%|          | 0/12 [00:00<?, ?it/s]Channels in encoder_1_conv2:   0%|          | 0/12 [00:08<?, ?it/s]
+
+  Channel 0:
+Using Fourier preconditioning (Distill innovation)
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/unet_feature_viz_distill.py", line 894, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/unet_feature_viz_distill.py", line 773, in main
+    diverse_images, histories = visualizer.visualize_diverse(
+  File "/scratch/phyzxi/unet-HPC/unet_feature_viz_distill.py", line 534, in visualize_diverse
+    img, history = self.visualize_channel(layer_name, channel_idx, **kwargs)
+  File "/scratch/phyzxi/unet-HPC/unet_feature_viz_distill.py", line 448, in visualize_channel
+    _, intermediates = self.model(img_transformed, return_intermediates=True)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/scratch/phyzxi/unet-HPC/unet_feature_viz_distill.py", line 89, in forward
+    d4 = torch.cat([d4, e4], dim=1)
+RuntimeError: Sizes of tensors must match except in dimension 1. Expected size 62 but got size 63 for tensor number 1 in the list.
+
+==================================================================
+❌ Visualization failed with error code 1
+==================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-29 21:10:12.857297:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 329717.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:29
+	Memory: Requested(240gb), Used(1938024kb)
+	Vmem Used: 16971096kb
+	Walltime: Requested(06:00:00), Used(00:00:35)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-018[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.

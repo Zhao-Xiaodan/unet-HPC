@@ -1,0 +1,22 @@
+{
+  "model_path": "./best_models_PyTorch/unet/best_model.pth",
+  "output_dir": "unet_viz_distill",
+  "layers": [
+    "encoder_1_conv2",
+    "encoder_3_conv2",
+    "decoder_1_conv2",
+    "bottleneck_conv2"
+  ],
+  "channels_per_layer": 12,
+  "diverse_per_channel": 3,
+  "iterations": 500,
+  "use_fourier": true,
+  "compare_methods": false,
+  "timestamp": "20251029_210955",
+  "distill_enhancements": [
+    "Fourier preconditioning",
+    "Enhanced transforms (jitter \u00b116px, rotation \u00b110\u00b0, scale 0.95-1.05\u00d7)",
+    "Explicit diversity term option",
+    "Neuron interaction visualizations"
+  ]
+}
