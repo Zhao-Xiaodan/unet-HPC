@@ -70,3 +70,75 @@ ModuleNotFoundError: No module named 'torch'
 	Execution Nodes Used: (GN-A40-073[1]:ncpus=36:ngpus=1:mem=251658240kb)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	No GPU-related information available for this job.
+==================================================================
+Job started: Wed Oct 29 04:35:13 PM +08 2025
+Node: GN-A40-016
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+Singularity image: /app1/common/singularity-img/hopper/pytorch/pytorch_2.4.0a0-cuda_12.5.0_ngc_24.06.sif
+==================================================================
+
+Wed Oct 29 16:35:13 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     Off |   00000000:0A:00.0 Off |                    0 |
+|  0%   31C    P8             22W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+==================================================================
+Distill 2017 Enhanced Feature Visualization
+==================================================================
+Model: ./best_models_PyTorch/unet/best_model.pth
+Output: unet_viz_distill
+Layers: encoder_1_conv2 encoder_3_conv2 decoder_1_conv2 bottleneck_conv2
+Channels per layer: 12
+Diverse examples: 3
+Iterations: 500
+Fourier preconditioning: ENABLED
+Enhanced transforms: ENABLED (jitter ±16px, rotation ±10°, scale 0.95-1.05×)
+==================================================================
+
+Loading model from ./best_models_PyTorch/unet/best_model.pth
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/unet_feature_viz_distill.py", line 880, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/unet_feature_viz_distill.py", line 722, in main
+    model.load_state_dict(torch.load(args.model_path, map_location=device))
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 2191, in load_state_dict
+    raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(
+RuntimeError: Error(s) in loading state_dict for UNet:
+	Missing key(s) in state_dict: "enc1.conv1.weight", "enc1.conv1.bias", "enc1.bn1.weight", "enc1.bn1.bias", "enc1.bn1.running_mean", "enc1.bn1.running_var", "enc1.conv2.weight", "enc1.conv2.bias", "enc1.bn2.weight", "enc1.bn2.bias", "enc1.bn2.running_mean", "enc1.bn2.running_var", "enc2.conv1.weight", "enc2.conv1.bias", "enc2.bn1.weight", "enc2.bn1.bias", "enc2.bn1.running_mean", "enc2.bn1.running_var", "enc2.conv2.weight", "enc2.conv2.bias", "enc2.bn2.weight", "enc2.bn2.bias", "enc2.bn2.running_mean", "enc2.bn2.running_var", "enc3.conv1.weight", "enc3.conv1.bias", "enc3.bn1.weight", "enc3.bn1.bias", "enc3.bn1.running_mean", "enc3.bn1.running_var", "enc3.conv2.weight", "enc3.conv2.bias", "enc3.bn2.weight", "enc3.bn2.bias", "enc3.bn2.running_mean", "enc3.bn2.running_var", "enc4.conv1.weight", "enc4.conv1.bias", "enc4.bn1.weight", "enc4.bn1.bias", "enc4.bn1.running_mean", "enc4.bn1.running_var", "enc4.conv2.weight", "enc4.conv2.bias", "enc4.bn2.weight", "enc4.bn2.bias", "enc4.bn2.running_mean", "enc4.bn2.running_var", "bottleneck.conv1.weight", "bottleneck.conv1.bias", "bottleneck.bn1.weight", "bottleneck.bn1.bias", "bottleneck.bn1.running_mean", "bottleneck.bn1.running_var", "bottleneck.conv2.weight", "bottleneck.conv2.bias", "bottleneck.bn2.weight", "bottleneck.bn2.bias", "bottleneck.bn2.running_mean", "bottleneck.bn2.running_var", "up4.weight", "up4.bias", "dec4.conv1.weight", "dec4.conv1.bias", "dec4.bn1.weight", "dec4.bn1.bias", "dec4.bn1.running_mean", "dec4.bn1.running_var", "dec4.conv2.weight", "dec4.conv2.bias", "dec4.bn2.weight", "dec4.bn2.bias", "dec4.bn2.running_mean", "dec4.bn2.running_var", "up3.weight", "up3.bias", "dec3.conv1.weight", "dec3.conv1.bias", "dec3.bn1.weight", "dec3.bn1.bias", "dec3.bn1.running_mean", "dec3.bn1.running_var", "dec3.conv2.weight", "dec3.conv2.bias", "dec3.bn2.weight", "dec3.bn2.bias", "dec3.bn2.running_mean", "dec3.bn2.running_var", "up2.weight", "up2.bias", "dec2.conv1.weight", "dec2.conv1.bias", "dec2.bn1.weight", "dec2.bn1.bias", "dec2.bn1.running_mean", "dec2.bn1.running_var", "dec2.conv2.weight", "dec2.conv2.bias", "dec2.bn2.weight", "dec2.bn2.bias", "dec2.bn2.running_mean", "dec2.bn2.running_var", "up1.weight", "up1.bias", "dec1.conv1.weight", "dec1.conv1.bias", "dec1.bn1.weight", "dec1.bn1.bias", "dec1.bn1.running_mean", "dec1.bn1.running_var", "dec1.conv2.weight", "dec1.conv2.bias", "dec1.bn2.weight", "dec1.bn2.bias", "dec1.bn2.running_mean", "dec1.bn2.running_var", "out.weight", "out.bias". 
+	Unexpected key(s) in state_dict: "epoch", "model_state_dict", "optimizer_state_dict", "best_val_iou", "history". 
+
+==================================================================
+❌ Visualization failed with error code 1
+==================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-29 16:35:35.060859:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 329260.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:17
+	Memory: Requested(240gb), Used(1047172kb)
+	Vmem Used: 6740180kb
+	Walltime: Requested(06:00:00), Used(00:00:23)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-016[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
