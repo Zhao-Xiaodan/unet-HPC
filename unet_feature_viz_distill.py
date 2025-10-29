@@ -719,7 +719,21 @@ def main():
     print(f"Loading model from {args.model_path}")
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     model = UNet(in_channels=1, n_filters=32, dropout=0.2)
-    model.load_state_dict(torch.load(args.model_path, map_location=device))
+
+    # Load checkpoint (handle both checkpoint dict and direct state_dict formats)
+    checkpoint = torch.load(args.model_path, map_location=device)
+
+    if isinstance(checkpoint, dict) and 'model_state_dict' in checkpoint:
+        # Checkpoint format: {'epoch': ..., 'model_state_dict': ..., ...}
+        print(f"  ✓ Loading from checkpoint (epoch {checkpoint.get('epoch', '?')})")
+        model.load_state_dict(checkpoint['model_state_dict'])
+        if 'best_val_iou' in checkpoint:
+            print(f"  ✓ Best validation IoU: {checkpoint['best_val_iou']:.4f}")
+    else:
+        # Direct state_dict format
+        print(f"  ✓ Loading direct state_dict")
+        model.load_state_dict(checkpoint)
+
     model.to(device)
 
     # Initialize visualizer

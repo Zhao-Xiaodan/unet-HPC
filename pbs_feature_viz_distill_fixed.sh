@@ -3,13 +3,13 @@
 #PBS -l walltime=6:00:00
 #PBS -l select=1:ncpus=8:mpiprocs=1:ompthreads=8:ngpus=1:mem=32gb
 #PBS -j oe
-#PBS -o UNet_Viz_Distill.o
 
 # ============================================================================
 # U-Net Feature Visualization with Distill 2017 Enhancements - HPC Execution
 # ============================================================================
 #
 # FIXED VERSION: Uses Singularity container (like other working scripts)
+# Note: Output log will be named UNet_Viz_Distill.o<JobID> automatically
 #
 # This script runs enhanced feature visualization with:
 # 1. Fourier preconditioning (Distill's key innovation)
