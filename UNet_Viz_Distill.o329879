@@ -1,0 +1,659 @@
+==================================================================
+Job started: Wed Oct 29 11:07:45 PM +08 2025
+Node: GN-A40-102
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+Singularity image: /app1/common/singularity-img/hopper/pytorch/pytorch_2.4.0a0-cuda_12.5.0_ngc_24.06.sif
+==================================================================
+
+Wed Oct 29 23:07:45 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     Off |   00000000:0A:00.0 Off |                    0 |
+|  0%   31C    P8             21W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+==================================================================
+Distill 2017 Enhanced Feature Visualization
+==================================================================
+Model: ./best_models_PyTorch/unet/best_model.pth
+Output: unet_viz_distill
+Layers: encoder_1_conv2 encoder_3_conv2 decoder_1_conv2 bottleneck_conv2
+Channels per layer: 12
+Diverse examples: 3
+Iterations: 500
+Fourier preconditioning: ENABLED
+Enhanced transforms: ENABLED (jitter ±16px, rotation ±10°, scale 0.95-1.05×)
+==================================================================
+
+Loading model from ./best_models_PyTorch/unet/best_model.pth
+  ✓ Loading from checkpoint (epoch 48)
+  ✓ Best validation IoU: 0.6377
+
+======================================================================
+Distill 2017 Enhanced Feature Visualization
+======================================================================
+Fourier preconditioning: ENABLED
+Enhanced transforms: ENABLED (jitter ±16px, rotation ±10°, scale 0.95-1.05×)
+Output directory: unet_viz_distill_20251029_230750
+======================================================================
+
+
+======================================================================
+Visualizing layer: encoder_1_conv2
+======================================================================
+
+Visualizing 12 channels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Channels in encoder_1_conv2:   0%|          | 0/12 [00:00<?, ?it/s]/scratch/phyzxi/unet-HPC/unet_feature_viz_distill.py:670: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(img_uint8, mode='L').save(filepath)
+Channels in encoder_1_conv2:   8%|▊         | 1/12 [00:06<01:13,  6.70s/it]Channels in encoder_1_conv2:  17%|█▋        | 2/12 [00:09<00:46,  4.69s/it]Channels in encoder_1_conv2:  25%|██▌       | 3/12 [00:13<00:36,  4.08s/it]Channels in encoder_1_conv2:  33%|███▎      | 4/12 [00:16<00:29,  3.74s/it]Channels in encoder_1_conv2:  42%|████▏     | 5/12 [00:19<00:25,  3.58s/it]Channels in encoder_1_conv2:  50%|█████     | 6/12 [00:23<00:20,  3.48s/it]Channels in encoder_1_conv2:  58%|█████▊    | 7/12 [00:26<00:16,  3.39s/it]Channels in encoder_1_conv2:  67%|██████▋   | 8/12 [00:29<00:13,  3.36s/it]Channels in encoder_1_conv2:  75%|███████▌  | 9/12 [00:32<00:09,  3.31s/it]Channels in encoder_1_conv2:  83%|████████▎ | 10/12 [00:36<00:06,  3.32s/it]Channels in encoder_1_conv2:  92%|█████████▏| 11/12 [00:39<00:03,  3.32s/it]Channels in encoder_1_conv2: 100%|██████████| 12/12 [00:42<00:00,  3.28s/it]Channels in encoder_1_conv2: 100%|██████████| 12/12 [00:42<00:00,  3.56s/it]
+
+  Channel 0:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.346
+    Diverse #2: Final activation = 0.345
+    Diverse #3: Final activation = 0.347
+
+  Channel 1:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.313
+    Diverse #2: Final activation = 0.306
+    Diverse #3: Final activation = 0.309
+
+  Channel 2:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.284
+    Diverse #2: Final activation = 0.287
+    Diverse #3: Final activation = 0.291
+
+  Channel 3:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.337
+    Diverse #2: Final activation = 0.337
+    Diverse #3: Final activation = 0.326
+
+  Channel 4:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.375
+    Diverse #2: Final activation = 0.386
+    Diverse #3: Final activation = 0.379
+
+  Channel 5:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.385
+    Diverse #2: Final activation = 0.396
+    Diverse #3: Final activation = 0.390
+
+  Channel 6:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.316
+    Diverse #2: Final activation = 0.312
+    Diverse #3: Final activation = 0.329
+
+  Channel 7:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.316
+    Diverse #2: Final activation = 0.317
+    Diverse #3: Final activation = 0.331
+
+  Channel 8:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.351
+    Diverse #2: Final activation = 0.364
+    Diverse #3: Final activation = 0.350
+
+  Channel 9:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.360
+    Diverse #2: Final activation = 0.371
+    Diverse #3: Final activation = 0.363
+
+  Channel 10:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.345
+    Diverse #2: Final activation = 0.346
+    Diverse #3: Final activation = 0.362
+
+  Channel 11:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.244
+    Diverse #2: Final activation = 0.235
+    Diverse #3: Final activation = 0.238
+
+Creating overview grid for encoder_1_conv2...
+
+======================================================================
+Visualizing layer: encoder_3_conv2
+======================================================================
+
+Visualizing 12 channels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Channels in encoder_3_conv2:   0%|          | 0/12 [00:00<?, ?it/s]Channels in encoder_3_conv2:   8%|▊         | 1/12 [00:03<00:35,  3.22s/it]Channels in encoder_3_conv2:  17%|█▋        | 2/12 [00:06<00:32,  3.28s/it]Channels in encoder_3_conv2:  25%|██▌       | 3/12 [00:09<00:29,  3.29s/it]Channels in encoder_3_conv2:  33%|███▎      | 4/12 [00:13<00:26,  3.26s/it]Channels in encoder_3_conv2:  42%|████▏     | 5/12 [00:16<00:22,  3.28s/it]Channels in encoder_3_conv2:  50%|█████     | 6/12 [00:19<00:19,  3.30s/it]Channels in encoder_3_conv2:  58%|█████▊    | 7/12 [00:22<00:16,  3.27s/it]Channels in encoder_3_conv2:  67%|██████▋   | 8/12 [00:26<00:13,  3.28s/it]Channels in encoder_3_conv2:  75%|███████▌  | 9/12 [00:29<00:09,  3.26s/it]Channels in encoder_3_conv2:  83%|████████▎ | 10/12 [00:32<00:06,  3.27s/it]Channels in encoder_3_conv2:  92%|█████████▏| 11/12 [00:36<00:03,  3.28s/it]Channels in encoder_3_conv2: 100%|██████████| 12/12 [00:39<00:00,  3.27s/it]Channels in encoder_3_conv2: 100%|██████████| 12/12 [00:39<00:00,  3.27s/it]
+
+  Channel 0:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.300
+    Diverse #2: Final activation = 0.313
+    Diverse #3: Final activation = 0.317
+
+  Channel 1:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.286
+    Diverse #2: Final activation = 0.318
+    Diverse #3: Final activation = 0.304
+
+  Channel 2:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.293
+    Diverse #2: Final activation = 0.320
+    Diverse #3: Final activation = 0.307
+
+  Channel 3:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.408
+    Diverse #2: Final activation = 0.407
+    Diverse #3: Final activation = 0.417
+
+  Channel 4:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.258
+    Diverse #2: Final activation = 0.258
+    Diverse #3: Final activation = 0.260
+
+  Channel 5:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.278
+    Diverse #2: Final activation = 0.303
+    Diverse #3: Final activation = 0.299
+
+  Channel 6:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.411
+    Diverse #2: Final activation = 0.413
+    Diverse #3: Final activation = 0.410
+
+  Channel 7:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.269
+    Diverse #2: Final activation = 0.272
+    Diverse #3: Final activation = 0.276
+
+  Channel 8:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.312
+    Diverse #2: Final activation = 0.326
+    Diverse #3: Final activation = 0.323
+
+  Channel 9:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.239
+    Diverse #2: Final activation = 0.234
+    Diverse #3: Final activation = 0.231
+
+  Channel 10:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.328
+    Diverse #2: Final activation = 0.348
+    Diverse #3: Final activation = 0.337
+
+  Channel 11:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.251
+    Diverse #2: Final activation = 0.251
+    Diverse #3: Final activation = 0.253
+
+Creating overview grid for encoder_3_conv2...
+
+======================================================================
+Visualizing layer: decoder_1_conv2
+======================================================================
+
+Visualizing 12 channels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Channels in decoder_1_conv2:   0%|          | 0/12 [00:00<?, ?it/s]Channels in decoder_1_conv2:   8%|▊         | 1/12 [00:03<00:36,  3.30s/it]Channels in decoder_1_conv2:  17%|█▋        | 2/12 [00:06<00:33,  3.35s/it]Channels in decoder_1_conv2:  25%|██▌       | 3/12 [00:09<00:29,  3.32s/it]Channels in decoder_1_conv2:  33%|███▎      | 4/12 [00:13<00:26,  3.34s/it]Channels in decoder_1_conv2:  42%|████▏     | 5/12 [00:16<00:23,  3.35s/it]Channels in decoder_1_conv2:  50%|█████     | 6/12 [00:19<00:19,  3.32s/it]Channels in decoder_1_conv2:  58%|█████▊    | 7/12 [00:23<00:16,  3.34s/it]Channels in decoder_1_conv2:  67%|██████▋   | 8/12 [00:26<00:13,  3.32s/it]Channels in decoder_1_conv2:  75%|███████▌  | 9/12 [00:29<00:09,  3.33s/it]Channels in decoder_1_conv2:  83%|████████▎ | 10/12 [00:33<00:06,  3.31s/it]Channels in decoder_1_conv2:  92%|█████████▏| 11/12 [00:36<00:03,  3.33s/it]Channels in decoder_1_conv2: 100%|██████████| 12/12 [00:39<00:00,  3.34s/it]Channels in decoder_1_conv2: 100%|██████████| 12/12 [00:39<00:00,  3.33s/it]
+
+  Channel 0:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.164
+    Diverse #2: Final activation = 0.164
+    Diverse #3: Final activation = 0.189
+
+  Channel 1:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.523
+    Diverse #2: Final activation = 0.518
+    Diverse #3: Final activation = 0.516
+
+  Channel 2:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.107
+    Diverse #2: Final activation = 0.106
+    Diverse #3: Final activation = 0.128
+
+  Channel 3:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.403
+    Diverse #2: Final activation = 0.400
+    Diverse #3: Final activation = 0.400
+
+  Channel 4:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.576
+    Diverse #2: Final activation = 0.574
+    Diverse #3: Final activation = 0.570
+
+  Channel 5:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.118
+    Diverse #2: Final activation = 0.118
+    Diverse #3: Final activation = 0.141
+
+  Channel 6:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.574
+    Diverse #2: Final activation = 0.577
+    Diverse #3: Final activation = 0.570
+
+  Channel 7:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.590
+    Diverse #2: Final activation = 0.583
+    Diverse #3: Final activation = 0.583
+
+  Channel 8:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.613
+    Diverse #2: Final activation = 0.605
+    Diverse #3: Final activation = 0.603
+
+  Channel 9:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.620
+    Diverse #2: Final activation = 0.614
+    Diverse #3: Final activation = 0.613
+
+  Channel 10:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.652
+    Diverse #2: Final activation = 0.648
+    Diverse #3: Final activation = 0.645
+
+  Channel 11:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.142
+    Diverse #2: Final activation = 0.143
+    Diverse #3: Final activation = 0.168
+
+Creating overview grid for decoder_1_conv2...
+
+======================================================================
+Visualizing layer: bottleneck_conv2
+======================================================================
+
+Visualizing 12 channels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Channels in bottleneck_conv2:   0%|          | 0/12 [00:00<?, ?it/s]Channels in bottleneck_conv2:   8%|▊         | 1/12 [00:03<00:36,  3.31s/it]Channels in bottleneck_conv2:  17%|█▋        | 2/12 [00:06<00:32,  3.26s/it]Channels in bottleneck_conv2:  25%|██▌       | 3/12 [00:09<00:29,  3.29s/it]Channels in bottleneck_conv2:  33%|███▎      | 4/12 [00:13<00:26,  3.26s/it]Channels in bottleneck_conv2:  42%|████▏     | 5/12 [00:16<00:23,  3.29s/it]Channels in bottleneck_conv2:  50%|█████     | 6/12 [00:19<00:19,  3.29s/it]Channels in bottleneck_conv2:  58%|█████▊    | 7/12 [00:22<00:16,  3.26s/it]Channels in bottleneck_conv2:  67%|██████▋   | 8/12 [00:26<00:13,  3.28s/it]Channels in bottleneck_conv2:  75%|███████▌  | 9/12 [00:29<00:09,  3.26s/it]Channels in bottleneck_conv2:  83%|████████▎ | 10/12 [00:32<00:06,  3.28s/it]Channels in bottleneck_conv2:  92%|█████████▏| 11/12 [00:36<00:03,  3.29s/it]Channels in bottleneck_conv2: 100%|██████████| 12/12 [00:39<00:00,  3.26s/it]Channels in bottleneck_conv2: 100%|██████████| 12/12 [00:39<00:00,  3.27s/it]
+
+  Channel 0:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.242
+    Diverse #2: Final activation = 0.287
+    Diverse #3: Final activation = 0.267
+
+  Channel 1:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.315
+    Diverse #2: Final activation = 0.396
+    Diverse #3: Final activation = 0.361
+
+  Channel 2:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.253
+    Diverse #2: Final activation = 0.313
+    Diverse #3: Final activation = 0.290
+
+  Channel 3:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.341
+    Diverse #2: Final activation = 0.349
+    Diverse #3: Final activation = 0.343
+
+  Channel 4:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.448
+    Diverse #2: Final activation = 0.429
+    Diverse #3: Final activation = 0.436
+
+  Channel 5:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.247
+    Diverse #2: Final activation = 0.310
+    Diverse #3: Final activation = 0.284
+
+  Channel 6:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.379
+    Diverse #2: Final activation = 0.429
+    Diverse #3: Final activation = 0.419
+
+  Channel 7:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.384
+    Diverse #2: Final activation = 0.379
+    Diverse #3: Final activation = 0.377
+
+  Channel 8:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.288
+    Diverse #2: Final activation = 0.317
+    Diverse #3: Final activation = 0.300
+
+  Channel 9:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.366
+    Diverse #2: Final activation = 0.363
+    Diverse #3: Final activation = 0.362
+
+  Channel 10:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.293
+    Diverse #2: Final activation = 0.305
+    Diverse #3: Final activation = 0.297
+
+  Channel 11:
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+Using Fourier preconditioning (Distill innovation)
+    WARNING: NaN/Inf detected at iteration 44, stopping early
+    Diverse #1: Final activation = 0.402
+    Diverse #2: Final activation = 0.388
+    Diverse #3: Final activation = 0.391
+
+Creating overview grid for bottleneck_conv2...
+
+======================================================================
+✅ Visualization complete!
+📁 Results saved to: unet_viz_distill_20251029_230750
+======================================================================
+
+
+==================================================================
+✅ Visualization completed successfully!
+==================================================================
+
+Compressing results...
+Created archive: unet_viz_distill_20251029_230750.tar.gz
+Total files generated: 341
+Disk usage: 125M
+
+Example visualizations created:
+unet_viz_distill_20251029_230750/bottleneck_conv2_overview.png
+unet_viz_distill_20251029_230750/decoder_1_conv2_overview.png
+unet_viz_distill_20251029_230750/encoder_1_conv2_overview.png
+
+==================================================================
+Job finished: Wed Oct 29 11:10:42 PM +08 2025
+==================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-29 23:10:43.068131:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 329879.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:05:12
+	Memory: Requested(240gb), Used(2250812kb)
+	Vmem Used: 18042716kb
+	Walltime: Requested(06:00:00), Used(00:02:58)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-102[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
