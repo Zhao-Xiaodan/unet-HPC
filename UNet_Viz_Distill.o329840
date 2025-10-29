@@ -1,0 +1,517 @@
+==================================================================
+Job started: Wed Oct 29 10:39:48 PM +08 2025
+Node: GN-A40-074
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+Singularity image: /app1/common/singularity-img/hopper/pytorch/pytorch_2.4.0a0-cuda_12.5.0_ngc_24.06.sif
+==================================================================
+
+Wed Oct 29 22:39:48 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A40                     Off |   00000000:AE:00.0 Off |                    0 |
+|  0%   31C    P8             22W /  300W |       0MiB /  46068MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+==================================================================
+Distill 2017 Enhanced Feature Visualization
+==================================================================
+Model: ./best_models_PyTorch/unet/best_model.pth
+Output: unet_viz_distill
+Layers: encoder_1_conv2 encoder_3_conv2 decoder_1_conv2 bottleneck_conv2
+Channels per layer: 12
+Diverse examples: 3
+Iterations: 500
+Fourier preconditioning: ENABLED
+Enhanced transforms: ENABLED (jitter ±16px, rotation ±10°, scale 0.95-1.05×)
+==================================================================
+
+Loading model from ./best_models_PyTorch/unet/best_model.pth
+  ✓ Loading from checkpoint (epoch 48)
+  ✓ Best validation IoU: 0.6377
+
+======================================================================
+Distill 2017 Enhanced Feature Visualization
+======================================================================
+Fourier preconditioning: ENABLED
+Enhanced transforms: ENABLED (jitter ±16px, rotation ±10°, scale 0.95-1.05×)
+Output directory: unet_viz_distill_20251029_223954
+======================================================================
+
+
+======================================================================
+Visualizing layer: encoder_1_conv2
+======================================================================
+
+Visualizing 12 channels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Channels in encoder_1_conv2:   0%|          | 0/12 [00:00<?, ?it/s]/scratch/phyzxi/unet-HPC/unet_feature_viz_distill.py:648: RuntimeWarning: invalid value encountered in cast
+  img_uint8 = (img_normalized * 255).astype(np.uint8)
+/scratch/phyzxi/unet-HPC/unet_feature_viz_distill.py:650: DeprecationWarning: 'mode' parameter is deprecated and will be removed in Pillow 13 (2026-10-15)
+  Image.fromarray(img_uint8, mode='L').save(filepath)
+Channels in encoder_1_conv2:   8%|▊         | 1/12 [00:20<03:42, 20.22s/it]Channels in encoder_1_conv2:  17%|█▋        | 2/12 [00:37<03:04, 18.41s/it]Channels in encoder_1_conv2:  25%|██▌       | 3/12 [00:54<02:40, 17.83s/it]Channels in encoder_1_conv2:  33%|███▎      | 4/12 [01:11<02:20, 17.51s/it]Channels in encoder_1_conv2:  42%|████▏     | 5/12 [01:28<02:01, 17.39s/it]Channels in encoder_1_conv2:  50%|█████     | 6/12 [01:45<01:43, 17.30s/it]Channels in encoder_1_conv2:  58%|█████▊    | 7/12 [02:02<01:26, 17.22s/it]Channels in encoder_1_conv2:  67%|██████▋   | 8/12 [02:20<01:08, 17.20s/it]Channels in encoder_1_conv2:  75%|███████▌  | 9/12 [02:37<00:51, 17.19s/it]Channels in encoder_1_conv2:  83%|████████▎ | 10/12 [02:54<00:34, 17.13s/it]Channels in encoder_1_conv2:  92%|█████████▏| 11/12 [03:11<00:17, 17.13s/it]Channels in encoder_1_conv2: 100%|██████████| 12/12 [03:28<00:00, 17.09s/it]Channels in encoder_1_conv2: 100%|██████████| 12/12 [03:28<00:00, 17.36s/it]
+
+  Channel 0:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 1:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 2:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 3:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 4:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 5:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 6:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 7:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 8:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 9:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 10:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 11:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+Creating overview grid for encoder_1_conv2...
+
+======================================================================
+Visualizing layer: encoder_3_conv2
+======================================================================
+
+Visualizing 12 channels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Channels in encoder_3_conv2:   0%|          | 0/12 [00:00<?, ?it/s]Channels in encoder_3_conv2:   8%|▊         | 1/12 [00:17<03:08, 17.11s/it]Channels in encoder_3_conv2:  17%|█▋        | 2/12 [00:34<02:52, 17.21s/it]Channels in encoder_3_conv2:  25%|██▌       | 3/12 [00:51<02:34, 17.21s/it]Channels in encoder_3_conv2:  33%|███▎      | 4/12 [01:08<02:17, 17.16s/it]Channels in encoder_3_conv2:  42%|████▏     | 5/12 [01:25<02:00, 17.17s/it]Channels in encoder_3_conv2:  50%|█████     | 6/12 [01:42<01:42, 17.13s/it]Channels in encoder_3_conv2:  58%|█████▊    | 7/12 [02:00<01:25, 17.16s/it]Channels in encoder_3_conv2:  67%|██████▋   | 8/12 [02:17<01:08, 17.17s/it]Channels in encoder_3_conv2:  75%|███████▌  | 9/12 [02:34<00:51, 17.15s/it]Channels in encoder_3_conv2:  83%|████████▎ | 10/12 [02:51<00:34, 17.17s/it]Channels in encoder_3_conv2:  92%|█████████▏| 11/12 [03:08<00:17, 17.14s/it]Channels in encoder_3_conv2: 100%|██████████| 12/12 [03:25<00:00, 17.17s/it]Channels in encoder_3_conv2: 100%|██████████| 12/12 [03:25<00:00, 17.16s/it]
+
+  Channel 0:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 1:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 2:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 3:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 4:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 5:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 6:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 7:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 8:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 9:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 10:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 11:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+Creating overview grid for encoder_3_conv2...
+
+======================================================================
+Visualizing layer: decoder_1_conv2
+======================================================================
+
+Visualizing 12 channels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Channels in decoder_1_conv2:   0%|          | 0/12 [00:00<?, ?it/s]Channels in decoder_1_conv2:   8%|▊         | 1/12 [00:17<03:13, 17.57s/it]Channels in decoder_1_conv2:  17%|█▋        | 2/12 [00:35<02:55, 17.56s/it]Channels in decoder_1_conv2:  25%|██▌       | 3/12 [00:52<02:37, 17.50s/it]Channels in decoder_1_conv2:  33%|███▎      | 4/12 [01:10<02:20, 17.52s/it]Channels in decoder_1_conv2:  42%|████▏     | 5/12 [01:27<02:02, 17.50s/it]Channels in decoder_1_conv2:  50%|█████     | 6/12 [01:45<01:45, 17.53s/it]Channels in decoder_1_conv2:  58%|█████▊    | 7/12 [02:02<01:27, 17.54s/it]Channels in decoder_1_conv2:  67%|██████▋   | 8/12 [02:20<01:10, 17.51s/it]Channels in decoder_1_conv2:  75%|███████▌  | 9/12 [02:37<00:52, 17.53s/it]Channels in decoder_1_conv2:  83%|████████▎ | 10/12 [02:55<00:35, 17.51s/it]Channels in decoder_1_conv2:  92%|█████████▏| 11/12 [03:12<00:17, 17.53s/it]Channels in decoder_1_conv2: 100%|██████████| 12/12 [03:30<00:00, 17.51s/it]Channels in decoder_1_conv2: 100%|██████████| 12/12 [03:30<00:00, 17.52s/it]
+
+  Channel 0:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 1:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 2:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 3:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 4:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 5:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 6:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 7:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 8:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 9:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 10:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 11:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+Creating overview grid for decoder_1_conv2...
+
+======================================================================
+Visualizing layer: bottleneck_conv2
+======================================================================
+
+Visualizing 12 channels: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+Channels in bottleneck_conv2:   0%|          | 0/12 [00:00<?, ?it/s]Channels in bottleneck_conv2:   8%|▊         | 1/12 [00:17<03:08, 17.17s/it]Channels in bottleneck_conv2:  17%|█▋        | 2/12 [00:34<02:52, 17.21s/it]Channels in bottleneck_conv2:  25%|██▌       | 3/12 [00:51<02:35, 17.23s/it]Channels in bottleneck_conv2:  33%|███▎      | 4/12 [01:08<02:17, 17.20s/it]Channels in bottleneck_conv2:  42%|████▏     | 5/12 [01:26<02:00, 17.22s/it]Channels in bottleneck_conv2:  50%|█████     | 6/12 [01:43<01:43, 17.19s/it]Channels in bottleneck_conv2:  58%|█████▊    | 7/12 [02:00<01:26, 17.21s/it]Channels in bottleneck_conv2:  67%|██████▋   | 8/12 [02:17<01:08, 17.22s/it]Channels in bottleneck_conv2:  75%|███████▌  | 9/12 [02:34<00:51, 17.19s/it]Channels in bottleneck_conv2:  83%|████████▎ | 10/12 [02:52<00:34, 17.21s/it]Channels in bottleneck_conv2:  92%|█████████▏| 11/12 [03:09<00:17, 17.18s/it]Channels in bottleneck_conv2: 100%|██████████| 12/12 [03:26<00:00, 17.20s/it]Channels in bottleneck_conv2: 100%|██████████| 12/12 [03:26<00:00, 17.20s/it]
+
+  Channel 0:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 1:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 2:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 3:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 4:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 5:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 6:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 7:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 8:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 9:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 10:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+  Channel 11:
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+Using Fourier preconditioning (Distill innovation)
+    Diverse #1: Final activation = nan
+    Diverse #2: Final activation = nan
+    Diverse #3: Final activation = nan
+
+Creating overview grid for bottleneck_conv2...
+
+======================================================================
+✅ Visualization complete!
+📁 Results saved to: unet_viz_distill_20251029_223954
+======================================================================
+
+
+==================================================================
+✅ Visualization completed successfully!
+==================================================================
+
+Compressing results...
+Created archive: unet_viz_distill_20251029_223954.tar.gz
+Total files generated: 341
+Disk usage: 26M
+
+Example visualizations created:
+unet_viz_distill_20251029_223954/bottleneck_conv2_overview.png
+unet_viz_distill_20251029_223954/decoder_1_conv2_overview.png
+unet_viz_distill_20251029_223954/encoder_1_conv2_overview.png
+
+==================================================================
+Job finished: Wed Oct 29 10:53:53 PM +08 2025
+==================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-29 22:53:54.506113:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 329840.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:25:52
+	Memory: Requested(240gb), Used(2116412kb)
+	Vmem Used: 18335412kb
+	Walltime: Requested(06:00:00), Used(00:14:06)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-074[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
