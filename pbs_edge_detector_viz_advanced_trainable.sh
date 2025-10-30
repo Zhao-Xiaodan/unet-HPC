@@ -3,9 +3,9 @@
 #PBS -l walltime=4:00:00
 #PBS -l select=1:ncpus=8:mpiprocs=1:ompthreads=8:ngpus=1:mem=32gb
 #PBS -j oe
-#PBS -P personal-phyzxi
-#PBS -o EdgeDet_Viz_Train.o
-#PBS -q normal
+#PBS -k oed
+#PBS -M phyzxi@nus.edu.sg
+#PBS -m abe
 
 ################################################################################
 # Advanced Visualization for Trainable Gabor Edge Detector Model
