@@ -1,0 +1,177 @@
+========================================
+Job ID: 334399.stdct-mgmt-02
+Node: GN-A40-077
+Start Time: Thu Oct 30 04:54:44 PM +08 2025
+========================================
+
+Configuration:
+  Model: Attention ResU-Net
+  Model path: ./best_models_PyTorch/attention_resunet/best_model.pth
+  Test images: ./test_images
+  Output: ./attention_resunet_visualization_advanced
+  n_filters: 64 (4× more than standard U-Net)
+  dropout: 0.1
+  PCA clusters: 8
+  Tile position: row 3, col 4
+  Image filter: 320x
+
+Model characteristics:
+  ✓ Residual connections (skip connections within blocks)
+  ✓ Attention gates (focus on salient features)
+  ✓ n_filters=64 → ~7.7M parameters (vs ~1.9M for n_filters=32)
+  ✓ Best Val IoU: ~0.63
+
+Features:
+  ✓ Feature inversions at correct dimensions
+  ✓ PCA clustering for representative feature maps
+  ✓ Attention gate visualizations
+  ✓ Residual block feature analysis
+  ✓ Full feature map exports
+
+Output structure per image:
+  - <image_name>/
+    ├── <image_name>_3panel.png
+    ├── feature_inversions/
+    │   ├── feature_inversion_encoder_1_resconv.png  ← Residual block
+    │   ├── feature_inversion_encoder_2_resconv.png
+    │   └── ... (9 total)
+    ├── feature_maps/
+    │   ├── pca_clusters/
+    │   │   ├── pca_clusters_encoder_1_resconv.png
+    │   │   ├── pca_clusters_attention_gate_1.png  ← Attention
+    │   │   └── ... (13 total)
+    │   └── representative_feature_maps_pca/
+    │       ├── feature_map_encoder_1_resconv_pca.png
+    │       ├── feature_map_attention_gate_1_pca.png
+    │       └── ... (13 total)
+    └── tile_metadata.json
+
+========================================
+Starting advanced visualization...
+========================================
+
+⚠ UMAP not available. Will use PCA only. Install with: pip install umap-learn
+================================================================================
+ATTENTION RESU-NET ADVANCED FEATURE VISUALIZATION
+================================================================================
+Model: ./best_models_PyTorch/attention_resunet/best_model.pth
+Test images: ./test_images
+Output: ./attention_resunet_visualization_advanced
+PCA clusters: 8
+================================================================================
+
+Using device: cuda
+
+Loading Attention ResU-Net model...
+✓ Model loaded successfully
+
+Filtered from 8 to 1 image(s) matching '320x'
+
+Found 1 test images
+
+================================================================================
+Processing image 1/1: 320x_2025-05-15_02-05-00.tif
+================================================================================
+✓ Saved 3-panel figure
+
+Visualizing Attention ResU-Net feature inversions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [01:02<08:20, 62.60s/it]Running feature inversions:  22%|██▏       | 2/9 [02:09<07:36, 65.21s/it]Running feature inversions:  33%|███▎      | 3/9 [03:21<06:50, 68.40s/it]Running feature inversions:  44%|████▍     | 4/9 [04:37<05:57, 71.45s/it]Running feature inversions:  56%|█████▌    | 5/9 [05:58<04:59, 74.83s/it]Running feature inversions:  67%|██████▋   | 6/9 [07:28<03:59, 79.76s/it]Running feature inversions:  78%|███████▊  | 7/9 [09:07<02:52, 86.33s/it]Running feature inversions:  89%|████████▉ | 8/9 [11:03<01:35, 95.58s/it]Running feature inversions: 100%|██████████| 9/9 [13:25<00:00, 110.04s/it]Running feature inversions: 100%|██████████| 9/9 [13:25<00:00, 89.46s/it] 
+  Feature inversion: encoder_1_resconv (inverting from 512x512)
+  Feature inversion: encoder_2_resconv (inverting from 256x256)
+  Feature inversion: encoder_3_resconv (inverting from 128x128)
+  Feature inversion: encoder_4_resconv (inverting from 64x64)
+  Feature inversion: bottleneck_resconv (inverting from 32x32)
+  Feature inversion: decoder_4_resconv (inverting from 64x64)
+  Feature inversion: decoder_3_resconv (inverting from 128x128)
+  Feature inversion: decoder_2_resconv (inverting from 256x256)
+  Feature inversion: decoder_1_resconv (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+
+Visualizing Attention ResU-Net feature maps with PCA clustering...
+  Clustering with PCA...
+Clustering (PCA):   0%|          | 0/13 [00:00<?, ?it/s]Clustering (PCA):   8%|▊         | 1/13 [00:00<00:08,  1.47it/s]Clustering (PCA):  15%|█▌        | 2/13 [00:00<00:04,  2.53it/s]Clustering (PCA):  31%|███       | 4/13 [00:01<00:01,  5.16it/s]Clustering (PCA):  69%|██████▉   | 9/13 [00:01<00:00, 11.89it/s]Clustering (PCA):  85%|████████▍ | 11/13 [00:01<00:00, 11.42it/s]Clustering (PCA): 100%|██████████| 13/13 [00:01<00:00,  7.44it/s]Clustering (PCA): 100%|██████████| 13/13 [00:01<00:00,  6.87it/s]
+  UMAP not available, only PCA results will be generated
+  ✓ Saved 9 PCA cluster plots to: attention_resunet_visualization_advanced/320x_2025-05-15_02-05-00/feature_maps/pca_clusters
+  ✓ Saved PCA visualizations to: attention_resunet_visualization_advanced/320x_2025-05-15_02-05-00/feature_maps
+✓ Completed 320x_2025-05-15_02-05-00
+
+================================================================================
+✓ ALL VISUALIZATIONS COMPLETE
+================================================================================
+Output directory: attention_resunet_visualization_advanced
+Processed 1 images
+================================================================================
+
+========================================
+Visualization complete!
+End Time: Thu Oct 30 05:08:41 PM +08 2025
+========================================
+
+Output directory structure:
+total 280
+drwxr-x---   4 phyzxi svuusers   135 Oct 30 17:08 .
+drwxr-xr-x 113 phyzxi svuusers 17326 Oct 30 16:54 ..
+drwxr-x---   3 phyzxi svuusers    30 Oct 30 16:27 10240x_2025-05-29_02-22-00_002
+drwxr-x---   4 phyzxi svuusers   155 Oct 30 17:08 320x_2025-05-15_02-05-00
+-rw-r-----   1 phyzxi svuusers   186 Oct 30 17:08 visualization_metadata.json
+
+Sample outputs (first image):
+
+Contents of ./attention_resunet_visualization_advanced/10240x_2025-05-29_02-22-00_002/:
+total 96
+drwxr-x--- 3 phyzxi svuusers  30 Oct 30 16:27 .
+drwxr-x--- 4 phyzxi svuusers 135 Oct 30 17:08 ..
+drwxr-x--- 4 phyzxi svuusers  79 Oct 30 16:02 feature_maps
+
+Feature inversions (residual blocks):
+ls: cannot access './attention_resunet_visualization_advanced/10240x_2025-05-29_02-22-00_002/feature_inversions/': No such file or directory
+ls: cannot access './attention_resunet_visualization_advanced/10240x_2025-05-29_02-22-00_002/feature_inversions/': No such file or directory
+  ... (total: 0 files)
+
+PCA clusters:
+  ... (total: 0 files)
+
+Representative feature maps (PCA):
+  ... (total: 0 files)
+
+========================================
+✓ Job complete!
+========================================
+
+Next steps:
+1. Download results to local machine:
+   scp -r <username>@hopper:~/scratch/unet-HPC/./attention_resunet_visualization_advanced ./
+
+2. Compare with Attention U-Net results:
+   # ResConv blocks vs standard ConvBlocks
+   diff -r attention_unet_visualization_advanced/ ./attention_resunet_visualization_advanced/
+
+3. Compare with standard U-Net results:
+   # Residual connections + attention vs neither
+   diff -r unet_visualization_advanced_20251028_091857/ ./attention_resunet_visualization_advanced/
+
+4. Analyze residual block features:
+   # Check encoder_*_resconv visualizations
+   # Look for evidence of residual connections
+   ls ./attention_resunet_visualization_advanced/*/feature_maps/pca_clusters/pca_clusters_encoder_*_resconv.png
+
+5. Compare attention gate patterns across models:
+   # Attention U-Net vs Attention ResU-Net
+   # Do attention gates behave differently with residual connections?
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-30 17:08:42.017131:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 334399.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:14:23
+	Memory: Requested(240gb), Used(3144648kb)
+	Vmem Used: 19399440kb
+	Walltime: Requested(08:00:00), Used(00:13:59)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-077[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.

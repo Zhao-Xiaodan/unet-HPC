@@ -1,0 +1,6 @@
+{
+  "model_path": "./best_models_PyTorch/attention_resunet/best_model.pth",
+  "test_images_dir": "./test_images",
+  "n_images_processed": 1,
+  "timestamp": "2025-10-30T17:08:40.058520"
+}

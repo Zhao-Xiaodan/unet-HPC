@@ -1,0 +1,14 @@
+{
+  "image_name": "320x_2025-05-15_02-05-00",
+  "tile_position": {
+    "row": 3,
+    "col": 4,
+    "y": 1024,
+    "x": 1536
+  },
+  "model_config": {
+    "n_filters": 32,
+    "dropout": 0.1
+  },
+  "pca_clusters": 8
+}
