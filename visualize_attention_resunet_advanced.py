@@ -277,12 +277,15 @@ def visualize_attention_resunet_feature_maps(model, image_tensor, output_dir, de
     # Cluster and visualize each layer using PCA
     results = base_viz.cluster_feature_maps_dual(activations, n_clusters=n_clusters)
 
-    for result in results:
-        layer_name = result['layer_name']
-        method_name = result['method_name']
-        embeddings = result['embeddings']
-        labels = result['labels']
-        representatives = result['representatives']
+    # Extract PCA results (always available)
+    pca_results = results['pca']
+    method_name = pca_results['method_name']
+
+    # Process each layer
+    for layer_name in pca_results['representatives'].keys():
+        representatives = pca_results['representatives'][layer_name]
+        embeddings = pca_results['embeddings'][layer_name]
+        labels = pca_results['cluster_labels'][layer_name]
 
         # Plot cluster scatter
         cluster_path = pca_clusters_dir / f"pca_clusters_{layer_name}.png"
@@ -363,6 +366,8 @@ def main():
                        help='Tile row position')
     parser.add_argument('--tile_col', type=int, default=4,
                        help='Tile column position')
+    parser.add_argument('--filter_image', type=str, default=None,
+                       help='Process only images containing this substring (e.g., "320x")')
 
     args = parser.parse_args()
 
@@ -407,9 +412,17 @@ def main():
         image_files.extend(test_images_dir.glob(ext))
     image_files = sorted(image_files)
 
+    # Apply image filter if specified
+    if args.filter_image:
+        original_count = len(image_files)
+        image_files = [f for f in image_files if args.filter_image in f.name]
+        print(f"\nFiltered from {original_count} to {len(image_files)} image(s) matching '{args.filter_image}'")
+
     if len(image_files) == 0:
-        print(f"❌ No images found in {test_images_dir}")
-        print(f"   Searched for: .png, .tif, .tiff, .jpg, .jpeg")
+        filter_msg = f" matching filter '{args.filter_image}'" if args.filter_image else ""
+        print(f"❌ No images found{filter_msg} in {test_images_dir}")
+        if not args.filter_image:
+            print(f"   Searched for: .png, .tif, .tiff, .jpg, .jpeg")
         return
 
     print(f"\nFound {len(image_files)} test images")

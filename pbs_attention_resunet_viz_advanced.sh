@@ -55,6 +55,10 @@ N_CLUSTERS=8
 TILE_ROW=3
 TILE_COL=4
 
+# Optional: Filter to process only specific images (e.g., "320x")
+# Leave empty to process all images in TEST_IMAGES_DIR
+FILTER_IMAGE="320x"
+
 echo "Configuration:"
 echo "  Model: Attention ResU-Net"
 echo "  Model path: $MODEL_PATH"
@@ -64,6 +68,9 @@ echo "  n_filters: $N_FILTERS (4× more than standard U-Net)"
 echo "  dropout: $DROPOUT"
 echo "  PCA clusters: $N_CLUSTERS"
 echo "  Tile position: row $TILE_ROW, col $TILE_COL"
+if [ -n "$FILTER_IMAGE" ]; then
+    echo "  Image filter: $FILTER_IMAGE"
+fi
 echo ""
 
 echo "Model characteristics:"
@@ -106,6 +113,11 @@ echo "========================================"
 echo ""
 
 # Run advanced visualization
+FILTER_ARG=""
+if [ -n "$FILTER_IMAGE" ]; then
+    FILTER_ARG="--filter_image $FILTER_IMAGE"
+fi
+
 singularity exec --nv $image python visualize_attention_resunet_advanced.py \
     --model_path $MODEL_PATH \
     --test_images_dir $TEST_IMAGES_DIR \
@@ -114,7 +126,8 @@ singularity exec --nv $image python visualize_attention_resunet_advanced.py \
     --dropout $DROPOUT \
     --n_clusters $N_CLUSTERS \
     --tile_row $TILE_ROW \
-    --tile_col $TILE_COL
+    --tile_col $TILE_COL \
+    $FILTER_ARG
 
 echo ""
 echo "========================================"
