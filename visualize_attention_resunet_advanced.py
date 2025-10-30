@@ -399,12 +399,16 @@ def main():
     model.eval()
     print("✓ Model loaded successfully")
 
-    # Get test images
+    # Get test images (support multiple formats)
     test_images_dir = Path(args.test_images_dir)
-    image_files = sorted(list(test_images_dir.glob('*.png')))
+    image_files = []
+    for ext in ['*.png', '*.tif', '*.tiff', '*.jpg', '*.jpeg']:
+        image_files.extend(test_images_dir.glob(ext))
+    image_files = sorted(image_files)
 
     if len(image_files) == 0:
         print(f"❌ No images found in {test_images_dir}")
+        print(f"   Searched for: .png, .tif, .tiff, .jpg, .jpeg")
         return
 
     print(f"\nFound {len(image_files)} test images")
