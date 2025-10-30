@@ -1,0 +1,103 @@
+========================================
+Job ID: 334335.stdct-mgmt-02
+Node: GN-A40-095
+Start Time: Thu Oct 30 03:37:17 PM +08 2025
+========================================
+
+Configuration:
+  Model: Attention U-Net
+  Model path: ./best_models_PyTorch/attention_unet/best_model.pth
+  Test images: ./test_images
+  Output: ./attention_unet_visualization_advanced
+  n_filters: 32
+  dropout: 0.1
+  PCA clusters: 8
+  Tile position: row 3, col 4
+
+Features:
+  ✓ Feature inversions at correct dimensions
+  ✓ PCA clustering for representative feature maps
+  ✓ Attention gate visualizations
+  ✓ Full feature map exports
+
+Output structure per image:
+  - <image_name>/
+    ├── <image_name>_3panel.png
+    ├── feature_inversions/
+    │   ├── feature_inversion_encoder_1_conv2.png
+    │   ├── feature_inversion_encoder_2_conv2.png
+    │   └── ... (9 total)
+    ├── feature_maps/
+    │   ├── pca_clusters/
+    │   │   ├── pca_clusters_encoder_1_conv2.png
+    │   │   ├── pca_clusters_attention_gate_1.png  ← NEW!
+    │   │   └── ... (13 total)
+    │   └── representative_feature_maps_pca/
+    │       ├── feature_map_encoder_1_conv2_pca.png
+    │       ├── feature_map_attention_gate_1_pca.png  ← NEW!
+    │       └── ... (13 total)
+    └── tile_metadata.json
+
+========================================
+Starting advanced visualization...
+========================================
+
+⚠ UMAP not available. Will use PCA only. Install with: pip install umap-learn
+================================================================================
+ATTENTION U-NET ADVANCED FEATURE VISUALIZATION
+================================================================================
+Model: ./best_models_PyTorch/attention_unet/best_model.pth
+Test images: ./test_images
+Output: ./attention_unet_visualization_advanced
+PCA clusters: 8
+================================================================================
+
+Using device: cuda
+
+Loading Attention U-Net model...
+✓ Model loaded successfully
+❌ No images found in test_images
+
+========================================
+Visualization complete!
+End Time: Thu Oct 30 03:37:34 PM +08 2025
+========================================
+
+Output directory structure:
+total 192
+drwxr-x---   2 phyzxi svuusers     0 Oct 30 15:37 .
+drwxr-xr-x 113 phyzxi svuusers 16986 Oct 30 15:37 ..
+
+Sample outputs (first image):
+
+========================================
+✓ Job complete!
+========================================
+
+Next steps:
+1. Download results to local machine:
+   scp -r <username>@hopper:~/scratch/unet-HPC/./attention_unet_visualization_advanced ./
+
+2. Compare with standard U-Net results:
+   diff -r unet_visualization_advanced_20251028_091857/ ./attention_unet_visualization_advanced/
+
+3. Analyze attention gate patterns:
+   # Check attention_gate_* visualizations
+   ls ./attention_unet_visualization_advanced/*/feature_maps/pca_clusters/pca_clusters_attention_gate_*.png
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-30 15:37:34.852205:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 334335.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:18
+	Memory: Requested(240gb), Used(865888kb)
+	Vmem Used: 11663388kb
+	Walltime: Requested(08:00:00), Used(00:00:19)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-095[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
