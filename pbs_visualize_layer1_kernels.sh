@@ -7,6 +7,32 @@
 #PBS -M phyzxi@nus.edu.sg
 #PBS -m abe
 
+# ==============================================================================
+# Visualize Layer 1 Conv1 Kernels (AlexNet Figure 3 Style)
+# ==============================================================================
+#
+# Purpose: Extract and visualize learned convolutional kernels from Layer 1
+#          to compare Gabor initialization vs random initialization
+#
+# Models visualized:
+#   1. Frozen Gabor: Should be IDENTICAL to initial Gabor filters
+#   2. Trainable Gabor: Should show minimal adaptation (~1% change)
+#   3. Baseline U-Net: Should show random-looking learned patterns
+#
+# Output: AlexNet Figure 3 style visualization (grid of 32 filters, 3×3 kernels)
+#
+# Expected runtime: ~2-3 minutes
+# ==============================================================================
+
+# Load modules
+module load singularity
+
+# Singularity container
+image=/app1/common/singularity-img/hopper/pytorch/pytorch_2.4.0a0-cuda_12.5.0_ngc_24.06.sif
+
+# Change to working directory
+cd $PBS_O_WORKDIR
+
 echo "========================================"
 echo "Job ID: $PBS_JOBID"
 echo "Node: $(hostname)"
@@ -27,23 +53,25 @@ echo "========================================"
 echo "Setting up environment..."
 echo "========================================"
 
-cd $PBS_O_WORKDIR || exit 1
-
-# Use direct Python path from conda environment
-PYTHON="/Users/xiaodan/miniconda3/envs/unetCNN/bin/python"
-
-if [ ! -f "$PYTHON" ]; then
-    echo "❌ Python not found at: $PYTHON"
+# Verify container exists
+if [ ! -f "$image" ]; then
+    echo "❌ Container not found: $image"
     exit 1
 fi
 
-echo "Python: $PYTHON"
-echo "PyTorch: $($PYTHON -c 'import torch; print(torch.__version__)')"
+echo "✓ Singularity container: $image"
+
+# Test Python/PyTorch availability
+echo "Testing Python environment..."
+singularity exec $image python --version
+singularity exec $image python -c "import torch; print('PyTorch:', torch.__version__)"
 echo ""
 
 # Create output directory
 OUTPUT_DIR="./layer1_kernel_visualizations"
 mkdir -p "$OUTPUT_DIR"
+echo "✓ Output directory: $OUTPUT_DIR"
+echo ""
 
 echo "========================================"
 echo "1. Frozen Gabor Layer 1 Kernels"
@@ -55,15 +83,22 @@ FROZEN_OUTPUT="$OUTPUT_DIR/frozen_gabor_layer1_kernels.png"
 if [ -f "$FROZEN_MODEL" ]; then
     echo "Model: $FROZEN_MODEL"
     echo "Output: $FROZEN_OUTPUT"
+    echo ""
 
-    $PYTHON visualize_layer1_kernels.py \
+    singularity exec $image python visualize_layer1_kernels.py \
         --model_path "$FROZEN_MODEL" \
         --output "$FROZEN_OUTPUT" \
         --title "Layer 1 Conv1 Kernels: Frozen Gabor (Should Be Identical to Initial)" \
         --n_filters 32 \
         --dropout 0.2
 
-    echo "✓ Frozen Gabor kernels visualized"
+    if [ -f "$FROZEN_OUTPUT" ]; then
+        echo ""
+        echo "✓ Frozen Gabor kernels visualized"
+    else
+        echo ""
+        echo "❌ Failed to create: $FROZEN_OUTPUT"
+    fi
 else
     echo "❌ Model not found: $FROZEN_MODEL"
 fi
@@ -79,15 +114,22 @@ TRAINABLE_OUTPUT="$OUTPUT_DIR/trainable_gabor_layer1_kernels.png"
 if [ -f "$TRAINABLE_MODEL" ]; then
     echo "Model: $TRAINABLE_MODEL"
     echo "Output: $TRAINABLE_OUTPUT"
+    echo ""
 
-    $PYTHON visualize_layer1_kernels.py \
+    singularity exec $image python visualize_layer1_kernels.py \
         --model_path "$TRAINABLE_MODEL" \
         --output "$TRAINABLE_OUTPUT" \
         --title "Layer 1 Conv1 Kernels: Trainable Gabor (After 48 Epochs)" \
         --n_filters 32 \
         --dropout 0.2
 
-    echo "✓ Trainable Gabor kernels visualized"
+    if [ -f "$TRAINABLE_OUTPUT" ]; then
+        echo ""
+        echo "✓ Trainable Gabor kernels visualized"
+    else
+        echo ""
+        echo "❌ Failed to create: $TRAINABLE_OUTPUT"
+    fi
 else
     echo "❌ Model not found: $TRAINABLE_MODEL"
 fi
@@ -103,15 +145,22 @@ BASELINE_OUTPUT="$OUTPUT_DIR/baseline_unet_layer1_kernels.png"
 if [ -f "$BASELINE_MODEL" ]; then
     echo "Model: $BASELINE_MODEL"
     echo "Output: $BASELINE_OUTPUT"
+    echo ""
 
-    $PYTHON visualize_layer1_kernels.py \
+    singularity exec $image python visualize_layer1_kernels.py \
         --model_path "$BASELINE_MODEL" \
         --output "$BASELINE_OUTPUT" \
         --title "Layer 1 Conv1 Kernels: Baseline U-Net (Random Initialization)" \
         --n_filters 32 \
         --dropout 0.2
 
-    echo "✓ Baseline U-Net kernels visualized"
+    if [ -f "$BASELINE_OUTPUT" ]; then
+        echo ""
+        echo "✓ Baseline U-Net kernels visualized"
+    else
+        echo ""
+        echo "❌ Failed to create: $BASELINE_OUTPUT"
+    fi
 else
     echo "❌ Model not found: $BASELINE_MODEL"
 fi
