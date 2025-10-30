@@ -1,0 +1,206 @@
+========================================
+Job ID: 338538.stdct-mgmt-02
+Node: GN-A40-099
+Start Time: Thu Oct 30 08:42:02 PM +08 2025
+========================================
+
+Configuration:
+  Variant: Frozen Layer 1 (Gabor filters stay fixed)
+  Model: ./edge_detector_experiment/20251030_122713/unet_frozen_layer1/best_model.pth
+  Initial weights: ./edge_detector_experiment/20251030_122713/unet_frozen_layer1/layer1_weights_epoch000.pth
+  Test images: ./test_images
+  Output: ./edge_detector_viz_advanced_frozen_layer1
+  n_filters: 32
+  dropout: 0.2
+  PCA clusters: 8
+  Image filter: 320x
+
+Expected outputs:
+  ✓ Feature inversions (9 layers: 512x512 → 32x32)
+  ✓ PCA cluster scatter plots (9 layers)
+  ✓ Representative feature maps (9 layers)
+  ✓ Layer 1 Gabor comparison (initial = final, should be identical!)
+
+========================================
+Starting advanced visualization...
+========================================
+
+⚠ UMAP not available. Will use PCA only. Install with: pip install umap-learn
+================================================================================
+EDGE DETECTOR EXPERIMENT: ADVANCED VISUALIZATION
+================================================================================
+Variant: frozen_layer1
+Model: ./edge_detector_experiment/20251030_122713/unet_frozen_layer1/best_model.pth
+Test images: ./test_images
+Output: ./edge_detector_viz_advanced_frozen_layer1
+PCA clusters: 8
+================================================================================
+
+Using device: cuda
+
+Loading model...
+✓ Model loaded successfully
+
+Filtered from 8 to 1 image(s) matching '320x'
+
+Found 1 test images
+
+================================================================================
+Processing image 1/1: 320x_2025-05-15_02-05-00.tif
+================================================================================
+✓ Saved 3-panel figure
+
+Visualizing feature inversions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:31<04:10, 31.29s/it]Running feature inversions:  22%|██▏       | 2/9 [00:57<03:17, 28.24s/it]Running feature inversions:  33%|███▎      | 3/9 [01:25<02:48, 28.06s/it]Running feature inversions:  44%|████▍     | 4/9 [01:54<02:22, 28.42s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:24<01:56, 29.15s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:57<01:31, 30.36s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:33<01:04, 32.16s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:14<00:34, 34.96s/it]Running feature inversions: 100%|██████████| 9/9 [05:03<00:00, 39.55s/it]Running feature inversions: 100%|██████████| 9/9 [05:03<00:00, 33.76s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+
+Visualizing feature maps with PCA clustering...
+  Clustering with PCA...
+Clustering (PCA):   0%|          | 0/9 [00:00<?, ?it/s]Clustering (PCA):  11%|█         | 1/9 [00:00<00:06,  1.17it/s]Clustering (PCA):  22%|██▏       | 2/9 [00:01<00:03,  2.25it/s]Clustering (PCA):  44%|████▍     | 4/9 [00:01<00:01,  4.75it/s]Clustering (PCA):  78%|███████▊  | 7/9 [00:01<00:00,  8.18it/s]Clustering (PCA): 100%|██████████| 9/9 [00:01<00:00,  5.33it/s]Clustering (PCA): 100%|██████████| 9/9 [00:01<00:00,  4.64it/s]
+  UMAP not available, only PCA results will be generated
+  ✓ Saved 9 PCA cluster plots to: edge_detector_viz_advanced_frozen_layer1/320x_2025-05-15_02-05-00/feature_maps/pca_clusters
+  ✓ Saved PCA visualizations to: edge_detector_viz_advanced_frozen_layer1/320x_2025-05-15_02-05-00/feature_maps
+
+Visualizing Layer 1 Gabor comparison...
+  ✓ Layer 1 comparison saved to: edge_detector_viz_advanced_frozen_layer1/320x_2025-05-15_02-05-00/layer1_comparison
+    L2 distance: 0.000000
+    Cosine similarity: 1.000000
+    Weights identical: True
+
+================================================================================
+✓ All visualizations complete!
+  Output directory: edge_detector_viz_advanced_frozen_layer1
+================================================================================
+
+========================================
+Visualization complete!
+End Time: Thu Oct 30 08:47:43 PM +08 2025
+========================================
+
+Output directory structure:
+total 224
+drwxr-x---   3 phyzxi svuusers    42 Oct 30 20:39 .
+drwxr-xr-x 115 phyzxi svuusers 18177 Oct 30 20:42 ..
+drwxr-x---   5 phyzxi svuusers   154 Oct 30 20:47 320x_2025-05-15_02-05-00
+
+Contents of ./edge_detector_viz_advanced_frozen_layer1/320x_2025-05-15_02-05-00/:
+./edge_detector_viz_advanced_frozen_layer1/320x_2025-05-15_02-05-00/:
+total 1952
+drwxr-x--- 5 phyzxi svuusers     154 Oct 30 20:47 .
+drwxr-x--- 3 phyzxi svuusers      42 Oct 30 20:39 ..
+-rw-r----- 1 phyzxi svuusers 1280626 Oct 30 20:42 320x_2025-05-15_02-05-00_3panel.png
+drwxr-x--- 2 phyzxi svuusers     496 Oct 30 20:47 feature_inversions
+drwxr-x--- 4 phyzxi svuusers      79 Oct 30 20:47 feature_maps
+drwxr-x--- 2 phyzxi svuusers      90 Oct 30 20:47 layer1_comparison
+
+./edge_detector_viz_advanced_frozen_layer1/320x_2025-05-15_02-05-00/feature_inversions:
+total 10840
+drwxr-x--- 2 phyzxi svuusers     496 Oct 30 20:47 .
+drwxr-x--- 5 phyzxi svuusers     154 Oct 30 20:47 ..
+-rw-r----- 1 phyzxi svuusers  771160 Oct 30 20:44 feature_inversion_bottleneck_conv2.png
+-rw-r----- 1 phyzxi svuusers 1088039 Oct 30 20:47 feature_inversion_decoder_1_conv2.png
+-rw-r----- 1 phyzxi svuusers  976808 Oct 30 20:46 feature_inversion_decoder_2_conv2.png
+-rw-r----- 1 phyzxi svuusers  988122 Oct 30 20:45 feature_inversion_decoder_3_conv2.png
+-rw-r----- 1 phyzxi svuusers  878421 Oct 30 20:45 feature_inversion_decoder_4_conv2.png
+-rw-r----- 1 phyzxi svuusers  915094 Oct 30 20:42 feature_inversion_encoder_1_conv2.png
+-rw-r----- 1 phyzxi svuusers  949919 Oct 30 20:43 feature_inversion_encoder_2_conv2.png
+-rw-r----- 1 phyzxi svuusers  940764 Oct 30 20:43 feature_inversion_encoder_3_conv2.png
+-rw-r----- 1 phyzxi svuusers  832975 Oct 30 20:44 feature_inversion_encoder_4_conv2.png
+
+./edge_detector_viz_advanced_frozen_layer1/320x_2025-05-15_02-05-00/feature_maps:
+total 128
+drwxr-x--- 4 phyzxi svuusers  79 Oct 30 20:47 .
+drwxr-x--- 5 phyzxi svuusers 154 Oct 30 20:47 ..
+drwxr-x--- 2 phyzxi svuusers 451 Oct 30 20:47 pca_clusters
+drwxr-x--- 2 phyzxi svuusers 478 Oct 30 20:47 representative_feature_maps_pca
+
+./edge_detector_viz_advanced_frozen_layer1/320x_2025-05-15_02-05-00/feature_maps/pca_clusters:
+total 4088
+drwxr-x--- 2 phyzxi svuusers    451 Oct 30 20:47 .
+drwxr-x--- 4 phyzxi svuusers     79 Oct 30 20:47 ..
+-rw-r----- 1 phyzxi svuusers 470446 Oct 30 20:47 pca_clusters_bottleneck_conv2.png
+-rw-r----- 1 phyzxi svuusers  80451 Oct 30 20:47 pca_clusters_decoder_1_conv2.png
+-rw-r----- 1 phyzxi svuusers 110669 Oct 30 20:47 pca_clusters_decoder_2_conv2.png
+-rw-r----- 1 phyzxi svuusers 173898 Oct 30 20:47 pca_clusters_decoder_3_conv2.png
+-rw-r----- 1 phyzxi svuusers 286168 Oct 30 20:47 pca_clusters_decoder_4_conv2.png
+-rw-r----- 1 phyzxi svuusers  78634 Oct 30 20:47 pca_clusters_encoder_1_conv2.png
+-rw-r----- 1 phyzxi svuusers 109054 Oct 30 20:47 pca_clusters_encoder_2_conv2.png
+-rw-r----- 1 phyzxi svuusers 172717 Oct 30 20:47 pca_clusters_encoder_3_conv2.png
+-rw-r----- 1 phyzxi svuusers 281992 Oct 30 20:47 pca_clusters_encoder_4_conv2.png
+
+./edge_detector_viz_advanced_frozen_layer1/320x_2025-05-15_02-05-00/feature_maps/representative_feature_maps_pca:
+total 7304
+drwxr-x--- 2 phyzxi svuusers    478 Oct 30 20:47 .
+drwxr-x--- 4 phyzxi svuusers     79 Oct 30 20:47 ..
+-rw-r----- 1 phyzxi svuusers  94390 Oct 30 20:47 feature_map_bottleneck_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 799430 Oct 30 20:47 feature_map_decoder_1_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 779310 Oct 30 20:47 feature_map_decoder_2_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 693528 Oct 30 20:47 feature_map_decoder_3_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 102747 Oct 30 20:47 feature_map_decoder_4_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 593274 Oct 30 20:47 feature_map_encoder_1_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 858152 Oct 30 20:47 feature_map_encoder_2_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 815654 Oct 30 20:47 feature_map_encoder_3_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 177653 Oct 30 20:47 feature_map_encoder_4_conv2_pca.png
+
+./edge_detector_viz_advanced_frozen_layer1/320x_2025-05-15_02-05-00/layer1_comparison:
+total 184
+drwxr-x--- 2 phyzxi svuusers    90 Oct 30 20:47 .
+drwxr-x--- 5 phyzxi svuusers   154 Oct 30 20:47 ..
+-rw-r----- 1 phyzxi svuusers 27648 Oct 30 20:47 layer1_gabor_comparison_first16.png
+-rw-r----- 1 phyzxi svuusers   132 Oct 30 20:47 layer1_metrics.json
+
+Feature inversions:
+  ... (total: 10 files)
+
+PCA clusters:
+  ... (total: 10 files)
+
+Representative feature maps:
+  ... (total: 10 files)
+
+Layer 1 comparison:
+  ... (total: 3 files)
+========================================
+✓ Job complete!
+========================================
+
+Next steps:
+1. Download results:
+   scp -r <username>@hopper:~/scratch/unet-HPC/./edge_detector_viz_advanced_frozen_layer1 ./
+
+2. Compare with trainable layer 1:
+   diff -r ./edge_detector_viz_advanced_frozen_layer1 edge_detector_viz_advanced_trainable_layer1/
+
+3. Check if Layer 1 stayed frozen:
+   cat ./edge_detector_viz_advanced_frozen_layer1/*/layer1_comparison/layer1_metrics.json
+   # cosine_similarity should = 1.0, weights_identical should = true
+
+4. Compare with baseline U-Net:
+   # Compare feature inversions to see if Gabor filters produce different patterns
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-30 20:47:43.944974:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 338538.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:06:13
+	Memory: Requested(240gb), Used(2163556kb)
+	Vmem Used: 16006828kb
+	Walltime: Requested(04:00:00), Used(00:05:43)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-099[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.

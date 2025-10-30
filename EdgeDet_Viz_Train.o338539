@@ -1,0 +1,222 @@
+========================================
+Job ID: 338539.stdct-mgmt-02
+Node: GN-A40-010
+Start Time: Thu Oct 30 08:42:01 PM +08 2025
+========================================
+
+Configuration:
+  Variant: Trainable Layer 1 (Gabor filters can adapt)
+  Model: ./edge_detector_experiment/20251030_122737/unet_trainable_layer1/best_model.pth
+  Initial weights: ./edge_detector_experiment/20251030_122737/unet_trainable_layer1/layer1_weights_epoch000.pth
+  Test images: ./test_images
+  Output: ./edge_detector_viz_advanced_trainable_layer1
+  n_filters: 32
+  dropout: 0.2
+  PCA clusters: 8
+  Image filter: 320x
+
+Expected outputs:
+  ✓ Feature inversions (9 layers: 512x512 → 32x32)
+  ✓ PCA cluster scatter plots (9 layers)
+  ✓ Representative feature maps (9 layers)
+  ✓ Layer 1 Gabor comparison (initial → final, shows Gabor adaptation!)
+
+Key question:
+  Did Gabor filters adapt toward textures (like baseline)?
+  Or did they stay edge-like (suggesting edges are optimal)?
+
+========================================
+Starting advanced visualization...
+========================================
+
+⚠ UMAP not available. Will use PCA only. Install with: pip install umap-learn
+================================================================================
+EDGE DETECTOR EXPERIMENT: ADVANCED VISUALIZATION
+================================================================================
+Variant: trainable_layer1
+Model: ./edge_detector_experiment/20251030_122737/unet_trainable_layer1/best_model.pth
+Test images: ./test_images
+Output: ./edge_detector_viz_advanced_trainable_layer1
+PCA clusters: 8
+================================================================================
+
+Using device: cuda
+
+Loading model...
+✓ Model loaded successfully
+
+Filtered from 8 to 1 image(s) matching '320x'
+
+Found 1 test images
+
+================================================================================
+Processing image 1/1: 320x_2025-05-15_02-05-00.tif
+================================================================================
+✓ Saved 3-panel figure
+
+Visualizing feature inversions...
+
+Visualizing feature inversions at correct dimensions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:25<03:27, 25.99s/it]Running feature inversions:  22%|██▏       | 2/9 [00:51<03:00, 25.81s/it]Running feature inversions:  33%|███▎      | 3/9 [01:19<02:39, 26.54s/it]Running feature inversions:  44%|████▍     | 4/9 [01:47<02:16, 27.36s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:17<01:53, 28.34s/it]Running feature inversions:  67%|██████▋   | 6/9 [02:50<01:29, 29.69s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:25<01:03, 31.58s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:06<00:34, 34.44s/it]Running feature inversions: 100%|██████████| 9/9 [04:55<00:00, 39.07s/it]Running feature inversions: 100%|██████████| 9/9 [04:55<00:00, 32.82s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+
+Visualizing feature maps with PCA clustering...
+  Clustering with PCA...
+Clustering (PCA):   0%|          | 0/9 [00:00<?, ?it/s]Clustering (PCA):  11%|█         | 1/9 [00:00<00:04,  1.97it/s]Clustering (PCA):  22%|██▏       | 2/9 [00:00<00:01,  3.58it/s]Clustering (PCA):  56%|█████▌    | 5/9 [00:00<00:00,  9.14it/s]Clustering (PCA):  89%|████████▉ | 8/9 [00:00<00:00, 11.28it/s]Clustering (PCA): 100%|██████████| 9/9 [00:01<00:00,  6.93it/s]
+  UMAP not available, only PCA results will be generated
+  ✓ Saved 9 PCA cluster plots to: edge_detector_viz_advanced_trainable_layer1/320x_2025-05-15_02-05-00/feature_maps/pca_clusters
+  ✓ Saved PCA visualizations to: edge_detector_viz_advanced_trainable_layer1/320x_2025-05-15_02-05-00/feature_maps
+
+Visualizing Layer 1 Gabor comparison...
+  ✓ Layer 1 comparison saved to: edge_detector_viz_advanced_trainable_layer1/320x_2025-05-15_02-05-00/layer1_comparison
+    L2 distance: 0.229917
+    Cosine similarity: 0.999178
+    Weights identical: False
+
+================================================================================
+✓ All visualizations complete!
+  Output directory: edge_detector_viz_advanced_trainable_layer1
+================================================================================
+
+========================================
+Visualization complete!
+End Time: Thu Oct 30 08:47:18 PM +08 2025
+========================================
+
+Output directory structure:
+total 224
+drwxr-x---   3 phyzxi svuusers    42 Oct 30 20:38 .
+drwxr-xr-x 115 phyzxi svuusers 18177 Oct 30 20:42 ..
+drwxr-x---   5 phyzxi svuusers   154 Oct 30 20:47 320x_2025-05-15_02-05-00
+
+Contents of ./edge_detector_viz_advanced_trainable_layer1/320x_2025-05-15_02-05-00/:
+./edge_detector_viz_advanced_trainable_layer1/320x_2025-05-15_02-05-00/:
+total 1976
+drwxr-x--- 5 phyzxi svuusers     154 Oct 30 20:47 .
+drwxr-x--- 3 phyzxi svuusers      42 Oct 30 20:38 ..
+-rw-r----- 1 phyzxi svuusers 1304321 Oct 30 20:42 320x_2025-05-15_02-05-00_3panel.png
+drwxr-x--- 2 phyzxi svuusers     496 Oct 30 20:47 feature_inversions
+drwxr-x--- 4 phyzxi svuusers      79 Oct 30 20:47 feature_maps
+drwxr-x--- 2 phyzxi svuusers      90 Oct 30 20:47 layer1_comparison
+
+./edge_detector_viz_advanced_trainable_layer1/320x_2025-05-15_02-05-00/feature_inversions:
+total 11376
+drwxr-x--- 2 phyzxi svuusers     496 Oct 30 20:47 .
+drwxr-x--- 5 phyzxi svuusers     154 Oct 30 20:47 ..
+-rw-r----- 1 phyzxi svuusers  787416 Oct 30 20:44 feature_inversion_bottleneck_conv2.png
+-rw-r----- 1 phyzxi svuusers 1235951 Oct 30 20:47 feature_inversion_decoder_1_conv2.png
+-rw-r----- 1 phyzxi svuusers  968979 Oct 30 20:46 feature_inversion_decoder_2_conv2.png
+-rw-r----- 1 phyzxi svuusers 1068215 Oct 30 20:45 feature_inversion_decoder_3_conv2.png
+-rw-r----- 1 phyzxi svuusers  868453 Oct 30 20:44 feature_inversion_decoder_4_conv2.png
+-rw-r----- 1 phyzxi svuusers  979465 Oct 30 20:42 feature_inversion_encoder_1_conv2.png
+-rw-r----- 1 phyzxi svuusers  972709 Oct 30 20:42 feature_inversion_encoder_2_conv2.png
+-rw-r----- 1 phyzxi svuusers  930559 Oct 30 20:43 feature_inversion_encoder_3_conv2.png
+-rw-r----- 1 phyzxi svuusers  839304 Oct 30 20:43 feature_inversion_encoder_4_conv2.png
+
+./edge_detector_viz_advanced_trainable_layer1/320x_2025-05-15_02-05-00/feature_maps:
+total 128
+drwxr-x--- 4 phyzxi svuusers  79 Oct 30 20:47 .
+drwxr-x--- 5 phyzxi svuusers 154 Oct 30 20:47 ..
+drwxr-x--- 2 phyzxi svuusers 451 Oct 30 20:47 pca_clusters
+drwxr-x--- 2 phyzxi svuusers 478 Oct 30 20:47 representative_feature_maps_pca
+
+./edge_detector_viz_advanced_trainable_layer1/320x_2025-05-15_02-05-00/feature_maps/pca_clusters:
+total 4088
+drwxr-x--- 2 phyzxi svuusers    451 Oct 30 20:47 .
+drwxr-x--- 4 phyzxi svuusers     79 Oct 30 20:47 ..
+-rw-r----- 1 phyzxi svuusers 483197 Oct 30 20:47 pca_clusters_bottleneck_conv2.png
+-rw-r----- 1 phyzxi svuusers  81729 Oct 30 20:47 pca_clusters_decoder_1_conv2.png
+-rw-r----- 1 phyzxi svuusers 108708 Oct 30 20:47 pca_clusters_decoder_2_conv2.png
+-rw-r----- 1 phyzxi svuusers 171922 Oct 30 20:47 pca_clusters_decoder_3_conv2.png
+-rw-r----- 1 phyzxi svuusers 279583 Oct 30 20:47 pca_clusters_decoder_4_conv2.png
+-rw-r----- 1 phyzxi svuusers  81601 Oct 30 20:47 pca_clusters_encoder_1_conv2.png
+-rw-r----- 1 phyzxi svuusers 112939 Oct 30 20:47 pca_clusters_encoder_2_conv2.png
+-rw-r----- 1 phyzxi svuusers 170046 Oct 30 20:47 pca_clusters_encoder_3_conv2.png
+-rw-r----- 1 phyzxi svuusers 294257 Oct 30 20:47 pca_clusters_encoder_4_conv2.png
+
+./edge_detector_viz_advanced_trainable_layer1/320x_2025-05-15_02-05-00/feature_maps/representative_feature_maps_pca:
+total 7136
+drwxr-x--- 2 phyzxi svuusers    478 Oct 30 20:47 .
+drwxr-x--- 4 phyzxi svuusers     79 Oct 30 20:47 ..
+-rw-r----- 1 phyzxi svuusers 101787 Oct 30 20:47 feature_map_bottleneck_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 774385 Oct 30 20:47 feature_map_decoder_1_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 795099 Oct 30 20:47 feature_map_decoder_2_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 596989 Oct 30 20:47 feature_map_decoder_3_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 157175 Oct 30 20:47 feature_map_decoder_4_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 595100 Oct 30 20:47 feature_map_encoder_1_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 772361 Oct 30 20:47 feature_map_encoder_2_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 698679 Oct 30 20:47 feature_map_encoder_3_conv2_pca.png
+-rw-r----- 1 phyzxi svuusers 177149 Oct 30 20:47 feature_map_encoder_4_conv2_pca.png
+
+./edge_detector_viz_advanced_trainable_layer1/320x_2025-05-15_02-05-00/layer1_comparison:
+total 184
+drwxr-x--- 2 phyzxi svuusers    90 Oct 30 20:47 .
+drwxr-x--- 5 phyzxi svuusers   154 Oct 30 20:47 ..
+-rw-r----- 1 phyzxi svuusers 27761 Oct 30 20:47 layer1_gabor_comparison_first16.png
+-rw-r----- 1 phyzxi svuusers   196 Oct 30 20:47 layer1_metrics.json
+
+Feature inversions:
+  ... (total: 10 files)
+
+PCA clusters:
+  ... (total: 10 files)
+
+Representative feature maps:
+  ... (total: 10 files)
+
+Layer 1 comparison (KEY RESULT!):
+  ... (total: 3 files)
+
+Layer 1 adaptation metrics:
+{
+  "l2_distance": 0.2299174964427948,
+  "cosine_similarity": 0.9991781711578369,
+  "weights_identical": false,
+  "mean_abs_change": 0.010423245839774609,
+  "max_abs_change": 0.05288058519363403
+}========================================
+✓ Job complete!
+========================================
+
+Next steps:
+1. Download results:
+   scp -r <username>@hopper:~/scratch/unet-HPC/./edge_detector_viz_advanced_trainable_layer1 ./
+
+2. Compare with frozen layer 1:
+   # Check Layer 1 adaptation
+   diff -y \
+     edge_detector_viz_advanced_frozen_layer1/*/layer1_comparison/layer1_metrics.json \
+     ./edge_detector_viz_advanced_trainable_layer1/*/layer1_comparison/layer1_metrics.json
+
+3. Analyze Gabor → texture adaptation:
+   # If cosine_similarity < 0.8: Gabor filters significantly changed
+   # If cosine_similarity > 0.95: Gabor filters stayed mostly edge-like
+
+4. Compare feature inversions with baseline:
+   # Do trainable layer 1 features resemble baseline or stay edge-like?
+   diff -r unet_visualization_advanced_20251028_091857/ ./edge_detector_viz_advanced_trainable_layer1/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-30 20:47:19.708673:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 338539.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:05:46
+	Memory: Requested(240gb), Used(2224736kb)
+	Vmem Used: 15997416kb
+	Walltime: Requested(04:00:00), Used(00:05:19)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-010[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
