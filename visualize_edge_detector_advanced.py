@@ -388,8 +388,8 @@ def main():
         if img_array.max() > 1:
             img_array /= 255.0
 
-        # Extract center tile
-        tile = base_viz.extract_center_tile(img_array, tile_size=512, row=args.tile_row, col=args.tile_col)
+        # Extract center tile (returns tuple: tile, (y, x))
+        tile, (tile_y, tile_x) = base_viz.extract_center_tile(img_array, tile_size=512, row=args.tile_row, col=args.tile_col)
         tile_tensor = base_viz.preprocess_tile(tile)
 
         # Run prediction
