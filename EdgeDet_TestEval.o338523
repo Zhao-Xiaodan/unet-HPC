@@ -1,0 +1,98 @@
+========================================
+Job ID: 338523.stdct-mgmt-02
+Node: GN-A40-010
+Start Time: Thu Oct 30 08:19:45 PM +08 2025
+========================================
+
+Configuration:
+  Baseline model: ./best_models_PyTorch/unet/best_model.pth
+  Frozen model: ./edge_detector_experiment/20251030_122713/unet_frozen_layer1/best_model.pth
+  Trainable model: ./edge_detector_experiment/20251030_122737/unet_trainable_layer1/best_model.pth
+  Test images: ./test_images
+  Output: ./edge_detector_test_evaluation
+
+Test set details:
+  8 images at different dilutions (80x, 160x, 320x, 640x, 1280x, 2560x, 5120x, 10240x)
+  These images were NOT used during training (held-out test set)
+  Provides unbiased estimate of generalization performance
+
+Expected outputs:
+  ✓ 8 prediction images × 3 models = 24 visualization files
+  ✓ Comparison plot (bar chart across dilutions)
+  ✓ JSON results with predicted cell counts
+
+Key questions to answer:
+  1. Do Gabor-initialized models generalize better to unseen data?
+  2. How do models perform at extreme dilutions (80x, 10240x)?
+  3. Is frozen layer 1 sufficient or does trainable perform better?
+
+========================================
+Starting test set evaluation...
+========================================
+
+Using device: cuda
+
+================================================================================
+Evaluating: frozen_layer1
+Model: edge_detector_experiment/20251030_122713/unet_frozen_layer1/best_model.pth
+================================================================================
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/evaluate_edge_detector_on_test.py", line 362, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/evaluate_edge_detector_on_test.py", line 314, in main
+    model = load_model(model_path, device, args.n_filters, args.dropout)
+  File "/scratch/phyzxi/unet-HPC/evaluate_edge_detector_on_test.py", line 176, in load_model
+    model.load_state_dict(checkpoint['model_state_dict'])
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 2191, in load_state_dict
+    raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(
+RuntimeError: Error(s) in loading state_dict for UNet:
+	Missing key(s) in state_dict: "upconv4.weight", "upconv4.bias", "upconv3.weight", "upconv3.bias", "upconv2.weight", "upconv2.bias", "upconv1.weight", "upconv1.bias". 
+	Unexpected key(s) in state_dict: "up4.weight", "up4.bias", "up3.weight", "up3.bias", "up2.weight", "up2.bias", "up1.weight", "up1.bias". 
+
+========================================
+Evaluation complete!
+End Time: Thu Oct 30 08:19:52 PM +08 2025
+========================================
+
+Output directory structure:
+total 192
+drwxr-x---   2 phyzxi svuusers     0 Oct 30 20:19 .
+drwxr-xr-x 113 phyzxi svuusers 17625 Oct 30 20:19 ..
+
+========================================
+✓ Job complete!
+========================================
+
+Next steps:
+1. Download results:
+   scp -r <username>@hopper:~/scratch/unet-HPC/./edge_detector_test_evaluation ./
+
+2. View comparison plot:
+   open ./edge_detector_test_evaluation/comparison_plot.png
+
+3. Analyze JSON results:
+   cat ./edge_detector_test_evaluation/comparison_summary.json
+
+4. Compare individual predictions:
+   open ./edge_detector_test_evaluation/*/320x_2025-05-15_02-05-00_prediction.png
+
+Expected findings:
+  - If Gabor models (frozen/trainable) predict better: Edge detectors help generalization
+  - If baseline predicts better: Texture features may be more robust
+  - If frozen ≈ trainable: Layer 1 adaptation had minimal effect on generalization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-30 20:19:52.743049:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 338523.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:05
+	Memory: Requested(240gb), Used(947112kb)
+	Vmem Used: 11254084kb
+	Walltime: Requested(01:00:00), Used(00:00:09)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-010[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.

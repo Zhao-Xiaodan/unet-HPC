@@ -1,0 +1,95 @@
+========================================
+Job ID: 338524.stdct-mgmt-02
+Node: GN-A40-010
+Start Time: Thu Oct 30 08:19:51 PM +08 2025
+========================================
+
+Configuration:
+  Variant: Frozen Layer 1 (Gabor filters stay fixed)
+  Model: ./edge_detector_experiment/20251030_122713/unet_frozen_layer1/best_model.pth
+  Initial weights: ./edge_detector_experiment/20251030_122713/unet_frozen_layer1/layer1_weights_epoch000.pth
+  Test images: ./test_images
+  Output: ./edge_detector_viz_advanced_frozen_layer1
+  n_filters: 32
+  dropout: 0.2
+  PCA clusters: 8
+  Image filter: 320x
+
+Expected outputs:
+  ✓ Feature inversions (9 layers: 512x512 → 32x32)
+  ✓ PCA cluster scatter plots (9 layers)
+  ✓ Representative feature maps (9 layers)
+  ✓ Layer 1 Gabor comparison (initial = final, should be identical!)
+
+========================================
+Starting advanced visualization...
+========================================
+
+⚠ UMAP not available. Will use PCA only. Install with: pip install umap-learn
+================================================================================
+EDGE DETECTOR EXPERIMENT: ADVANCED VISUALIZATION
+================================================================================
+Variant: frozen_layer1
+Model: ./edge_detector_experiment/20251030_122713/unet_frozen_layer1/best_model.pth
+Test images: ./test_images
+Output: ./edge_detector_viz_advanced_frozen_layer1
+PCA clusters: 8
+================================================================================
+
+Using device: cuda
+
+Loading model...
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/visualize_edge_detector_advanced.py", line 427, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/visualize_edge_detector_advanced.py", line 352, in main
+    model.load_state_dict(checkpoint['model_state_dict'])
+  File "/usr/local/lib/python3.10/dist-packages/torch/nn/modules/module.py", line 2191, in load_state_dict
+    raise RuntimeError('Error(s) in loading state_dict for {}:\n\t{}'.format(
+RuntimeError: Error(s) in loading state_dict for UNet:
+	Missing key(s) in state_dict: "upconv4.weight", "upconv4.bias", "upconv3.weight", "upconv3.bias", "upconv2.weight", "upconv2.bias", "upconv1.weight", "upconv1.bias". 
+	Unexpected key(s) in state_dict: "up4.weight", "up4.bias", "up3.weight", "up3.bias", "up2.weight", "up2.bias", "up1.weight", "up1.bias". 
+
+========================================
+Visualization complete!
+End Time: Thu Oct 30 08:19:57 PM +08 2025
+========================================
+
+Output directory structure:
+total 192
+drwxr-x---   2 phyzxi svuusers     0 Oct 30 20:19 .
+drwxr-xr-x 114 phyzxi svuusers 17683 Oct 30 20:19 ..
+
+========================================
+✓ Job complete!
+========================================
+
+Next steps:
+1. Download results:
+   scp -r <username>@hopper:~/scratch/unet-HPC/./edge_detector_viz_advanced_frozen_layer1 ./
+
+2. Compare with trainable layer 1:
+   diff -r ./edge_detector_viz_advanced_frozen_layer1 edge_detector_viz_advanced_trainable_layer1/
+
+3. Check if Layer 1 stayed frozen:
+   cat ./edge_detector_viz_advanced_frozen_layer1/*/layer1_comparison/layer1_metrics.json
+   # cosine_similarity should = 1.0, weights_identical should = true
+
+4. Compare with baseline U-Net:
+   # Compare feature inversions to see if Gabor filters produce different patterns
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-30 20:19:58.167958:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 338524.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:07
+	Memory: Requested(240gb), Used(802684kb)
+	Vmem Used: 6163148kb
+	Walltime: Requested(04:00:00), Used(00:00:06)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-010[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
