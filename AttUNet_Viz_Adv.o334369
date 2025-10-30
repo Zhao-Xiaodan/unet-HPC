@@ -1,0 +1,157 @@
+========================================
+Job ID: 334369.stdct-mgmt-02
+Node: GN-A40-074
+Start Time: Thu Oct 30 04:27:30 PM +08 2025
+========================================
+
+Configuration:
+  Model: Attention U-Net
+  Model path: ./best_models_PyTorch/attention_unet/best_model.pth
+  Test images: ./test_images
+  Output: ./attention_unet_visualization_advanced
+  n_filters: 32
+  dropout: 0.1
+  PCA clusters: 8
+  Tile position: row 3, col 4
+  Image filter: 320x
+
+Features:
+  ✓ Feature inversions at correct dimensions
+  ✓ PCA clustering for representative feature maps
+  ✓ Attention gate visualizations
+  ✓ Full feature map exports
+
+Output structure per image:
+  - <image_name>/
+    ├── <image_name>_3panel.png
+    ├── feature_inversions/
+    │   ├── feature_inversion_encoder_1_conv2.png
+    │   ├── feature_inversion_encoder_2_conv2.png
+    │   └── ... (9 total)
+    ├── feature_maps/
+    │   ├── pca_clusters/
+    │   │   ├── pca_clusters_encoder_1_conv2.png
+    │   │   ├── pca_clusters_attention_gate_1.png  ← NEW!
+    │   │   └── ... (13 total)
+    │   └── representative_feature_maps_pca/
+    │       ├── feature_map_encoder_1_conv2_pca.png
+    │       ├── feature_map_attention_gate_1_pca.png  ← NEW!
+    │       └── ... (13 total)
+    └── tile_metadata.json
+
+========================================
+Starting advanced visualization...
+========================================
+
+⚠ UMAP not available. Will use PCA only. Install with: pip install umap-learn
+================================================================================
+ATTENTION U-NET ADVANCED FEATURE VISUALIZATION
+================================================================================
+Model: ./best_models_PyTorch/attention_unet/best_model.pth
+Test images: ./test_images
+Output: ./attention_unet_visualization_advanced
+PCA clusters: 8
+================================================================================
+
+Using device: cuda
+
+Loading Attention U-Net model...
+✓ Model loaded successfully
+
+Filtered from 8 to 1 image(s) matching '320x'
+
+Found 1 test images
+
+================================================================================
+Processing image 1/1: 320x_2025-05-15_02-05-00.tif
+================================================================================
+✓ Saved 3-panel figure
+
+Visualizing Attention U-Net feature inversions...
+Running feature inversions:   0%|          | 0/9 [00:00<?, ?it/s]Running feature inversions:  11%|█         | 1/9 [00:26<03:34, 26.87s/it]Running feature inversions:  22%|██▏       | 2/9 [00:54<03:11, 27.35s/it]Running feature inversions:  33%|███▎      | 3/9 [01:24<02:49, 28.32s/it]Running feature inversions:  44%|████▍     | 4/9 [01:54<02:26, 29.25s/it]Running feature inversions:  56%|█████▌    | 5/9 [02:26<02:01, 30.30s/it]Running feature inversions:  67%|██████▋   | 6/9 [03:01<01:35, 31.90s/it]Running feature inversions:  78%|███████▊  | 7/9 [03:41<01:08, 34.36s/it]Running feature inversions:  89%|████████▉ | 8/9 [04:27<00:38, 38.19s/it]Running feature inversions: 100%|██████████| 9/9 [05:26<00:00, 44.60s/it]Running feature inversions: 100%|██████████| 9/9 [05:26<00:00, 36.26s/it]
+  Feature inversion: encoder_1_conv2 (inverting from 512x512)
+  Feature inversion: encoder_2_conv2 (inverting from 256x256)
+  Feature inversion: encoder_3_conv2 (inverting from 128x128)
+  Feature inversion: encoder_4_conv2 (inverting from 64x64)
+  Feature inversion: bottleneck_conv2 (inverting from 32x32)
+  Feature inversion: decoder_4_conv2 (inverting from 64x64)
+  Feature inversion: decoder_3_conv2 (inverting from 128x128)
+  Feature inversion: decoder_2_conv2 (inverting from 256x256)
+  Feature inversion: decoder_1_conv2 (inverting from 512x512)
+  ✓ Saved 9 feature inversion visualizations
+
+Visualizing Attention U-Net feature maps with PCA clustering...
+  Clustering with PCA...
+Clustering (PCA):   0%|          | 0/13 [00:00<?, ?it/s]Clustering (PCA):   8%|▊         | 1/13 [00:00<00:05,  2.28it/s]Clustering (PCA):  15%|█▌        | 2/13 [00:00<00:02,  4.02it/s]Clustering (PCA):  38%|███▊      | 5/13 [00:00<00:00, 10.06it/s]Clustering (PCA):  85%|████████▍ | 11/13 [00:00<00:00, 17.93it/s]Clustering (PCA): 100%|██████████| 13/13 [00:01<00:00, 10.67it/s]
+  UMAP not available, only PCA results will be generated
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/visualize_attention_unet_advanced.py", line 489, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/visualize_attention_unet_advanced.py", line 455, in main
+    visualize_attention_unet_feature_maps(model, tile_tensor, image_output_dir, device, args.n_clusters)
+  File "/scratch/phyzxi/unet-HPC/visualize_attention_unet_advanced.py", line 284, in visualize_attention_unet_feature_maps
+    base_viz.plot_cluster_scatter(embeddings, labels, layer_name, cluster_path, method_name)
+AttributeError: module 'visualize_unet_features_advanced' has no attribute 'plot_cluster_scatter'
+
+========================================
+Visualization complete!
+End Time: Thu Oct 30 04:33:06 PM +08 2025
+========================================
+
+Output directory structure:
+total 256
+drwxr-x---   4 phyzxi svuusers    90 Oct 30 16:27 .
+drwxr-xr-x 113 phyzxi svuusers 17241 Oct 30 16:27 ..
+drwx------   3 phyzxi svuusers    30 Oct 30 16:27 10240x_2025-05-29_02-22-00_002
+drwx------   4 phyzxi svuusers   119 Oct 30 16:33 320x_2025-05-15_02-05-00
+
+Sample outputs (first image):
+
+Contents of ./attention_unet_visualization_advanced/10240x_2025-05-29_02-22-00_002/:
+total 96
+drwx------ 3 phyzxi svuusers 30 Oct 30 16:27 .
+drwxr-x--- 4 phyzxi svuusers 90 Oct 30 16:27 ..
+drwx------ 4 phyzxi svuusers 79 Oct 30 15:54 feature_maps
+
+Feature inversions:
+ls: cannot access './attention_unet_visualization_advanced/10240x_2025-05-29_02-22-00_002/feature_inversions/': No such file or directory
+ls: cannot access './attention_unet_visualization_advanced/10240x_2025-05-29_02-22-00_002/feature_inversions/': No such file or directory
+  ... (total: 0 files)
+
+PCA clusters:
+  ... (total: 0 files)
+
+Representative feature maps (PCA):
+  ... (total: 0 files)
+
+========================================
+✓ Job complete!
+========================================
+
+Next steps:
+1. Download results to local machine:
+   scp -r <username>@hopper:~/scratch/unet-HPC/./attention_unet_visualization_advanced ./
+
+2. Compare with standard U-Net results:
+   diff -r unet_visualization_advanced_20251028_091857/ ./attention_unet_visualization_advanced/
+
+3. Analyze attention gate patterns:
+   # Check attention_gate_* visualizations
+   ls ./attention_unet_visualization_advanced/*/feature_maps/pca_clusters/pca_clusters_attention_gate_*.png
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-30 16:33:06.899370:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 334369.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:05:50
+	Memory: Requested(240gb), Used(2089032kb)
+	Vmem Used: 16106908kb
+	Walltime: Requested(08:00:00), Used(00:05:37)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-074[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
