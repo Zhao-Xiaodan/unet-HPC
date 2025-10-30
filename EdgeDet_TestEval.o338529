@@ -1,0 +1,170 @@
+========================================
+Job ID: 338529.stdct-mgmt-02
+Node: GN-A40-010
+Start Time: Thu Oct 30 08:25:08 PM +08 2025
+========================================
+
+Configuration:
+  Baseline model: ./best_models_PyTorch/unet/best_model.pth
+  Frozen model: ./edge_detector_experiment/20251030_122713/unet_frozen_layer1/best_model.pth
+  Trainable model: ./edge_detector_experiment/20251030_122737/unet_trainable_layer1/best_model.pth
+  Test images: ./test_images
+  Output: ./edge_detector_test_evaluation
+
+Test set details:
+  8 images at different dilutions (80x, 160x, 320x, 640x, 1280x, 2560x, 5120x, 10240x)
+  These images were NOT used during training (held-out test set)
+  Provides unbiased estimate of generalization performance
+
+Expected outputs:
+  ✓ 8 prediction images × 3 models = 24 visualization files
+  ✓ Comparison plot (bar chart across dilutions)
+  ✓ JSON results with predicted cell counts
+
+Key questions to answer:
+  1. Do Gabor-initialized models generalize better to unseen data?
+  2. How do models perform at extreme dilutions (80x, 10240x)?
+  3. Is frozen layer 1 sufficient or does trainable perform better?
+
+========================================
+Starting test set evaluation...
+========================================
+
+Using device: cuda
+
+================================================================================
+Evaluating: frozen_layer1
+Model: edge_detector_experiment/20251030_122713/unet_frozen_layer1/best_model.pth
+================================================================================
+Found 8 test images
+Evaluating:   0%|          | 0/8 [00:00<?, ?it/s]Evaluating:  12%|█▎        | 1/8 [00:02<00:17,  2.49s/it]Evaluating:  25%|██▌       | 2/8 [00:03<00:09,  1.57s/it]Evaluating:  38%|███▊      | 3/8 [00:04<00:06,  1.29s/it]Evaluating:  50%|█████     | 4/8 [00:05<00:04,  1.14s/it]Evaluating:  62%|██████▎   | 5/8 [00:06<00:03,  1.05s/it]Evaluating:  75%|███████▌  | 6/8 [00:07<00:01,  1.00it/s]Evaluating:  88%|████████▊ | 7/8 [00:08<00:00,  1.02it/s]Evaluating: 100%|██████████| 8/8 [00:09<00:00,  1.00s/it]Evaluating: 100%|██████████| 8/8 [00:09<00:00,  1.13s/it]
+
+✓ Evaluation complete!
+  Results saved to: edge_detector_test_evaluation/frozen_layer1/test_results.json
+  Visualizations saved to: edge_detector_test_evaluation/frozen_layer1
+
+================================================================================
+Evaluating: trainable_layer1
+Model: edge_detector_experiment/20251030_122737/unet_trainable_layer1/best_model.pth
+================================================================================
+Found 8 test images
+Evaluating:   0%|          | 0/8 [00:00<?, ?it/s]Evaluating:  12%|█▎        | 1/8 [00:00<00:05,  1.26it/s]Evaluating:  25%|██▌       | 2/8 [00:01<00:05,  1.14it/s]Evaluating:  38%|███▊      | 3/8 [00:02<00:04,  1.08it/s]Evaluating:  50%|█████     | 4/8 [00:03<00:03,  1.04it/s]Evaluating:  62%|██████▎   | 5/8 [00:04<00:02,  1.07it/s]Evaluating:  75%|███████▌  | 6/8 [00:05<00:01,  1.08it/s]Evaluating:  88%|████████▊ | 7/8 [00:06<00:00,  1.08it/s]Evaluating: 100%|██████████| 8/8 [00:07<00:00,  1.04it/s]Evaluating: 100%|██████████| 8/8 [00:07<00:00,  1.07it/s]
+
+✓ Evaluation complete!
+  Results saved to: edge_detector_test_evaluation/trainable_layer1/test_results.json
+  Visualizations saved to: edge_detector_test_evaluation/trainable_layer1
+
+================================================================================
+Evaluating: baseline
+Model: best_models_PyTorch/unet/best_model.pth
+================================================================================
+Found 8 test images
+Evaluating:   0%|          | 0/8 [00:00<?, ?it/s]Evaluating:  12%|█▎        | 1/8 [00:00<00:05,  1.32it/s]Evaluating:  25%|██▌       | 2/8 [00:01<00:04,  1.24it/s]Evaluating:  38%|███▊      | 3/8 [00:02<00:04,  1.15it/s]Evaluating:  50%|█████     | 4/8 [00:03<00:03,  1.15it/s]Evaluating:  62%|██████▎   | 5/8 [00:04<00:02,  1.15it/s]Evaluating:  75%|███████▌  | 6/8 [00:05<00:01,  1.15it/s]Evaluating:  88%|████████▊ | 7/8 [00:06<00:00,  1.16it/s]Evaluating: 100%|██████████| 8/8 [00:07<00:00,  1.10it/s]Evaluating: 100%|██████████| 8/8 [00:07<00:00,  1.14it/s]
+
+✓ Evaluation complete!
+  Results saved to: edge_detector_test_evaluation/baseline/test_results.json
+  Visualizations saved to: edge_detector_test_evaluation/baseline
+
+================================================================================
+COMPARISON SUMMARY
+================================================================================
+✓ Comparison summary saved to: edge_detector_test_evaluation/comparison_summary.json
+✓ Comparison plot saved to: edge_detector_test_evaluation/comparison_plot.png
+
+========================================
+Evaluation complete!
+End Time: Thu Oct 30 08:25:37 PM +08 2025
+========================================
+
+Output directory structure:
+total 528
+drwxr-x---   5 phyzxi svuusers   169 Oct 30 20:25 .
+drwxr-xr-x 115 phyzxi svuusers 17916 Oct 30 20:25 ..
+drwxr-x---   2 phyzxi svuusers   511 Oct 30 20:25 baseline
+-rw-r-----   1 phyzxi svuusers 64410 Oct 30 20:25 comparison_plot.png
+-rw-r-----   1 phyzxi svuusers  5259 Oct 30 20:25 comparison_summary.json
+drwxr-x---   2 phyzxi svuusers   511 Oct 30 20:25 frozen_layer1
+drwxr-x---   2 phyzxi svuusers   511 Oct 30 20:25 trainable_layer1
+
+Model: baseline
+  Images generated:
+     8 prediction files
+
+Model: frozen_layer1
+  Images generated:
+     8 prediction files
+
+Model: trainable_layer1
+  Images generated:
+     8 prediction files
+
+Comparison summary:
+{
+  "frozen_layer1": [
+    {
+      "image": "10240x_2025-05-29_02-22-00_002.tif",
+      "dilution": "10240x",
+      "predicted_cell_count": 0.0,
+      "mean_probability": 0.11163881421089172,
+      "max_probability": 0.3745787441730499
+    },
+    {
+      "image": "1280x_2025-05-16_00-59-00_002.tif",
+      "dilution": "1280x",
+      "predicted_cell_count": 0.0,
+      "mean_probability": 0.11121421307325363,
+      "max_probability": 0.40718212723731995
+    },
+    {
+      "image": "160x_2025-05-15_02-05-00.tif",
+      "dilution": "160x",
+      "predicted_cell_count": 0.545,
+      "mean_probability": 0.13671721518039703,
+      "max_probability": 0.658250629901886
+    },
+    {
+      "image": "2560x_2025-05-16_00-59-00_002.tif",
+      "dilution": "2560x",
+      "predicted_cell_count": 0.0,
+      "mean_probability": 0.1114281713962555,
+      "max_probability": 0.41888630390167236
+    },
+
+✓ Comparison plot generated: ./edge_detector_test_evaluation/comparison_plot.png
+========================================
+✓ Job complete!
+========================================
+
+Next steps:
+1. Download results:
+   scp -r <username>@hopper:~/scratch/unet-HPC/./edge_detector_test_evaluation ./
+
+2. View comparison plot:
+   open ./edge_detector_test_evaluation/comparison_plot.png
+
+3. Analyze JSON results:
+   cat ./edge_detector_test_evaluation/comparison_summary.json
+
+4. Compare individual predictions:
+   open ./edge_detector_test_evaluation/*/320x_2025-05-15_02-05-00_prediction.png
+
+Expected findings:
+  - If Gabor models (frozen/trainable) predict better: Edge detectors help generalization
+  - If baseline predicts better: Texture features may be more robust
+  - If frozen ≈ trainable: Layer 1 adaptation had minimal effect on generalization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-30 20:25:38.365315:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 338529.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:43
+	Memory: Requested(240gb), Used(1661640kb)
+	Vmem Used: 13031792kb
+	Walltime: Requested(01:00:00), Used(00:00:30)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-010[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.

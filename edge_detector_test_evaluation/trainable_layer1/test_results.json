@@ -1,0 +1,58 @@
+[
+  {
+    "image": "10240x_2025-05-29_02-22-00_002.tif",
+    "dilution": "10240x",
+    "predicted_cell_count": 0.1275,
+    "mean_probability": 0.1214396208524704,
+    "max_probability": 0.6077669262886047
+  },
+  {
+    "image": "1280x_2025-05-16_00-59-00_002.tif",
+    "dilution": "1280x",
+    "predicted_cell_count": 2.145,
+    "mean_probability": 0.2806050181388855,
+    "max_probability": 0.601353108882904
+  },
+  {
+    "image": "160x_2025-05-15_02-05-00.tif",
+    "dilution": "160x",
+    "predicted_cell_count": 34.37,
+    "mean_probability": 0.23408609628677368,
+    "max_probability": 0.6349347233772278
+  },
+  {
+    "image": "2560x_2025-05-16_00-59-00_002.tif",
+    "dilution": "2560x",
+    "predicted_cell_count": 2.045,
+    "mean_probability": 0.29460567235946655,
+    "max_probability": 0.6006972789764404
+  },
+  {
+    "image": "320x_2025-05-15_02-05-00.tif",
+    "dilution": "320x",
+    "predicted_cell_count": 15.5725,
+    "mean_probability": 0.15326432883739471,
+    "max_probability": 0.6364839673042297
+  },
+  {
+    "image": "5120x_2025-05-16_00-59-00.tif",
+    "dilution": "5120x",
+    "predicted_cell_count": 0.2775,
+    "mean_probability": 0.2873891592025757,
+    "max_probability": 0.5503070950508118
+  },
+  {
+    "image": "640x_2025-05-16_00-59-00_002.tif",
+    "dilution": "640x",
+    "predicted_cell_count": 0.2625,
+    "mean_probability": 0.3036234378814697,
+    "max_probability": 0.5411931872367859
+  },
+  {
+    "image": "80x_2025-05-22_14-48-00.tif",
+    "dilution": "80x",
+    "predicted_cell_count": 102.5,
+    "mean_probability": 0.3225024938583374,
+    "max_probability": 0.7036351561546326
+  }
+]

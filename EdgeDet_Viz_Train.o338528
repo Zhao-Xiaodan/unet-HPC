@@ -1,0 +1,119 @@
+========================================
+Job ID: 338528.stdct-mgmt-02
+Node: GN-A40-010
+Start Time: Thu Oct 30 08:25:03 PM +08 2025
+========================================
+
+Configuration:
+  Variant: Trainable Layer 1 (Gabor filters can adapt)
+  Model: ./edge_detector_experiment/20251030_122737/unet_trainable_layer1/best_model.pth
+  Initial weights: ./edge_detector_experiment/20251030_122737/unet_trainable_layer1/layer1_weights_epoch000.pth
+  Test images: ./test_images
+  Output: ./edge_detector_viz_advanced_trainable_layer1
+  n_filters: 32
+  dropout: 0.2
+  PCA clusters: 8
+  Image filter: 320x
+
+Expected outputs:
+  ✓ Feature inversions (9 layers: 512x512 → 32x32)
+  ✓ PCA cluster scatter plots (9 layers)
+  ✓ Representative feature maps (9 layers)
+  ✓ Layer 1 Gabor comparison (initial → final, shows Gabor adaptation!)
+
+Key question:
+  Did Gabor filters adapt toward textures (like baseline)?
+  Or did they stay edge-like (suggesting edges are optimal)?
+
+========================================
+Starting advanced visualization...
+========================================
+
+⚠ UMAP not available. Will use PCA only. Install with: pip install umap-learn
+================================================================================
+EDGE DETECTOR EXPERIMENT: ADVANCED VISUALIZATION
+================================================================================
+Variant: trainable_layer1
+Model: ./edge_detector_experiment/20251030_122737/unet_trainable_layer1/best_model.pth
+Test images: ./test_images
+Output: ./edge_detector_viz_advanced_trainable_layer1
+PCA clusters: 8
+================================================================================
+
+Using device: cuda
+
+Loading model...
+✓ Model loaded successfully
+
+Filtered from 8 to 1 image(s) matching '320x'
+
+Found 1 test images
+
+================================================================================
+Processing image 1/1: 320x_2025-05-15_02-05-00.tif
+================================================================================
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/visualize_edge_detector_advanced.py", line 427, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/visualize_edge_detector_advanced.py", line 393, in main
+    tile_tensor = base_viz.preprocess_tile(tile)
+  File "/scratch/phyzxi/unet-HPC/visualize_unet_features_advanced.py", line 76, in preprocess_tile
+    arr_norm = _percentile_norm(tile_array)
+  File "/scratch/phyzxi/unet-HPC/visualize_unet_features_advanced.py", line 56, in _percentile_norm
+    lo, hi = np.percentile(arr, [0.5, 99.5]).astype(np.float32)
+  File "<__array_function__ internals>", line 200, in percentile
+  File "/usr/local/lib/python3.10/dist-packages/numpy/lib/function_base.py", line 4205, in percentile
+    return _quantile_unchecked(
+  File "/usr/local/lib/python3.10/dist-packages/numpy/lib/function_base.py", line 4473, in _quantile_unchecked
+    return _ureduce(a,
+  File "/usr/local/lib/python3.10/dist-packages/numpy/lib/function_base.py", line 3718, in _ureduce
+    a = np.asanyarray(a)
+ValueError: setting an array element with a sequence. The requested array has an inhomogeneous shape after 1 dimensions. The detected shape was (2,) + inhomogeneous part.
+
+========================================
+Visualization complete!
+End Time: Thu Oct 30 08:25:08 PM +08 2025
+========================================
+
+Output directory structure:
+total 192
+drwxr-x---   2 phyzxi svuusers     0 Oct 30 20:20 .
+drwxr-xr-x 115 phyzxi svuusers 17916 Oct 30 20:25 ..
+
+========================================
+✓ Job complete!
+========================================
+
+Next steps:
+1. Download results:
+   scp -r <username>@hopper:~/scratch/unet-HPC/./edge_detector_viz_advanced_trainable_layer1 ./
+
+2. Compare with frozen layer 1:
+   # Check Layer 1 adaptation
+   diff -y \
+     edge_detector_viz_advanced_frozen_layer1/*/layer1_comparison/layer1_metrics.json \
+     ./edge_detector_viz_advanced_trainable_layer1/*/layer1_comparison/layer1_metrics.json
+
+3. Analyze Gabor → texture adaptation:
+   # If cosine_similarity < 0.8: Gabor filters significantly changed
+   # If cosine_similarity > 0.95: Gabor filters stayed mostly edge-like
+
+4. Compare feature inversions with baseline:
+   # Do trainable layer 1 features resemble baseline or stay edge-like?
+   diff -r unet_visualization_advanced_20251028_091857/ ./edge_detector_viz_advanced_trainable_layer1/
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-30 20:25:09.444235:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 338528.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:07
+	Memory: Requested(240gb), Used(900340kb)
+	Vmem Used: 11545280kb
+	Walltime: Requested(04:00:00), Used(00:00:06)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-010[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
