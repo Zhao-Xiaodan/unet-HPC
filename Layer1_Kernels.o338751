@@ -1,0 +1,114 @@
+========================================
+Job ID: 338751.stdct-mgmt-02
+Node: CN-149
+Start Time: Fri Oct 31 07:42:15 AM +08 2025
+========================================
+
+Configuration:
+  Purpose: Visualize Layer 1 conv1 kernels (AlexNet Figure 3 style)
+  Models:
+    1. Frozen Gabor (should match initial Gabor filters)
+    2. Trainable Gabor (should show minimal adaptation)
+    3. Baseline U-Net (random initialization, learned filters)
+  Output: layer1_kernel_visualizations/
+
+========================================
+Setting up environment...
+========================================
+
+EnvironmentNameNotFound: Could not find conda environment: unetCNN
+You can list all discoverable environments with `conda info --envs`.
+
+
+Python: /app1/ebapps/arches/flat-avx512/software/Miniconda3/24.7.1-0/bin/python
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+ModuleNotFoundError: No module named 'torch'
+PyTorch: 
+
+========================================
+1. Frozen Gabor Layer 1 Kernels
+========================================
+Model: ./edge_detector_experiment/20251030_122713/unet_frozen_layer1/best_model.pth
+Output: ./layer1_kernel_visualizations/frozen_gabor_layer1_kernels.png
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/visualize_layer1_kernels.py", line 12, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+✓ Frozen Gabor kernels visualized
+
+========================================
+2. Trainable Gabor Layer 1 Kernels
+========================================
+Model: ./edge_detector_experiment/20251030_122737/unet_trainable_layer1/best_model.pth
+Output: ./layer1_kernel_visualizations/trainable_gabor_layer1_kernels.png
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/visualize_layer1_kernels.py", line 12, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+✓ Trainable Gabor kernels visualized
+
+========================================
+3. Baseline U-Net Layer 1 Kernels
+========================================
+Model: ./best_models_PyTorch/unet/best_model.pth
+Output: ./layer1_kernel_visualizations/baseline_unet_layer1_kernels.png
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/visualize_layer1_kernels.py", line 12, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'
+✓ Baseline U-Net kernels visualized
+
+========================================
+4. Copy Initial Gabor Filters for Comparison
+========================================
+✓ Copied initial Gabor filters to: ./layer1_kernel_visualizations/initial_gabor_filters_reference.png
+  (For visual comparison with frozen model)
+
+========================================
+Visualization complete!
+End Time: Fri Oct 31 07:42:17 AM +08 2025
+========================================
+
+Output directory structure:
+total 72K
+-rw------- 1 phyzxi svuusers 45K Oct 31 07:42 initial_gabor_filters_reference.png
+
+========================================
+✓ Job complete!
+========================================
+
+Expected results:
+  1. frozen_gabor_layer1_kernels.png
+     → Should be IDENTICAL to initial_gabor_filters_reference.png
+     → Confirms freezing mechanism worked correctly
+
+  2. trainable_gabor_layer1_kernels.png
+     → Should be VISUALLY SIMILAR to initial Gabor filters
+     → May show subtle adaptations (1.04% mean change expected)
+
+  3. baseline_unet_layer1_kernels.png
+     → Should show RANDOM-LOOKING patterns
+     → May include textures, blobs, unstructured features
+     → Contrast with structured Gabor edge detectors
+
+Scientific question:
+  Do trainable Gabor filters maintain edge-detection character
+  or drift toward texture-based features like baseline?
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-31 07:42:18.159453:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 338751.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(4), Used(4)
+	CPU Time Used: 00:00:01
+	Memory: Requested(27gb), Used(28212kb)
+	Vmem Used: 0kb
+	Walltime: Requested(00:30:00), Used(00:00:03)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (CN-149[0]:ncpus=4:mem=28311552kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
