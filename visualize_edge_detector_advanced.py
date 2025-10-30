@@ -385,6 +385,11 @@ def main():
         # Load and preprocess image
         img = Image.open(img_path)
         img_array = np.array(img).astype(np.float32)
+
+        # Convert RGB to grayscale if needed
+        if len(img_array.shape) == 3 and img_array.shape[2] == 3:
+            img_array = np.mean(img_array, axis=2)  # Average RGB channels
+
         if img_array.max() > 1:
             img_array /= 255.0
 
