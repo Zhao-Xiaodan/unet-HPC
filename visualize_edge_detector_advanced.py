@@ -406,9 +406,8 @@ def main():
         image_output_dir.mkdir(parents=True, exist_ok=True)
 
         # 1. Create 3-panel figure
-        pred_np = prediction.cpu().squeeze().numpy()
         base_viz.create_3panel_figure(
-            tile, tile, pred_np, img_path.stem,
+            tile, tile_tensor, prediction, img_path.stem,
             image_output_dir / f"{img_path.stem}_3panel.png"
         )
         print("✓ Saved 3-panel figure")
