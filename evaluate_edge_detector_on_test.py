@@ -66,16 +66,16 @@ class UNet(nn.Module):
         self.bottleneck = ConvBlock(n_filters*8, n_filters*16, dropout=dropout)
 
         # Decoder
-        self.upconv4 = nn.ConvTranspose2d(n_filters*16, n_filters*8, 2, stride=2)
+        self.up4 = nn.ConvTranspose2d(n_filters*16, n_filters*8, 2, stride=2)
         self.dec4 = ConvBlock(n_filters*16, n_filters*8, dropout=dropout)
 
-        self.upconv3 = nn.ConvTranspose2d(n_filters*8, n_filters*4, 2, stride=2)
+        self.up3 = nn.ConvTranspose2d(n_filters*8, n_filters*4, 2, stride=2)
         self.dec3 = ConvBlock(n_filters*8, n_filters*4, dropout=dropout)
 
-        self.upconv2 = nn.ConvTranspose2d(n_filters*4, n_filters*2, 2, stride=2)
+        self.up2 = nn.ConvTranspose2d(n_filters*4, n_filters*2, 2, stride=2)
         self.dec2 = ConvBlock(n_filters*4, n_filters*2, dropout=dropout)
 
-        self.upconv1 = nn.ConvTranspose2d(n_filters*2, n_filters, 2, stride=2)
+        self.up1 = nn.ConvTranspose2d(n_filters*2, n_filters, 2, stride=2)
         self.dec1 = ConvBlock(n_filters*2, n_filters, dropout=dropout)
 
         # Output
@@ -92,10 +92,10 @@ class UNet(nn.Module):
         b = self.bottleneck(self.pool4(e4))
 
         # Decoder with skip connections
-        d4 = self.dec4(torch.cat([self.upconv4(b), e4], dim=1))
-        d3 = self.dec3(torch.cat([self.upconv3(d4), e3], dim=1))
-        d2 = self.dec2(torch.cat([self.upconv2(d3), e2], dim=1))
-        d1 = self.dec1(torch.cat([self.upconv1(d2), e1], dim=1))
+        d4 = self.dec4(torch.cat([self.up4(b), e4], dim=1))
+        d3 = self.dec3(torch.cat([self.up3(d4), e3], dim=1))
+        d2 = self.dec2(torch.cat([self.up2(d3), e2], dim=1))
+        d1 = self.dec1(torch.cat([self.up1(d2), e1], dim=1))
 
         return torch.sigmoid(self.out(d1))
 
