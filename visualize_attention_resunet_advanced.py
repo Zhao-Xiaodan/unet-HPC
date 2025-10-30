@@ -281,17 +281,17 @@ def visualize_attention_resunet_feature_maps(model, image_tensor, output_dir, de
     pca_results = results['pca']
     method_name = pca_results['method_name']
 
-    # Process each layer
+    # Plot all PCA cluster scatter plots at once
+    base_viz.plot_clustering_results(
+        pca_results['embeddings'],
+        pca_results['cluster_labels'],
+        pca_clusters_dir,
+        method_name='PCA'
+    )
+
+    # Plot representative feature maps for each layer
     for layer_name in pca_results['representatives'].keys():
         representatives = pca_results['representatives'][layer_name]
-        embeddings = pca_results['embeddings'][layer_name]
-        labels = pca_results['cluster_labels'][layer_name]
-
-        # Plot cluster scatter
-        cluster_path = pca_clusters_dir / f"pca_clusters_{layer_name}.png"
-        base_viz.plot_cluster_scatter(embeddings, labels, layer_name, cluster_path, method_name)
-
-        # Plot representative feature maps
         representative_path = pca_dir / f"feature_map_{layer_name}_pca.png"
         base_viz.plot_representative_feature_maps(
             activations[layer_name], layer_name, representatives,
