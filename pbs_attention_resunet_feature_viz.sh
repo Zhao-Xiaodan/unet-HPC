@@ -44,7 +44,7 @@ echo ""
 MODEL_PATH="./best_models_PyTorch/attention_resunet/best_model.pth"
 OUTPUT_DIR="./attention_resunet_feature_viz"
 TEST_IMAGES_DIR="./test_images"
-N_FILTERS=32
+N_FILTERS=64  # Trained model uses 64 base filters (not 32)
 DROPOUT=0.1
 
 # Visualization parameters

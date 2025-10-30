@@ -539,7 +539,8 @@ def main():
                        default='./best_models_PyTorch/attention_resunet/best_model.pth')
     parser.add_argument('--output_dir', type=str,
                        default='./attention_resunet_feature_viz')
-    parser.add_argument('--n_filters', type=int, default=32)
+    parser.add_argument('--n_filters', type=int, default=64,
+                       help='Base number of filters (trained model uses 64)')
     parser.add_argument('--dropout', type=float, default=0.1)
 
     # Visualization parameters
