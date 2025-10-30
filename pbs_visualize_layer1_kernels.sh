@@ -29,12 +29,16 @@ echo "========================================"
 
 cd $PBS_O_WORKDIR || exit 1
 
-# Activate conda environment
-source ~/.bashrc
-conda activate unetCNN
+# Use direct Python path from conda environment
+PYTHON="/Users/xiaodan/miniconda3/envs/unetCNN/bin/python"
 
-echo "Python: $(which python)"
-echo "PyTorch: $(python -c 'import torch; print(torch.__version__)')"
+if [ ! -f "$PYTHON" ]; then
+    echo "❌ Python not found at: $PYTHON"
+    exit 1
+fi
+
+echo "Python: $PYTHON"
+echo "PyTorch: $($PYTHON -c 'import torch; print(torch.__version__)')"
 echo ""
 
 # Create output directory
@@ -52,7 +56,7 @@ if [ -f "$FROZEN_MODEL" ]; then
     echo "Model: $FROZEN_MODEL"
     echo "Output: $FROZEN_OUTPUT"
 
-    python visualize_layer1_kernels.py \
+    $PYTHON visualize_layer1_kernels.py \
         --model_path "$FROZEN_MODEL" \
         --output "$FROZEN_OUTPUT" \
         --title "Layer 1 Conv1 Kernels: Frozen Gabor (Should Be Identical to Initial)" \
@@ -76,7 +80,7 @@ if [ -f "$TRAINABLE_MODEL" ]; then
     echo "Model: $TRAINABLE_MODEL"
     echo "Output: $TRAINABLE_OUTPUT"
 
-    python visualize_layer1_kernels.py \
+    $PYTHON visualize_layer1_kernels.py \
         --model_path "$TRAINABLE_MODEL" \
         --output "$TRAINABLE_OUTPUT" \
         --title "Layer 1 Conv1 Kernels: Trainable Gabor (After 48 Epochs)" \
@@ -100,7 +104,7 @@ if [ -f "$BASELINE_MODEL" ]; then
     echo "Model: $BASELINE_MODEL"
     echo "Output: $BASELINE_OUTPUT"
 
-    python visualize_layer1_kernels.py \
+    $PYTHON visualize_layer1_kernels.py \
         --model_path "$BASELINE_MODEL" \
         --output "$BASELINE_OUTPUT" \
         --title "Layer 1 Conv1 Kernels: Baseline U-Net (Random Initialization)" \
