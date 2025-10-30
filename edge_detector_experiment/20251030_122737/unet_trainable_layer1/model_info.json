@@ -1,0 +1,11 @@
+{
+  "variant": "trainable_layer1",
+  "freeze_layer1": false,
+  "n_filters": 32,
+  "dropout": 0.2,
+  "learning_rate": 0.001,
+  "best_val_iou": 0.711463350057602,
+  "total_epochs": 48,
+  "baseline_iou": 0.6377,
+  "improvement_vs_baseline": 0.07376335005760193
+}
