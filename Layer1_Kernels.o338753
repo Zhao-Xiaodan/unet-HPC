@@ -1,0 +1,193 @@
+========================================
+Job ID: 338753.stdct-mgmt-02
+Node: CN-149
+Start Time: Fri Oct 31 08:21:07 AM +08 2025
+========================================
+
+Configuration:
+  Purpose: Visualize Layer 1 conv1 kernels (AlexNet Figure 3 style)
+  Models:
+    1. Frozen Gabor (should match initial Gabor filters)
+    2. Trainable Gabor (should show minimal adaptation)
+    3. Baseline U-Net (random initialization, learned filters)
+  Output: layer1_kernel_visualizations/
+
+========================================
+Setting up environment...
+========================================
+✓ Singularity container: /app1/common/singularity-img/hopper/pytorch/pytorch_2.4.0a0-cuda_12.5.0_ngc_24.06.sif
+Testing Python environment...
+WARNING: Could not find any nv files on this host!
+Python 3.10.12
+WARNING: Could not find any nv files on this host!
+PyTorch: 2.4.0a0+f70bd71a48.nv24.06
+
+✓ Output directory: ./layer1_kernel_visualizations
+
+========================================
+1. Frozen Gabor Layer 1 Kernels
+========================================
+Model: ./edge_detector_experiment/20251030_122713/unet_frozen_layer1/best_model.pth
+Output: ./layer1_kernel_visualizations/frozen_gabor_layer1_kernels.png
+
+WARNING: Could not find any nv files on this host!
+/scratch/phyzxi/unet-HPC/visualize_layer1_kernels.py:176: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  plt.tight_layout(rect=[0, 0, 0.92, 0.96])
+================================================================================
+LAYER 1 KERNEL VISUALIZATION
+================================================================================
+Model: ./edge_detector_experiment/20251030_122713/unet_frozen_layer1/best_model.pth
+Output: ./layer1_kernel_visualizations/frozen_gabor_layer1_kernels.png
+Title: Layer 1 Conv1 Kernels: Frozen Gabor (Should Be Identical to Initial)
+================================================================================
+
+Loading model...
+✓ Model loaded successfully
+
+Extracting Layer 1 conv1 weights...
+
+Visualizing kernels...
+Kernel shape: (32, 1, 3, 3)
+  n_filters: 32
+  in_channels: 1
+  kernel_size: 3×3
+Weight range: [-0.5556, 0.6473]
+Symmetric range for visualization: [-0.6473, 0.6473]
+✓ Saved visualization to: layer1_kernel_visualizations/frozen_gabor_layer1_kernels.png
+
+================================================================================
+✓ Visualization complete!
+================================================================================
+
+✓ Frozen Gabor kernels visualized
+
+========================================
+2. Trainable Gabor Layer 1 Kernels
+========================================
+Model: ./edge_detector_experiment/20251030_122737/unet_trainable_layer1/best_model.pth
+Output: ./layer1_kernel_visualizations/trainable_gabor_layer1_kernels.png
+
+WARNING: Could not find any nv files on this host!
+/scratch/phyzxi/unet-HPC/visualize_layer1_kernels.py:176: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  plt.tight_layout(rect=[0, 0, 0.92, 0.96])
+================================================================================
+LAYER 1 KERNEL VISUALIZATION
+================================================================================
+Model: ./edge_detector_experiment/20251030_122737/unet_trainable_layer1/best_model.pth
+Output: ./layer1_kernel_visualizations/trainable_gabor_layer1_kernels.png
+Title: Layer 1 Conv1 Kernels: Trainable Gabor (After 48 Epochs)
+================================================================================
+
+Loading model...
+✓ Model loaded successfully
+
+Extracting Layer 1 conv1 weights...
+
+Visualizing kernels...
+Kernel shape: (32, 1, 3, 3)
+  n_filters: 32
+  in_channels: 1
+  kernel_size: 3×3
+Weight range: [-0.5810, 0.6460]
+Symmetric range for visualization: [-0.6460, 0.6460]
+✓ Saved visualization to: layer1_kernel_visualizations/trainable_gabor_layer1_kernels.png
+
+================================================================================
+✓ Visualization complete!
+================================================================================
+
+✓ Trainable Gabor kernels visualized
+
+========================================
+3. Baseline U-Net Layer 1 Kernels
+========================================
+Model: ./best_models_PyTorch/unet/best_model.pth
+Output: ./layer1_kernel_visualizations/baseline_unet_layer1_kernels.png
+
+WARNING: Could not find any nv files on this host!
+/scratch/phyzxi/unet-HPC/visualize_layer1_kernels.py:176: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  plt.tight_layout(rect=[0, 0, 0.92, 0.96])
+================================================================================
+LAYER 1 KERNEL VISUALIZATION
+================================================================================
+Model: ./best_models_PyTorch/unet/best_model.pth
+Output: ./layer1_kernel_visualizations/baseline_unet_layer1_kernels.png
+Title: Layer 1 Conv1 Kernels: Baseline U-Net (Random Initialization)
+================================================================================
+
+Loading model...
+✓ Model loaded successfully
+
+Extracting Layer 1 conv1 weights...
+
+Visualizing kernels...
+Kernel shape: (32, 1, 3, 3)
+  n_filters: 32
+  in_channels: 1
+  kernel_size: 3×3
+Weight range: [-0.3818, 0.3751]
+Symmetric range for visualization: [-0.3818, 0.3818]
+✓ Saved visualization to: layer1_kernel_visualizations/baseline_unet_layer1_kernels.png
+
+================================================================================
+✓ Visualization complete!
+================================================================================
+
+✓ Baseline U-Net kernels visualized
+
+========================================
+4. Copy Initial Gabor Filters for Comparison
+========================================
+✓ Copied initial Gabor filters to: ./layer1_kernel_visualizations/initial_gabor_filters_reference.png
+  (For visual comparison with frozen model)
+
+========================================
+Visualization complete!
+End Time: Fri Oct 31 08:21:44 AM +08 2025
+========================================
+
+Output directory structure:
+total 768K
+-rw------- 1 phyzxi svuusers 68K Oct 31 08:21 baseline_unet_layer1_kernels.png
+-rw------- 1 phyzxi svuusers 69K Oct 31 08:21 frozen_gabor_layer1_kernels.png
+-rw------- 1 phyzxi svuusers 45K Oct 31 08:21 initial_gabor_filters_reference.png
+-rw------- 1 phyzxi svuusers 69K Oct 31 08:21 trainable_gabor_layer1_kernels.png
+
+========================================
+✓ Job complete!
+========================================
+
+Expected results:
+  1. frozen_gabor_layer1_kernels.png
+     → Should be IDENTICAL to initial_gabor_filters_reference.png
+     → Confirms freezing mechanism worked correctly
+
+  2. trainable_gabor_layer1_kernels.png
+     → Should be VISUALLY SIMILAR to initial Gabor filters
+     → May show subtle adaptations (1.04% mean change expected)
+
+  3. baseline_unet_layer1_kernels.png
+     → Should show RANDOM-LOOKING patterns
+     → May include textures, blobs, unstructured features
+     → Contrast with structured Gabor edge detectors
+
+Scientific question:
+  Do trainable Gabor filters maintain edge-detection character
+  or drift toward texture-based features like baseline?
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-10-31 08:21:45.313043:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 338753.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(4), Used(4)
+	CPU Time Used: 00:00:43
+	Memory: Requested(27gb), Used(713560kb)
+	Vmem Used: 6012188kb
+	Walltime: Requested(00:30:00), Used(00:00:38)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (CN-149[0]:ncpus=4:mem=28311552kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
