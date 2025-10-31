@@ -133,7 +133,14 @@ def visualize_conv1_kernels(weights, output_path, title="Layer 1: Convolutional 
     vmin = weights.min()
     vmax = weights.max()
 
+    # Use symmetric normalization around zero for better contrast
+    # This ensures positive and negative weights are equally visible
+    abs_max = max(abs(vmin), abs(vmax))
+    vmin_sym = -abs_max
+    vmax_sym = abs_max
+
     print(f"Weight range: [{vmin:.4f}, {vmax:.4f}]")
+    print(f"Symmetric range for visualization: [{vmin_sym:.4f}, {vmax_sym:.4f}]")
 
     # Plot each filter
     for i in range(n_filters):
@@ -150,8 +157,9 @@ def visualize_conv1_kernels(weights, output_path, title="Layer 1: Convolutional 
             # RGB input: show as RGB image (for comparison with AlexNet)
             img = kernel.transpose(1, 2, 0)  # Shape: [3, 3, 3]
 
-        # Display kernel with RdBu_r colormap (red=positive, blue=negative)
-        im = ax.imshow(img, cmap='RdBu_r', vmin=vmin, vmax=vmax, interpolation='nearest')
+        # Display kernel with grayscale colormap (white=positive, black=negative, gray=zero)
+        # Using 'gray' colormap for AlexNet-style visualization
+        im = ax.imshow(img, cmap='gray', vmin=vmin_sym, vmax=vmax_sym, interpolation='nearest')
         ax.set_title(f'Ch {i}', fontsize=8)
         ax.axis('off')
 
@@ -163,7 +171,7 @@ def visualize_conv1_kernels(weights, output_path, title="Layer 1: Convolutional 
     fig.subplots_adjust(right=0.92)
     cbar_ax = fig.add_axes([0.94, 0.15, 0.02, 0.7])
     cbar = fig.colorbar(im, cax=cbar_ax)
-    cbar.set_label('Filter Weight', fontsize=12)
+    cbar.set_label('Filter Weight\n(White=Positive, Black=Negative)', fontsize=10)
 
     plt.tight_layout(rect=[0, 0, 0.92, 0.96])
     plt.savefig(output_path, dpi=150, bbox_inches='tight')
