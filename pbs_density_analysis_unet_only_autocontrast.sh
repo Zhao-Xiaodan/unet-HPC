@@ -8,16 +8,16 @@
 #PBS -m abe
 
 ################################################################################
-# UNet-Only Density Analysis with Auto-Contrast Enhancement
+# UNet-Only Density Analysis with Dual Contrast Visualization
 ################################################################################
 #
 # Purpose: Perform density analysis on test images using the BEST UNet model
-#          with AUTO-CONTRAST visualization enhancement for Panel 2
+#          with DUAL tile visualization for direct comparison
 #
-# KEY IMPROVEMENT: Auto-contrast visualization for Panel 2 (Predicted masks)
-#   - Uses explicit vmin/vmax calculation based on actual data range
-#   - Enhances contrast by mapping actual min/max to full black-white range
-#   - Makes model predictions more visible, especially for conservative models
+# KEY IMPROVEMENT: DUAL representative tile sets for comparison
+#   - SET 1: Fixed contrast (vmin=0, vmax=1) - matches previous results
+#   - SET 2: Auto-contrast (vmin/vmax from data) - enhanced visibility
+#   - IDENTICAL tile selection - ensures fair comparison
 #
 # Updates previous analysis (density_analysis_unet_only_20251016_071037) with:
 #   1. ✅ Tile-level density tracking (all 28 tiles per image saved)
@@ -133,13 +133,15 @@ done
 echo ""
 
 echo "========================================================================"
-echo "AUTO-CONTRAST ENHANCEMENT"
+echo "DUAL VISUALIZATION STRATEGY"
 echo "========================================================================"
-echo "Panel 2 visualization improvement:"
-echo "  - Explicit vmin/vmax calculation from actual prediction range"
-echo "  - Formula: vmin = inverted_pred.min(), vmax = inverted_pred.max()"
-echo "  - Ensures maximum contrast regardless of model output range"
-echo "  - Displays actual data range in tile titles"
+echo "TWO sets of representative tiles will be generated:"
+echo "  SET 1: FIXED contrast (vmin=0, vmax=1)"
+echo "    - Matches previous analysis for direct comparison"
+echo "  SET 2: AUTO contrast (vmin/vmax from actual data)"
+echo "    - Formula: vmin = inverted_pred.min(), vmax = inverted_pred.max()"
+echo "    - Enhanced visibility of model confidence patterns"
+echo "  Both sets use IDENTICAL tile selection (fair comparison)"
 echo "========================================================================"
 echo ""
 
@@ -193,12 +195,20 @@ if [ $EXIT_CODE -eq 0 ]; then
             cat "$OUTPUT_DIR/EXPERIMENT_INFO.json"
         fi
 
+        if [ -d "$OUTPUT_DIR/representative_tiles_3panel_fixed_contrast" ]; then
+            echo ""
+            echo "3-Panel Tile Visualizations (FIXED CONTRAST):"
+            ls -1 "$OUTPUT_DIR/representative_tiles_3panel_fixed_contrast"
+            TILE_COUNT=$(ls -1 "$OUTPUT_DIR/representative_tiles_3panel_fixed_contrast" | wc -l)
+            echo "Total: $TILE_COUNT image tile sets (vmin=0, vmax=1)"
+        fi
+
         if [ -d "$OUTPUT_DIR/representative_tiles_3panel_autocontrast" ]; then
             echo ""
             echo "3-Panel Tile Visualizations (AUTO-CONTRAST):"
             ls -1 "$OUTPUT_DIR/representative_tiles_3panel_autocontrast"
             TILE_COUNT=$(ls -1 "$OUTPUT_DIR/representative_tiles_3panel_autocontrast" | wc -l)
-            echo "Total: $TILE_COUNT image tile sets"
+            echo "Total: $TILE_COUNT image tile sets (vmin/vmax from data)"
         fi
     fi
 
@@ -213,13 +223,22 @@ if [ $EXIT_CODE -eq 0 ]; then
     echo "    4. Threshold 0.95: density_boxplot_*_threshold_0.95.png"
     echo "    5. CLAHE+Otsu on pred: density_boxplot_*_claheotsu_on_pred.png"
     echo "    6. CLAHE+Otsu on orig: density_boxplot_*_claheotsu_on_original.png"
-    echo "  Tile visualizations (AUTO-CONTRAST):"
-    echo "    - representative_tiles_3panel_autocontrast/ (5 tiles per image, 3 panels each)"
+    echo "  Tile visualizations (DUAL SETS for comparison):"
+    echo "    SET 1: representative_tiles_3panel_fixed_contrast/"
+    echo "      * Panel 1: Original tile"
+    echo "      * Panel 2: Predicted mask with FIXED CONTRAST (vmin=0, vmax=1)"
+    echo "        └─> Matches previous analysis for direct comparison"
+    echo "      * Panel 3: CLAHE+Otsu (white beads, denoised)"
+    echo ""
+    echo "    SET 2: representative_tiles_3panel_autocontrast/"
     echo "      * Panel 1: Original tile"
     echo "      * Panel 2: Predicted mask with AUTO-CONTRAST (white beads)"
     echo "        └─> vmin/vmax calculated from actual prediction range"
     echo "        └─> Displays actual data range in title"
+    echo "        └─> Enhanced visibility for model confidence patterns"
     echo "      * Panel 3: CLAHE+Otsu (white beads, denoised)"
+    echo ""
+    echo "    Both sets use IDENTICAL tile selection for fair comparison!"
 else
     echo ""
     echo "✗ Analysis failed with exit code $EXIT_CODE"

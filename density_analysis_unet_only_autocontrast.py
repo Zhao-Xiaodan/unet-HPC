@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """
-UNet-Only Density Analysis with Auto-Contrast Enhancement
-==========================================================
+UNet-Only Density Analysis with Dual Contrast Visualization
+============================================================
 
 Script: density_analysis_unet_only_autocontrast.py
 PBS Script: pbs_density_analysis_unet_only_autocontrast.sh
 
-KEY IMPROVEMENT: Auto-contrast visualization for Panel 2 (Predicted masks)
-- Uses explicit vmin/vmax calculation based on actual data range
-- Enhances contrast by mapping actual min/max to full black-white range
-- Makes model predictions more visible, especially for conservative models
+KEY IMPROVEMENT: DUAL representative tile sets for direct comparison
+- SET 1: Fixed contrast (vmin=0, vmax=1) - matches previous analysis
+- SET 2: Auto-contrast (vmin/vmax from data) - enhanced visibility
+- IDENTICAL tile selection in both sets - ensures fair comparison
 
 Updates the previous density analysis (density_analysis_unet_only_20251016_071037)
 with the following improvements:
@@ -18,9 +18,10 @@ with the following improvements:
 3. ✅ Two boxplot ranges:
    - Full range: 1/10240 to 1/10
    - Low dilution range: 1/10240 to 1/80
-4. ✅ AUTO-CONTRAST for Panel 2 predictions (NEW!)
-   - Explicitly calculates vmin/vmax from actual prediction range
-   - Ensures maximum contrast regardless of model output range
+4. ✅ DUAL TILE SETS for Panel 2 predictions (NEW!)
+   - Fixed contrast: vmin=0, vmax=1 (for comparison with previous results)
+   - Auto contrast: vmin/vmax from actual data (for enhanced visibility)
+   - Same tiles in both sets (fair comparison)
 
 Uses the BEST UNet model from hyperparameter search:
 - Source: unet_hyperparam_20251015_224125/
@@ -111,7 +112,7 @@ DILUTION_PATTERNS = {
 def print_header(config, best_model_info):
     """Print analysis header."""
     print("="*80)
-    print("UNET-ONLY DENSITY ANALYSIS - AUTO-CONTRAST ENHANCEMENT")
+    print("UNET-ONLY DENSITY ANALYSIS - DUAL CONTRAST VISUALIZATION")
     print("="*80)
     print(f"Script: density_analysis_unet_only_autocontrast.py")
     print(f"PBS Script: pbs_density_analysis_unet_only_autocontrast.sh")
@@ -122,12 +123,15 @@ def print_header(config, best_model_info):
     print(f"Image format: {config['img_size']}×{config['img_size']} RGB ({config['img_channels']} channels)")
     print()
     print("="*80)
-    print("VISUALIZATION ENHANCEMENT")
+    print("DUAL VISUALIZATION STRATEGY")
     print("="*80)
-    print("Panel 2 (Predicted masks): AUTO-CONTRAST enabled")
-    print("  - vmin/vmax explicitly calculated from actual prediction range")
-    print("  - Formula: vmin = inverted_pred.min(), vmax = inverted_pred.max()")
-    print("  - Ensures maximum contrast regardless of model output range")
+    print("TWO sets of representative tiles will be generated:")
+    print("  SET 1: FIXED contrast (vmin=0, vmax=1)")
+    print("    └─> Matches previous analysis for direct comparison")
+    print("  SET 2: AUTO contrast (vmin/vmax from actual data)")
+    print("    └─> Formula: vmin = inverted_pred.min(), vmax = inverted_pred.max()")
+    print("    └─> Enhanced visibility of model confidence patterns")
+    print("  Both sets use IDENTICAL tile selection (fair comparison)")
     print("="*80)
     print()
     print("="*80)
@@ -812,6 +816,101 @@ def create_representative_tile_visualizations(tile_data, output_dir, config):
     print(f"    Total images: {len(tiles_by_image)}")
     print(f"    Format: 3 panels (Original, Predicted AUTO-CONTRAST, CLAHE+Otsu)")
 
+def create_representative_tile_visualizations_fixed_contrast(tile_data, output_dir, config):
+    """
+    Create 3-panel tile visualizations with FIXED CONTRAST (vmin=0, vmax=1).
+    This matches the previous analysis for direct comparison.
+
+    Shows 5 representative tiles per image with:
+    - Panel 1: Original tile (dark beads on bright background)
+    - Panel 2: Inverted Predicted mask with FIXED CONTRAST (vmin=0, vmax=1)
+    - Panel 3: Inverted CLAHE+Otsu mask (white beads on dark background)
+    """
+    print("\nGenerating representative tile visualizations (3-panel with FIXED CONTRAST)...")
+
+    output_dir = Path(output_dir)
+    tiles_dir = output_dir / 'representative_tiles_3panel_fixed_contrast'
+    tiles_dir.mkdir(parents=True, exist_ok=True)
+
+    # Group tiles by image
+    tiles_by_image = defaultdict(list)
+    for tile_info in tile_data:
+        tiles_by_image[tile_info['image']].append(tile_info)
+
+    # Process each image
+    for image_name, tiles in tiles_by_image.items():
+        print(f"  Creating tiles for: {image_name}")
+
+        # Sort tiles by CLAHE+Otsu density (denoised) to get representative range
+        tiles_sorted = sorted(tiles, key=lambda x: x['density_clahe_otsu_pred'])
+
+        # Select 5 representative tiles (min, 25th percentile, median, 75th percentile, max)
+        n_tiles = len(tiles_sorted)
+        indices = [
+            0,                          # Min density
+            n_tiles // 4,               # 25th percentile
+            n_tiles // 2,               # Median
+            3 * n_tiles // 4,           # 75th percentile
+            n_tiles - 1,                # Max density
+        ]
+
+        representative_tiles = [tiles_sorted[i] for i in indices]
+
+        # Get dilution label for filename
+        dilution_label = tiles[0]['dilution_label']
+
+        # Create 3-panel figure (5 rows × 3 columns)
+        fig, axes = plt.subplots(5, 3, figsize=(15, 25))
+
+        for row_idx, tile_info in enumerate(representative_tiles):
+            tile = tile_info['tile']
+            prediction = tile_info['prediction']
+            density_threshold_05 = tile_info['density_threshold_0.5']
+            density_clahe_pred = tile_info['density_clahe_otsu_pred']
+            binary_mask_pred = tile_info['binary_mask_pred']
+            tile_idx = tile_info['tile_idx']
+            pos = tile_info['position']
+
+            # Panel 1: Original tile (dark beads on bright background)
+            axes[row_idx, 0].imshow(tile, cmap='gray')
+            axes[row_idx, 0].set_title(f'Original Tile {tile_idx}\nPosition: ({pos[0]}, {pos[1]})',
+                                       fontsize=11)
+            axes[row_idx, 0].axis('off')
+
+            # Panel 2: Inverted Predicted mask with FIXED CONTRAST (vmin=0, vmax=1)
+            pred_squeeze = prediction.squeeze()
+            inverted_pred = 1.0 - pred_squeeze  # Invert: white beads
+
+            # FIXED CONTRAST: vmin=0, vmax=1 (matches previous analysis)
+            axes[row_idx, 1].imshow(inverted_pred, cmap='gray', vmin=0, vmax=1)
+            axes[row_idx, 1].set_title(f'Predicted (FIXED vmin=0, vmax=1)\n(White = Beads)\nDensity: {density_threshold_05:.4f}',
+                                       fontsize=10)
+            axes[row_idx, 1].axis('off')
+
+            # Panel 3: Inverted CLAHE+Otsu mask (white beads on dark background)
+            axes[row_idx, 2].imshow(binary_mask_pred, cmap='gray', vmin=0, vmax=255)
+            axes[row_idx, 2].set_title(f'CLAHE+Otsu\n(White = Beads, Denoised)\nDensity: {density_clahe_pred:.4f}',
+                                       fontsize=11)
+            axes[row_idx, 2].axis('off')
+
+        # Add overall title
+        fig.suptitle(f'{image_name} - Representative Tiles (5 tiles, FIXED CONTRAST)',
+                    fontsize=16, fontweight='bold', y=0.995)
+
+        plt.tight_layout(rect=[0, 0, 1, 0.995])
+
+        # Save
+        output_filename = f'tiles_3panel_fixed_contrast_{dilution_label}_{image_name.replace(".tif", "").replace(".tiff", "")}.png'
+        output_path = tiles_dir / output_filename
+        plt.savefig(output_path, dpi=config['dpi'], bbox_inches='tight')
+        plt.close()
+
+        print(f"    ✓ Saved: {output_path.name}")
+
+    print(f"\n  ✓ All tile visualizations saved to: {tiles_dir}")
+    print(f"    Total images: {len(tiles_by_image)}")
+    print(f"    Format: 3 panels (Original, Predicted FIXED-CONTRAST vmin=0/vmax=1, CLAHE+Otsu)")
+
 # ============================================================================
 # SAVE RESULTS
 # ============================================================================
@@ -972,8 +1071,15 @@ def main():
                                       density_column='density_clahe_otsu_orig',
                                       title_suffix=' - CLAHE+Otsu on Original')
 
-    # 3-panel tile visualizations with AUTO-CONTRAST (5 representative tiles per image)
-    print("\n--- Tile Visualizations (AUTO-CONTRAST) ---")
+    # 3-panel tile visualizations - TWO SETS for comparison
+    print("\n--- Tile Visualizations (DUAL SETS) ---")
+
+    # Set 1: FIXED contrast (vmin=0, vmax=1) - for comparison with previous results
+    print("\n  Generating FIXED contrast tiles (vmin=0, vmax=1)...")
+    create_representative_tile_visualizations_fixed_contrast(tile_data, CONFIG['output_dir'], CONFIG)
+
+    # Set 2: AUTO contrast (vmin/vmax from data) - for enhanced visibility
+    print("\n  Generating AUTO contrast tiles (vmin/vmax from data)...")
     create_representative_tile_visualizations(tile_data, CONFIG['output_dir'], CONFIG)
 
     print("\n" + "="*80)
@@ -1003,13 +1109,22 @@ def main():
     print("  6. CLAHE+Otsu on original image (baseline):")
     print("     - density_boxplot_full_range_claheotsu_on_original.png")
     print("     - density_boxplot_low_dilution_range_claheotsu_on_original.png")
-    print("\nTile visualizations (AUTO-CONTRAST):")
-    print("  - representative_tiles_3panel_autocontrast/ (5 tiles per image, 3 panels each)")
+    print("\nTile visualizations (DUAL SETS for comparison):")
+    print("  SET 1: representative_tiles_3panel_fixed_contrast/ (5 tiles per image)")
+    print("      * Panel 1: Original tile (dark beads)")
+    print("      * Panel 2: Predicted mask with FIXED CONTRAST (vmin=0, vmax=1)")
+    print("        └─> Matches previous analysis - for direct comparison")
+    print("      * Panel 3: CLAHE+Otsu (WHITE beads, denoised)")
+    print()
+    print("  SET 2: representative_tiles_3panel_autocontrast/ (5 tiles per image)")
     print("      * Panel 1: Original tile (dark beads)")
     print("      * Panel 2: Predicted mask with AUTO-CONTRAST (WHITE beads)")
     print("        └─> vmin/vmax calculated from actual prediction range")
     print("        └─> Displays actual data range in title")
+    print("        └─> Enhanced visibility for model confidence patterns")
     print("      * Panel 3: CLAHE+Otsu (WHITE beads, denoised)")
+    print()
+    print("  Both sets use IDENTICAL tile selection for fair comparison!")
     print("="*80)
 
 if __name__ == '__main__':
