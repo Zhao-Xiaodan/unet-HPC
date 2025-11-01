@@ -1,0 +1,478 @@
+========================================================================
+UNET-ONLY DENSITY ANALYSIS - AUTO-CONTRAST ENHANCEMENT
+========================================================================
+Job ID: 339755.stdct-mgmt-02
+Job Name: Density_UNet_AutoContrast
+Node: GN-A40-070
+Start time: Sat Nov  1 03:01:03 PM +08 2025
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================================================
+
+=== ENVIRONMENT SETUP ===
+✓ TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+===========================
+
+Verifying required files...
+✓ Model directory: ./unet_hyperparam_20251015_224125
+✓ Checkpoints directory: ./unet_hyperparam_20251015_224125/checkpoints
+✓ Test images directory: ./test_images
+✓ Found 27 UNet model(s)
+
+Found 8 test images
+
+Test images:
+  - 10240x_2025-05-29_02-22-00_002.tif
+  - 1280x_2025-05-16_00-59-00_002.tif
+  - 160x_2025-05-15_02-05-00.tif
+  - 2560x_2025-05-16_00-59-00_002.tif
+  - 320x_2025-05-15_02-05-00.tif
+  - 5120x_2025-05-16_00-59-00.tif
+  - 640x_2025-05-16_00-59-00_002.tif
+  - 80x_2025-05-22_14-48-00.tif
+
+========================================================================
+AUTO-CONTRAST ENHANCEMENT
+========================================================================
+Panel 2 visualization improvement:
+  - Explicit vmin/vmax calculation from actual prediction range
+  - Formula: vmin = inverted_pred.min(), vmax = inverted_pred.max()
+  - Ensures maximum contrast regardless of model output range
+  - Displays actual data range in tile titles
+========================================================================
+
+========================================================================
+RUNNING DENSITY ANALYSIS WITH AUTO-CONTRAST
+========================================================================
+Command: singularity exec --nv "/app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif" python3 ./density_analysis_unet_only_autocontrast.py
+
+Searching for best UNet model...
+Found 27 UNet model configurations
+  New best: unet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4572)
+  New best: unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4853)
+
+✓ Selected best model: unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001
+  Best Val IoU: 0.4853
+
+================================================================================
+UNET-ONLY DENSITY ANALYSIS - AUTO-CONTRAST ENHANCEMENT
+================================================================================
+Script: density_analysis_unet_only_autocontrast.py
+PBS Script: pbs_density_analysis_unet_only_autocontrast.sh
+Timestamp: 2025-11-01 07:01:14
+Model base directory: ./unet_hyperparam_20251015_224125
+Test images: ./test_images
+Output directory: ./density_analysis_unet_only_autocontrast_20251101_070114
+Image format: 512×512 RGB (3 channels)
+
+================================================================================
+VISUALIZATION ENHANCEMENT
+================================================================================
+Panel 2 (Predicted masks): AUTO-CONTRAST enabled
+  - vmin/vmax explicitly calculated from actual prediction range
+  - Formula: vmin = inverted_pred.min(), vmax = inverted_pred.max()
+  - Ensures maximum contrast regardless of model output range
+================================================================================
+
+================================================================================
+BEST MODEL SELECTION
+================================================================================
+Model: unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001
+Hyperparameters:
+  - n_filters: 32
+  - dropout: 0.2
+  - batch_norm: True
+  - learning_rate: 0.001
+Best Val IoU: 0.4853
+Model path: unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001/best_model.keras
+================================================================================
+
+Loading model from: unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001/best_model.keras
+  ✓ Model loaded successfully
+  Input shape: (None, 512, 512, 3)
+  Output shape: (None, 512, 512, 1)
+
+================================================================================
+PREDICTION ON TEST IMAGES
+================================================================================
+Found 8 test images
+
+Processing images:   0%|          | 0/8 [00:00<?, ?it/s]Processing images:  12%|█▎        | 1/8 [00:13<01:32, 13.17s/it]Processing images:  25%|██▌       | 2/8 [00:14<00:36,  6.14s/it]Processing images:  38%|███▊      | 3/8 [00:14<00:17,  3.59s/it]Processing images:  50%|█████     | 4/8 [00:15<00:09,  2.39s/it]Processing images:  62%|██████▎   | 5/8 [00:16<00:05,  1.73s/it]Processing images:  75%|███████▌  | 6/8 [00:16<00:02,  1.32s/it]Processing images:  88%|████████▊ | 7/8 [00:17<00:01,  1.07s/it]Processing images: 100%|██████████| 8/8 [00:17<00:00,  1.10it/s]Processing images: 100%|██████████| 8/8 [00:17<00:00,  2.21s/it]
+
+Processing: 10240x_2025-05-29_02-22-00_002.tif
+  Dilution: 10240x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.0029
+    Threshold (0.5):        0.0007
+    Threshold (0.8):        0.0000
+    Threshold (0.95):       0.0000
+    CLAHE+Otsu on pred:     0.3187
+    CLAHE+Otsu on original: 0.4899
+
+Processing: 1280x_2025-05-16_00-59-00_002.tif
+  Dilution: 1280x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.0604
+    Threshold (0.5):        0.0177
+    Threshold (0.8):        0.0012
+    Threshold (0.95):       0.0000
+    CLAHE+Otsu on pred:     0.0682
+    CLAHE+Otsu on original: 0.0652
+
+Processing: 160x_2025-05-15_02-05-00.tif
+  Dilution: 160x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.6271
+    Threshold (0.5):        0.2809
+    Threshold (0.8):        0.0635
+    Threshold (0.95):       0.0006
+    CLAHE+Otsu on pred:     0.4461
+    CLAHE+Otsu on original: 0.3147
+
+Processing: 2560x_2025-05-16_00-59-00_002.tif
+  Dilution: 2560x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.0422
+    Threshold (0.5):        0.0130
+    Threshold (0.8):        0.0011
+    Threshold (0.95):       0.0000
+    CLAHE+Otsu on pred:     0.0534
+    CLAHE+Otsu on original: 0.1183
+
+Processing: 320x_2025-05-15_02-05-00.tif
+  Dilution: 320x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.3007
+    Threshold (0.5):        0.0972
+    Threshold (0.8):        0.0118
+    Threshold (0.95):       0.0001
+    CLAHE+Otsu on pred:     0.2609
+    CLAHE+Otsu on original: 0.1751
+
+Processing: 5120x_2025-05-16_00-59-00.tif
+  Dilution: 5120x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.0181
+    Threshold (0.5):        0.0047
+    Threshold (0.8):        0.0003
+    Threshold (0.95):       0.0000
+    CLAHE+Otsu on pred:     0.1535
+    CLAHE+Otsu on original: 0.4045
+
+Processing: 640x_2025-05-16_00-59-00_002.tif
+  Dilution: 640x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.1490
+    Threshold (0.5):        0.0471
+    Threshold (0.8):        0.0030
+    Threshold (0.95):       0.0001
+    CLAHE+Otsu on pred:     0.1418
+    CLAHE+Otsu on original: 0.1046
+
+Processing: 80x_2025-05-22_14-48-00.tif
+  Dilution: 80x
+  Image shape: (2160, 3840, 3)
+  Extracted 28 tiles
+  Mean densities (across 28 tiles):
+    Threshold (0.2):        0.8153
+    Threshold (0.5):        0.5512
+    Threshold (0.8):        0.2505
+    Threshold (0.95):       0.0157
+    CLAHE+Otsu on pred:     0.5050
+    CLAHE+Otsu on original: 0.4442
+
+================================================================================
+SAVING RESULTS
+================================================================================
+✓ Tile-level results saved: density_analysis_unet_only_autocontrast_20251101_070114/density_results_tile_level.csv
+  Total tiles: 224
+✓ Image-level summary saved: density_analysis_unet_only_autocontrast_20251101_070114/density_results_image_summary.csv
+  Total images: 8
+✓ Experiment info saved: density_analysis_unet_only_autocontrast_20251101_070114/EXPERIMENT_INFO.json
+
+
+================================================================================
+GENERATING VISUALIZATIONS
+================================================================================
+
+--- Threshold Method (0.2) ---
+
+Generating box plot (Full Range: 1/10240 to 1/10) -  - Threshold 0.2...
+  ✓ Saved: density_analysis_unet_only_autocontrast_20251101_070114/density_boxplot_full_range__threshold_0.2.png
+
+Generating box plot (Low Dilution Range: 1/10240 to 1/80) -  - Threshold 0.2...
+  ✓ Saved: density_analysis_unet_only_autocontrast_20251101_070114/density_boxplot_low_dilution_range__threshold_0.2.png
+
+--- Threshold Method (0.5) ---
+
+Generating box plot (Full Range: 1/10240 to 1/10) -  - Threshold 0.5...
+  ✓ Saved: density_analysis_unet_only_autocontrast_20251101_070114/density_boxplot_full_range__threshold_0.5.png
+
+Generating box plot (Low Dilution Range: 1/10240 to 1/80) -  - Threshold 0.5...
+  ✓ Saved: density_analysis_unet_only_autocontrast_20251101_070114/density_boxplot_low_dilution_range__threshold_0.5.png
+
+--- Threshold Method (0.8) ---
+
+Generating box plot (Full Range: 1/10240 to 1/10) -  - Threshold 0.8...
+  ✓ Saved: density_analysis_unet_only_autocontrast_20251101_070114/density_boxplot_full_range__threshold_0.8.png
+
+Generating box plot (Low Dilution Range: 1/10240 to 1/80) -  - Threshold 0.8...
+  ✓ Saved: density_analysis_unet_only_autocontrast_20251101_070114/density_boxplot_low_dilution_range__threshold_0.8.png
+
+--- Threshold Method (0.95) ---
+
+Generating box plot (Full Range: 1/10240 to 1/10) -  - Threshold 0.95...
+  ✓ Saved: density_analysis_unet_only_autocontrast_20251101_070114/density_boxplot_full_range__threshold_0.95.png
+
+Generating box plot (Low Dilution Range: 1/10240 to 1/80) -  - Threshold 0.95...
+  ✓ Saved: density_analysis_unet_only_autocontrast_20251101_070114/density_boxplot_low_dilution_range__threshold_0.95.png
+
+--- CLAHE+Otsu on Predicted Mask (Denoised) ---
+
+Generating box plot (Full Range: 1/10240 to 1/10) -  - CLAHE+Otsu on Pred...
+  ✓ Saved: density_analysis_unet_only_autocontrast_20251101_070114/density_boxplot_full_range__clahe+otsu_on_pred.png
+
+Generating box plot (Low Dilution Range: 1/10240 to 1/80) -  - CLAHE+Otsu on Pred...
+  ✓ Saved: density_analysis_unet_only_autocontrast_20251101_070114/density_boxplot_low_dilution_range__clahe+otsu_on_pred.png
+
+--- CLAHE+Otsu on Original Image (Baseline) ---
+
+Generating box plot (Full Range: 1/10240 to 1/10) -  - CLAHE+Otsu on Original...
+  ✓ Saved: density_analysis_unet_only_autocontrast_20251101_070114/density_boxplot_full_range__clahe+otsu_on_original.png
+
+Generating box plot (Low Dilution Range: 1/10240 to 1/80) -  - CLAHE+Otsu on Original...
+  ✓ Saved: density_analysis_unet_only_autocontrast_20251101_070114/density_boxplot_low_dilution_range__clahe+otsu_on_original.png
+
+--- Tile Visualizations (AUTO-CONTRAST) ---
+
+Generating representative tile visualizations (3-panel with AUTO-CONTRAST)...
+  Creating tiles for: 10240x_2025-05-29_02-22-00_002.tif
+    ✓ Saved: tiles_3panel_autocontrast_10240x_10240x_2025-05-29_02-22-00_002.png
+  Creating tiles for: 1280x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_3panel_autocontrast_1280x_1280x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 160x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_3panel_autocontrast_160x_160x_2025-05-15_02-05-00.png
+  Creating tiles for: 2560x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_3panel_autocontrast_2560x_2560x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 320x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_3panel_autocontrast_320x_320x_2025-05-15_02-05-00.png
+  Creating tiles for: 5120x_2025-05-16_00-59-00.tif
+    ✓ Saved: tiles_3panel_autocontrast_5120x_5120x_2025-05-16_00-59-00.png
+  Creating tiles for: 640x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_3panel_autocontrast_640x_640x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 80x_2025-05-22_14-48-00.tif
+    ✓ Saved: tiles_3panel_autocontrast_80x_80x_2025-05-22_14-48-00.png
+
+  ✓ All tile visualizations saved to: density_analysis_unet_only_autocontrast_20251101_070114/representative_tiles_3panel_autocontrast
+    Total images: 8
+    Format: 3 panels (Original, Predicted AUTO-CONTRAST, CLAHE+Otsu)
+
+================================================================================
+ANALYSIS COMPLETE
+================================================================================
+Output directory: ./density_analysis_unet_only_autocontrast_20251101_070114
+
+Generated files:
+  - density_results_tile_level.csv (6 density methods per tile)
+  - density_results_image_summary.csv (summary statistics)
+  - EXPERIMENT_INFO.json
+
+Generated boxplots (12 total - 6 methods × 2 dilution ranges):
+  1. Threshold 0.2:
+     - density_boxplot_full_range_threshold_0.2.png
+     - density_boxplot_low_dilution_range_threshold_0.2.png
+  2. Threshold 0.5:
+     - density_boxplot_full_range_threshold_0.5.png
+     - density_boxplot_low_dilution_range_threshold_0.5.png
+  3. Threshold 0.8:
+     - density_boxplot_full_range_threshold_0.8.png
+     - density_boxplot_low_dilution_range_threshold_0.8.png
+  4. Threshold 0.95:
+     - density_boxplot_full_range_threshold_0.95.png
+     - density_boxplot_low_dilution_range_threshold_0.95.png
+  5. CLAHE+Otsu on predicted mask (denoised):
+     - density_boxplot_full_range_claheotsu_on_pred.png
+     - density_boxplot_low_dilution_range_claheotsu_on_pred.png
+  6. CLAHE+Otsu on original image (baseline):
+     - density_boxplot_full_range_claheotsu_on_original.png
+     - density_boxplot_low_dilution_range_claheotsu_on_original.png
+
+Tile visualizations (AUTO-CONTRAST):
+  - representative_tiles_3panel_autocontrast/ (5 tiles per image, 3 panels each)
+      * Panel 1: Original tile (dark beads)
+      * Panel 2: Predicted mask with AUTO-CONTRAST (WHITE beads)
+        └─> vmin/vmax calculated from actual prediction range
+        └─> Displays actual data range in title
+      * Panel 3: CLAHE+Otsu (WHITE beads, denoised)
+================================================================================
+
+========================================================================
+DENSITY ANALYSIS COMPLETED
+========================================================================
+Exit code: 0
+End time: Sat Nov  1 03:02:52 PM +08 2025
+
+Output directory: ./density_analysis_unet_only_autocontrast_20251101_070114
+
+Generated files:
+total 6.0M
+-rw-r----- 1 phyzxi svuusers 234K Nov  1 15:01 density_boxplot_full_range__clahe+otsu_on_original.png
+-rw-r----- 1 phyzxi svuusers 230K Nov  1 15:01 density_boxplot_full_range__clahe+otsu_on_pred.png
+-rw-r----- 1 phyzxi svuusers 234K Nov  1 15:01 density_boxplot_full_range__threshold_0.2.png
+-rw-r----- 1 phyzxi svuusers 227K Nov  1 15:01 density_boxplot_full_range__threshold_0.5.png
+-rw-r----- 1 phyzxi svuusers 235K Nov  1 15:01 density_boxplot_full_range__threshold_0.8.png
+-rw-r----- 1 phyzxi svuusers 234K Nov  1 15:01 density_boxplot_full_range__threshold_0.95.png
+-rw-r----- 1 phyzxi svuusers 237K Nov  1 15:01 density_boxplot_low_dilution_range__clahe+otsu_on_original.png
+-rw-r----- 1 phyzxi svuusers 235K Nov  1 15:01 density_boxplot_low_dilution_range__clahe+otsu_on_pred.png
+-rw-r----- 1 phyzxi svuusers 238K Nov  1 15:01 density_boxplot_low_dilution_range__threshold_0.2.png
+-rw-r----- 1 phyzxi svuusers 232K Nov  1 15:01 density_boxplot_low_dilution_range__threshold_0.5.png
+-rw-r----- 1 phyzxi svuusers 239K Nov  1 15:01 density_boxplot_low_dilution_range__threshold_0.8.png
+-rw-r----- 1 phyzxi svuusers 239K Nov  1 15:01 density_boxplot_low_dilution_range__threshold_0.95.png
+-rw-r----- 1 phyzxi svuusers 2.9K Nov  1 15:01 density_results_image_summary.csv
+-rw-r----- 1 phyzxi svuusers  30K Nov  1 15:01 density_results_tile_level.csv
+-rw-r----- 1 phyzxi svuusers 1.2K Nov  1 15:01 EXPERIMENT_INFO.json
+drwxr-x--- 2 phyzxi svuusers  640 Nov  1 15:02 representative_tiles_3panel_autocontrast
+
+
+Tile-Level Density Results Summary (first 20 rows):
+image,dilution,dilution_label,tile_idx,position_y,position_x,density_threshold_0.2,density_threshold_0.5,density_threshold_0.8,density_threshold_0.95,density_clahe_otsu_pred,density_clahe_otsu_orig
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,0,0,0,0.0070495605,0.0020751953,0.00010681152,0.0,0.00565338134765625,0.4085540771484375
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,1,0,512,0.0020370483,0.00064849854,2.2888184e-05,0.0,0.3645057678222656,0.37102508544921875
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,2,0,1024,0.002380371,0.00077438354,7.247925e-05,0.0,0.3602027893066406,0.47954559326171875
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,3,0,1536,0.0012741089,0.00033187866,3.0517578e-05,0.0,0.3304481506347656,0.5380973815917969
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,4,0,2048,0.00333786,0.0008583069,4.9591064e-05,0.0,0.3213958740234375,0.4058189392089844
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,5,0,2560,0.003353119,0.0006866455,3.0517578e-05,0.0,0.3095664978027344,0.5608749389648438
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,6,0,3072,0.0054244995,0.0002937317,0.0,0.0,0.2791938781738281,0.24615097045898438
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,7,512,0,0.0057907104,0.0017166138,8.773804e-05,0.0,0.2638053894042969,0.5058784484863281
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,8,512,512,0.003353119,0.00092697144,3.4332275e-05,0.0,0.348846435546875,0.5483131408691406
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,9,512,1024,0.002960205,0.00092697144,0.000102996826,0.0,0.3546142578125,0.4955940246582031
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,10,512,1536,0.0026359558,0.0009536743,6.1035156e-05,0.0,0.3308868408203125,0.5264244079589844
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,11,512,2048,0.00049972534,0.00018310547,1.9073486e-05,0.0,0.4232177734375,0.5729217529296875
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,12,512,2560,0.002166748,0.00050354004,1.5258789e-05,0.0,0.3761787414550781,0.5464363098144531
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,13,512,3072,0.0038833618,0.0008201599,0.0,0.0,0.3241729736328125,0.4801826477050781
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,14,1024,0,0.003376007,0.00090789795,8.392334e-05,0.0,0.3546638488769531,0.5289077758789062
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,15,1024,512,0.00036621094,0.0,0.0,0.0,0.4018898010253906,0.5337066650390625
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,16,1024,1024,0.004295349,0.0011177063,1.1444092e-05,0.0,0.3254127502441406,0.4910926818847656
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,17,1024,1536,0.000579834,0.00015640259,3.8146973e-06,0.0,0.3839530944824219,0.5455741882324219
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,18,1024,2048,0.0009918213,0.00034713745,1.5258789e-05,0.0,0.3705329895019531,0.4964790344238281
+
+Image-Level Density Summary:
+image,dilution,dilution_label,n_tiles,mean_density_threshold_0.2,median_density_threshold_0.2,std_density_threshold_0.2,mean_density_threshold_0.5,median_density_threshold_0.5,std_density_threshold_0.5,mean_density_threshold_0.8,median_density_threshold_0.8,std_density_threshold_0.8,mean_density_threshold_0.95,median_density_threshold_0.95,std_density_threshold_0.95,mean_density_clahe_otsu_pred,median_density_clahe_otsu_pred,std_density_clahe_otsu_pred,mean_density_clahe_otsu_orig,median_density_clahe_otsu_orig,std_density_clahe_otsu_orig
+10240x_2025-05-29_02-22-00_002.tif,10240,10240x,28,0.00286729,0.002603531,0.0016132707,0.000711986,0.0006351471,0.00045407208,3.5558427e-05,2.0980835e-05,3.9657818e-05,0.0,0.0,0.0,0.31872313363211496,0.3304119110107422,0.07834351156199346,0.4898685727800642,0.5011787414550781,0.06799856811586717
+1280x_2025-05-16_00-59-00_002.tif,1280,1280x,28,0.06042031,0.05096054,0.025076386,0.017676353,0.017326355,0.0038368423,0.0011971338,0.0011558533,0.00048422348,0.0,0.0,0.0,0.06824629647391182,0.051753997802734375,0.03823672616526648,0.06519440242222377,0.03979301452636719,0.061501443090583606
+160x_2025-05-15_02-05-00.tif,160,160x,28,0.6271144,0.6114998,0.050713226,0.2808805,0.2661171,0.059188522,0.0634846,0.05637741,0.021787409,0.0005509513,0.00046730042,0.00046731776,0.4461240768432617,0.4456653594970703,0.02166542394250581,0.3147130693708147,0.30344390869140625,0.03668772482499694
+2560x_2025-05-16_00-59-00_002.tif,2560,2560x,28,0.04215336,0.03612137,0.015030698,0.0129646575,0.013017654,0.0015255113,0.0011420931,0.0012283325,0.00048785316,5.585807e-06,0.0,2.0673073e-05,0.053417205810546875,0.038143157958984375,0.037534454315327606,0.11829021998814174,0.032032012939453125,0.12806332107522195
+320x_2025-05-15_02-05-00.tif,320,320x,28,0.30074963,0.29638672,0.048799388,0.09717859,0.091594696,0.021321783,0.011829649,0.009428024,0.0071069663,5.217961e-05,2.861023e-05,6.9266716e-05,0.26087869916643414,0.26519012451171875,0.02670323002011016,0.17513860974993026,0.16143035888671875,0.041329234810654904
+5120x_2025-05-16_00-59-00.tif,5120,5120x,28,0.018066678,0.015785217,0.009091258,0.004738944,0.0045490265,0.001126155,0.0002683912,0.00022697449,0.00015105864,1.0899136e-06,0.0,5.76728e-06,0.15353666033063615,0.19506454467773438,0.10888129086913474,0.4044803891863142,0.41353797912597656,0.05472875054094231
+640x_2025-05-16_00-59-00_002.tif,640,640x,28,0.14904213,0.121011734,0.06677355,0.04706437,0.041971207,0.01710148,0.0030232838,0.002008438,0.002810038,0.00012561253,0.0,0.00036929434,0.14182213374546596,0.12876319885253906,0.04950894931871873,0.10459068843296596,0.09724998474121094,0.026055760056356958
+80x_2025-05-22_14-48-00.tif,80,80x,28,0.81534207,0.8142586,0.04318784,0.55119896,0.5490551,0.040157575,0.25046703,0.24932098,0.044285934,0.01573004,0.01581192,0.006859444,0.5049540655953544,0.503814697265625,0.0053006416978822555,0.4441615513392857,0.4429283142089844,0.006753246648845572
+
+Experiment Info:
+{
+  "timestamp": "2025-11-01 07:01:44",
+  "script": "density_analysis_unet_only_autocontrast.py",
+  "visualization_enhancement": "AUTO-CONTRAST for Panel 2 (vmin/vmax from actual data range)",
+  "model_info": {
+    "model_path": "unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001/best_model.keras",
+    "model_name": "unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001",
+    "n_filters": 32,
+    "dropout": 0.2,
+    "batch_norm": true,
+    "learning_rate": 0.001,
+    "best_val_iou": 0.4853319227695465
+  },
+  "config": {
+    "model_base_dir": "./unet_hyperparam_20251015_224125",
+    "test_images_dir": "./test_images",
+    "output_dir": "./density_analysis_unet_only_autocontrast_20251101_070114",
+    "img_size": 512,
+    "img_channels": 3,
+    "batch_size": 8,
+    "thresholds": [
+      0.2,
+      0.5,
+      0.8,
+      0.95
+    ],
+    "n_representative_tiles": 5,
+    "dpi": 300,
+    "figsize_boxplot_full": [
+      14,
+      8
+    ],
+    "figsize_boxplot_low": [
+      14,
+      8
+    ]
+  },
+  "total_images": 8,
+  "total_tiles": 224,
+  "dilutions": [
+    80,
+    160,
+    320,
+    640,
+    1280,
+    2560,
+    5120,
+    10240
+  ]
+}
+3-Panel Tile Visualizations (AUTO-CONTRAST):
+tiles_3panel_autocontrast_10240x_10240x_2025-05-29_02-22-00_002.png
+tiles_3panel_autocontrast_1280x_1280x_2025-05-16_00-59-00_002.png
+tiles_3panel_autocontrast_160x_160x_2025-05-15_02-05-00.png
+tiles_3panel_autocontrast_2560x_2560x_2025-05-16_00-59-00_002.png
+tiles_3panel_autocontrast_320x_320x_2025-05-15_02-05-00.png
+tiles_3panel_autocontrast_5120x_5120x_2025-05-16_00-59-00.png
+tiles_3panel_autocontrast_640x_640x_2025-05-16_00-59-00_002.png
+tiles_3panel_autocontrast_80x_80x_2025-05-22_14-48-00.png
+Total: 8 image tile sets
+
+✓ Analysis completed successfully!
+
+Generated visualizations (12 boxplots + tile visualizations):
+  Boxplots (6 methods × 2 dilution ranges = 12 total):
+    1. Threshold 0.2: density_boxplot_*_threshold_0.2.png
+    2. Threshold 0.5: density_boxplot_*_threshold_0.5.png
+    3. Threshold 0.8: density_boxplot_*_threshold_0.8.png
+    4. Threshold 0.95: density_boxplot_*_threshold_0.95.png
+    5. CLAHE+Otsu on pred: density_boxplot_*_claheotsu_on_pred.png
+    6. CLAHE+Otsu on orig: density_boxplot_*_claheotsu_on_original.png
+  Tile visualizations (AUTO-CONTRAST):
+    - representative_tiles_3panel_autocontrast/ (5 tiles per image, 3 panels each)
+      * Panel 1: Original tile
+      * Panel 2: Predicted mask with AUTO-CONTRAST (white beads)
+        └─> vmin/vmax calculated from actual prediction range
+        └─> Displays actual data range in title
+      * Panel 3: CLAHE+Otsu (white beads, denoised)
+========================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-11-01 15:02:53.511778:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 339755.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:02:14
+	Memory: Requested(240gb), Used(5373588kb)
+	Vmem Used: 72964544kb
+	Walltime: Requested(04:00:00), Used(00:01:50)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-070[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
