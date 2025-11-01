@@ -44,6 +44,7 @@ from tensorflow.keras import backend as K
 
 # Import custom modules
 from loss_functions_fixed import combined_dice_focal_loss, jacard_coef, dice_coef, focal_loss
+from models_fixed import RepeatElements  # Custom layer for attention models
 
 # ============================================================================
 # CONFIGURATION
@@ -291,6 +292,7 @@ def load_model(model_path):
         'dice_coef': dice_coef,
         'focal_loss': focal_loss,
         'BinaryFocalLoss': BinaryFocalLoss,
+        'RepeatElements': RepeatElements,  # Required for attention models
     }
     
     model = keras.models.load_model(str(model_path), custom_objects=custom_objects)
@@ -304,162 +306,164 @@ def load_model(model_path):
 
 def create_4panel_tiles_fixed_contrast(tile_data_by_arch, output_dir, config):
     """
-    Create 4-panel visualizations with FIXED contrast (vmin=0, vmax=1).
-    Panels: Original | UNet | Attention UNet | Attention ResUNet
+    Create multi-panel visualizations with FIXED contrast (vmin=0, vmax=1).
+    Dynamically adjusts to number of loaded architectures.
+    Panels: Original | [Architecture 1] | [Architecture 2] | [Architecture 3]
     """
-    print("\nGenerating 4-panel tiles (FIXED CONTRAST: vmin=0, vmax=1)...")
-    
+    # Determine which architectures loaded successfully
+    loaded_archs = list(tile_data_by_arch.keys())
+    n_archs = len(loaded_archs)
+    n_panels = n_archs + 1  # +1 for original image
+
+    print(f"\nGenerating {n_panels}-panel tiles (FIXED CONTRAST: vmin=0, vmax=1)...")
+    print(f"  Loaded architectures: {', '.join(loaded_archs)}")
+
+    if n_archs == 0:
+        print("  WARNING: No architectures loaded! Skipping visualization.")
+        return
+
     output_dir = Path(output_dir)
-    tiles_dir = output_dir / 'representative_tiles_4panel_fixed_contrast'
+    tiles_dir = output_dir / f'representative_tiles_{n_panels}panel_fixed_contrast'
     tiles_dir.mkdir(parents=True, exist_ok=True)
-    
-    # Get UNet data as reference (all archs should have same images/tiles)
-    unet_data = tile_data_by_arch['unet']
-    
+
+    # Use first architecture as reference (all archs should have same images/tiles)
+    ref_data = tile_data_by_arch[loaded_archs[0]]
+
     # Group by image
     tiles_by_image = defaultdict(list)
-    for tile_info in unet_data:
+    for tile_info in ref_data:
         tiles_by_image[tile_info['image']].append(tile_info)
-    
+
     for image_name, tiles in tiles_by_image.items():
         print(f"  Creating tiles for: {image_name}")
-        
+
         # Select 5 representative tiles
         tiles_sorted = sorted(tiles, key=lambda x: x['density_clahe_otsu_pred'])
         n_tiles = len(tiles_sorted)
         indices = [0, n_tiles//4, n_tiles//2, 3*n_tiles//4, n_tiles-1]
         representative_tiles = [tiles_sorted[i] for i in indices]
-        
+
         dilution_label = tiles[0]['dilution_label']
-        
-        # Create 4-panel figure (5 rows × 4 columns)
-        fig, axes = plt.subplots(5, 4, figsize=(20, 25))
-        
+
+        # Create dynamic multi-panel figure (5 rows × n_panels columns)
+        fig, axes = plt.subplots(5, n_panels, figsize=(5*n_panels, 25))
+
+        # Handle single architecture case (axes would be 1D)
+        if n_archs == 1:
+            axes = axes.reshape(5, n_panels)
+
         for row_idx, tile_info in enumerate(representative_tiles):
             tile_idx = tile_info['tile_idx']
             pos = tile_info['position']
-            
-            # Get predictions from all 3 architectures
-            unet_pred = tile_data_by_arch['unet'][tile_idx]['prediction']
-            attn_unet_pred = tile_data_by_arch['attention_unet'][tile_idx]['prediction']
-            attn_res_pred = tile_data_by_arch['attention_resunet'][tile_idx]['prediction']
-            
-            unet_density = tile_data_by_arch['unet'][tile_idx]['density_threshold_0.5']
-            attn_unet_density = tile_data_by_arch['attention_unet'][tile_idx]['density_threshold_0.5']
-            attn_res_density = tile_data_by_arch['attention_resunet'][tile_idx]['density_threshold_0.5']
-            
-            # Panel 1: Original
+
+            # Panel 0: Original
             axes[row_idx, 0].imshow(tile_info['tile'], cmap='gray')
             axes[row_idx, 0].set_title(f'Original Tile {tile_idx}\nPos: ({pos[0]}, {pos[1]})', fontsize=10)
             axes[row_idx, 0].axis('off')
-            
-            # Panel 2: UNet (inverted, fixed contrast)
-            unet_inv = 1.0 - unet_pred.squeeze()
-            axes[row_idx, 1].imshow(unet_inv, cmap='gray', vmin=0, vmax=1)
-            axes[row_idx, 1].set_title(f'UNet\nDensity: {unet_density:.4f}', fontsize=10)
-            axes[row_idx, 1].axis('off')
-            
-            # Panel 3: Attention UNet (inverted, fixed contrast)
-            attn_unet_inv = 1.0 - attn_unet_pred.squeeze()
-            axes[row_idx, 2].imshow(attn_unet_inv, cmap='gray', vmin=0, vmax=1)
-            axes[row_idx, 2].set_title(f'Attention UNet\nDensity: {attn_unet_density:.4f}', fontsize=10)
-            axes[row_idx, 2].axis('off')
-            
-            # Panel 4: Attention ResUNet (inverted, fixed contrast)
-            attn_res_inv = 1.0 - attn_res_pred.squeeze()
-            axes[row_idx, 3].imshow(attn_res_inv, cmap='gray', vmin=0, vmax=1)
-            axes[row_idx, 3].set_title(f'Attention ResUNet\nDensity: {attn_res_density:.4f}', fontsize=10)
-            axes[row_idx, 3].axis('off')
-        
-        fig.suptitle(f'{image_name} - 4-Panel Comparison (FIXED CONTRAST)', fontsize=16, fontweight='bold', y=0.995)
+
+            # Panels 1+: Each architecture
+            for col_idx, arch_name in enumerate(loaded_archs, start=1):
+                pred = tile_data_by_arch[arch_name][tile_idx]['prediction']
+                density = tile_data_by_arch[arch_name][tile_idx]['density_threshold_0.5']
+
+                # Invert and display with fixed contrast
+                pred_inv = 1.0 - pred.squeeze()
+                axes[row_idx, col_idx].imshow(pred_inv, cmap='gray', vmin=0, vmax=1)
+                axes[row_idx, col_idx].set_title(f'{ARCHITECTURE_NAMES.get(arch_name, arch_name)}\nDensity: {density:.4f}', fontsize=10)
+                axes[row_idx, col_idx].axis('off')
+
+        fig.suptitle(f'{image_name} - {n_panels}-Panel Comparison (FIXED CONTRAST)', fontsize=16, fontweight='bold', y=0.995)
         plt.tight_layout(rect=[0, 0, 1, 0.995])
-        
-        output_filename = f'tiles_4panel_fixed_{dilution_label}_{image_name.replace(".tif", "").replace(".tiff", "")}.png'
+
+        output_filename = f'tiles_{n_panels}panel_fixed_{dilution_label}_{image_name.replace(".tif", "").replace(".tiff", "")}.png'
         output_path = tiles_dir / output_filename
         plt.savefig(output_path, dpi=config['dpi'], bbox_inches='tight')
         plt.close()
-        
+
         print(f"    ✓ Saved: {output_path.name}")
-    
-    print(f"\n  ✓ All 4-panel fixed-contrast tiles saved to: {tiles_dir}")
+
+    print(f"\n  ✓ All {n_panels}-panel fixed-contrast tiles saved to: {tiles_dir}")
 
 def create_4panel_tiles_auto_contrast(tile_data_by_arch, output_dir, config):
     """
-    Create 4-panel visualizations with AUTO contrast (vmin/vmax from data).
-    Panels: Original | UNet | Attention UNet | Attention ResUNet
+    Create multi-panel visualizations with AUTO contrast (vmin/vmax from data).
+    Dynamically adjusts to number of loaded architectures.
+    Panels: Original | [UNet] | [Attention UNet] | [Attention ResUNet]
     """
-    print("\nGenerating 4-panel tiles (AUTO CONTRAST: vmin/vmax from data)...")
-    
+    print("\nGenerating multi-panel tiles (AUTO CONTRAST: vmin/vmax from data)...")
+
+    # Determine which architectures loaded successfully
+    loaded_archs = list(tile_data_by_arch.keys())
+    n_archs = len(loaded_archs)
+    n_panels = n_archs + 1  # +1 for original image
+
+    if n_archs == 0:
+        print("  ⚠ WARNING: No architectures loaded successfully. Skipping auto-contrast tiles.")
+        return
+
+    print(f"  Loaded architectures ({n_archs}): {loaded_archs}")
+    print(f"  Creating {n_panels}-panel visualizations (Original + {n_archs} predictions)")
+
     output_dir = Path(output_dir)
-    tiles_dir = output_dir / 'representative_tiles_4panel_auto_contrast'
+    tiles_dir = output_dir / f'representative_tiles_{n_panels}panel_auto_contrast'
     tiles_dir.mkdir(parents=True, exist_ok=True)
-    
-    unet_data = tile_data_by_arch['unet']
+
+    # Use first available architecture for tile selection
+    first_arch = loaded_archs[0]
+    arch_data = tile_data_by_arch[first_arch]
     tiles_by_image = defaultdict(list)
-    for tile_info in unet_data:
+    for tile_info in arch_data:
         tiles_by_image[tile_info['image']].append(tile_info)
-    
+
     for image_name, tiles in tiles_by_image.items():
         print(f"  Creating tiles for: {image_name}")
-        
+
         tiles_sorted = sorted(tiles, key=lambda x: x['density_clahe_otsu_pred'])
         n_tiles = len(tiles_sorted)
         indices = [0, n_tiles//4, n_tiles//2, 3*n_tiles//4, n_tiles-1]
         representative_tiles = [tiles_sorted[i] for i in indices]
-        
+
         dilution_label = tiles[0]['dilution_label']
-        fig, axes = plt.subplots(5, 4, figsize=(20, 25))
-        
+        fig, axes = plt.subplots(5, n_panels, figsize=(5*n_panels, 25))
+
         for row_idx, tile_info in enumerate(representative_tiles):
             tile_idx = tile_info['tile_idx']
             pos = tile_info['position']
-            
-            # Get predictions
-            unet_pred = tile_data_by_arch['unet'][tile_idx]['prediction']
-            attn_unet_pred = tile_data_by_arch['attention_unet'][tile_idx]['prediction']
-            attn_res_pred = tile_data_by_arch['attention_resunet'][tile_idx]['prediction']
-            
-            unet_density = tile_data_by_arch['unet'][tile_idx]['density_threshold_0.5']
-            attn_unet_density = tile_data_by_arch['attention_unet'][tile_idx]['density_threshold_0.5']
-            attn_res_density = tile_data_by_arch['attention_resunet'][tile_idx]['density_threshold_0.5']
-            
+
             # Panel 1: Original
             axes[row_idx, 0].imshow(tile_info['tile'], cmap='gray')
             axes[row_idx, 0].set_title(f'Original Tile {tile_idx}\nPos: ({pos[0]}, {pos[1]})', fontsize=10)
             axes[row_idx, 0].axis('off')
-            
-            # Panel 2: UNet (AUTO contrast)
-            unet_inv = 1.0 - unet_pred.squeeze()
-            v_min, v_max = unet_inv.min(), unet_inv.max()
-            axes[row_idx, 1].imshow(unet_inv, cmap='gray', vmin=v_min, vmax=v_max)
-            axes[row_idx, 1].set_title(f'UNet (AUTO)\nDensity: {unet_density:.4f}\nRange: [{v_min:.3f}, {v_max:.3f}]', fontsize=9)
-            axes[row_idx, 1].axis('off')
-            
-            # Panel 3: Attention UNet (AUTO contrast)
-            attn_unet_inv = 1.0 - attn_unet_pred.squeeze()
-            v_min, v_max = attn_unet_inv.min(), attn_unet_inv.max()
-            axes[row_idx, 2].imshow(attn_unet_inv, cmap='gray', vmin=v_min, vmax=v_max)
-            axes[row_idx, 2].set_title(f'Attention UNet (AUTO)\nDensity: {attn_unet_density:.4f}\nRange: [{v_min:.3f}, {v_max:.3f}]', fontsize=9)
-            axes[row_idx, 2].axis('off')
-            
-            # Panel 4: Attention ResUNet (AUTO contrast)
-            attn_res_inv = 1.0 - attn_res_pred.squeeze()
-            v_min, v_max = attn_res_inv.min(), attn_res_inv.max()
-            axes[row_idx, 3].imshow(attn_res_inv, cmap='gray', vmin=v_min, vmax=v_max)
-            axes[row_idx, 3].set_title(f'Attention ResUNet (AUTO)\nDensity: {attn_res_density:.4f}\nRange: [{v_min:.3f}, {v_max:.3f}]', fontsize=9)
-            axes[row_idx, 3].axis('off')
-        
-        fig.suptitle(f'{image_name} - 4-Panel Comparison (AUTO CONTRAST)', fontsize=16, fontweight='bold', y=0.995)
+
+            # Panels 2+: Predictions for each loaded architecture (AUTO contrast)
+            for col_idx, arch_name in enumerate(loaded_archs, start=1):
+                pred = tile_data_by_arch[arch_name][tile_idx]['prediction']
+                density = tile_data_by_arch[arch_name][tile_idx]['density_threshold_0.5']
+
+                pred_inv = 1.0 - pred.squeeze()
+                v_min, v_max = pred_inv.min(), pred_inv.max()
+
+                axes[row_idx, col_idx].imshow(pred_inv, cmap='gray', vmin=v_min, vmax=v_max)
+                axes[row_idx, col_idx].set_title(
+                    f'{ARCHITECTURE_NAMES.get(arch_name, arch_name)} (AUTO)\n'
+                    f'Density: {density:.4f}\n'
+                    f'Range: [{v_min:.3f}, {v_max:.3f}]',
+                    fontsize=9
+                )
+                axes[row_idx, col_idx].axis('off')
+
+        fig.suptitle(f'{image_name} - {n_panels}-Panel Comparison (AUTO CONTRAST)',
+                     fontsize=16, fontweight='bold', y=0.995)
         plt.tight_layout(rect=[0, 0, 1, 0.995])
-        
-        output_filename = f'tiles_4panel_auto_{dilution_label}_{image_name.replace(".tif", "").replace(".tiff", "")}.png'
+
+        output_filename = f'tiles_{n_panels}panel_auto_{dilution_label}_{image_name.replace(".tif", "").replace(".tiff", "")}.png'
         output_path = tiles_dir / output_filename
         plt.savefig(output_path, dpi=config['dpi'], bbox_inches='tight')
         plt.close()
-        
+
         print(f"    ✓ Saved: {output_path.name}")
-    
-    print(f"\n  ✓ All 4-panel auto-contrast tiles saved to: {tiles_dir}")
+
+    print(f"\n  ✓ All {n_panels}-panel auto-contrast tiles saved to: {tiles_dir}")
 
 
 # ============================================================================
