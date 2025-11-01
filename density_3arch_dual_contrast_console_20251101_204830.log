@@ -1,0 +1,197 @@
+================================================================================
+3-ARCHITECTURE DENSITY ANALYSIS - DUAL CONTRAST + EDGE FIX
+================================================================================
+Timestamp: 2025-11-01 12:48:40
+Output: ./density_analysis_3arch_dual_contrast_20251101_124840
+
+FEATURES:
+  ✅ 3 architectures: UNet, Attention UNet, Attention ResUNet
+  ✅ 4-panel visualization (Original + 3 predictions)
+  ✅ DUAL contrast sets (Fixed + Auto)
+  ✅ CLAHE edge artifacts FIXED
+  ✅ Auto-contrast shows actual min/max ranges
+================================================================================
+
+================================================================================
+LOADING MODELS
+================================================================================
+
+Searching for best unet model...
+Found 27 unet model(s)
+  Best so far: unet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4572)
+  Best so far: unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001 (IoU: 0.5080)
+✓ Selected: unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001 (IoU: 0.5080)
+Loading model from: unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001/best_model.keras
+  ✓ Loaded successfully
+
+Searching for best attention_unet model...
+Found 27 attention_unet model(s)
+  Best so far: attention_unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p005 (IoU: 0.3000)
+  Best so far: attention_unet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p005 (IoU: 0.3940)
+  Best so far: attention_unet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001 (IoU: 0.4749)
+  Best so far: attention_unet_n_filters64_dropout0p1_batch_normTrue_learning_rate0p001 (IoU: 0.4761)
+  Best so far: attention_unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4765)
+  Best so far: attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003 (IoU: 0.4875)
+✓ Selected: attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003 (IoU: 0.4875)
+Loading model from: attention_unet_hyperparam_20251015_230149/checkpoints/attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003/best_model.keras
+  ✓ Loaded successfully
+
+Searching for best attention_resunet model...
+Found 27 attention_resunet model(s)
+  Best so far: attention_resunet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4342)
+  Best so far: attention_resunet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4764)
+  Best so far: attention_resunet_n_filters16_dropout0p1_batch_normTrue_learning_rate0p003 (IoU: 0.4851)
+  Best so far: attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003 (IoU: 0.5039)
+✓ Selected: attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003 (IoU: 0.5039)
+Loading model from: attention_resunet_hyperparam_20251015_235542/checkpoints/attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003/best_model.keras
+  ✓ Loaded successfully
+
+✓ Successfully loaded 3 model(s)
+================================================================================
+
+================================================================================
+PREDICTION ON ALL 3 ARCHITECTURES
+================================================================================
+Found 8 test images
+Architectures: ['unet', 'attention_unet', 'attention_resunet']
+
+Processing images:   0%|          | 0/8 [00:00<?, ?it/s]Processing images:  12%|█▎        | 1/8 [00:24<02:48, 24.10s/it]Processing images:  25%|██▌       | 2/8 [00:26<01:06, 11.09s/it]Processing images:  38%|███▊      | 3/8 [00:27<00:33,  6.65s/it]Processing images:  50%|█████     | 4/8 [00:28<00:18,  4.59s/it]Processing images:  62%|██████▎   | 5/8 [00:30<00:10,  3.49s/it]Processing images:  75%|███████▌  | 6/8 [00:31<00:05,  2.84s/it]Processing images:  88%|████████▊ | 7/8 [00:33<00:02,  2.41s/it]Processing images: 100%|██████████| 8/8 [00:34<00:00,  2.11s/it]Processing images: 100%|██████████| 8/8 [00:34<00:00,  4.37s/it]
+
+Processing: 10240x_2025-05-29_02-22-00_002.tif
+  Dilution: 10240x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0025
+    Predicting with Attention UNet...
+      Mean density: 0.0007
+    Predicting with Attention ResUNet...
+      Mean density: 0.0005
+
+Processing: 1280x_2025-05-16_00-59-00_002.tif
+  Dilution: 1280x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0158
+    Predicting with Attention UNet...
+      Mean density: 0.0172
+    Predicting with Attention ResUNet...
+      Mean density: 0.0150
+
+Processing: 160x_2025-05-15_02-05-00.tif
+  Dilution: 160x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.2147
+    Predicting with Attention UNet...
+      Mean density: 0.2577
+    Predicting with Attention ResUNet...
+      Mean density: 0.2335
+
+Processing: 2560x_2025-05-16_00-59-00_002.tif
+  Dilution: 2560x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0124
+    Predicting with Attention UNet...
+      Mean density: 0.0127
+    Predicting with Attention ResUNet...
+      Mean density: 0.0112
+
+Processing: 320x_2025-05-15_02-05-00.tif
+  Dilution: 320x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0710
+    Predicting with Attention UNet...
+      Mean density: 0.0913
+    Predicting with Attention ResUNet...
+      Mean density: 0.0801
+
+Processing: 5120x_2025-05-16_00-59-00.tif
+  Dilution: 5120x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0058
+    Predicting with Attention UNet...
+      Mean density: 0.0048
+    Predicting with Attention ResUNet...
+      Mean density: 0.0042
+
+Processing: 640x_2025-05-16_00-59-00_002.tif
+  Dilution: 640x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0381
+    Predicting with Attention UNet...
+      Mean density: 0.0490
+    Predicting with Attention ResUNet...
+      Mean density: 0.0407
+
+Processing: 80x_2025-05-22_14-48-00.tif
+  Dilution: 80x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.4598
+    Predicting with Attention UNet...
+      Mean density: 0.4907
+    Predicting with Attention ResUNet...
+      Mean density: 0.4347
+
+================================================================================
+GENERATING 4-PANEL VISUALIZATIONS
+================================================================================
+
+Generating 4-panel tiles (FIXED CONTRAST: vmin=0, vmax=1)...
+  Loaded architectures: unet, attention_unet, attention_resunet
+  Creating tiles for: 10240x_2025-05-29_02-22-00_002.tif
+    ✓ Saved: tiles_4panel_fixed_10240x_10240x_2025-05-29_02-22-00_002.png
+  Creating tiles for: 1280x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_fixed_1280x_1280x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 160x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_4panel_fixed_160x_160x_2025-05-15_02-05-00.png
+  Creating tiles for: 2560x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_fixed_2560x_2560x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 320x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_4panel_fixed_320x_320x_2025-05-15_02-05-00.png
+  Creating tiles for: 5120x_2025-05-16_00-59-00.tif
+    ✓ Saved: tiles_4panel_fixed_5120x_5120x_2025-05-16_00-59-00.png
+  Creating tiles for: 640x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_fixed_640x_640x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 80x_2025-05-22_14-48-00.tif
+    ✓ Saved: tiles_4panel_fixed_80x_80x_2025-05-22_14-48-00.png
+
+  ✓ All 4-panel fixed-contrast tiles saved to: density_analysis_3arch_dual_contrast_20251101_124840/representative_tiles_4panel_fixed_contrast
+
+Generating multi-panel tiles (AUTO CONTRAST: vmin/vmax from data)...
+  Loaded architectures (3): ['unet', 'attention_unet', 'attention_resunet']
+  Creating 4-panel visualizations (Original + 3 predictions)
+  Creating tiles for: 10240x_2025-05-29_02-22-00_002.tif
+    ✓ Saved: tiles_4panel_auto_10240x_10240x_2025-05-29_02-22-00_002.png
+  Creating tiles for: 1280x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_auto_1280x_1280x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 160x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_4panel_auto_160x_160x_2025-05-15_02-05-00.png
+  Creating tiles for: 2560x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_auto_2560x_2560x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 320x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_4panel_auto_320x_320x_2025-05-15_02-05-00.png
+  Creating tiles for: 5120x_2025-05-16_00-59-00.tif
+    ✓ Saved: tiles_4panel_auto_5120x_5120x_2025-05-16_00-59-00.png
+  Creating tiles for: 640x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_auto_640x_640x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 80x_2025-05-22_14-48-00.tif
+    ✓ Saved: tiles_4panel_auto_80x_80x_2025-05-22_14-48-00.png
+
+  ✓ All 4-panel auto-contrast tiles saved to: density_analysis_3arch_dual_contrast_20251101_124840/representative_tiles_4panel_auto_contrast
+
+================================================================================
+ANALYSIS COMPLETE!
+================================================================================
+Output directory: ./density_analysis_3arch_dual_contrast_20251101_124840
+
+Generated files:
+  - EXPERIMENT_INFO.json
+  - representative_tiles_4panel_fixed_contrast/
+      * 4 panels: Original | UNet | Attention UNet | Attention ResUNet
+      * Fixed contrast (vmin=0, vmax=1)
+  - representative_tiles_4panel_auto_contrast/
+      * 4 panels: Original | UNet | Attention UNet | Attention ResUNet
+      * Auto contrast (vmin/vmax from data)
+      * Shows actual range values in titles
+
+FIXES APPLIED:
+  ✓ CLAHE edge artifacts removed (padding + cropping)
+  ✓ Auto-contrast proves it works (shows min/max ranges)
+================================================================================
