@@ -1,0 +1,115 @@
+================================================================================
+3-ARCHITECTURE DENSITY ANALYSIS - DUAL CONTRAST + EDGE FIX
+================================================================================
+Timestamp: 2025-11-01 09:27:12
+Output: ./density_analysis_3arch_dual_contrast_20251101_092712
+
+FEATURES:
+  ✅ 3 architectures: UNet, Attention UNet, Attention ResUNet
+  ✅ 4-panel visualization (Original + 3 predictions)
+  ✅ DUAL contrast sets (Fixed + Auto)
+  ✅ CLAHE edge artifacts FIXED
+  ✅ Auto-contrast shows actual min/max ranges
+================================================================================
+
+================================================================================
+LOADING MODELS
+================================================================================
+
+Searching for best unet model...
+Found 27 unet model(s)
+  Best so far: unet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4572)
+  Best so far: unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001 (IoU: 0.5080)
+✓ Selected: unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001 (IoU: 0.5080)
+Loading model from: unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001/best_model.keras
+  ✓ Loaded successfully
+
+Searching for best attention_unet model...
+Found 27 attention_unet model(s)
+  Best so far: attention_unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p005 (IoU: 0.3000)
+  Best so far: attention_unet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p005 (IoU: 0.3940)
+  Best so far: attention_unet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001 (IoU: 0.4749)
+  Best so far: attention_unet_n_filters64_dropout0p1_batch_normTrue_learning_rate0p001 (IoU: 0.4761)
+  Best so far: attention_unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4765)
+  Best so far: attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003 (IoU: 0.4875)
+✓ Selected: attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003 (IoU: 0.4875)
+Loading model from: attention_unet_hyperparam_20251015_230149/checkpoints/attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003/best_model.keras
+ERROR loading attention_unet: 'str' object is not callable
+Skipping attention_unet
+
+Searching for best attention_resunet model...
+Found 27 attention_resunet model(s)
+  Best so far: attention_resunet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4342)
+  Best so far: attention_resunet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4764)
+  Best so far: attention_resunet_n_filters16_dropout0p1_batch_normTrue_learning_rate0p003 (IoU: 0.4851)
+  Best so far: attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003 (IoU: 0.5039)
+✓ Selected: attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003 (IoU: 0.5039)
+Loading model from: attention_resunet_hyperparam_20251015_235542/checkpoints/attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003/best_model.keras
+ERROR loading attention_resunet: 'str' object is not callable
+Skipping attention_resunet
+
+✓ Successfully loaded 1 model(s)
+================================================================================
+
+================================================================================
+PREDICTION ON ALL 3 ARCHITECTURES
+================================================================================
+Found 8 test images
+Architectures: ['unet']
+
+Processing images:   0%|          | 0/8 [00:00<?, ?it/s]Processing images:  12%|█▎        | 1/8 [00:13<01:31, 13.10s/it]Processing images:  25%|██▌       | 2/8 [00:14<00:37,  6.17s/it]Processing images:  38%|███▊      | 3/8 [00:15<00:18,  3.69s/it]Processing images:  50%|█████     | 4/8 [00:15<00:10,  2.52s/it]Processing images:  62%|██████▎   | 5/8 [00:16<00:05,  1.86s/it]Processing images:  75%|███████▌  | 6/8 [00:17<00:02,  1.41s/it]Processing images:  88%|████████▊ | 7/8 [00:17<00:01,  1.11s/it]Processing images: 100%|██████████| 8/8 [00:18<00:00,  1.07it/s]Processing images: 100%|██████████| 8/8 [00:18<00:00,  2.27s/it]
+
+Processing: 10240x_2025-05-29_02-22-00_002.tif
+  Dilution: 10240x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0025
+
+Processing: 1280x_2025-05-16_00-59-00_002.tif
+  Dilution: 1280x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0158
+
+Processing: 160x_2025-05-15_02-05-00.tif
+  Dilution: 160x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.2147
+
+Processing: 2560x_2025-05-16_00-59-00_002.tif
+  Dilution: 2560x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0124
+
+Processing: 320x_2025-05-15_02-05-00.tif
+  Dilution: 320x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0710
+
+Processing: 5120x_2025-05-16_00-59-00.tif
+  Dilution: 5120x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0058
+
+Processing: 640x_2025-05-16_00-59-00_002.tif
+  Dilution: 640x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0381
+
+Processing: 80x_2025-05-22_14-48-00.tif
+  Dilution: 80x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.4598
+
+================================================================================
+GENERATING 4-PANEL VISUALIZATIONS
+================================================================================
+
+Generating 4-panel tiles (FIXED CONTRAST: vmin=0, vmax=1)...
+  Creating tiles for: 10240x_2025-05-29_02-22-00_002.tif
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_3arch_dual_contrast.py", line 633, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_3arch_dual_contrast.py", line 610, in main
+    create_4panel_tiles_fixed_contrast(tile_data_by_arch, CONFIG['output_dir'], CONFIG)
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_3arch_dual_contrast.py", line 344, in create_4panel_tiles_fixed_contrast
+    attn_unet_pred = tile_data_by_arch['attention_unet'][tile_idx]['prediction']
+KeyError: 'attention_unet'

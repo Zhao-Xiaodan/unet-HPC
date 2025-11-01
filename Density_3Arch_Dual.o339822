@@ -1,0 +1,230 @@
+========================================================================
+3-ARCHITECTURE DENSITY ANALYSIS - DUAL CONTRAST + EDGE FIX
+========================================================================
+Job ID: 339822.stdct-mgmt-02
+Job Name: Density_3Arch_Dual
+Node: GN-A40-075
+Start time: Sat Nov  1 05:27:02 PM +08 2025
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================================================
+
+=== ENVIRONMENT SETUP ===
+✓ TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+===========================
+
+Verifying required files...
+✓ Script: ./density_analysis_3arch_dual_contrast.py
+✓ Test images: ./test_images
+✓ Model directory: ./unet_hyperparam_20251015_224125
+✓ Model directory: ./attention_unet_hyperparam_20251015_230149
+✓ Model directory: ./attention_resunet_hyperparam_20251015_235542
+
+Found 8 test images
+
+========================================================================
+KEY IMPROVEMENTS IN THIS ANALYSIS
+========================================================================
+1. FIXES CLAHE edge artifacts:
+   - Pads borders before CLAHE processing
+   - Crops after Otsu thresholding
+   - Result: NO MORE BLACK/WHITE FRAMES!
+
+2. 4-panel architecture comparison:
+   - Panel 1: Original image
+   - Panel 2: UNet prediction (inverted)
+   - Panel 3: Attention UNet prediction (inverted)
+   - Panel 4: Attention ResUNet prediction (inverted)
+
+3. DUAL visualization sets:
+   - SET 1: Fixed contrast (vmin=0, vmax=1)
+     └─> For comparison with previous results
+   - SET 2: Auto contrast (vmin/vmax from actual data)
+     └─> Shows actual min/max range in title
+     └─> Proves auto-contrast is working!
+
+4. Same tiles in both sets (fair comparison)
+========================================================================
+
+========================================================================
+RUNNING 3-ARCHITECTURE ANALYSIS
+========================================================================
+Command: singularity exec --nv "/app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif" python3 ./density_analysis_3arch_dual_contrast.py
+
+================================================================================
+3-ARCHITECTURE DENSITY ANALYSIS - DUAL CONTRAST + EDGE FIX
+================================================================================
+Timestamp: 2025-11-01 09:27:12
+Output: ./density_analysis_3arch_dual_contrast_20251101_092712
+
+FEATURES:
+  ✅ 3 architectures: UNet, Attention UNet, Attention ResUNet
+  ✅ 4-panel visualization (Original + 3 predictions)
+  ✅ DUAL contrast sets (Fixed + Auto)
+  ✅ CLAHE edge artifacts FIXED
+  ✅ Auto-contrast shows actual min/max ranges
+================================================================================
+
+================================================================================
+LOADING MODELS
+================================================================================
+
+Searching for best unet model...
+Found 27 unet model(s)
+  Best so far: unet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4572)
+  Best so far: unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001 (IoU: 0.5080)
+✓ Selected: unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001 (IoU: 0.5080)
+Loading model from: unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001/best_model.keras
+  ✓ Loaded successfully
+
+Searching for best attention_unet model...
+Found 27 attention_unet model(s)
+  Best so far: attention_unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p005 (IoU: 0.3000)
+  Best so far: attention_unet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p005 (IoU: 0.3940)
+  Best so far: attention_unet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001 (IoU: 0.4749)
+  Best so far: attention_unet_n_filters64_dropout0p1_batch_normTrue_learning_rate0p001 (IoU: 0.4761)
+  Best so far: attention_unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4765)
+  Best so far: attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003 (IoU: 0.4875)
+✓ Selected: attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003 (IoU: 0.4875)
+Loading model from: attention_unet_hyperparam_20251015_230149/checkpoints/attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003/best_model.keras
+ERROR loading attention_unet: 'str' object is not callable
+Skipping attention_unet
+
+Searching for best attention_resunet model...
+Found 27 attention_resunet model(s)
+  Best so far: attention_resunet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4342)
+  Best so far: attention_resunet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4764)
+  Best so far: attention_resunet_n_filters16_dropout0p1_batch_normTrue_learning_rate0p003 (IoU: 0.4851)
+  Best so far: attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003 (IoU: 0.5039)
+✓ Selected: attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003 (IoU: 0.5039)
+Loading model from: attention_resunet_hyperparam_20251015_235542/checkpoints/attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003/best_model.keras
+ERROR loading attention_resunet: 'str' object is not callable
+Skipping attention_resunet
+
+✓ Successfully loaded 1 model(s)
+================================================================================
+
+================================================================================
+PREDICTION ON ALL 3 ARCHITECTURES
+================================================================================
+Found 8 test images
+Architectures: ['unet']
+
+Processing images:   0%|          | 0/8 [00:00<?, ?it/s]Processing images:  12%|█▎        | 1/8 [00:13<01:31, 13.10s/it]Processing images:  25%|██▌       | 2/8 [00:14<00:37,  6.17s/it]Processing images:  38%|███▊      | 3/8 [00:15<00:18,  3.69s/it]Processing images:  50%|█████     | 4/8 [00:15<00:10,  2.52s/it]Processing images:  62%|██████▎   | 5/8 [00:16<00:05,  1.86s/it]Processing images:  75%|███████▌  | 6/8 [00:17<00:02,  1.41s/it]Processing images:  88%|████████▊ | 7/8 [00:17<00:01,  1.11s/it]Processing images: 100%|██████████| 8/8 [00:18<00:00,  1.07it/s]Processing images: 100%|██████████| 8/8 [00:18<00:00,  2.27s/it]
+
+Processing: 10240x_2025-05-29_02-22-00_002.tif
+  Dilution: 10240x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0025
+
+Processing: 1280x_2025-05-16_00-59-00_002.tif
+  Dilution: 1280x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0158
+
+Processing: 160x_2025-05-15_02-05-00.tif
+  Dilution: 160x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.2147
+
+Processing: 2560x_2025-05-16_00-59-00_002.tif
+  Dilution: 2560x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0124
+
+Processing: 320x_2025-05-15_02-05-00.tif
+  Dilution: 320x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0710
+
+Processing: 5120x_2025-05-16_00-59-00.tif
+  Dilution: 5120x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0058
+
+Processing: 640x_2025-05-16_00-59-00_002.tif
+  Dilution: 640x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0381
+
+Processing: 80x_2025-05-22_14-48-00.tif
+  Dilution: 80x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.4598
+
+================================================================================
+GENERATING 4-PANEL VISUALIZATIONS
+================================================================================
+
+Generating 4-panel tiles (FIXED CONTRAST: vmin=0, vmax=1)...
+  Creating tiles for: 10240x_2025-05-29_02-22-00_002.tif
+Traceback (most recent call last):
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_3arch_dual_contrast.py", line 633, in <module>
+    main()
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_3arch_dual_contrast.py", line 610, in main
+    create_4panel_tiles_fixed_contrast(tile_data_by_arch, CONFIG['output_dir'], CONFIG)
+  File "/scratch/phyzxi/unet-HPC/./density_analysis_3arch_dual_contrast.py", line 344, in create_4panel_tiles_fixed_contrast
+    attn_unet_pred = tile_data_by_arch['attention_unet'][tile_idx]['prediction']
+KeyError: 'attention_unet'
+
+========================================================================
+ANALYSIS COMPLETED
+========================================================================
+Exit code: 0
+End time: Sat Nov  1 05:27:45 PM +08 2025
+
+Output directory: ./density_analysis_3arch_dual_contrast_20251101_092712
+
+Generated files:
+total 56K
+-rw-r----- 1 phyzxi svuusers 591 Nov  1 17:27 EXPERIMENT_INFO.json
+drwxr-x--- 2 phyzxi svuusers   0 Nov  1 17:27 representative_tiles_4panel_fixed_contrast
+
+Experiment Info:
+{
+  "timestamp": "2025-11-01 09:27:44",
+  "script": "density_analysis_3arch_dual_contrast.py",
+  "architectures": [
+    "unet"
+  ],
+  "models": {
+    "unet": {
+      "name": "unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001",
+      "iou": 0.5079596638679504,
+      "path": "unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001/best_model.keras"
+    }
+  },
+  "features": [
+    "CLAHE edge artifacts fixed",
+    "Dual contrast visualization",
+    "4-panel architecture comparison",
+    "Auto-contrast shows actual ranges"
+  ]
+}
+4-Panel Tiles (FIXED CONTRAST):
+  Total: 0 tile sets
+  ...
+
+✓ Analysis completed successfully!
+
+WHAT TO CHECK:
+  1. Edge artifacts: Should be GONE from all tiles!
+  2. Auto-contrast: Check titles show actual [min, max] ranges
+  3. Architecture comparison: 4 panels side-by-side
+  4. Dual sets: Compare fixed vs auto contrast versions
+========================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-11-01 17:27:46.488939:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 339822.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:00:50
+	Memory: Requested(240gb), Used(5002352kb)
+	Vmem Used: 72797360kb
+	Walltime: Requested(06:00:00), Used(00:00:45)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-075[1]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
