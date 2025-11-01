@@ -19,6 +19,8 @@
 #   3. ✅ DUAL contrast sets (Fixed vmin=0,vmax=1 + Auto vmin/vmax from data)
 #   4. ✅ FIXES CLAHE edge artifacts with border padding/cropping
 #   5. ✅ Auto-contrast shows actual min/max ranges in titles
+#   6. ✅ FIXED tile indexing bug (tiles now match correctly between architectures)
+#   7. ✅ Boxplots for threshold 0.5 (full range + low dilution range)
 #
 # Date: November 1, 2025
 ################################################################################
@@ -119,7 +121,17 @@ echo "   - SET 2: Auto contrast (vmin/vmax from actual data)"
 echo "     └─> Shows actual min/max range in title"
 echo "     └─> Proves auto-contrast is working!"
 echo ""
-echo "4. Same tiles in both sets (fair comparison)"
+echo "4. FIXED tile indexing bug:"
+echo "   - Previous version accessed tiles by wrong list index"
+echo "   - Now matches tiles by (image_name, tile_idx)"
+echo "   - Result: Tiles CORRECTLY CORRELATED between architectures!"
+echo ""
+echo "5. Boxplots for threshold 0.5:"
+echo "   - Full dilution range (1/10240 to 1/10)"
+echo "   - Low dilution range (1/10240 to 1/80)"
+echo "   - Grouped comparison of all 3 architectures"
+echo ""
+echo "6. Same tiles in both sets (fair comparison)"
 echo "========================================================================"
 echo ""
 

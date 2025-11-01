@@ -363,8 +363,19 @@ def create_4panel_tiles_fixed_contrast(tile_data_by_arch, output_dir, config):
 
             # Panels 1+: Each architecture
             for col_idx, arch_name in enumerate(loaded_archs, start=1):
-                pred = tile_data_by_arch[arch_name][tile_idx]['prediction']
-                density = tile_data_by_arch[arch_name][tile_idx]['density_threshold_0.5']
+                # FIX: Find matching tile by image name AND tile_idx (not by list index!)
+                matching_tile = None
+                for arch_tile in tile_data_by_arch[arch_name]:
+                    if arch_tile['image'] == image_name and arch_tile['tile_idx'] == tile_idx:
+                        matching_tile = arch_tile
+                        break
+
+                if matching_tile is None:
+                    print(f"    WARNING: No matching tile found for {arch_name} (image={image_name}, tile_idx={tile_idx})")
+                    continue
+
+                pred = matching_tile['prediction']
+                density = matching_tile['density_threshold_0.5']
 
                 # Invert and display with fixed contrast
                 pred_inv = 1.0 - pred.squeeze()
@@ -437,8 +448,19 @@ def create_4panel_tiles_auto_contrast(tile_data_by_arch, output_dir, config):
 
             # Panels 2+: Predictions for each loaded architecture (AUTO contrast)
             for col_idx, arch_name in enumerate(loaded_archs, start=1):
-                pred = tile_data_by_arch[arch_name][tile_idx]['prediction']
-                density = tile_data_by_arch[arch_name][tile_idx]['density_threshold_0.5']
+                # FIX: Find matching tile by image name AND tile_idx (not by list index!)
+                matching_tile = None
+                for arch_tile in tile_data_by_arch[arch_name]:
+                    if arch_tile['image'] == image_name and arch_tile['tile_idx'] == tile_idx:
+                        matching_tile = arch_tile
+                        break
+
+                if matching_tile is None:
+                    print(f"    WARNING: No matching tile found for {arch_name} (image={image_name}, tile_idx={tile_idx})")
+                    continue
+
+                pred = matching_tile['prediction']
+                density = matching_tile['density_threshold_0.5']
 
                 pred_inv = 1.0 - pred.squeeze()
                 v_min, v_max = pred_inv.min(), pred_inv.max()
@@ -464,6 +486,203 @@ def create_4panel_tiles_auto_contrast(tile_data_by_arch, output_dir, config):
         print(f"    ✓ Saved: {output_path.name}")
 
     print(f"\n  ✓ All {n_panels}-panel auto-contrast tiles saved to: {tiles_dir}")
+
+
+# ============================================================================
+# BOXPLOT VISUALIZATION FOR 3 ARCHITECTURES
+# ============================================================================
+
+def create_3arch_boxplot_full_range(tile_data_by_arch, output_dir, config):
+    """
+    Create grouped boxplot comparing 3 architectures across full dilution range.
+    Shows UNet, Attention UNet, and Attention ResUNet side-by-side for each dilution.
+    """
+    print("\nGenerating 3-architecture boxplot (Full Range: 1/10240 to 1/10)...")
+
+    loaded_archs = list(tile_data_by_arch.keys())
+    n_archs = len(loaded_archs)
+
+    if n_archs == 0:
+        print("  WARNING: No architectures loaded. Skipping boxplot.")
+        return
+
+    output_dir = Path(output_dir)
+
+    # Prepare data for each architecture
+    arch_data = {}
+    for arch_name in loaded_archs:
+        data_by_dilution = {d: [] for d in DILUTION_ORDER}
+        for tile_info in tile_data_by_arch[arch_name]:
+            dilution = tile_info['dilution']
+            if dilution in DILUTION_ORDER:
+                data_by_dilution[dilution].append(tile_info['density_threshold_0.5'])
+        arch_data[arch_name] = data_by_dilution
+
+    # Create figure
+    fig, ax = plt.subplots(figsize=(16, 8))
+
+    # Colors for each architecture
+    arch_colors = {
+        'unet': '#3498db',  # Blue
+        'attention_unet': '#e74c3c',  # Red
+        'attention_resunet': '#2ecc71'  # Green
+    }
+
+    # Create grouped boxplot
+    positions_base = np.arange(len(DILUTION_ORDER))
+    width = 0.25
+
+    for arch_idx, arch_name in enumerate(loaded_archs):
+        # Calculate positions for this architecture
+        positions = positions_base + (arch_idx - n_archs/2 + 0.5) * width
+
+        # Prepare data
+        data = [arch_data[arch_name][d] for d in DILUTION_ORDER]
+
+        # Create boxplot
+        bp = ax.boxplot(
+            data,
+            positions=positions,
+            widths=width * 0.8,
+            patch_artist=True,
+            showfliers=True,
+            boxprops=dict(facecolor=arch_colors.get(arch_name, '#95a5a6'),
+                         color='black', linewidth=1, alpha=0.7),
+            medianprops=dict(color='black', linewidth=2),
+            whiskerprops=dict(color='black', linewidth=1),
+            capprops=dict(color='black', linewidth=1),
+            flierprops=dict(marker='o', markerfacecolor='gray', markersize=3, alpha=0.5),
+            label=ARCHITECTURE_NAMES.get(arch_name, arch_name)
+        )
+
+    # Customize
+    ax.set_title('3-Architecture Comparison: Particle Density vs Dilution (Threshold 0.5)',
+                fontsize=16, fontweight='bold', pad=20)
+    ax.set_xlabel('1/Dilution Factor', fontsize=14, fontweight='bold')
+    ax.set_ylabel('Foreground Percentage (log scale)', fontsize=14, fontweight='bold')
+
+    # Set y-axis to log scale
+    ax.set_yscale('log')
+
+    # Grid
+    ax.grid(True, alpha=0.3, linestyle='--', linewidth=0.5, axis='y')
+    ax.set_axisbelow(True)
+
+    # Set x-axis ticks and labels
+    inv_dilution_labels = [f'1/{d}' for d in DILUTION_ORDER]
+    ax.set_xticks(positions_base)
+    ax.set_xticklabels(inv_dilution_labels, fontsize=12, rotation=45, ha='right')
+
+    # Legend
+    ax.legend(loc='upper left', fontsize=12, framealpha=0.9)
+
+    plt.tight_layout()
+
+    # Save
+    filename = 'density_boxplot_3arch_full_range__threshold_0.5.png'
+    output_path = output_dir / filename
+    plt.savefig(output_path, dpi=config['dpi'], bbox_inches='tight')
+    plt.close()
+
+    print(f"  ✓ Saved: {output_path}")
+
+
+def create_3arch_boxplot_low_dilution_range(tile_data_by_arch, output_dir, config):
+    """
+    Create grouped boxplot for LOW dilution range (1/10240 to 1/80).
+    Shows UNet, Attention UNet, and Attention ResUNet side-by-side for each dilution.
+    """
+    print("\nGenerating 3-architecture boxplot (Low Range: 1/10240 to 1/80)...")
+
+    loaded_archs = list(tile_data_by_arch.keys())
+    n_archs = len(loaded_archs)
+
+    if n_archs == 0:
+        print("  WARNING: No architectures loaded. Skipping boxplot.")
+        return
+
+    output_dir = Path(output_dir)
+
+    # Low dilution range: 10240x to 80x
+    LOW_DILUTION_ORDER = [10240, 5120, 2560, 1280, 640, 320, 160, 80]
+
+    # Prepare data for each architecture
+    arch_data = {}
+    for arch_name in loaded_archs:
+        data_by_dilution = {d: [] for d in LOW_DILUTION_ORDER}
+        for tile_info in tile_data_by_arch[arch_name]:
+            dilution = tile_info['dilution']
+            if dilution in LOW_DILUTION_ORDER:
+                data_by_dilution[dilution].append(tile_info['density_threshold_0.5'])
+        arch_data[arch_name] = data_by_dilution
+
+    # Create figure
+    fig, ax = plt.subplots(figsize=(14, 8))
+
+    # Colors for each architecture
+    arch_colors = {
+        'unet': '#3498db',  # Blue
+        'attention_unet': '#e74c3c',  # Red
+        'attention_resunet': '#2ecc71'  # Green
+    }
+
+    # Create grouped boxplot
+    positions_base = np.arange(len(LOW_DILUTION_ORDER))
+    width = 0.25
+
+    for arch_idx, arch_name in enumerate(loaded_archs):
+        # Calculate positions for this architecture
+        positions = positions_base + (arch_idx - n_archs/2 + 0.5) * width
+
+        # Prepare data
+        data = [arch_data[arch_name][d] for d in LOW_DILUTION_ORDER]
+
+        # Create boxplot
+        bp = ax.boxplot(
+            data,
+            positions=positions,
+            widths=width * 0.8,
+            patch_artist=True,
+            showfliers=True,
+            boxprops=dict(facecolor=arch_colors.get(arch_name, '#95a5a6'),
+                         color='black', linewidth=1, alpha=0.7),
+            medianprops=dict(color='black', linewidth=2),
+            whiskerprops=dict(color='black', linewidth=1),
+            capprops=dict(color='black', linewidth=1),
+            flierprops=dict(marker='o', markerfacecolor='gray', markersize=3, alpha=0.5),
+            label=ARCHITECTURE_NAMES.get(arch_name, arch_name)
+        )
+
+    # Customize
+    ax.set_title('3-Architecture Comparison: Low Dilution Range (Threshold 0.5)',
+                fontsize=16, fontweight='bold', pad=20)
+    ax.set_xlabel('1/Dilution Factor', fontsize=14, fontweight='bold')
+    ax.set_ylabel('Foreground Percentage (log scale)', fontsize=14, fontweight='bold')
+
+    # Set y-axis to log scale
+    ax.set_yscale('log')
+
+    # Grid
+    ax.grid(True, alpha=0.3, linestyle='--', linewidth=0.5, axis='y')
+    ax.set_axisbelow(True)
+
+    # Set x-axis ticks and labels
+    inv_dilution_labels = [f'1/{d}' for d in LOW_DILUTION_ORDER]
+    ax.set_xticks(positions_base)
+    ax.set_xticklabels(inv_dilution_labels, fontsize=12, rotation=45, ha='right')
+
+    # Legend
+    ax.legend(loc='upper left', fontsize=12, framealpha=0.9)
+
+    plt.tight_layout()
+
+    # Save
+    filename = 'density_boxplot_3arch_low_range__threshold_0.5.png'
+    output_path = output_dir / filename
+    plt.savefig(output_path, dpi=config['dpi'], bbox_inches='tight')
+    plt.close()
+
+    print(f"  ✓ Saved: {output_path}")
 
 
 # ============================================================================
@@ -596,10 +815,12 @@ def main():
             'path': str(info['model_path'])
         } for arch, info in best_models_info.items()},
         'features': [
-            'CLAHE edge artifacts fixed',
-            'Dual contrast visualization',
+            'CLAHE edge artifacts fixed (padding + cropping)',
+            'Dual contrast visualization (fixed + auto)',
             '4-panel architecture comparison',
-            'Auto-contrast shows actual ranges'
+            'Auto-contrast shows actual ranges',
+            'Tile indexing bug FIXED (correct matching between architectures)',
+            'Boxplots for threshold 0.5 (full range + low dilution range)'
         ]
     }
     
@@ -610,10 +831,18 @@ def main():
     print("\n" + "="*80)
     print("GENERATING 4-PANEL VISUALIZATIONS")
     print("="*80)
-    
+
     create_4panel_tiles_fixed_contrast(tile_data_by_arch, CONFIG['output_dir'], CONFIG)
     create_4panel_tiles_auto_contrast(tile_data_by_arch, CONFIG['output_dir'], CONFIG)
-    
+
+    # Generate boxplots
+    print("\n" + "="*80)
+    print("GENERATING 3-ARCHITECTURE BOXPLOTS")
+    print("="*80)
+
+    create_3arch_boxplot_full_range(tile_data_by_arch, CONFIG['output_dir'], CONFIG)
+    create_3arch_boxplot_low_dilution_range(tile_data_by_arch, CONFIG['output_dir'], CONFIG)
+
     print("\n" + "="*80)
     print("ANALYSIS COMPLETE!")
     print("="*80)
@@ -627,10 +856,18 @@ def main():
     print("      * 4 panels: Original | UNet | Attention UNet | Attention ResUNet")
     print("      * Auto contrast (vmin/vmax from data)")
     print("      * Shows actual range values in titles")
+    print("  - density_boxplot_3arch_full_range__threshold_0.5.png")
+    print("      * Grouped boxplot: Full dilution range (1/10240 to 1/10)")
+    print("      * Compares all 3 architectures side-by-side")
+    print("  - density_boxplot_3arch_low_range__threshold_0.5.png")
+    print("      * Grouped boxplot: Low dilution range (1/10240 to 1/80)")
+    print("      * Compares all 3 architectures side-by-side")
     print()
     print("FIXES APPLIED:")
     print("  ✓ CLAHE edge artifacts removed (padding + cropping)")
     print("  ✓ Auto-contrast proves it works (shows min/max ranges)")
+    print("  ✓ Tile indexing bug FIXED (tiles now match correctly between architectures)")
+    print("  ✓ Boxplots added for threshold 0.5 density comparison")
     print("="*80)
 
 if __name__ == '__main__':
