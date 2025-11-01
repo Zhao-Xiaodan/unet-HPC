@@ -1,0 +1,367 @@
+========================================================================
+3-ARCHITECTURE DENSITY ANALYSIS - DUAL CONTRAST + EDGE FIX
+========================================================================
+Job ID: 339957.stdct-mgmt-02
+Job Name: Density_3Arch_Dual
+Node: GN-A40-071
+Start time: Sat Nov  1 09:05:47 PM +08 2025
+Working directory: /home/svu/phyzxi/scratch/unet-HPC
+========================================================================
+
+=== ENVIRONMENT SETUP ===
+✓ TensorFlow Container: /app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif
+===========================
+
+Verifying required files...
+✓ Script: ./density_analysis_3arch_dual_contrast.py
+✓ Test images: ./test_images
+✓ Model directory: ./unet_hyperparam_20251015_224125
+✓ Model directory: ./attention_unet_hyperparam_20251015_230149
+✓ Model directory: ./attention_resunet_hyperparam_20251015_235542
+
+Found 8 test images
+
+========================================================================
+KEY IMPROVEMENTS IN THIS ANALYSIS
+========================================================================
+1. FIXES CLAHE edge artifacts:
+   - Pads borders before CLAHE processing
+   - Crops after Otsu thresholding
+   - Result: NO MORE BLACK/WHITE FRAMES!
+
+2. 4-panel architecture comparison:
+   - Panel 1: Original image
+   - Panel 2: UNet prediction (inverted)
+   - Panel 3: Attention UNet prediction (inverted)
+   - Panel 4: Attention ResUNet prediction (inverted)
+
+3. DUAL visualization sets:
+   - SET 1: Fixed contrast (vmin=0, vmax=1)
+     └─> For comparison with previous results
+   - SET 2: Auto contrast (vmin/vmax from actual data)
+     └─> Shows actual min/max range in title
+     └─> Proves auto-contrast is working!
+
+4. FIXED tile indexing bug:
+   - Previous version accessed tiles by wrong list index
+   - Now matches tiles by (image_name, tile_idx)
+   - Result: Tiles CORRECTLY CORRELATED between architectures!
+
+5. Boxplots for threshold 0.5:
+   - Full dilution range (1/10240 to 1/10)
+   - Low dilution range (1/10240 to 1/80)
+   - Grouped comparison of all 3 architectures
+
+6. Same tiles in both sets (fair comparison)
+========================================================================
+
+========================================================================
+RUNNING 3-ARCHITECTURE ANALYSIS
+========================================================================
+Command: singularity exec --nv "/app1/common/singularity-img/hopper/tensorflow/tensorflow_2.16.1-cuda_12.5.0_24.06.sif" python3 ./density_analysis_3arch_dual_contrast.py
+
+================================================================================
+3-ARCHITECTURE DENSITY ANALYSIS - DUAL CONTRAST + EDGE FIX
+================================================================================
+Timestamp: 2025-11-01 13:06:09
+Output: ./density_analysis_3arch_dual_contrast_20251101_130609
+
+FEATURES:
+  ✅ 3 architectures: UNet, Attention UNet, Attention ResUNet
+  ✅ 4-panel visualization (Original + 3 predictions)
+  ✅ DUAL contrast sets (Fixed + Auto)
+  ✅ CLAHE edge artifacts FIXED
+  ✅ Auto-contrast shows actual min/max ranges
+================================================================================
+
+================================================================================
+LOADING MODELS
+================================================================================
+
+Searching for best unet model...
+Found 27 unet model(s)
+  Best so far: unet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4572)
+  Best so far: unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001 (IoU: 0.5080)
+✓ Selected: unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001 (IoU: 0.5080)
+Loading model from: unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001/best_model.keras
+  ✓ Loaded successfully
+
+Searching for best attention_unet model...
+Found 27 attention_unet model(s)
+  Best so far: attention_unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p005 (IoU: 0.3000)
+  Best so far: attention_unet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p005 (IoU: 0.3940)
+  Best so far: attention_unet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p001 (IoU: 0.4749)
+  Best so far: attention_unet_n_filters64_dropout0p1_batch_normTrue_learning_rate0p001 (IoU: 0.4761)
+  Best so far: attention_unet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4765)
+  Best so far: attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003 (IoU: 0.4875)
+✓ Selected: attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003 (IoU: 0.4875)
+Loading model from: attention_unet_hyperparam_20251015_230149/checkpoints/attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003/best_model.keras
+  ✓ Loaded successfully
+
+Searching for best attention_resunet model...
+Found 27 attention_resunet model(s)
+  Best so far: attention_resunet_n_filters16_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4342)
+  Best so far: attention_resunet_n_filters32_dropout0p2_batch_normTrue_learning_rate0p001 (IoU: 0.4764)
+  Best so far: attention_resunet_n_filters16_dropout0p1_batch_normTrue_learning_rate0p003 (IoU: 0.4851)
+  Best so far: attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003 (IoU: 0.5039)
+✓ Selected: attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003 (IoU: 0.5039)
+Loading model from: attention_resunet_hyperparam_20251015_235542/checkpoints/attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003/best_model.keras
+  ✓ Loaded successfully
+
+✓ Successfully loaded 3 model(s)
+================================================================================
+
+================================================================================
+PREDICTION ON ALL 3 ARCHITECTURES
+================================================================================
+Found 8 test images
+Architectures: ['unet', 'attention_unet', 'attention_resunet']
+
+Processing images:   0%|          | 0/8 [00:00<?, ?it/s]Processing images:  12%|█▎        | 1/8 [00:28<03:22, 28.95s/it]Processing images:  25%|██▌       | 2/8 [00:31<01:19, 13.27s/it]Processing images:  38%|███▊      | 3/8 [00:32<00:40,  8.01s/it]Processing images:  50%|█████     | 4/8 [00:34<00:21,  5.44s/it]Processing images:  62%|██████▎   | 5/8 [00:35<00:12,  4.01s/it]Processing images:  75%|███████▌  | 6/8 [00:37<00:06,  3.16s/it]Processing images:  88%|████████▊ | 7/8 [00:39<00:02,  2.63s/it]Processing images: 100%|██████████| 8/8 [00:40<00:00,  2.29s/it]Processing images: 100%|██████████| 8/8 [00:40<00:00,  5.07s/it]
+
+Processing: 10240x_2025-05-29_02-22-00_002.tif
+  Dilution: 10240x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0025
+    Predicting with Attention UNet...
+      Mean density: 0.0007
+    Predicting with Attention ResUNet...
+      Mean density: 0.0005
+
+Processing: 1280x_2025-05-16_00-59-00_002.tif
+  Dilution: 1280x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0158
+    Predicting with Attention UNet...
+      Mean density: 0.0172
+    Predicting with Attention ResUNet...
+      Mean density: 0.0150
+
+Processing: 160x_2025-05-15_02-05-00.tif
+  Dilution: 160x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.2147
+    Predicting with Attention UNet...
+      Mean density: 0.2577
+    Predicting with Attention ResUNet...
+      Mean density: 0.2335
+
+Processing: 2560x_2025-05-16_00-59-00_002.tif
+  Dilution: 2560x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0124
+    Predicting with Attention UNet...
+      Mean density: 0.0127
+    Predicting with Attention ResUNet...
+      Mean density: 0.0112
+
+Processing: 320x_2025-05-15_02-05-00.tif
+  Dilution: 320x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0710
+    Predicting with Attention UNet...
+      Mean density: 0.0913
+    Predicting with Attention ResUNet...
+      Mean density: 0.0801
+
+Processing: 5120x_2025-05-16_00-59-00.tif
+  Dilution: 5120x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0058
+    Predicting with Attention UNet...
+      Mean density: 0.0048
+    Predicting with Attention ResUNet...
+      Mean density: 0.0042
+
+Processing: 640x_2025-05-16_00-59-00_002.tif
+  Dilution: 640x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.0381
+    Predicting with Attention UNet...
+      Mean density: 0.0490
+    Predicting with Attention ResUNet...
+      Mean density: 0.0407
+
+Processing: 80x_2025-05-22_14-48-00.tif
+  Dilution: 80x, Tiles: 28
+    Predicting with UNet...
+      Mean density: 0.4598
+    Predicting with Attention UNet...
+      Mean density: 0.4907
+    Predicting with Attention ResUNet...
+      Mean density: 0.4347
+
+================================================================================
+GENERATING 4-PANEL VISUALIZATIONS
+================================================================================
+
+Generating 4-panel tiles (FIXED CONTRAST: vmin=0, vmax=1)...
+  Loaded architectures: unet, attention_unet, attention_resunet
+  Creating tiles for: 10240x_2025-05-29_02-22-00_002.tif
+    ✓ Saved: tiles_4panel_fixed_10240x_10240x_2025-05-29_02-22-00_002.png
+  Creating tiles for: 1280x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_fixed_1280x_1280x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 160x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_4panel_fixed_160x_160x_2025-05-15_02-05-00.png
+  Creating tiles for: 2560x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_fixed_2560x_2560x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 320x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_4panel_fixed_320x_320x_2025-05-15_02-05-00.png
+  Creating tiles for: 5120x_2025-05-16_00-59-00.tif
+    ✓ Saved: tiles_4panel_fixed_5120x_5120x_2025-05-16_00-59-00.png
+  Creating tiles for: 640x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_fixed_640x_640x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 80x_2025-05-22_14-48-00.tif
+    ✓ Saved: tiles_4panel_fixed_80x_80x_2025-05-22_14-48-00.png
+
+  ✓ All 4-panel fixed-contrast tiles saved to: density_analysis_3arch_dual_contrast_20251101_130609/representative_tiles_4panel_fixed_contrast
+
+Generating multi-panel tiles (AUTO CONTRAST: vmin/vmax from data)...
+  Loaded architectures (3): ['unet', 'attention_unet', 'attention_resunet']
+  Creating 4-panel visualizations (Original + 3 predictions)
+  Creating tiles for: 10240x_2025-05-29_02-22-00_002.tif
+    ✓ Saved: tiles_4panel_auto_10240x_10240x_2025-05-29_02-22-00_002.png
+  Creating tiles for: 1280x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_auto_1280x_1280x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 160x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_4panel_auto_160x_160x_2025-05-15_02-05-00.png
+  Creating tiles for: 2560x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_auto_2560x_2560x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 320x_2025-05-15_02-05-00.tif
+    ✓ Saved: tiles_4panel_auto_320x_320x_2025-05-15_02-05-00.png
+  Creating tiles for: 5120x_2025-05-16_00-59-00.tif
+    ✓ Saved: tiles_4panel_auto_5120x_5120x_2025-05-16_00-59-00.png
+  Creating tiles for: 640x_2025-05-16_00-59-00_002.tif
+    ✓ Saved: tiles_4panel_auto_640x_640x_2025-05-16_00-59-00_002.png
+  Creating tiles for: 80x_2025-05-22_14-48-00.tif
+    ✓ Saved: tiles_4panel_auto_80x_80x_2025-05-22_14-48-00.png
+
+  ✓ All 4-panel auto-contrast tiles saved to: density_analysis_3arch_dual_contrast_20251101_130609/representative_tiles_4panel_auto_contrast
+
+================================================================================
+GENERATING 3-ARCHITECTURE BOXPLOTS
+================================================================================
+
+Generating 3-architecture boxplot (Full Range: 1/10240 to 1/10)...
+  ✓ Saved: density_analysis_3arch_dual_contrast_20251101_130609/density_boxplot_3arch_full_range__threshold_0.5.png
+
+Generating 3-architecture boxplot (Low Range: 1/10240 to 1/80)...
+  ✓ Saved: density_analysis_3arch_dual_contrast_20251101_130609/density_boxplot_3arch_low_range__threshold_0.5.png
+
+================================================================================
+ANALYSIS COMPLETE!
+================================================================================
+Output directory: ./density_analysis_3arch_dual_contrast_20251101_130609
+
+Generated files:
+  - EXPERIMENT_INFO.json
+  - representative_tiles_4panel_fixed_contrast/
+      * 4 panels: Original | UNet | Attention UNet | Attention ResUNet
+      * Fixed contrast (vmin=0, vmax=1)
+  - representative_tiles_4panel_auto_contrast/
+      * 4 panels: Original | UNet | Attention UNet | Attention ResUNet
+      * Auto contrast (vmin/vmax from data)
+      * Shows actual range values in titles
+  - density_boxplot_3arch_full_range__threshold_0.5.png
+      * Grouped boxplot: Full dilution range (1/10240 to 1/10)
+      * Compares all 3 architectures side-by-side
+  - density_boxplot_3arch_low_range__threshold_0.5.png
+      * Grouped boxplot: Low dilution range (1/10240 to 1/80)
+      * Compares all 3 architectures side-by-side
+
+FIXES APPLIED:
+  ✓ CLAHE edge artifacts removed (padding + cropping)
+  ✓ Auto-contrast proves it works (shows min/max ranges)
+  ✓ Tile indexing bug FIXED (tiles now match correctly between architectures)
+  ✓ Boxplots added for threshold 0.5 density comparison
+================================================================================
+
+========================================================================
+ANALYSIS COMPLETED
+========================================================================
+Exit code: 0
+End time: Sat Nov  1 09:10:45 PM +08 2025
+
+Output directory: ./density_analysis_3arch_dual_contrast_20251101_130609
+
+Generated files:
+total 1.2M
+-rw------- 1 phyzxi svuusers 246K Nov  1 21:10 density_boxplot_3arch_full_range__threshold_0.5.png
+-rw------- 1 phyzxi svuusers 236K Nov  1 21:10 density_boxplot_3arch_low_range__threshold_0.5.png
+-rw------- 1 phyzxi svuusers 1.5K Nov  1 21:07 EXPERIMENT_INFO.json
+drwx------ 2 phyzxi svuusers  576 Nov  1 21:10 representative_tiles_4panel_auto_contrast
+drwx------ 2 phyzxi svuusers  584 Nov  1 21:09 representative_tiles_4panel_fixed_contrast
+
+Experiment Info:
+{
+  "timestamp": "2025-11-01 13:07:37",
+  "script": "density_analysis_3arch_dual_contrast.py",
+  "architectures": [
+    "unet",
+    "attention_unet",
+    "attention_resunet"
+  ],
+  "models": {
+    "unet": {
+      "name": "unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001",
+      "iou": 0.5079596638679504,
+      "path": "unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001/best_model.keras"
+    },
+    "attention_unet": {
+      "name": "attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003",
+      "iou": 0.487527459859848,
+      "path": "attention_unet_hyperparam_20251015_230149/checkpoints/attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003/best_model.keras"
+    },
+    "attention_resunet": {
+      "name": "attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003",
+      "iou": 0.5038761496543884,
+      "path": "attention_resunet_hyperparam_20251015_235542/checkpoints/attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003/best_model.keras"
+    }
+  },
+  "features": [
+    "CLAHE edge artifacts fixed (padding + cropping)",
+    "Dual contrast visualization (fixed + auto)",
+    "4-panel architecture comparison",
+    "Auto-contrast shows actual ranges",
+    "Tile indexing bug FIXED (correct matching between architectures)",
+    "Boxplots for threshold 0.5 (full range + low dilution range)"
+  ]
+}
+4-Panel Tiles (FIXED CONTRAST):
+  Total: 8 tile sets
+tiles_4panel_fixed_10240x_10240x_2025-05-29_02-22-00_002.png
+tiles_4panel_fixed_1280x_1280x_2025-05-16_00-59-00_002.png
+tiles_4panel_fixed_160x_160x_2025-05-15_02-05-00.png
+  ...
+
+4-Panel Tiles (AUTO CONTRAST):
+  Total: 8 tile sets
+tiles_4panel_auto_10240x_10240x_2025-05-29_02-22-00_002.png
+tiles_4panel_auto_1280x_1280x_2025-05-16_00-59-00_002.png
+tiles_4panel_auto_160x_160x_2025-05-15_02-05-00.png
+  ...
+
+✓ Analysis completed successfully!
+
+WHAT TO CHECK:
+  1. Edge artifacts: Should be GONE from all tiles!
+  2. Auto-contrast: Check titles show actual [min, max] ranges
+  3. Architecture comparison: 4 panels side-by-side
+  4. Dual sets: Compare fixed vs auto contrast versions
+========================================================================
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+			Resource Usage on 2025-11-01 21:10:46.681913:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	JobId: 339957.stdct-mgmt-02
+	Project: personal-phyzxi
+	Exit Status: 0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	NCPUs: Requested(36), Used(36)
+	CPU Time Used: 00:05:33
+	Memory: Requested(240gb), Used(6825644kb)
+	Vmem Used: 75180848kb
+	Walltime: Requested(06:00:00), Used(00:05:00)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	Execution Nodes Used: (GN-A40-071[0]:ncpus=36:ngpus=1:mem=251658240kb)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	No GPU-related information available for this job.
