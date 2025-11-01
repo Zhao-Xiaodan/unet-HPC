@@ -21,6 +21,7 @@
 #   5. ✅ Auto-contrast shows actual min/max ranges in titles
 #   6. ✅ FIXED tile indexing bug (tiles now match correctly between architectures)
 #   7. ✅ Boxplots for threshold 0.5 (full range + low dilution range)
+#   8. ✅ Custom colormap highlights min/max pixels (RED=min, CYAN=max)
 #
 # Date: November 1, 2025
 ################################################################################
@@ -131,7 +132,13 @@ echo "   - Full dilution range (1/10240 to 1/10)"
 echo "   - Low dilution range (1/10240 to 1/80)"
 echo "   - Grouped comparison of all 3 architectures"
 echo ""
-echo "6. Same tiles in both sets (fair comparison)"
+echo "6. Custom colormap for auto-contrast tiles:"
+echo "   - RED pixels = minimum value"
+echo "   - CYAN pixels = maximum value"
+echo "   - Grayscale = middle values"
+echo "   - Result: VISUALLY PROVES auto-contrast is working!"
+echo ""
+echo "7. Same tiles in both sets (fair comparison)"
 echo "========================================================================"
 echo ""
 

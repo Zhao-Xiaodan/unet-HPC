@@ -31,6 +31,7 @@ import cv2
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
 import re
 from pathlib import Path
 from datetime import datetime
@@ -95,6 +96,33 @@ ARCHITECTURE_NAMES = {
     'attention_unet': 'Attention UNet',
     'attention_resunet': 'Attention ResUNet'
 }
+
+def create_extreme_highlight_colormap():
+    """
+    Create a custom colormap that highlights min/max pixels with distinct colors.
+
+    Color scheme:
+    - MIN pixels (darkest, 0%) → RED
+    - Middle pixels (1-99%) → Grayscale gradient
+    - MAX pixels (brightest, 100%) → CYAN
+
+    This makes it easy to see where the extreme pixels are located,
+    even if there are only a few of them.
+    """
+    # Define colors at specific positions
+    # Position 0.0 (min): RED
+    # Position 0.001-0.999 (middle): Gray gradient
+    # Position 1.0 (max): CYAN
+
+    colors = [
+        (0.000, (1.0, 0.0, 0.0)),  # MIN → RED
+        (0.001, (0.0, 0.0, 0.0)),  # Just above min → BLACK (start of grayscale)
+        (0.999, (1.0, 1.0, 1.0)),  # Just below max → WHITE (end of grayscale)
+        (1.000, (0.0, 1.0, 1.0)),  # MAX → CYAN
+    ]
+
+    cmap = LinearSegmentedColormap.from_list('extreme_highlight', colors, N=256)
+    return cmap
 
 
 # ============================================================================
@@ -465,11 +493,15 @@ def create_4panel_tiles_auto_contrast(tile_data_by_arch, output_dir, config):
                 pred_inv = 1.0 - pred.squeeze()
                 v_min, v_max = pred_inv.min(), pred_inv.max()
 
-                axes[row_idx, col_idx].imshow(pred_inv, cmap='gray', vmin=v_min, vmax=v_max)
+                # Use custom colormap that highlights min/max pixels
+                # RED = minimum pixels, CYAN = maximum pixels, Grayscale = middle values
+                extreme_cmap = create_extreme_highlight_colormap()
+                axes[row_idx, col_idx].imshow(pred_inv, cmap=extreme_cmap, vmin=v_min, vmax=v_max)
                 axes[row_idx, col_idx].set_title(
                     f'{ARCHITECTURE_NAMES.get(arch_name, arch_name)} (AUTO)\n'
                     f'Density: {density:.4f}\n'
-                    f'Range: [{v_min:.3f}, {v_max:.3f}]',
+                    f'Range: [{v_min:.3f}, {v_max:.3f}]\n'
+                    f'🔴MIN  🔵MAX',
                     fontsize=9
                 )
                 axes[row_idx, col_idx].axis('off')
@@ -820,7 +852,8 @@ def main():
             '4-panel architecture comparison',
             'Auto-contrast shows actual ranges',
             'Tile indexing bug FIXED (correct matching between architectures)',
-            'Boxplots for threshold 0.5 (full range + low dilution range)'
+            'Boxplots for threshold 0.5 (full range + low dilution range)',
+            'Custom colormap highlights min/max pixels (RED=min, CYAN=max)'
         ]
     }
     
@@ -856,6 +889,8 @@ def main():
     print("      * 4 panels: Original | UNet | Attention UNet | Attention ResUNet")
     print("      * Auto contrast (vmin/vmax from data)")
     print("      * Shows actual range values in titles")
+    print("      * 🔴 RED pixels = MIN value (proves auto-contrast working)")
+    print("      * 🔵 CYAN pixels = MAX value (proves auto-contrast working)")
     print("  - density_boxplot_3arch_full_range__threshold_0.5.png")
     print("      * Grouped boxplot: Full dilution range (1/10240 to 1/10)")
     print("      * Compares all 3 architectures side-by-side")
@@ -868,6 +903,7 @@ def main():
     print("  ✓ Auto-contrast proves it works (shows min/max ranges)")
     print("  ✓ Tile indexing bug FIXED (tiles now match correctly between architectures)")
     print("  ✓ Boxplots added for threshold 0.5 density comparison")
+    print("  ✓ Custom colormap highlights min/max pixels (🔴RED=min, 🔵CYAN=max)")
     print("="*80)
 
 if __name__ == '__main__':
