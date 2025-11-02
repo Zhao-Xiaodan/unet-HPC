@@ -1,0 +1,35 @@
+{
+  "timestamp": "2025-11-02 00:24:04",
+  "script": "density_analysis_3arch_dual_contrast.py",
+  "architectures": [
+    "unet",
+    "attention_unet",
+    "attention_resunet"
+  ],
+  "models": {
+    "unet": {
+      "name": "unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001",
+      "iou": 0.5079596638679504,
+      "path": "unet_hyperparam_20251015_224125/checkpoints/unet_n_filters32_dropout0p3_batch_normTrue_learning_rate0p001/best_model.keras"
+    },
+    "attention_unet": {
+      "name": "attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003",
+      "iou": 0.487527459859848,
+      "path": "attention_unet_hyperparam_20251015_230149/checkpoints/attention_unet_n_filters16_dropout0p3_batch_normTrue_learning_rate0p003/best_model.keras"
+    },
+    "attention_resunet": {
+      "name": "attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003",
+      "iou": 0.5038761496543884,
+      "path": "attention_resunet_hyperparam_20251015_235542/checkpoints/attention_resunet_n_filters32_dropout0p1_batch_normTrue_learning_rate0p003/best_model.keras"
+    }
+  },
+  "features": [
+    "CLAHE edge artifacts fixed (padding + cropping)",
+    "Dual contrast visualization (fixed + auto)",
+    "4-panel architecture comparison",
+    "Auto-contrast shows actual ranges",
+    "Tile indexing bug FIXED (correct matching between architectures)",
+    "Boxplots for threshold 0.5 (full range + low dilution range)",
+    "Custom colormap highlights min/max pixels (RED=min, CYAN=max)"
+  ]
+}
