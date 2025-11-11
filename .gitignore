@@ -10,3 +10,7 @@ test_images/
 **/*.h5
 **/*.keras
 **/*.pth
+
+# Exception: Allow sharing best models
+!best_models_PyTorch/unet/*.pth
+!best_models_PyTorch/unet/*.pt
